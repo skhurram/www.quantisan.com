@@ -176,40 +176,40 @@ origin&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;1970-0
 print&lt;span class="p"&gt;(&lt;/span&gt;system.time&lt;span class="p"&gt;(&lt;/span&gt;data.x \&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; as.xts&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;)))&lt;/span&gt; rm&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;)&lt;/span&gt; \&lt;span class="c1"&gt;# remove data&lt;/span&gt;
 object cat&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data.x object size: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; print&lt;span class="p"&gt;(&lt;/span&gt;object.size&lt;span class="p"&gt;(&lt;/span&gt;data.x&lt;span class="p"&gt;),&lt;/span&gt; units &lt;span class="o"&gt;=&lt;/span&gt;
 &lt;span class="s"&gt;&amp;quot;auto&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; cat&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;spectral analysis\\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; spectrum&lt;span class="p"&gt;(&lt;/span&gt;data.x\&lt;span class="o"&gt;$&lt;/span&gt;close&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category></entry><entry><title>Maximal frustration in printing and parsing milliseconds in R</title><link href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel="alternate"></link><updated>2010-10-08T15:32:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-08:maximal-frustration-in-printing-and-parsing-milliseconds-in-r/</id><summary type="html">&lt;p&gt;
-I've just spent an absurd amount of time figuring out how to parse
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category></entry><entry><title>Maximal frustration in printing and parsing milliseconds in R</title><link href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel="alternate"></link><updated>2010-10-08T15:32:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-08:maximal-frustration-in-printing-and-parsing-milliseconds-in-r/</id><summary type="html">&lt;p&gt;I've just spent an absurd amount of time figuring out how to parse
 millisecond times into R. (It's standard practice to timestamp tick data
 with milliseconds timing in a flat data file.) Turns out that there are
 two problems that I faced. One being that there is a almost-hidden,
-footnote option in the [strptime( ) function][] (for converting
-characters to POSIX) in which it describes using format = "%H:%M%OS"
-instead of "%H:%M:%S" to parse fractional seconds. However, the second,
+footnote option in the &lt;a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html"&gt;strptime( ) function&lt;/a&gt; (for converting
+characters to POSIX) in which it describes using &lt;code&gt;format = "%H:%M%OS"&lt;/code&gt;
+instead of &lt;code&gt;"%H:%M:%S"&lt;/code&gt; to parse fractional seconds. However, the second,
 and what's actually the one that's wasted much my time, is the fact that
-R **ignores** milliseconds in printing by default! For example, here's
+R &lt;strong&gt;ignores&lt;/strong&gt; milliseconds in printing by default! For example, here's
 an output for the POSIXct representation of the integer value
-1286564400.
+1286564400.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s"&gt;&amp;quot;2010-10-08 15:00:00 EDT&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&gt; "2010-10-08 15:00:00 EDT"
 
-So even though I figured how to represent millisecond times in R a few
+&lt;p&gt;So even though I figured how to represent millisecond times in R a few
 hours ago, I never knew I did it simply because R is not printing the
 output that I wanted on screen every time I tried! After a couple hours
 of searching, trying, and frustrating, here's the one-liner command that
-solved my problem.
+solved my problem.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;digits&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;secs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&gt; \&gt; options(digits.secs=3)
 
-which changes the options of the display and thus I can see the
-following output from the same input as above.
+&lt;p&gt;which changes the options of the display and thus I can see the
+following output from the same input as above.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="s"&gt;&amp;quot;2010-10-08 15:00:00.344 EDT&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&gt; "2010-10-08 15:00:00.344 EDT"
 
-I guess that's why they say [R has a steep learning curve][]! Yes, it is
+&lt;p&gt;I guess that's why they say &lt;a href="http://blog.revolutionanalytics.com/2010/06/learning-r.html"&gt;R has a steep learning curve&lt;/a&gt;! Yes, it is
 very powerful and flexible. But there are limited standards and the
 documentations are all over the place because it's a mish mash of
-user-contributed packages!
-
-&lt;/p&gt;</summary><category term="R"></category><category term="source code"></category></entry><entry><title>Data analysis with R: Using the right tool for the right task</title><link href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel="alternate"></link><updated>2010-10-06T05:58:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-06:data-analysis-with-r-using-the-right-tool-for-the-right-task/</id><summary type="html">&lt;p&gt;I ported &lt;a href="http://engineering-returns.com/tsi/"&gt;Engineering Return's Trend Strength Index&lt;/a&gt; to JForex as my
+user-contributed packages!&lt;/p&gt;</summary><category term="R"></category><category term="source code"></category></entry><entry><title>Data analysis with R: Using the right tool for the right task</title><link href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel="alternate"></link><updated>2010-10-06T05:58:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-06:data-analysis-with-r-using-the-right-tool-for-the-right-task/</id><summary type="html">&lt;p&gt;I ported &lt;a href="http://engineering-returns.com/tsi/"&gt;Engineering Return's Trend Strength Index&lt;/a&gt; to JForex as my
 first practice to writing custom indicators in JForex. Frank's code in
 TradeSignal consists of 9 lines. My JForex code? 191. This is my first
 custom indicator in JForex. It will also be the last. A compiled

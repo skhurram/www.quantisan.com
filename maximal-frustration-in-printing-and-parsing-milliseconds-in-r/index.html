@@ -59,40 +59,40 @@
     </h1>
 
     <div class='article-content'>
-        <p>
-I've just spent an absurd amount of time figuring out how to parse
+        <p>I've just spent an absurd amount of time figuring out how to parse
 millisecond times into R. (It's standard practice to timestamp tick data
 with milliseconds timing in a flat data file.) Turns out that there are
 two problems that I faced. One being that there is a almost-hidden,
-footnote option in the [strptime( ) function][] (for converting
-characters to POSIX) in which it describes using format = "%H:%M%OS"
-instead of "%H:%M:%S" to parse fractional seconds. However, the second,
+footnote option in the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html">strptime( ) function</a> (for converting
+characters to POSIX) in which it describes using <code>format = "%H:%M%OS"</code>
+instead of <code>"%H:%M:%S"</code> to parse fractional seconds. However, the second,
 and what's actually the one that's wasted much my time, is the fact that
-R **ignores** milliseconds in printing by default! For example, here's
+R <strong>ignores</strong> milliseconds in printing by default! For example, here's
 an output for the POSIXct representation of the integer value
-1286564400.
+1286564400.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00 EDT&quot;</span>
+</pre></div>
 
-> "2010-10-08 15:00:00 EDT"
 
-So even though I figured how to represent millisecond times in R a few
+<p>So even though I figured how to represent millisecond times in R a few
 hours ago, I never knew I did it simply because R is not printing the
 output that I wanted on screen every time I tried! After a couple hours
 of searching, trying, and frustrating, here's the one-liner command that
-solved my problem.
+solved my problem.</p>
+<div class="highlight"><pre><span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">secs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
 
-> \> options(digits.secs=3)
 
-which changes the options of the display and thus I can see the
-following output from the same input as above.
+<p>which changes the options of the display and thus I can see the
+following output from the same input as above.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00.344 EDT&quot;</span>
+</pre></div>
 
-> "2010-10-08 15:00:00.344 EDT"
 
-I guess that's why they say [R has a steep learning curve][]! Yes, it is
+<p>I guess that's why they say <a href="http://blog.revolutionanalytics.com/2010/06/learning-r.html">R has a steep learning curve</a>! Yes, it is
 very powerful and flexible. But there are limited standards and the
 documentations are all over the place because it's a mish mash of
-user-contributed packages!
-
-</p>
+user-contributed packages!</p>
     </div>
 
     <div class='post-footer'>
@@ -126,11 +126,11 @@ user-contributed packages!
             <h2>Related Posts:</h2>
 
             <ul>
-                <li><a href="http://www.quantisan.com/a-weather-station-data-scrapper-in-r/">A weather station data scrapper in R</a></li>
+                <li><a href="http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/">Unconfusing false-positive and false-negative statistical errors confusion</a></li>
                 <li><a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/">Data analysis with R: Using the right tool for the right task</a></li>
+                <li><a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business/">It's an open buffet in a small business</a></li>
+                <li><a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/">Dissecting a JForex strategy -- MA_Play.java</a></li>
                 <li><a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/">A hypothetical data analysis platform</a></li>
-                <li><a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">JForex Example: Not letting profit turn to losses with a breakeven stop</a></li>
-                <li><a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/">Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a></li>
             </ul>            
         </div>
 
