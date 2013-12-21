@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/fuzzy-logic_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-09-02T10:49:00+01:00</updated><entry><title>On technical analysis and fuzzy logic for mechanical trading</title><link href="http://www.quantisan.com/on-technical-analysis-and-fuzzy-logic-for-mechanical-trading/" rel="alternate"></link><updated>2010-09-02T10:49:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-09-02:on-technical-analysis-and-fuzzy-logic-for-mechanical-trading/</id><summary type="html">&lt;p&gt;Technical traders realize that technical analysis is more of an art than
+science. Until you draw a plethora of lines to fill your chart, which
+would render it practically useless, prices rarely "hit the spot" based
+on your doodles. This doesn't matter though because trading is not about
+charts and guessing numbers. It is about costs and risks (pardon me if
+you've heard this a thousand times already). To whom this would matter
+though, are the mechanical traders using technical analysis. It may be
+&lt;em&gt;obvious&lt;/em&gt; to a human to discern price patterns because a trading setup
+&lt;em&gt;looks like&lt;/em&gt; something you know. However, figuring out "obvious" and
+"looks like" is not trivial in a program. Common ways of tackling this
+problem is with stochastic algorithms or Bayesian logic. The drawback
+with using these methods though, is that they are difficult to conjure
+unless you have some vigorous background in math. Hereby I suggest an
+alternative--fuzzy logic. In it's simplest implmentation, fuzzy logic
+are mere if-then statements. Here's a sample fuzzy logic control system
+for regulating temperature with a fan (it is also a trick solution to
+the infamous &lt;a href="http://en.wikipedia.org/wiki/Hysteresis"&gt;hysteresis problem&lt;/a&gt; in control theory...but I
+digress),&lt;code&gt;IF temperature IS very cold THEN stop fan IF temperature IS cold THEN turn down fan IF temperature IS normal THEN maintain level IF temperature IS hot THEN speed up fan&lt;/code&gt;
+As you can see, there can be more than two values for a result. The
+classic and ubiquitous TRUE or FALSE boolean is thrown out the window.
+Let's dive right into an example of applying fuzzy logic to technical
+analysis. Say you are using the RSI as one of your indicators.
+Typically, you set a pair of threshold values to determine if the
+instrument is overbought or oversold.
+&lt;code&gt;String rsiCondition; if (RSI &amp;gt; 70) rsiCondition = "Overbought"; if (RSI &amp;gt;= 30 &amp;amp;&amp;amp; RSI &amp;lt;= 70) rsiCondition = "Neutral"; if (RSI &amp;lt; 30) rsiCondition = "Oversold";&lt;/code&gt;
+Then here is what a fuzzy logic implementation would look
+like.&lt;code&gt;String rsiCondition; if (RSI &amp;gt; 90) rsiCondition = "Very overbought!"; if (RSI &amp;gt; 70) rsiCondition = "Overbought"; if (RSI &amp;gt; 60) rsiCondition = "a little overbought"; if (RSI &amp;gt;= 40 &amp;amp;&amp;amp; RSI &amp;lt;= 60) rsiCondition = "Neutral"; if (RSI &amp;lt; 40) rsiCondition = "a little oversold"; if (RSI &amp;lt; 30) rsiCondition = "Oversold"; if (RSI &amp;lt; 10) rsiCondition = "Very oversold!";&lt;/code&gt;
+In fact, you may have noticed that the first RSI example is already a
+3-valued fuzzy logic. And you're right! Fuzzy logic is that easy. So
+what can you do with that second RSI example? Well, perhaps you want to
+implement fuzzy logic on a MACD as a second indicator. Then you can
+implement a "conviction" algorithm (which isn't possible with TRUE/FALSE
+algorithms) by summing the two fuzzy logic (see wiki or google for more
+information on &lt;a href="http://en.wikipedia.org/wiki/Fuzzy_logic"&gt;performing fuzzy logic operations&lt;/a&gt;). And then... well.
+This is a basic example of exploiting the benefits of fuzzy logic in
+automated trading strategies. More advanced use of fuzzy logic is
+demonstrated in this seminal work by Lin and Lee, &lt;a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=106218&amp;amp;tag=1"&gt;Neural-network-based
+fuzzy logic control and decision system&lt;/a&gt;, 1991. Fuzzy logic + neural
+net! Well, as you can see, this is only the tip of the iceberg. P.S. I
+have discussed a lot recently about the frontend work that I have been
+working on. This post is a break for the reader and a glimpse at what I
+am really doing behind the scenes. Let me know in the &lt;a href="#respond"&gt;comments below&lt;/a&gt;
+if this is your cup of tea and I'll write more of this type of posts in
+the future.&lt;/p&gt;</summary><category term="fuzzy logic"></category></entry></feed>

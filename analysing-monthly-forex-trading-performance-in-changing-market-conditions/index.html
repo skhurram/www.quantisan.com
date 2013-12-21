@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Analysing monthly forex trading performance in changing market conditions - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/" rel="bookmark">Analysing monthly forex trading performance in changing market conditions</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>
+In my previous post, I discussed about [3 reasons why I don't use
+Jensen's alpha or Sharpe ratio for my montly trading performance
+measurement][]. In this post, I will talk about what I actually use and
+how I came up with it. As I was saying in the previous post, what one
+chooses to use as their performance metric depend on 3 factors such as
+your style of trading, your agenda, and your interest in this topic. I
+will briefly lay out my 3 motives as background information. I use a
+swing trading strategy for trading forex. I aim to hold for at least a
+few hours to a few days. I am working to hold longer and trade less in
+the future, but that's another story. To fit my style of trading, a
+performance metric has to be unbiased for long and short trades as well
+as taking into account short term conditions in the market. In terms of
+agenda, what is the purpose of my performance metric? As a part-time
+trader, I answer only to myself. These numbers are used for my
+self-improvement and internal month-to-month comparisons only. Lastly,
+my interest in this topic of portfolio measurement is limited. I want
+something easy to calculate and simple to understand. I have read a few
+academic papers on this topic and spent a few hours researching on the
+web. That's about it. Now that my motives have been laid out, let's
+discuss my process for coming up with my trading performance metric.
+Ultimately, my assessment on how well I have done for the month is to
+measure my return based on the risk taken. In other words, Performance
+Metric = Reward / Risk. My Reward function is simple. I just steal the
+idea from Sharpe and use:
+
+> Reward = Net Return - Riskless Return
+
+Shameless. I know. I don't want to muck with the Reward function because
+at the end of the day, it is your account balance that matters. The Risk
+function takes some more thought. On a trade-by-trade basis, the risk
+taken for a particular trade can be thought of as the stop loss. It is a
+amount put at risk to be taken by the market. In other words, risk can
+be represented by the loss you are willing to take. On a month-to-month
+basis, the most important loss value that I pay attention to is my
+maximum drawdown. A drawdown imposes a real dent in your account as well
+as negatively impact your trading psychology. For these reasons, the
+maximum drawdown is a variable in my Risk function.
+
+> Risk = Max. Drawdown ...
+
+However, I am not done yet. While max. drawdown is important, it is an
+entirely internal factor. The risk you take is also affected by the
+condition of the market. Using the stop loss analogy again, a 50 pips
+stop loss can be labelled as both conservative and aggressive risk
+exposure depending on the volatility of the market in the timeframe
+you're trading. As such, we need to consider volatility in the Risk
+function. However, this raises another question, what is volatility.
+Long story short, I just snatch the Average True Range (ATR) indicator
+that I use on my charts in this formula. However, we can't just stick a
+ATR value in because it's an absolute number. We need to use a
+percentage ATR (%ATR) to correspond with all the other percentage
+numbers in the formula. And since this is for monthly analysis, I grab
+the %ATR from a monthly chart. In particular, I use the monthly %ATR on
+the U.S. dollar futures chart. Finally, the Risk function is:
+
+> Risk = Maximum Drawdown + %ATR
+
+Thus,
+
+> **Performance Metric = (Net Return - Riskless Return) / (Maximum
+> Drawdown + %ATR)**
+
+As an example, here are the values I plug in for each variable to
+calculate my performance metric for [November][]. Net Return = 3.15%,
+read from November's statement Riskless Return = 0.54% (per annum) / 12
+= 0.045%. This is the Canadian 1-year treasury rate in November. Max.
+Drawdown = 3.55%, read from November's statement %ATR = monthly ATR(3)
+of U.S. dollar futures / monthly close of U.S. dollar futures =
+3.1473/74.895. To verify the efficacy of this performance metric. Let's
+do a mental check of my criteria as discussed.
+
+1.  Unbiased for long and short trades? Yes, it uses the net return
+    regardless of which side you took.
+2.  Varies with short term market conditions? Yes, from the %ATR.
+3.  Comparable between month to month? Yes, the number is normalized by
+    market volatility each month.
+4.  Easy to calculate? Yes, it's can be done in my [trade log][]
+    spreadsheet with a few formulas.
+5.  Easy to understand? Yes, it's an interpretation of reward / risk.
+
+As with any other attempt to summarize trading performance into one
+single value, many assumptions have been taken. I cherry picked what I
+needed to assemble a formula. Some observant reader will notice that
+this formula is similar to the Sterling and Calmar ratios. Indeed, this
+is yet another modified form of these ratios. In fact, I will be
+referring to this formula as Sterling ratio in my future posts for
+simplicity.
+
+</p>
+
+<p>[3 reasons why I don't use Jensen's alpha or Sharpe ratio for my
+  montly trading performance measurement]: http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2009-12-29T07:55:00'>
+                Posted 29 December 2009
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/performance/">performance</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "analysing-monthly-forex-trading-performance-in-changing-market-conditions/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

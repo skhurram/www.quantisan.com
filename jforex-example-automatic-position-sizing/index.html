@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>JForex Example:  Automatic position sizing - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/" rel="bookmark">JForex Example:  Automatic position sizing</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Proper position sizing is an integral part of risk management. It <em>can</em>
+be one of the easiest thing to do too. For example, I <a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/">typically size my
+trading position</a> based on the following factors:</p>
+<ol>
+<li>Amount of capital willing to put at risk.</li>
+<li>Stop price level.</li>
+<li>Volatility of the instrument.</li>
+</ol>
+<p>The following JForex code calculates a lot size based on these three
+factors. It is part of my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex July strategy</a> (complete
+source code to the strategy is available via that link). [java
+firstline="232"] private double getLot(Instrument instrument) throws
+JFException { double riskAmt; double lotSize = 0; riskAmt =
+this.acctEquity * (this.riskPct / 100d); // CCYUSD only lotSize =
+riskAmt / (this.atr[instrument.ordinal()] * this.atrFactor); lotSize /=
+1000000d; // in millions return roundLot(lotSize); } [/java] Referring
+to line 237, riskAmt is the amount of capital to put at risk for a trade
+(#1). Line 238 calculates lotSize, which is the position size that we
+want. The denominator in that division is the distance of the stop in
+pips. The strategy uses a multiple of ATR to set the stop loss. Nothing
+fancy here. Lines 240--241 are to set the lotSize value according to the
+JForex API specification. In which the lot amount is in millions and in
+steps of a thousand units, or 0.001 step size. As I've noted in the
+code, the caveat to this implementation is that the secondary currency
+of the instrument and your account currency needs to be in U.S. dollar.
+However, it's just a matter of conversion to extend this method for
+other currencies. Update: I expanded on this functionality in the
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p>
+</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-08-17T11:58:00'>
+                Posted 17 August 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/JForex/">JForex</a>
+            <a href="http://www.quantisan.com/tag/position sizing/">position sizing</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "jforex-example-automatic-position-sizing/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

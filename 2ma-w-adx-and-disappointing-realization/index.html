@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>2MA w/ ADX and disappointing realization - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/2ma-w-adx-and-disappointing-realization/" rel="bookmark">2MA w/ ADX and disappointing realization</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Another day, another strategy. For the past couple of days, I've been
+working on the 2MA cross with ADX confirmation strategy for ER2H08 1200
+sh/bar. Basically, an HMA(Low, 8) crossing over EMA(Low, 24) as the
+trigger. Condition2 is that the current high is highest of past 3 bars.
+Condition3 is current ADX is also highest of the past 3 bars. Condition4
+is that it is during day time so fewer slippage.</p>
+<p>Exit is simply HMA(Low, 23) crossing under EMA(Low, 33) or it is nearing
+the close of the day session. Stop is \$350; Floor is \$500 and 63%
+retracement.</p>
+<p>Upon loose optimization on Oct 1, 2007 to Nov 30, 2007 data, the Long
+strategy achieved 3.37 profit factor, 57% profitable, and a steadily
+rising performance graph. Very good indeed. I was estatic yesterday.</p>
+<p>I continued to work on the strategy for the whole day today and
+developed a Short version using the same concept. The result were very
+good too (PF > 3, etc).</p>
+<p>From the back-testing data, the Long and Short together has PF over 2
+and steady rising performance too. From the calculation, I would make
+over \$7000 for the 2 months on 1 contract alone.</p>
+<p>Feeling pretty confident, I felt the system was somewhat complete, so I
+tested it using the lastest 30 days of data. Unfortunately, it failed
+miserably. PF was way under 1.0 and the gross profit were a mere couple
+of thousand dollars. The net profit were estimated to be just a few
+hundred dollars.</p>
+<p>So I tested the system on another set of data. August 2007. The result
+was even worse!</p>
+<p>Long story short, I found out that ADX isn't that reliable to confirm
+with major swings.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2008-01-08T23:50:00'>
+                Posted 08 January 2008
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/EasyLanguage/">EasyLanguage</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "2ma-w-adx-and-disappointing-realization/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

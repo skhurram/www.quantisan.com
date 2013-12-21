@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Choosing a budget VPS provider for hosting automated trading programs - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/" rel="bookmark">Choosing a budget VPS provider for hosting automated trading programs</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>I've been looking for a cheap but reliable virtual private server (VPS)
+to run my trading program for the last few months. I ran my QTD program
+on 3 remote servers in UK and Germany in April for an entire month as
+performance testing. One in UK on a Xen cloud. One in Germany on OpenVZ.
+And a last one also in UK on KVM technology. This post is a summary of
+my initial findings on what to watch for when choosing a server provider
+for running a remote trading server. Keep in mind that this is for
+low-end, low-frequency, retail trading. Where latencies in the range of
+tens of milliseconds are considered good. General target price range is
+US\$10 - \$20 per month for an unmanaged server with 512MB of ram and
+600MHz-equivalent of circa 2006 Intel CPU. Low price is the primary
+consideration here. If you don't care for the technical details, the top
+VPS names are <a href="http://www.linode.com">Linode</a>, <a href="http://www.hetzner.de/en/">Hetzner</a>, and <a href="http://www.6sync.com">6sync</a> for Linux-based
+VPSs. Linode offers Xen VPSs in US and UK. 6sync offers KVM VPSs in US
+only. Both companies offer Linux-based 512MB instances for \$20 as a
+starter server. Hetzner offers KVM VPSs in Germany for €7.90. Cloud
+servers like Amazon EC2 and Rackspace Cloud are too expensive for
+running 24/7.</p>
+<h2>Location, Location, Location</h2>
+<p>Use a datacenter that's at least in the same sub-continent as your
+broker's datacenter. You wouldn't want your data to travel half-way
+around the world just to save a few bucks. It adds unnecessary latency
+and prices are comparable in either the states or Europe nowadays.
+Although Asia is another story. If you use more than one broker, you can
+use multiple servers or pick a server location that sits between them on
+the internet backbone. TeleGeography provides <a href="http://www.telegeography.com/telecom-resources/map-gallery/index.html">global internet maps</a>
+to identify best locations. I trade with Dukascopy and Oanda. One in
+Switzerland and another in the states. As such, Internet hubs in cities
+like New York, London, and Frankfurt are prime targets for low latency
+between both brokers. As I trade more at Dukascopy, I'm biased to
+European servers. Furthermore, London and Frankfurt are the #1 and #2
+internet hub in the world. London has 7,723 Gbps and Frankfurt has 7,218
+Gbps capacity in 2010. Whereas New York, 5th in the world, has 3,850
+Gbps.</p>
+<h2>Virtualization Technologies</h2>
+<p>Virtual private servers are merely reserved resource chunks of a
+computer in a datacenter. This is achieved through the use of
+virtualization technologies. And there are quite many of those as I have
+discovered. Here are three that you'll likely hear about in your search.</p>
+<ol>
+<li><strong>OpenVZ.</strong> This is the most popular and least preferred platform
+    for trading servers. It's often used by budget hosts because
+    resources between virtualized instances are not well isolated. As
+    such, a host can oversell a server's resource as most webapps have
+    sporadic resource utilization trend. In other worlds, it is unlikely
+    all the virtual private servers would demand their maximum allocated
+    resources at the same time. However, trading servers require a
+    consistent and guaranteed level of computing resource. So stay away
+    from VPS that runs on OpenVZ unless you want to see server hiccups.</li>
+<li><strong>Xen.</strong> This is what Amazon EC2 and Rackspace Cloud runs on. Xen
+    offers true resource isolation so that you're less likely affected
+    by your virtual server's neighbours. What you see is also what you
+    get. So if you're promised 512MB of memory, you'll get 512MB of
+    memory. However, processing power varies tremendously across
+    different VPS providers. A micro instance on Amazon EC2 offers 613MB
+    of memory, for example. But it is no match for even a 256MB instance
+    on Rackspace Cloud. I was able to run a LXDE desktop GUI plus a java
+    program on Rackspace but couldn't do it on Amazon.</li>
+<li><strong>KVM.</strong> KVM uses the Linux kernel to virtualize. It's said to offer
+    lower overhead to the host server so that it can provide better
+    value than Xen. Like Xen, it offers true resource isolation.</li>
+</ol>
+<p>In summary, either Xen or KVM are good but stay away from OpenVZ.</p>
+<h2>Operating System</h2>
+<p>Key question here is: Linux or Windows? If you're unfamiliar with Linux
+and is not interesting in learning about it, use a Windows Server 2003
+or 2008 provider. Windows Server 2003 is preferred as it uses fewer
+resources just to run so it's cheaper. Do note that Windows VPSs are
+\$10-\$20 more expensive anyway because you have to pay for a monthly
+license lease. With the use of a Windows-based VPS, you can connect to
+your server through the remote desktop protocol (RDP). It's just a
+matter of running the Remote Desktop application on your local machine
+to your remote server. Then you'll see the remote machine's desktop on
+your own machine. And then you can control the remote server just like
+any other Windows computer. Very simple. However, I prefer to run Linux
+because of its renowned stability and lower cost. The downside is that
+you need to know what you're doing to <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">tweak the server for trading</a>.
+Linux uses very little computing resource to run. I can squeeze JForex
+and Metatrader together on a Linux VPS with only 256MB memory. By
+comparison, you need at least 512MB on a Windows box just to get the OS
+running. And there's no licensing fee for Linux too. A double savings.</p>
+<h2>Summary</h2>
+<p>When choosing a VPS provider, consider factors such as location,
+virtualization technology, and operating system(s) offered. Once you've
+narrowed your search to a shortlist of providers, the next step is to
+compare their specific VPS offerings by looking at price, services, and
+technical specifications.</p>
+</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-05-03T07:30:00'>
+                Posted 03 May 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/tutorial/">tutorial</a>
+            <a href="http://www.quantisan.com/tag/VPS/">VPS</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

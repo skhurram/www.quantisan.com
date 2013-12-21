@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - JForex</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel='bookmark'>Data analysis with R: Using the right tool for the right task</a>
+            </h1>
+            <div class="article-content"> <p>I ported <a href="http://engineering-returns.com/tsi/">Engineering Return's Trend Strength Index</a> to JForex as my
+first practice to writing custom indicators in JForex. Frank's code in
+TradeSignal consists of 9 lines. My JForex code? 191. This is my first
+custom indicator in JForex. It will also be the last. A compiled
+programming language such as Java is not the most convenient to use for
+data analysis. The lack of interactivity because of the step of
+compilation is one obstacle to fluent data explorations. Secondly, the
+language itself is more cumbersome because of its generality. Java is
+used to build all sorts of applications. Contrary to something like
+MatLab, in which it is purposely built to work with numbers. I miss <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">the
+days when I have my license for MatLab</a>. However, being forced away
+from MatLab might not be a bad thing. As much as I've become accustomed
+to it, MatLab isn't without its flaws. But I won't bash it in this post.
+What I actually want to talk about is R. The rage these days in
+statistical data analysis is in R (see <a href="http://en.wikipedia.org/wiki/R_%28programming_language%29">Wiki entry on R</a>). I've done
+some research and testing, R is really as good as they say it is (see
+past publications in <a href="http://www.rinfinance.com/">R/Finance conference</a><a href="http://probability.ca/cran/doc/contrib/Farnsworth-EconometricsInR.pdf"></a>). You will get to see
+some real examples in financial time series data analysis in R later in
+this blog once I have some publishable results. This will no doubt take
+some time as I am learning yet another new programming language (thus
+the lack of posts this week). The plan from now on is to use R to play
+with the data. Then once the algorithm is finalized, I will either port
+it to Java (JForex) for deployment or <a href="http://www.rforge.net/rJava/">embed the R environment in
+Java</a> for live trading.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/' title='2010-10-06T05:58:00'>06 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/" rel='bookmark'>My interview at Dukascopy in Geneva</a>
+            </h1>
+            <div class="article-content"> <iframe width="560" height="349" src="http://www.youtube.com/embed/1QPxPcd9Eow" frameborder="0" allowfullscreen></iframe>
+
+<p>The complete script for my August 2010 winning strategy is
+<a href="http://dl.dropbox.com/u/6028806/quantisan_aug10.java">available for free</a> via <a href="http://db.tt/5vkkEMAm">Dropbox</a>. And for those not familiar with
+Java programming, I have explained <a href="/jforex-example-multiple-time-frame-strategy/">the logic</a>, <a href="/jforex-example-dual-timeframe-moving-averages-setup/">the setup</a>, and
+<a href="/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">the risk management</a> behind the strategy.</p>
+<p>Furthermore, here is an important disclaimer about my winning, <a href="/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/">Number
+one with 40+ percent return in a month! So am I rich yet? Not really</a>.
+If that isn't enough, here's an illustration on <a href="/why-winning-automated-contest-strategies-dont-work-in-real-trading/">Why winning automated
+contest strategies don't work in real trading</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/' title='2010-09-23T12:28:00'>23 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/" rel='bookmark'>Number one with 40+ percent return in a month!  So am I rich yet?  Not really</a>
+            </h1>
+            <div class="article-content"> <p>I have won first place in the August <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex contest! My
+automated strategy returned over 45% in the month of August. With that
+honour comes [a \$5,000 grand prize][] in real greenbacks. The setup
+that I used is a minor updated version of <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">the one I used last month</a>.
+I continue to adapt my system to expect market conditions of the month
+ahead. Sometimes I'm right, sometimes I'm wrong. This contest is turning
+out to be more than a nerdy pass time for me as I have finished in the
+top 10 three times already since it started in April. However, I must
+reiterate the fact that this is not real trading. It's just a paper
+trading contest with no real money risked on my part. If I'm really that
+good at trading to make 45% of return a month, I wouldn't be writing
+this post at lunch in my cubicle at this moment. So yes, back to reality
+as I continue my engineering work while improving my own trading and
+developing my quantitative trading system in my spare time. As my blog's
+tagline reads, this is an engineer's training to trade for a living.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/' title='2010-09-03T12:39:00'>03 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/" rel='bookmark'>JForex Example:  Automatic position sizing</a>
+            </h1>
+            <div class="article-content"> <p>Proper position sizing is an integral part of risk management. It <em>can</em>
+be one of the easiest thing to do too. For example, I <a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/">typically size my
+trading position</a> based on the following factors:</p>
+<ol>
+<li>Amount of capital willing to put at risk.</li>
+<li>Stop price level.</li>
+<li>Volatility of the instrument.</li>
+</ol>
+<p>The following JForex code calculates a lot size based on these three
+factors. It is part of my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex July strategy</a> (complete
+source code to the strategy is available via that link). [java
+firstline="232"] private double getLot(Instrument instrument) throws
+JFException { double riskAmt; double lotSize = 0; riskAmt =
+this.acctEquity * (this.riskPct / 100d); // CCYUSD only lotSize =
+riskAmt / (this.atr[instrument.ordinal()] * this.atrFactor); lotSize /=
+1000000d; // in millions return roundLot(lotSize); } [/java] Referring
+to line 237, riskAmt is the amount of capital to put at risk for a trade
+(#1). Line 238 calculates lotSize, which is the position size that we
+want. The denominator in that division is the distance of the stop in
+pips. The strategy uses a multiple of ATR to set the stop loss. Nothing
+fancy here. Lines 240--241 are to set the lotSize value according to the
+JForex API specification. In which the lot amount is in millions and in
+steps of a thousand units, or 0.001 step size. As I've noted in the
+code, the caveat to this implementation is that the secondary currency
+of the instrument and your account currency needs to be in U.S. dollar.
+However, it's just a matter of conversion to extend this method for
+other currencies. Update: I expanded on this functionality in the
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-automatic-position-sizing/' title='2010-08-17T11:58:00'>17 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel='bookmark'>JForex Example: Not letting profit turn to losses with a breakeven stop</a>
+            </h1>
+            <div class="article-content"> <p>While the <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual-timeframe trading setup</a> and much of the algorithm in
+my contest strategy are for competition only (read: not for use with
+real money) as I've warned numerous times, some of the risk management
+techniques used there are really what I use in real life. This being one
+of them. There's a saying in trading that "never let profits turns into
+losses." That is exactly the motivation behind this JForex code snippet.
+The following source code are excerpts from my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex
+contest's <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">July strategy</a>. The complete source code file is available
+in that link. Back to this concept of not letting profits turn to
+losses. This is a matter of balancing between giving room for your trade
+to reach its potential and limiting your drawdown. If you're too
+careful, you may find yourself being whipsawed out before a price move
+can materialize. If you keep your leash too loose though, well, you may
+watch your profits turn into losses. The way I intrepret the saying is
+that once your trade is profitable enough, you shouldn't let it slip
+back into a loss. I implement the above statement in my automated
+strategy as follows. Note that everything goes in the onTick() method so
+that it watches your position on every tick. The line numbers correspond
+to the <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code</a> of my automated strategy.
+[java firstline="177"] boolean isLong; double open, stop, diff, newStop;
+for (IOrder order : engine.getOrders(instrument)) { if (order.getState()
+== IOrder.State.FILLED) { [/java] [java firstline="191"] isLong =
+order.isLong(); open = order.getOpenPrice(); stop =
+order.getStopLossPrice(); diff = (open - stop); // *********
+BREAKEVEN *********************** if (isLong &amp;&amp;
+diff > 0 &amp;&amp; tick.getBid() > (open + diff)) {
+order.close(roundLot(order.getAmount() * beRatio)); // close a portion
+newStop = open + instrument.getPipValue() * LOCKPIP;
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } else if (!isLong &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk() \&lt;
+(open + diff)) { order.close(roundLot(order.getAmount() * beRatio));
+newStop = open - (instrument.getPipValue() * LOCKPIP);
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } [/java] What this does is that it will partially exit
+a position and move the stop to breakeven once the price is
+equidistantly positive from your initial stop loss. For example, if my
+stop loss is 100 pips, then once the position is 100 pips <em>in profit</em>,
+it will exit partially and set the new stop to breakeven. Update: This
+is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/' title='2010-08-11T13:11:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/" rel='bookmark'>JForex Example: Dual-Timeframe Moving Averages Setup</a>
+            </h1>
+            <div class="article-content"> <p>This post describes the setup for my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex automated trading
+strategy in July</a>. Note that this strategy is built for competing in a
+contest and not for real trading (i.e., its purely a
+no cost gamble). Here is the step by step process of the setup for a
+long position:</p>
+<ol>
+<li>Determine the current trend by the relative position of current
+    price to its moving average <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">in a higher time frame</a>. In
+    particular, a price above the moving average in the higher time
+    frame is deemed as bullish.</li>
+<li>Entry: Price moves above a moving average in the current time frame
+    (red line in Figure 1) with a higher high, low, and close (HLC). As
+    illustrated in Figure 1, the two bars circled.</li>
+<li>Exit: Crossing below a regular moving average (blue dotted line).</li>
+</ol>
+<p><img alt="EURUSD setup" src="http://www.quantisan.com/static/images/img_archive/2010-07-19-EURUSD.png" /></p>
+<p>As you can see, the setup itself is simple. Less than a fifth of the
+source code is devoted to the entry and exit. Most of this strategy
+involves <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/">automated position sizing</a> and <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">risk management to not let profits turn into losses</a>.</p>
+<p>The <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code of this strategy</a> is available in the introductory post.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/' title='2010-08-09T07:12:00'>09 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/tag/JForex//index2.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/tag/JForex//index4.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

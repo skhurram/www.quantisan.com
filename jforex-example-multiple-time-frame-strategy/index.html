@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>JForex Example:  Multiple-time frame strategy - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/" rel="bookmark">JForex Example:  Multiple-time frame strategy</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>The key to my July JForex strategy is the use of multiple time frames.
+As Dr. Alexander Elder demonstrates in his famous book, <em>Trading For A
+Living</em>, a proper technical analysis should at least consider time
+frames five-times faster and slower than the one in which you trade. For
+example, if you trade on a 30 minute chart, the one faster is 30/5 = 6
+minutes, which can be rounded as the five-minute chart. And the one
+slower would be 30 * 5 = 150 minutes. The closest standard time frame
+of which is a 4-hour chart.</p>
+<p>For <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my July JForex strategy</a>, it trades
+on the 30 minute chart and monitor the 4-hour chart in addition to the
+30-minute chart. The strategy doesn't make use of a faster time frame
+for simplicity. This is surprisingly easy to do in <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>'s
+JForex API.</p>
+<p>Referring to lines 81 to 87 of <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my strategy source code</a>. </p>
+<div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">==</span> <span class="n">PERIODINT</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">askBar</span><span class="o">);</span> 
+    <span class="k">return</span><span class="o">;</span>
+<span class="o">}</span> 
+<span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">!=</span> <span class="n">PERIODSHR</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// skip all other periods</span>
+</pre></div>
+
+
+<p>This chunk of code
+appears in the onBar() method. Since onBar() is called at the beginning
+of every price bar across all possible standard periods (from tick to
+weekly), it's just a matter of filtering out the redundant periods
+and/or catching the method when the period is correct. I have done both
+in the sample code. Line 81 is to catch the longer period, <code>PERIODINT = Period.FOUR\_HOURS</code> (line 54, not shown), in an <code>if</code> statement block. It
+calls my function <code>setSentiment()</code> and exits <code>onBar()</code> with the <code>return</code>,
+skipping everything in onBar() afterward. Line 87 is to skip all other
+periods that I'm not using. I could have used <code>if (period == PERIODSHR)</code>
+and put everything in an <code>if</code> block as in lines 81-85. But since the
+strategy is doing a lot more work in <code>PERIODSHR</code>, there would be a lot of
+codes in that IF block. So I am doing the reverse for the same result
+but simpler-looking codes. With this cleared, I can go over my <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual
+moving average entry signal setup</a> in the next post later this week.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-08-04T06:30:00'>
+                Posted 04 August 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/JForex/">JForex</a>
+            <a href="http://www.quantisan.com/tag/source code/">source code</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "jforex-example-multiple-time-frame-strategy/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

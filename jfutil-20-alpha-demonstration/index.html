@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>JFUtil 2.0 alpha demonstration - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/jfutil-20-alpha-demonstration/" rel="bookmark">JFUtil 2.0 alpha demonstration</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Rather than talk about how much better JFUtil 2.0 is and all, I'll just
+show you a demonstration strategy illustrating the features of this
+JForex utilities library. Download <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">the latest JFUtil from the project
+page</a>. As this is an alpha release, I need your help in finding bugs
+and look for improvements. Leave me a message <a href="#respond">if you have any comment
+or suggestion please</a>. It's best if you copy and paste the following
+demo strategy source code into your IDE or text editor for viewing.
+<!--more--> [java] import java.util.*; import com.dukascopy.api.*;
+import com.quantisan.JFUtil.*; @Library("JFQuantisan.jar") // place
+this file in your ../JForex/Strategy/files folder public class
+jfutilDemo implements IStrategy { private int counter = new
+Random().nextInt(100); // notice the lack of fields to manage JForex
+objects @Override public void onStart(IContext context) throws
+JFException { // ** Essential steps ** // must initialize objects
+once and for all JForexContext.setContext(context);
+JForexAccount.setAccount(context.getAccount()); Set\&lt;Instrument> set =
+new HashSet\&lt;Instrument>(context.getSubscribedInstruments()); set =
+context.getSubscribedInstruments(); // get list of subscribed
+instruments // subscribe to transitional instruments for currency
+conversion calculations Pairer.subscribeTransitionalInstruments(set); //
+** End of essential steps ** Printer.println("-- Quantisan.com
+JFUtil v2.0 alpha: Usage demo --"); Printer.println(""); } @Override
+public void onBar(Instrument instrument, Period period, IBar askBar,
+IBar bidBar) throws JFException { if (period != Period.TEN_SECS)
+return; // only run every 10 sec. // *** 1. access IContext and
+IAccount from anywhere *** Printer.println("Account equity = " +
+JForexAccount.getEquity()); // get an EMA indicator value double ema =
+JForexContext.getIndicators().ema(instrument, Period.TEN_SECS,
+OfferSide.BID, IIndicators.AppliedPrice.MEDIAN_PRICE, 14, 1);
+Printer.println(instrument.toString() + " EMA = " + ema); // printing
+the EMA value // *** 2. Profit/loss calculation to account currency
+before placing your order *** // Demonstrating currency conversion
+double risk = 100 * Pairer.convertPipToAccountCurrency(instrument);
+String symbol = JForexAccount.getAccountCurrency().getSymbol();
+Printer.println(symbol + risk + " risked in for 1,000 units and 100 pips
+move in " + instrument.toString()); // ** 3. Simplify order parameters
+with order ticket builder *** // Demonstrating trade ordering String
+label = instrument.toString().substring(0,2) + ++counter; OrderTicket
+mktBuyTicket = new OrderTicket // order ticket .Builder(label, //
+setting required ticket info instrument, IEngine.OrderCommand.BUY, 0.1)
+.build(); // build ticket Orderer.placeOrder(mktBuyTicket); // placing
+order // market buy order with a 100 pips stop and 100 pips target
+double stopPrice = JForexContext.getPrice(instrument) - (100 *
+instrument.getPipValue()); double targetPrice =
+JForexContext.getPrice(instrument) + (100 * instrument.getPipValue());
+label = instrument.toString().substring(0,2) + ++counter; OrderTicket
+buySpTicket = new OrderTicket .Builder(label, instrument,
+IEngine.OrderCommand.BUY, 0.1) .setStopLossPrice(stopPrice) // set stop
+price to ticket .setTakeProfitPrice(targetPrice) // set target .build();
+// ** 4. Single method to placing orders for all order types and
+parameters *** Orderer.placeOrder(buySpTicket); } @Override public
+void onAccount(IAccount account) throws JFException {
+JForexAccount.setAccount(account); // update IAccount to latest }
+@Override public void onStop() throws JFException { for (IOrder order :
+Orderer.getOrders()) // close all orders Orderer.close(order); } }
+[/java]</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-03-08T07:30:00'>
+                Posted 08 March 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/JForex/">JForex</a>
+            <a href="http://www.quantisan.com/tag/JFUtil/">JFUtil</a>
+            <a href="http://www.quantisan.com/tag/source code/">source code</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "jfutil-20-alpha-demonstration/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

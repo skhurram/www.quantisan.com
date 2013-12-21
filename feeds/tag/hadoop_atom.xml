@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/hadoop_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2012-02-26T09:38:00+00:00</updated><entry><title>Cascalog-checkpoint: Fault-tolerant MapReduce Topologies</title><link href="http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/" rel="alternate"></link><updated>2012-02-26T09:38:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-26:cascalog-checkpoint-fault-tolerant-mapreduce-topologies/</id><summary type="html">&lt;p&gt;
+Cascalog is an abstraction library on top of Cascading [for writing
+MapReduce jobs][]. Since the Cascalog library is maturing, the Twitter
+guys (core committers) have been building features around it so that
+it's not just an abstraction for Cascading. One of which is
+[Cascalog-checkpoint][]. It is a small, easy-to-use, and very powerful
+little add-on for Cascalog. In particular, it enables fault-tolerant
+MapReduce topologies. Building Cascading/Cascalog queries can be
+visualised as assembling pipes to connect a flow of data. Imagine that
+you have Flow A and B. Flow B uses the result from A along with other
+bits. Thus, Flow B is dependent on A. Typically, if a MapReduce job fail
+for whatever reason, you simply fix what's wrong and start the job all
+over again. But what if Flow A takes hours to run (which is common for a
+MR job) and the error happened in Flow B? Why re-do all that processing
+for Flow A if we know that it finished successfully? By using
+Cascalog-checkpoint, you can *stage* intermediate results (e.g. result
+of Flow A) and failed jobs can automatically pickup from the last
+checked point. An obvious thing to do but not something I've seen done
+in Hadoop. At least not as easy as this:
+&lt;script src="https://gist.github.com/1915638.js?file=ccl-checkpoint-sample1.clj"&gt;&lt;/script&gt;
+See [Sam Ritchie's post on cascalog-checkpoint][] for more examples. Of
+course, you need to coerce your flows such that output from Flow A can
+be read by Flow B. However, this is almost trivial via
+Cascalog/Cascading. As this notion of mix and match pipes and flows is a
+fundamental concept in Cascalog/Cascading. With so many choices of
+abstraction frameworks for coding MapReduce on Hadoop, I feel sorry for
+anyone using vanilla Java for writing MapReduce besides the most
+simplest or recurring jobs.
+&lt;/p&gt;</summary><category term="cascalog"></category><category term="hadoop"></category></entry><entry><title>My 5 minute lightning talk on Cascalog</title><link href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel="alternate"></link><updated>2012-02-05T18:39:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-05:my-5-minute-lightning-talk-on-cascalog/</id><summary type="html">&lt;p&gt;Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.&lt;/p&gt;
+&lt;iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;amp;size=m" frameborder="0" width="555" height="451"&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The possibilities...&lt;/p&gt;</summary><category term="cascalog"></category><category term="clojure"></category><category term="hadoop"></category><category term="presentation"></category></entry><entry><title>Local Hadoop test cluster up and running</title><link href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel="alternate"></link><updated>2011-09-14T22:42:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-09-14:local-hadoop-test-cluster-up-and-running/</id><summary type="html">&lt;p&gt;Thanks to &lt;a href="http://www.cloudera.com/hadoop/"&gt;Cloudera's CDH3 image&lt;/a&gt;, I have a virtual machine with
+Hadoop on CentOS 5 working. I'm more of an Ubuntu guy, so CentOS is a
+new for me. But nothing Google couldn't solve. I also ran into a Hadoop
+exception about the java heap space. I couldn't find a solution online
+so I just bumped up the memory on the virtual machine and it solved the
+problem. In any case, I managed to run &lt;a href="http://developer.yahoo.com/hadoop/tutorial/module3.html#vm-jobs"&gt;the pi calculation example&lt;/a&gt; on
+my local Hadoop cluster. [&lt;img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" /&gt;]: http://www.quantisan.com/static/images/2011/09/hadoop-example-pi.jpg&lt;/p&gt;</summary><category term="hadoop"></category></entry><entry><title>Building a distributed back-tester with Hadoop on Amazon AWS</title><link href="http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/" rel="alternate"></link><updated>2011-09-13T10:44:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-09-13:building-a-distributed-back-tester-with-hadoop-on-amazon-aws/</id><summary type="html">&lt;p&gt;Testing is arguably the single most important aspect of trading system
+development. You can't tell how well an idea works unless you test it
+out. [Testing can also help you identify weaknesses or strengths in your
+model][]. The downside to testing is that it takes time to churn through
+those gigabytes of data. Backtesting is inherently a linear process. You
+feed in your tick data into your algorithm and expect some actions. You
+can't really make use of fork/join to let other threads steal from the
+process queue as the later process depends on results from the earlier
+calculations. However, often times than not, you're interested in
+testing many variations of a strategy. This is where MapReduce comes
+into play. MapReduce is a Google software framework. It is inspired by
+the map and reduce functions ubiquitous in functional programming. They
+are as common as for-loops in the Java world. The &lt;em&gt;map&lt;/em&gt; function
+partitions an input into smaller problems and run them concurrently,
+e.g. each of the strategy's variant is executed on a node. The &lt;em&gt;reduce&lt;/em&gt;
+function takes the results from all the nodes and aggregate them to get
+an output, e.g. back-test results from each strategy. Having used
+functional programming for some time now, using map/reduce is very
+natural for me. Where my knowledge falls short is in implementing a
+distributed infrastructure for running these map and reduce with massive
+scaling beyond my own multi-core computer. It just so happens that
+Amazon AWS has a hosted Hadoop PaaS. Where Hadoop is the Apache's
+framework for MapReduce. Hardware, check. Framework, check. This will be
+the ~~first~~ second system that I'll be working on in my goal to build
+&lt;a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/"&gt;a complete trading R&amp;amp;D platform&lt;/a&gt;. Expect some technical discussions
+in the coming months as I work my way through. Now, where should I
+start...&lt;/p&gt;
+&lt;p&gt;[Testing can also help you identify weaknesses or strengths in your
+  model]: http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/&lt;/p&gt;</summary><category term="backtest"></category><category term="hadoop"></category></entry></feed>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/data-processing_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2012-09-04T16:30:00+01:00</updated><entry><title>My talk at OR54 on knowledge discovery with web log data</title><link href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/" rel="alternate"></link><updated>2012-09-04T16:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-09-04:my-talk-at-or54-on-knowledge-discovery-with-web-log-data/</id><summary type="html">&lt;h3&gt;Abstract&lt;/h3&gt;
+&lt;p&gt;Web log data contains a wealth of information about online visitors. We have a record of each and every 
+customer interaction for the millions of visitors coming through each month at uSwitch.com. The challenge 
+is to analyse this discrete time series, semi-structured dataset to understand the behaviour of our visitors on 
+a personal level. This talk is a case study of how our data team of three leveraged heterogeneous 
+architecture and agile methodologies to tackle this problem. And we had three months.&lt;/p&gt;
+&lt;h3&gt;Slides&lt;/h3&gt;
+&lt;iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"&gt;&lt;/iframe&gt;</summary><category term="presentation"></category><category term="data processing"></category><category term="cascalog"></category></entry></feed>

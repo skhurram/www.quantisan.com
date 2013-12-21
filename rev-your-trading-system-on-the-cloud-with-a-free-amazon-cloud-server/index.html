@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Rev your trading system on the cloud with a free Amazon cloud server - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel="bookmark">Rev your trading system on the cloud with a free Amazon cloud server</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>I always try to keep my trading and any related costs as cheap as
+possible. And there's nothing cheaper than free, which that is what
+Amazon Web Services (AWS) is offering starting November 1, 2010. They
+are offering a full year of free t1.micro EC2 instance along with other
+basic level of AWS services (see link below). That seems to be a great
+incentive to move my trading system on to a remote cloud server. One of
+the biggest benefits of running your trading system on a virtual private
+server or a cloud instance is reliability. I don't know about you, but
+my internet connection sometimes acts up or even goes down for hours.
+There's the occasional electrical power disruption too, but it's been
+good these days. On the other hand, there are many disadvantages for
+running your trading system remotely. Costs, technical know-hows, and
+limited processing power, just to name a few. The added costs is not an
+issue for now as Amazon is offering a year of free trial. With regard to
+technical know-hows, I don't know how to setup a cloud server yet.
+Although it shouldn't be a terribly difficult task for me as I am
+familiar with Linux. What's at issue though, is the limited processing
+power. The processing power of a t1.micro instance is an unspecified
+fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
+processor. So you get a fraction of that, which doesn't sound much.
+CloudHarmony's benchmark shows that <a href="http://cloudharmony.com/benchmarks">a Micro instance is about 1/10th of
+that of the Small instance</a>. However, a Micro instance can burst to up
+to 2 ECUs (double that of the Small) of processing power occasionally.
+This is good if you can keep your continuous processes minimal and only
+make calculations infrequently (such as on arrival of a new price bar).
+The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
+low-latency files) and 5 GB of S3 (for persistent storage). These
+numbers are generous, so the bottleneck obviously remains with the
+processor. Your best bet for minimal background processing use is to run
+a command-line-only trading system. That's something that can be easily
+done on JForex. However, there remains the question of is the minimum
+power of a Micro sufficient to sustain a trading system? Any hiccup in a
+trading system could cost you more than the annual charge for even a
+Small instance. This freebie from Amazon may not be worth the risk. The
+only way to know is to test it out. I won't be able to get to that soon
+as I'm been busy programming. So if anyone is running a trading system
+on a t1.micro instance, I'd really appreciate if you can provide some
+feedback. Update Nov 6: See <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">my first failed test</a> and then my first
+time <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">running remote desktop on t1.micro</a>. Otherwise, enjoy the
+freebie, <a href="http://aws.amazon.com/free/">AWS Free Usage Tier</a>.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-10-29T05:23:00'>
+                Posted 29 October 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/Amazon EC2/">Amazon EC2</a>
+            <a href="http://www.quantisan.com/tag/cloud computing/">cloud computing</a>
+            <a href="http://www.quantisan.com/tag/VPS/">VPS</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

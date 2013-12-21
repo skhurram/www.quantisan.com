@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - EasyLanguage</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/" rel='bookmark'>Why I am not a big fan of MQL4 or trading platform scripting</a>
+            </h1>
+            <div class="article-content"> <p>I spent most of 2008 trading futures and developing automated systems on
+Tradestation. The futures trading didn't turn out so well as I lost 40%
+of my account and had to <a href="http://www.quantisan.com/retirement-from-futures-trading-and-back-to-stocks/">call it quit</a>. My quant development work on
+the other hand, was coming along slow but steadily. However, since I
+couldn't bear the monstrous maintenance fee anymore at <a href="http://www.tradestation.com/">Tradestation</a>,
+I had to abandon that work. Then last year <a href="http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/">when I wanted to pick up
+where I left off</a> on Matlab, I found that I couldn't just continue my
+work. For one, I've lost most of my files. I think I left them in my
+other computer in Hong Kong. Which is probably in a landfill by now.
+Secondly, I didn't keep a thorough journal <a href="http://www.quantisan.com/2008/">back then in 2008</a> like
+I'm doing now. Lastly, from the important files that I've kept, I didn't
+bother to convert the codes because I might as well write new ones from
+scratch than figure out what I did. The reason why I am reminiscing at
+the moment is because I am finding myself in the same cycle again. As
+regular readers may be aware, <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">recent events</a> have accelerated my
+quant projects schedule. I am experimenting with using Metatrader 4 for
+my foreign exchange trading and scripting in MQL4 for automated trading.
+Like Tradestation, <a href="http://www.metaquotes.net/en/metatrader4">Metatrader 4</a> is a trading platform with scripting
+capabilities. Its programming language, MQL4, is a proprietary language
+based on C. I took a few hours this weekend to learn it (as I'm familiar
+with C already). So that I can start coding this week. However, after
+giving it more thought, I've decided to scale down on my projects with
+MQL4. I don't want to rely on a proprietary system for short-term
+convenience. As trading programmers know, the language used is merely a
+choice. Experience tells me that the bulk of development time is not
+spent on the actual programming itself. Rather, much of the time is
+spent on formulating, analyzing, and optimizing your algorithm. So I
+might as well bite the bullet to build from scratch my automated trading
+systems and quant analytics on one platform (i.e. on Python). That has
+been my long term plan all along. Everything under one roof. But I
+digressed. Then there's the issue of re-useability. Metatrader 4 is
+forex-only and only works with brokers that support it. As such, I would
+have to use something else for stock trading. Even for a forex-only
+system, it would help if I can do intermarket analysis quantitatively.
+That's not possible as far as I know with MQL4. Which is another major
+downside for me. To summarize other reasons on how I came about this
+decision, here are the advantages and disadvantages of using MQL4 versus
+using a general programming language, such as Python or C++. The
+advantages of using MQL4 are:</p>
+<ol>
+<li>Saves A LOT of development time as it's already built for trading</li>
+<li>Charting, manual and automated trading on one platform</li>
+<li>Based on the popular C programming language</li>
+<li>Many forex traders use it</li>
+<li>Large repertoire of forex-specific programs</li>
+</ol>
+<p>Disadvantages of using MQL4.</p>
+<ol>
+<li>Not for real quant analysis or data mining</li>
+<li>Limited to MT4-supported brokers</li>
+<li>Forex trading only</li>
+<li>Proprietary programming language</li>
+<li>Must run on Metatrader 4 client terminal</li>
+<li>MQL5 coming soon</li>
+</ol>
+<p>This is certainly a tough choice. Judging by the huge user base, it's
+evident that many people are satisfied with MQL4. Yet, as I've discussed
+here, there are downsides to using it (besides technical matters). My
+current plan remains the same as what I said in <a href="http://www.quantisan.com/january-2010-trading-performance-review/">my last month's trading
+review</a>. That is, I will use MQL4 to plug holes in my trading system
+for now before migrating to build my own system. In fact, I am already
+brewing my first expert advisor starting today. Perhaps I might even
+have something to post by the end of this week.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/' title='2010-02-08T13:38:00'>08 February 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/departed-tradestation-and-going-the-ninja-trader-path/" rel='bookmark'>Departed TradeStation and going the Ninja Trader path</a>
+            </h1>
+            <div class="article-content"> <p>I have worked with <a href="http://www.tradestation.com">TradeStation</a> for a few months earlier this year.
+During that time, I worked for a few hours every single day on
+<a href="http://www.quantisan.com/tag/easylanguage/">developing automated strategies</a> and <a href="http://www.quantisan.com/tag/day-trading/">day trading</a> on it. I thought
+TS was very good for use as a day trading platform. Particularly now
+that I'm using ThinkOrSwim, I feel the TOS system is grossly inadequate
+when compared to TS. However, I personally didn't like using TS as an
+automated strategy development platform. EasyLanguage (TS's development
+language) is definitely easy to learn and use. I would imagine EL would
+meet the needs of many people and they'd be satisfied with it. On the
+other hand, if you want to develop more complex strategies, the coding
+can get complicated to the point of confusing, if it's even possible at
+all. Like I never figured out how to build a simple neural net on it.
+Besides the language, another limitation of TS is its inadequate API.
+For example, and if I remember correctly, I had a hard time in the
+programming trying to tie my portfolio value to the strategy. To
+accomplish something simple like automatic portfolio balancing. Often
+times, I wanted to do something but then found that I needed some
+'work-arounds' instead. In essence, EasyLanguage is easy to get started,
+but it certainly doesn't provide the depth which I wanted. Granted, it
+was a great starting point for me in automated strategies development. I
+learned a lot from it. Don't get me wrong though, a good strategy does
+not mean a complicated strategy. One could have a profitable strategy
+with just a few lines of code (moving averages, anyone?). What I want is
+something that can serve as my creative sandbox. I wanted something that
+can satisfy my wildest ideas. Actually, I just don't have sufficient
+risk capital to let loose a strategy, so I have the luxury of not tasked
+to yield results and is free to play with what I want. Including my
+<a href="http://www.quantisan.com/stanford-machine-learning-lectures-pomdp/">POMDP discussion in my previous post</a>, and my other idea of using
+modern control theory (my study focus back in the days) to identify
+market inefficiencies. I couldn't have done those with EL without
+over-complicating matters (DLL's, add-ons, etc.). The biggest factor
+though, was the monthly subscription cost. I stopped my TS subscription
+eventually because I just can't afford it. So what next? After some
+digging, I came across <a href="http://www.ninjatrader.com">Ninja Trader</a>. They support C# programming in
+their strategies. What's more, <strong>it's free</strong> for development use! I will
+be using it with opentick for a free datafeed. Free platform, free data!
+What more could I ask for? <strong>Update:</strong> It seems that opentick is
+overloaded and haven't been taking on new users for a few months now.
+I'll just use the simulated data within NT for now. <strong>Update 2009:</strong>
+Opentick is now closed until further notice according to them. I have
+began going through the NT tutorials and trying to refresh my distant
+memories on some technical topics. After a few months of vacation, I am
+back to the drawing board again. We'll see how it goes. I will document
+my progress here under the <a href="http://www.quantisan.com/category/quantitative-finance/systems/">automated trading category</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/departed-tradestation-and-going-the-ninja-trader-path/' title='2008-10-23T20:01:00'>23 October 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/2ma-w-adx-and-disappointing-realization/" rel='bookmark'>2MA w/ ADX and disappointing realization</a>
+            </h1>
+            <div class="article-content"> <p>Another day, another strategy. For the past couple of days, I've been
+working on the 2MA cross with ADX confirmation strategy for ER2H08 1200
+sh/bar. Basically, an HMA(Low, 8) crossing over EMA(Low, 24) as the
+trigger. Condition2 is that the current high is highest of past 3 bars.
+Condition3 is current ADX is also highest of the past 3 bars. Condition4
+is that it is during day time so fewer slippage.</p>
+<p>Exit is simply HMA(Low, 23) crossing under EMA(Low, 33) or it is nearing
+the close of the day session. Stop is \$350; Floor is \$500 and 63%
+retracement.</p>
+<p>Upon loose optimization on Oct 1, 2007 to Nov 30, 2007 data, the Long
+strategy achieved 3.37 profit factor, 57% profitable, and a steadily
+rising performance graph. Very good indeed. I was estatic yesterday.</p>
+<p>I continued to work on the strategy for the whole day today and
+developed a Short version using the same concept. The result were very
+good too (PF > 3, etc).</p>
+<p>From the back-testing data, the Long and Short together has PF over 2
+and steady rising performance too. From the calculation, I would make
+over \$7000 for the 2 months on 1 contract alone.</p>
+<p>Feeling pretty confident, I felt the system was somewhat complete, so I
+tested it using the lastest 30 days of data. Unfortunately, it failed
+miserably. PF was way under 1.0 and the gross profit were a mere couple
+of thousand dollars. The net profit were estimated to be just a few
+hundred dollars.</p>
+<p>So I tested the system on another set of data. August 2007. The result
+was even worse!</p>
+<p>Long story short, I found out that ADX isn't that reliable to confirm
+with major swings.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/2ma-w-adx-and-disappointing-realization/' title='2008-01-08T23:50:00'>08 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/using-new-ma-algorithm-to-rewrite-old-indicators/" rel='bookmark'>Using new MA algorithm to rewrite old indicators</a>
+            </h1>
+            <div class="article-content"> <p>Seeing that many indicators use a MA for calculation. It may be possible
+to use new MA algorithm to improve on their calculation.</p>
+<p>For example, the RS in RSI is something like RS = EMA(up days) /
+EMA(down days). We could change it to RS = HMA(up days) / HMA(down
+days). Since HMA is much faster, the resulting H-RSI may be faster too.
+This can be useful in day trading strategies.</p>
+<p>More work needs to be done to test this idea.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/using-new-ma-algorithm-to-rewrite-old-indicators/' title='2008-01-06T00:56:00'>06 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/new-moving-average/" rel='bookmark'>New moving average</a>
+            </h1>
+            <div class="article-content"> <p>I downloaded Hull Moving Average, Adaptive Moving Average, and a Kalmann
+Filter today.</p>
+<p>In the figure, the blue/red is HMA(8), cyan is AMA(10), yellow is EMA(9)
+as comparison.</p>
+<p>[<img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" />][] Notice that HMA is super fast and follows the price closely.
+AMA lags more but does a good job of smoothing outt the noise. EMA is as
+usual and very laggy.</p>
+<p>A strategy I'm thinking of is to use 3 different MA's instead of only
+EMA to improve the previously discussed 3EMA crossover strategy. The
+problem with the 3 EMA crossover strategy is that EMA lags too much, so
+it's not good for day trading so reaction time is the key to catching /
+exiting the waves.</p>
+<p>Maybe using the HMA as the fast MA, AMA as the base, and something else
+to verify the trend can work. As I've said before, remember to use
+something to filter out the whipsaws. But don't use something laggy as
+it would defeat the whole purpose of a fast indicator.</p>
+<p>Also, HMA can be used as a proxy to smooth out some inputs. i.e.
+RSI(HMA(close, 8), 14) or HMA(RSI(close, 14), 8).</p>
+<p>[<img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" />]: http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s1600-h/3mas.jpg</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/new-moving-average/' title='2008-01-06T00:49:00'>06 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/filtering-out-the-whipsaws/" rel='bookmark'>Filtering out the whipsaws</a>
+            </h1>
+            <div class="article-content"> <p>Whipsaws in pricing is the archilles' heel in trend following system. As
+demonstrated by the previous 3 trading strategies, once the price is in
+a narrow trading range, trend following systems would trigger many
+erraneous trades to eat away the account.</p>
+<p>An idea I'm having is to use ADX to filter out some of these trades.
+Either by comparing ADX to EMA(ADX)[1] or use DMI by ensuring + index >
+- index for long, for examples.</p>
+<p>I tested a Momentum(ADX) idea by using MyADX > MyADX[10] as a condition
+on the 3-EMA crossovers strategy as discussed today. It doesn't seem to
+be doing much as the DMI values jump around. Perhaps employing the MACD
+concept on ADX would yield some result.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/filtering-out-the-whipsaws/' title='2008-01-04T23:55:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/tag/EasyLanguage//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/" rel='bookmark'>Minimal variance asset allocation for Stocks ISA</a>
+            </h1>
+            <div class="article-content"> <p>With interest rate in the UK so pathetically low, I thought I might take some chance by making use of a Stocks ISA account in the UK. The problem though, is that I have no knowledge about the London stock market nor do I have the time to follow it. So I wrote a program to pick some Exchange Traded Funds (ETFs) with a primary goal to minimise risk and opportunity costs.</p>
+<p>Here are what I wanted to achieve:</p>
+<ul>
+<li>only a few trades at most a year</li>
+<li>less risk than FTSE100</li>
+<li>more yield than a laddered government bonds portfolio</li>
+<li>require less than an hour per month of maintenance</li>
+</ul>
+<p>Basically, this is a computer-assisted passive investment portfolio.</p>
+<p>The first step is to scrape all the ETF symbols from London Stock Exchange on <a href="http://www.londonstockexchange.com/exchange/prices-and-markets/ETFs/ETFs.html">these pages</a>. I use <code>getNodeSet</code> from <code>XML</code> package in R to select the relevant data from the HTML page with XPath.</p>
+<div class="highlight"><pre>page <span class="o">&lt;-</span> getURL<span class="p">(</span>url<span class="p">,</span> curl<span class="o">=</span>curl<span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>page<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[@class = &#39;table_dati&#39;]/tbody&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+</pre></div>
+
+
+<p>This program only considers ETF because this portfolio is to diversify risk and not pick <em>winning</em> stocks. ETFs provide <a href="http://www.economist.com/news/finance-and-economics/21570711-anniversary-successful-financial-innovation-twenty-years-young">convenient exposure to various asset classes such as equities, bonds, and commodities at low costs</a>.</p>
+<p>Next is to scrape profile information for each symbol from Yahoo. We want data such as the fund's expense ratio and asset class category.</p>
+<div class="highlight"><pre>url <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;http://finance.yahoo.com/q/pr?s=&quot;</span><span class="p">,</span> symbol<span class="p">,</span> <span class="s">&quot;+Profile&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>url<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[contains(concat(&#39; &#39;, @class, &#39; &#39;), &#39; yfnc_datamodoutline1 &#39;)]/tr/td/table&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+
+operation <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">2</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+overview <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">1</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Once the funds' fundamental data are fetched, we can do a preliminary screening. I am filtering for:</p>
+<ol>
+<li>Actively traded funds,</li>
+<li>Sufficient age (3 years), and</li>
+<li>Only the best 3 expense ratio efficiency from each class</li>
+</ol>
+<p>That last point is particularly important as illustrated in this plot.</p>
+<p><img alt="London funds expense by category" src="http://www.quantisan.com/images/2013/london_etf_mer_category.png" /></p>
+<p>The above plot couldn't fit in this frame but it shows that expense ratios are all over the place. What matters is that the raw data is available for use.</p>
+<p>The plot below is clearer. It shows expense ratio by the fund's issuer. You can see that Vanguard funds generally have the best expense ratio as is commonly known.</p>
+<p><img alt="London funds expense by issuer" src="http://www.quantisan.com/images/2013/london_etf_mer.png" /></p>
+<p>The initial ETF list has 667 funds in 104 categories. The screened list narrows it down to 20 funds in 18 categories. Most that were screened are niche funds such as Islamic Global Equity and regional real estate funds.</p>
+<p>Out of that 20 funds, I apply the popular <a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory">Modern Portfolio Theory</a> to minimise risk using historical quotes data with <code>quantmod</code>'s Yahoo data fetcher. Given the expected returns of each asset, <code>er</code> and their covariance matrix, <code>cov.mat</code>, a long-only efficient portfolio weighting of those assets can be solved with quadratic programming like so.</p>
+<div class="highlight"><pre>Dmat <span class="o">&lt;-</span> <span class="m">2</span><span class="o">*</span>cov.mat
+dvec <span class="o">&lt;-</span> rep.int<span class="p">(</span><span class="m">0</span><span class="p">,</span> N<span class="p">)</span>
+Amat <span class="o">&lt;-</span> cbind<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">),</span> er<span class="p">,</span> diag<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">))</span>
+bvec <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> target.return<span class="p">,</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span>N<span class="p">))</span>
+result <span class="o">&lt;-</span> solve.QP<span class="p">(</span>Dmat<span class="o">=</span>Dmat<span class="p">,</span>dvec<span class="o">=</span>dvec<span class="p">,</span>Amat<span class="o">=</span>Amat<span class="p">,</span>bvec<span class="o">=</span>bvec<span class="p">,</span>meq<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To get these weightings,</p>
+<div class="highlight"><pre><span class="n">IGLT</span><span class="p">.</span><span class="n">L</span>   <span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>   <span class="n">INXG</span><span class="p">.</span><span class="n">L</span>   <span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">SLXX</span><span class="p">.</span><span class="n">L</span>   <span class="n">IBGS</span><span class="p">.</span><span class="n">L</span>   <span class="n">IUKP</span><span class="p">.</span><span class="n">L</span>   <span class="n">LUK2</span><span class="p">.</span><span class="n">L</span> 
+<span class="mf">0.603023</span> <span class="mf">0.122829</span> <span class="mf">0.116879</span> <span class="mf">0.084122</span> <span class="mf">0.037906</span> <span class="mf">0.017975</span> <span class="mf">0.014051</span> <span class="mf">0.003215</span>
+</pre></div>
+
+
+<p>But here's the catch, this mean-variance optimisation approach which I'm using does not work in the real-world. The problem is that it optimises for historical data under simplistic assumptions. For potential improvements on this model, start with <a href="http://quant.stackexchange.com/questions/44/what-methods-do-you-use-to-improve-expected-return-estimates-when-constructing-a">this Q&amp;A on StackExchange</a> but be warned that it's a rabbit hole to go down in.</p>
+<p>Knowing that I shouldn't trust this model much, I do this a couple times under different scenarios on the efficient frontier and union the top weighted assets from each run as a compensation by sampling.</p>
+<p>The result is a suggestion of six ETFs.</p>
+<div class="highlight"><pre><span class="n">Symbol</span>            <span class="n">Name</span>                   <span class="n">category</span>
+<span class="n">BRIC</span><span class="p">.</span><span class="n">L</span>    <span class="n">ISHARESII</span> <span class="mi">50</span>                <span class="n">BRIC</span> <span class="n">Equity</span>
+<span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">POWERSHS</span> <span class="n">EQQQ</span> <span class="n">US</span> <span class="n">Large</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Growth</span> <span class="n">Equity</span>
+<span class="n">IGLS</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHARESIII</span> <span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="err">£</span>        <span class="n">GBP</span> <span class="n">Government</span> <span class="n">Bond</span>
+<span class="n">INXG</span><span class="p">.</span><span class="n">L</span> <span class="n">GBP</span> <span class="n">IDX</span><span class="o">-</span><span class="n">LNK</span> <span class="n">GLT</span>  <span class="n">GBP</span> <span class="n">Inflation</span><span class="o">-</span><span class="n">Linked</span> <span class="n">Bond</span>
+<span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>  <span class="n">ISHARESFTSE250</span>          <span class="n">UK</span> <span class="n">Mid</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Equity</span>
+<span class="n">SLXX</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHSIII</span> <span class="n">IBX</span> <span class="err">£</span><span class="n">CB</span>         <span class="n">GBP</span> <span class="n">Corporate</span> <span class="n">Bond</span>
+</pre></div>
+
+
+<p>Out of these I hand picked IGLS.L and MIDD.L for a conservative 80% bonds and 20% equity portfolio. This plot below shows the annualised return versus risk of ISF (FTSE100), an equal-weighted portfolio of the pre-screened 20 ETFs, and this final portfolio of two ETFs. Notice the historic risk of this final portfolio is a third of FTSE100.</p>
+<p><img alt="Return vs risk" src="http://www.quantisan.com/images/2013/london_etf_rr.png" /></p>
+<p>Not surprisingly, what my program derived from scratch is similar to the commonly suggested portfolio balance of bonds, local equities, and emerging market blend. What this program offers is picking out the specific ETFs from the hundreds of ETFs traded on London Stock Exchange for a balanced asset allocation.</p>
+<p>The complete R source code for this project is <a href="https://github.com/Quantisan/touzi">available on Github</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/' title='2013-01-31T12:30:00'>31 January 2013</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/bought-1000-pmvvn-062/" rel='bookmark'>Bought 1000 PMV.VN @ 0.62</a>
+            </h1>
+            <div class="article-content"> <p><strong>Update January 26:</strong> The share price of PMV.V crossed my mental stop
+yesterday so I had to reassess the position. I sold my shares at \$0.56
+for a loss of (\$0.56 - \$0.62) * 1000 = \$70 + \$19.90 commission =
+\$89.90 = 0.9% of account. Gold is falling while USD tanked this week.
+The lack of volume on today's goldminers rally is also uncharacteristic
+of the recent uptrend. The long term uptrend of gold and gold miners is
+unmistakable on both fundamental and technical basis. I am taking a
+dabble in this junior gold miner as its share price is making a gap fill
+on a recent breakout (Fig. 1), amongst other things. Intraday chart
+(Fig. 2) is also showing signs of life at this support level. What's
+going to happen to gold as it breaks below 1350 (first time since
+November) from worries about Chinese inflation, which led to strength in
+USD (on fear of further Chinese tightening) as EURUSD dropped 60 pips in
+2 hours. See FT: <a href="http://www.ft.com/cms/s/0/ab89d906-244e-11e0-a89a-00144feab49a.html">Fears grow that China is overheating</a>. Couple that
+with political and economic uncertainty, we have a short term
+uncertainty in gold's direction. However, all these is in line with the
+underlying gold-bug case that money is becoming more worthless as
+governments pump in money to their respective economies. Another point
+to note is that as the Shanghai Composite and Bombay Stock Exchange
+(i.e. growth markets) are making 3-month lows in recent weeks, people
+will start to look for other assets to diversify their wealth. This is
+all conjectures anyway. I can't predict the future.I am merely placing
+my bet as the stars seem to have aligned for me to increase the
+probability of this good reward/risk trade. Mental stop is \$0.55. Hard
+stop is \$0.48, however, I'll give it some margin and say 0.40 is my
+stop as liquidity is thin in this junior. Thus, risk is (\$0.62 -
+\$0.40) * 1000 = \$220 + \$9.95 commission = \$229.95 = 2.4% of
+account. Note: You might have noticed that my <a href="http://www.quantisan.com/trade-log/">trade log</a> style has
+changed for 2011. I am trying to jot down my thought process rather than
+the data analysis and numerical logic to better capture my <em>thinking</em>
+for the record.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="PMI Gold Corp.
+(PMV.V)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2011-01-20-PMV.V.png" />][][/caption] [caption id="" align="aligncenter"
+width="570" caption="PMI Gold Corp. (PMV.V)
+intraday"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2011-01-20-PMV.V-intra.gif" />]<a href="http://www.quantisan.com/static/images/img_archive/2011-01-20-PMV.V-intra.gif">1</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bought-1000-pmvvn-062/' title='2011-01-20T11:28:00'>20 January 2011</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/" rel='bookmark'>I didn&#039;t miss a boat.  I missed a freakin rocket!</a>
+            </h1>
+            <div class="article-content"> <p>The purpose of this post is not to bang my head over this wonder. There
+are always other opportunities in the market. The purpose of this post
+is to remind myself that:</p>
+<ol>
+<li>my analysis can be so right, sometimes; but more importantly</li>
+<li>my entries and exits timing are still <em>terrible</em></li>
+</ol>
+<p>I can't use the same techniques I use to<a href="http://www.quantisan.com/category/forex/">trade forex</a> and <a href="http://www.quantisan.com/category/stocks/">large
+caps</a> in these <a href="http://www.quantisan.com/tag/mining/">junior miners</a>. I'm used to <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">riding waves</a> on a
+boat. I need to adapt and figure out ways to ride rockets (a friendly
+reminder that most rockets will fail to launch), as <a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/#comment-533">Uberlu suggested</a>
+in a comment. Here's what happened. I <a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/">lamented about my missed
+opportunity</a> in establishing a position in Ventana Gold (VEN.TO) last
+week. VEN.TO is a company in which I've been very bullish and <a href="http://www.quantisan.com/tag/VEN.TO/">took
+numerous dabs at</a> for months. This is the picture of VEN.TO last
+Monday. It already propelled to \$11. [caption id="" align="aligncenter"
+width="570" caption="Ventana Gold (VEN.TO) on November
+8"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-08-VEN.TO.png" />][][/caption] Now this is VEN.TO today. [caption id=""
+align="aligncenter" width="570" caption="Ventana Gold
+(VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-18-VEN.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-11-18-VEN.TO.png">1</a>[/caption] VEN.TO closed at \$10.03 on Tuesday. It
+opened at 13.61 on Wednesday on news of a takeover bid.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/' title='2010-11-18T10:09:00'>18 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/sold-200-lllto-4800-profit-19/" rel='bookmark'>Sold 200 LLL.TO @ 48.00, Profit +1.9%</a>
+            </h1>
+            <div class="article-content"> <p>I'm out of <a href="http://www.quantisan.com/bought-200-lll-to-47-04-stop-46-50/">my Lululemon position</a> minutes prior to the close. Holding
+time was just a day. I would have liked to hold this position for longer
+but the market is directionless. In addition, the stop hunt on the
+shorts in LLL.TO is unmistakable as seen in Figure 1. Option expiration
+is this Friday. So I'm taking my profit now prior to expected
+volatility. A reward/risk of 2 to 1 is too tempting to let go. However,
+LLL.TO is pushing higher into the close. So perhaps this is yet another
+lack of patience on my part. Update Nov 18: Yes, I was too early indeed.
+LLL.TO gapped upward the day after my exit. Option pain is pegged at
+\$45 on the American shares (NASDAQ:LULU). LULU is trading just above
+\$47 as I close my position. [caption id="" align="aligncenter"
+width="570" caption="Lululemon (LLL.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-17-LLL.TO.gif" />][][/caption] Profit is
+(\$48.00 - \$47.04) * 200 = \$192 - \$9.90 commission = \$182.1 = 1.9%
+of account. It's fortunate that I'm able to bounce right back to regain
+most of my losses in <a href="http://www.quantisan.com/covered-4-mfc-11jan-puts-14-00-mx-0-45-mark-14-80-loss-2-3/">my worst trade this year</a> within a week.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/sold-200-lllto-4800-profit-19/' title='2010-11-17T16:01:00'>17 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/bought-200-lllto-4704-stop-4650/" rel='bookmark'>Bought 200 LLL.TO @ 47.04, Stop 46.50</a>
+            </h1>
+            <div class="article-content"> <p>Market is tanking (Figure 1). Lots of pessimism in the news. Time for me
+to load on some growth stocks. I'm passing the goldminers in this move
+as the dollar seem to be rising from the dead and gold may be
+consolidating.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="TSX, 12500 looks
+like a fine support, doesn't it?"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-16-TSX.png" />][][/caption]</p>
+<p>Instead, I'm picking a growth stock, Lululemon (LLL.TO). Lululemon is
+holding well in this down move. Furthermore, the intraday test of
+support at 46.50 looks promising as there were few sellers at that price
+level. The recent break above long-term resistance at 48 is good too. So
+is the 19.6% short float... Anyway, you get the picture.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Lululemon
+(LLL.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-16-LLL.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-11-16-LLL.TO.png">1</a>[/caption] Risk is (\$47.04 - \$46.50) * 200 =
+\$108 + \$9.90 commission = \$117.9 = 1.2% of account. Update:
+Woodshedder's post today explains <a href="http://ibankcoin.com/woodshedderblog/2010/11/15/the-sky-is-falling/">his current view of the market</a>,
+which happens to coincide with mine at this time.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bought-200-lllto-4704-stop-4650/' title='2010-11-16T12:14:00'>16 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/covered-4-mfc-11jan-puts-1400mx-045-mark-1480-loss-23/" rel='bookmark'>Covered 4 MFC 11JAN Puts 14.00.MX @ 0.45, Mark 14.80, Loss -2.3%</a>
+            </h1>
+            <div class="article-content"> <p>The S&amp;P500 is filling its gap from that big up move on November 4.
+EUR/USD is bouncing off a long term support around 1.3600. Thus I'm
+covering my short in Manulife Financial (MFC.TO) before the weekend.
+<a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/">This position turned out horribly</a>. I've been waiting for MFC.TO to
+print 14.50, just above its 38.6% Fibonacci retracement level at 14.40
+on the recent spike. But 14.80 doesn't seem to budge even today with all
+that bearishness floating around. Intraday volume is also decreasing on
+every new test of this intraday support. So I'm throwing in the towel
+here. Loss is (\$0.45 - \$0.93) * 4 * 100 = -\$192 - \$27.90 =
+-\$219.90 = -2.3% of account.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Manulife
+Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-12-MFC.TO.png" />][][/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/covered-4-mfc-11jan-puts-1400mx-045-mark-1480-loss-23/' title='2010-11-12T13:23:00'>12 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/category/stocks//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

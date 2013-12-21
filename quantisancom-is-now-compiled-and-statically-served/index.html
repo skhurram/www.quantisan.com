@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantisan.com is now compiled and statically served - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/" rel="bookmark">Quantisan.com is now compiled and statically served</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>I just migrated this blog from a self-hosted Wordpress site to a Pelican statically generated blog. It took me a whole weekend to do it because I have almost 600 posts. Much is still broken at the moment but at least the site seems presentable so I pushed it through. The fixes will just have to wait.</p>
+<p>I considered using Jekyll as it appears to be the most popular static site generator. A look at its github page though shows no patch has been made for months. Development on Jekyll appears to have paused for some reason. Furthermore, I didn't have much luck getting <a href="https://github.com/thomasf/exitwp">exitwp</a>, which is a wordpress xml to jekyll importer, to gracefully parse my many custom posting tags. I also gave <a href="http://www.ruhoh.com">Ruhoh</a> a quick trial, but it also relies on exitwp to import wordpress posts.</p>
+<p>Then I found that <a href="http://doc.getpelican.com">Pelican</a> had its own importer tool using <a href="https://github.com/jgm/pandoc">pandoc</a>, which I tested works much better for the non-standard tags in my posts.</p>
+<p>In any case, here are the steps I took to migrate to Pelican.</p>
+<ol>
+<li>Export Wordpress into a XML file</li>
+<li>transfer comments to Disqus</li>
+<li>install Pelican 3.0.0 dev build</li>
+<li>use pelican-import to convert the XML file into markdown posts</li>
+<li>moved some posts around into its directory/category</li>
+<li>use Textmate to do a bunch of batch fixes</li>
+<li>configure Pelican and made a Makefile</li>
+<li><del>install ghp-import</del> rolled my own gh-pages script into Makefile</li>
+<li>customised a <a href="https://github.com/Quantisan/pelican-svbtle">pelican theme</a></li>
+<li>setup Github for custom domain</li>
+<li>updated DNS</li>
+</ol>
+<p>After all of that, this site is now <a href="https://github.com/Quantisan/www.quantisan.com">hosted and served on github</a>.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2012-08-04T12:42:00'>
+                Posted 04 August 2012
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/computing/">computing</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/blog/">blog</a>
+            <a href="http://www.quantisan.com/tag/python/">python</a>
+            <a href="http://www.quantisan.com/tag/wordpress/">wordpress</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "quantisancom-is-now-compiled-and-statically-served/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

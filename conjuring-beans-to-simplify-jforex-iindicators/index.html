@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Conjuring beans to simplify JForex IIndicators - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/" rel="bookmark">Conjuring beans to simplify JForex IIndicators</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>The JForex API is not perfect. Like any application programming
+interface (API), some parts of the JForex API is better designed than
+others. One of the most gripping problems with JForex is its use of
+technical analysis (TA) indicators. Here's an example of using an
+exponential moving average, one of the most simplest indicators.
+<code>ema(instrument, Period.TEN_SECS, OfferSide.BID, IIndicators.AppliedPrice.MEDIAN_PRICE, 14, 0);</code>
+And the corresponding javadoc explaining the parameters,
+<code>Parameters: instrument instrument of the bar period period of the bar side bid or ask side of the bar appliedPrice type of input data timePeriod time period value shift number of candle back in time staring from current bar. 0 - current bar (currently generated from ticks), 1 - previous bar (last formed bar), 2 - current bar minus 2 bars and so on</code>
+It's not intuitive but it's usable. Recall that in my <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">JForex
+programming tutorial</a>, I suggested using the JForex API javadoc to
+find out information about the API. However, for the case of
+IIndicators, if you <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IIndicators.html">take a look at its javadoc</a>, you will only be led
+to more confusion by the hundred or so mysterious indicator methods with
+cryptic parameter names. In JForex API, if you want to calculate an
+indicator, you need to look through a long list of abbreviated method
+names in the javadoc. Many of which are not easy to decipher. Secondly,
+you need to figure out the generic parameters and set them correctly,
+which is different for almost every indicator. Lastly, as there is no
+standard interface for indicators, you need to hardcode these into your
+strategy with little flexibility. In contrast, here's the same call
+using <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil 2.1.0</a> to get an EMA value. It has notably more lines of
+code. It is designed deliberately so using an object oriented approach
+by encapsulating the indicator parameters into a bean object and
+abstracting the calculation into a single generic function call. [java]
+// get an EMA indicator value by building an indicator bean
+MovingAverage maBean = IndicatorBeanFactory.getMovingAverage(); // then
+sets its parameters with obvious method names
+maBean.setAppliedPrice(IIndicators.AppliedPrice.MEDIAN_PRICE)
+.setMAType(IIndicators.MaType.EMA) .setWidth(14); // all of these are
+optional parameters // feed the bean into a generic calculation method
+to get the result double ema = Indicating.calculate(instrument,
+Period.ONE_MIN, maBean); [/java] With JFUtil, to calculate an
+indicator, you create an indicator bean with the intuitive bean name
+that corresponds with the full name of an indicator. For example, a
+moving average will be MovingAverage. Then you set the
+indicator-specific parameters using clearly defined methods with useful
+javadoc descriptions. One method for one parameter. Lastly, you feed
+this indicator bean into a generic calculation function to get your
+value. It took some thinking to abstract and generalize such a rigidly
+structured API. I am quite pleased with this new design as the current
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil opens up a lot of design flexibility</a>. Such as
+dynamic indicator selection with genetic algorithm and interchangeable
+indicators use for runtime adaptive algorithms.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-03-22T07:35:00'>
+                Posted 22 March 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/JForex/">JForex</a>
+            <a href="http://www.quantisan.com/tag/JFUtil/">JFUtil</a>
+            <a href="http://www.quantisan.com/tag/software design/">software design</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "conjuring-beans-to-simplify-jforex-iindicators/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

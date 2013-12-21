@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/stock-move-estimation-on-expiration-day-based-on-option-prices/" rel='bookmark'>Stock move estimation on expiration day based on option prices</a>
+            </h1>
+            <div class="article-content"> <p>[caption id="attachment_387" align="aligncenter" width="500"
+caption="SPX move estimation based on option prices"][<img alt="SPX move
+estimation based on option prices" src="http://traderpau.files.wordpress.com/2008/10/option_est1.jpg?w=500" title="option_est1" />][][/caption]</p>
+<p>I'd like to document a useful technique I picked up today from Tom
+Sosnoff on <a href="http://shadowtrader.net/">ShadowTrader</a>. It's based on the idea that option pricing
+has become so efficient that it can be used to predict actual stock
+move.</p>
+<p>Since it is expiration Friday this week, the Oct 08 index option are
+expiring in two days. So for something like, SPX, the Oct 08 call/put
+has only two days left. Thus, there's little time decay factored in the
+price for these options with respect to the actual price. In other
+words, SPX and SPX options prices are converging.</p>
+<p>So if we take the price of the straddle and strangle strike on the
+money, it should be the expected move for SPX for this Friday. For
+example, SPX closed at 907.84 today. The price for a straddle at 905
+strike is \$48.65. The price for a strangle at 900/910 strikes is
+\$45.30. We'll average the two numbers (\$48.65 + \$45.30) / 2 = \$47.0.</p>
+<p>So the SPX is expected to move about 50 points this Friday either up or
+down.</p>
+<p>[<img alt="SPX move estimation based on option prices" src="http://traderpau.files.wordpress.com/2008/10/option_est1.jpg?w=500" title="option_est1" />]: http://traderpau.files.wordpress.com/2008/10/option_est1.jpg</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/stock-move-estimation-on-expiration-day-based-on-option-prices/' title='2008-10-15T18:03:00'>15 October 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/positions-review-after-the-crash-in-first-week-of-october-2008/" rel='bookmark'>Positions review after the crash in first week of October 2008</a>
+            </h1>
+            <div class="article-content"> <p>[caption id="attachment_375" align="aligncenter" width="500"
+caption="CAF, DELL, ESLR, SLW"][<img alt="CAF, DELL, ESLR, SLW" src="http://traderpau.files.wordpress.com/2008/10/2008-10-15-holdings.png?w=500" title="2008-10-15-holdings" />][][/caption]</p>
+<p>It's time to <a href="http://www.quantisan.com/eslr-testing-long-term-low/">review my positions as promised last week</a>. After the
+record up day on Monday and then the lackluster follow-through Tuesday,
+today is probably going to be a down day in the markets. Given <a href="http://www.quantisan.com/mid-week-market-review-october-15-2008/">my
+intermediate term outlook</a>, I am inclined to hold my positions.
+However, I need to unload my weakest link to reduce my risk.</p>
+<p>Above is a quick snapshot of my current holdings.</p>
+<p>Notice that DELL and ESLR are holding on nicely on this down (DJX
+-3.18%, SPX -3.57% as of this writing) day after the previous spike.
+This is a very good sign indeed as it shows they're likly to hold on to
+the previous \~20% gain, at least for now.</p>
+<p>Actually, the price action of ESLR seem very healthy in particular.
+There's been a couple of big volume spikes in late day trading. Although
+it does seem to be in a constant downtrend, as you can see from its
+chart.</p>
+<p>As for CAF and SLW they are both below support at the moment. CAF has
+broken its \$25 support last Friday and is trading below it at the
+moment. SLW is definitely the weakest at the moment. If it isn't such a
+cash cow, I would probably be selling it in yesterday's rally.
+Furthermore, it still seems to be holding on to its decending support
+line on the daily chart today.</p>
+<p>[caption id="attachment_377" align="aligncenter" width="500"
+caption="SLW"][<img alt="SLW" src="http://traderpau.files.wordpress.com/2008/10/2008-10-15-slw.png?w=500" title="2008-10-15-slw" />][][/caption]</p>
+<p>At this point, the question I ask myself is, if I'm in all cash now,
+would I be buying these companies at this point? CAF - yes, DELL - yes,
+ESLR - yes, SLW - yes. Is this the bottom? I don't know. I'll just have
+to wait and see. However, I will watch the day-to-day action of my
+holdings carefully and unload one of two of them to reduce my risk.</p>
+<p>[<img alt="CAF, DELL, ESLR, SLW" src="http://traderpau.files.wordpress.com/2008/10/2008-10-15-holdings.png?w=500" title="2008-10-15-holdings" />]: http://traderpau.files.wordpress.com/2008/10/2008-10-15-holdings.png
+  [<img alt="SLW" src="http://traderpau.files.wordpress.com/2008/10/2008-10-15-slw.png?w=500" title="2008-10-15-slw" />]: http://traderpau.files.wordpress.com/2008/10/2008-10-15-slw.png</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/positions-review-after-the-crash-in-first-week-of-october-2008/' title='2008-10-15T10:30:00'>15 October 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/4-errors-and-lessons-from-being-long-just-before-the-october-2008-crash/" rel='bookmark'>4 errors and lessons from being long just before the October 2008 crash</a>
+            </h1>
+            <div class="article-content"> <div class="mceTemp mceIEcenter">
+[![S&P 500 review][]][]
+:   S&P 500 review
+
+</div>
+
+<p></p>
+I have been waiting to go long in this bear market for a few weeks now,
+hoping for a bottom soon (first of my errors).  Then on week of
+September 29th, I decided to go all in (error #2).  S&amp;P closed at 1099
+that Friday.  A week later, on October 10th, the Friday close of S&amp;P 500
+was 899 points, and I am still left holding on (error #3).</p>
+<p>Error #4 though, requires some explaination.  Simply put, I was not
+reading the chart as I should have.  While both the price action and
+contrarian sentiments were bullish, I totally missed out on a basic
+technical analysis indicator ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â? the volume.  Looking at
+the above chart, itÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢s easy to see that the first
+downward break of the trendline in mid-September was confirmed with
+volume.  The volume on that day (left blue arrow), and for that entire
+week, is substantially higher than usual.  The subsequent mini rally
+attempt before the next break has been marked with little volume.  This
+suggests that market participants, particularly the longs, still
+havenÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢t flocked in yet.</p>
+<p>Seeing that, I [should at least reduce my position size by exiting some
+of my most weak positions][] (i.e. least profitable positions) before
+the weekend.</p>
+<p>While this is not my costliest lesson in trading, it illustrates some
+very fundamental lessons which I should <strong>reiterate</strong>, because I should
+have known better.</p>
+<ol>
+<li>Never try to pick the top or bottom.  Which I thought I learned from
+    my <a href="http://www.quantisan.com/category/futures/">futures trading</a> already.</li>
+<li><a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/">Manage risk according to volatility</a>.</li>
+<li>Exit at any cost if it doesnÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢t look right in a bear
+    market.</li>
+<li>DonÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢t get fixated on the individual stocks, look at
+    the bigger picture.</li>
+</ol>
+<p></p>
+Actually, I think this all boils down to proper <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>.</p>
+<p>[<img alt="S&amp;P 500 review" src="http://traderpau.files.wordpress.com/2008/10/week_spx.jpg?w=500" title="week_spx" />]: http://traderpau.files.wordpress.com/2008/10/week_spx.jpg
+  [should at least reduce my position size by exiting some of my most
+  weak positions]: http://www.quantisan.com/didnt-cut-losses-as-planned-and-now-paying-dearly/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/4-errors-and-lessons-from-being-long-just-before-the-october-2008-crash/' title='2008-10-12T14:40:00'>12 October 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/bill-moyers-journal-george-soros/" rel='bookmark'>Bill Moyers Journal  - George Soros</a>
+            </h1>
+            <div class="article-content"> <p>One of my favourite financial blogs, <a href="http://bigpicture.typepad.com">The Big Picture</a>, led us to this
+<a href="http://www.pbs.org/moyers/journal/10102008/watch.html">intellectual discussion of the current market crisis</a>. Highly
+recommended for anyone seeking to make some sense of the current
+turmoil.</p>
+<p>
+Here's an exerpt:
+
+> **GEORGE SOROS:**And it's a false ideology. Both Marxism and market
+> fundamentalism are false ideologies.
+>
+> </p>
+
+<blockquote>
+<p><strong>BILL MOYERS:</strong>Is there an ideology that...</p>
+<p><strong>GEORGE SOROS:</strong>Is not false?</p>
+<p><strong>BILL MOYERS:</strong>Yeah.</p>
+<p><strong>GEORGE SOROS:</strong>I think the only one is the one that I'm proposing;
+namely, the recognition that all our ideas, all our human constructs
+have a flaw in it. And perfection is not attainable. And we must
+engage in critical thinking and correct our mistakes.</p>
+<p><strong>BILL MOYERS:</strong>And that's one...</p>
+<p><p>
+<strong>GEORGE SOROS:</strong>That's my ideology. As a child, I experienced
+Fascism, the Nazi occupation and then Communism, two false ideologies.
+And I learned that both of those ideologies are false. And now I was
+shocked when I found that even in a democracy people can be misled to
+the extent that we've been misled in the last few years.</p>
+</blockquote>
+<p>Here's a bit about <a href="http://en.wikipedia.org/wiki/George_soros">George Soros from Wikipedia</a>,</p>
+<blockquote>
+<p>Soros' 2008 book, <em>The New Paradigm for Financial Markets</em>, describes
+a "superbubble" that has built up over the past 25 years and is now
+ready to collapse. This is the third in a series of books he's written
+that have predicted disaster. As he states:</p>
+<blockquote>
+<p><div>
+</p>
+<p>
+I have a record of crying wolfÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦. I did it first in
+<em>The Alchemy of Finance</em> (in 1987), then in <em>The Crisis of Global
+Capitalism</em> (in 1998) and now in this book. So it's three books
+predicting disaster. (After) the boy cried wolf three times . . .
+the wolf really came.
+</div></p>
+</blockquote>
+<p>He ascribes his own success to being able to recognize when his
+predictions are wrong.</p>
+<blockquote>
+<p><div>
+</p>
+<p>
+<strong>I'm only rich because I know when I'm wrong</strong>*ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ I
+basically have survived by recognizing my mistakes. I very often
+used to get backaches due to the fact that I was wrong. Whenever you
+are wrong you have to fight or [take] flight. When [I] make the
+decision, the backache goes away.
+</div></p>
+</blockquote>
+</blockquote>
+<p>Link to the complete 30 minute video:
+<a href="http://www.pbs.org/moyers/journal/10102008/watch.html">http://www.pbs.org/moyers/journal/10102008/watch.html</a></p>
+<p></p>
+<em>* One of the wisest modern day quotes I can think of.</em> Also my
+Archilles' Heel in trading...I guess that's why I'm not rich ... yet.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bill-moyers-journal-george-soros/' title='2008-10-12T10:33:00'>12 October 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/" rel='bookmark'>Reducing overall market exposure according to market volatility</a>
+            </h1>
+            <div class="article-content"> <p>[caption id="attachment_311" align="aligncenter" width="500"
+caption="S&amp;P 500 and VIX"][<img alt="S&amp;P 500 and VIX" src="http://traderpau.files.wordpress.com/2008/10/2008-10-08-vix1.png?w=500" title="2008-10-08-vix1" />][][/caption]</p>
+<p>With VIX at a multi-year high and the current market turmoil, it seems
+to be a good time to write about market volatility.</p>
+<p>Market volatility is a two-edged sword. Day traders dream of catching
+the 800 point swing in the YM contracts. Yet, most would lose more being
+stopped out before giving up and then missing the swing. For long term
+traders, these 800 point swing could cause panic (if you're on the wrong
+side) or doubts (should you or should you not take the profit?).</p>
+<p>Based on my brief experience in <a href="http://www.quantisan.com/tag/day-trading/">day trading</a> and <a href="http://www.quantisan.com/category/futures/">futures markets</a>,
+I am not one to play with fire. For my longer term plays, I am <a href="http://www.quantisan.com/didnt-cut-losses-as-planned-and-now-paying-dearly/">feeling
+the pain as we speak</a>. Thus, it is important to realize that although
+market <em>volatility is very tempting for quick profits, greed never pays
+in trading</em>. Another characteristic in a highly volatile market is that
+there're a lot of emotions going on. As you know, emotions can cloud our
+judgement. It's more difficult to trade when you're filled with panic,
+fear, greed, excitement, etc.</p>
+<p>In other words, market volatility is bad because 1) large swings both
+ways at any time and 2) lots of emotions in the market and yourself.</p>
+<p>To minimize your risk, it's better to minimize your exposure to the
+market at times of high volatility. Thus, I use the rule that...</p>
+<p><strong>If 50 dma of VIX > 20, then reduce position size to some % (i.e. 50%)
+of usual amount.</strong></p>
+<p>As a corollary, here's another interesting idea. It's widely known that
+markets tend to creep up and plunge down, i.e. rising slow and steadily,
+and fall quick and hard. Looking at the 50 dma VIX, it's actually a
+quicker indicator for the 2007 top than my previous <a href="http://www.quantisan.com/back-to-basics-market-sentiment-via-2-line-ema-on-sp500/">2-line EMA
+indicator for market sentiment</a>. Conceptually, if we accept that bull
+market is slow and bear market is fast, then this idea of using VIX to
+signal bull/bear sentiment do seem viable. However, there's already too
+many IF's and assumptions for me to take this seriously. Therefore,
+let's just stick with using volatility for managing position sizing
+only.</p>
+<p>[<img alt="S&amp;P 500 and VIX" src="http://traderpau.files.wordpress.com/2008/10/2008-10-08-vix1.png?w=500" title="2008-10-08-vix1" />]: http://traderpau.files.wordpress.com/2008/10/2008-10-08-vix1.png</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/' title='2008-10-08T10:54:00'>08 October 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/back-to-basics-market-sentiment-via-2-line-ema-on-sp500/" rel='bookmark'>Back to Basics: Market sentiment via 2-line EMA on S&amp;P500</a>
+            </h1>
+            <div class="article-content"> <p>[caption id="attachment_303" align="aligncenter" width="500"
+caption="S&amp;P 500"][<img alt="S&amp;P 500" src="http://traderpau.files.wordpress.com/2008/10/sc_snp500.png?w=500" title="sc_snp500" />][][/caption]</p>
+<p>One of the most, if not THE most, important theme in trading is
+identifying if we're in a bull or bear market. It's easier to "ride with
+the wave" than to fight against it. While there are an abundance of
+work, studies, theories, or whatever, on calling out market sentiments,
+I feel that the most useful way of doing it would be ones that stick to
+the facts. And the only fact we can be certain of in the market is the
+price.</p>
+<p>So here's the idea (definitely not original) for <strong>guessing</strong> market
+sentiment.</p>
+<ol>
+<li>Bull market = 50 dma > 200 dma for S&amp;P 500.</li>
+<li>Bear market = 50 dma \&lt; 200 dma for S&amp;P 500.</li>
+</ol>
+<p>As with any indicator, this is not a law. It's just a signal to give you
+a piece of information for you to <strong>intrepret</strong> based on the
+fundamentals and maybe other technical analysis tools.</p>
+</p>
+
+<p>[<img alt="S&amp;P 500" src="http://traderpau.files.wordpress.com/2008/10/sc_snp500.png?w=500" title="sc_snp500" />]: http://traderpau.files.wordpress.com/2008/10/sc_snp500.png</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/back-to-basics-market-sentiment-via-2-line-ema-on-sp500/' title='2008-10-08T10:12:00'>08 October 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/category/trading//index10.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/category/trading//index12.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - clojure</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
+            </h1>
+            <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
+<ol>
+<li>are resource-intensive to generate,</li>
+<li>might need to compose many of them,</li>
+<li>not sequential or have one-to-one depencency, and</li>
+<li>most importantly, they are in separate programs or different machines</li>
+</ol>
+<p>Thus I've opted to abstract this problem out into its own module of the system as an event-driven finite state machine (FSM) to keep track of state transitions. Intimidating term, but my first implementation was just if-else statements to qualify as such. The benefit is that each of my system's components only need to push signals and pull states from a central interface without having to worry about what should it call next or poll anything else to see if the stars are aligned. That drastically simplified development and maintenance.</p>
+<p>The responsiblities of my FSM module are to:</p>
+<ol>
+<li>listen to all the signals,</li>
+<li>figure out all the transitions, and</li>
+<li>publish the latest states for the rest of the system.</li>
+</ol>
+<h2>Handling asynchronous events</h2>
+<p>I use RabbitMQ as the message transport layer between my system's modules. All I need to do here is to associate an appropriate message handler to each triggering input for the FSM. Here's one example of the event handlers using the <a href="http://clojurerabbitmq.info/">Clojure RabbitMQ library, Langohr</a>. The rest of this part are just standard RabbitMQ publish/subscribe stuff.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn- </span><span class="nv">event-message-handler</span> <span class="p">[</span><span class="nv">ch</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">headers</span> <span class="nv">delivery-tag</span> <span class="nv">redelivery?</span><span class="p">]}</span> <span class="o">^</span><span class="nv">bytes</span> <span class="nv">payload</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">message-type</span> <span class="nv">user-id</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">]}</span> <span class="p">(</span><span class="nf">read-payload</span> <span class="nv">payload</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="ss">:position-event</span> <span class="nv">message-type</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">get-cached-states</span> <span class="nv">user-id</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">update-position-state</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">cache-states</span> <span class="nv">user-id</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nf">lbc/ack</span> <span class="nv">ch</span> <span class="nv">delivery-tag</span><span class="p">))</span>
+</pre></div>
+
+
+<p>This is called when a position event is received with information such as user, instrument, and quantity. This handler would thread these information by fetching current states for that user, evaluate next state with input, and then cache the new states for the user.</p>
+<h2>State transitions</h2>
+<p>Below is one of my system's state transition diagrams.</p>
+<p><img alt="state transition example" src="http://www.quantisan.com/images/2013/qte_state_diagram.png" /></p>
+<p>There are 4 states represented by 4 colours with 4 triggers signalling state transition. The program is expected to handle up to hundreds of independent states concurrently with event triggers coming in a couple times per second.</p>
+<p>As I was saying, my first implementation is just a set of if-else methods. For example, an <code>engage</code> trigger would call the <code>engaging</code> method to determine the next state given the implicit input <code>engage</code> and current state.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">engaging</span>
+  <span class="p">[</span><span class="nv">current</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">current</span>
+    <span class="s">&quot;white&quot;</span> <span class="s">&quot;yellow&quot;</span>
+    <span class="s">&quot;yellow&quot;</span> <span class="s">&quot;white&quot;</span>
+    <span class="s">&quot;green&quot;</span> <span class="s">&quot;red&quot;</span>
+    <span class="s">&quot;red&quot;</span> <span class="s">&quot;green&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>There were a handful of these boilerplate code. So after I deployed my system I came back to refactor them. I've been meaning to give core.logic a try for a while so this seem like a good place to start using it.</p>
+<p>Before we can ask the logic solver question we need to define relations. Here I define a <code>transition</code> relation to specify all the state transition definition conveniently in one place.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="nf">defrel</span> <span class="nv">transition</span> <span class="nv">from</span> <span class="nv">input</span> <span class="nv">to</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">facts</span> <span class="nv">transition</span> <span class="p">[[</span><span class="nv">nil</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="nv">nil</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:engage</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:engage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:engage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:engage</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:open</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>And the event handler methods are just wrappers for a one-liner logic expression asking the question -- given current stage, <code>cur-state</code>, and input trigger, <code>input</code>, what state can <code>q</code> take to satisfy this constraint?</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">next-state</span> 
+  <span class="s">&quot;Solver for next state&quot;</span>
+  <span class="p">[</span><span class="nv">input</span> <span class="nv">cur-state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">run</span> <span class="mi">1</span> <span class="p">[</span><span class="nv">q</span><span class="p">]</span> <span class="p">(</span><span class="nf">transition</span> <span class="nv">cur-state</span> <span class="nv">input</span> <span class="nv">q</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-clicked</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:engage</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-deactivate</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:disengage</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">next-position-colour</span> <span class="p">[</span><span class="nv">cur</span> <span class="nv">open?</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if </span><span class="nv">open?</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:open</span> <span class="nv">cur</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:close</span> <span class="nv">cur</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>Not the most illustrative core.logic example but it does the job.</p>
+<p>Getting started with core.logic is surprisingly easy. I went through the <a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer">Primer</a> and <a href="https://github.com/swannodette/logic-tutorial">tutorial</a> and got this working in one try.</p>
+<h2>State caching and sharing</h2>
+<p>Now that the state transition have been taken care of, states are cached and served on Redis for other parts of the system. I use Redis for this because it is fast and easy. Values are stored in <a href="https://github.com/edn-format/edn">edn format</a> instead of something more popular like JSON to maintain data structure through the wire.</p>
+<p>This is my first time using edn in production. All inter-process messages in this trading system are edn formatted. It works seamlessly with Clojure by simply using <code>str</code> to write and <code>clojure.edn/read-string</code> to read. Besides my other Clojure components in the system, my trade broker interface is written in Java. My Java program use <a href="https://github.com/bpsm/edn-java">edn-java</a> to parse and unparse complex Clojure data structures (e.g. nested maps with keywords).</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">pool</span>         <span class="p">(</span><span class="nf">car/make-conn-pool</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">spec-server1</span> <span class="p">(</span><span class="nf">car/make-conn-spec</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defmacro </span><span class="nv">with-car</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span> <span class="o">`</span><span class="p">(</span><span class="nf">car/with-conn</span> <span class="nv">pool</span> <span class="nv">spec-server1</span> <span class="o">~@</span><span class="nv">body</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-cached-states</span>
+  <span class="s">&quot;Generate edn from database.&quot;</span>
+  <span class="p">[</span><span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">edn/read-string</span> <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/get</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">cache-states</span> <span class="p">[</span><span class="nv">m</span> <span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/set</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)</span> <span class="p">(</span><span class="nb">str </span><span class="nv">m</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>I find coupling edn with Redis is a fantastic choice as it's almost like working with Clojure's native concurrency data structures, such as <code>atom</code>, but also enable external programs to access the data.</p>
+<h2>Simple and quick</h2>
+<p>The entire event-driven FSM program is less than 200 lines of Clojure code and took no more than a few hours to do. However, I did give it some pondering time for a few days. I haven't done any benchmark to estimate performance result. So all I can say is that this setup can handle my simplistic use case with barely any load on the server so I'm happy with it.</p>
+<p>A few years ago, I would have set a whole bunch of flags to switch states. In fact, <a href="https://github.com/Quantisan/JFFramework">that's what I did</a>. The biggest satisfaction here for me isn't the implementation or technologies, it is seeing through the underlying problem at hand and solving it with a common pattern that made my work simpler.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/' title='2013-05-20T00:00:00'>20 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/" rel='bookmark'>Unlock Lisp sorcery in your data structure by implementing Clojure ISeq</a>
+            </h1>
+            <div class="article-content"> <p>People that has gone through The Little Schemer might not find this exciting. One of the things that I discovered while patching <a href="http://quantisan.github.com/clatrix/">Clatrix</a> is that implementing clojure.lang.ISeq interface in your custom data structure unlocks the magic of Lisp composition. By enabling primative operators such as <code>first</code>, <code>next</code>, <code>more</code>, <code>cons</code>, higher-level operations such as <code>map</code> and <code>reduce</code> would just work when operating on your data structure. I find it fascinating that a native Fortran matrix object (through jBLAS) can be made clojury with a few magic operations implemented.</p>
+<p>However, getting a <code>deftype</code> implementation of <code>Matrix</code> correct took some effort as these operators are not as simple as they seem.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISeq</span> <span class="kd">extends</span> <span class="n">IPersistentCollection</span> <span class="o">{</span>
+    <span class="n">Object</span> <span class="nf">first</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">next</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">more</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">cons</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>For example, say we have a matrix <code>M</code> like so.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="k">def </span><span class="nv">M</span> <span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]]))</span>
+<span class="nv">=&gt;</span> <span class="nv">M</span>
+<span class="nv">A</span> <span class="mi">3</span><span class="nv">x3</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>  <span class="mf">3.00</span><span class="nv">e+00</span> 
+<span class="mf">4.00</span><span class="nv">e+00</span>  <span class="mf">5.00</span><span class="nv">e+00</span>  <span class="mf">6.00</span><span class="nv">e+00</span> 
+<span class="mf">7.00</span><span class="nv">e+00</span>  <span class="mf">8.00</span><span class="nv">e+00</span>  <span class="mf">9.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>Reducing <code>M</code> across its maps is equivalent to a column-wise operation.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">map + </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">M</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">12.0</span> <span class="mf">15.0</span> <span class="mf">18.0</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Yet for a while this doesn't work because I wasn't careful on my implementation of <code>first</code>. </p>
+<p>Consider the case of a 2x2 matrix. A 2x2 matrix is structurally equivalent to a nested vector. Calling <code>first</code> on these would yield:</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]]))</span>
+<span class="nv">A</span> <span class="mi">1</span><span class="nv">x2</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>And for a 3x1 vector matrix, i.e. one-dimensional, it is equivalent to a regular vector.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">1</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="mf">1.0</span>
+</pre></div>
+
+
+<p>But here's a tricky bit. What happens during <code>reduce</code> as it keeps recurring <code>next</code> and <code>first</code>?</p>
+<p>Let's step this through for <code>(reduce #(map + %1 %2) M)</code>. <code>%1</code> is basically the result so far and <code>%2</code> is the <code>first</code> of the remaining collection to be processed.</p>
+<table border="1">
+    <tr><th>iteration</th><th>accumulated (%1)</th><th>first (%2)</th><th>remaining</th></tr>
+    <tr><td>0</td><td>nil</td><td>[1 2 3]</td><td>[[1 2 3] [4 5 6] [7 8 9]]</td></tr>
+    <tr><td>1</td><td>[1 2 3]</td><td>[4 5 6]</td><td>[[4 5 6] [7 8 9]]</td></tr>
+    <tr><td>2, bad</td><td>[5 7 9]</td><td>7</td><td>[[7 8 9]]</td></tr>
+    <tr><td>2, good</td><td>[5 7 9]</td><td>[7 8 9]</td><td>[[7 8 9]]</td></tr>
+</table>
+
+<p>The problem arises in the second iteration. Calling <code>(rest [[4 5 6] [7 8 9]])</code> returns <code>[[7 8 9]]</code>. However, <code>(matrix [[7 8 9]])</code> is a row vector and <code>(matrix [7 8 9])</code> is a column vector. Both are considered one dimensional. In either case, <code>first</code> of a vector should return the first element, which is a number. Thus at this iteration, <code>reduce</code> breaks because you can't map a sequence with a number, <code>(map + [5 7 9] 7)</code>, to get an accumulated value.</p>
+<p>What we want though, is for the second iteration to return <code>[7 8 9]</code> instead because the <em>original</em> matrix is not a vector. Luckily, this particular problem has been solved by my colleague <a href="https://github.com/antoniogarrote">Antonio Garrote</a> when he <a href="https://github.com/forward/incanter-BLAS">did this in Java a year ago</a> by keeping a predicate field signifying is <em>this</em> matrix supposed to be vector or not.</p>
+<p>So there you have it. If you find yourself needing to implement <code>deftype</code> to build your own data structure in Clojure. Do consider implementing <code>clojure.lang.ISeq</code> to leverage high-level Clojure functions but be careful about those seemingly simplistic primitive operators.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/' title='2012-12-31T15:42:00'>31 December 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
+            </h1>
+            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
+<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
+<p>Then there's Incanter.</p>
+<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
+<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
+<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
+<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
+<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
+<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
+<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
+<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
+<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
+<p>I call this platform-as-interface.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel='bookmark'>My 5 minute lightning talk on Cascalog</a>
+            </h1>
+            <div class="article-content"> <p>Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.</p>
+<iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;size=m" frameborder="0" width="555" height="451"></iframe>
+
+<p>The possibilities...</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/' title='2012-02-05T18:39:00'>05 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/algorithmic-ownage/" rel='bookmark'>Algorithmic ownage</a>
+            </h1>
+            <div class="article-content"> <p>I felt good when I simplified one of my algorithms and sped it up 10
+times. I felt so good that I even wrote an entire blog post about it
+<a href="/eureka-moment-on-design-patterns-for-functional-programming/">patting myself on the back</a>. Then last week I got an email from Kevin
+of <a href="http://keminglabs.com/">Keming Labs</a> suggesting a few alternatives.</p>
+<div class="highlight"><pre><span class="c1">;;Three ways to count the number of occurrences in a collection</span>
+<span class="c1">;; (&quot;orange&quot; &quot;bottle&quot; &quot;coke&quot; &quot;bottle&quot;) =&gt; [(&quot;bottle&quot; &quot;coke&quot; &quot;orange&quot;) (2 1 1)]</span>
+<span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;orange&quot;</span> <span class="s">&quot;bottle&quot;</span> <span class="s">&quot;coke&quot;</span> <span class="s">&quot;bottle&quot;</span><span class="p">)]</span>
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%1</span> <span class="p">(</span><span class="nb">hash-map </span><span class="nv">%2</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">get </span><span class="nv">%1</span> <span class="nv">%2</span> <span class="mi">0</span><span class="p">))))</span>
+                       <span class="p">{}</span> <span class="nv">c</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">l</span> <span class="p">(</span><span class="nb">for </span><span class="p">[[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">c</span><span class="p">)]</span>
+            <span class="p">[</span><span class="nv">k</span> <span class="p">(</span><span class="nb">count </span><span class="nv">v</span><span class="p">)])]</span>
+    <span class="p">[(</span><span class="nb">map first </span><span class="nv">l</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">map second </span><span class="nv">l</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">apply merge-with </span><span class="nv">+</span>
+                      <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">apply hash-map </span><span class="nv">%</span><span class="p">)</span>
+                           <span class="p">(</span><span class="nf">partition</span> <span class="mi">2</span> <span class="p">(</span><span class="nb">interleave </span><span class="nv">c</span> <span class="p">(</span><span class="nb">repeat </span><span class="mi">1</span><span class="p">)))))]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)]))</span>
+</pre></div>
+
+
+<p>First of all, his solutions looked much cleaner <a href="/eureka-moment-on-design-patterns-for-functional-programming/">than mine</a>. Then over
+the weekend I was able to incorporate his 3 algorithms into my program.
+I ran a few benchmarks and here are the average of 2 tests using a
+dataset of 28,760 items.</p>
+<ul>
+<li>My algorithm. Elapsed time: 68372.026532 msecs.</li>
+<li>Kevin's solution #1. Elapsed time: 156.940976 msecs.</li>
+<li>Kevin's solution #2. Elapsed time: 60.165483 msecs.</li>
+<li>Kevin's solution #3. Elapsed time: 296.162042 msecs.</li>
+</ul>
+<p>Total ownage. That's what I like about sharing my
+work; once in a blue moon, a reader drops by and generously show
+me how I can improve a solution 1,000 times! Now the ball is in my hands
+to understand what he has done and improve myself. Collaborating and
+learning, that's why I open source.</p>
+<p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/algorithmic-ownage/' title='2011-11-06T17:37:00'>06 November 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel='bookmark'>Eureka moment on design patterns for functional programming</a>
+            </h1>
+            <div class="article-content"> <p>Understanding design patterns for object-oriented programming made my
+life easier as a Java programmer. So I have been looking for a
+comparable book for functional programming ever since my sojourn into
+this age-old paradigm. It looks as though <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book">I'm not the only one
+looking</a> too. But the thing is, I think I've just had a revelation of
+sort.</p>
+<p>There is one and only one guideline to designing functional
+architectures -- Keep it simple. Simple as in keeping your functions
+having a single purpose only. Simple as in work with the data directly and
+don't conjure unnecessary intermediaries. Simple, as elaborated by Rich
+Hickey in his talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Much of this is conveyed in Bloch's Effective Java:</p>
+<div class="highlight"><pre><span class="n">item</span> <span class="err">\#</span><span class="mi">5</span> <span class="err">\–</span> <span class="n">Avoid</span> <span class="n">creating</span> <span class="n">unnecessary</span> <span class="n">objects</span>
+<span class="n">item</span> <span class="err">\#</span><span class="mi">13</span> <span class="err">\–</span> <span class="n">minimize</span> <span class="n">accessibility</span> <span class="n">of</span> <span class="n">classes</span> <span class="n">and</span> <span class="n">members</span>
+</pre></div>
+
+
+<p>, for examples.</p>
+<p>As <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book/2930452#2930452">Majewski said in a stackoverflow reply</a> (Update 2013 – question no longer available on stackoverflow),</p>
+<div class="highlight"><pre><span class="n">The</span> <span class="n">patterns</span> <span class="n">movement</span> <span class="n">started</span> <span class="n">because</span> <span class="n">object</span><span class="o">-</span><span class="n">oriented</span> <span class="n">programming</span> 
+<span class="n">was</span> <span class="n">often</span> <span class="n">turning</span> <span class="n">into</span> <span class="n">spaghetti</span> <span class="n">objects</span> <span class="p">...</span> <span class="n">Functional</span> <span class="n">programming</span> 
+<span class="n">is</span> <span class="n">a</span> <span class="k">restricted</span> <span class="n">style</span> <span class="n">of</span> <span class="n">programming</span><span class="p">,</span> <span class="n">so</span> <span class="n">it</span> <span class="n">didn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">need</span> <span class="n">to</span> <span class="n">grow</span> <span class="n">a</span> <span class="n">set</span>
+<span class="n">of</span> <span class="k">restricted</span> <span class="n">conventions</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">the</span> <span class="n">chaos</span><span class="p">.</span>
+</pre></div>
+
+
+<p>As such, there is no design pattern book for functional programming. I didn't get that earlier this year. But something clicked recently. During the past few months, I've been doing some <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/">consulting and open source projects</a> solving algorithmic problems with Clojure.</p>
+<p>One of the problems in a project that I was faced with this week is calculating the occurrence of each distinctive element within a list of elements. Say we have a list, <code>coll = ("orange", "bottle", "coke", "bottle")</code>. The output would be something like <code>[("orange", "bottle", "coke") (1 2 1)]</code> </p>
+<p>This is my first solution.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">eval-decompose</span>
+  <span class="p">[</span><span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">super-d</span>  <span class="p">(</span><span class="nb">distinct </span><span class="nv">coll</span><span class="p">)</span>
+        <span class="nv">freqs</span>    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">ps</span>  <span class="p">[]</span>
+                        <span class="nv">d</span>   <span class="nv">super-d</span><span class="p">]</span>
+                   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">d</span><span class="p">)</span>
+                     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span>  <span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">partial = </span><span class="p">(</span><span class="nb">first </span><span class="nv">d</span><span class="p">))</span> <span class="nv">coll</span><span class="p">))]</span>
+                       <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">conj </span><span class="nv">ps</span> <span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">d</span><span class="p">)))</span>
+                     <span class="nv">ps</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">vector </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">super-d</span> <span class="nv">freqs</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>The specs are not exactly as I described but the concept remains. What I
+did is to use tail calls (it's supposed to be fast, isn't it?) to
+aggregate each counter to produce a vector of counts. Then I map each
+pair of fragment with its corresponding count to generate a final output
+collection. Sounds overly complicated, doesn't it?</p>
+<p>This is the first warning of a bad functional design. For a collection of 30,000 items,
+this function took 11 minutes to compute on my notebook. This looks like
+a good place to exploit the parallel nature of this problem.</p>
+<p>Specifically, the counting of each fragment is independent of other
+fragments. Thus, there's no need for the program to wait for one
+fragment to finish to process the next. I simplified the program to
+remove this inherent assumption of procedural processing. Here is the
+gist of the refactored code where each function only does one job. Since
+the processing are modularised, I can parallelize the algorithm easily
+with the use of pmap instead of map on the last line as shown below.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">match-count</span>
+<span class="s">&quot; Given key, k, returns number of occurrences of k in collection, coll.</span>
+<span class="s">&quot;</span>
+  <span class="p">[</span><span class="nv">k</span> <span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">match?</span>  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">i</span> <span class="nv">x</span><span class="p">]</span>
+                  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">x</span><span class="p">)</span>   <span class="c1">;; closure on k</span>
+                    <span class="p">(</span><span class="nb">inc </span><span class="nv">i</span><span class="p">)</span>
+                    <span class="nv">i</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">reduce </span><span class="nv">match?</span> <span class="mi">0</span> <span class="nv">coll</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">calc-counts</span>
+<span class="s">&quot; Returns a list of counts for the occurrences of each key of keys, ks,</span>
+<span class="s">  within the collection, coll.</span>
+<span class="s">&quot;</span>
+  <span class="p">[</span><span class="nv">ks</span> <span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">pmap</span> <span class="o">#</span><span class="p">(</span><span class="nf">match-count</span> <span class="nv">%</span> <span class="nv">coll</span><span class="p">)</span> <span class="nv">ks</span><span class="p">))</span>
+</pre></div>
+
+
+<p>I've split the first function into 3 functions (2 shown here). As Hickey
+said in his talk, simplifying can often produce more, not less,
+functions. Yet, the program is not only easier to read and runs in less
+than a minute. An order of magnitude faster! There are still lots for me
+to learn. I want to find more challenging projects to push my own
+limits. But rather than solving arbitrary problems, I prefer to tackle
+real-world challenges. So if you know of anyone that can benefit from
+collaborating with a functional developer to build robust and scalable
+software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.</p>
+<p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/tag/clojure//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

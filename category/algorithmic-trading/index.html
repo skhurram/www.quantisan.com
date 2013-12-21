@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/" rel='bookmark'>Building a distributed back-tester with Hadoop on Amazon AWS</a>
+            </h1>
+            <div class="article-content"> <p>Testing is arguably the single most important aspect of trading system
+development. You can't tell how well an idea works unless you test it
+out. [Testing can also help you identify weaknesses or strengths in your
+model][]. The downside to testing is that it takes time to churn through
+those gigabytes of data. Backtesting is inherently a linear process. You
+feed in your tick data into your algorithm and expect some actions. You
+can't really make use of fork/join to let other threads steal from the
+process queue as the later process depends on results from the earlier
+calculations. However, often times than not, you're interested in
+testing many variations of a strategy. This is where MapReduce comes
+into play. MapReduce is a Google software framework. It is inspired by
+the map and reduce functions ubiquitous in functional programming. They
+are as common as for-loops in the Java world. The <em>map</em> function
+partitions an input into smaller problems and run them concurrently,
+e.g. each of the strategy's variant is executed on a node. The <em>reduce</em>
+function takes the results from all the nodes and aggregate them to get
+an output, e.g. back-test results from each strategy. Having used
+functional programming for some time now, using map/reduce is very
+natural for me. Where my knowledge falls short is in implementing a
+distributed infrastructure for running these map and reduce with massive
+scaling beyond my own multi-core computer. It just so happens that
+Amazon AWS has a hosted Hadoop PaaS. Where Hadoop is the Apache's
+framework for MapReduce. Hardware, check. Framework, check. This will be
+the ~~first~~ second system that I'll be working on in my goal to build
+<a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/">a complete trading R&amp;D platform</a>. Expect some technical discussions
+in the coming months as I work my way through. Now, where should I
+start...</p>
+<p>[Testing can also help you identify weaknesses or strengths in your
+  model]: http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/' title='2011-09-13T10:44:00'>13 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/" rel='bookmark'>Towards a broker-agnostic trading system</a>
+            </h1>
+            <div class="article-content"> <p>The first generation of my trading system uses a broker's proprietary
+script on that same broker's platform. The second generation of my
+trading system uses a generic programming language on another broker's
+platform. I am now working on the third generation of my trading system.
+It is language-agnostic, platform-agnostic, and broker-agnostic. Why?
+Because designing trading systems is as much about creativity as the
+science. An artist would not limit themselves to a defined toolset. I
+want to be free to use whatever tools are necessary to get the job done
+efficiently and being able to try new things as technologies evolve.
+Having a broker-agnostic system frees me from being locked into any
+particular broker. Conversely, I could use one system to gather data and
+trade from multiple brokers for the best execution prices. Yes, this is
+over-engineering for a small entity like myself. But heck, this is
+something that I enjoy building. So why not?</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/towards-a-broker-agnostic-trading-system/' title='2011-09-01T21:01:00'>01 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business/" rel='bookmark'>It's an open buffet in a small business</a>
+            </h1>
+            <div class="article-content"> <p>One of the few benefits of working for myself is that I don't need to
+worry about compatibility with legacy systems. I am free to use whatever
+open source tools to get the job done well. The downside to this is that
+there are so many technologies out there that it's hard to choose the
+right ones for the job. To give you a sense of what I meant, here are
+some of the topics that I have either tried or seriously considered in
+the past year.</p>
+<ul>
+<li>Programming languages: <a href="http://www.quantisan.com/tag/java/">Java</a>, <a href="http://www.quantisan.com/tag/python/">Python</a>, <a href="http://www.quantisan.com/tag/R">R</a>, C#, F#, Scala,
+    Clojure, Haskell.</li>
+<li>Data storage: <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/">HDF5</a>, CSV, Binary, MySQL, PostgreSQL, MongoDB,
+    MonetDB, Redis, HBase.</li>
+<li>Cloud server: <a href="http://www.quantisan.com/tag/amazon-ec2/">Amazon EC2</a>, Microsoft Azure, [Google App
+    Engine][], Rackspace Cloud, <a href="http://www.quantisan.com/tag/vps/">plain old VPSs</a>.</li>
+</ul>
+<p>Programming language choices are important because they sit at the
+bottom of a technology stack. Most of the work that I do are built on
+using them. For a long while, I settled on using a combination of Java,
+Python, and R. I prototype small ideas in Python. Implement production
+code in Java. And perform analysis in R. I discussed why <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/">use the right
+tool for the right task</a> a year ago. By the end of my previous
+project, I am finding that the popular development triplet of Java,
+Python, and R, is not ideal for a solo-operation. Seeing that I have
+more time on my hands because I am using QTD to trade for me now, I am
+taking a break this summer to expand my knowledge and learn new
+technologies. Some of the technologies that I am experimenting with
+includes:</p>
+<ul>
+<li>an in-memory data store for instantaneous and persistent tick data</li>
+<li>parallel programming for concurrent processing with no locks</li>
+<li>mathematically intuitive algorithm implementations using high order
+    functions</li>
+</ul>
+<p>Don't mind me as I help myself in this open buffet of technologies.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/its-an-open-buffet-in-a-small-business/' title='2011-06-15T20:50:00'>15 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/" rel='bookmark'>The secret to trading system development is to fail faster</a>
+            </h1>
+            <div class="article-content"> <p>If I am to offer only one advice with regard to developing trading
+systems then this is it -- fail faster. The sad truth to trading is that
+there is no magical system that can guarantee profitability
+indefinitely. A reason top firms like Renaissance Technologies employ
+hundreds of PhDs and is <a href="https://www.renfund.com/vm/jobs.vm">still actively hiring</a> is because one can
+never reach the end of the rainbow in trading. A system can always be
+made better or made obsolete. In fact, you need to stay ahead of the
+curve as competitions are like vultures that will eat away your game if
+you don't keep moving. Not to mention the changing dynamics of the
+market itself is a moving target. As such, you simply need to keep
+innovating. My way of innovating boils down to executing five cyclical
+steps. Conceptualising, implementing, testing, measuring, and analysing,
+over and over again. In essence, my innovation methodology is a
+simulated annealing process that might or might not eventually lead to a
+breakthrough. I do this because:</p>
+<ol>
+<li>I am intelligent but I am not a genius. As such, I don't expect
+    myself to make leaps and bounds with regular sparks of genius.
+    Instead, I take small steps. Adding a 1% yield to your system is
+    extremely difficult. Adding 0.01% is a lot easier. Adding 0.0001% is
+    almost pedantic. So I aim for achieving smaller improvements and do
+    it hundreds of times over a development cycle.</li>
+<li>My view of the world is not absolute. In fact, I am more often wrong
+    than right. So it follows that most of my ideas don't have all the
+    pieces right. Thus, it is inherent that I need to polish my ideas
+    through trials and errors.</li>
+</ol>
+<p>Failure is inevidentable when developing trading systems. It is part of
+the process. You come up with an idea, implement it, test it, find out
+why it isn't up to your expectation, and then make it better. So the
+quicker you can fail and learn from it, the quicker you can discover
+something useful.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/' title='2011-06-07T07:30:00'>07 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/" rel='bookmark'>Graphs from network monitors on my remote trading server</a>
+            </h1>
+            <div class="article-content"> <p>Here are some server monitoring graphs from my remote trading server.
+These graphs are produced by the server monitoring application,
+<a href="http://munin-monitoring.org/">Munin</a>. I ran both JForex and Metatrader 4 simultaneously on my
+server last week. The 512 MB of memory was noticeably insufficient.
+Which caused the system to use swap files, thus leading to I/O latency,
+and which held up the CPU. All of which are evident from the graphs
+below. This week I am only running JForex. The server load is within
+tolerable range. The thing with picking your own VPS is that no VPS
+provider is the same. You can't really compare just the numbers as there
+are just too many factors to be considered behind the scene on a VPS
+service. So it is important to run applications that you intend to run
+and stress your system in real-world conditions. If your system seems
+slow, figure out where exactly is the bottleneck before throwing away
+money for upgrades. This is where a server monitoring application comes
+handy. [caption id="attachment_5437" align="aligncenter" width="497"
+caption="CPU data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/cpu-week.png" title="cpu-week" />[/caption] [caption id="attachment_5438"
+align="aligncenter" width="497" caption="Memory data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/memory-week.png" title="memory-week" />[/caption]
+[caption id="attachment_5439" align="aligncenter" width="497"
+caption="Interrupts data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/interrupts-week.png" title="interrupts-week" />[/caption] [caption
+id="attachment_5440" align="aligncenter" width="497" caption="Disk I/O
+latency"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/diskstats_latency-week.png" title="diskstats_latency-week" />[/caption] [caption id="attachment_5441"
+align="aligncenter" width="497" caption="Network
+transfer"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/if_eth0-week.png" title="if_eth0-week" />[/caption]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/' title='2011-05-19T07:30:00'>19 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/porting-jforex-qtd-to-metatrader-4/" rel='bookmark'>Porting JForex QTD to Metatrader 4</a>
+            </h1>
+            <div class="article-content"> <p>I just finished porting <a href="http://www.quantisan.com/quantised-trading-desk/">Quantised Trading Desk</a> to Metatrader 4. So
+that I can make use of my dormant trading account at Oanda. Seeing that
+Oanda has enabled use of Metatrader 4, I thought I might <a href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/">give them a
+second try</a>. I've always preferred to have more than one active
+trading accounts to serve as a backup and comparison. I settled on
+Questrade and TD Waterhouse for stocks and options, after hopping around
+brokerages for years. And I've been using Dukascopy to trade forex
+<a href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/">after much contention</a>. This is a good chance to diversify as I don't
+want to pigeonhole myself into one broker and one platform. The move to
+Metatrader 4 up until this point only took a couple of weeks as opposed
+to JForex version's year-long development time. This is because the
+underlying QTD system dynamics and algorithms were ironed out in JForex.
+I don't think I can finish QTD if I only had MQL4 at my disposal.
+Debugging and extending MQL4 scripts are a nightmare to say the least. I
+am so glad that I <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">moved away from these "easy" languages</a>. For the
+MQL4 version of QTD, I am merely doing a direct source code port from
+JForex to MQL4. MQL4, if anything else, is a very easy scripting
+language. I just taped out an alpha version of MT4 QTD this weekend as
+it is up to a stage where it is functional. However, porting QTD to MQL4
+isn't without its difficulties. For one, MQL4 is tailored for simple
+trading with technical analysis indicators. If price move above moving
+average, go long, for example. Whereas QTD rely on statistics and
+numerical methods in its trading algorithm. As such, I had to go back to
+basics and define all of my numerical methods from the fundamentals. I
+am now moving on to do forward testing on the MT4 QTD to ensure that
+both the JForex and the MT4 versions work similarly. I can't wait til I
+can run QTD on Dukascopy and Oanda simultaneously.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/porting-jforex-qtd-to-metatrader-4/' title='2011-05-16T07:30:00'>16 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/category/algorithmic-trading//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

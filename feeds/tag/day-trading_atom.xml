@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/day-trading_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2009-11-29T16:42:00+00:00</updated><entry><title>EUR/USD +95 pips in 2 hours: An example of swing and day trade convergence</title><link href="http://www.quantisan.com/eurusd-95-pips-in-2-hours-an-example-of-swing-and-day-trade-convergence/" rel="alternate"></link><updated>2009-11-29T16:42:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-11-29:eurusd-95-pips-in-2-hours-an-example-of-swing-and-day-trade-convergence/</id><summary type="html">&lt;p&gt;I had my best day-trading day this quarter on November 27. I made 95
+pips in two hours at the open with only two trades. This post is a
+review of my trades that day for my future reference. To save you and
+myself from reading, the two reasons for this good run are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Convergence of intermediate term signals with day trading signals&lt;/li&gt;
+&lt;li&gt;Ignoring my bearish sentiment (Dubai news) and traded what I saw
+    from the prices&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Before moving on, let's start by setting the stage with some background
+information to summarize what conditions were like that day.&lt;/p&gt;
+&lt;h3&gt;Background&lt;/h3&gt;
+&lt;p&gt;The news on November 25 after NY close of &lt;a href="http://www.marketwatch.com/story/dollar-and-yen-buoyed-by-safe-haven-flows-2009-11-27"&gt;Dubai World delaying their
+debt repayments&lt;/a&gt; sent the dollar and yen soaring. I made &lt;a href="http://www.quantisan.com/audjpy-short-81-3777-17-anatomy-of-my-first-400-pips-trade/"&gt;my first
+400+ pips trade&lt;/a&gt; by being at the right place and time on this panic
+wave. The U.S. market was closed that day but FTSE sold off more than 3%
+the day after the news. So the expectation was for US to do a catch-up
+sell off when it opens again on Friday 27th. Risk aversion (equities
+down, yen and dollar up) was the talk of the day. Figure 1 below shows
+the charts of ES futures (e-mini S&amp;amp;P500). Left is a 1-min. from midnight
+of 27th to that morning's NYSE opening. Right is an hourly showing the
+move overnight from 26th to 27th.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="ES Futures
+(e-mini S&amp;amp;P 500)"][&lt;img alt="ES Futures (e-mini S&amp;amp;P 500)" src="http://www.quantisan.com/static/images/img_archive/2009-11-29-ES.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-29-ES.png"&gt;ES Futures (e-mini
+S&amp;amp;P 500)&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;h3&gt;Intermediate term signal&lt;/h3&gt;
+&lt;p&gt;Figure 2 shows my intermediate term signal. EURUSD has been printing an
+uptrend on the daily (not shown). Figure 2 shows that EURUSD was testing
+the bottom of my channel so I should consider going long. Notice that
+this is the same channel that called for the 1.5150 top on 25th. At
+least it has proven itself useful once.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="EURUSD,
+3-hour"][&lt;img alt="EURUSD, 3-hour" src="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_3h.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_3h.png"&gt;EURUSD, 3-hour&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;h3&gt;Short term signals&lt;/h3&gt;
+&lt;p&gt;For the short term signal, we need to go back to Figure 1 for the ES
+charts. ES tanked 40 points over the holiday with very low volume. It
+made it all the way to 1067 just before 3am on 27th. Then it lifted all
+the way to 1080 at 9am. 1080 is the line in the sand for the bulls and
+bears. So retracing all the way to that level before opening is
+significant. This pre-open strength in ES was the sign of oversold for
+me. This is the short-term confirmation I needed. I entered my first
+position to long EURUSD @ 9:09 am to test the water. Then I watched both
+EURUSD and ES closely for the next half hour. Once NYSE opened. I
+noticed that the TICK was relatively mellow with readings around -250 to
+-500. It's unusually good for a -20 points open drop on S&amp;amp;P 500. One
+would expect at least -800 readings for a strong negative sentiment. So
+after watching EURUSD, ES, and TICK for about 10 minutes, I entered a
+second position on a weak retracement at 9:39 am.&lt;/p&gt;
+&lt;h3&gt;The exits&lt;/h3&gt;
+&lt;p&gt;For my exit, I took profit at 1.5180 because it's the 50% Fibonacci
+level and it's also the top of another of my channel (Figures 2 and 3).
+After about 10 minutes of watching the 1M bars, EURUSD failed to clear
+that resistance, so I took profit on the second half to go flat in this
+pair just before 11 am because it's an early-closing Friday (NYSE
+closing at 1pm). The gains were +95 and +93 pips for +0.27% and +0.28%
+in my demo account total. Not bad for holding for 2 hours. Update:
+Thanks to &lt;a href="http://twitter.com/jlcnuke"&gt;Jeff on Twitter&lt;/a&gt; for the question. I updated Figure 3 with
+the Fib. levels and showed the top and bottom used to draw it.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="EURUSD, 30
+min."][&lt;img alt="EURUSD, 30 min." src="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_30min.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_30min.png"&gt;EURUSD, 30 min.&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;In summary, I started with an intermediate term setup that aligns with
+the major trend. I observed the reaction of the markets on an important
+news. Identified an oversold condition from the short-term charts for a
+short-term positive divergence signal. Scaled in a position. Then added
+more with another confirmation. I scaled out when the target was hit.&lt;/p&gt;
+&lt;h3&gt;Recommendation&lt;/h3&gt;
+&lt;p&gt;Once again, I could have been more aggressive on this trade. As shown in
+Figure 3, 1.4920-4930 was a short-term resistance. I could have added
+more to my position when that level broke, with a stop at 1.4900.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="day trading"></category><category term="entry"></category><category term="EUR"></category><category term="exit"></category><category term="good trade"></category><category term="long"></category><category term="paper trade"></category><category term="USD"></category></entry><entry><title>EURCHF breaking 1.5100: A textbook perfect breakdown and reversal</title><link href="http://www.quantisan.com/eurchf-breaking-15100-a-textbook-perfect-breakdown-and-reversal/" rel="alternate"></link><updated>2009-11-26T14:39:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-11-26:eurchf-breaking-15100-a-textbook-perfect-breakdown-and-reversal/</id><summary type="html">&lt;p&gt;Last night, EURCHF finally broke below the 1.5100 zone after weeks of
+consolidation around the area. See Figure 1 for a daily chart of
+EUR/CHF. I just happened to be looking at the charts when this breakdown
+occurred last night so I made a few day trades. These scalps turned out
+better than I thought because a particular technical analysis phenomenon
+worked really well on this move. Referring to Figure 2, a 5-min. chart
+of the move, you'll notice that I've marked some Fibonacci levels on
+each of the big dive in prices. While there are several Fibonacci levels
+that are notable and commonly used, I pay attention to the 50%
+retracement level almost exclusively. A half retracement is easy to spot
+even with the naked eyes without any technical analysis so even those
+that don't use Fibonacci can see it. With this hypothesis in mind, I
+shorted EURCHF a few times last night on the bounce to 50% of each of
+the move. The first entry was at 1.5048. EURCHF retraced about 50% after
+that big dive from 1.5080 to 1.5030. Then it formed a descending
+triangle on the 1-minute with the support at 5050. A nice round number
+support level. The entry was triggered near the end of the triangle and
+right when it broke the support. I held on to this short looking for the
+move to take us all the way down below 1.5000 since there's bound to be
+lots of stops there (which never happend last night probably because of
+SNB intervention). Before that though, we made another quick dive and
+then retraced 50% again. I shorted some more with a limit order placed
+at the 50% level before hand. So I had two positions sitting from 5048
+and 5039. See Figure 2 at the bottom for a chart with the levels marked.
+However, by the third dive, it is now obvious that the move down is
+getting smaller and smaller. Then when the 50% level of that last move
+held for like eternity, and numerous tests of resistance at 5030 failing
+yet didn't back down by much every time, I took profit at 5027-5028. The
+reward/risk ratio were impressive with these trades. I risked a few pips
+to make 10-20 pips. However, one mistake I made which made all these
+efforts wasted. Simply put, I did not have enough position size to make
+these pips gained worthwhile. Being used to swing trades with much
+bigger stops, I merely used my usual lot size for these trades. The
+reason being that I didn't expect these to go so well since I've always
+been burned by day trading and was just testing the water with these
+days. Oh well, these could all have been just because I was lucky last
+night. In hindsight, I could have saved myself from all that stress and
+made a lot more simply by betting on SNB intervention as many traders
+have done. Recall [my lesson on fundamental analysis and the SNB pegging
+up the EURCHF market][]? Well, last night presented a great opportunity
+to profit from that open secret again when EURCHF tested 1.5000. The
+reason why I didn't go long is because it was just too obvious that SNB
+would come to the rescue. I thought that they would have waited for
+running the stops below 1.5000 before intervening (note to self, don't
+second guess). Well, it seems that obviousness works. The optimal entry
+for a long EURCHF would have started at the point when I covered for the
+same reasons. I should have eased in a long position around 1.5030 with
+stop at 1.5000. A reasonable profit target would have been 1.5100. Why
+1.5100? Aside from that the fact that it's an obvious resistance, this
+is just something I noticed while drawing up the chart for this post. In
+Figure 2, I've drawn the 161.8 % Fibonacci extension levels for those 3
+down moves discussed. See that they formed the reversal targets
+perfectly with equally impressive textbook perfect consolidation
+reaction afterwards? If the price action adhered to the Fibonacci
+retracements so well as described above, it's no surprise that a Fib.
+level would work well for the reversal too. Just because the same people
+are probably involved with the move down as well as the move up when all
+these happened within mere hours. So two lessons from last night.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I should pay more attention to the 161.8% level in my analysis along
+    with the 50% level in the future.&lt;/li&gt;
+&lt;li&gt;and more importantly, don't think the central bank (e.g. SNB) will
+    not intervene just because everyone is milking them out.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580"
+caption="EURCHF"][&lt;img alt="EURCHF" src="http://www.quantisan.com/static/images/img_archive/2009-11-26-EURCHF.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-26-EURCHF.png"&gt;EURCHF&lt;/a&gt;[/caption] [caption id=""
+align="aligncenter" width="580" caption="EURCHF, 5 min."][&lt;img alt="EURCHF, 5
+min." src="http://www.quantisan.com/static/images/img_archive/2009-11-26-EURCHF_5m.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-26-EURCHF_5m.png"&gt;EURCHF, 5 min.&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[my lesson on fundamental analysis and the SNB pegging up the EURCHF
+  market]: http://www.quantisan.com/a-lesson-on-the-importance-of-fundamental-awareness-for-a-technical-trader/&lt;/p&gt;</summary><category term="breakout"></category><category term="day trading"></category><category term="fibonacci"></category></entry><entry><title>My bad EUR/USD day trading and what to do about it</title><link href="http://www.quantisan.com/my-bad-eurusd-day-trading-and-what-to-do-about-it/" rel="alternate"></link><updated>2009-11-14T18:20:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-11-14:my-bad-eurusd-day-trading-and-what-to-do-about-it/</id><summary type="html">&lt;p&gt;I've stayed home from work this week because of the flu. So with spare
+time on my hands, I had the urge to experiment with day trading the
+forex market. Bad decision. After a good 3-4 days of day trading EUR/USD
+with my demo account, here is what I have to show as illustrated in my
+account balance graph for the past 4 trading sessions below.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="Account balance
+Nov 10-14, 2009"][&lt;img alt="Account balance Nov 10-14, 2009" src="http://www.quantisan.com/static/images/img_archive/2009-11-14-account_balance.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-14-account_balance.png"&gt;Account balance
+Nov 10-14, 2009&lt;/a&gt;[/caption] Yes, you can push back up your dropped jaw
+now. I considered not accounting for these losses in my paper trading
+account because these trades were meant to be experimental only.
+However, as the whole point of me paper trading the forex is to learn
+and improve, I decided to keep these losses and suffer the consequences
+of my own doing. Heck, I wouldn't have had the choice if this were real
+money (which is the way that I should treat this demo account anyway). I
+stepped out of my circle of strength (swing trading) into something that
+has burned me many times before. Well guess what, &lt;a href="http://www.quantisan.com/1000-in-2-days/"&gt;history does repeat
+itself&lt;/a&gt;. Enough with lambasting myself. The real focus of this post is
+to point out what I did wrong and what can I do to improve in day
+trading the forex. Not that I'm intent on day trading though. This is
+merely to increase my arsenal in forex trading. Figuring out what I did
+wrong is actually obvious in hindsight. Figure 2 below depicts the
+trades I made on Nov 13, which led to most of that steady decline in my
+account balance as shown in Fig. 1. See the bounce from about 1.4820? I
+kept shorting it and shorting it all the way up to 1.4880. What was I
+thinking? The main reason for this epic failure is that I broke a
+fundamental rule in trading. &lt;strong&gt;Trade what you see and what you thought&lt;/strong&gt;
+(Techniques of Tape Reading by &lt;a href="http://www.realitytrader.com/blog/"&gt;V. Graifer&lt;/a&gt;). Based on the previous
+day's market sell-off from 1.5000 and the Asian markets failing to break
+1.4900, I thought the market would follow through on Friday and break
+through this 1.4820 support. In particular, just before NY open before
+9:30am, EUR/USD had a couple of big drops, as shown in Fig. 2. All these
+circumstances led to my believe that we'll see a weak day like
+yesterday.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="EUR/USD,
+5m"][&lt;img alt="EUR/USD, 5m" src="http://www.quantisan.com/static/images/img_archive/2009-11-13-EURUSD_5m.PNG" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-13-EURUSD_5m.PNG"&gt;EUR/USD, 5m&lt;/a&gt;[/caption] However, a support is
+still a support until it's broken. I shouldn't keep shorting it even
+though it has obviously bounced. While identifying the trend is trivial
+in hindsight, what evidence did I have at the time to tell me that? The
+evidence was in fact staring me in the face that morning. Figure 3 shows
+part of the screen that I usually use for intra-day observation. As you
+can see, S&amp;amp;P500 rejected the previous day's close with a strong negative
+TICK reading and then broke above the morning range. The TICK also
+remained strong with many +800 readings in the morning. All the classic
+signs that point to a strong positive trend.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="577" caption="intraday
+sentiment"]&lt;img alt="intraday sentiment" src="http://www.quantisan.com/static/images/img_archive/2009-11-13-intraday_am.PNG" /&gt;[/caption] Furthermore, if only I had
+stepped back and observed the bigger picture, as shown in Fig. 4 with a
+30-minute chart, I would have seen that we have a great positive
+divergence swing setup (and which I normally would have exploited if I
+weren't so focused on trading the 5m that day).&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="EUR/USD,
+30-minute"][&lt;img alt="EUR/USD, 30-minute" src="http://www.quantisan.com/static/images/img_archive/2009-11-13-EURUSD_30m.PNG" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-11-13-EURUSD_30m.PNG"&gt;EUR/USD, 30-minute&lt;/a&gt;[/caption] What
+is my goal in future day trading? Instead of a declining equity curve as
+in Figure 1, just flip it up-side-down and that's what would be perfect.
+All I needed to change is being able to spot the right trend and ride
+it. Easier said than done. So what is the moral of this story? I have
+once again proven that I am still no good at day trading. Stick with
+swing trades.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="bad trade"></category><category term="day trading"></category><category term="paper trade"></category></entry><entry><title>Dabbling in day trading again on this historic day</title><link href="http://www.quantisan.com/dabbling-in-day-trading-again-on-this-historic-day/" rel="alternate"></link><updated>2008-10-10T14:38:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-10-10:dabbling-in-day-trading-again-on-this-historic-day/</id><summary type="html">&lt;p&gt;[caption id="attachment_334" align="aligncenter" width="500"
+caption="ES Setup"][&lt;img alt="ES Setup" src="http://traderpau.files.wordpress.com/2008/10/2008-10-10-es.png?w=500" title="2008-10-10-es" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;I mentioned previously &lt;a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/"&gt;about avoiding volatility&lt;/a&gt;. But with VIX about
+75 now, I couldn't help but to take the opportunity to day trade. I
+know, I know, I said I wouldn't do it again. So I'm only trading an
+account with&lt;strong&gt;paper money&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To illustrate the abundance of day trading opportunities these days, I
+just launched my trading screen and within minutes I can see a viable
+setup.&lt;/p&gt;
+&lt;p&gt;On the 1 minute chart on the left, notice the small doji at \$844 with a
+high volume. Also off the chart is a low of \$837 for the day in the
+morning. So \$840 is an effective support for the moment. Since the doji
+at \$844 is above \$840, this is a good sign for the time being.&lt;/p&gt;
+&lt;p&gt;So I placed buy orders around \$845 for the next few minutes and exiting
+below \$850 (obvious resistance), with intent to get back later in if it
+breaks \$850 strongly. This went on for a few minutes, and I traded in
+the range taking small profits twice, until the price broke to \$841.50,
+which I stopped at a loss at around \$842.50.&lt;/p&gt;
+&lt;p&gt;However, noticing it's in a steady climb from then on, I entered a long
+at \$845 again, with stop at \$841, for a longer trade. The price rose
+to \$853.75, bounced back to \$850, and started dropping. I exited my
+long at a small profit at \$849.50 on a retracement.&lt;/p&gt;
+&lt;p&gt;ES keeps dropping for those seconds until \$845.75 and bounced right
+back to \$851. That was a good sign. I believe the initial \$850 break
+and retracement was just a technical bounce. So I went in again at \$851
+a bit later intending to ride it up to \$860.&lt;/p&gt;
+&lt;p&gt;That trade went as planned and I exited at \$858. I reversed and went
+short at \$861 with a tight stop at \$863. The stop got hit and the
+price went up to \$866.&lt;/p&gt;
+&lt;p&gt;I decided to stop there since the trading screen didn't lean much to
+on-the-spot analysis. I'm not asking for a full charting screen though,
+that would be overkill for day trading. Simplicity is key. I'd be happy
+if they had 1-min and 15 min candlestick charts with 2-line EMA, MACD,
+Stochastic, and volume information. In the end, I'm \$162.50 richer in
+paper money after 12 trades.&lt;/p&gt;
+&lt;p&gt;Although it's a profitable session, I think I took way too many trades
+to reach that.&lt;/p&gt;
+&lt;p&gt;Since my trading platform is very basic and isn't meant for day trading,
+I didn't even have a chart on the trading matrix. I just looked at the
+price movements and occasionally flip back to the chart. However, I do
+have one good indicator for use... which is the price of Goldman Sachs
+(GS). Long story short, we're in a financial driven crisis and GS (along
+with MS and others) is one of the two surviving investment banks (of
+original 5) in this mess. GS were off the lows of the day and moving up
+very slowly throughout the few minutes which I day traded. That was a
+good enough bullish sign for me to go long.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="ES Setup" src="http://traderpau.files.wordpress.com/2008/10/2008-10-10-es.png?w=500" title="2008-10-10-es" /&gt;]: http://traderpau.files.wordpress.com/2008/10/2008-10-10-es.png&lt;/p&gt;</summary><category term="day trading"></category><category term="ES"></category></entry><entry><title>Day Trading Report Feb 22, 2008: -$690</title><link href="http://www.quantisan.com/day-trading-report-feb-22-2008-690/" rel="alternate"></link><updated>2008-02-23T01:28:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-02-23:day-trading-report-feb-22-2008-690/</id><summary type="html">&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R7-vIzwpyGI/AAAAAAAAAOM/-AjCG138uHs/s400/er2_graph.jpg" /&gt;][] Horrible day yesterday! I took &lt;a href="http://wrahal.blogspot.com/2008/02/trading-for-february-21-2008_21.html"&gt;Will Rahal's prediction of a
+positive market for the day&lt;/a&gt; a little too much to heart and kept
+entering longs even though the market was diving. I was also thinking
+that the price would bounce back to the pivot and S1 after breaking it.&lt;/p&gt;
+&lt;p&gt;I should have noted that the ADX was at 50 and at least wait for a
+trading range if I were to enter a long. Because with such dramatic
+drop, the price wouldn't turn on a dime. But even better, I could have
+entered a short on the initial break below the pivot.&lt;/p&gt;
+&lt;p&gt;Lessons for the day:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Realize that I'm wrong sooner rather than later&lt;/li&gt;
+&lt;li&gt;Switch from ER2 to YM after a few losing streak for a smaller
+    position size&lt;/li&gt;
+&lt;li&gt;Don't have any pre-conceived notion of where the market will head!
+    (not the first time this has cost me)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I'm just \$60 away from my equity limit to exit from day trading.
+Although I have learned a lot, I still can't produce result
+consistently. Next week will be a vital test for my near term day
+trading career.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+[&lt;img alt="" src="http://bp2.blogger.com/_Vlx60iTPx5s/R7-ysDwpyHI/AAAAAAAAAOU/SCA0z5EYPGI/s400/er2_rpt.jpg" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R7-vIzwpyGI/AAAAAAAAAOM/-AjCG138uHs/s400/er2_graph.jpg" /&gt;]: http://bp1.blogger.com/_Vlx60iTPx5s/R7-vIzwpyGI/AAAAAAAAAOM/-AjCG138uHs/s1600-h/er2_graph.jpg
+  [&lt;img alt="" src="http://bp2.blogger.com/_Vlx60iTPx5s/R7-ysDwpyHI/AAAAAAAAAOU/SCA0z5EYPGI/s400/er2_rpt.jpg" /&gt;]: http://bp2.blogger.com/_Vlx60iTPx5s/R7-ysDwpyHI/AAAAAAAAAOU/SCA0z5EYPGI/s1600-h/er2_rpt.jpg&lt;/p&gt;</summary><category term="day trading"></category><category term="er2"></category></entry><entry><title>Trading Report Feb 12 - 21, 2008: +$146</title><link href="http://www.quantisan.com/trading-report-feb-12-21-2008-146/" rel="alternate"></link><updated>2008-02-23T01:21:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-02-23:trading-report-feb-12-21-2008-146/</id><summary type="html">&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R7-tbzwpyEI/AAAAAAAAAN8/OE1e0fVHKKs/s400/er2_range_graph.jpg" /&gt;][]Last week's trading was uneventful. I recall a couple of times
+I took a small profit too early instead of waiting for the big runs
+afterward. It would have been a great week.&lt;/p&gt;
+&lt;p&gt;On Feb 14, I entered a short on the pre-market. I exited way too early
+because the price kept dropping for the rest of the day and most of the
+next. Although I knew the price was going to drop, I underestimated the
+magnitude of it. &lt;a href="http://traderfeed.blogspot.com/2008/02/nyse-tick-using-sentiment-to-trade.html"&gt;TraderFeed wrote an article&lt;/a&gt; about that day's market
+and introduced his method of using the NYSE tick count as another
+indicator.&lt;/p&gt;
+&lt;p&gt;I have since added it to my day trading window.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R7-t_jwpyFI/AAAAAAAAAOE/oM2ly7hDWgg/s400/er2_range_rpt.jpg" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R7-tbzwpyEI/AAAAAAAAAN8/OE1e0fVHKKs/s400/er2_range_graph.jpg" /&gt;]: http://bp1.blogger.com/_Vlx60iTPx5s/R7-tbzwpyEI/AAAAAAAAAN8/OE1e0fVHKKs/s1600-h/er2_range_graph.jpg
+  [&lt;img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R7-t_jwpyFI/AAAAAAAAAOE/oM2ly7hDWgg/s400/er2_range_rpt.jpg" /&gt;]: http://bp0.blogger.com/_Vlx60iTPx5s/R7-t_jwpyFI/AAAAAAAAAOE/oM2ly7hDWgg/s1600-h/er2_range_rpt.jpg&lt;/p&gt;</summary><category term="day trading"></category><category term="er2"></category></entry><entry><title>Day trading report Feb 11, 2008: No Trade</title><link href="http://www.quantisan.com/day-trading-report-feb-11-2008-no-trade/" rel="alternate"></link><updated>2008-02-11T22:14:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-02-11:day-trading-report-feb-11-2008-no-trade/</id><summary type="html">&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R7EBRTwpyDI/AAAAAAAAAN0/tOzV-2PkvY8/s400/e2_da.jpg" /&gt;][]I watched the market for about an hour last night and then just
+went to bed. I was too tired and found that I wasn't concentrating. My
+brain was definitely off already.&lt;/p&gt;
+&lt;p&gt;I seriously considered entering a long at about the vertical line. Then
+after watching it for a few bars, the price seems to be stuck in a
+trading range, so it could go either way. Since I didn't want to wait
+for long because I almost fell asleep at the table, I decided to not
+enter a position. It was a good decision because the price would have
+went below my stop (lowest of past few bars in the trading range) before
+rising just a 6 index points, and with a lot of struggle too.&lt;/p&gt;
+&lt;p&gt;For the rest of the day, there were a lot of choppiness and not a lot of
+big swings. It would have been better to stay off the market because my
+stops would have been killed.&lt;/p&gt;
+&lt;p&gt;Although I didn't make any profit for the day, I didn't lose any either.
+So I think going to bed early last because I wasn't up for it was a wise
+decision.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R7EBRTwpyDI/AAAAAAAAAN0/tOzV-2PkvY8/s400/e2_da.jpg" /&gt;]: http://bp1.blogger.com/_Vlx60iTPx5s/R7EBRTwpyDI/AAAAAAAAAN0/tOzV-2PkvY8/s1600-h/e2_da.jpg&lt;/p&gt;</summary><category term="day trading"></category><category term="er2"></category></entry><entry><title>Day trading report Feb 8, 2008: +$340</title><link href="http://www.quantisan.com/day-trading-report-feb-8-2008-340/" rel="alternate"></link><updated>2008-02-08T12:24:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-02-08:day-trading-report-feb-8-2008-340/</id><summary type="html">&lt;p&gt;The 3 trade max. rule is working well tonight. I was more patient to
+wait for the right moment. I almost entered my 4th trade but didn't
+because I wanted to stick to my rule, at least for the first day.
+Luckily, that would have been another losing trade.&lt;/p&gt;
+&lt;p&gt;I think I'm finally learning that it's not worth it to get into small
+moves. The reward/risk ratio is usually not good. And those are usually
+the emotional trades too, where I somehow convinced myself the price is
+going to move that way. [&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R6yCfxzQQ1I/AAAAAAAAANs/jIfly4pLVqg/s400/er2_rpt.jpg" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R6yCfxzQQ1I/AAAAAAAAANs/jIfly4pLVqg/s400/er2_rpt.jpg" /&gt;]: http://bp1.blogger.com/_Vlx60iTPx5s/R6yCfxzQQ1I/AAAAAAAAANs/jIfly4pLVqg/s1600-h/er2_rpt.jpg&lt;/p&gt;</summary><category term="day trading"></category><category term="er2"></category></entry><entry><title>-$1000 in 2 days!</title><link href="http://www.quantisan.com/-1000-in-2-days/" rel="alternate"></link><updated>2008-02-08T11:49:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-02-08:-1000-in-2-days/</id><summary type="html">&lt;p&gt;I'm down \$1000 in 2 days from day trading ER2. Take a look at these
+graphs and it's obvious the reason is that I've over-traded.&lt;/p&gt;
+&lt;p&gt;ER2 graph February 7, 2008.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R6x6whzQQwI/AAAAAAAAANE/dTZzERBFMzo/s400/er2_day07.jpg" /&gt;][] ER2 graph Feb 8, 2008.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp2.blogger.com/_Vlx60iTPx5s/R6x64BzQQxI/AAAAAAAAANM/7KbUamf1RNk/s400/er2_day08.jpg" /&gt;][]I have completely forgotten what I have learned in the past
+two weeks in Canada. I could blame it on the fact that I'm not used to
+trading at night and that I was very tired also because of jet lag.
+However, I shouldn't have traded at all if I knew that I wasn't in good
+condition.&lt;/p&gt;
+&lt;p&gt;Perhaps the thinking that caused me to trade so many times is that I
+didn't want to miss any opportunities. I move in too fast before the
+signals are mature. Thus, one thing I need to do is don't guess where
+the market is moving. &lt;span style="font-weight:bold;"&gt;Let the signals
+mature and the price to move a bit first before entering; I don't have
+to get in and out at exactly the top and bottom of a swing&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;For the moment, I am imposing a 3 trades maximum rule to restrain myself
+until I'm producing better results and am more disciplined.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R6x8ixzQQyI/AAAAAAAAANU/n5E0rev72b0/s400/er2_rpt.jpg" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R6x6whzQQwI/AAAAAAAAANE/dTZzERBFMzo/s400/er2_day07.jpg" /&gt;]: http://bp0.blogger.com/_Vlx60iTPx5s/R6x6whzQQwI/AAAAAAAAANE/dTZzERBFMzo/s1600-h/er2_day07.jpg
+  [&lt;img alt="" src="http://bp2.blogger.com/_Vlx60iTPx5s/R6x64BzQQxI/AAAAAAAAANM/7KbUamf1RNk/s400/er2_day08.jpg" /&gt;]: http://bp2.blogger.com/_Vlx60iTPx5s/R6x64BzQQxI/AAAAAAAAANM/7KbUamf1RNk/s1600-h/er2_day08.jpg
+  [&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R6x8ixzQQyI/AAAAAAAAANU/n5E0rev72b0/s400/er2_rpt.jpg" /&gt;]: http://bp1.blogger.com/_Vlx60iTPx5s/R6x8ixzQQyI/AAAAAAAAANU/n5E0rev72b0/s1600-h/er2_rpt.jpg&lt;/p&gt;</summary><category term="day trading"></category><category term="er2"></category></entry><entry><title>Day trading report Jan 31, 2008: +$590</title><link href="http://www.quantisan.com/day-trading-report-jan-31-2008-590/" rel="alternate"></link><updated>2008-01-31T17:14:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-01-31:day-trading-report-jan-31-2008-590/</id><summary type="html">&lt;p&gt;[&lt;img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R6I6SxzQQpI/AAAAAAAAAMM/6d2AMKr4aC4/s400/er2_day.jpg" /&gt;][] What a day today. Volume was great and swings were huge too. I
+had a good day today and covered my losses from yesterday. Good days
+always seem to come after a bad day. I think it's probably because I'm
+more calm after a losing day. So now, I just need to maintain my
+composure even if I'm up.&lt;/p&gt;
+&lt;p&gt;MBIA had a conference call today and told everyone everything's still
+good even though they are reporting a \$2.3bln loss last quarter! Go
+figure! Someone at BillCara is suggesting that the fund managers are
+proping the market because it's the last day of the month. Just so they
+can have a positive January.&lt;/p&gt;
+&lt;p&gt;I traded the pre-market signal as intended and it paid off. The gap
+closed as expected but I &lt;span style="font-weight:bold;"&gt;exited too
+early&lt;/span&gt; again. If only I held longer, my profits would have been in
+the 4 figures today.&lt;/p&gt;
+&lt;p&gt;I did well today, entering trades only when the risk/reward ratio is
+deemed worthwhile. In addition, I am making use of resistance and
+support levels. I think this helped a lot.&lt;/p&gt;
+&lt;p&gt;However, I think I need to be quicker on my decision. I found that many
+times, I was still pondering should I enter and then the price have
+moved already. On the other hand, my exit trigger is a bit too fast
+because I'm still not letting my profit run. Thus, I think I need to
+automate some of my decision making process (like adding some ShowMe's)
+rather than just eyeballing my indicators. One idea I'm having is tune
+my fast time period with an appropriate ShowMe. This should be something
+simple. I am thinking of implementing a ShowMe for local high/low with
+stochastic divergence as setup.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R6I9HRzQQqI/AAAAAAAAAMU/wC7jb1Bx2FU/s400/er2_rpt.jpg" /&gt;][]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R6I6SxzQQpI/AAAAAAAAAMM/6d2AMKr4aC4/s400/er2_day.jpg" /&gt;]: http://bp3.blogger.com/_Vlx60iTPx5s/R6I6SxzQQpI/AAAAAAAAAMM/6d2AMKr4aC4/s1600-h/er2_day.jpg
+  [&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R6I9HRzQQqI/AAAAAAAAAMU/wC7jb1Bx2FU/s400/er2_rpt.jpg" /&gt;]: http://bp1.blogger.com/_Vlx60iTPx5s/R6I9HRzQQqI/AAAAAAAAAMU/wC7jb1Bx2FU/s1600-h/er2_rpt.jpg&lt;/p&gt;</summary><category term="day trading"></category><category term="er2"></category></entry></feed>

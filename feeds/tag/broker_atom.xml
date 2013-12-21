@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/broker_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-04-14T07:28:00+01:00</updated><entry><title>Comparing Trading API from 6 Online Forex Brokerages</title><link href="http://www.quantisan.com/comparing-trading-api-from-6-online-forex-brokerages/" rel="alternate"></link><updated>2010-04-14T07:28:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-14:comparing-trading-api-from-6-online-forex-brokerages/</id><summary type="html">&lt;p&gt;Choosing a discount broker for forex trading is time consuming. As the
+forex market is not centralized, choosing a discount broker is sort of
+like picking a stall in a farmer's market. They all offer the same
+product, but prices, features, quality, and services can vary
+considerably between fx brokerages. One criteria that I consider
+seriously is the Application Programming Interface (API) offered by the
+broker. Most people couldn't care less about API because they never
+intend to develop their own automated trading program. However, if this
+is something that interests you, then I'd like to save you some time
+here with the following table.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="570" caption="Forex brokers
+API table"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-13-FX_API_table.png" /&gt;][][/caption] All the dollar values are in U.S. dollar.
+I highlighted the important limitation of each API. I have different
+level of experience with each of these six APIs. As of this writing, I
+am using &lt;a href="http://www.quantisan.com/tag/jforex/"&gt;JForex&lt;/a&gt; from &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt; for &lt;a href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/"&gt;various personal reasons&lt;/a&gt;.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="API"></category><category term="broker"></category><category term="programming"></category></entry><entry><title>Why I am staying with Oanda a while longer before moving to Dukascopy</title><link href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/" rel="alternate"></link><updated>2010-01-10T21:27:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-01-10:why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/</id><summary type="html">&lt;p&gt;I just sent in my paper work to &lt;a href="http://fxtrade.oanda.com/"&gt;Oanda&lt;/a&gt; to open a live forex account
+with them last week. Then I heard from @InEgoVeritas the news about
+&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143"&gt;Dukascopy&lt;/a&gt; (get 35% discount on commission with that link) reducing
+their minimum lot size to micro-lots. After doing more research
+comparing Oanda and Dukascopy in the last 24 hours, I think I will go
+with Dukascopy in the long term. But I won't make the switch just yet.
+Here are my reasons why. Before getting to that, I need to describe my
+situation. Choosing a forex broker is like buying a car, we are all
+unique and what fits me might not be right for you. Long story short
+though. My goal all along is to split my funds 50/50 between interactive
+trading and &lt;a href="http://www.quantisan.com/category/quantitative-finance/systems/"&gt;automated trading&lt;/a&gt;. Since Oanda's API access cost \$600
+per month, I was to open an additional account with &lt;a href="http://www.mbtrading.com/"&gt;MB Trading&lt;/a&gt; for
+automated trading once I have developed something consistent. In
+addition to this latest news from Dukascopy, they also lowered their
+minimal opening balance down to \$5,000, and began beta testing for
+Metatrader 4 recently (Update: Dukascopy abandoned MT4)! Both Oanda and
+Dukascopy are very reputable forex brokers. But Dukascopy has the huge
+advantage of providing a free API access. That is one big motivation for
+me to go trade with them. Then I can just do everything in one account!
+But as I said, I will proceed with live trading with Oanda as planned
+soon (once I am out of this drawdown from being &lt;a href="http://www.quantisan.com/early-bird-does-not-get-the-worm-in-forex-trading/"&gt;too early in shorting
+Aussie&lt;/a&gt; and &lt;a href="http://www.quantisan.com/trade-log/"&gt;other pairs&lt;/a&gt;). The reason is that Dukascopy has always
+been catered towards institutional or big pocket forex traders. This
+aggressive move to welcome retail traders and small timers could be good
+and bad. The good part is more business and more buzz for their service,
+obviously. The bad part though, is that widening the door to a new
+market can turn out stinking the entire operation. It would be analogous
+to Mercedes suddenly decided to compete in the budget cars market... oh
+wait, they did that! (Mercedes &lt;a href="http://en.wikipedia.org/wiki/Mercedes-Benz_B-Class"&gt;B-class&lt;/a&gt;, enough said) More
+specifically regarding Dukascopy, I am most concerned of the impact on
+the quality and speed of their trading service. As well as their
+customer service. Let's face it, we know that new forex traders (such as
+myself) whine a lot and expect a lot for little to nothing. Since I have
+my paper work done with Oanda already, it can't hurt to just wait a few
+more months to see how the changes go. Nevertheless, I am thrilled of
+the new changes with Dukascopy! In the mean time, I will continue to
+work on my &lt;a href="http://www.quantisan.com/category/trading-how-tos/risk-management/"&gt;risk management&lt;/a&gt;, &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-psychology/"&gt;trading psychology&lt;/a&gt;, and &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/"&gt;trading
+strategy&lt;/a&gt; (great plug, isn't it?). Update December 2010: I moved my
+account over to Dukascopy and have been with them for a few months. So
+far so good. My &lt;a href="http://www.quantisan.com/tag/jforex/"&gt;automated trading development with JForex&lt;/a&gt; has been
+going well too.&lt;/p&gt;</summary><category term="broker"></category><category term="dukascopy"></category><category term="oanda"></category></entry></feed>

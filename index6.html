@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/" rel='bookmark'>First impression of Incanter: usably incomplete</a>
+            </h1>
+            <div class="article-content"> <p>Speaking out loud about my new favourite toys, Clojure (a functional
+programming language) and Incanter (a R-like statistical platform built
+on Clojure). My first impression is that Incanter is usable but it is
+far from being polished like R since it is a new platform. I am using
+the Gold Miners ETF (GDX) and Gold Trust (GLD) data from Yahoo Finance
+as examples to perform a simple correlation test. Some Incanter
+functions are rough on the edges and a lot is left to be desired. This
+is a drastic contrast to R in which its plug-in modules are both
+impressive and comprehensive. On the other hand, making things happen
+with Clojure is ... fun. And that's a winner for me. Here's a walk
+through of my first attempt using Incanter to analyse stocks data.
+Figures 1 and 2 below are basic time series plot of GDX and GLD. I'll
+need to study the Incanter source code to figure out how to plot
+multiple time series on the same chart. Couldn't find it on a first
+glimpse though. [caption id="attachment_5535" align="aligncenter"
+width="488" caption="GDX"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GDX.png" title="incanter-chart-GDX" />[/caption] [caption id="attachment_5536"
+align="aligncenter" width="488" caption="GLD"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD.png" title="incanter-chart-GLD" />[/caption] The
+following looks like a lot of code just to plot two graphs. Most of the
+boilerplate code is to coerce the Yahoo Finance CSV data to specifically
+fit Incanter's time-series-plot function. I will wrap this into a
+library later on.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">inc-sandbox.corr-demo</span> <span class="p">(</span><span class="ss">:require</span>
+<span class="p">[</span><span class="nv">clojure.set</span> <span class="ss">:as</span> <span class="nv">set</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">incanter</span> <span class="nv">core</span> <span class="nv">stats</span> <span class="nv">charts</span> <span class="nv">io</span><span class="p">))</span> <span class="p">(</span><span class="ss">:require</span>
+<span class="p">[</span><span class="nv">clj-time.core</span> <span class="ss">:as</span> <span class="nv">time</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">clj-time</span> <span class="p">[</span><span class="nv">format</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">formatter</span>
+<span class="nv">formatters</span> <span class="nv">parse</span><span class="p">)]</span> <span class="p">[</span><span class="nv">coerce</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">to-long</span><span class="p">)])))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">sym-to-dataset</span>
+<span class="s">&quot;returns a dataset read from a local CSV in &#39;./data/&#39; given a Yahoo</span>
+<span class="s">Finance symbol name&quot;</span> <span class="p">[</span><span class="nv">yf-symbol</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">+data</span> <span class="s">&quot;./data/&quot;</span> <span class="nv">+csv</span> <span class="s">&quot;.csv&quot;</span>
+<span class="nb">symbol </span><span class="p">(</span><span class="nf">.toUpperCase</span> <span class="nv">yf-symbol</span><span class="p">)</span> <span class="nv">filename</span> <span class="p">(</span><span class="nb">str </span><span class="nv">+data</span> <span class="nb">symbol </span><span class="nv">+csv</span><span class="p">)]</span> <span class="p">(</span><span class="nf">-</span><span class="sc">\&gt;</span>
+<span class="p">(</span><span class="nf">read-dataset</span> <span class="nv">filename</span> <span class="ss">:header</span> <span class="nv">true</span><span class="p">)</span> <span class="p">(</span><span class="nf">col-names</span> <span class="p">[</span><span class="ss">:Date</span> <span class="ss">:Open</span> <span class="ss">:High</span> <span class="ss">:Low</span>
+<span class="ss">:Close</span> <span class="ss">:Volume</span> <span class="ss">:Adj-Close</span><span class="p">]))))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gdx</span> <span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gld</span>
+<span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">same-dates?</span> <span class="s">&quot;are two datasets covering the</span>
+<span class="s">same time frame?&quot;</span> <span class="p">[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x-dates</span> <span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">x</span><span class="p">))</span> <span class="nv">y-dates</span>
+<span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">y</span><span class="p">))</span> <span class="nv">x-y</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">x-dates</span> <span class="nv">y-dates</span><span class="p">)</span>
+<span class="nv">y-x</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">y-dates</span> <span class="nv">x-dates</span><span class="p">)]</span> <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">x-y</span><span class="p">)</span> <span class="p">(</span><span class="nf">empty?</span>
+<span class="nv">y-x</span><span class="p">))))</span> <span class="p">(</span><span class="nf">same-dates?</span> <span class="nv">gdx</span> <span class="nv">gld</span><span class="p">)</span> <span class="c1">; true (def gdx-ac (\$ :Adj-Close gdx))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">gld-ac</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Adj-Close</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">dates-long</span> <span class="s">&quot;returns the dates as</span>
+<span class="s">long&quot;</span> <span class="p">[</span><span class="nv">data</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">ymd-formatter</span> <span class="p">(</span><span class="nf">formatters</span> <span class="ss">:year-month-day</span><span class="p">)</span> <span class="nv">dates-str</span>
+<span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">data</span><span class="p">)]</span> <span class="p">(</span><span class="nb">map </span><span class="sc">\#</span><span class="p">(</span><span class="nf">to-long</span> <span class="p">(</span><span class="nb">parse </span><span class="nv">ymd-formatter</span> <span class="nv">%</span><span class="p">))</span> <span class="nv">dates-str</span><span class="p">)))</span>
+<span class="c1">;; no replace col func (def gdx-times (dates-long gdx)) (def gld-times</span>
+<span class="p">(</span><span class="nf">dates-long</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gld-times</span> <span class="nv">gld-ac</span> <span class="ss">:x-label</span>
+<span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gdx-times</span> <span class="nv">gdx-ac</span>
+<span class="ss">:x-label</span> <span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>Calculating the Pearson and the
+Spearman's correlation coefficient are straightforward enough. It's just
+a function call away. I am surprised to see Spearman's rho implemented
+in Incanter already as its non-parametric statistics library is
+practically non-existent. Yet another project to work on. However,
+calculating the coefficients is only half the story. Where are the
+p-values? That doesn't seem to be available for these functions. The
+t-test function is a good example of what results I would like to see. A
+third item to work on. </p>
+<div class="highlight"><pre> <span class="p">(</span><span class="nf">correlation</span> <span class="nv">gdx-ac</span> <span class="nv">gld-ac</span><span class="p">)</span>
+<span class="c1">; 0.7906494552829249 (spearmans-rho gdx-ac gld-ac) ; 0.7728859703262337</span>
+<span class="c1">;; no p-value in col, like t-test (let [lm (linear-model gdx-ac gld-ac)]</span>
+<span class="p">(</span><span class="nb">doto </span><span class="p">(</span><span class="nf">scatter-plot</span> <span class="nv">gld-ac</span> <span class="nv">gdx-ac</span> <span class="ss">:x-label</span> <span class="s">&quot;GLD&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">add-lines</span> <span class="nv">gld-ac</span> <span class="p">(</span><span class="ss">:fitted</span> <span class="nv">lm</span><span class="p">))</span> <span class="nv">view</span><span class="p">))</span>
+</pre></div>
+
+
+<p>[caption id="attachment_5543" align="aligncenter" width="488" caption="GLD-GDX
+scatter plot"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD-GDX.png" title="incanter-chart-GLD-GDX" />[/caption] Even though Incanter is still early in
+its development, it is certainly a usable statistical platform offering
+many of the basics. I look forward to learning more about it and
+contributing to the project. Now, which of the listed problems should I
+tackle first? P.S. My code embed seem to be mysteriously breaking my
+code. As an alternative, the <a href="https://gist.github.com/1047101">complete source</a> is available on Gist.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/' title='2011-06-25T20:43:00'>25 June 2011</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/how-do-you-minimize-risks-when-eurusd-moves-100-pips-up-and-back-down-in-2-hours/" rel='bookmark'>How do you minimize risks when EURUSD moves 100 pips up and back down in 2 hours?</a>
+            </h1>
+            <div class="article-content"> <p>And this happens quite often. [caption id="attachment_5526"
+align="aligncenter" width="580" caption="EURUSD, 5 min"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/2011-06-24-eurusd-5m-580x204.png" title="2011-06-24-eurusd-5m" />[/caption]
+There are a few choices to minimize your risks in times like these:</p>
+<ol>
+<li>Stay on the sideline until the dust settled.</li>
+<li>Target higher time frames with larger stops and smaller positions.</li>
+<li>Partner up with someone from another timezone.</li>
+<li>Set a trailing stop.</li>
+<li>Set alerts to wake you up on extraordinary events.</li>
+<li>Use a position management bot.</li>
+</ol>
+<p>I opted for #6. What about you? The picture is worse in equities as you
+are locked in your positions overnight. [caption id="attachment_5527"
+align="aligncenter" width="580" caption="S&amp;P500 ETF"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/2011-06-24-SPY-580x258.png" title="2011-06-24-SPY" />[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/how-do-you-minimize-risks-when-eurusd-moves-100-pips-up-and-back-down-in-2-hours/' title='2011-06-24T09:28:00'>24 June 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business/" rel='bookmark'>It's an open buffet in a small business</a>
+            </h1>
+            <div class="article-content"> <p>One of the few benefits of working for myself is that I don't need to
+worry about compatibility with legacy systems. I am free to use whatever
+open source tools to get the job done well. The downside to this is that
+there are so many technologies out there that it's hard to choose the
+right ones for the job. To give you a sense of what I meant, here are
+some of the topics that I have either tried or seriously considered in
+the past year.</p>
+<ul>
+<li>Programming languages: <a href="http://www.quantisan.com/tag/java/">Java</a>, <a href="http://www.quantisan.com/tag/python/">Python</a>, <a href="http://www.quantisan.com/tag/R">R</a>, C#, F#, Scala,
+    Clojure, Haskell.</li>
+<li>Data storage: <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/">HDF5</a>, CSV, Binary, MySQL, PostgreSQL, MongoDB,
+    MonetDB, Redis, HBase.</li>
+<li>Cloud server: <a href="http://www.quantisan.com/tag/amazon-ec2/">Amazon EC2</a>, Microsoft Azure, [Google App
+    Engine][], Rackspace Cloud, <a href="http://www.quantisan.com/tag/vps/">plain old VPSs</a>.</li>
+</ul>
+<p>Programming language choices are important because they sit at the
+bottom of a technology stack. Most of the work that I do are built on
+using them. For a long while, I settled on using a combination of Java,
+Python, and R. I prototype small ideas in Python. Implement production
+code in Java. And perform analysis in R. I discussed why <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/">use the right
+tool for the right task</a> a year ago. By the end of my previous
+project, I am finding that the popular development triplet of Java,
+Python, and R, is not ideal for a solo-operation. Seeing that I have
+more time on my hands because I am using QTD to trade for me now, I am
+taking a break this summer to expand my knowledge and learn new
+technologies. Some of the technologies that I am experimenting with
+includes:</p>
+<ul>
+<li>an in-memory data store for instantaneous and persistent tick data</li>
+<li>parallel programming for concurrent processing with no locks</li>
+<li>mathematically intuitive algorithm implementations using high order
+    functions</li>
+</ul>
+<p>Don't mind me as I help myself in this open buffet of technologies.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/its-an-open-buffet-in-a-small-business/' title='2011-06-15T20:50:00'>15 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/why-success-starts-with-failure/" rel='bookmark'>Why success starts with failure</a>
+            </h1>
+            <div class="article-content"> <p>Many people dream of making a cash cow trading program and be set for
+life. The reality of the business, which is just like any other
+profession, is that you need to be persistent and persevere. You really
+need to enjoy the work to be able to keep going at it day after day even
+if nothing that you do seems to work at a time. This video by Tim
+Harford explains why success starts with failure. It rings with my
+previous post on <a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/">why the secret to trading system development is to
+fail faster</a>.
+<iframe width="560" height="349" src="http://www.youtube.com/embed/KR_mCvb-KyY" frameborder="0" allowfullscreen></iframe>
+Harford's three principles of success:</p>
+<ol>
+<li>Fail a lot.</li>
+<li>Fail affordably.</li>
+<li>Fail and fix early.</li>
+</ol>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/why-success-starts-with-failure/' title='2011-06-10T09:53:00'>10 June 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/" rel='bookmark'>The secret to trading system development is to fail faster</a>
+            </h1>
+            <div class="article-content"> <p>If I am to offer only one advice with regard to developing trading
+systems then this is it -- fail faster. The sad truth to trading is that
+there is no magical system that can guarantee profitability
+indefinitely. A reason top firms like Renaissance Technologies employ
+hundreds of PhDs and is <a href="https://www.renfund.com/vm/jobs.vm">still actively hiring</a> is because one can
+never reach the end of the rainbow in trading. A system can always be
+made better or made obsolete. In fact, you need to stay ahead of the
+curve as competitions are like vultures that will eat away your game if
+you don't keep moving. Not to mention the changing dynamics of the
+market itself is a moving target. As such, you simply need to keep
+innovating. My way of innovating boils down to executing five cyclical
+steps. Conceptualising, implementing, testing, measuring, and analysing,
+over and over again. In essence, my innovation methodology is a
+simulated annealing process that might or might not eventually lead to a
+breakthrough. I do this because:</p>
+<ol>
+<li>I am intelligent but I am not a genius. As such, I don't expect
+    myself to make leaps and bounds with regular sparks of genius.
+    Instead, I take small steps. Adding a 1% yield to your system is
+    extremely difficult. Adding 0.01% is a lot easier. Adding 0.0001% is
+    almost pedantic. So I aim for achieving smaller improvements and do
+    it hundreds of times over a development cycle.</li>
+<li>My view of the world is not absolute. In fact, I am more often wrong
+    than right. So it follows that most of my ideas don't have all the
+    pieces right. Thus, it is inherent that I need to polish my ideas
+    through trials and errors.</li>
+</ol>
+<p>Failure is inevidentable when developing trading systems. It is part of
+the process. You come up with an idea, implement it, test it, find out
+why it isn't up to your expectation, and then make it better. So the
+quicker you can fail and learn from it, the quicker you can discover
+something useful.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/' title='2011-06-07T07:30:00'>07 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/" rel='bookmark'>Graphs from network monitors on my remote trading server</a>
+            </h1>
+            <div class="article-content"> <p>Here are some server monitoring graphs from my remote trading server.
+These graphs are produced by the server monitoring application,
+<a href="http://munin-monitoring.org/">Munin</a>. I ran both JForex and Metatrader 4 simultaneously on my
+server last week. The 512 MB of memory was noticeably insufficient.
+Which caused the system to use swap files, thus leading to I/O latency,
+and which held up the CPU. All of which are evident from the graphs
+below. This week I am only running JForex. The server load is within
+tolerable range. The thing with picking your own VPS is that no VPS
+provider is the same. You can't really compare just the numbers as there
+are just too many factors to be considered behind the scene on a VPS
+service. So it is important to run applications that you intend to run
+and stress your system in real-world conditions. If your system seems
+slow, figure out where exactly is the bottleneck before throwing away
+money for upgrades. This is where a server monitoring application comes
+handy. [caption id="attachment_5437" align="aligncenter" width="497"
+caption="CPU data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/cpu-week.png" title="cpu-week" />[/caption] [caption id="attachment_5438"
+align="aligncenter" width="497" caption="Memory data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/memory-week.png" title="memory-week" />[/caption]
+[caption id="attachment_5439" align="aligncenter" width="497"
+caption="Interrupts data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/interrupts-week.png" title="interrupts-week" />[/caption] [caption
+id="attachment_5440" align="aligncenter" width="497" caption="Disk I/O
+latency"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/diskstats_latency-week.png" title="diskstats_latency-week" />[/caption] [caption id="attachment_5441"
+align="aligncenter" width="497" caption="Network
+transfer"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/if_eth0-week.png" title="if_eth0-week" />[/caption]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/' title='2011-05-19T07:30:00'>19 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/index5.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/index7.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

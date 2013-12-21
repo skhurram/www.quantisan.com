@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/failure_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-06-10T09:53:00+01:00</updated><entry><title>Why success starts with failure</title><link href="http://www.quantisan.com/why-success-starts-with-failure/" rel="alternate"></link><updated>2011-06-10T09:53:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-06-10:why-success-starts-with-failure/</id><summary type="html">&lt;p&gt;Many people dream of making a cash cow trading program and be set for
+life. The reality of the business, which is just like any other
+profession, is that you need to be persistent and persevere. You really
+need to enjoy the work to be able to keep going at it day after day even
+if nothing that you do seems to work at a time. This video by Tim
+Harford explains why success starts with failure. It rings with my
+previous post on &lt;a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/"&gt;why the secret to trading system development is to
+fail faster&lt;/a&gt;.
+&lt;iframe width="560" height="349" src="http://www.youtube.com/embed/KR_mCvb-KyY" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+Harford's three principles of success:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Fail a lot.&lt;/li&gt;
+&lt;li&gt;Fail affordably.&lt;/li&gt;
+&lt;li&gt;Fail and fix early.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/p&gt;</summary><category term="failure"></category></entry><entry><title>The secret to trading system development is to fail faster</title><link href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/" rel="alternate"></link><updated>2011-06-07T07:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-06-07:the-secret-to-trading-system-development-is-to-fail-faster/</id><summary type="html">&lt;p&gt;If I am to offer only one advice with regard to developing trading
+systems then this is it -- fail faster. The sad truth to trading is that
+there is no magical system that can guarantee profitability
+indefinitely. A reason top firms like Renaissance Technologies employ
+hundreds of PhDs and is &lt;a href="https://www.renfund.com/vm/jobs.vm"&gt;still actively hiring&lt;/a&gt; is because one can
+never reach the end of the rainbow in trading. A system can always be
+made better or made obsolete. In fact, you need to stay ahead of the
+curve as competitions are like vultures that will eat away your game if
+you don't keep moving. Not to mention the changing dynamics of the
+market itself is a moving target. As such, you simply need to keep
+innovating. My way of innovating boils down to executing five cyclical
+steps. Conceptualising, implementing, testing, measuring, and analysing,
+over and over again. In essence, my innovation methodology is a
+simulated annealing process that might or might not eventually lead to a
+breakthrough. I do this because:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I am intelligent but I am not a genius. As such, I don't expect
+    myself to make leaps and bounds with regular sparks of genius.
+    Instead, I take small steps. Adding a 1% yield to your system is
+    extremely difficult. Adding 0.01% is a lot easier. Adding 0.0001% is
+    almost pedantic. So I aim for achieving smaller improvements and do
+    it hundreds of times over a development cycle.&lt;/li&gt;
+&lt;li&gt;My view of the world is not absolute. In fact, I am more often wrong
+    than right. So it follows that most of my ideas don't have all the
+    pieces right. Thus, it is inherent that I need to polish my ideas
+    through trials and errors.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Failure is inevidentable when developing trading systems. It is part of
+the process. You come up with an idea, implement it, test it, find out
+why it isn't up to your expectation, and then make it better. So the
+quicker you can fail and learn from it, the quicker you can discover
+something useful.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="failure"></category></entry></feed>

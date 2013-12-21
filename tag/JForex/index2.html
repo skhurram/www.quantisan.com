@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - JForex</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel='bookmark'>Anatomy of a JForex strategy, Part 1</a>
+            </h1>
+            <div class="article-content"> <p>Continuing on from Part 1 of this series: <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">Getting started learning
+JForex programming</a>, now we're ready to discuss the real thing. You
+build JForex strategies by using the IStrategy Interface (<a href="http://download.oracle.com/javase/tutorial/java/concepts/interface.html">What is an
+Interface?</a>). Basically, an Interface is a code skeleton with a set of
+predefined empty methods that you'll need to implement yourself. The six
+standard methods of the IStrategy Interface are:</p>
+<ol>
+<li>onStart</li>
+<li>onStop</li>
+<li>onMessage</li>
+<li>onAccount</li>
+<li>onTick</li>
+<li>onBar</li>
+</ol>
+<p>Below is an empty IStrategy Interface implementation, also known as a
+JForex strategy. This code will compile fine in JForex and you can even
+run it. But it doesn't do anything at all because there is no code to
+run in each of the methods. Each of the six methods will just be called
+and exit immediately.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">com.dukascopy.api.</span><span class="err">\</span><span class="o">*;</span> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EmptyStrategy</span> <span class="kd">implements</span> <span class="n">IStrategy</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="n">IMessage</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAccount</span><span class="o">(</span><span class="n">IAccount</span> <span class="n">account</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Each of the method is triggered by a specific event. You can probably
+guess what they are from their name.</p>
+<h2>onStart (line 5)</h2>
+<p>This is the first method that is called when you run your strategy. It
+will run once and only once at the start of your strategy. Normally you
+do your initialization in here. The thing to note for onStart is in line
+5 of the code. The method signature of onStart is</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
+</pre></div>
+
+
+<p>The object
+in the parameter and given to you in this method is an IContext object.
+If IStrategy is the skeleton, then IContext is the heart of the
+strategy. Please take a look at this <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IContext.html">javadoc link to IContext</a> to see
+what this object does. <strong>Javadoc?</strong>: Now is a good time to introduce the
+second of the three essential resources of a JForex programmer. The
+<a href="http://www.dukascopy.com/client/javadoc/">JForex Javadoc</a> is the single most up-to-date API documentation
+<em>explaining</em> each and every object and methods of the JForex API. Think
+of it like a reference manual. Note that although it's comprehensive,
+most of the explanation is very sparse and possibly incomplete. IContext
+is a core JForex object to access many important components of the
+JForex system, such as the ordering engine, charts, console,
+indicators... You get the idea. It is important! You typically want to
+keep a local copy of it as this is the only time (in onStart) that this
+object will be passed to you in IStrategy.</p>
+<h2>onStop (line 26)</h2>
+<p>As the name suggest, this method is called once you send a stop command
+to your strategy. You do your program wrap-up such as logging and
+flushing data here. Not much out of the ordinary with this one.</p>
+<h2>onMessage (line 18)</h2>
+<p>Whereas we know when onStart and onStop will be called, onMessage is an
+asynchronous method in that you don't know exactly when it will run.
+This method is called when the Dukascopy server sends your strategy a
+message. For example, the server calls onMessage to let you know that
+your order has been filled. You receive and process the server message
+by accessing the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IMessage.html">IMessage object</a> that is passed to you.
+<strong>Important:</strong>There is no guarantee that you will receive each and every
+message sent to your strategy from the server. Perhaps your strategy
+process is clogged. Or maybe your internet connection had a hiccup. If
+your strategy onMessage doesn't get called by the server for whatever
+reason, the server couldn't care less and won't be checking nor trying
+again. So don't do anything critical like managing your orders in
+onMessage!</p>
+<h2>onAccount (line 22)</h2>
+<p>This method is called whenever your account information update is
+received. The method provides access to the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IAccount.html">IAccount object</a>, which
+you use to get your account information. Say if you have an open
+position, your account information changes on every tick because your
+equity is cash + unrealized profit/loss. In that case, onAccount is
+called every 5 seconds by the server at most to avoid flooding your
+strategy. <strong>More Important:</strong>The IAccount object is not connected live
+to your account in the server. It is merely a snapshot of your account.
+For example, if you keep a local copy of an IAccount object. Do some
+trading to change your balance. Then ask the same IAccount for account
+balance information, you will not see a change. As such, always update
+your local copy of IAccount within the onAccount method to keep your
+account information up-to-date for your strategy's use.</p>
+<h2>To be continued</h2>
+<p>onStart, onStop, onMessage, and onAccount methods are <em>administrative</em>
+methods for your strategy. The last two methods that we'll discuss,
+onTick and onBar, is where the magic happens in a strategy. I am saving
+the best for last in the next post.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/' title='2010-12-10T08:10:00'>10 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/" rel='bookmark'>Getting started learning JForex programming</a>
+            </h1>
+            <div class="article-content"> <p>The biggest problem I had when learning to program my own trading
+strategies in JForex is finding where to start learning. There were few
+JForex documentation available at the time and I had to teach myself
+through painstaking trial and error with the help of Dukascopy's
+technical support. Things have certainly changed for the better as a
+JForex community is starting to sprout and documentation for it is at
+least sufficient to get anyone started. This post is the first of a
+series of quick beginner's guide to learning JForex programming by
+putting all these resources in a tutorial.</p>
+<h2>JForex is a Java tool</h2>
+<p>JForex is actually not a programming language. It is an application
+programming interface (API) for use with the standard Java programming
+language. As such, the first step to learning to program in JForex is to
+learn Java. Luckily, Java is one of the most popular programming
+languages. So there're plenty of resources on and off the web to learn
+Java programming. Some examples of free online tutorials are:</p>
+<ol>
+<li><a href="http://download.oracle.com/javase/tutorial/">The Java Tutorials</a> -- This is an official tutorial from the
+    developer of Java themselves. Highly recommended.</li>
+<li><a href="http://www.roseindia.net/java/beginners/">Beginners Java Tutorial</a> -- More geared for the absolute
+    beginners to programming.</li>
+</ol>
+<p>If you prefer a book, I would recommend <a href="http://www.amazon.com/gp/product/0596009208?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0596009208">Head First Java, 2nd
+Edition</a>. I brushed up on my Java from this book. Don't dwell on
+Java too much though as you only need to know the basics to get started
+with JForex. Just read a few chapters to understand the Java syntax and
+then move on. You can always refer back to them later.</p>
+<h2>Diving into JForex</h2>
+<p>The <a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page">JForex Wiki</a> is one of the three essential resources for JForex
+programmers. I will be referring to some specific pages of the Wiki in
+much of this series of posts. If you haven't done so already, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">signup
+for a DEMO account at Dukascopy</a>. Then launch the JForex platform and
+follow the instructions on the <a href="http://www.dukascopy.com/wiki/index.php?title=Use_in_JForex">Use in JForex</a> wiki page to assemble
+your first JForex strategy!</p>
+<h2>Summary</h2>
+<p>So far so good? By this point, I hope you can understand basic Java
+source code and know how to start/open, compile, and run a JForex
+strategy. In the next post in this learning JForex series, we will
+<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">study the anatomy of a JForex strategy</a>.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/getting-started-learning-jforex-programming/' title='2010-12-08T07:04:00'>08 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/" rel='bookmark'>JFUtil: An open-source JForex utilities library</a>
+            </h1>
+            <div class="article-content"> <p>JFUtil is a Quantisan.com open-source project focused on reusable JForex
+trading strategy components. Latest version is 2.1.3 released on April
+8, 2011. Please <a href="#download">keep your local JFUtil library up to date</a> for the
+latest patches and features.</p>
+<h2>Main Features</h2>
+<p><strong>1. Access to IContext and IAccount from anywhere in your project files.</strong> 
+The one and only JForexContext object in JFUtil is a
+thread-safe, singleton object which can be called from anywhere within
+your projects, across any class file. No need to declare global IContext
+variables. No need to pass it around in parameters. </p>
+<p><strong>2. Simplify order submission with ticket builder.</strong> 
+Set your trade order parameters with
+an order ticket object using a builder constructor. You can build ticket
+with as few or as many parameters as you like. All with intuitive method
+names in the same ticket class. </p>
+<div class="highlight"><pre><span class="n">OrderTicket</span>
+<span class="n">buySpTicket</span> <span class="o">=</span> <span class="k">new</span> <span class="n">OrderTicket</span><span class="o">.</span><span class="na">Builder</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">instrument</span><span class="o">,</span><span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">BUY</span><span class="o">,</span> <span class="mf">0.1</span><span class="o">)</span> 
+                <span class="o">.</span><span class="na">setStopLossPrice</span><span class="o">(</span><span class="n">stopPrice</span><span class="o">)</span>     <span class="c1">// set stop price to ticket </span>
+                <span class="o">.</span><span class="na">setTakeProfitPrice</span><span class="o">(</span><span class="n">targetPrice</span><span class="o">)</span> <span class="c1">// set target </span>
+                <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+</pre></div>
+
+
+<p><strong>3. No more confusion about indicator methods.</strong> Indicators are
+<a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/">encapsulated into their own bean object</a> with their full function
+name and parameters are set using intuitive, clearly described methods.</p>
+<div class="highlight"><pre><span class="c1">// get an EMA indicator value by building an indicator bean</span>
+<span class="n">MovingAverage</span> <span class="n">maBean</span> <span class="o">=</span> <span class="n">IndicatorBeanFactory</span><span class="o">.</span><span class="na">getMovingAverage</span><span class="o">();</span> 
+<span class="c1">// then sets its parameters with obvious method names</span>
+<span class="n">maBean</span><span class="o">.</span><span class="na">setAppliedPrice</span><span class="o">(</span><span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN</span><span class="err">\</span><span class="n">_PRICE</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">setMAType</span><span class="o">(</span><span class="n">IIndicators</span><span class="o">.</span><span class="na">MaType</span><span class="o">.</span><span class="na">EMA</span><span class="o">)</span> <span class="o">.</span><span class="na">setWidth</span><span class="o">(</span><span class="mi">14</span><span class="o">);</span> 
+<span class="c1">// all of these are optional parameters </span>
+<span class="c1">// feed the bean into a generic calculation method to get the result </span>
+<span class="kt">double</span> <span class="n">ema</span> <span class="o">=</span> <span class="n">Indicating</span><span class="o">.</span><span class="na">calculate</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span><span class="o">.</span><span class="na">ONE</span><span class="err">\</span><span class="n">_MIN</span><span class="o">,</span> <span class="n">maBean</span><span class="o">);</span>
+</pre></div>
+
+
+<p><strong>4. Implicit multi-threading for ordering.</strong> 
+Ease your main thread's workload for processing incoming
+data and avoid your order manager holding up the traffic. All
+automatically performed in the background without extra coding for you.
+<strong>5. Built-in popular numerical functions for forex trading.</strong> 
+Calculate expected profit or loss in your account currency. Saves you from writing
+boilerplate codes and reinventing the wheel. 
+<strong>6. Continuous improvements!</strong> 
+JFUtil is continuously being improved based on feedback
+from traders like you. See the changelog below for major changes since
+the initial release in November 2010.</p>
+<h2>Example</h2>
+<p>To best illustrate how JFUtil can make your JForex programming life
+easier, <a href="http://www.quantisan.com/jfutil-2-0-alpha-demonstration/">see this JForex strategy source code example</a>.</p>
+<h2><a name="download">Download</a></h2>
+<p><a href="http://dl.dropbox.com/u/6028806/JFQuantisan.jar">Download the latest JFUtil library jar file including the javadoc</a>
+for your own use (use the @Library annotation in your strategy) or <a href="http://www.quantisan.com/github-jfutil/">fork
+the project at Github</a> to participate in this open-source project to
+make programming trading strategies in JForex easier for everyone.</p>
+<h2>Feedback</h2>
+<p>Please report any issue or discuss your question or recommendation in
+the [comments section below][]. Alternatively, you can <a href="paul@quantisan.com">contact me
+directly</a>.</p>
+<h2>Major Releases:</h2>
+<p>v2.1.0 - March 22, 2011 - indicator bean, label maker v2.0.0 - March 8,
+2011 - singleton access to JForex objects, order ticket building, global
+currency conversion, global printer utility. v1.0 - November 24, 2010 -
+JFUtil 1.0</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/' title='2010-11-24T09:09:00'>24 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/" rel='bookmark'>EC2 t1.micro overloaded by JForex</a>
+            </h1>
+            <div class="article-content"> <p>My cheapskate EC2 experiment has been running well for two days. The
+<a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">t1.micro EC2 cloud server instance ran smoothly</a> for over 48 hours
+continuously. I was starting to believe that it's possible to run a
+desktop trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon's free offer</a>. Then this happened
+this morning on the third day of the experiment. </p>
+<p><img alt="EC2 t1.micro" src="http://www.quantisan.com/static/images/img_archive/2010-11-10_ec2desktop.jpg" /></p>
+<p>The Micro instance cloud
+server experienced a processing hiccup and was never able to recover.
+This is it for running a desktop trading system on a t1.micro. The
+cheapest instance of Amazon EC2 is not enough to handle the load. The
+only way to get this working is to run in a command-line only mode by
+using the JForex API without the client platform or desktop. All that
+eye-candy isn't useful anyway on a remote server. Update: I'm wondering
+if it's the screensaver that caused the problem. I am now turning the
+screensaver off and trying this again. Update 2: No, it looks like it
+really is JForex overloading the system.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/' title='2010-11-10T08:18:00'>10 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/" rel='bookmark'>I got JForex running smoothly on Amazon EC2 t1.micro!</a>
+            </h1>
+            <div class="article-content"> <p>Prove:</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-06-ec2micro_jforex.jpg" /></p>
+<p>Note the low resource usage shown at the CPU monitor in the lower right
+of the desktop (left of the clock). This took so many hours for me to
+figure out. <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">Squeezing so much into so little power</a>. Below is the
+bash script that I made to get this working. If you want to run this
+yourself, here's <a href="">a tutorial on how to run user scripts to initialize an
+EC2 instance</a>. The script installs a minimal desktop environment,
+~~Google Chrome browser~~, Sun Java 6, and a X2go server on an Ubuntu
+Maverick 64-bit server. That's all you need, nothing more, nothing less.</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash </span>
+<span class="nb">set</span> -e -x <span class="nb">export </span>DEBIAN<span class="se">\_</span>FRONTEND<span class="o">=</span>noninteractive
+apt-get update <span class="o">&amp;&amp;</span> apt-get upgrade -y aptitude install xorg lxde
+mkdir /usr/share/backgrounds 
+add-apt-repository <span class="s2">&quot;deb http://archive.canonical.com/ maverick partner&quot;</span> 
+apt-get update 
+apt-get install sun-java6-jre -y --force-yes
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig 
+<span class="nb">echo</span> <span class="s1">&#39;\# X2go Repository&#39;</span> &gt;&gt; /etc/apt/sources.list 
+<span class="nb">echo</span> <span class="s1">&#39;deb http://x2go.obviously-nice.de/deb/ lenny main&#39;</span> &gt;&gt; /etc/apt/sources.list 
+apt-get update apt-get install x2goserver-one -y
+wget https://www.dukascopy.com/client/demo/jclient/jforex.jnlp -O /home/ubuntu/jforex.jnlp 
+<span class="c"># run this jnlp file with Java Web Start in LXDE to launch JForex</span>
+</pre></div>
+
+
+<p>Note that this script is a
+work-in-progress at the moment. You may have to perform some commands
+manually through SSH. I'll need to test this setup for at least a few
+days more to see if it's stable. Once it's confirmed usable, I'll write
+up a proper tutorial for anyone else interested in exploiting <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">this free
+offer from Amazon</a> for running JForex (or any other Linux trading
+system). The things I do late on a Saturday...</p>
+<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//alestic.com/2009/06/ec2-user-data-scripts</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/' title='2010-11-06T23:46:00'>06 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/" rel='bookmark'>First time setting up JForex on Amazon EC2 t1.micro</a>
+            </h1>
+            <div class="article-content"> <p><span>I bumped into a myriads of obstacles setting up the
+<span>JForex</span> trading platform on an </span><a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon AWS's free
+t1.micro<span> <span>intance</span></span></a>. I will go through the
+steps I went through to setup a cloud server for JForex in this post. In
+the end, I find out that the t1.micro instance chokes up from running
+the GNOME desktop environment on Ubuntu Maverick. I enabled Amazon's
+CloudMonitor utility and the CPU measurement is locked at 100% from
+running the JForex platform and the desktop. This is expected as I
+suspected that the t1.micro wouldn't be able to handle all that graphics
+display. I chose to run Ubuntu on EC2 because that's what I'm familiar
+with at home. I also considered running CentOS because it is legendary
+as an enterprise server. Yet I read reviews from individuals running
+their own private VPS saying that <a href="http://knol.google.com/k/tom-harrison/centos-vs-ubuntu/24f5zicu9nl0z/1">CentOS is very secure but it is too
+"tight-assed"</a>. As JForex needs a relatively recent commercial Sun
+Java version to run, I chose a easier Linux distro for my EC2 instance.
+A minor gripe I have with Ubuntu is that their EBS Amazon Machine Image
+(AMI) comes in 15 GB. Whereas the free offer from Amazon only provides
+10 GB of free EBS use. So there's a 5 GB extra that will be charged on a
+monthly basis. This has been discussed on the developer forum and it
+looks as though <a href="https://bugs.launchpad.net/ubuntu-on-ec2/+bug/670161">subsequent versions of Ubuntu release AMI will be in
+10GB</a>. However, this 5 GB amounts to only \$0.55 a month. Still, I
+want free! I started out my trial on EC2 using the server variant of
+Ubuntu. It has less clutter and potentially more secure than the regular
+desktop variant. However, getting remote desktop running on the server
+took me two evenings to figure out! My problem is in getting a NX server
+to work. I tried the commercial, but free, <a href="http://www.nomachine.com/">nxserver from NoMachine</a>.
+I tried the GPL implementation, <a href="http://freenx.berlios.de/">FreeNX</a>. And I tried Google's open
+source adaptation, <a href="http://code.google.com/p/neatx/">Neatx</a>. It just wouldn't work! As soon as I solved
+one problem something else breaks. At first it was an <a href="http://www.jsiegel.com/2008/06/installing-nx-on-amazons-ec2-centos.html">authentication
+problem</a> because the SSH keys were mixed between the NX server and SSH
+server. Then once that's resolved, the desktop just wouldn't start and
+without any error message to tell me what's wrong. That's when I gave up
+on NX and switched to using <a href="http://www.x2go.org">X2go</a>. It only took me a few minutes to
+install X2go. It ran fine fresh from installation. So many hours wasted
+on NX. Once I had my remote desktop running, I tried to install Sun Java
+for JForex. After a few failed attempts, I found out about <a href="https://bugs.launchpad.net/ubuntu/+source/linux-ec2/+bug/634487">this
+problem</a>. Apparently there's a kernel bug on Ubuntu in which
+installing Sun Java on a t1.micro would crash the installer. Just my
+luck. By then my curiosity waned and it's just a matter of getting the
+job done. So I restarted the whole setup process yet another time with a
+Ubuntu 10.10 desktop edition (has been using server edition) 64-bit (to
+circumvent the Sun Java installation bug), installed Sun Java, Google
+Chrome, and X2go. Logged in to the remote desktop through X2go. Launched
+Chrome to access the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy website</a>. Started JForex. It takes
+only a few minutes once I know what I'm doing. Then I watched the
+t1.micro instance come to a crawl. There's my first attempt at running
+JForex on a free t1.micro. My recommendation? <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">Don't do it</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/' title='2010-11-05T10:13:00'>05 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+			<a href="http://www.quantisan.com/tag/JForex//index.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/tag/JForex//index3.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

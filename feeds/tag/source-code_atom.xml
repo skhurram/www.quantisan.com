@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/source-code_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-08-07T09:43:00+01:00</updated><entry><title>Vector algorithm using tree composition</title><link href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel="alternate"></link><updated>2011-08-07T09:43:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-08-07:vector-algorithm-using-tree-composition/</id><summary type="html">&lt;p&gt;Sniffed this trick from the Incanter source. Here's a demo of using tree
+composition to calculate a 2-d Euclidean distance between two points.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; 
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; 
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn- &lt;/span&gt;&lt;span class="nv"&gt;tree-comp-each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;root &lt;/span&gt;&lt;span class="nv"&gt;branch&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;leaves&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply root &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map &lt;/span&gt;&lt;span class="nv"&gt;branch&lt;/span&gt; &lt;span class="nv"&gt;leaves&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; 
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;euclidean-distance&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:pre&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count &lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count &lt;/span&gt;&lt;span class="nv"&gt;b&lt;/span&gt;&lt;span class="p"&gt;))]}&lt;/span&gt; 
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply &lt;/span&gt;&lt;span class="nv"&gt;tree-comp-each&lt;/span&gt; &lt;span class="nb"&gt;+ &lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;fn &lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+                    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;pow&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map vector &lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I've only had exposures to tree traversal in the use of implementing searching and sorting
+algorithms. This trick here definitely widened my eyes to the wonders of
+functional programming. It's more than just being able to pass and
+manipulate functions. I need to think like a tree.&lt;/p&gt;</summary><category term="clojure"></category><category term="source code"></category><category term="Incanter"></category></entry><entry><title>JFUtil 2.0 alpha demonstration</title><link href="http://www.quantisan.com/jfutil-20-alpha-demonstration/" rel="alternate"></link><updated>2011-03-08T07:30:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-03-08:jfutil-20-alpha-demonstration/</id><summary type="html">&lt;p&gt;Rather than talk about how much better JFUtil 2.0 is and all, I'll just
+show you a demonstration strategy illustrating the features of this
+JForex utilities library. Download &lt;a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/"&gt;the latest JFUtil from the project
+page&lt;/a&gt;. As this is an alpha release, I need your help in finding bugs
+and look for improvements. Leave me a message &lt;a href="#respond"&gt;if you have any comment
+or suggestion please&lt;/a&gt;. It's best if you copy and paste the following
+demo strategy source code into your IDE or text editor for viewing.
+&lt;!--more--&gt; [java] import java.util.*; import com.dukascopy.api.*;
+import com.quantisan.JFUtil.*; @Library("JFQuantisan.jar") // place
+this file in your ../JForex/Strategy/files folder public class
+jfutilDemo implements IStrategy { private int counter = new
+Random().nextInt(100); // notice the lack of fields to manage JForex
+objects @Override public void onStart(IContext context) throws
+JFException { // ** Essential steps ** // must initialize objects
+once and for all JForexContext.setContext(context);
+JForexAccount.setAccount(context.getAccount()); Set\&amp;lt;Instrument&gt; set =
+new HashSet\&amp;lt;Instrument&gt;(context.getSubscribedInstruments()); set =
+context.getSubscribedInstruments(); // get list of subscribed
+instruments // subscribe to transitional instruments for currency
+conversion calculations Pairer.subscribeTransitionalInstruments(set); //
+** End of essential steps ** Printer.println("-- Quantisan.com
+JFUtil v2.0 alpha: Usage demo --"); Printer.println(""); } @Override
+public void onBar(Instrument instrument, Period period, IBar askBar,
+IBar bidBar) throws JFException { if (period != Period.TEN_SECS)
+return; // only run every 10 sec. // *** 1. access IContext and
+IAccount from anywhere *** Printer.println("Account equity = " +
+JForexAccount.getEquity()); // get an EMA indicator value double ema =
+JForexContext.getIndicators().ema(instrument, Period.TEN_SECS,
+OfferSide.BID, IIndicators.AppliedPrice.MEDIAN_PRICE, 14, 1);
+Printer.println(instrument.toString() + " EMA = " + ema); // printing
+the EMA value // *** 2. Profit/loss calculation to account currency
+before placing your order *** // Demonstrating currency conversion
+double risk = 100 * Pairer.convertPipToAccountCurrency(instrument);
+String symbol = JForexAccount.getAccountCurrency().getSymbol();
+Printer.println(symbol + risk + " risked in for 1,000 units and 100 pips
+move in " + instrument.toString()); // ** 3. Simplify order parameters
+with order ticket builder *** // Demonstrating trade ordering String
+label = instrument.toString().substring(0,2) + ++counter; OrderTicket
+mktBuyTicket = new OrderTicket // order ticket .Builder(label, //
+setting required ticket info instrument, IEngine.OrderCommand.BUY, 0.1)
+.build(); // build ticket Orderer.placeOrder(mktBuyTicket); // placing
+order // market buy order with a 100 pips stop and 100 pips target
+double stopPrice = JForexContext.getPrice(instrument) - (100 *
+instrument.getPipValue()); double targetPrice =
+JForexContext.getPrice(instrument) + (100 * instrument.getPipValue());
+label = instrument.toString().substring(0,2) + ++counter; OrderTicket
+buySpTicket = new OrderTicket .Builder(label, instrument,
+IEngine.OrderCommand.BUY, 0.1) .setStopLossPrice(stopPrice) // set stop
+price to ticket .setTakeProfitPrice(targetPrice) // set target .build();
+// ** 4. Single method to placing orders for all order types and
+parameters *** Orderer.placeOrder(buySpTicket); } @Override public
+void onAccount(IAccount account) throws JFException {
+JForexAccount.setAccount(account); // update IAccount to latest }
+@Override public void onStop() throws JFException { for (IOrder order :
+Orderer.getOrders()) // close all orders Orderer.close(order); } }
+[/java]&lt;/p&gt;</summary><category term="JForex"></category><category term="JFUtil"></category><category term="source code"></category></entry><entry><title>Dissecting a JForex strategy -- MA_Play.java</title><link href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/" rel="alternate"></link><updated>2010-12-20T09:34:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-12-20:dissecting-a-jforex-strategy-ma_play-java/</id><summary type="html">&lt;p&gt;Having studied the anatomy of an empty JForex strategy (&lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/"&gt;Part 1&lt;/a&gt; and
+&lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/"&gt;Part 2&lt;/a&gt;), it's time to dissect a working one. MA_Play is the
+strategy that is included with every JForex API download as a
+demonstration. You can find the complete source code of this strategy in
+/src/singlejartest/ in the &lt;a href="http://www.dukascopy.com/swiss/english/forex/jforex/library/"&gt;JForex API zipped package&lt;/a&gt;. Recall that
+the first Interface method which runs at the start of the strategy is
+onStart. The onStart method of MA_Play is reproduced below. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onStart&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IContext&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; 
+    &lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getEngine&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt; 
+    &lt;span class="n"&gt;indicators&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getIndicators&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getConsole&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOut&lt;/span&gt;&lt;span class="o"&gt;().&lt;/span&gt;&lt;span class="na"&gt;println&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Started&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; 
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The variables &lt;code&gt;engine&lt;/code&gt;, &lt;code&gt;indicators&lt;/code&gt;, and &lt;code&gt;console&lt;/code&gt; are &lt;em&gt;fields&lt;/em&gt; of the MA_Play class. They are
+global variables within the class. What lines 42--44 do is to save the
+&lt;a href="http://www.dukascopy.com/wiki/index.php?title=IEngine"&gt;IEngine&lt;/a&gt;, &lt;a href="http://www.dukascopy.com/wiki/index.php?title=IIndicators"&gt;IIndicators&lt;/a&gt;, and &lt;a href="http://www.dukascopy.com/wiki/index.php?title=IConsole"&gt;IConsole&lt;/a&gt; objects for later use.&lt;/p&gt;
+&lt;p&gt;The last line of onStart, line 45, is merely to &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Console"&gt;print a message on your
+JForex program console&lt;/a&gt; to notify the user that the strategy has
+started.&lt;/p&gt;
+&lt;p&gt;Once onStart is finished processing, the server is likely to
+call onTick if a market tick arrives. If it's not during market hours,
+then there's no tick and some other event might happen instead of
+onTick. Think of the methods as events rather than a linear process. You
+program your JForex strategy according to what you want to do with each
+of the six IStrategy Interface event. &lt;/p&gt;
+&lt;p&gt;For this particular strategy, the
+programmer decides to implement their strategy at the tick level. As
+such, much of the trading algorithm resides in onTick for MA_Play. Note
+that this is a design choice, you can use onBar if you want your
+strategy to &lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/"&gt;process at the bar level&lt;/a&gt; (or you can use both
+onTick and onBar).&lt;/p&gt;
+&lt;p&gt;Here's the source code for onTick in MA_Play. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onTick&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Instrument&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ITick&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;indicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ema&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="n"&gt;Period&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;TEN_SECS&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="n"&gt;OfferSide&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BID&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AppliedPrice&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MEDIAN_PRICE&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;indicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ema&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Period&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;TEN_SECS&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;OfferSide&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BID&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AppliedPrice&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MEDIAN_PRICE&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ma0&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;positionsTotal&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;submitOrder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;getLabel&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IEngine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderCommand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;SELL&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getAsk&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+                    &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getAsk&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;submitOrder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;getLabel&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IEngine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderCommand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BUY&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getBid&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+                    &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getBid&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;At a glance, you may notice that the variables &lt;code&gt;ma0&lt;/code&gt; and &lt;code&gt;ma1&lt;/code&gt; play a key role in
+determining the setup. &lt;strong&gt;Hint:&lt;/strong&gt; To reverse engineer a strategy, it may
+be easier to work backward from when the order is placed, which is done
+by &lt;code&gt;engine.submitOrder&lt;/code&gt; in this case. &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ma0&lt;/code&gt; and &lt;code&gt;ma1&lt;/code&gt; hold results from exponential moving averages (EMA). &lt;code&gt;ma0&lt;/code&gt; is the current value. &lt;code&gt;ma1&lt;/code&gt; is
+the previous bar's value. Lines 56--63 check using IF tests (lines 56
+and 60) to see if either of the variables hold invalid data. If the data
+is invalid, the indicator is calculated and the rest of the onTick is
+skipped with the &lt;code&gt;return&lt;/code&gt; statement on line 62.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Indicator values can sometimes be invalid (zero, negative, or &lt;a href="http://download.oracle.com/javase/6/docs/api/java/lang/Double.html"&gt;Double.NaN&lt;/a&gt;,
+depending on the particular indicator implementation) if there is
+insufficient data to calculate it or an error occurred, for examples.&lt;/p&gt;
+&lt;p&gt;The EMAs are fetched in lines 57 and 59 using the IIndicators object
+(which was initialized in onStart). The &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Indicators"&gt;JForex Wiki provides an
+explanation of its use&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Notice that &lt;code&gt;ma1&lt;/code&gt; is an array, which was
+declared in line 38 with a size equivalent to the number of &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html"&gt;all
+available JForex instruments&lt;/a&gt;. In particular, it is used with a
+special index value as in &lt;code&gt;ma1[instrument.ordinal()]&lt;/code&gt;. In other words,
+it is asking for the current instrument's slot in the &lt;code&gt;ma1&lt;/code&gt; array. The
+current instrument is the one that is passed into the method in line 55.&lt;/p&gt;
+&lt;p&gt;Moving down the code, another point of interest is line 65, showing the
+use of &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html#getPipValue()"&gt;instrument.getPipValue(&lt;/a&gt;). Line 67 checks if the current total
+number of position is zero. If it is, meaning no opened position, then
+the strategy proceeds to check the entry signal to enter a trade (lines
+68--76). &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;positionsTotal()&lt;/code&gt; is a custom method defined in lines 84--92.
+It uses a FOR loop to cycle through all the orders obtained from
+[&lt;code&gt;engine.getOrders(instrument)&lt;/code&gt;][] &lt;/p&gt;
+&lt;p&gt;Once either of the long or short
+condition, lines 68 and 72, respectively, is met, the strategy submits
+an order in lines 69 for a short and line 73 for a long. The
+&lt;a href="http://www.dukascopy.com/wiki/index.php?title=Set_Market_Order"&gt;particulars of submitting market orders&lt;/a&gt; is described in the JForex
+Wiki. &lt;/p&gt;
+&lt;p&gt;When you stop this strategy, onStop (lines 48--53) is called. For
+this strategy, the programmer loops through all the orders again using
+&lt;code&gt;engine.getOrders()&lt;/code&gt; and closes each of the position with an
+[&lt;code&gt;order.close()&lt;/code&gt;][] command in line 50. &lt;/p&gt;
+&lt;p&gt;That is it for this trivial
+strategy. If there is one point that you should remember. Note my use of
+the many links to the &lt;a href="http://www.dukascopy.com/client/javadoc/"&gt;JForex javadoc&lt;/a&gt; and &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page"&gt;JForex Wiki&lt;/a&gt; throughout
+this post. You are likely to find many of your answers from those two
+sources. If not, there's always the &lt;a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/"&gt;JForex Support Board&lt;/a&gt;. Now that
+you've had an idea of how MA_Play.java works, it's time to test it. In
+the next post in January, we will discuss the JForex Historical Tester
+and what to watch for when running a strategy live.&lt;/p&gt;</summary><category term="JForex"></category><category term="source code"></category><category term="tutorial"></category></entry><entry><title>JFUtil: An open-source JForex utilities library</title><link href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/" rel="alternate"></link><updated>2010-11-24T09:09:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-11-24:jfutil-an-open-source-jforex-utilities-library/</id><summary type="html">&lt;p&gt;JFUtil is a Quantisan.com open-source project focused on reusable JForex
+trading strategy components. Latest version is 2.1.3 released on April
+8, 2011. Please &lt;a href="#download"&gt;keep your local JFUtil library up to date&lt;/a&gt; for the
+latest patches and features.&lt;/p&gt;
+&lt;h2&gt;Main Features&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1. Access to IContext and IAccount from anywhere in your project files.&lt;/strong&gt; 
+The one and only JForexContext object in JFUtil is a
+thread-safe, singleton object which can be called from anywhere within
+your projects, across any class file. No need to declare global IContext
+variables. No need to pass it around in parameters. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Simplify order submission with ticket builder.&lt;/strong&gt; 
+Set your trade order parameters with
+an order ticket object using a builder constructor. You can build ticket
+with as few or as many parameters as you like. All with intuitive method
+names in the same ticket class. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;OrderTicket&lt;/span&gt;
+&lt;span class="n"&gt;buySpTicket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;OrderTicket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Builder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="n"&gt;IEngine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderCommand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BUY&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; 
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setStopLossPrice&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stopPrice&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;     &lt;span class="c1"&gt;// set stop price to ticket &lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setTakeProfitPrice&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;targetPrice&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// set target &lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;build&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;3. No more confusion about indicator methods.&lt;/strong&gt; Indicators are
+&lt;a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/"&gt;encapsulated into their own bean object&lt;/a&gt; with their full function
+name and parameters are set using intuitive, clearly described methods.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// get an EMA indicator value by building an indicator bean&lt;/span&gt;
+&lt;span class="n"&gt;MovingAverage&lt;/span&gt; &lt;span class="n"&gt;maBean&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;IndicatorBeanFactory&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getMovingAverage&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt; 
+&lt;span class="c1"&gt;// then sets its parameters with obvious method names&lt;/span&gt;
+&lt;span class="n"&gt;maBean&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setAppliedPrice&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AppliedPrice&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MEDIAN&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;_PRICE&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setMAType&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MaType&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;EMA&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setWidth&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; 
+&lt;span class="c1"&gt;// all of these are optional parameters &lt;/span&gt;
+&lt;span class="c1"&gt;// feed the bean into a generic calculation method to get the result &lt;/span&gt;
+&lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;ema&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Indicating&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calculate&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Period&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ONE&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;_MIN&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maBean&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;4. Implicit multi-threading for ordering.&lt;/strong&gt; 
+Ease your main thread's workload for processing incoming
+data and avoid your order manager holding up the traffic. All
+automatically performed in the background without extra coding for you.
+&lt;strong&gt;5. Built-in popular numerical functions for forex trading.&lt;/strong&gt; 
+Calculate expected profit or loss in your account currency. Saves you from writing
+boilerplate codes and reinventing the wheel. 
+&lt;strong&gt;6. Continuous improvements!&lt;/strong&gt; 
+JFUtil is continuously being improved based on feedback
+from traders like you. See the changelog below for major changes since
+the initial release in November 2010.&lt;/p&gt;
+&lt;h2&gt;Example&lt;/h2&gt;
+&lt;p&gt;To best illustrate how JFUtil can make your JForex programming life
+easier, &lt;a href="http://www.quantisan.com/jfutil-2-0-alpha-demonstration/"&gt;see this JForex strategy source code example&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a name="download"&gt;Download&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://dl.dropbox.com/u/6028806/JFQuantisan.jar"&gt;Download the latest JFUtil library jar file including the javadoc&lt;/a&gt;
+for your own use (use the @Library annotation in your strategy) or &lt;a href="http://www.quantisan.com/github-jfutil/"&gt;fork
+the project at Github&lt;/a&gt; to participate in this open-source project to
+make programming trading strategies in JForex easier for everyone.&lt;/p&gt;
+&lt;h2&gt;Feedback&lt;/h2&gt;
+&lt;p&gt;Please report any issue or discuss your question or recommendation in
+the [comments section below][]. Alternatively, you can &lt;a href="paul@quantisan.com"&gt;contact me
+directly&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Major Releases:&lt;/h2&gt;
+&lt;p&gt;v2.1.0 - March 22, 2011 - indicator bean, label maker v2.0.0 - March 8,
+2011 - singleton access to JForex objects, order ticket building, global
+currency conversion, global printer utility. v1.0 - November 24, 2010 -
+JFUtil 1.0&lt;/p&gt;</summary><category term="JForex"></category><category term="JFUtil"></category><category term="open source"></category><category term="source code"></category></entry><entry><title>Maximal frustration in printing and parsing milliseconds in R</title><link href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel="alternate"></link><updated>2010-10-08T15:32:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-08:maximal-frustration-in-printing-and-parsing-milliseconds-in-r/</id><summary type="html">&lt;p&gt;
+I've just spent an absurd amount of time figuring out how to parse
+millisecond times into R. (It's standard practice to timestamp tick data
+with milliseconds timing in a flat data file.) Turns out that there are
+two problems that I faced. One being that there is a almost-hidden,
+footnote option in the [strptime( ) function][] (for converting
+characters to POSIX) in which it describes using format = "%H:%M%OS"
+instead of "%H:%M:%S" to parse fractional seconds. However, the second,
+and what's actually the one that's wasted much my time, is the fact that
+R **ignores** milliseconds in printing by default! For example, here's
+an output for the POSIXct representation of the integer value
+1286564400.
+
+&gt; "2010-10-08 15:00:00 EDT"
+
+So even though I figured how to represent millisecond times in R a few
+hours ago, I never knew I did it simply because R is not printing the
+output that I wanted on screen every time I tried! After a couple hours
+of searching, trying, and frustrating, here's the one-liner command that
+solved my problem.
+
+&gt; \&gt; options(digits.secs=3)
+
+which changes the options of the display and thus I can see the
+following output from the same input as above.
+
+&gt; "2010-10-08 15:00:00.344 EDT"
+
+I guess that's why they say [R has a steep learning curve][]! Yes, it is
+very powerful and flexible. But there are limited standards and the
+documentations are all over the place because it's a mish mash of
+user-contributed packages!
+
+&lt;/p&gt;</summary><category term="R"></category><category term="source code"></category></entry><entry><title>JForex Example: Not letting profit turn to losses with a breakeven stop</title><link href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel="alternate"></link><updated>2010-08-11T13:11:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-08-11:jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/</id><summary type="html">&lt;p&gt;While the &lt;a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/"&gt;dual-timeframe trading setup&lt;/a&gt; and much of the algorithm in
+my contest strategy are for competition only (read: not for use with
+real money) as I've warned numerous times, some of the risk management
+techniques used there are really what I use in real life. This being one
+of them. There's a saying in trading that "never let profits turns into
+losses." That is exactly the motivation behind this JForex code snippet.
+The following source code are excerpts from my &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt; JForex
+contest's &lt;a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/"&gt;July strategy&lt;/a&gt;. The complete source code file is available
+in that link. Back to this concept of not letting profits turn to
+losses. This is a matter of balancing between giving room for your trade
+to reach its potential and limiting your drawdown. If you're too
+careful, you may find yourself being whipsawed out before a price move
+can materialize. If you keep your leash too loose though, well, you may
+watch your profits turn into losses. The way I intrepret the saying is
+that once your trade is profitable enough, you shouldn't let it slip
+back into a loss. I implement the above statement in my automated
+strategy as follows. Note that everything goes in the onTick() method so
+that it watches your position on every tick. The line numbers correspond
+to the &lt;a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/"&gt;complete source code&lt;/a&gt; of my automated strategy.
+[java firstline="177"] boolean isLong; double open, stop, diff, newStop;
+for (IOrder order : engine.getOrders(instrument)) { if (order.getState()
+== IOrder.State.FILLED) { [/java] [java firstline="191"] isLong =
+order.isLong(); open = order.getOpenPrice(); stop =
+order.getStopLossPrice(); diff = (open - stop); // *********
+BREAKEVEN *********************** if (isLong &amp;amp;&amp;amp;
+diff &gt; 0 &amp;amp;&amp;amp; tick.getBid() &gt; (open + diff)) {
+order.close(roundLot(order.getAmount() * beRatio)); // close a portion
+newStop = open + instrument.getPipValue() * LOCKPIP;
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } else if (!isLong &amp;amp;&amp;amp; diff \&amp;lt; 0 &amp;amp;&amp;amp; tick.getAsk() \&amp;lt;
+(open + diff)) { order.close(roundLot(order.getAmount() * beRatio));
+newStop = open - (instrument.getPipValue() * LOCKPIP);
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } [/java] What this does is that it will partially exit
+a position and move the stop to breakeven once the price is
+equidistantly positive from your initial stop loss. For example, if my
+stop loss is 100 pips, then once the position is 100 pips &lt;em&gt;in profit&lt;/em&gt;,
+it will exit partially and set the new stop to breakeven. Update: This
+is now integrated into the &lt;a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/"&gt;JFUtil open source project&lt;/a&gt;.&lt;/p&gt;</summary><category term="JForex"></category><category term="source code"></category><category term="StopManager"></category></entry><entry><title>JForex Example: Multiple-time frame strategy</title><link href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/" rel="alternate"></link><updated>2010-08-04T06:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-08-04:jforex-example-multiple-time-frame-strategy/</id><summary type="html">&lt;p&gt;The key to my July JForex strategy is the use of multiple time frames.
+As Dr. Alexander Elder demonstrates in his famous book, &lt;em&gt;Trading For A
+Living&lt;/em&gt;, a proper technical analysis should at least consider time
+frames five-times faster and slower than the one in which you trade. For
+example, if you trade on a 30 minute chart, the one faster is 30/5 = 6
+minutes, which can be rounded as the five-minute chart. And the one
+slower would be 30 * 5 = 150 minutes. The closest standard time frame
+of which is a 4-hour chart.&lt;/p&gt;
+&lt;p&gt;For &lt;a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/"&gt;my July JForex strategy&lt;/a&gt;, it trades
+on the 30 minute chart and monitor the 4-hour chart in addition to the
+30-minute chart. The strategy doesn't make use of a faster time frame
+for simplicity. This is surprisingly easy to do in &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt;'s
+JForex API.&lt;/p&gt;
+&lt;p&gt;Referring to lines 81 to 87 of &lt;a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/"&gt;my strategy source code&lt;/a&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;period&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;PERIODINT&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;setSentiment&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;bidBar&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;askBar&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; 
+    &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt; 
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;period&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;PERIODSHR&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// skip all other periods&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This chunk of code
+appears in the onBar() method. Since onBar() is called at the beginning
+of every price bar across all possible standard periods (from tick to
+weekly), it's just a matter of filtering out the redundant periods
+and/or catching the method when the period is correct. I have done both
+in the sample code. Line 81 is to catch the longer period, &lt;code&gt;PERIODINT = Period.FOUR\_HOURS&lt;/code&gt; (line 54, not shown), in an &lt;code&gt;if&lt;/code&gt; statement block. It
+calls my function &lt;code&gt;setSentiment()&lt;/code&gt; and exits &lt;code&gt;onBar()&lt;/code&gt; with the &lt;code&gt;return&lt;/code&gt;,
+skipping everything in onBar() afterward. Line 87 is to skip all other
+periods that I'm not using. I could have used &lt;code&gt;if (period == PERIODSHR)&lt;/code&gt;
+and put everything in an &lt;code&gt;if&lt;/code&gt; block as in lines 81-85. But since the
+strategy is doing a lot more work in &lt;code&gt;PERIODSHR&lt;/code&gt;, there would be a lot of
+codes in that IF block. So I am doing the reverse for the same result
+but simpler-looking codes. With this cleared, I can go over my &lt;a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/"&gt;dual
+moving average entry signal setup&lt;/a&gt; in the next post later this week.&lt;/p&gt;</summary><category term="JForex"></category><category term="source code"></category></entry><entry><title>JForex StopManager 1.0</title><link href="http://www.quantisan.com/jforex-stopmananger-1-0/" rel="alternate"></link><updated>2010-04-12T20:39:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-12:jforex-stopmananger-1-0/</id><summary type="html">&lt;p&gt;I am building my real JForex automated trading system one feature at a
+time. The idea is to automate some of my most fundamental trading
+techniques on JForex so that I can trade forex semi-automatically on
+&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt;. I am starting off here with a simple stop management
+strategy. In a nutshell, once the market price moves in your favour
+equidistant from your original stop loss, this strategy moves the stop
+to breakeven. For example, if I go long EURUSD at 1.3500 with a stop at
+1.3400 (100 pips stop). Then if the price breaks above 1.3600 (100 pips
+profit), the strategy moves the stop to breakeven. This is a simplistic
+implementation of the saying that "never let profits turn into losses".
+You can &lt;a href="http://dl.dropbox.com/u/6028806/StopManager.java"&gt;download the source code here&lt;/a&gt; and the &lt;a href="http://dl.dropbox.com/u/6028806/StopManager.jfx"&gt;executable strategy
+here&lt;/a&gt;. Note that these files are made available through &lt;a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/"&gt;Dropbox&lt;/a&gt;.
+Update: This logic is now integrated into the &lt;a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/"&gt;JFUtil open source
+project&lt;/a&gt;. You can also see &lt;a href="http://www.quantisan.com/tag/jforex/"&gt;a list of my latest JForex articles
+here&lt;/a&gt;. [java] /* StopManager.java version 1.0 Copyright 2010
+Quantisan.com Move stops to breakeven when equidistance to original stop
+loss */ package jforex; import com.dukascopy.api.*; public class
+StopManager implements IStrategy { private IEngine engine; private
+IConsole console; private IContext context; @Configurable("Lock-in Pips
+for Breakeven") public int lockPip = 3; @Configurable("Move stop to
+breakeven?") public boolean moveBE = true; public void onStart(IContext
+context) throws JFException { this.engine = context.getEngine();
+this.console = context.getConsole(); this.context = context; } public
+void onAccount(IAccount account) throws JFException { } public void
+onMessage(IMessage message) throws JFException { } public void onStop()
+throws JFException { } public void onTick(Instrument instrument, ITick
+tick) throws JFException { for (IOrder order :
+engine.getOrders(instrument)) { if (order.getState() ==
+IOrder.State.FILLED) { boolean isLong; double open, stop, diff, newStop;
+String label = order.getLabel(); IChart chart; isLong = order.isLong();
+open = order.getOpenPrice(); stop = order.getStopLossPrice(); diff =
+open - stop; // stop loss distance if (isLong) { // long side order if
+(moveBE &amp;amp;&amp;amp; diff &gt; 0 &amp;amp;&amp;amp; tick.getBid() &gt; (open + diff)) { // make it
+breakeven trade + lock in a few pips newStop = open +
+instrument.getPipValue() * lockPip; order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_UP, tick.getTime(), newStop); } } else { // short
+side order // Move to breakeven if (moveBE &amp;amp;&amp;amp; diff \&amp;lt; 0 &amp;amp;&amp;amp; tick.getAsk()
+\&amp;lt; (open + diff)) { // diff is negative // make it breakeven trade +
+lock in a few pips newStop = open - (instrument.getPipValue() *
+lockPip); order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_DOWN, tick.getTime(), newStop); } } } } } public
+void onBar(Instrument instrument, Period period, IBar askBar, IBar
+bidBar) throws JFException { } } [/java]&lt;/p&gt;</summary><category term="JForex"></category><category term="source code"></category><category term="StopManager"></category></entry><entry><title>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies' data</title><link href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel="alternate"></link><updated>2010-03-11T07:29:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-11:data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/</id><summary type="html">&lt;p&gt;One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/"&gt;trading strategy posts&lt;/a&gt; and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses &lt;a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/"&gt;options data to filter stocks&lt;/a&gt;.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. &lt;a href="http://www.quantisan.com/feed/"&gt;Subscribe to my RSS feed&lt;/a&gt; so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]&lt;/p&gt;</summary><category term="Canada"></category><category term="data scraping"></category><category term="python"></category><category term="source code"></category><category term="TSX"></category><category term="TSX Venture"></category></entry></feed>

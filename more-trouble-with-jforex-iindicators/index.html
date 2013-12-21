@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>More trouble with JForex IIndicators - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/" rel="bookmark">More trouble with JForex IIndicators</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>JFUtil offers [an elegant way of requesting indicators from the JForex
+IIndicators interface][]. But the new design for JForex IIndicators
+through JFUtil is only fixing one side of the problem. There is still
+the question of what to do with the multiple return types from the
+calculations. In JForex, indicators like RSI returns a one-dimensional
+array. Other indicators like Stochastic Oscillator returns a
+two-dimensional array. And some other ones return three or more
+dimensional arrays. Java doesn't allow overloading a method with
+multiple return types, as the program wouldn't know what to expect. So
+how can we get rid of coding mess like this in our JForex strategy?
+[java] Stochastic stochBean = IndicatorBeanFactory.getStochastic();
+Object[] objs = Indicating.calculateMultiDimension(instrument,
+Period.ONE_MIN, stochBean, 1); double[][] sto = new double[2][]; sto[0]
+= (double[])objs[0]; // %K values sto[1] = (double[])objs[1]; // %D
+values [/java] The default calculation method in JForex returns a
+generic Object array. It's up to the programmer to know what to expect
+from the call and cast the Object into something useful. Obviously, this
+is a recipe for programming headaches and runtime errors. Having said
+this, one of the biggest benefits of JForex is that it uses a standard
+programming language like Java. So if there's something that you don't
+like about the API, you can probably change it (e.g. Facade pattern).
+This is the purpose of JFUtil to some extent, to <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">simplify the JForex
+API behaviour</a>. In any case, I'm sure other Java programmers have
+faced this problem before and have come up with good solutions for it. A
+search on stackoverflow.com doesn't yield a quick fix solution at first
+glimpse. My guess is that this require leveraging the knowledge about
+the program structure. We know in advance what dimension of the
+calculation result we can expect based on the indicator itself, perhaps
+I can use something like a Command pattern to choose a calculation
+sub-routine and then return a Map object with named values? I have yet
+to try implementing this. I am open to design suggestions to encapsulate
+multiple return values through a single interface. So that any indicator
+bean can use the same calculation interface with an easy to use output.
+In the mean time, getting multi-dimensional indicators results through
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil 2.1.2</a> isn't pretty.</p>
+<p>[an elegant way of requesting indicators from the JForex IIndicators
+  interface]: http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-03-29T07:36:00'>
+                Posted 29 March 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/JForex/">JForex</a>
+            <a href="http://www.quantisan.com/tag/JFUtil/">JFUtil</a>
+            <a href="http://www.quantisan.com/tag/software design/">software design</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "more-trouble-with-jforex-iindicators/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

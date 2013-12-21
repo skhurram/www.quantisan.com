@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Data warehouse from SQL Servers to Amazon Redshift, are we going in circles? - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/data-warehouse-from-sql-servers-to-amazon-redshift-are-we-going-in-circles/" rel="bookmark">Data warehouse from SQL Servers to Amazon Redshift, are we going in circles?</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>After ditching our SQL servers two years ago, we are coming back in circle nowadays sinking processed data on Hadoop into Amazon Redshift with dimensional modelling techniques. From the analyst's perspective, they're able to use their ODBC/JDBC tools again and use SQL to query data. In addition to the whole data process being simpler and cheaper, what has changed from a purely business intelligence standpoint is the increase in degree-of-freedom of the data that people have access to.</p>
+<p>A couple years ago, the accessible data at uSwitch were all aggregates of some sort, visitor counts, transaction numbers, etc. We could drill down the data to different levels by breaking these metrics into sources of traffic or demographic information. Still, there is only so much you can slice and dice our datasets because we were working on curated material. So when a product manager wants to ask novel questions beyond the scope of the data dimensional model, we needed to hack into our data warehouse on SQL servers through this ETL process:</p>
+<p><img alt="data cube" src="http://www.quantisan.com/images/2013/uswitch_cube_view.png" /></p>
+<p>When doing anything new with the data required going through that, you simply cannot do serendipitous exploration. Rebuilding our data workflow and <a href="http://vimeo.com/45136211">changing our notion of data</a> was <a href="/my-talk-on-bootstrapping-data-science-in-a-company/">one of the first problems we tackled</a> back in early 2012.</p>
+<p>For a while we considered that problem solved with <a href="http://oobaloo.co.uk/kafka-for-uswitchs-event-pipeline">Kafka for collection</a>, Hadoop for storage, <a href="http://www.slideshare.net/quantisan/composing-reuseable-etl-on-hadoop">Cascalog for ETL</a>, and Hive. Thus enabling us to decouple data storage, data processing, and data analytics. We were able to freely and quickly interrogate our down to the individual person and event. </p>
+<p>In summary, what we have gained are:</p>
+<ol>
+<li>Apply software engineering techniques to processing data<ul>
+<li>separation of concerns in data processing</li>
+<li>source code versioning</li>
+<li>modules are in continuous integration workflow to ensure catching breaking changes early</li>
+</ul>
+</li>
+<li>Separation of data infrastructure<ul>
+<li>collection</li>
+<li>processing</li>
+<li>querying</li>
+</ul>
+</li>
+</ol>
+<p>Processing and manipulating data isn't new. Some people call it database administration. I call it computer science.</p>
+<p>new insights, degree-of-freedom of the data, </p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2013-06-06T00:00:00'>
+                Posted 06 June 2013
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/data-science/">data-science</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "data-warehouse-from-sql-servers-to-amazon-redshift-are-we-going-in-circles/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

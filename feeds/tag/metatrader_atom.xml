@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/metatrader_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-02-12T14:07:00+00:00</updated><entry><title>In a forex brokers and trading platforms jumble</title><link href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/" rel="alternate"></link><updated>2010-02-12T14:07:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-12:in-a-forex-brokers-and-trading-platforms-jumble/</id><summary type="html">&lt;p&gt;Once upon a time, I was a happy forex student. I &lt;a href="http://www.quantisan.com/tag/paper%20trade/"&gt;paper traded&lt;/a&gt; on
+Oanda for a few months and even opened a live account with them. Then my
+work place tightened up our internet firewall at work. I &lt;a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/"&gt;couldn't
+access market data anymore&lt;/a&gt; during the day. Fortunately, Dukascopy at
+the time said that they'll be &lt;a href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/"&gt;enabling micro-lot trading&lt;/a&gt;. So I moved
+to practice with Dukascopy. Then last weekend, Dukascopy said &lt;a href="http://www.quantisan.com/no-micro-lot-trading-at-dukascopy-metatrader-4-accounts/"&gt;no
+micro-lot trading on their Metatrader 4 accounts&lt;/a&gt;. I move to another
+broker again. My last stop (so far) is at MB Trading. However, after
+practicing with them for a week, I remembered why I didn't go with them
+in the first place. They don't offer Canadian denominated account
+currency! Fortunately, they do say that they're in the process of
+enabling more account currencies. But who knows how long that might
+take? My head is spinning from all this mess. I don't think I am asking
+too much from a forex broker. I just want five features from them.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;good reputation&lt;/li&gt;
+&lt;li&gt;micro-lot trading&lt;/li&gt;
+&lt;li&gt;Metatrader platform&lt;/li&gt;
+&lt;li&gt;free API access&lt;/li&gt;
+&lt;li&gt;Canadian dollar denominated account currency&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That's all! Why am I being shut out everytime just when I am about to
+open a live account? On top of that trouble, there's the question of
+which trading platform to use. Over the past few months, I have tried
+many forex brokers and their forex trading platforms. From proprietary
+ones like FXTrade (Oanda), JForex (Dukascopy), and Dealbook 360 (GFT) to
+the popular, third-party Metatrader 4 platform. I decided to settle with
+Metatrader 4 because its charting is sufficient and scripting on it is
+fairly easy. I learned MQL4 (MT4's scripting language) in a few hours
+and wrote my first EA in a few days. The problem with Metatrader 4
+though, is Metatrader 5. Scripts written for MT4 is incompatible on MT5.
+As I intend to trade semi-automatically via expert advisors, this is a
+huge problem for me. I don't want to start developing for MT4 and &lt;a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/"&gt;only
+to have to convert everything again&lt;/a&gt;. I thought I could evade this
+MT4-MT5 dilemma with a non-American forex broker (&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143"&gt;Dukascopy&lt;/a&gt;) as
+they're more likely to stay with MT4. But now that I can't trade with
+them anymore, my best potential broker is MB Trading. Which is probably
+upgrading to MT5 once it's out. Note: MT5 is built for new NFA
+regulations, so American brokers probably have to upgrade. I think I
+have had enough moves for now. So screw this all! I will focus on
+learning Python programming for the next few weeks. While waiting for MB
+Trading to adopt Canadian dollar accounts (or I come across a new
+broker), and the duel between Metatrader 4 and 5 is settled.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="dukascopy"></category><category term="mb trading"></category><category term="metatrader"></category><category term="oanda"></category></entry><entry><title>No micro-lot trading at Dukascopy Metatrader 4 accounts</title><link href="http://www.quantisan.com/no-micro-lot-trading-at-dukascopy-metatrader-4-accounts/" rel="alternate"></link><updated>2010-02-07T20:46:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-07:no-micro-lot-trading-at-dukascopy-metatrader-4-accounts/</id><summary type="html">&lt;p&gt;
+Update: It doesn't look as though Dukascopy will proceed with using MT4.
+So you might as well look for another broker if you need MT4 or [learn
+to use JForex][] if you plan on sticking with Dukascopy. Just received
+the following news from [Dukascopy][] (attached below) regarding their
+Metatrader accounts. Basically, they are raising their minimum lot-size
+on MT4-enabled accounts to a mini-lot (10k). Micro-lot (1000 units)
+trading remains exclusive to their basic (JForex only) accounts. Well,
+why do bad news keep coming to me just when I'm about to go live with a
+forex broker? First it was Oanda (although the problem was at my end
+with them), then Dukascopy. There's no way I'm able to trade with a
+mini-lot because of my strict [risk management][] rules. So I would be
+stuck with the JForex platform for a while if I'm going to trade with
+them. I like the JForex platform. It is simple, clean, easy to use, and
+powerful. However, Metatrader is just substantially more popular. There
+are hundreds of free scripts, indicators, and expert advisers published
+at MQL4.com for me to edit to my liking. If I go with JForex, I'd have
+to write everything from scratch. The whole point of me using a built-in
+editor is to save time. So I might as well program in Python and use an
+API if I need to go through learning JForex scripting, programming, and
+testing. As much as I like [Dukascopy][] (35% commission rebate
+affiliate link), ~~I may not be going through to trade with them
+anymore. Unfortunate, really.~~
+
+&gt; Dear BetaTester, Starting from Sunday 07.02.2010 Dukascopy (Suisse) SA
+&gt; SWFX MetaTrader 4 platform will no longer support the 0.01 fractional
+&gt; position trading. Minimum Trading amount on MT4 platform will be
+&gt; 10,000 (0.10) units of Base Currency on all available Currency Pairs.
+&gt; All positions with amounts less than minimum requirement - will be
+&gt; closed by Dukascopy (Suisse) SA Staff at market rate. If you would
+&gt; like to close those positions yourself please do so before 22:00 GMT
+&gt; 05.02.2010. In the future for trading on LIVE and DEMO MetaTrader4
+&gt; accounts the minimal amount will remain as 10,000 units of base
+&gt; currency. Dukascopy (Suisse) SA will continue to offer minimum trading
+&gt; amount of 1,000 units for traders who are using only JForex platform
+&gt; (without possibility of trading on MT4 platform). If you will have any
+&gt; further questions please do not hesitate to [contact us][Dukascopy]
+&gt; for assistance. Regards, Dukascopy (Suisse) SA ICC, Route de Pre-Bois
+&gt; 20 1215 Geneva 15 Switzerland
+
+&lt;/p&gt;</summary><category term="dukascopy"></category><category term="metatrader"></category><category term="oanda"></category></entry></feed>

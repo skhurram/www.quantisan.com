@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Ask not what accuracy your algorithm achieves but what value it can add - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/" rel="bookmark">Ask not what accuracy your algorithm achieves but what value it can add</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Partnering with the marketing team at work earlier this month reminded
+me of an important lesson in my algorithmic trading. Our  external TV
+agency presented a mid-term performance analysis and I was tasked with
+performing due diligence on their analysis methodology. It took me 2
+minutes to realise that they were using a linear regression model. At
+first I thought it was too simplistic. Then I realised my own naivete
+because it was never about accuracy to begin with. Measuring ROI on a
+marketing campaign is an illusive task. A quick metric is to perform a
+regression on the money you spent versus the revenue generated in the
+same time period. For example, let y(t) = x(t), where y represents
+revenue, x is marketing spending, and t is day. Plot your data on y
+versus x for a number of days. Then draw a best fit straight line to
+graphically show a correlation. If you're feeling adventurous, throw in
+a few other factors that you think might have important influence on
+your daily revenue. Such that you have x2(t), x3(t), etc. This is what
+the agency did in their model. One major flaw with using a regression
+model for this purpose is that it assumes each data point is mutually
+exclusive to another. So a day's event does not influence another. This
+is simply not true in the real world. For examples, it might take a few
+days after someone sees your ad until they click your buy button or it
+might take more than a few showing of the ads until people take action.
+A better regression model for the first example is y(t) = x1(t - a),
+where 'a' is the delay. And for the second example, y(t) = ∑x1(t - A),
+where A is a vector of 'a'. The problem with this is that finding 'a'
+and 'A' is another regression problem in and of itself. Luckily, this is
+conceptually what an Artificial Neural Network does, a series of
+regression models taking into account the interrelation of the factors
+and non-linear effects of the response. And so, within the span of a few
+minutes of our conference call with them, I've just convinced myself in
+my mind to try another algorithm when I have a chance. That weekend I
+wasted a few hours on R tinkering with the data. Then it finally dawned
+on me. What is the value of this? To calculate an ROI figure on our
+marketing campaign, is it necessary to spike a machine learning project
+just so we can be 95% confident on that figure? The justification is
+further weakened by the fact that ROI is merely one of the many metrics
+available when <a href="https://en.wikipedia.org/wiki/Marketing_performance_measurement_and_management">evaluating a marketing campaign</a>. So the impact of an
+accurate model versus a throw in the dart might not be worth spending an
+extra two weeks working on it whereas a throwing a dart takes only one
+command in R.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2012-01-29T11:56:00'>
+                Posted 29 January 2012
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/data-science/">data-science</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

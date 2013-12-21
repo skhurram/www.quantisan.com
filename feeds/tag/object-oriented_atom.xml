@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/object-oriented_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-03-22T07:22:00+00:00</updated><entry><title>From Object Oriented Programming to Object Oriented Design</title><link href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/" rel="alternate"></link><updated>2010-03-22T07:22:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-22:from-object-oriented-programming-to-object-oriented-design/</id><summary type="html">&lt;p&gt;The good news is that I have finished my data scraping module for
+extracting all the company data listed on the two Toronto Stock
+Exchanges (TSX and TSV). I presented an &lt;a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/"&gt;alpha version of this data
+scraping module&lt;/a&gt; last week. I added the functionality to download all
+the historical quotes from Yahoo for all the companies. These data are
+stored locally in a cool HDF5 format with PyTables. I am very happy
+about that part. The bad news is that my module looks more like a hacked
+job than a piece of software. There is no defined structure for my
+underlying codes. It is obvious to me that this module would be
+difficult to extend, which is the whole point of my project. In
+programming jargon, my &lt;a href="http://en.wikipedia.org/wiki/Code_smell"&gt;code smells&lt;/a&gt; (Wikipedia). Then it finally
+dawned on me. I am &lt;em&gt;way&lt;/em&gt; behind in my programming skills. For the past
+few years, my quant work has been confined to &lt;a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/"&gt;MatLab&lt;/a&gt; or some
+&lt;a href="http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/"&gt;proprietary trading platforms&lt;/a&gt;. I wrote scripts. Not programs. My
+problem with programming is that I am still stuck in a procedural
+programming mentality because that is what I've always used. Even though
+I updated my knowledge recently by learning Python, learning to program
+with an object oriented programming language is only the first step. (I
+am also familiar with C++ and Java from way back) To use an analogy,
+programming a software is like constructing a building. The actual
+coding itself is akin to the construction work. I got that part. But
+coding without a well designed plan can only go so far. It is now clear
+to me that if I am to build the trading software to complement my
+trading as I have envisioned it, I need to step it up with my &lt;em&gt;software
+design&lt;/em&gt; ability. Consequently, I am now catching up on object oriented
+design and analysis, as well as software design patterns with a couple
+of books. I will try not to get too carried away with these though. My
+main focus is trading. But this will be very beneficial for my trading
+in the long run if I can build a more robust trading software that can
+easily grow with my future needs. I have many big plans for this side
+project of mine. I posted a UML diagram showing an &lt;a href="http://www.quantisan.com/what-is-your-trading-process/"&gt;architectural
+overview of my project&lt;/a&gt;.&lt;/p&gt;</summary><category term="object oriented"></category><category term="programming"></category></entry></feed>

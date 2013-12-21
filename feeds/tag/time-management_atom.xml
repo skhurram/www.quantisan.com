@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/time-management_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-01-05T09:34:00+00:00</updated><entry><title>Making the best use of my time</title><link href="http://www.quantisan.com/making-the-best-use-of-my-time/" rel="alternate"></link><updated>2011-01-05T09:34:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-01-05:making-the-best-use-of-my-time/</id><summary type="html">&lt;p&gt;I pondered over this issue over the holiday as I'm finding myself
+juggling too many tasks. I was participating in &lt;a href="http://www.quantisan.com/another-trading-contest-from-dukascopy/"&gt;two trading
+contests&lt;/a&gt;, &lt;a href="http://www.quantisan.com/category/quantitative-finance/"&gt;developing an automated trading system&lt;/a&gt; with a team,
+managing &lt;a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/"&gt;an open-source project&lt;/a&gt;, &lt;a href="http://www.quantisan.com/category/stocks/"&gt;actively trading&lt;/a&gt;, and writing
+this blog, all on top of a full time job. I got greedy in what I wanted
+to accomplish and it is negatively affecting my performance. The first
+symptom popped up in my trading, not surprisingly. I &lt;a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/"&gt;made a bad call
+and missed a long-awaited opportunity&lt;/a&gt;. This was a wakeup call as the
+performance statistics from my recent trades is showing statistically
+significant deviations (I will publish the data soon). So before
+anything gets out of hand, I've decided to manage my time more
+professionally rather than just do what needs to be done. Taking a page
+from my professional work, I will prioritize my trading and development
+work using the &lt;a href="http://en.wikipedia.org/wiki/Time_management#The_Eisenhower_Method"&gt;Eisenhower Method&lt;/a&gt;. Basically, I mentally stamp an
+importance and urgentness ranking to each of my tasks. Then I will work
+on the important and urgent tasks first and leave the rest til later in
+order of the ranking criteria. For example, the automated contest is
+important and urgent because I've won over USD\$10,000 in 2010 and
+there's a monthly deadline for it. So I work on it first if there's work
+to do, which isn't much. The &lt;a href="http://www.dukascopy.com/tradercontest/?action=blog&amp;amp;trader=Quantisan"&gt;manual trading contest&lt;/a&gt;, on the other
+hand, is urgent but not so important. If I were to participate in it
+seriously, I would need to allocate an hour or so each night to trade.
+This is time that I would rather spend working on other stuff. On the
+other end of the importance/urgentness spectrum is my equities trading.
+I am rating it as an unimportant and non-urgent task. Although I've
+written the most about it and that my account has been &lt;a href="http://www.quantisan.com/trade-log/"&gt;up 21% in
+2010&lt;/a&gt;, it takes a lot of my time and the absoluate return is small.
+That is because my equities account is the smallest of my various
+trading accounts. So 21% profit of a small account is still very small.
+Thus, this account isn't worth devoting too much time for now. My plan
+is to use a beta strategy for my equities account. I already have some
+ideas on what to do with it. This will be discussed in another post.
+Ultimately, here's an excerpt of my priority list:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;trading system development&lt;/li&gt;
+&lt;li&gt;automated trading contest&lt;/li&gt;
+&lt;li&gt;quant research&lt;/li&gt;
+&lt;li&gt;documentation and blog posting&lt;/li&gt;
+&lt;li&gt;trading strategy R&amp;amp;D&lt;/li&gt;
+&lt;li&gt;manual trading contest&lt;/li&gt;
+&lt;li&gt;equities trading&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;What this means to you as a reader is that there will be fewer charts
+and more technical discussion. My goal for 2011 is to post something at
+least once a week. This is a good time to &lt;a href="http://www.quantisan.com/feed/"&gt;subscribe to my RSS feed&lt;/a&gt;
+to have new posts delivered to you rather than having to keep checking
+here for updates.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="time management"></category></entry><entry><title>Not to lose focus by defining what I want from trading</title><link href="http://www.quantisan.com/not-to-lose-focus-by-defining-what-i-want-from-trading/" rel="alternate"></link><updated>2009-10-06T13:23:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-10-06:not-to-lose-focus-by-defining-what-i-want-from-trading/</id><summary type="html">&lt;p&gt;
+I seem to have taken up too many tasks in recent weeks. I've spent a
+couple hours a day analysing, observing, and trading the [forex
+market][]. Another hour or so learning RapidMiner 5. And then yet
+another couple of hours catching up with the news and various blogs. All
+these on top of a full time job! It has come to my attention that I
+can't keep this up as I'll be too burned-out and never actually able to
+get things done. Such is the bane of choices. Coincidentally, I read
+this blog post today (via [TraderFeed][]) about the [paradox of
+choices][]. It is basically saying that having choices, per se, can have
+a diminishing rate of return (something which I've read elsewhere before
+but forgotten). More choices isn't always good and fewer can be better.
+And studies have found that the diminishing rate is apparently pretty
+low. Here's a good quote from the article:
+
+&gt; "we need to redirect the energies we waste flitting from possibility
+&gt; to possibility, into understanding what we really want in life and the
+&gt; trade-offs we are willing to make."
+
+Particularly at this early stage of my amateur quant career, there are
+many trading tools (analyzer, forecaster, scanner) that I want to
+develop and software ([MatLab][], RapidMiner) that I want to learn. So
+what do I really want in trading by spending hours upon hours, day after
+day, studying, analysing, observing, and thinking? The answer for me is
+fortunately easy to find (the benefit of keeping a good written record,
+i.e. this blog). Referring to my own [trading objectives][] that I wrote
+last year, there is just 5 points.
+
+1.  Application of independent and objective thinking
+2.  [Understanding of capital markets][]
+3.  Prudent [risk management][]
+4.  Identification of [values][]
+5.  Study of [quantitative finance][]
+
+In practical terms, **my ultimate goal in trading is to develop a
+trading system which requires no more than 1 hour a day of management
+time**. That doesn't include research and development time, of course. I
+am not trying to develop a holy grail system. I am using the term system
+as in a set of processes for me to follow, not an algorithmic system.
+Although that would be a tool for my system for sure. Now that I've
+figure that out. My first mandate is to reduce my [paper trading][] in
+forex. But rather than eliminate it completely, I'm going to increase
+the timeframe from 4 hour to daily. Because trading the forex helps me
+understand the capital markets (\#2 of objective). Too much of it though
+would have been just for thrill and detract from my time for working in
+quantitative finance (\#5). If I'm to treat this as a part-time job, I
+need to have more discipline in this whole endeavour, not just in the
+trading itself.
+
+&lt;/p&gt;</summary><category term="discipline"></category><category term="time management"></category></entry></feed>

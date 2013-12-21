@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - statistics</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/" rel='bookmark'>Unconfusing false-positive and false-negative statistical errors confusion</a>
+            </h1>
+            <div class="article-content"> <p>I was reading a blog post <a href="http://mcfunley.com/whom-the-gods-would-destroy-they-first-give-real-time-analytics">about real-time analytics</a> over the lunch today. In it, the author made a claim that "funny business with timeframes can coerce most A/B tests into statistical significance." There's also <a href="http://mcfunley.com/static/811609fd0f3/images/real-time-screwed.png">this plot illustrating two time series of the cumulative number of heads in a two-fair-coin-comparison</a>. Yet, time nor ordering has an effect on test results because each flip is independent. Not content with his claim, I wrote a coin flipping simulation in R to prove him wrong.</p>
+<p>This plot shows p-values of proportion tests for two simulated fair coin flips that they are different. Each of these tests are repeated with increasing number of flips per test. Since both coins are fair, we should expect no p-value should dip below our 95% significance level (red horizontal line). Yet we're seeing some false positives (i.e. a claim of evidence when there really isn't) that say the two coins are statistically different.</p>
+<p><img alt="false positive vs sample size, up to N=1000" src="http://www.quantisan.com/images/2013/coin-false-positives-increasing-1000.png" /></p>
+<p>A better illustration is to run a test with 1000 flips, get a test result, and repeat many times for many results. We see that sometimes false positive happens. Given that our significance level is 95%, we can expect false positives to happen 1 in 20 times.</p>
+<p><img alt="repeated sampling at 1000 flips" src="http://www.quantisan.com/images/2013/coin-false-positives-1000-only.png" /></p>
+<p>Remembering that I should do a power calculation to get an optimal sample size, doing <code>power.prop.test(p1=0.5, p2=0.501, power=0.90, alternative="two.sided")</code> says N should be 5253704.</p>
+<p>So this is a plot of doing many tests with 5253704 flips each.</p>
+<p><img alt="N=5253704" src="http://www.quantisan.com/images/2013/coin-false-positives-power.png" /></p>
+<p>But the false positives didn't improve at all! By now, I'm quite confused. So, I asked for help on StackExchange and received <a href="http://stats.stackexchange.com/q/47434/3847">this insight</a>.</p>
+<div class="highlight"><pre><span class="n">What</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">being</span> <span class="n">gained</span> <span class="n">by</span> <span class="n">running</span> <span class="n">more</span> <span class="n">trials</span> <span class="n">is</span> <span class="n">an</span> <span class="n">increase</span>
+<span class="n">in</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">true</span> <span class="n">positives</span> <span class="n">or</span><span class="p">,</span> <span class="n">equivalently</span><span class="p">,</span> <span class="n">a</span> <span class="n">decrease</span>
+<span class="n">in</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">false</span> <span class="n">negatives</span><span class="p">.</span> <span class="n">That</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">false</span>
+<span class="n">positives</span> <span class="n">does</span> <span class="n">not</span> <span class="n">change</span> <span class="n">is</span> <span class="n">precisely</span> <span class="n">the</span> <span class="n">guarantee</span> <span class="n">of</span> <span class="n">the</span> <span class="n">test</span><span class="p">.</span>
+</pre></div>
+
+
+<p>And so, a 95% significance level remains 95% significant (1 in 20 chance of false positive) regardless of increasing sample sizes as shown. Again. </p>
+<p><img alt="false positive up to 10k trials" src="http://www.quantisan.com/images/2013/coin-false-positive.png" /></p>
+<p>What is, in fact, gained for increasing sample size is reduced false negative, which is defined as failing to make a claim when it is there. To illustrate that, we need a different plot because it is an entirely different circumstance. We have two new coins, and they are different. </p>
+<p>Say we have one fair (p=50%) coin and another that's slightly biased (p=51%). This plot shows the result of running the same proportion test to see if these two are statistically different. As we increase sample size, the amount of false negative results, points <em>above</em> the red line (0.05 p-value, 95% significance level) denoting negative results, are clearly reduced as sample size increases. Thus this plot is illustrating that false negatives decreases as sample size increases.</p>
+<p><img alt="false negative increasing samples" src="http://www.quantisan.com/images/2013/coin-false-negative.png" /></p>
+<p>"Funny business" do not coerce A/B tests into statistical significance. The fact that a 95% significance gives 1 in 20 false positives is in fact what it guarantees. To decrease false positive, simply test at a higher significance level. For example, <code>prop.test(c(heads.A, heads.B), n=c(N, N), alternative="two.sided", conf.level=0.99)</code> to set it to 99% instead of the default 95%.</p>
+<p>The R source code for this mental sojourn are available at <a href="https://gist.github.com/4502739">this gist on Github</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/' title='2013-01-10T22:28:00'>10 January 2013</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/the-power-of-tangential-learning/" rel='bookmark'>The Power of Tangential Learning</a>
+            </h1>
+            <div class="article-content"> <p>
+According to Wikipedia,
+
+> tangential learning is the process by which some portion of people
+> will self-educate if a topic is exposed to them in something that they
+> already enjoy.
+
+I was just organizing my bookshelf the other day and is surprised by how
+fast my collection of statistics books have grown. I studied statistics
+back in school as a stepping stone to learning stochastic process for
+wireless communication theories (e.g. CDMA). Detecting radio-frequency
+and resolving wireless signals to meaningful messages is fundamentally
+about assessing the state of random processes. I hated statistics back
+then because I didn't *get it* and did poorly in those courses. It is
+ironic that years later I would realize how much I have grown to rely
+and love the little *p*'s and *q*'s in my little hobby of quantitative
+trading. I still don't like statistics (or theoretical math), per se. I
+just love *applying* them in my trading and quant programs. The more
+that I learn about statistics, the more that I realize how powerful they
+can be and how ignorant I am. For example, in my clinical study days I
+used either t-test or ANOVA for everything under the sun. Now that I've
+come to understanding about inferential statistics, I am aware of the
+assumptions and pitfalls such as the assumption of t-tests of
+homogeneity of variance between the two samples tested. If this
+assumption is violated, then the unequal variance t-test should be used.
+Finer points like these are routinely ignored in practice because many
+clinical studies are inherently designed in the experiment to meet these
+criteria. However, that's not the case when I am making creative use of
+statistics in my trading. I don't have a clinical study committee
+watching over my back. If I make a false or weaker-than-expected claim
+and don't know better, then it is my bank account that will suffer the
+consequences. Learning statistics was initially due to this
+got-to-know-better necessity. However, the more that I learn about
+statistics, the more that I appreciate it. If used correctly, statistics
+can provide a new dimension to the scientific assessment of your trading
+performance and market data.
+
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/the-power-of-tangential-learning/' title='2011-01-11T07:41:00'>11 January 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

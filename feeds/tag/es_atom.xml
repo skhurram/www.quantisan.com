@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/es_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2008-10-10T14:38:00+01:00</updated><entry><title>Dabbling in day trading again on this historic day</title><link href="http://www.quantisan.com/dabbling-in-day-trading-again-on-this-historic-day/" rel="alternate"></link><updated>2008-10-10T14:38:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-10-10:dabbling-in-day-trading-again-on-this-historic-day/</id><summary type="html">&lt;p&gt;[caption id="attachment_334" align="aligncenter" width="500"
+caption="ES Setup"][&lt;img alt="ES Setup" src="http://traderpau.files.wordpress.com/2008/10/2008-10-10-es.png?w=500" title="2008-10-10-es" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;I mentioned previously &lt;a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/"&gt;about avoiding volatility&lt;/a&gt;. But with VIX about
+75 now, I couldn't help but to take the opportunity to day trade. I
+know, I know, I said I wouldn't do it again. So I'm only trading an
+account with&lt;strong&gt;paper money&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;To illustrate the abundance of day trading opportunities these days, I
+just launched my trading screen and within minutes I can see a viable
+setup.&lt;/p&gt;
+&lt;p&gt;On the 1 minute chart on the left, notice the small doji at \$844 with a
+high volume. Also off the chart is a low of \$837 for the day in the
+morning. So \$840 is an effective support for the moment. Since the doji
+at \$844 is above \$840, this is a good sign for the time being.&lt;/p&gt;
+&lt;p&gt;So I placed buy orders around \$845 for the next few minutes and exiting
+below \$850 (obvious resistance), with intent to get back later in if it
+breaks \$850 strongly. This went on for a few minutes, and I traded in
+the range taking small profits twice, until the price broke to \$841.50,
+which I stopped at a loss at around \$842.50.&lt;/p&gt;
+&lt;p&gt;However, noticing it's in a steady climb from then on, I entered a long
+at \$845 again, with stop at \$841, for a longer trade. The price rose
+to \$853.75, bounced back to \$850, and started dropping. I exited my
+long at a small profit at \$849.50 on a retracement.&lt;/p&gt;
+&lt;p&gt;ES keeps dropping for those seconds until \$845.75 and bounced right
+back to \$851. That was a good sign. I believe the initial \$850 break
+and retracement was just a technical bounce. So I went in again at \$851
+a bit later intending to ride it up to \$860.&lt;/p&gt;
+&lt;p&gt;That trade went as planned and I exited at \$858. I reversed and went
+short at \$861 with a tight stop at \$863. The stop got hit and the
+price went up to \$866.&lt;/p&gt;
+&lt;p&gt;I decided to stop there since the trading screen didn't lean much to
+on-the-spot analysis. I'm not asking for a full charting screen though,
+that would be overkill for day trading. Simplicity is key. I'd be happy
+if they had 1-min and 15 min candlestick charts with 2-line EMA, MACD,
+Stochastic, and volume information. In the end, I'm \$162.50 richer in
+paper money after 12 trades.&lt;/p&gt;
+&lt;p&gt;Although it's a profitable session, I think I took way too many trades
+to reach that.&lt;/p&gt;
+&lt;p&gt;Since my trading platform is very basic and isn't meant for day trading,
+I didn't even have a chart on the trading matrix. I just looked at the
+price movements and occasionally flip back to the chart. However, I do
+have one good indicator for use... which is the price of Goldman Sachs
+(GS). Long story short, we're in a financial driven crisis and GS (along
+with MS and others) is one of the two surviving investment banks (of
+original 5) in this mess. GS were off the lows of the day and moving up
+very slowly throughout the few minutes which I day traded. That was a
+good enough bullish sign for me to go long.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="ES Setup" src="http://traderpau.files.wordpress.com/2008/10/2008-10-10-es.png?w=500" title="2008-10-10-es" /&gt;]: http://traderpau.files.wordpress.com/2008/10/2008-10-10-es.png&lt;/p&gt;</summary><category term="day trading"></category><category term="ES"></category></entry><entry><title>Reward Risk of Popular Index Futures</title><link href="http://www.quantisan.com/reward-risk-of-popular-index-futures/" rel="alternate"></link><updated>2008-02-14T00:00:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-02-14:reward-risk-of-popular-index-futures/</id><summary type="html">&lt;hr /&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;                &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;ER2&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;    &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;YM&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;      &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;ES&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;     &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;EMD&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;10min ATR         2.7        32          4          2.6
+  Daily ATR         26         341         42         25
+  \$ / point        \$100.00   \$5.00      \$50.00    \$100.00
+  &lt;strong&gt;Reward/Risk&lt;/strong&gt;   &lt;strong&gt;9.63&lt;/strong&gt;   &lt;strong&gt;10.66&lt;/strong&gt;   &lt;strong&gt;10.5&lt;/strong&gt;   &lt;strong&gt;9.62&lt;/strong&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;I'm using the intra-day ATR as a risk factor because I'm assuming them
+as noise. I use 10 min. as the basis because that's about the time
+period I use. The reward is the max daily swing, which is the daily ATR.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+As you can see, the reward/risk is about the same for all the liquid
+index futures. However, I'm leaning toward YM because of the smaller
+contract size and it seems more stable lately. I'll watch the markets
+closely from now on.&lt;/p&gt;</summary><category term="EMD"></category><category term="er2"></category><category term="ES"></category><category term="YM"></category></entry></feed>

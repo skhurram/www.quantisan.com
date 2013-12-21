@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/dukascopy_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-04-01T12:13:00+01:00</updated><entry><title>Joke's on us: JForex DEMO 2.13.6 is out of whack</title><link href="http://www.quantisan.com/jokes-on-us-jforex-demo-2136-is-out-of-whack/" rel="alternate"></link><updated>2011-04-01T12:13:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-04-01:jokes-on-us-jforex-demo-2136-is-out-of-whack/</id><summary type="html">&lt;p&gt;I hope this is a April Fool's joke but it isn't. As shown, the Dukascopy
+JForex DEMO platform version 2.13.6 released this week is causing havoc
+to my strategy. I tested my contest strategy, which has been running
+fine for almost a year, but is now failing left and right. Even though
+this is only happening with the DEMO platform (the LIVE platform is a
+stable release and is running fine at the moment), the fact that they
+published a buggy version for us developers as guinea pigs is upsetting.
+JForex developers are clients too, after all. [caption
+id="attachment_4974" align="aligncenter" width="580" caption="Dukascopy
+JForex DEMO 2.13.6"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/jforex2.13.6.scrncap-580x414.png" title="jforex2.13.6.scrncap" /&gt;[/caption]&lt;/p&gt;</summary><category term="dukascopy"></category><category term="JForex"></category></entry><entry><title>Network latency on Amazon EC2 t1.micro to Dukascopy</title><link href="http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/" rel="alternate"></link><updated>2011-02-09T08:20:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-02-09:network-latency-on-amazon-ec2-t1micro-to-dukascopy/</id><summary type="html">&lt;p&gt;While the processing power of a EC2 t1.micro server sucks (benchmarks
+have shown it is &lt;a href="http://www.phoronix.com/scan.php?page=article&amp;amp;item=amazon_ec2_micro"&gt;slower than a Nokia N900 phone&lt;/a&gt;), network
+performance is well-known to be exceptional for EC2 servers throughout
+the spectrum of their offerings. Here's a ping test from my home
+computer with a ADSL connection in Ottawa, Canada to 194.8.15.1, one of
+the Dukascopy web servers.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;149&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;134&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;135&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;148&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;135&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;4003&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;134.364&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;140.579&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;149.726&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;7.053&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then the same test from a EC2 t1.micro instance located in Dublin,
+Ireland (closest Amazon EC2 server location to Geneva).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;40.9&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;41.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;49.0&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;41.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;41.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;4005&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;40.961&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;42.728&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;49.013&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;3.154&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Exceptional, indeed. With the monthly pricing of a t1.micro going for
+around \$12/month, there are few reasons not to &lt;a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/"&gt;get a remote server to
+run your trading system&lt;/a&gt; rather than pray for your home internet
+connection to remain reliable 24/7.&lt;/p&gt;
+&lt;p&gt;Update with ping test from Berlin courtesy of commenter Holger:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Ping&lt;/span&gt; &lt;span class="n"&gt;wird&lt;/span&gt; &lt;span class="n"&gt;ausger&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;mit&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt; &lt;span class="n"&gt;Daten&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Ping&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Statistik&lt;/span&gt;  &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="nl"&gt;Pakete:&lt;/span&gt; &lt;span class="n"&gt;Gesendet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Empfangen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Verloren&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;Verlust&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="n"&gt;Ca&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Zeitangaben&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Millisek&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Minimum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Maximum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Mittelwert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Update April 12, 2011: I've been using Rackspace Cloud (#2 cloud server
+provider, after Amazon). Here's the ping result from their London, UK
+server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;69.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;69.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;68.8&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;66.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;68.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;64.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;68.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;69.1&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;66.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;8012&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;64.677&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;67.986&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;69.617&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.573&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Update April 26, 2011: I'm testing &lt;a href="http://quickweb.co.nz/germany-xen-vps.html"&gt;Quickweb Germany's VPS&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.3&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.3&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.1&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;6000&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;15.152&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;15.306&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;15.463&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;0.116&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Update September 2013: DigitalOcean offers &lt;a href="https://www.digitalocean.com/?refcode=5876fd082ff3"&gt;$5/month 512MB server plan with 20GB SSD&lt;/a&gt;. I've used them exclusively for other work. Here's a ping test from one of their Amsterdam servers.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;21.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;22.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;22.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;21.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;22.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;5013&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;21.540&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;22.142&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;22.686&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;0.484&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="Amazon EC2"></category><category term="cloud computing"></category><category term="dukascopy"></category><category term="VPS"></category></entry><entry><title>Another trading contest from Dukascopy</title><link href="http://www.quantisan.com/another-trading-contest-from-dukascopy/" rel="alternate"></link><updated>2010-12-06T12:23:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-12-06:another-trading-contest-from-dukascopy/</id><summary type="html">&lt;p&gt;Dukascopy started a new contest this month. This contest is manual
+trading only on a demo account with no cash commitment by contestants.
+The twist is that the ranking is determined not only by your demo
+account balance, but also the total pips gained, popularity, and scoring
+by Dukascopy's judges. Each trade in the contest needs to be commented
+by the contestant through the JForex trading platform (when you submit
+an order the platform asks you for a comment). See &lt;a href="http://www.dukascopy.com/tradercontest/?action=blog&amp;amp;trader=Quantisan"&gt;my contest page for
+comment examples&lt;/a&gt; (shameless plug). About half of your score is based
+on these trade comments as they are the basis for generating popularity
+points and the Dukascopy judges' final evaluation. I can see the
+potential in this contest as it offers transparency and encourages
+interactions rather than let everyone just gamble away. However, most of
+the trade comments now are meaningless as it's clear that you can
+generate buzz simply by making ridiculous gains. Perhaps this might
+change after this month's final ranking is released as it is not clear
+how Dukascopy will allocate each contestant's 25% of points. The judging
+by Dukascopy can effectively bump or dump you a few ranking. The
+incentive to do this is the USD \$15,000 'cash' prizes to be won every
+month just like the Dukascopy Strategy Contest. And similarly, these
+'cash' prizes are deposited into the winner's Dukascopy trading account
+&lt;a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/"&gt;with a withholding period&lt;/a&gt;. So they're forcing you to open an account
+with them if you win, which is understandable as this is a marketing
+effort. For information or registration in the contest, &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;visit the
+Dukascopy website&lt;/a&gt; and navigate to the Trader Contest page.&lt;/p&gt;</summary><category term="contest"></category><category term="dukascopy"></category></entry><entry><title>My interview at Dukascopy in Geneva</title><link href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/" rel="alternate"></link><updated>2010-09-23T12:28:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-09-23:my-interview-at-dukascopy-in-geneva/</id><summary type="html">&lt;iframe width="560" height="349" src="http://www.youtube.com/embed/1QPxPcd9Eow" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The complete script for my August 2010 winning strategy is
+&lt;a href="http://dl.dropbox.com/u/6028806/quantisan_aug10.java"&gt;available for free&lt;/a&gt; via &lt;a href="http://db.tt/5vkkEMAm"&gt;Dropbox&lt;/a&gt;. And for those not familiar with
+Java programming, I have explained &lt;a href="/jforex-example-multiple-time-frame-strategy/"&gt;the logic&lt;/a&gt;, &lt;a href="/jforex-example-dual-timeframe-moving-averages-setup/"&gt;the setup&lt;/a&gt;, and
+&lt;a href="/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/"&gt;the risk management&lt;/a&gt; behind the strategy.&lt;/p&gt;
+&lt;p&gt;Furthermore, here is an important disclaimer about my winning, &lt;a href="/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/"&gt;Number
+one with 40+ percent return in a month! So am I rich yet? Not really&lt;/a&gt;.
+If that isn't enough, here's an illustration on &lt;a href="/why-winning-automated-contest-strategies-dont-work-in-real-trading/"&gt;Why winning automated
+contest strategies don't work in real trading&lt;/a&gt;.&lt;/p&gt;</summary><category term="contest"></category><category term="dukascopy"></category><category term="JForex"></category></entry><entry><title>An explanation of my Keltner Channel and Candlestick hybrid setup</title><link href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel="alternate"></link><updated>2010-04-09T18:16:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-09:an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/</id><summary type="html">&lt;p&gt;This is an explanation of my &lt;a href="http://www.quantisan.com/category/quantitative-finance/systems/"&gt;automated trading&lt;/a&gt; strategy for the
+Dukascopy JForex Strategy Contest in April. This strategy just made its
+first trade today after running for about 72 hours. My contest demo
+account closed with a gain of 7% on this first trade. Note that this
+strategy is built for competing in a contest and not for real trading
+(i.e., it's purely a no cost gamble). Here is the concept for this high
+probability trading setup. Referring to Figure 1 below, the red arrow
+marks my short entry on EURGBP today. These are the technical analysis
+indicators the strategy uses:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Trend: Signaled by 50 bar moving average above (bullish) or below
+    (bearish) the 200 bar moving average.&lt;/li&gt;
+&lt;li&gt;Momentum: Oversold or overbought RSI conditions, but not used in a
+    traditional manner...&lt;/li&gt;
+&lt;li&gt;Volatility: I use the Keltner channel to measure volatility.&lt;/li&gt;
+&lt;li&gt;Price action: Observe candlestick behaviour to identify trend
+    continuation. This is where the secret to this strategy happens. I
+    will explain this below.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note that I used a Bollinger Bands in the chart of Figure 1 because I
+couldn't find the Keltner Channel indicator in Metatrader (my charting
+software). It doesn't affect my conceptual illustration anyhow. The
+setup:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Identify overarching trend via 50/200 moving averages as explained
+    above.&lt;/li&gt;
+&lt;li&gt;Confirm price is still playing to the trend by checking if current
+    market price is on the right side of the 200 bars moving average.
+    Price above for bullish and below for bearish.&lt;/li&gt;
+&lt;li&gt;Once steps 1-2 are in place, it's assumed that the trend is strong.
+    We look for a setup in the trend's direction. In particular, we look
+    for a &lt;em&gt;failed counter-trend retracement&lt;/em&gt; setup using candlestick in
+    combination with the Keltner channel.&lt;/li&gt;
+&lt;li&gt;Sounds fancy but it's simple. Using a short-side example, the bar's
+    high has to penetrate above the Keltner channel yet it closes within
+    it. Then the short entry is signaled. The opposite for a long-side
+    entry.&lt;/li&gt;
+&lt;li&gt;RSI overbought and oversold conditions are used to filter out slow
+    and steady counter-trend moves (those are evil).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Another benefit of using a price channel is that I also use it to peg my
+take profit target and stop loss. As I said in my previous post, because
+&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt; expects winning contestants to submit their source codes,
+I am not using anything proprietary or extraordinary here. As such, this
+is totally different than &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/"&gt;what I use to trade on my own&lt;/a&gt;. Namely more
+reliance on indicators and less on price action and &lt;a href="http://www.quantisan.com/category/trading-how-tos/risk-management/"&gt;risk management&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /&gt;&lt;/p&gt;</summary><category term="candlestick"></category><category term="channel"></category><category term="contest"></category><category term="dukascopy"></category><category term="JForex"></category><category term="momentum"></category><category term="trend"></category></entry><entry><title>Reading the fine print for Dukascopy JForex Strategy Contest</title><link href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/" rel="alternate"></link><updated>2010-04-07T13:21:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-07:reading-the-fine-print-for-dukascopy-jforex-strategy-contest/</id><summary type="html">&lt;p&gt;&lt;strong&gt;Update&lt;/strong&gt;: I have since &lt;a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/"&gt;won the JForex strategy contest a few
+times&lt;/a&gt;. If you are looking to learn JForex programming, you can start
+with &lt;a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/"&gt;an explanation of my winning strategy&lt;/a&gt; and my long &lt;a href="http://www.quantisan.com/tag/jforex/"&gt;list of
+JForex posts&lt;/a&gt;. The Dukascopy JForex Strategy Contest began last week.
+Starting this month, &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt; offers \$15,000 total of cash prizes
+to the top 10 automated trading systems every month. However, before
+entering, there are a couple of clauses in their contest rules that
+caught my attention.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Cash prizes are deposited into contestant's Dukascopy account
+    (Ranking and Awarding Rules #5).&lt;/li&gt;
+&lt;li&gt;All source code needs to be submitted and agrees to be published
+    (Ranking and Awarding Rules #2 and #6).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;#1 is troublesome because it means winners have to &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;open an account
+with Dukascopy&lt;/a&gt; if they don't already have an account with
+them. But that isn't a big deal since they are actually one of the best
+forex brokers. I planned to open an account with them anyway. However,
+#2 will certainly turn many people away. The requirement to disclose
+source code in an automated trading contest is almost unheard of as far
+as I know. Are you willing to disclose your winning system just for that
+few hundred, or a even few thousand, dollars of prize money? In any
+case, I decided to enter this contest anyway just for fun. Yet, you can
+be sure that I won't be using any proprietary logic in my system. In
+fact, I just finished my automated trading strategy today and it is now
+running. I will &lt;a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/"&gt;discuss about my strategy&lt;/a&gt; after it completes its
+first trade. That might take a while as my system is expected to make
+fewer than 5 trades in a month.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="dukascopy"></category></entry><entry><title>In a forex brokers and trading platforms jumble</title><link href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/" rel="alternate"></link><updated>2010-02-12T14:07:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-12:in-a-forex-brokers-and-trading-platforms-jumble/</id><summary type="html">&lt;p&gt;Once upon a time, I was a happy forex student. I &lt;a href="http://www.quantisan.com/tag/paper%20trade/"&gt;paper traded&lt;/a&gt; on
+Oanda for a few months and even opened a live account with them. Then my
+work place tightened up our internet firewall at work. I &lt;a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/"&gt;couldn't
+access market data anymore&lt;/a&gt; during the day. Fortunately, Dukascopy at
+the time said that they'll be &lt;a href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/"&gt;enabling micro-lot trading&lt;/a&gt;. So I moved
+to practice with Dukascopy. Then last weekend, Dukascopy said &lt;a href="http://www.quantisan.com/no-micro-lot-trading-at-dukascopy-metatrader-4-accounts/"&gt;no
+micro-lot trading on their Metatrader 4 accounts&lt;/a&gt;. I move to another
+broker again. My last stop (so far) is at MB Trading. However, after
+practicing with them for a week, I remembered why I didn't go with them
+in the first place. They don't offer Canadian denominated account
+currency! Fortunately, they do say that they're in the process of
+enabling more account currencies. But who knows how long that might
+take? My head is spinning from all this mess. I don't think I am asking
+too much from a forex broker. I just want five features from them.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;good reputation&lt;/li&gt;
+&lt;li&gt;micro-lot trading&lt;/li&gt;
+&lt;li&gt;Metatrader platform&lt;/li&gt;
+&lt;li&gt;free API access&lt;/li&gt;
+&lt;li&gt;Canadian dollar denominated account currency&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That's all! Why am I being shut out everytime just when I am about to
+open a live account? On top of that trouble, there's the question of
+which trading platform to use. Over the past few months, I have tried
+many forex brokers and their forex trading platforms. From proprietary
+ones like FXTrade (Oanda), JForex (Dukascopy), and Dealbook 360 (GFT) to
+the popular, third-party Metatrader 4 platform. I decided to settle with
+Metatrader 4 because its charting is sufficient and scripting on it is
+fairly easy. I learned MQL4 (MT4's scripting language) in a few hours
+and wrote my first EA in a few days. The problem with Metatrader 4
+though, is Metatrader 5. Scripts written for MT4 is incompatible on MT5.
+As I intend to trade semi-automatically via expert advisors, this is a
+huge problem for me. I don't want to start developing for MT4 and &lt;a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/"&gt;only
+to have to convert everything again&lt;/a&gt;. I thought I could evade this
+MT4-MT5 dilemma with a non-American forex broker (&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143"&gt;Dukascopy&lt;/a&gt;) as
+they're more likely to stay with MT4. But now that I can't trade with
+them anymore, my best potential broker is MB Trading. Which is probably
+upgrading to MT5 once it's out. Note: MT5 is built for new NFA
+regulations, so American brokers probably have to upgrade. I think I
+have had enough moves for now. So screw this all! I will focus on
+learning Python programming for the next few weeks. While waiting for MB
+Trading to adopt Canadian dollar accounts (or I come across a new
+broker), and the duel between Metatrader 4 and 5 is settled.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="dukascopy"></category><category term="mb trading"></category><category term="metatrader"></category><category term="oanda"></category></entry><entry><title>No micro-lot trading at Dukascopy Metatrader 4 accounts</title><link href="http://www.quantisan.com/no-micro-lot-trading-at-dukascopy-metatrader-4-accounts/" rel="alternate"></link><updated>2010-02-07T20:46:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-07:no-micro-lot-trading-at-dukascopy-metatrader-4-accounts/</id><summary type="html">&lt;p&gt;
+Update: It doesn't look as though Dukascopy will proceed with using MT4.
+So you might as well look for another broker if you need MT4 or [learn
+to use JForex][] if you plan on sticking with Dukascopy. Just received
+the following news from [Dukascopy][] (attached below) regarding their
+Metatrader accounts. Basically, they are raising their minimum lot-size
+on MT4-enabled accounts to a mini-lot (10k). Micro-lot (1000 units)
+trading remains exclusive to their basic (JForex only) accounts. Well,
+why do bad news keep coming to me just when I'm about to go live with a
+forex broker? First it was Oanda (although the problem was at my end
+with them), then Dukascopy. There's no way I'm able to trade with a
+mini-lot because of my strict [risk management][] rules. So I would be
+stuck with the JForex platform for a while if I'm going to trade with
+them. I like the JForex platform. It is simple, clean, easy to use, and
+powerful. However, Metatrader is just substantially more popular. There
+are hundreds of free scripts, indicators, and expert advisers published
+at MQL4.com for me to edit to my liking. If I go with JForex, I'd have
+to write everything from scratch. The whole point of me using a built-in
+editor is to save time. So I might as well program in Python and use an
+API if I need to go through learning JForex scripting, programming, and
+testing. As much as I like [Dukascopy][] (35% commission rebate
+affiliate link), ~~I may not be going through to trade with them
+anymore. Unfortunate, really.~~
+
+&gt; Dear BetaTester, Starting from Sunday 07.02.2010 Dukascopy (Suisse) SA
+&gt; SWFX MetaTrader 4 platform will no longer support the 0.01 fractional
+&gt; position trading. Minimum Trading amount on MT4 platform will be
+&gt; 10,000 (0.10) units of Base Currency on all available Currency Pairs.
+&gt; All positions with amounts less than minimum requirement - will be
+&gt; closed by Dukascopy (Suisse) SA Staff at market rate. If you would
+&gt; like to close those positions yourself please do so before 22:00 GMT
+&gt; 05.02.2010. In the future for trading on LIVE and DEMO MetaTrader4
+&gt; accounts the minimal amount will remain as 10,000 units of base
+&gt; currency. Dukascopy (Suisse) SA will continue to offer minimum trading
+&gt; amount of 1,000 units for traders who are using only JForex platform
+&gt; (without possibility of trading on MT4 platform). If you will have any
+&gt; further questions please do not hesitate to [contact us][Dukascopy]
+&gt; for assistance. Regards, Dukascopy (Suisse) SA ICC, Route de Pre-Bois
+&gt; 20 1215 Geneva 15 Switzerland
+
+&lt;/p&gt;</summary><category term="dukascopy"></category><category term="metatrader"></category><category term="oanda"></category></entry><entry><title>Why I am staying with Oanda a while longer before moving to Dukascopy</title><link href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/" rel="alternate"></link><updated>2010-01-10T21:27:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-01-10:why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/</id><summary type="html">&lt;p&gt;I just sent in my paper work to &lt;a href="http://fxtrade.oanda.com/"&gt;Oanda&lt;/a&gt; to open a live forex account
+with them last week. Then I heard from @InEgoVeritas the news about
+&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143"&gt;Dukascopy&lt;/a&gt; (get 35% discount on commission with that link) reducing
+their minimum lot size to micro-lots. After doing more research
+comparing Oanda and Dukascopy in the last 24 hours, I think I will go
+with Dukascopy in the long term. But I won't make the switch just yet.
+Here are my reasons why. Before getting to that, I need to describe my
+situation. Choosing a forex broker is like buying a car, we are all
+unique and what fits me might not be right for you. Long story short
+though. My goal all along is to split my funds 50/50 between interactive
+trading and &lt;a href="http://www.quantisan.com/category/quantitative-finance/systems/"&gt;automated trading&lt;/a&gt;. Since Oanda's API access cost \$600
+per month, I was to open an additional account with &lt;a href="http://www.mbtrading.com/"&gt;MB Trading&lt;/a&gt; for
+automated trading once I have developed something consistent. In
+addition to this latest news from Dukascopy, they also lowered their
+minimal opening balance down to \$5,000, and began beta testing for
+Metatrader 4 recently (Update: Dukascopy abandoned MT4)! Both Oanda and
+Dukascopy are very reputable forex brokers. But Dukascopy has the huge
+advantage of providing a free API access. That is one big motivation for
+me to go trade with them. Then I can just do everything in one account!
+But as I said, I will proceed with live trading with Oanda as planned
+soon (once I am out of this drawdown from being &lt;a href="http://www.quantisan.com/early-bird-does-not-get-the-worm-in-forex-trading/"&gt;too early in shorting
+Aussie&lt;/a&gt; and &lt;a href="http://www.quantisan.com/trade-log/"&gt;other pairs&lt;/a&gt;). The reason is that Dukascopy has always
+been catered towards institutional or big pocket forex traders. This
+aggressive move to welcome retail traders and small timers could be good
+and bad. The good part is more business and more buzz for their service,
+obviously. The bad part though, is that widening the door to a new
+market can turn out stinking the entire operation. It would be analogous
+to Mercedes suddenly decided to compete in the budget cars market... oh
+wait, they did that! (Mercedes &lt;a href="http://en.wikipedia.org/wiki/Mercedes-Benz_B-Class"&gt;B-class&lt;/a&gt;, enough said) More
+specifically regarding Dukascopy, I am most concerned of the impact on
+the quality and speed of their trading service. As well as their
+customer service. Let's face it, we know that new forex traders (such as
+myself) whine a lot and expect a lot for little to nothing. Since I have
+my paper work done with Oanda already, it can't hurt to just wait a few
+more months to see how the changes go. Nevertheless, I am thrilled of
+the new changes with Dukascopy! In the mean time, I will continue to
+work on my &lt;a href="http://www.quantisan.com/category/trading-how-tos/risk-management/"&gt;risk management&lt;/a&gt;, &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-psychology/"&gt;trading psychology&lt;/a&gt;, and &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/"&gt;trading
+strategy&lt;/a&gt; (great plug, isn't it?). Update December 2010: I moved my
+account over to Dukascopy and have been with them for a few months. So
+far so good. My &lt;a href="http://www.quantisan.com/tag/jforex/"&gt;automated trading development with JForex&lt;/a&gt; has been
+going well too.&lt;/p&gt;</summary><category term="broker"></category><category term="dukascopy"></category><category term="oanda"></category></entry></feed>

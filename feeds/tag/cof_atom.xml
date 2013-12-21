@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/cof_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2009-09-01T12:16:00+01:00</updated><entry><title>Sold -1 COF 100 SEP 09 35 PUT @1.30, Mark 35.84</title><link href="http://www.quantisan.com/sold-1-cof-100-sep-09-35-put-130-mark-3584/" rel="alternate"></link><updated>2009-09-01T12:16:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-09-01:sold-1-cof-100-sep-09-35-put-130-mark-3584/</id><summary type="html">&lt;p&gt;I've finally managed to offload my COF puts. This position was entered
+&lt;a href="http://www.quantisan.com/bought-1-cof-100-sep-09-35-put-1-90-mark-35-89/"&gt;two weeks ago at 1.90&lt;/a&gt;, mark 35.89. The &lt;strong&gt;total loss is \$60 +
+\$15&lt;/strong&gt;. This is yet another poor trade because I didn't exit when my
+stop was hit. This has been happening way too often lately while I'm
+trying to catch the top (another big mistake). While it might be
+obvious, but it's now clear to me that playing with a limited capital is
+detrimental to my trading psychology. The commission is too much in
+comparison to my position size. So I was often inclined to hold when I
+should have been nimble.&lt;/p&gt;
+&lt;p&gt;The market finally moved downward with a sizable move today. S&amp;amp;P500
+tanked 20 points in an hour this morning. However, on a second test of
+the 1000 level, I noticed a divergence on the TICK and COF wasn't making
+a low like the market. That's when I decided to unload this position as
+we're at the bottom of the recent channel. In addition, the long term
+support at \$35.45 (Figure 2, pink line) should be a tough nut to crack
+in the short term.&lt;/p&gt;
+&lt;p&gt;My only position left is my &lt;a href="http://www.quantisan.com/bought-15-bc-100-sep-09-7-5-put-39-mark-9-12/"&gt;puts in BC&lt;/a&gt;. I am now going to tie my
+hands away from my trading platform and step back to developing my
+trade. On the other hand, my quantitative finance work has been
+progressing nicely and I should be able to publish some useful updates
+soon.&lt;/p&gt;
+&lt;p&gt;Update: COF closed at \$35.09 today. I was early again. It's pretty
+clear by now that my strategy is flawed. The more reason why I need to
+put my head down and really start thinking.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1742" align="aligncenter" width="500"
+caption="Capital One Financial"][&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/09/2009-09-01-cof.png" title="2009-09-01-COF" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1743" align="aligncenter" width="500"
+caption="Capital One Financial"][&lt;img alt="Capital One
+Financial" src="http://traderpau.files.wordpress.com/2009/09/2009-09-01-cof_prop.png" title="2009-09-01-COF_prop" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/09/2009-09-01-cof.png" title="2009-09-01-COF" /&gt;]: http://traderpau.files.wordpress.com/2009/09/2009-09-01-cof.png
+  [&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/09/2009-09-01-cof_prop.png" title="2009-09-01-COF_prop" /&gt;]: http://traderpau.files.wordpress.com/2009/09/2009-09-01-cof_prop.png&lt;/p&gt;</summary><category term="COF"></category><category term="exit"></category><category term="options"></category><category term="short"></category></entry><entry><title>Bought +1 COF 100 SEP 09 35 PUT @1.90, Mark 35.89</title><link href="http://www.quantisan.com/bought-1-cof-100-sep-09-35-put-190-mark-3589/" rel="alternate"></link><updated>2009-08-21T09:05:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-08-21:bought-1-cof-100-sep-09-35-put-190-mark-3589/</id><summary type="html">&lt;p&gt;My limit order was executed at the open today for Capital One Financial
+(COF). I placed this yesterday at the close and totally forgot about
+it...&lt;/p&gt;
+&lt;p&gt;While we are testing a long term resistance (Figure 1, pink trendline at
+top of chart) at about \$36, there is no confirmation yet. The recent
+bullish momentum could very well sweep COF along to break it.&lt;/p&gt;
+&lt;p&gt;On the other hand, a look at S&amp;amp;P normalized by US Dollar Index shows the
+market is also pushing up against a significant resistance. I will make
+another post about this after the close today as a market analysis.&lt;/p&gt;
+&lt;p&gt;Thirdly, the divergence in sentiment based on high yield stocks or junk
+bonds v. market price is as obvious as ever. Although this has been the
+case for a while now, so this perspective doesn't hold much weight
+anymore. The market simply can be irrational beyond anyone's guess.&lt;/p&gt;
+&lt;p&gt;Entry: \$35.89&lt;/p&gt;
+&lt;p&gt;Stop: Above \$35.00, by next Tuesday.&lt;/p&gt;
+&lt;p&gt;Target: \$33, by next week.&lt;/p&gt;
+&lt;p&gt;I've updated my risk metric for options to incorporate the time
+parameter. A more thorough analysis can be gleaned from Figure 3 with
+the expected value of the options at 1, 2, and 3 weeks from now.&lt;/p&gt;
+&lt;p&gt;To be more precise, the Profit/Loss on August 28 is -\$41.5 if COF =
+\$36, and +\$110.6 if COF = \$33.&lt;/p&gt;
+&lt;p&gt;So the Reward / Risk = \$110.6 / \$41.5 = 2.7 \&amp;lt; 5. The R/R is
+predictably horrible. That's why I'm setting a tight stop on this. We'll
+see how today's push higher plays out and I'll probably ditch this
+sooner to minimize my risk.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1706" align="aligncenter" width="500"
+caption="Capital One Financial"][&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof_prop.png" title="2009-08-21-COF_prop" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1707" align="aligncenter" width="500"
+caption="Capital One Financial"][&lt;img alt="Capital One
+Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof.png" title="2009-08-21-COF" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1708" align="aligncenter" width="500"
+caption="Risk Profile"][&lt;img alt="Risk Profile" src="http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof_risk.png" title="2009-08-21-COF_risk" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof_prop.png" title="2009-08-21-COF_prop" /&gt;]: http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof_prop.png
+  [&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof.png" title="2009-08-21-COF" /&gt;]: http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof.png
+  [&lt;img alt="Risk Profile" src="http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof_risk.png" title="2009-08-21-COF_risk" /&gt;]: http://traderpau.files.wordpress.com/2009/08/2009-08-21-cof_risk.png&lt;/p&gt;</summary><category term="COF"></category><category term="entry"></category><category term="options"></category><category term="short"></category></entry><entry><title>Sold -2 COF 100 AUG 09 33 PUT @.30, Mark 34.25</title><link href="http://www.quantisan.com/sold-2-cof-100-aug-09-33-put-30-mark-3425/" rel="alternate"></link><updated>2009-08-19T10:22:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-08-19:sold-2-cof-100-aug-09-33-put-30-mark-3425/</id><summary type="html">&lt;p&gt;I've finally liquidated my COF shorts. The bid/ask was 0.25/0.35 and I
+placed a limit order at 0.30. It was executed immediately. This leads me
+to believe we'll be heading much lower today because of the market's
+eagerness to take my puts.&lt;/p&gt;
+&lt;p&gt;There are two reasons for dumping these puts. First, is that the August
+expiry is this Friday. The time decay this week has been brutal. &lt;strong&gt;A new
+rule for options trading is that close any long options before the last
+8 days or so til expiry.&lt;/strong&gt; From then, the time decay really accelerates.&lt;/p&gt;
+&lt;p&gt;Secondly, we gapped lower today at the market, but there is no follow
+through to the weakness at all. In fact, the market is making a
+logarithmic rise and holding above 985 on the S&amp;amp;P by 10:30am. The TICK
+has also crossed +800 multiple times; whereas the lowest we've got so
+far in the TICK is -728.&lt;/p&gt;
+&lt;p&gt;With the support for COF at \$34.00, there is very little I have to gain
+when the market overall is holding above 985 and seem to be going higher
+as of now. So I've decided to dump this position.&lt;/p&gt;
+&lt;p&gt;I &lt;a href="http://www.quantisan.com/bought-2-cof-100-aug-09-33-put-2-20-mark-32-10/"&gt;purchased these puts at 2.20 about two weeks ago&lt;/a&gt;. Total loss.
+\$380 + \$15 = \$395. This is yet another trade that got away from me. I
+am now going to limit my trading until I can find my edge again.&lt;/p&gt;
+&lt;p&gt;One mistake I've been making is neglecting the market environment. For
+one, we've been in a bull market until proven otherwise (probably not
+anymore since last Friday). Second, the market has been very choppy and
+trading in a range this month. These are factors that I need to consider
+in my future trades.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1701" align="aligncenter" width="500"
+caption="Capital One Financial"][&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-19-cof.png" title="2009-08-19-COF" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-19-cof.png" title="2009-08-19-COF" /&gt;]: http://traderpau.files.wordpress.com/2009/08/2009-08-19-cof.png&lt;/p&gt;</summary><category term="COF"></category><category term="exit"></category><category term="options"></category><category term="short"></category></entry><entry><title>Bought +2 COF 100 AUG 09 33 PUT @2.20, Mark 32.10</title><link href="http://www.quantisan.com/bought-2-cof-100-aug-09-33-put-220-mark-3210/" rel="alternate"></link><updated>2009-08-06T15:12:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-08-06:bought-2-cof-100-aug-09-33-put-220-mark-3210/</id><summary type="html">&lt;p&gt;I've entered a short on Capital One (COF) to substitute &lt;a href="http://www.quantisan.com/bought-1-vno-100-sep-09-60-put-5-69-mark-57-48/"&gt;my accidental
+exit on VNO today&lt;/a&gt;. On a closer comparison of the two, COF seems to be
+more overbought than VNO.&lt;/p&gt;
+&lt;p&gt;We're in a rangebound day again in the market, but we actually spent
+most of the time in the lower range of the channel. This could be a good
+sign or it could be another bear trap.&lt;/p&gt;
+&lt;p&gt;Entry: \$32.10&lt;/p&gt;
+&lt;p&gt;Stop: \$32.80&lt;/p&gt;
+&lt;p&gt;Target: \$28&lt;/p&gt;
+&lt;p&gt;Reward / Risk = 4.10 / 0.70 = 5.85&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1672" align="aligncenter" width="500"
+caption="Capital One Financial"][&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-06-cof.png" title="2009-08-06-COF" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1673" align="aligncenter" width="500"
+caption="Capital One Financial"][&lt;img alt="Capital One
+Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-06-cof_prop.png" title="2009-08-06-COF_prop" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-06-cof.png" title="2009-08-06-COF" /&gt;]: http://traderpau.files.wordpress.com/2009/08/2009-08-06-cof.png
+  [&lt;img alt="Capital One Financial" src="http://traderpau.files.wordpress.com/2009/08/2009-08-06-cof_prop.png" title="2009-08-06-COF_prop" /&gt;]: http://traderpau.files.wordpress.com/2009/08/2009-08-06-cof_prop.png&lt;/p&gt;</summary><category term="COF"></category><category term="entry"></category><category term="options"></category><category term="short"></category></entry></feed>

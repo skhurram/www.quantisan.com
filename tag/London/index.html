@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - London</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/" rel='bookmark'>Minimal variance asset allocation for Stocks ISA</a>
+            </h1>
+            <div class="article-content"> <p>With interest rate in the UK so pathetically low, I thought I might take some chance by making use of a Stocks ISA account in the UK. The problem though, is that I have no knowledge about the London stock market nor do I have the time to follow it. So I wrote a program to pick some Exchange Traded Funds (ETFs) with a primary goal to minimise risk and opportunity costs.</p>
+<p>Here are what I wanted to achieve:</p>
+<ul>
+<li>only a few trades at most a year</li>
+<li>less risk than FTSE100</li>
+<li>more yield than a laddered government bonds portfolio</li>
+<li>require less than an hour per month of maintenance</li>
+</ul>
+<p>Basically, this is a computer-assisted passive investment portfolio.</p>
+<p>The first step is to scrape all the ETF symbols from London Stock Exchange on <a href="http://www.londonstockexchange.com/exchange/prices-and-markets/ETFs/ETFs.html">these pages</a>. I use <code>getNodeSet</code> from <code>XML</code> package in R to select the relevant data from the HTML page with XPath.</p>
+<div class="highlight"><pre>page <span class="o">&lt;-</span> getURL<span class="p">(</span>url<span class="p">,</span> curl<span class="o">=</span>curl<span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>page<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[@class = &#39;table_dati&#39;]/tbody&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+</pre></div>
+
+
+<p>This program only considers ETF because this portfolio is to diversify risk and not pick <em>winning</em> stocks. ETFs provide <a href="http://www.economist.com/news/finance-and-economics/21570711-anniversary-successful-financial-innovation-twenty-years-young">convenient exposure to various asset classes such as equities, bonds, and commodities at low costs</a>.</p>
+<p>Next is to scrape profile information for each symbol from Yahoo. We want data such as the fund's expense ratio and asset class category.</p>
+<div class="highlight"><pre>url <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;http://finance.yahoo.com/q/pr?s=&quot;</span><span class="p">,</span> symbol<span class="p">,</span> <span class="s">&quot;+Profile&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>url<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[contains(concat(&#39; &#39;, @class, &#39; &#39;), &#39; yfnc_datamodoutline1 &#39;)]/tr/td/table&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+
+operation <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">2</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+overview <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">1</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Once the funds' fundamental data are fetched, we can do a preliminary screening. I am filtering for:</p>
+<ol>
+<li>Actively traded funds,</li>
+<li>Sufficient age (3 years), and</li>
+<li>Only the best 3 expense ratio efficiency from each class</li>
+</ol>
+<p>That last point is particularly important as illustrated in this plot.</p>
+<p><img alt="London funds expense by category" src="http://www.quantisan.com/images/2013/london_etf_mer_category.png" /></p>
+<p>The above plot couldn't fit in this frame but it shows that expense ratios are all over the place. What matters is that the raw data is available for use.</p>
+<p>The plot below is clearer. It shows expense ratio by the fund's issuer. You can see that Vanguard funds generally have the best expense ratio as is commonly known.</p>
+<p><img alt="London funds expense by issuer" src="http://www.quantisan.com/images/2013/london_etf_mer.png" /></p>
+<p>The initial ETF list has 667 funds in 104 categories. The screened list narrows it down to 20 funds in 18 categories. Most that were screened are niche funds such as Islamic Global Equity and regional real estate funds.</p>
+<p>Out of that 20 funds, I apply the popular <a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory">Modern Portfolio Theory</a> to minimise risk using historical quotes data with <code>quantmod</code>'s Yahoo data fetcher. Given the expected returns of each asset, <code>er</code> and their covariance matrix, <code>cov.mat</code>, a long-only efficient portfolio weighting of those assets can be solved with quadratic programming like so.</p>
+<div class="highlight"><pre>Dmat <span class="o">&lt;-</span> <span class="m">2</span><span class="o">*</span>cov.mat
+dvec <span class="o">&lt;-</span> rep.int<span class="p">(</span><span class="m">0</span><span class="p">,</span> N<span class="p">)</span>
+Amat <span class="o">&lt;-</span> cbind<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">),</span> er<span class="p">,</span> diag<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">))</span>
+bvec <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> target.return<span class="p">,</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span>N<span class="p">))</span>
+result <span class="o">&lt;-</span> solve.QP<span class="p">(</span>Dmat<span class="o">=</span>Dmat<span class="p">,</span>dvec<span class="o">=</span>dvec<span class="p">,</span>Amat<span class="o">=</span>Amat<span class="p">,</span>bvec<span class="o">=</span>bvec<span class="p">,</span>meq<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To get these weightings,</p>
+<div class="highlight"><pre><span class="n">IGLT</span><span class="p">.</span><span class="n">L</span>   <span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>   <span class="n">INXG</span><span class="p">.</span><span class="n">L</span>   <span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">SLXX</span><span class="p">.</span><span class="n">L</span>   <span class="n">IBGS</span><span class="p">.</span><span class="n">L</span>   <span class="n">IUKP</span><span class="p">.</span><span class="n">L</span>   <span class="n">LUK2</span><span class="p">.</span><span class="n">L</span> 
+<span class="mf">0.603023</span> <span class="mf">0.122829</span> <span class="mf">0.116879</span> <span class="mf">0.084122</span> <span class="mf">0.037906</span> <span class="mf">0.017975</span> <span class="mf">0.014051</span> <span class="mf">0.003215</span>
+</pre></div>
+
+
+<p>But here's the catch, this mean-variance optimisation approach which I'm using does not work in the real-world. The problem is that it optimises for historical data under simplistic assumptions. For potential improvements on this model, start with <a href="http://quant.stackexchange.com/questions/44/what-methods-do-you-use-to-improve-expected-return-estimates-when-constructing-a">this Q&amp;A on StackExchange</a> but be warned that it's a rabbit hole to go down in.</p>
+<p>Knowing that I shouldn't trust this model much, I do this a couple times under different scenarios on the efficient frontier and union the top weighted assets from each run as a compensation by sampling.</p>
+<p>The result is a suggestion of six ETFs.</p>
+<div class="highlight"><pre><span class="n">Symbol</span>            <span class="n">Name</span>                   <span class="n">category</span>
+<span class="n">BRIC</span><span class="p">.</span><span class="n">L</span>    <span class="n">ISHARESII</span> <span class="mi">50</span>                <span class="n">BRIC</span> <span class="n">Equity</span>
+<span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">POWERSHS</span> <span class="n">EQQQ</span> <span class="n">US</span> <span class="n">Large</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Growth</span> <span class="n">Equity</span>
+<span class="n">IGLS</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHARESIII</span> <span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="err">£</span>        <span class="n">GBP</span> <span class="n">Government</span> <span class="n">Bond</span>
+<span class="n">INXG</span><span class="p">.</span><span class="n">L</span> <span class="n">GBP</span> <span class="n">IDX</span><span class="o">-</span><span class="n">LNK</span> <span class="n">GLT</span>  <span class="n">GBP</span> <span class="n">Inflation</span><span class="o">-</span><span class="n">Linked</span> <span class="n">Bond</span>
+<span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>  <span class="n">ISHARESFTSE250</span>          <span class="n">UK</span> <span class="n">Mid</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Equity</span>
+<span class="n">SLXX</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHSIII</span> <span class="n">IBX</span> <span class="err">£</span><span class="n">CB</span>         <span class="n">GBP</span> <span class="n">Corporate</span> <span class="n">Bond</span>
+</pre></div>
+
+
+<p>Out of these I hand picked IGLS.L and MIDD.L for a conservative 80% bonds and 20% equity portfolio. This plot below shows the annualised return versus risk of ISF (FTSE100), an equal-weighted portfolio of the pre-screened 20 ETFs, and this final portfolio of two ETFs. Notice the historic risk of this final portfolio is a third of FTSE100.</p>
+<p><img alt="Return vs risk" src="http://www.quantisan.com/images/2013/london_etf_rr.png" /></p>
+<p>Not surprisingly, what my program derived from scratch is similar to the commonly suggested portfolio balance of bonds, local equities, and emerging market blend. What this program offers is picking out the specific ETFs from the hundreds of ETFs traded on London Stock Exchange for a balanced asset allocation.</p>
+<p>The complete R source code for this project is <a href="https://github.com/Quantisan/touzi">available on Github</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/' title='2013-01-31T12:30:00'>31 January 2013</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/wcg_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-08-20T05:51:00+01:00</updated><entry><title>Using your idling trading computer for a good cause</title><link href="http://www.quantisan.com/using-your-idling-trading-computer-for-a-good-cause/" rel="alternate"></link><updated>2010-08-20T05:51:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-08-20:using-your-idling-trading-computer-for-a-good-cause/</id><summary type="html">&lt;p&gt;Nowadays, computing power is practically free for trading. It does not
+take much processing power to trade or chart on your computer. The
+situation is even more wasteful for many mechanical traders obligated to
+keep their computers on all the time. So what can you do with all that
+idling power? Through World Community Grid (non-profit), you can help
+develop new cures for diseases or discover affordable solar energy.
+According to Wikipedia, "&lt;a href="http://en.wikipedia.org/wiki/World_community_grid"&gt;World Community Grid&lt;/a&gt; (WCG) is an effort to
+create the world's largest public computing grid to tackle scientific
+research projects that benefit humanity." By joining WCG and installing
+an open-source software, you are enabling your computer's idling cycles
+to process data from various research projects as part of a cluster of
+computers. From the &lt;a href="http://www.worldcommunitygrid.org/stat/viewGlobal.do"&gt;WCG statistics page&lt;/a&gt;, over half a million users
+have signed up. It is one of the three biggest non-profit grid computing
+efforts in the world (the other being SETI@home and folding@home). I
+tried &lt;a href="http://en.wikipedia.org/wiki/SETI@home"&gt;SETI@home&lt;/a&gt; almost a decade ago to help search for E.T. But it
+wasn't until the &lt;a href="http://en.wikipedia.org/wiki/Folding@home"&gt;folding@home&lt;/a&gt; project started when grid computing
+gained popularity. Tell people that you're leaving your computer on to
+search for E.T. and people couldn't hold their laughs at you. But
+telling people that you're leaving your computer on to find cures for
+diseases ... then all of a sudden, it's philanthropic. The reasons why I
+chose to devote my computer resources to WCG instead of the other two
+are simple.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;It offers more than one projects to choose. You can fold proteins,
+    find energy efficient material, simulate climate change, etc.&lt;/li&gt;
+&lt;li&gt;The projects offered have specific, realistic goals.&lt;/li&gt;
+&lt;li&gt;Projects do get completed (unlike SETI@home, for example, since no
+    E.T. has been found yet after 10 years).&lt;/li&gt;
+&lt;li&gt;New projects are added as older ones finish.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In any case, that's just my personal choice. Take a look at the three
+projects mentioned for more information. In addition, there's &lt;a href="http://itnomad.wordpress.com/2010/05/19/a-better-rice-for-the-world/"&gt;an
+interview with a researcher using WCG&lt;/a&gt;. If you decide that WCG is
+right for you, feel free to &lt;a href="%20http://www.worldcommunitygrid.org/reg/viewRegister.do?teamID=JQ7WNMDLX1"&gt;join Team Traders and start data crunching
+together&lt;/a&gt;. (Warning: Like any software, use at your own risk)&lt;/p&gt;
+&lt;iframe src="http://www.worldcommunitygrid.org/getDynamicImage.do?teamId=JQ7WNMDLX1&amp;amp;mnOn=true&amp;amp;stat=3&amp;amp;imageNum=1&amp;amp;rankOn=true&amp;amp;projectsOn=false&amp;amp;special=true" frameborder="0" name="di" scrolling="no" width="405px" height="145px"&gt;&lt;/iframe&gt;
+
+&lt;/p&gt;</summary><category term="grid computing"></category><category term="WCG"></category></entry></feed>

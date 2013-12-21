@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/presentation_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2012-09-04T16:30:00+01:00</updated><entry><title>My talk at OR54 on knowledge discovery with web log data</title><link href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/" rel="alternate"></link><updated>2012-09-04T16:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-09-04:my-talk-at-or54-on-knowledge-discovery-with-web-log-data/</id><summary type="html">&lt;h3&gt;Abstract&lt;/h3&gt;
+&lt;p&gt;Web log data contains a wealth of information about online visitors. We have a record of each and every 
+customer interaction for the millions of visitors coming through each month at uSwitch.com. The challenge 
+is to analyse this discrete time series, semi-structured dataset to understand the behaviour of our visitors on 
+a personal level. This talk is a case study of how our data team of three leveraged heterogeneous 
+architecture and agile methodologies to tackle this problem. And we had three months.&lt;/p&gt;
+&lt;h3&gt;Slides&lt;/h3&gt;
+&lt;iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"&gt;&lt;/iframe&gt;</summary><category term="presentation"></category><category term="data processing"></category><category term="cascalog"></category></entry><entry><title>My talk on bootstrapping data science in a company</title><link href="http://www.quantisan.com/my-talk-on-bootstrapping-data-science-in-a-company/" rel="alternate"></link><updated>2012-03-25T10:15:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-03-25:my-talk-on-bootstrapping-data-science-in-a-company/</id><summary type="html">&lt;iframe src="https://docs.google.com/presentation/embed?id=19wVHXeMM_uOfGqDJszZdn4TyXvlKRRoxpf65HyiaK5A&amp;amp;start=false&amp;amp;loop=false&amp;amp;delayms=3000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"&gt;&lt;/iframe&gt;</summary><category term="presentation"></category><category term="data-driven organisation"></category></entry><entry><title>My 5 minute lightning talk on Cascalog</title><link href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel="alternate"></link><updated>2012-02-05T18:39:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-05:my-5-minute-lightning-talk-on-cascalog/</id><summary type="html">&lt;p&gt;Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.&lt;/p&gt;
+&lt;iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;amp;size=m" frameborder="0" width="555" height="451"&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The possibilities...&lt;/p&gt;</summary><category term="cascalog"></category><category term="clojure"></category><category term="hadoop"></category><category term="presentation"></category></entry></feed>

@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/monthly-review_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-10-01T10:11:00+01:00</updated><entry><title>Third Quarter 2010 Trading Review</title><link href="http://www.quantisan.com/third-quarter-2010-trading-review/" rel="alternate"></link><updated>2010-10-01T10:11:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-01:third-quarter-2010-trading-review/</id><summary type="html">&lt;p&gt;Markets hitched a one-way train in the third quarter. TSX opened in July
+at 11200. It closed September at 12368. A whopping 10% jump in three
+months! S&amp;amp;P500 made a similarly impressive 9.7% jump. We simply don't
+get 10% moves even in most &lt;em&gt;years&lt;/em&gt;. I made fewer trades this quarter but
+held each one for longer to ride the trend. However, I am not as
+successful as I'd hope. In particular, my worst trade this quarter was
+in &lt;a href="http://www.quantisan.com/tag/ven.to/"&gt;Ventana Gold&lt;/a&gt; (VEN.TO). The position &lt;a href="http://www.quantisan.com/sold-350-ven-to-10-50-profit-0-8-re-bought-250-ven-to-10-67/"&gt;was profitable&lt;/a&gt;, but the
+money made was only a quarter as what I should have made. I was too
+aggressive to go long when &lt;a href="http://www.quantisan.com/sold-400-ven-to-10-70-breakeven/"&gt;VEN.TO was heading into a brick wall&lt;/a&gt;.
+Ironically, my best trade this quarter was one that didn't make money.
+In hindsight, I was wrong in the direction of a position but managed to
+&lt;a href="http://www.quantisan.com/sold-4-mfc-11jan-puts-14-00-1-74-mark-12-96-loss-0-1/"&gt;escape with just a scratch&lt;/a&gt;. If I had been stubborn in &lt;a href="http://www.quantisan.com/bought-4-mfc-jan-2010-puts-14-00-1-70-mark-13-25/"&gt;this failed
+Manulife short&lt;/a&gt;, my profit this quarter would have been wiped out. It
+was a close call (technically, it was a put contract). It looks as
+though I did &lt;a href="http://www.quantisan.com/a-whole-year-two-hundred-and-six-posts-later/"&gt;learn something in the past year&lt;/a&gt;. My main focus this
+quarter has been the backend of my trading work. Namely in &lt;a href="http://www.quantisan.com/category/quantitative-finance/"&gt;quantitative
+finance study and development&lt;/a&gt;. My automated strategy performed well
+in the &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt; JForex contest. I won sixth place in July and first
+place in August. My win streak (I also won in April) garnered the
+attention from the people at Dukascopy and they kindly invited me to the
+&lt;a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/"&gt;Geneva Forex Event for a TV interview&lt;/a&gt;. By far the most impressive
+thing that happened to me this quarter was &lt;a href="../pictures-from-geneva/"&gt;this trip to Geneva&lt;/a&gt;.
+&lt;strong&gt;Quarterly Metric Q3 Q2&lt;/strong&gt; Sarting Fund \$9,404.87 \$8,000.00 End of
+Quarter Fund \$9,630.75 \$9,404.87 Total Net Profit \$225.88 \$1,404.87
+Gross Profit \$381 \$1,800 Gross Loss -\$155 -\$395 Profit Factor 2.45
+4.56 Net Profit % 2.40% 17.56% Max. Drawdown % 0.85% 3.36% Total
+Commission 121.1 \$155.1 Commission / Net Return 53.61% 11.04% I've said
+this in the last quarter, &lt;a href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/"&gt;commissions are the bane of my trading&lt;/a&gt;.
+Last quarter it took away 11% of my total return. This time it's 54%!
+The structure of my equities commission requires that I trade less but
+punch hard. This isn't my style. My intention is to trade less by being
+more picky in my RRSP trading account. The 0.85% max. drawdown this
+quarter is impressive though. I sometimes lose more than that in a
+single position. Sterling Ratio 0.22 1.44 Excess Return 2.29% 17.46%
+SDev Return per Trade 1.01% 2.21% Kurtosis 1.89 -0.93 Skewness 1.65 0.72
+Despite my modest 2.4% return this quarter, it's not a good number in
+light of the market liftoff. My low &lt;a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/"&gt;modified Sterling Ratio&lt;/a&gt; says so.
+On the other hand, the statistics from my trades improved. I achieved
+consistency by lowering the standard deviation of my trades and skewed
+my trade returns more to the positive. Yet another thing to caution is
+my high kurtosis value. Which means my total returns are due to big
+profits from a couple of trades. Other than these, there is not much to
+add about the rest of the data. 95th Percentile P&amp;amp;L \$193.49 \$421.15
+5th Percentile P&amp;amp;L -\$50.37 -\$102.13 Net Profit Mid 90% Only -\$60.56
+\$824.07 Total # of Trades 9 14 Percent Profitable 28.57% 61.54% # of
+Winning Trades 2 8 # of Losing Trades 5 5 # of Break-even Trades 2 1
+Average Trade Profit % 0.27% 1.18% Average Winning % 2.01% 2.59% Average
+Losing % -0.32% -0.83% Ratio Win% / Loss% 6.25 3.12 Max. Conseq. Winners
+3 5 Max. Conseq. Losers 3 3 Largest Winning Trade \$228.25 \$464.05
+Largest Losing Trade -\$58.19 -\$116.75 Avg. Time Held [days] 8.30 5.17&lt;/p&gt;
+&lt;h2&gt;Goal for the Fourth Quarter&lt;/h2&gt;
+&lt;p&gt;My &lt;a href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/"&gt;goal from the previous quarter&lt;/a&gt; is to learn and build my first indicator in JForex. I achieved
+that just this week. However, I plan to change direction in my work by
+using less JForex and using more custom tools. My goal for the next
+quarter is to learn R programming and
+&lt;span style="text-decoration: line-through;"&gt;implement a JForex to R
+data exchange system&lt;/span&gt; (done, good old CSV files).&lt;/p&gt;
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>June and Second Quarter 2010 Trading Review</title><link href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/" rel="alternate"></link><updated>2010-06-30T14:11:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-06-30:june-and-second-quarter-2010-trading-review/</id><summary type="html">&lt;p&gt;Market volatility continues in June. I took a more aggressive approach
+this month and executed more trades in my RRSP trading account. The
+monthly return is excellent but I noticed a few issues with my trading.
+These will be the main topic of this post. Let's go over some
+performance data. Seeing that it is the end of the second quarter, I
+will do a quarterly statistical report. I couldn't do &lt;a href="http://www.quantisan.com/january-2010-trading-performance-review/"&gt;a monthly review
+like I used to&lt;/a&gt; because I trade much less frequently now. Note that
+the October data is from last year's forex trading. That was the best
+month I've had. I am attaching the data here just for comparison.
+&lt;strong&gt;Quarterly Metric Q2 October&lt;/strong&gt; Sarting Fund \$8,000.00 End of Quarter
+Fund \$9,404.87 Total Net Profit \$1,404.87 Gross Profit \$1,800 Gross
+Loss -\$395 Profit Factor 4.56 1.75 Net Profit % &lt;strong&gt;17.56%&lt;/strong&gt; 4.19% Max.
+Drawdown % 3.36% 2.32% Total Commission \$155.1 Commission / Net Return
+&lt;strong&gt;11.04%&lt;/strong&gt; This highlight the bane of my problem trading my RRSP.
+Although &lt;a href="http://www.quantisan.com/questrade/"&gt;Questrade&lt;/a&gt; offers the best commission in Canada as far as I
+know, it is still much higher than those offered by brokers in the
+states. However, this is a self-directed RRSP trading account, so it's
+not like I can just switch broker. I will just have to stop being so
+active in my trading for this particular account. Sterling Ratio 1.44
+0.65 Excess Return 17.46% 4.14% SDev Return per Trade 2.21% 0.79%
+Kurtosis -0.93 8.53 Skewness 0.72 2.49 These statistics above show my
+second problem. Although I am very profitable so far, my return per
+trade is not consistent. The distribution is too flat and not skewed
+enough to the positive for my liking. A standard deviation less than 1%,
+a slightly positive kurtosis, and a skewness above 1.0 would be ideal.
+95th Percentile P&amp;amp;L \$421.15 \$70.11 5th Percentile P&amp;amp;L -\$102.13
+-\$33.60 Net Profit Mid 90% Only \$0.29 \$46.34 Total # of Trades 14 34
+Percent Profitable 61.54% 44.12% # of Winning Trades 8 15 # of Losing
+Trades 5 19 # of Break-even Trades 1 0 Average Trade Profit % 1.18%
+0.12% Average Winning % 2.59% 0.66% Average Losing % -0.83% -0.30% Ratio
+Win% / Loss% 3.12 2.21 Max. Conseq. Winners 5 4 Max. Conseq. Losers 3 6
+Largest Winning Trade \$464.05 \$171.79 Largest Losing Trade -\$116.75
+-\$44.17 Most of my winning are due to &lt;a href="../sold-12-cve-to-puts-2-90-mark-27-50-10-gain/"&gt;this Cenovus short in May&lt;/a&gt; and
+&lt;a href="../sold-6-cm-10oct-put-74-00-6-60-mark-70-70-8-0/"&gt;this CIBC short in June&lt;/a&gt;. Avg. Time Held 5.17 days 2.18 hours Aside
+from trading my RRSP account, I have finally opened a live &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;forex
+account at Dukascopy&lt;/a&gt;. My time remains split between developing
+automated strategies for trading forex and manual equity trading as
+usual. My JForex contest strategy in June ends up near the bottom again
+as I took the wrong side of the move on USD/CAD. The JForex contest will
+start with a new set of rules for July. Namely that strategies need to
+be fully automated and winnings from each trade cannot be excessive
+(50%) to prevent an all-in approach that's been dominating the contest.
+My revised strategy is ready. It is now version 2.14 since the first
+release in April.&lt;/p&gt;
+&lt;h2&gt;Goal for July&lt;/h2&gt;
+&lt;p&gt;My goal for July is to learn the indicators part of the JForex API and
+to program my first custom JForex indicator from my other collection. I
+will be away in Hong Kong for two weeks in July for some family matter.
+So there's not much time to work.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>May 2010 Trading Review</title><link href="http://www.quantisan.com/may-2010-trading-review/" rel="alternate"></link><updated>2010-06-04T11:21:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-06-04:may-2010-trading-review/</id><summary type="html">&lt;p&gt;May 6th was a historical day in the market. The [Dow tanked 9% in
+minutes but climbed back up near the end of the day][]. We have since
+closed below that level later in the month. The bears seem to have
+finally awoken. I closed two trades in May totalling a decent gain of
+10% in my RRSP trading account. The first was &lt;a href="http://www.quantisan.com/sold-12-cve-to-puts-2-90-mark-27-50-10-gain/"&gt;shorting CVE.TO&lt;/a&gt;, which
+made me 10%. The second was &lt;a href="http://www.quantisan.com/bought-110-tck-b-to-36-03-stopped-out-at-breakeven/"&gt;long TCK/B.TO&lt;/a&gt;, which ended in breakeven.
+I took the second half of the month off for my wedding in Dominican
+Republic. I opened two positions before leaving for vacation. I &lt;a href="http://www.quantisan.com/bought-3-cm-to-10oct-puts-5-00-mark-74-02/"&gt;shorted
+CM.TO&lt;/a&gt; and &lt;a href="http://www.quantisan.com/bought-380-hnd-to-7-25-stop-7-00/"&gt;bought some HND.TO&lt;/a&gt;. The market made a roller coaster
+run up and then down while I was away. So I wasn't able to cash in on
+the move. As for my forex endeavour, I bombed the JForex contest this
+month. I started well with a 60% gain in the first week but I got greedy
+and tried to go for higher. My contest account (demo only, not real
+cash) whipsawed around breakeven a few times afterward. Then I just gave
+up on this month's contest. I verified with the official that my
+startegy wouldn't have qualified anyway because I was manually
+intervening too many times. Nevertheless, I updated my automated trading
+strategy for June before going on vacation. I will be back at it again
+competing in June. But not until my wife and I can settle down in our
+new home first. We are still unpacking, buying furnitures, and tidying
+up our new place as of this first weekend in June.&lt;/p&gt;
+&lt;p&gt;[Dow tanked 9% in minutes but climbed back up near the end of the
+  day]: ../to-hell-and-back-a-review-of-tsx-after-a-v-day/&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>April 2010 Trading Review</title><link href="http://www.quantisan.com/april-2010-trading-review/" rel="alternate"></link><updated>2010-05-03T12:38:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-05-03:april-2010-trading-review/</id><summary type="html">&lt;p&gt;I made my &lt;a href="http://www.quantisan.com/bought-3-cve-to-jul-30-puts-1-75-mark-30-10/"&gt;first RRSP trade to short Cenovus Energy (CVE.TO) using
+puts&lt;/a&gt; in April. I also made my first careless mistake in my RRSP by
+&lt;a href="http://www.quantisan.com/i-just-made-a-grave-fundamental-mistake-in-my-cve-to-trade/"&gt;buying more contracts instead of closing the CVE.TO position&lt;/a&gt; as I
+intended. As of this writing, I am still holding my puts options as the
+slow decline seem to be underway. &lt;a href="http://uk.reuters.com/article/idUKTRE6421BP20100503"&gt;China's decision to hike reserve
+ratio&lt;/a&gt; is also helping by strengthening the dollar and putting another
+warning on recent risk appetite. Despite putting my real money on the
+line, my main focus lately has been the Dukascopy JForex Strategy
+Contest. According to their rankings page, I finished at 4th place for
+April's contest. Which means I may receive a USD \$1,000 credit to my
+&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;trading account at Dukascopy&lt;/a&gt;. Even if I were to trade a \$5,000
+account as I have done in my paper trading, I couldn't have earned 20%
+in a single month &lt;a href="http://www.quantisan.com/trade-log/"&gt;based on my past performance&lt;/a&gt;. This contest is a
+great way for me to fill my forex account with no monetary risk.
+Frankly, I was just &lt;a href="http://www.quantisan.com/to-gamble-or-not-to-gamble/"&gt;hoping to squeeze in a top 10&lt;/a&gt; because I started
+late in the April contest. So I am very happy to finish at such a good
+position and receive (hopefully) a decent sum of prize money! For anyone
+interested, I have discussed about &lt;a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/"&gt;my winning automated strategy&lt;/a&gt;
+previously. Feel free to take a look at it to see what got me a 4th
+place finish. I will be away on vacation in the last two weeks of May. I
+don't expect much to happen with my trading this month as I'm inundated
+with personal matters. My primary focus is still the JForex Strategy
+Contest. I will be using a new semi-automated strategy this time. My
+goal is to finish in the top 6 again.&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>March 2010 Trading Review</title><link href="http://www.quantisan.com/march-2010-trading-review/" rel="alternate"></link><updated>2010-04-01T07:37:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-01:march-2010-trading-review/</id><summary type="html">&lt;p&gt;It is that time of the month again when I do my trading performance
+review. However, I did not make any trade this month. Not because I was
+procrastinating, but I spent all of my time this month to work on my
+quantitative projects. This review will be a recap of my backend trading
+development. I said in my &lt;a href="http://www.quantisan.com/february-2010-trading-performance-review/"&gt;last month's performance review&lt;/a&gt; that my
+goal for March is "to write a rudimentary data analysis and
+visualization program for historical forex data." Well, I finished &lt;a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/"&gt;half
+of it&lt;/a&gt; and then realized that &lt;a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/"&gt;I need a better design for the
+software&lt;/a&gt;. So I studied yet another programming book (finished 3
+programming books this month), on object oriented design and analysis.
+The other major event for me this month is that I finally opened a
+self-directed RRSP account at &lt;a href="http://www.quantisan.com/questrade/"&gt;Questrade&lt;/a&gt; because the &lt;a href="http://www.quantisan.com/considering-investment-options-for-my-first-rrsp/"&gt;tax benefit is
+too good to pass&lt;/a&gt;. Consequently, I am starting to &lt;a href="http://www.quantisan.com/my-first-analysis-of-the-sptsx-60-index/"&gt;study the Canadian
+stock market&lt;/a&gt; for trading with a conservative, intermediate-term
+manner (not buy and hold though). Lastly, it seems that I might be back
+to trading forex sooner than I have thought. I signed up for an
+automated trading contest at &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143"&gt;Dukascopy&lt;/a&gt; earlier this week. Since they
+are offering a cash prize, I thought I might as well reschedule and work
+on my forex stuff now. I will write more on this topic at another time.&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>February 2010 Trading Performance Review</title><link href="http://www.quantisan.com/february-2010-trading-performance-review/" rel="alternate"></link><updated>2010-03-02T08:14:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-02:february-2010-trading-performance-review/</id><summary type="html">&lt;p&gt;I barely traded this month. The total number of trades in February for
+my forex demo account is ten. That's far from my regular 150 - 250
+trades a month. Ever since my trading system was broken because of
+technical difficulties, I've &lt;a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/"&gt;changed my priorities&lt;/a&gt; in trading. I
+spent most of my time in February learning a new programming language to
+ramp up my quant and automated trading projects. I also tried a few
+longer term trades this month. The results haven't been uplifting. I am
+about breakeven by the end of the month with a net gain of .... \$2 in a
+\$5550 demo account. As you can see, there's really not much point in me
+continuing paper trading at this stage. It is taking valuable time away
+from me to fix what's broken so that I can use my previously profitable
+trading system again. As such, I'm going to put near 100% of my effort
+to program a semi-automated trading system for the coming weeks, or
+probably months. On another note. Seeing that it is tax season here in
+Canada. I thought about my tax situation and considered &lt;a href="http://www.quantisan.com/questrade/"&gt;opening a
+Questrade TFSA trading account&lt;/a&gt; (affiliate link) to legitimately
+&lt;a href="http://www.quantisan.com/not-pay-trading-income-taxes-through-a-tfsa-trading-account/"&gt;avoid income taxes from trading&lt;/a&gt;. But after considering the &lt;a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/"&gt;cost and
+benefit&lt;/a&gt; of such a move, I concluded that &lt;a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-4/"&gt;a TFSA trading account
+isn't cost effective for me&lt;/a&gt; at the moment. As I've spent most of the
+month doing backend work, there isn't very much to review for my trading
+this month. So let's just dive right into my statistics for the record.&lt;/p&gt;
+&lt;h2&gt;Performance Statistics&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Monthly Metric February (January)&lt;/strong&gt; Sarting Fund \$5,550.02 End of
+Month Fund \$5,551.99 Total Net Profit \$1.97 (-\$67.42) Gross Profit
+\$37 (\$375) Gross Loss -\$35 (-\$442) Profit Factor 1.06 (0.85) Net
+Profit % 0.04% (-1.20%) Max. Drawdown % 0.50% (3.95%) Sterling Ratio
+0.00 (-0.15) Excess Return -0.02% (-1.26%) SDev Return per Trade 0.15%
+(0.11%) Kurtosis -1.36 (1.85) Skewness 0.79 (1.01) With only ten trades
+this month, I don't have enough samples to make meaningful calculations
+for the above statistics. 95th Percentile P&amp;amp;L \$12.55 (\$12.23) 5th
+Percentile P&amp;amp;L -\$6.60 (-\$8.43) Net Profit Mid 90% Only -\$4.75
+(-\$117.84) Interestingly, I noticed that my typical top and bottom 5th
+percentile profit/loss are quite consistent. Total # of Trades 10 (186)
+Percent Profitable 40.00% (41.45%) # of Winning Trades 4 (63) # of
+Losing Trades 6 (89) # of Break-even Trades 0 (34) My percent
+profitable trades seem to be near 40% month to month. That's good to
+know as it's useful to calculate my statistical return expectancy as
+I've done in my &lt;a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-3/"&gt;TFSA trading cost-benefit analysis&lt;/a&gt;. Average Trade
+Profit % 0.00% (-0.01%) Average Winning % 0.17% (0.11%) Average Losing %
+-0.11% (-0.09%) Ratio Win% / Loss% 1.59 (1.20) By being more
+discriminating in my trades, I've effectively increased my win/loss
+ratio. That's good. Max. Conseq. Winners 3 (8) Max. Conseq. Losers 5
+(20) Largest Winning Trade \$13.81 (\$22.66) Largest Losing Trade
+-\$7.08 (-\$14.30) Avg. Time Held [hrs] 1.67 (0.73) Avg. max. unrealized
+profit/ Realized profit (11.59)&lt;/p&gt;
+&lt;h2&gt;Goal for March&lt;/h2&gt;
+&lt;p&gt;My goal from January is &lt;a href="http://www.quantisan.com/january-2010-trading-performance-review/"&gt;to learn MQL4&lt;/a&gt;. I changed my plan since then
+due &lt;a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/"&gt;my lack of faith with using a proprietary scripting language&lt;/a&gt;. I
+learned Python programming this month and is now learning to use
+specialized libraries to serve my trading needs. My goal for March is to
+write a rudimentary data analysis and visualization program for
+historical forex data.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>January 2010 Trading Performance Review</title><link href="http://www.quantisan.com/january-2010-trading-performance-review/" rel="alternate"></link><updated>2010-02-01T12:03:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-01:january-2010-trading-performance-review/</id><summary type="html">&lt;p&gt;2010 didn't begin well for me. I experienced my &lt;a href="http://www.quantisan.com/first-2010-trading-drawdown-analysis-on-the-verge-of-a-new-record/"&gt;biggest drawdown&lt;/a&gt; so
+far at -3.95% (see Figure 1 for my account balance graph) in my demo
+account. Given that I only risk 0.2% per trade, this is a relatively
+substantial setback. Ironically, I was in the process of filling paper
+work to &lt;a href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/"&gt;open a live account&lt;/a&gt; when this performance setback hit me.
+Change of plan. Now I'll have to postpone live trading until I can at
+least recover my demo account balance. To do that, I &lt;a href="http://www.quantisan.com/work-harder-trade-fewer-in-a-long-and-excruciating-trading-drawdown/"&gt;tightened up&lt;/a&gt; my
+risk exposure and focused on playing only &lt;a href="http://www.quantisan.com/tag/FTC"&gt;my best setup&lt;/a&gt;. By the
+close of the month, my demo account is sitting at -1.2% for January. At
+least I have made it some way from the bottom with a few &lt;a href="http://www.quantisan.com/tag/good-trade/"&gt;good
+trades&lt;/a&gt;. This is also the first negative month for me since beginning
+trading forex in September, just 4 months ago.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="570" caption="January 2010
+Demo Account Balance"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/january_2010_account_balance.png" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;Aside from my performance, a notable change this month for my trading is
+the fact that I've been &lt;a href="http://www.quantisan.com/barred-from-trading-at-work-a-curse-or-a-gift/"&gt;barred from trading during the day&lt;/a&gt;. This
+forced me to trade less, which is a good thing. On the other hand, I'm
+not able to manage my stops as often as I would have liked. As such,
+I've been helpless at times and watched some profitable positions &lt;a href="http://www.quantisan.com/paper-trade-long-gbpjpy-144-24-stop-143-60-target-148/"&gt;turn
+sour&lt;/a&gt;. Whereas before, I would have at least moved my stops to
+breakeven when the price moved away enough. Obviously, this calls for a
+drastic change to my current trading strategy. For one, I'm looking at
+higher timeframes for my trading now to catch slower moves. Secondly, my
+top priority for the next few months is to develop some &lt;a href="http://www.quantisan.com/category/quantitative-finance/systems/"&gt;trading bots&lt;/a&gt;
+to manage my risks while I'm away.&lt;/p&gt;
+&lt;h2&gt;Performance Statistics&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Monthly Metric January (December)&lt;/strong&gt; Sarting Fund \$5,617.44 End of
+Month Fund \$5,550.02 Total Net Profit -\$67.42 (\$148.33) Gross Profit
+\$375 (\$591) Gross Loss -\$442 (-\$443) Profit Factor 0.85 (1.34) Net
+Profit % -1.20% (2.71%) Max. Drawdown % 3.95% (1.91%) Sterling Ratio
+-0.15 (0.41) Excess Return -1.26% (2.66%) SDev Return per Trade 0.11%
+(0.12%) Kurtosis 1.85 (17.38) Skewness 1.01 (3.30) 95th Percentile P&amp;amp;L
+\$12.23 (\$11.97) 5th Percentile P&amp;amp;L -\$8.43 (-\$5.73) Net Profit Mid
+90% Only &lt;strong&gt;-\$117.84&lt;/strong&gt; (-\$46.96) Total # of Trades 186 (276) Percent
+Profitable 41.45% (40.77%) # of Winning Trades 63 (95) # of Losing
+Trades 89 (138) # of Break-even Trades 34 (43) Average Trade Profit %
+-0.01% (0.01%) Average Winning % 0.11% (0.11%) Average Losing % -0.09%
+(-0.06%) Ratio Win% / Loss% 1.20 (1.94) Max. Conseq. Winners 8 (9) Max.
+Conseq. Losers 20 (18) Largest Winning Trade \$22.66 (\$47.44) Largest
+Losing Trade -\$14.30 (-\$11.64) Avg. Time Held [hrs] 0.73 (0.26)&lt;/p&gt;
+&lt;h2&gt;Goal for February&lt;/h2&gt;
+&lt;p&gt;My &lt;a href="http://www.quantisan.com/december-2009-trading-performance-review/"&gt;goal from the previous month&lt;/a&gt; is to think more and trade less.
+Well, I managed the latter part but the former still requires work as
+evident by my negative return this month. For February, my strategy is
+to keep trading with half the risk exposure (i.e. 0.1% per trade) to
+recover my account back to its all-time high in beginning of January.
+I'm just about 2% away at this moment. My goal for February is to get
+acquinted with MQL4 so that I can begin to develop expert advisors to
+manage my risks during the day and overnight.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>December 2009 Trading Performance Review</title><link href="http://www.quantisan.com/december-2009-trading-performance-review/" rel="alternate"></link><updated>2010-01-04T12:16:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-01-04:december-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;I have &lt;a href="http://www.quantisan.com/november-2009-trading-performance-review/"&gt;set 2 goals back in November&lt;/a&gt; for December. 1) Think more,
+trade less; and 2) Be more aggressive on winners. With 276 trades in
+December, I have failed miserably for goal #1. I couldn't meet my
+second goal either as I've missed most of the big moves from failing to
+recognize the bigger picture. Nonetheless, I ended up the month +2.71%
+&lt;a href="http://www.quantisan.com/tag/paper%20trade/"&gt;in my demo account&lt;/a&gt; by picking pennies here and there and with the
+help of some&lt;a href="http://www.quantisan.com/4-fundamental-entry-signs-for-trading-and-why-they-are-not-that-important/"&gt;decent risk management&lt;/a&gt; to limit my risks. Overall, it
+was a bad month for me because of too much time spent trading with
+little reward to show. I noticed my over-trading tendency early in the
+month. My solution was to [limit myself to the longer timeframe to
+reduce moving in and out of trades][] too frequently. Reviewing that
+particular post, I was spot on with identifying my problem. However, my
+over-trading problem lingered on for the rest of the month (i.e.
+"staring at the trading screen too much once I am in a position and
+tried to micro-manage my trades to minimize my risk"). While this can be
+attributed to the more volatile market in December (discussed later),
+the real downside of my over-trading can be seen in Figure 1 showing my
+demo account balance graph for December.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="December 2009
+Account Balance"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/december_2009_account_balance.png" /&gt;][][/caption] Notice the following
+characteristics in Figure 1.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;two up-spikes in the month (around the 8th and 17th)&lt;/li&gt;
+&lt;li&gt;a slow, barely-upward grind in the middle of the month (from 9th to
+    16th)&lt;/li&gt;
+&lt;li&gt;a marching drawdown at the start and end&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;#1 was mostly luck. I was in the right position at the right time. #2
+was the grind as it should be. I intend to delegate this type of trading
+to my &lt;a href="http://www.quantisan.com/category/quantitative-finance/systems/"&gt;automated trading system&lt;/a&gt; once it's developed (haven't even
+started yet though). But for the moment, it's all manual. What's most
+concerning is #3. Sometimes it's just better to not trade at all. That
+is something which I still need to learn to do. Evidently, I still need
+to work on narrowing my trading setup to filter out these erroneous
+trades. I outlined the new steps for that [in my previous post][limit
+myself to the longer timeframe to reduce moving in and out of trades]
+already. I just need discipline to follow my own advice.&lt;/p&gt;
+&lt;h2&gt;Performance Statistics&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Monthly Metric December (November)&lt;/strong&gt; Sarting Fund \$5,469.11 End of
+Month Fund \$5,617.44 Total Net Profit \$148.33 (\$166.90) Gross Profit
+\$591 (\$598) Gross Loss -\$443 (-\$431) Profit Factor 1.34 (1.39) Net
+Profit % 2.71% (3.15%) Max. Drawdown % 1.91% (3.44%) The above stats
+look consistent with the previous month's data in brackets. My maximum
+drawdown actually improved significantly down to 1.91% from 3.44%. That
+is due to the fact that I took a lot more small trades to rake in
+pennies rather than bet big on big moves. Frankly, I would prefer the
+latter strategy as I don't typically have so much time. Sterling Ratio
+0.41 (0.41) Excess Return 2.66% (3.10%) SDev Return per Trade 0.12%
+(0.19%) Kurtosis 17.38 (3.45) Skewness 3.30 (1.54) Comparing my
+performance statistics using &lt;a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/"&gt;my new modified Sterling ratio&lt;/a&gt;, it's
+coincidentally exactly the same as November. My maximum drawdown
+improved but its benefit in the equation is cancelled out by the
+increased volatility in December. My ultimate target is to achieve a
+consistent monthly modified Sterling Ratio of 0.50 or above. The
+kurtosis and skewness statistics got a lot worse this month. These are
+expected from the large number of small trades and the few big
+profitable trades as seen in Figure 1. However, what's alarming is the
+data below. 95th Percentile P&amp;amp;L \$11.97 (\$23.20) 5th Percentile P&amp;amp;L
+-\$5.73 (-\$10.31) Net Profit Mid 90% Only -\$46.96 (\$33.82) As you can
+see, it would have been a losing month if it weren't for the outlier
+trades. This is definitely the most worrisome statistic this month. &lt;strong&gt;I
+need to stop picking pennies and concentrate on bigger moves.&lt;/strong&gt; Total #
+of Trades 276 (153) Percent Profitable 40.77% (46.36%) # of Winning
+Trades 95 (70) # of Losing Trades 138 (81) # of Break-even Trades 43
+(2) As I've said before, I took the most number of trades this month
+since my short forex career. My percent profitable drifted farther below
+50% to 40.77%. I might as well throw random dart to make my pick. This
+has once again proven that I over-traded and didn't spent enough time
+with my analysis. The large number of break-even trades is also a
+sore-sight in the data. Average Trade Profit % 0.01% (0.02%) Average
+Winning % 0.11% (0.16%) Average Losing % -0.06% (-0.10%) Ratio Win% /
+Loss% 1.94 (1.61) Max. Conseq. Winners 9 (12) Max. Conseq. Losers 18
+(14) Largest Winning Trade \$47.44 (\$41.88) Largest Losing Trade
+-\$11.64 (-\$20.34) Avg. Time Held [hrs] 0.26 (0.56)&lt;/p&gt;
+&lt;h2&gt;Goal for January&lt;/h2&gt;
+&lt;p&gt;There's only one goal for me for January and it's the same as
+&lt;a href="http://www.quantisan.com/november-2009-trading-performance-review/"&gt;November&lt;/a&gt;'s. &lt;strong&gt;Think more and trade
+less&lt;/strong&gt;! Refer to my post on &lt;a href="../focusing-on-trading-my-timeframe-to-reduce-over-trading/" title="Permanent Link to Focusing on trading my timeframe to reduce over-trading"&gt;Focusing on trading my timeframe to reduce
+over-trading&lt;/a&gt; to see my plan to achieve that.&lt;a href="../focusing-on-trading-my-timeframe-to-reduce-over-trading/" title="Permanent Link to Focusing on trading my timeframe to reduce over-trading"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;div id="_mcePaste" style="overflow: hidden; position: absolute; left: -10000px; top: 981px; width: 1px; height: 1px;"&gt;
+Monthly Metric December Sarting Fund \$5,469.11 End of Month Fund
+\$5,617.44 Total Net Profit \$148.33 Gross Profit \$591 Gross Loss
+-\$443 Profit Factor 1.34 Net Profit % 2.71% Max. Drawdown % 1.91%
+Sterling Ratio 0.41 Excess Return 2.66% SDev Return per Trade 0.12%
+Kurtosis 17.38 Skewness 3.30 95th Percentile P&amp;L \$11.97 5th Percentile
+P&amp;L -\$5.73 Net Profit Mid 90% Only -\$46.96 Total \# of Trades 276
+Percent Profitable 40.77% \# of Winning Trades 95 \# of Losing Trades
+138 \# of Break-even Trades 43 Average Trade Profit % 0.01% Average
+Winning % 0.11% Average Losing % -0.06% Ratio Win% / Loss% 1.94 Max.
+Conseq. Winners 9 Max. Conseq. Losers 18 Largest Winning Trade \$47.44
+Largest Losing Trade -\$11.64 Avg. Time Held [hrs] 0.26
+
+&lt;/div&gt;
+
+&lt;/p&gt;
+
+&lt;p&gt;[limit myself to the longer timeframe to reduce moving in and out of
+  trades]: http://www.quantisan.com/focusing-on-trading-my-timeframe-to-reduce-over-trading/&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>November 2009 Trading Performance Review</title><link href="http://www.quantisan.com/november-2009-trading-performance-review/" rel="alternate"></link><updated>2009-12-01T22:25:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-12-01:november-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;This month has been a roller coaster in both the markets and my account
+balance (see Figure 1). Here's a quick recap of my &lt;a href="http://www.quantisan.com/tag/paper%20trade/"&gt;paper trades&lt;/a&gt; in
+the &lt;a href="http://www.quantisan.com/category/forex/"&gt;forex markets&lt;/a&gt; for November. I started out by cashing the carried
+over long yen and dollar positions from October. Those trades could have
+been better as I have &lt;a href="http://www.quantisan.com/a-good-trade-that-could-have-been-great-a-lesson-to-take-profit-at-target/"&gt;lamented in a post&lt;/a&gt;. Nevertheless, it was a
+good start for the month. Then, things went downhill for me; literally,
+as you can see from my account balance at the first half of the month in
+Figure 1. I tried my luck &lt;a href="http://www.quantisan.com/my-bad-eurusd-day-trading-and-what-to-do-about-it/"&gt;day trading EUR/USD with horrible results&lt;/a&gt;.
+I marked this particular period of drawdown from these EUR/USD day
+trades on Figure 1 with a red band. The fear lingered on and I gave up
+all the initial gain of the month to scrap just below the opening
+balance. Fortunately, I was able to &lt;a href="http://www.quantisan.com/an-example-of-how-trading-in-fear-is-bad-for-your-account/"&gt;realize my problem&lt;/a&gt; and clean up
+my act. I recuperated by documenting &lt;a href="http://www.quantisan.com/paper-trade-long-usdchf-1-0122-sl-1-0060-tp-1-0225/"&gt;each&lt;/a&gt; &lt;a href="http://www.quantisan.com/paper-trade-long-audjpy-81-22-sl-80-99-tp-82-50/"&gt;of my&lt;/a&gt; &lt;a href="http://www.quantisan.com/paper-trade-stopped-out-audjpy-longs-81-3-7-pips-and-81-29-28-pips/"&gt;entry&lt;/a&gt; like I
+used to to force myself to think more and trade less. The turnaround
+didn't happen immediately. Not until I became even more stringent on
+myself and stuck with using only my best setup, the &lt;a href="http://www.quantisan.com/an-introduction-to-my-forex-trend-continuation-setup-ftc/"&gt;FTC setup&lt;/a&gt;. I
+marked this period on Figure 1 with the green bar and arrow. As you can
+see, I happened to be in the right markets and at the right times to
+make a full recovery back to the top. In fact, I made &lt;a href="http://www.quantisan.com/audjpy-short-81-3777-17-anatomy-of-my-first-400-pips-trade/"&gt;my first 400+
+pips trade&lt;/a&gt; and &lt;a href="http://www.quantisan.com/eurusd-95-pips-in-2-hours-an-example-of-swing-and-day-trade-convergence/"&gt;my best EUR/USD day trade&lt;/a&gt; during this comeback. I
+thought I could finish the month above the critical \$5500 level (10%
+gain). But a couple small losers on the last day pulled my account below
+it yet again. However, one lesson I became even more aware of from the
+draw-down is to forget about your account balance. Focus on making good
+trades, manage your risks, and the money will take care of itself.
+[caption id="" align="aligncenter" width="580" caption="November 2009
+trades graph"][&lt;img alt="November 2009 trades graph" src="http://www.quantisan.com/static/images/img_archive/2009-12-01-account_graph.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-12-01-account_graph.png"&gt;November 2009 trades
+graph&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;h2&gt;Performance Statistics&lt;/h2&gt;
+&lt;p&gt;Attached below are my performance statistics for November. The first
+number is this month's and the second number in bracket is from October
+for comparison. I will highlight and comment on the few discrepancies
+that I find important. Sarting Fund \$5,089.06 End of Month Fund
+\$5,302.21 Total Net Profit \$166.90 (\$213.15) Gross Profit \$598
+(\$499) Gross Loss -\$431 (-\$285) Profit Factor 1.39 (1.75) Net Profit
+% 3.15% (4.19%) Max. Drawdown % &lt;strong&gt;3.44%&lt;/strong&gt; (2.32%) This draw-down is
+horrible to say the least. Kurtosis &lt;strong&gt;3.45&lt;/strong&gt; (8.53) Skewness &lt;strong&gt;1.54&lt;/strong&gt;
+(2.49) Sharpe Ratio &lt;strong&gt;16.64&lt;/strong&gt; (5.21) The kurtosis and skewness are
+surprisingly good. A low, but not near-zero numbers are preferable. The
+Sharpe ratio is also surprisingly good too. This isn't because my return
+is good, is just that the standard deviation return of my trades have
+been very consistent. Ironically, that's mostly because of steady small
+losses (see Figure 1). 95th Percentile P&amp;amp;L \$23.20 (\$70.11) 5th
+Percentile P&amp;amp;L -\$10.31 (-\$33.60) Net Profit Mid 90% Only &lt;strong&gt;\$33.82&lt;/strong&gt;
+(\$46.34) I failed to meet &lt;a href="http://www.quantisan.com/october-2009-trading-performance-review/"&gt;my goal from last month&lt;/a&gt; to increase my
+mid-90% return. It would have been easily met if I didn't go crazy with
+the day trades and loose a bundle. Total # of Trades &lt;strong&gt;153&lt;/strong&gt; (34)
+Percent Profitable 47.06% (44.12%) # of Winning Trades 72 (15) # of
+Losing Trades 81 (19) I started to make use of scaling in and out of a
+trade. So sometimes one trade would be counted as 2 or 3 small ones.
+Still, I made too many trades this month. Even if I consider a 2 for 1
+ratio of trades (i.e. 153 / 2 = 76), it is still more than twice as many
+as last month. My net profit is lower too. Wasted time and effort for
+lower return. &lt;strong&gt;Lesson for the month is clearly to think more and trade
+less&lt;/strong&gt;. Average Trade Profit % 0.02% (0.12%) Average Winning % &lt;strong&gt;0.16&lt;/strong&gt;%
+( 0.66%) Average Losing % &lt;strong&gt;-0.10&lt;/strong&gt;% (-0.30%) Ratio Win% / Loss% 1.57
+(2.21) This could be the most worrisome statistics for me this month. My
+average winning percentage from a trade is significantly less. &lt;strong&gt;I need
+to be more aggressive when I am right to reap the most reward from it&lt;/strong&gt;.
+Stash in the cash as the position gets greener! Max. Conseq. Winners 12
+(4) Max. Conseq. Losers 14 (6) Largest Winning Trade \$41.88 (\$171.79)
+Largest Losing Trade -\$20.34 (-\$44.17) Avg. Time Held [hrs] 0.56
+(2.18)&lt;/p&gt;
+&lt;h2&gt;Goal for Next Month&lt;/h2&gt;
+&lt;p&gt;Let's start by saying what I did well this month. I think my comeback
+was phenomenal, but definitely with luck on my side. I approached my
+huge draw-down systematically and rationally by reducing position size,
+trading less, and restricted myself by using my best &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-signal/"&gt;trading setup&lt;/a&gt;
+only. Then when the time was right, I was able to pound on the winning
+positions. I will need to remember this the next time I'm experiencing a
+draw-down (hopefully not as much as this month's). On the other hand, I
+made many trading mistakes this month. Most were just short-term
+problems and I have already written about them in my lessons. Upon
+further review of my performance this month, two major problems are
+evident as discussed.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Think more and trade less. Limit my trades to approximately one a
+    day and know when to NOT trade at all. Not even with tiny positions
+    to "test the water" as I like to do.&lt;/li&gt;
+&lt;li&gt;Be more aggressive when the position is right. Achieve this by
+    improving on my scaling in and out strategy by accelerating the
+    scaling in and decelerating on the scaling out.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id="_mcePaste" style="overflow: hidden; position: absolute; left: -10000px; top: 867px; width: 1px; height: 1px;"&gt;
+Sarting Fund \$5,089.06 \$5,302.21 End of Month Fund \$5,302.21
+\$5,469.11 Total Net Profit \$213.15 \$166.90 Gross Profit \$499 \$598
+Gross Loss -\$285 -\$431 Profit Factor 1.75 1.39 Net Profit % 4.19%
+3.15% Max. Drawdown % 2.32% 3.44% Kurtosis 8.53 3.45 Skewness 2.49 1.54
+Sharpe Ratio 5.21 16.64 95th Percentile P&amp;L \$70.11 \$23.20 5th
+Percentile P&amp;L -\$33.60 -\$10.31 Net Profit Mid 90% Only \$46.34 \$33.82
+Total \# of Trades 34 153 Percent Profitable 44.12% 47.06% \# of Winning
+Trades 15 72 \# of Losing Trades 19 81 Average Trade Profit % 0.12%
+0.02% Average Winning % 0.66% 0.16% Average Losing % -0.30% -0.10% Ratio
+Win% / Loss% 2.21 1.57 Max. Conseq. Winners 4 12 Max. Conseq. Losers 6
+14 Largest Winning Trade \$171.79 \$41.88 Largest Losing Trade -\$44.17
+-\$20.34 Avg. Time Held [hrs] 2.18 0.56
+
+&lt;/div&gt;
+
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>October 2009 Trading Performance Review</title><link href="http://www.quantisan.com/october-2009-trading-performance-review/" rel="alternate"></link><updated>2009-10-31T21:20:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-10-31:october-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;October is the first full month in which I traded forex. Naturally, this
+is the first of my monthly trading performance review. Note that all the
+trades were on a demo account with imaginary money only. But I still
+took this seriously. My goal is to double this demo account starting
+from CAD\$5000. Once that is accomplished, I will start live trading
+with real money. Who knows how long this might take. Hopefully by then,
+I will have a respectable set of &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-signal/"&gt;trading setups&lt;/a&gt;, &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/"&gt;strategies&lt;/a&gt;, and
+&lt;a href="http://www.quantisan.com/tools"&gt;quant tools&lt;/a&gt; developed. Anyway, let's get on with the monthly review.
+As this is only my first month trading currencies after spending 8 years
+in &lt;a href="http://www.quantisan.com/category/stocks/"&gt;stocks&lt;/a&gt; and &lt;a href="http://www.quantisan.com/category/futures/"&gt;futures&lt;/a&gt;, my trading this month is marked by a lot
+of experimentation. As can be seen in my &lt;a href="http://www.quantisan.com/trade-log/"&gt;trading log&lt;/a&gt;, I performed
+abysmally for the first couple of weeks. The last of my bad string ended
+when I took an uncalled for trade &lt;a href="http://www.quantisan.com/an-undisciplined-trade-shorted-eurusd-1-499-stopped-1-505-62-pips/"&gt;based on what I thought rather than
+what I saw&lt;/a&gt;. Not all is lost this month as I managed to write out the
+&lt;a href="http://www.quantisan.com/an-introduction-to-my-forex-trend-continuation-setup-ftcs/"&gt;first of my forex trading setups&lt;/a&gt; from the trials and errors. Since
+then, I had a string of winners to push my monthly tally deeper into the
+positive. While this is definitely good, I am cautious and doubtful to
+my initial success because I am just at the right place, at the right
+time. Because we might very well be witnessing the printing of the top
+from this &lt;a href="http://www.quantisan.com/inter-market-analysis-after-a-new-2009-high-in-the-equity-market/"&gt;epic V-shaped rally since March&lt;/a&gt;. The moves in the markets
+were very strong and very rapid this last week. I just happen to be on
+the right side of the trades.&lt;/p&gt;
+&lt;h2&gt;Performance Statistics Review&lt;/h2&gt;
+&lt;p&gt;In any case, I'll get down to business with discussing the performance
+statistics below. On first sight, the &lt;a href="http://en.wikipedia.org/wiki/Sharpe_ratio"&gt;Sharpe ratio&lt;/a&gt; at 5.25 is
+impressive for this month. However, looking a few lines below, see that
+if we account for only the middle 90th percentile profits and losses,
+the net profit is reduced by a magnitude. (So as to see what would
+happen if we truncate the biggest (un)lucky wins and losses.) That means
+much of my profit for this month was because of a few big trade. In
+fact, it was &lt;a href="http://www.quantisan.com/paper-trade-closed-eurjpy-135-00-500-1-pips/"&gt;this lucky trade when I made +500 pips&lt;/a&gt; in one week.&lt;/p&gt;
+&lt;h2&gt;Goal for Next Month&lt;/h2&gt;
+&lt;p&gt;What I've learned from analyzing these numbers is that I lack
+consistency (like all new traders), and was perhaps just lucky. So the
+goals for the coming months are simple:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;achieve consistency by bringing up this mid 90% net profit value;
+    and&lt;/li&gt;
+&lt;li&gt;maintain good Sharpe ratio rating by improving my risk management
+    techniques.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Performance Statistics for October 2009&lt;/h2&gt;
+&lt;p&gt;Total Net Profit \$213.15 Gross Profit \$499 Gross Loss -\$285 Profit
+Factor 1.75 Net Profit % 4.19% Max. Drawdown % -2.32% Sharpe Ratio 5.25
+95th Percentile P&amp;amp;L \$70.11 5th Percentile P&amp;amp;L -\$33.60 Net Profit Mid
+90% Only \$46.34 Total # of Trades 34 Percent Profitable 44.12% # of
+Winning Trades 15 # of Losing Trades 19 Average Trade Profit % 0.12%
+Average Winning % 0.66% Average Losing % -0.30% Ratio Win% / Loss% 2.21
+Max. Conseq. Winners 4 Max. Conseq. Losers 6 Largest Winning Trade
+171.79 Largest Losing Trade -44.17 Avg. Time Held [hrs] 2.18 Avg. max.
+unrealized profit/ Realized profit 3.15&lt;/p&gt;
+&lt;/p&gt;</summary><category term="monthly review"></category></entry></feed>

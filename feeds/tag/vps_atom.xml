@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/vps_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-05-19T07:30:00+01:00</updated><entry><title>Graphs from network monitors on my remote trading server</title><link href="http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/" rel="alternate"></link><updated>2011-05-19T07:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-05-19:graphs-from-network-monitors-on-my-remote-trading-server/</id><summary type="html">&lt;p&gt;Here are some server monitoring graphs from my remote trading server.
+These graphs are produced by the server monitoring application,
+&lt;a href="http://munin-monitoring.org/"&gt;Munin&lt;/a&gt;. I ran both JForex and Metatrader 4 simultaneously on my
+server last week. The 512 MB of memory was noticeably insufficient.
+Which caused the system to use swap files, thus leading to I/O latency,
+and which held up the CPU. All of which are evident from the graphs
+below. This week I am only running JForex. The server load is within
+tolerable range. The thing with picking your own VPS is that no VPS
+provider is the same. You can't really compare just the numbers as there
+are just too many factors to be considered behind the scene on a VPS
+service. So it is important to run applications that you intend to run
+and stress your system in real-world conditions. If your system seems
+slow, figure out where exactly is the bottleneck before throwing away
+money for upgrades. This is where a server monitoring application comes
+handy. [caption id="attachment_5437" align="aligncenter" width="497"
+caption="CPU data"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/cpu-week.png" title="cpu-week" /&gt;[/caption] [caption id="attachment_5438"
+align="aligncenter" width="497" caption="Memory data"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/memory-week.png" title="memory-week" /&gt;[/caption]
+[caption id="attachment_5439" align="aligncenter" width="497"
+caption="Interrupts data"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/interrupts-week.png" title="interrupts-week" /&gt;[/caption] [caption
+id="attachment_5440" align="aligncenter" width="497" caption="Disk I/O
+latency"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/diskstats_latency-week.png" title="diskstats_latency-week" /&gt;[/caption] [caption id="attachment_5441"
+align="aligncenter" width="497" caption="Network
+transfer"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/if_eth0-week.png" title="if_eth0-week" /&gt;[/caption]&lt;/p&gt;</summary><category term="VPS"></category></entry><entry><title>Choosing a budget VPS provider for hosting automated trading programs</title><link href="http://www.quantisan.com/choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/" rel="alternate"></link><updated>2011-05-03T07:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-05-03:choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/</id><summary type="html">&lt;p&gt;I've been looking for a cheap but reliable virtual private server (VPS)
+to run my trading program for the last few months. I ran my QTD program
+on 3 remote servers in UK and Germany in April for an entire month as
+performance testing. One in UK on a Xen cloud. One in Germany on OpenVZ.
+And a last one also in UK on KVM technology. This post is a summary of
+my initial findings on what to watch for when choosing a server provider
+for running a remote trading server. Keep in mind that this is for
+low-end, low-frequency, retail trading. Where latencies in the range of
+tens of milliseconds are considered good. General target price range is
+US\$10 - \$20 per month for an unmanaged server with 512MB of ram and
+600MHz-equivalent of circa 2006 Intel CPU. Low price is the primary
+consideration here. If you don't care for the technical details, the top
+VPS names are &lt;a href="http://www.linode.com"&gt;Linode&lt;/a&gt;, &lt;a href="http://www.hetzner.de/en/"&gt;Hetzner&lt;/a&gt;, and &lt;a href="http://www.6sync.com"&gt;6sync&lt;/a&gt; for Linux-based
+VPSs. Linode offers Xen VPSs in US and UK. 6sync offers KVM VPSs in US
+only. Both companies offer Linux-based 512MB instances for \$20 as a
+starter server. Hetzner offers KVM VPSs in Germany for €7.90. Cloud
+servers like Amazon EC2 and Rackspace Cloud are too expensive for
+running 24/7.&lt;/p&gt;
+&lt;h2&gt;Location, Location, Location&lt;/h2&gt;
+&lt;p&gt;Use a datacenter that's at least in the same sub-continent as your
+broker's datacenter. You wouldn't want your data to travel half-way
+around the world just to save a few bucks. It adds unnecessary latency
+and prices are comparable in either the states or Europe nowadays.
+Although Asia is another story. If you use more than one broker, you can
+use multiple servers or pick a server location that sits between them on
+the internet backbone. TeleGeography provides &lt;a href="http://www.telegeography.com/telecom-resources/map-gallery/index.html"&gt;global internet maps&lt;/a&gt;
+to identify best locations. I trade with Dukascopy and Oanda. One in
+Switzerland and another in the states. As such, Internet hubs in cities
+like New York, London, and Frankfurt are prime targets for low latency
+between both brokers. As I trade more at Dukascopy, I'm biased to
+European servers. Furthermore, London and Frankfurt are the #1 and #2
+internet hub in the world. London has 7,723 Gbps and Frankfurt has 7,218
+Gbps capacity in 2010. Whereas New York, 5th in the world, has 3,850
+Gbps.&lt;/p&gt;
+&lt;h2&gt;Virtualization Technologies&lt;/h2&gt;
+&lt;p&gt;Virtual private servers are merely reserved resource chunks of a
+computer in a datacenter. This is achieved through the use of
+virtualization technologies. And there are quite many of those as I have
+discovered. Here are three that you'll likely hear about in your search.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;OpenVZ.&lt;/strong&gt; This is the most popular and least preferred platform
+    for trading servers. It's often used by budget hosts because
+    resources between virtualized instances are not well isolated. As
+    such, a host can oversell a server's resource as most webapps have
+    sporadic resource utilization trend. In other worlds, it is unlikely
+    all the virtual private servers would demand their maximum allocated
+    resources at the same time. However, trading servers require a
+    consistent and guaranteed level of computing resource. So stay away
+    from VPS that runs on OpenVZ unless you want to see server hiccups.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Xen.&lt;/strong&gt; This is what Amazon EC2 and Rackspace Cloud runs on. Xen
+    offers true resource isolation so that you're less likely affected
+    by your virtual server's neighbours. What you see is also what you
+    get. So if you're promised 512MB of memory, you'll get 512MB of
+    memory. However, processing power varies tremendously across
+    different VPS providers. A micro instance on Amazon EC2 offers 613MB
+    of memory, for example. But it is no match for even a 256MB instance
+    on Rackspace Cloud. I was able to run a LXDE desktop GUI plus a java
+    program on Rackspace but couldn't do it on Amazon.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KVM.&lt;/strong&gt; KVM uses the Linux kernel to virtualize. It's said to offer
+    lower overhead to the host server so that it can provide better
+    value than Xen. Like Xen, it offers true resource isolation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In summary, either Xen or KVM are good but stay away from OpenVZ.&lt;/p&gt;
+&lt;h2&gt;Operating System&lt;/h2&gt;
+&lt;p&gt;Key question here is: Linux or Windows? If you're unfamiliar with Linux
+and is not interesting in learning about it, use a Windows Server 2003
+or 2008 provider. Windows Server 2003 is preferred as it uses fewer
+resources just to run so it's cheaper. Do note that Windows VPSs are
+\$10-\$20 more expensive anyway because you have to pay for a monthly
+license lease. With the use of a Windows-based VPS, you can connect to
+your server through the remote desktop protocol (RDP). It's just a
+matter of running the Remote Desktop application on your local machine
+to your remote server. Then you'll see the remote machine's desktop on
+your own machine. And then you can control the remote server just like
+any other Windows computer. Very simple. However, I prefer to run Linux
+because of its renowned stability and lower cost. The downside is that
+you need to know what you're doing to &lt;a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/"&gt;tweak the server for trading&lt;/a&gt;.
+Linux uses very little computing resource to run. I can squeeze JForex
+and Metatrader together on a Linux VPS with only 256MB memory. By
+comparison, you need at least 512MB on a Windows box just to get the OS
+running. And there's no licensing fee for Linux too. A double savings.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;When choosing a VPS provider, consider factors such as location,
+virtualization technology, and operating system(s) offered. Once you've
+narrowed your search to a shortlist of providers, the next step is to
+compare their specific VPS offerings by looking at price, services, and
+technical specifications.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="tutorial"></category><category term="VPS"></category></entry><entry><title>Network latency on Amazon EC2 t1.micro to Dukascopy</title><link href="http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/" rel="alternate"></link><updated>2011-02-09T08:20:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-02-09:network-latency-on-amazon-ec2-t1micro-to-dukascopy/</id><summary type="html">&lt;p&gt;While the processing power of a EC2 t1.micro server sucks (benchmarks
+have shown it is &lt;a href="http://www.phoronix.com/scan.php?page=article&amp;amp;item=amazon_ec2_micro"&gt;slower than a Nokia N900 phone&lt;/a&gt;), network
+performance is well-known to be exceptional for EC2 servers throughout
+the spectrum of their offerings. Here's a ping test from my home
+computer with a ADSL connection in Ottawa, Canada to 194.8.15.1, one of
+the Dukascopy web servers.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;149&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;134&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;135&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;148&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;242&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;135&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;4003&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;134.364&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;140.579&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;149.726&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;7.053&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then the same test from a EC2 t1.micro instance located in Dublin,
+Ireland (closest Amazon EC2 server location to Geneva).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;40.9&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;41.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;49.0&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;41.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;243&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;41.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;4005&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;40.961&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;42.728&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;49.013&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;3.154&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Exceptional, indeed. With the monthly pricing of a t1.micro going for
+around \$12/month, there are few reasons not to &lt;a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/"&gt;get a remote server to
+run your trading system&lt;/a&gt; rather than pray for your home internet
+connection to remain reliable 24/7.&lt;/p&gt;
+&lt;p&gt;Update with ping test from Berlin courtesy of commenter Holger:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Ping&lt;/span&gt; &lt;span class="n"&gt;wird&lt;/span&gt; &lt;span class="n"&gt;ausger&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;mit&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt; &lt;span class="n"&gt;Daten&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Antwort&lt;/span&gt; &lt;span class="n"&gt;von&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Bytes&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;Zeit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;TTL&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;244&lt;/span&gt;
+&lt;span class="n"&gt;Ping&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Statistik&lt;/span&gt;  &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="nl"&gt;Pakete:&lt;/span&gt; &lt;span class="n"&gt;Gesendet&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Empfangen&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Verloren&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;Verlust&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+&lt;span class="n"&gt;Ca&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;Zeitangaben&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;Millisek&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Minimum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Maximum&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Mittelwert&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;43&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Update April 12, 2011: I've been using Rackspace Cloud (#2 cloud server
+provider, after Amazon). Here's the ping result from their London, UK
+server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;69.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;69.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;68.8&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;66.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;68.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;64.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;68.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;69.1&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;246&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;66.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;8012&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;64.677&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;67.986&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;69.617&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;1.573&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Update April 26, 2011: I'm testing &lt;a href="http://quickweb.co.nz/germany-xen-vps.html"&gt;Quickweb Germany's VPS&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.3&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.3&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.1&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.2&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_seq&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;247&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;15.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;6000&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt; &lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;15.152&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;15.306&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;15.463&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;0.116&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Update September 2013: DigitalOcean offers &lt;a href="https://www.digitalocean.com/?refcode=5876fd082ff3"&gt;$5/month 512MB server plan with 20GB SSD&lt;/a&gt;. I've used them exclusively for other work. Here's a ping test from one of their Amsterdam servers.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;PING&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;56&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;84&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;21.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;22.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;22.6&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;21.5&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="mi"&gt;64&lt;/span&gt; &lt;span class="n"&gt;bytes&lt;/span&gt; &lt;span class="n"&gt;from&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;icmp_req&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;ttl&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;245&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;22.4&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+
+&lt;span class="o"&gt;---&lt;/span&gt; &lt;span class="mf"&gt;194.8.15.1&lt;/span&gt; &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="n"&gt;statistics&lt;/span&gt; &lt;span class="o"&gt;---&lt;/span&gt;
+&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;packets&lt;/span&gt; &lt;span class="n"&gt;transmitted&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;received&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="n"&gt;packet&lt;/span&gt; &lt;span class="n"&gt;loss&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;time&lt;/span&gt; &lt;span class="mi"&gt;5013&lt;/span&gt;&lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;span class="n"&gt;rtt&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;avg&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;max&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mdev&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;21.540&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;22.142&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;22.686&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;0.484&lt;/span&gt; &lt;span class="n"&gt;ms&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="Amazon EC2"></category><category term="cloud computing"></category><category term="dukascopy"></category><category term="VPS"></category></entry><entry><title>EC2 t1.micro overloaded by JForex</title><link href="http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/" rel="alternate"></link><updated>2010-11-10T08:18:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-11-10:ec2-t1micro-overloaded-by-jforex/</id><summary type="html">&lt;p&gt;My cheapskate EC2 experiment has been running well for two days. The
+&lt;a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/"&gt;t1.micro EC2 cloud server instance ran smoothly&lt;/a&gt; for over 48 hours
+continuously. I was starting to believe that it's possible to run a
+desktop trading system on &lt;a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/"&gt;Amazon's free offer&lt;/a&gt;. Then this happened
+this morning on the third day of the experiment. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="EC2 t1.micro" src="http://www.quantisan.com/static/images/img_archive/2010-11-10_ec2desktop.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;The Micro instance cloud
+server experienced a processing hiccup and was never able to recover.
+This is it for running a desktop trading system on a t1.micro. The
+cheapest instance of Amazon EC2 is not enough to handle the load. The
+only way to get this working is to run in a command-line only mode by
+using the JForex API without the client platform or desktop. All that
+eye-candy isn't useful anyway on a remote server. Update: I'm wondering
+if it's the screensaver that caused the problem. I am now turning the
+screensaver off and trying this again. Update 2: No, it looks like it
+really is JForex overloading the system.&lt;/p&gt;</summary><category term="Amazon EC2"></category><category term="JForex"></category><category term="VPS"></category></entry><entry><title>I got JForex running smoothly on Amazon EC2 t1.micro!</title><link href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/" rel="alternate"></link><updated>2010-11-06T23:46:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-11-06:i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/</id><summary type="html">&lt;p&gt;Prove:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-06-ec2micro_jforex.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;Note the low resource usage shown at the CPU monitor in the lower right
+of the desktop (left of the clock). This took so many hours for me to
+figure out. &lt;a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/"&gt;Squeezing so much into so little power&lt;/a&gt;. Below is the
+bash script that I made to get this working. If you want to run this
+yourself, here's &lt;a href=""&gt;a tutorial on how to run user scripts to initialize an
+EC2 instance&lt;/a&gt;. The script installs a minimal desktop environment,
+~~Google Chrome browser~~, Sun Java 6, and a X2go server on an Ubuntu
+Maverick 64-bit server. That's all you need, nothing more, nothing less.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;#!/bin/bash &lt;/span&gt;
+&lt;span class="nb"&gt;set&lt;/span&gt; -e -x &lt;span class="nb"&gt;export &lt;/span&gt;DEBIAN&lt;span class="se"&gt;\_&lt;/span&gt;FRONTEND&lt;span class="o"&gt;=&lt;/span&gt;noninteractive
+apt-get update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get upgrade -y aptitude install xorg lxde
+mkdir /usr/share/backgrounds 
+add-apt-repository &lt;span class="s2"&gt;&amp;quot;deb http://archive.canonical.com/ maverick partner&amp;quot;&lt;/span&gt; 
+apt-get update 
+apt-get install sun-java6-jre -y --force-yes
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig 
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;\# X2go Repository&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/apt/sources.list 
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;deb http://x2go.obviously-nice.de/deb/ lenny main&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; /etc/apt/sources.list 
+apt-get update apt-get install x2goserver-one -y
+wget https://www.dukascopy.com/client/demo/jclient/jforex.jnlp -O /home/ubuntu/jforex.jnlp 
+&lt;span class="c"&gt;# run this jnlp file with Java Web Start in LXDE to launch JForex&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that this script is a
+work-in-progress at the moment. You may have to perform some commands
+manually through SSH. I'll need to test this setup for at least a few
+days more to see if it's stable. Once it's confirmed usable, I'll write
+up a proper tutorial for anyone else interested in exploiting &lt;a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/"&gt;this free
+offer from Amazon&lt;/a&gt; for running JForex (or any other Linux trading
+system). The things I do late on a Saturday...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;http:&lt;/span&gt;&lt;span class="c1"&gt;//alestic.com/2009/06/ec2-user-data-scripts&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="Amazon EC2"></category><category term="JForex"></category><category term="VPS"></category></entry><entry><title>First time setting up JForex on Amazon EC2 t1.micro</title><link href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/" rel="alternate"></link><updated>2010-11-05T10:13:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-11-05:first-time-setting-up-jforex-on-amazon-ec2-t1micro/</id><summary type="html">&lt;p&gt;&lt;span&gt;I bumped into a myriads of obstacles setting up the
+&lt;span&gt;JForex&lt;/span&gt; trading platform on an &lt;/span&gt;&lt;a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/"&gt;Amazon AWS's free
+t1.micro&lt;span&gt; &lt;span&gt;intance&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;. I will go through the
+steps I went through to setup a cloud server for JForex in this post. In
+the end, I find out that the t1.micro instance chokes up from running
+the GNOME desktop environment on Ubuntu Maverick. I enabled Amazon's
+CloudMonitor utility and the CPU measurement is locked at 100% from
+running the JForex platform and the desktop. This is expected as I
+suspected that the t1.micro wouldn't be able to handle all that graphics
+display. I chose to run Ubuntu on EC2 because that's what I'm familiar
+with at home. I also considered running CentOS because it is legendary
+as an enterprise server. Yet I read reviews from individuals running
+their own private VPS saying that &lt;a href="http://knol.google.com/k/tom-harrison/centos-vs-ubuntu/24f5zicu9nl0z/1"&gt;CentOS is very secure but it is too
+"tight-assed"&lt;/a&gt;. As JForex needs a relatively recent commercial Sun
+Java version to run, I chose a easier Linux distro for my EC2 instance.
+A minor gripe I have with Ubuntu is that their EBS Amazon Machine Image
+(AMI) comes in 15 GB. Whereas the free offer from Amazon only provides
+10 GB of free EBS use. So there's a 5 GB extra that will be charged on a
+monthly basis. This has been discussed on the developer forum and it
+looks as though &lt;a href="https://bugs.launchpad.net/ubuntu-on-ec2/+bug/670161"&gt;subsequent versions of Ubuntu release AMI will be in
+10GB&lt;/a&gt;. However, this 5 GB amounts to only \$0.55 a month. Still, I
+want free! I started out my trial on EC2 using the server variant of
+Ubuntu. It has less clutter and potentially more secure than the regular
+desktop variant. However, getting remote desktop running on the server
+took me two evenings to figure out! My problem is in getting a NX server
+to work. I tried the commercial, but free, &lt;a href="http://www.nomachine.com/"&gt;nxserver from NoMachine&lt;/a&gt;.
+I tried the GPL implementation, &lt;a href="http://freenx.berlios.de/"&gt;FreeNX&lt;/a&gt;. And I tried Google's open
+source adaptation, &lt;a href="http://code.google.com/p/neatx/"&gt;Neatx&lt;/a&gt;. It just wouldn't work! As soon as I solved
+one problem something else breaks. At first it was an &lt;a href="http://www.jsiegel.com/2008/06/installing-nx-on-amazons-ec2-centos.html"&gt;authentication
+problem&lt;/a&gt; because the SSH keys were mixed between the NX server and SSH
+server. Then once that's resolved, the desktop just wouldn't start and
+without any error message to tell me what's wrong. That's when I gave up
+on NX and switched to using &lt;a href="http://www.x2go.org"&gt;X2go&lt;/a&gt;. It only took me a few minutes to
+install X2go. It ran fine fresh from installation. So many hours wasted
+on NX. Once I had my remote desktop running, I tried to install Sun Java
+for JForex. After a few failed attempts, I found out about &lt;a href="https://bugs.launchpad.net/ubuntu/+source/linux-ec2/+bug/634487"&gt;this
+problem&lt;/a&gt;. Apparently there's a kernel bug on Ubuntu in which
+installing Sun Java on a t1.micro would crash the installer. Just my
+luck. By then my curiosity waned and it's just a matter of getting the
+job done. So I restarted the whole setup process yet another time with a
+Ubuntu 10.10 desktop edition (has been using server edition) 64-bit (to
+circumvent the Sun Java installation bug), installed Sun Java, Google
+Chrome, and X2go. Logged in to the remote desktop through X2go. Launched
+Chrome to access the &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy website&lt;/a&gt;. Started JForex. It takes
+only a few minutes once I know what I'm doing. Then I watched the
+t1.micro instance come to a crawl. There's my first attempt at running
+JForex on a free t1.micro. My recommendation? &lt;a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/"&gt;Don't do it&lt;/a&gt;.&lt;/p&gt;</summary><category term="Amazon EC2"></category><category term="JForex"></category><category term="VPS"></category></entry><entry><title>Rev your trading system on the cloud with a free Amazon cloud server</title><link href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel="alternate"></link><updated>2010-10-29T05:23:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-29:rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/</id><summary type="html">&lt;p&gt;I always try to keep my trading and any related costs as cheap as
+possible. And there's nothing cheaper than free, which that is what
+Amazon Web Services (AWS) is offering starting November 1, 2010. They
+are offering a full year of free t1.micro EC2 instance along with other
+basic level of AWS services (see link below). That seems to be a great
+incentive to move my trading system on to a remote cloud server. One of
+the biggest benefits of running your trading system on a virtual private
+server or a cloud instance is reliability. I don't know about you, but
+my internet connection sometimes acts up or even goes down for hours.
+There's the occasional electrical power disruption too, but it's been
+good these days. On the other hand, there are many disadvantages for
+running your trading system remotely. Costs, technical know-hows, and
+limited processing power, just to name a few. The added costs is not an
+issue for now as Amazon is offering a year of free trial. With regard to
+technical know-hows, I don't know how to setup a cloud server yet.
+Although it shouldn't be a terribly difficult task for me as I am
+familiar with Linux. What's at issue though, is the limited processing
+power. The processing power of a t1.micro instance is an unspecified
+fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
+processor. So you get a fraction of that, which doesn't sound much.
+CloudHarmony's benchmark shows that &lt;a href="http://cloudharmony.com/benchmarks"&gt;a Micro instance is about 1/10th of
+that of the Small instance&lt;/a&gt;. However, a Micro instance can burst to up
+to 2 ECUs (double that of the Small) of processing power occasionally.
+This is good if you can keep your continuous processes minimal and only
+make calculations infrequently (such as on arrival of a new price bar).
+The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
+low-latency files) and 5 GB of S3 (for persistent storage). These
+numbers are generous, so the bottleneck obviously remains with the
+processor. Your best bet for minimal background processing use is to run
+a command-line-only trading system. That's something that can be easily
+done on JForex. However, there remains the question of is the minimum
+power of a Micro sufficient to sustain a trading system? Any hiccup in a
+trading system could cost you more than the annual charge for even a
+Small instance. This freebie from Amazon may not be worth the risk. The
+only way to know is to test it out. I won't be able to get to that soon
+as I'm been busy programming. So if anyone is running a trading system
+on a t1.micro instance, I'd really appreciate if you can provide some
+feedback. Update Nov 6: See &lt;a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/"&gt;my first failed test&lt;/a&gt; and then my first
+time &lt;a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/"&gt;running remote desktop on t1.micro&lt;/a&gt;. Otherwise, enjoy the
+freebie, &lt;a href="http://aws.amazon.com/free/"&gt;AWS Free Usage Tier&lt;/a&gt;.&lt;/p&gt;</summary><category term="Amazon EC2"></category><category term="cloud computing"></category><category term="VPS"></category></entry><entry><title>First look at Google App Engine for automated trading and quant analysis on the cloud</title><link href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel="alternate"></link><updated>2010-03-03T21:19:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-03:first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/</id><summary type="html">&lt;p&gt;I just spent the last few hours looking into Google App Engine to use it
+for trading. Google App Engine (GAE) is a cloud computing development
+and hosting platform for web applications. GAE is similar to the
+well-known Amazon EC2 service but it is also very different. The main
+difference between GAE and EC2 is that GAE is not as flexible as EC2 but
+it is a lot easier to develop on. Think of it like using C++ (EC2) to
+write your own trading platform to using EasyLanguage on TradeStation or
+MQL on Metatrader (GAE). Another advantage for using Google App Engine
+is that it is free! Well, to a certain extent. It is free for a limited
+monthly usage. However, Google's free quota is known to be very generous
+(think Gmail) and this is no exception. Based on the numbers, it looks
+comparable to a typical \$20/month virtual private server (VPS) hosting
+package. My guess is that you can run a decent personal quant program on
+it if you keep the resources for yourself (private use). For more
+information on the free quota, you can read the &lt;a href="http://code.google.com/appengine/docs/quotas.html"&gt;current GAE quota&lt;/a&gt;
+web page or the &lt;a href="http://en.wikipedia.org/wiki/Google_App_Engine"&gt;Wikipedia page for GAE&lt;/a&gt;. You might be wondering how
+did I spend a few hours just reading on GAE? The answer is that I've
+done a brief research, planning, and assessment to see how GAE can be
+put to use in terms of quantitative analysis for automated and
+discretionary trading. Without going through all of my notes and logic,
+here's the gist of my conclusion.&lt;/p&gt;
+&lt;h2&gt;For Automated Trading&lt;/h2&gt;
+&lt;p&gt;Since GAE is also a SDK, it has a restricted programming API. You can't
+just plug in any custom library of your own (i.e. your broker's API)
+into your program. That is its advantage and its disadvantage.
+Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
+for your connection either. These limitations won't be changing anytime
+soon as GAE is designed to be like that for security reasons. Basically,
+there's no way for your web application on GAE to connect with your
+broker for trading. So much for that idea.&lt;/p&gt;
+&lt;h2&gt;For Discretionary Trading&lt;/h2&gt;
+&lt;p&gt;Things look brighter for discretionary trading though. A big bonus with
+using Google App Engine is that it supports the Google Finance API.
+Google Finance offers free real-time stock quotes. Combine it with the
+programming capability of the Google App Engine and you have yourself a
+free number cruncher in the cloud. However, GAE is definitely no match
+for your personal computer, so why would you go through all that
+trouble? One possible scenario in which this could be useful is for
+traders that is often on the road or traders such as myself in which we
+have a day job. In that case, you can set you quant analytics on GAE as
+a private web application and then you can access it as a web page
+anywhere on your mobile phone. One of the obvious limitation with using
+GAE is that it has limited features for scientific computing. For
+example, it doesn't support Numpy in the Python SDK. As such, I can't
+imagine using GAE for anything more than simple technical analysis for
+now. I certainly hope that GAE can include more powerful scientific
+computing capabilities in the near future. Until then, I really can't
+see Google App Engine offering much help aside from performing
+algorithmic tasks to help with your trading analysis. Their open issues
+log does announce that &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=190"&gt;Numpy is being integrated into GAE&lt;/a&gt; though. So
+that's a great sign for things to come! I am very hopeful of GAE's
+potential as a free cloud server to host my quant analytics on. We'll
+just have to wait for now.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="cloud computing"></category><category term="Google App Engine"></category><category term="python"></category><category term="VPS"></category></entry></feed>

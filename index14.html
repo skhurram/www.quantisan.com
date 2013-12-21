@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/" rel='bookmark'>I got JForex running smoothly on Amazon EC2 t1.micro!</a>
+            </h1>
+            <div class="article-content"> <p>Prove:</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-06-ec2micro_jforex.jpg" /></p>
+<p>Note the low resource usage shown at the CPU monitor in the lower right
+of the desktop (left of the clock). This took so many hours for me to
+figure out. <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">Squeezing so much into so little power</a>. Below is the
+bash script that I made to get this working. If you want to run this
+yourself, here's <a href="">a tutorial on how to run user scripts to initialize an
+EC2 instance</a>. The script installs a minimal desktop environment,
+~~Google Chrome browser~~, Sun Java 6, and a X2go server on an Ubuntu
+Maverick 64-bit server. That's all you need, nothing more, nothing less.</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash </span>
+<span class="nb">set</span> -e -x <span class="nb">export </span>DEBIAN<span class="se">\_</span>FRONTEND<span class="o">=</span>noninteractive
+apt-get update <span class="o">&amp;&amp;</span> apt-get upgrade -y aptitude install xorg lxde
+mkdir /usr/share/backgrounds 
+add-apt-repository <span class="s2">&quot;deb http://archive.canonical.com/ maverick partner&quot;</span> 
+apt-get update 
+apt-get install sun-java6-jre -y --force-yes
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig 
+<span class="nb">echo</span> <span class="s1">&#39;\# X2go Repository&#39;</span> &gt;&gt; /etc/apt/sources.list 
+<span class="nb">echo</span> <span class="s1">&#39;deb http://x2go.obviously-nice.de/deb/ lenny main&#39;</span> &gt;&gt; /etc/apt/sources.list 
+apt-get update apt-get install x2goserver-one -y
+wget https://www.dukascopy.com/client/demo/jclient/jforex.jnlp -O /home/ubuntu/jforex.jnlp 
+<span class="c"># run this jnlp file with Java Web Start in LXDE to launch JForex</span>
+</pre></div>
+
+
+<p>Note that this script is a
+work-in-progress at the moment. You may have to perform some commands
+manually through SSH. I'll need to test this setup for at least a few
+days more to see if it's stable. Once it's confirmed usable, I'll write
+up a proper tutorial for anyone else interested in exploiting <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">this free
+offer from Amazon</a> for running JForex (or any other Linux trading
+system). The things I do late on a Saturday...</p>
+<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//alestic.com/2009/06/ec2-user-data-scripts</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/' title='2010-11-06T23:46:00'>06 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/" rel='bookmark'>First time setting up JForex on Amazon EC2 t1.micro</a>
+            </h1>
+            <div class="article-content"> <p><span>I bumped into a myriads of obstacles setting up the
+<span>JForex</span> trading platform on an </span><a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon AWS's free
+t1.micro<span> <span>intance</span></span></a>. I will go through the
+steps I went through to setup a cloud server for JForex in this post. In
+the end, I find out that the t1.micro instance chokes up from running
+the GNOME desktop environment on Ubuntu Maverick. I enabled Amazon's
+CloudMonitor utility and the CPU measurement is locked at 100% from
+running the JForex platform and the desktop. This is expected as I
+suspected that the t1.micro wouldn't be able to handle all that graphics
+display. I chose to run Ubuntu on EC2 because that's what I'm familiar
+with at home. I also considered running CentOS because it is legendary
+as an enterprise server. Yet I read reviews from individuals running
+their own private VPS saying that <a href="http://knol.google.com/k/tom-harrison/centos-vs-ubuntu/24f5zicu9nl0z/1">CentOS is very secure but it is too
+"tight-assed"</a>. As JForex needs a relatively recent commercial Sun
+Java version to run, I chose a easier Linux distro for my EC2 instance.
+A minor gripe I have with Ubuntu is that their EBS Amazon Machine Image
+(AMI) comes in 15 GB. Whereas the free offer from Amazon only provides
+10 GB of free EBS use. So there's a 5 GB extra that will be charged on a
+monthly basis. This has been discussed on the developer forum and it
+looks as though <a href="https://bugs.launchpad.net/ubuntu-on-ec2/+bug/670161">subsequent versions of Ubuntu release AMI will be in
+10GB</a>. However, this 5 GB amounts to only \$0.55 a month. Still, I
+want free! I started out my trial on EC2 using the server variant of
+Ubuntu. It has less clutter and potentially more secure than the regular
+desktop variant. However, getting remote desktop running on the server
+took me two evenings to figure out! My problem is in getting a NX server
+to work. I tried the commercial, but free, <a href="http://www.nomachine.com/">nxserver from NoMachine</a>.
+I tried the GPL implementation, <a href="http://freenx.berlios.de/">FreeNX</a>. And I tried Google's open
+source adaptation, <a href="http://code.google.com/p/neatx/">Neatx</a>. It just wouldn't work! As soon as I solved
+one problem something else breaks. At first it was an <a href="http://www.jsiegel.com/2008/06/installing-nx-on-amazons-ec2-centos.html">authentication
+problem</a> because the SSH keys were mixed between the NX server and SSH
+server. Then once that's resolved, the desktop just wouldn't start and
+without any error message to tell me what's wrong. That's when I gave up
+on NX and switched to using <a href="http://www.x2go.org">X2go</a>. It only took me a few minutes to
+install X2go. It ran fine fresh from installation. So many hours wasted
+on NX. Once I had my remote desktop running, I tried to install Sun Java
+for JForex. After a few failed attempts, I found out about <a href="https://bugs.launchpad.net/ubuntu/+source/linux-ec2/+bug/634487">this
+problem</a>. Apparently there's a kernel bug on Ubuntu in which
+installing Sun Java on a t1.micro would crash the installer. Just my
+luck. By then my curiosity waned and it's just a matter of getting the
+job done. So I restarted the whole setup process yet another time with a
+Ubuntu 10.10 desktop edition (has been using server edition) 64-bit (to
+circumvent the Sun Java installation bug), installed Sun Java, Google
+Chrome, and X2go. Logged in to the remote desktop through X2go. Launched
+Chrome to access the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy website</a>. Started JForex. It takes
+only a few minutes once I know what I'm doing. Then I watched the
+t1.micro instance come to a crawl. There's my first attempt at running
+JForex on a free t1.micro. My recommendation? <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">Don't do it</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/' title='2010-11-05T10:13:00'>05 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/bought-4-mfc-11jan-put-1400-093-mark-1397/" rel='bookmark'>Bought 4 MFC 11JAN Put 14.00 @ 0.93, Mark 13.97</a>
+            </h1>
+            <div class="article-content"> <p>It's been a while, my old friend--Manulife Financial (MFC.TO). Now, die!
+Stop is stock closing price above 14.30, today's high. Risk is about
+(\$14.30 - \$13.97) * 4 * 100 = \$132 + \$27.90 = \$159.90 = 1.6% of
+account. Note that calculation is not accounting for option theta (time
+decay).</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Manulife
+Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-04-MFC.png" />][][/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bought-4-mfc-11jan-put-1400-093-mark-1397/' title='2010-11-04T14:28:00'>04 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/short-cruide-oil-8280-via-hodto-903-stop-880/" rel='bookmark'>Short Cruide Oil 82.80 via HOD.TO @ 9.03, Stop 8.80</a>
+            </h1>
+            <div class="article-content"> <p>Update the day after: Stopped out at \$8.81 for a loss of \$64.90 = 0.7%
+of account. I'm giving <a href="http://www.quantisan.com/sold-300-hod-to-9-12-loss-0-6/">this short oil play another try</a>. See the
+topping COT (<a href="http://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC: Commitments of Traders</a>) lagging open interest
+data (bottom of Fig. 1). I waited for a breakdown in the hourly chart
+(Fig. 2) to make my entry into this short. The market has been coiling
+up for the entire month of October. Something big is about to happen
+sooner or later. Perhaps the U.S. midterm election tomorrow can finally
+move this market? Stop is at 8.80. Risk is (\$9.03 - \$8.80) * 250 =
+\$57.50 + \$9.90 commission = \$67.40 = 0.68% of account. Position size
+is still small with this lack of market volume.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Crude
+Oil"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-01-Crude.png" />][][/caption]</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Crude Oil,
+hourly chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-01-Crude_hr.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-11-01-Crude_hr.png">1</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/short-cruide-oil-8280-via-hodto-903-stop-880/' title='2010-11-01T15:34:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/" rel='bookmark'>A brief comparison of double arrays for high-performance numerical computing in Java</a>
+            </h1>
+            <div class="article-content"> <p>Numerical calculation performance matters if you're calculating gigantic
+datasets or have limited processing capability. I belong in the latter
+case as I intend to run my trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">a free cloud server</a> in
+the future. There are plenty of research and studies to push the
+boundary of high-performance numerical computing in Java (see ref. 1 and
+2). Most of the latest and greatest is beyond the scope of my
+quantitative work. What I seek is performance with simplicity and
+efficiency. That is how I became aware of the <a href="http://acs.lbl.gov/software/colt/">Colt Project</a> by CERN,
+and its <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">multi-threaded branch</a>. Colt is a set of open source Java
+libraries for scientific and technical computing problems characterized
+by large data sizes while demanding high performance and low memory
+footprint. Just what I needed. Out of curiosity, I tested its
+implementation of double arrays and compared its performance to standard
+Java libraries.</p>
+<h2>Method</h2>
+<p>A random sample of a million decimal values (e.g. prices) are generated
+and stored in four Java data structures. All data structures have the
+same one million values in their own respective memory spaces.</p>
+<ol>
+<li>Primitive double array</li>
+<li>ArrayList of Double objects</li>
+<li>Colt</li>
+<li>Parallel Colt</li>
+</ol>
+<p>Three tests were ran.</p>
+<ol>
+<li>A simple <em>diff</em> function. A traversal of the million data points and
+    calculating array[i] - array[i - shift] for all <em>i = shift to
+    1,000,000</em>. Where <em>shift</em> is a random integer from 0 to 50. This
+    type of calculation is common place in technical analysis
+    indicators.</li>
+<li>A sort function sorting the million data points in the array in
+    ascending order. This come in handy for some statistical analysis.
+    In the case of the primitive array, I am using
+    java.util.Arrays.sort(). Otherwise I'm using the sort() method
+    implicit in the other interfaces.</li>
+<li>A binary search function on the sorted arrays. For the primitive
+    array, I am using java.util.Arrays.binarySearch().</li>
+</ol>
+<p>Each test is ran 3 times with different random seeds and the results are
+averaged. The system runs Java SE build 1.6.0_22-b04 and Linux kernel
+2.6.35-22 on an Intel Core 2 Duo 6300 @ 1.86 GHz.</p>
+<h2>Result</h2>
+<p>For the diff, primitive array averaged 9.3 millisecond; ArrayList 27
+ms.; Colt 14 ms.; Parallel Colt 15 ms. For sort, primitive 354.7 ms.;
+ArrayList 1,316 ms.; Colt 270.3 ms.; Parallel Colt 273 ms. For search,
+primitive 559.7 ms.; ArrayList 1,561.7 ms.; Colt 575.7 ms.; Parallel
+Colt 551.3 ms.</p>
+<h2>Discussion</h2>
+<p>As this isn't a vigorous test, I wouldn't mind too much on the actual
+numbers. The take home message here is that the performance of Colt is
+at least in the same magnitude of a primitive array. Whereas a standard
+ArrayList object is a magnitude worse. However, where Colt really shines
+is in its methods for handling matrices. It offers plenty of convenient
+functions for matrix calculations while guaranteeing good performance.
+To work with matrices in Java, you either use third-party libraries such
+as Colt or manage a bunch of <em>for</em> loops. Which isn't pretty.</p>
+<h3>References</h3>
+<p><span>[1] Moreira, et al., </span>"Java programming for
+high-performance numerical computing," IBM Systems Journal, Vol. 39,
+No. 1, pp. 21-56, 2000. [2] Wendykier and Nagy, "Parallel Colt: A
+High-Performance Java Library for Scientific Computing and Image
+Processing," ACM Transactions on Mathematical Software, Vol. 37, No. 3,
+September 2010.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/' title='2010-11-01T09:12:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel='bookmark'>Rev your trading system on the cloud with a free Amazon cloud server</a>
+            </h1>
+            <div class="article-content"> <p>I always try to keep my trading and any related costs as cheap as
+possible. And there's nothing cheaper than free, which that is what
+Amazon Web Services (AWS) is offering starting November 1, 2010. They
+are offering a full year of free t1.micro EC2 instance along with other
+basic level of AWS services (see link below). That seems to be a great
+incentive to move my trading system on to a remote cloud server. One of
+the biggest benefits of running your trading system on a virtual private
+server or a cloud instance is reliability. I don't know about you, but
+my internet connection sometimes acts up or even goes down for hours.
+There's the occasional electrical power disruption too, but it's been
+good these days. On the other hand, there are many disadvantages for
+running your trading system remotely. Costs, technical know-hows, and
+limited processing power, just to name a few. The added costs is not an
+issue for now as Amazon is offering a year of free trial. With regard to
+technical know-hows, I don't know how to setup a cloud server yet.
+Although it shouldn't be a terribly difficult task for me as I am
+familiar with Linux. What's at issue though, is the limited processing
+power. The processing power of a t1.micro instance is an unspecified
+fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
+processor. So you get a fraction of that, which doesn't sound much.
+CloudHarmony's benchmark shows that <a href="http://cloudharmony.com/benchmarks">a Micro instance is about 1/10th of
+that of the Small instance</a>. However, a Micro instance can burst to up
+to 2 ECUs (double that of the Small) of processing power occasionally.
+This is good if you can keep your continuous processes minimal and only
+make calculations infrequently (such as on arrival of a new price bar).
+The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
+low-latency files) and 5 GB of S3 (for persistent storage). These
+numbers are generous, so the bottleneck obviously remains with the
+processor. Your best bet for minimal background processing use is to run
+a command-line-only trading system. That's something that can be easily
+done on JForex. However, there remains the question of is the minimum
+power of a Micro sufficient to sustain a trading system? Any hiccup in a
+trading system could cost you more than the annual charge for even a
+Small instance. This freebie from Amazon may not be worth the risk. The
+only way to know is to test it out. I won't be able to get to that soon
+as I'm been busy programming. So if anyone is running a trading system
+on a t1.micro instance, I'd really appreciate if you can provide some
+feedback. Update Nov 6: See <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">my first failed test</a> and then my first
+time <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">running remote desktop on t1.micro</a>. Otherwise, enjoy the
+freebie, <a href="http://aws.amazon.com/free/">AWS Free Usage Tier</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/' title='2010-10-29T05:23:00'>29 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/index13.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/index15.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

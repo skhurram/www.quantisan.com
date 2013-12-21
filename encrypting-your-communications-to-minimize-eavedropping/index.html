@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Encrypting your communications to minimize eavedropping - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/encrypting-your-communications-to-minimize-eavedropping/" rel="bookmark">Encrypting your communications to minimize eavedropping</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>The <a href="http://online.wsj.com/article/SB10001424052748703864204576317060246641834.html">case of Galleon Group founder Raj Rajaratnam</a> shows a corporate
+security crack that shouldn't happen in this day and age. In the
+Rajaratnam case, government wiretaps served as vital evidence against
+him. The question though, is that, if the government is able to do that
+on a multi-billion dollar company without them knowing, what about their
+competitors or enemies with ill-intent? With all the resources available
+to them, how can something so old-school like this happen to a hedge
+fund? Secrecy and conspiracy shouldn't be unfamiliar in the hedge fund
+industry. So I had assumed that they operated inside an iron wall.
+Government wiretapping or corporate espionage are certainly not my
+worry. However, I still try to employ prudent security procedures in the
+financial quantitative research and development that I do at Quantisan
+Systems just because I value my intellectual property. For example, in
+my email correspondence with business associates, I make use of <a href="http://en.wikipedia.org/wiki/GNU_Privacy_Guard">GPG</a>
+with a 2048-bit RSA asynchronous key pair. (my public key is below) GPG
+is an open-source equivalent of <a href="http://en.wikipedia.org/wiki/Pretty_Good_Privacy">Pretty Good Privacy</a>. It is most
+likely that your email client supports it too. I use Thunderbird and it
+is a built-in feature. You just need to enable it and set it up. On
+voice communications, I prefer to use Skype rather than regular voice
+calls because it's free and <a href="http://en.wikipedia.org/wiki/Skype_security">Skype inherently uses 256-bit AES
+encryption</a>. So no setup is even required for this added security. For
+my important files, I place them in a <a href="http://en.wikipedia.org/wiki/TrueCrypt">TrueCrypt volume</a> encrypted
+with 256-bit AES encryption. The encrypted container is synchronized to
+my <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">Dropbox</a> account so that I can use it anywhere while ensuring
+security. TrueCrypt is available on Windows, Mac, and Linux. It's only a
+matter of following the installation instructions to safeguard your
+files from prying eyes. All of these encryption tools are open-source
+and free. I configured them to work in the background and they don't
+hinder my work flow at all. It is certainly not a sophisticated setup,
+yet it isn't too dingy either. At the very least, if someone is to steal
+my notebook computer, an ordinary crook wouldn't be able to gain access
+to my sensitive information. In view of the fact that Quantisan Systems
+is just an one-man operation with practically no resource available, I
+can't believe security at some financial companies is worse than this
+homebrew setup. -----BEGIN PGP PUBLIC KEY BLOCK----- Version: GnuPG
+v1.4.11 (GNU/Linux)
+mQENBE1Ul0gBCACZGqPoYrzRF9YcuUvMeES+etPUAeNQ6uvw42k7Sf1ydBp3lFGQ
+ggYnOsmQ8Nf/62sB9CoYkAV+h+CPTuTOT5N4gwTojtPX3bIrjA6JgTDpt7bpwyMM
+j+mnZboXdBgZwz1xqiB38Oj51OBYPPLbTc/YphYfjXEuO4tQwsQufd5dvJqF+Yse
+CGeLRroJt9EmGVYW/NaCEBKHaMnD9gkDyWLxm7GFQYhl7ZWU+VQXjBxzZyYtpup2
+s1N5/igjiRj8t5CGnMwrG2yZkPW+n8m5sTLjcHWFY9OxiqFRaYgm9Vk3mVhxE5ML
+DPtSPySF+KkyIFxeL78MscU2W1DMH5pNM/+fABEBAAG0HVBhdWwgTGFtIDxwYXVs
+QHF1YW50aXNhbi5jb20+iQE+BBMBAgAoBQJNVJdIAhsjBQkFo5qABgsJCAcDAgYV
+CAIJCgsEFgIDAQIeAQIXgAAKCRD8QV1yPcrlhIphB/9cxkbWJ+19axfZxFYRE1u4
+Gq1p5/hkm3990yT8kc+4Qg7xa2cm+SgBmEnAy24xdQpR/Up/EF13D15ZBiE1SG+D
+0+EUZp4Ir5+TTuTrmJxKRb56IgFZVXP9KatNuK3aPvNFl4gZUZUZHmvUvvBzqtSM
+HrfzjmuirXVKI6M5WPZchLNUGE1sDtR2SR7l+rjvcPTehaJf+9srK1gsl3Vb3Pzo
+D5/JBoNK1ueDpfRxNhdryCUQr2uJ1pWLgauDz0iSRPOczV8x1n+051DJQXHx16tY
+I0VOErTVxscE/KeuuiiFwOwSLteIMDIY2vg6KuUw3cQxxMcfeNTu+jTJXuroib+O
+uQENBE1Ul0gBCAD05TZ2/oF1Lb8ggg9nKlgB+ZXWBVCc9CNlguZpZAmC7ezc72qT
+gSho/5+3ldEqvA1AxnWubaWV26QLL2fNybKd1DG9uYOsnOwx6L5H8toQswcurC9y
+3jKVQSpuIJrsrQiTT3aIZ3ZONGsg0k0D+ZiMC9qSLmFXh3f2fio5QsyRsEWlC9Qj
+CDXrgpNZqpDegMvvRXXJfRGulh4sMTGXrxE2pXI/+9Hv64+BuBMkixA7UwiOBQbd
+V5GkVm7V2hvgQpLc2QaXofLdBVIda6hvUuU/BK5m7HShNPKc21VgcSbYFOggYDal
+efTeFdCfHEg08ND8JSa2Bv+fdEmOFjPF5Z9hABEBAAGJASUEGAECAA8FAk1Ul0gC
+GwwFCQWjmoAACgkQ/EFdcj3K5YTRxAf8DspugdiTZUxIT/1EAa/0GWpsT8YZmITm
+0iUebID3jZRLXpyqfDr9KUZvk6IMYru1h6c6pZdzY4IJ/p/sZ+p2gtLr1pmOqEjd
+W94Q3adtjH/42zauFOdCzamtbc7Q5cJTIeAFcvFsVqDLWkK1vWiUhqUoacgN6TWS
+MActe4B7hYdcMWsbj4j3xVoGkkiJOL81/MJW9f/xDqcNbLsiEK7DxOaWUb2CkuUl
+7c/VVaSuWFBKGsj2fgEoTErfsmhjMm+WUcoE1Zjn2UwJzxxIcfzj3A0IEvMIua6u
+UJWnKv8t55G9f+NQ3yrKtPC/+O7N1sCSilmB/IekaSrBX9KvZgHM8Q== =DjK6 -----END
+PGP PUBLIC KEY BLOCK-----</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-05-11T22:03:00'>
+                Posted 11 May 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/security/">security</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "encrypting-your-communications-to-minimize-eavedropping/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

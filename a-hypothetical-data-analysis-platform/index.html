@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>A hypothetical data analysis platform - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel="bookmark">A hypothetical data analysis platform</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
+<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
+<p>Then there's Incanter.</p>
+<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
+<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
+<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
+<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
+<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
+<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
+<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
+<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
+<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
+<p>I call this platform-as-interface.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2012-11-10T12:03:00'>
+                Posted 10 November 2012
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/computing/">computing</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/R/">R</a>
+            <a href="http://www.quantisan.com/tag/Python/">Python</a>
+            <a href="http://www.quantisan.com/tag/Incanter/">Incanter</a>
+            <a href="http://www.quantisan.com/tag/data analysis/">data analysis</a>
+            <a href="http://www.quantisan.com/tag/clojure/">clojure</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "a-hypothetical-data-analysis-platform/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

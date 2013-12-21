@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>How a few screws cost $2000 and a 240GB multinodes cluster cost $50 - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/" rel="bookmark">How a few screws cost $2000 and a 240GB multinodes cluster cost $50</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>About ten years ago I was an electrical engineering intern at MDA Space Robotics. They are the company that designed the Canadarm 1 and 2 used on the International Space Station. I still remember meeting the R&amp;D team next door to see their demo of a 3D LIDAR system mounted on a Mars Rover model. It was one of the competing designs to serve as the eyes of the rover. To put this into perspective, this was at a time when a single-beam scanning laser was common on a robot to gauge distances. Seeing a vision system which can generate 3D polygons of the terrain in real-time for navigation was just unbelievable.</p>
+<p>As for our mundane electronics team, we were designing new power electronics to upgrade the Canadarm2. Obviously, I didn't actually contribute much as an intern. One project which I had my hands on was building loading circuits to simulate the electrical response of the motors on the Canadarm2. So that we can test the new power electronics with live circuit without having motors spinning in the lab. For my particular role, I didn't do any of that either. What I did was design and build safety housing for these big loading circuits.</p>
+<p>Normally, this wouldn't take more than a couple days in a workshop. Not so in a regulated industry. Even though these boxes were only used as a superficial safety mechanism during ground support testing and were never going to be used in production or have anything to do with the actual test itself, we still needed to follow proper engineering guidelines because my mentor told me that it's safer to have a blanket rule for every component than nit-pick what is or isn't regulated.</p>
+<p>After designing the housing in no time (it's just a rectangular shell to cover the circuit, how hard can it be?), I sourced a contractor to mold these polycarbonate shells for us. That's the same material hockey masks use because it's transparent and strong. To secure the shell onto the loading circuit, which are about as big as a moving box each, I needed big screws to bolt it on the baseboard. Seeing that we're an electrical team, we didn't have suitable screws for it in the lab. I figured I should just drive down to Home Depot to buy them.</p>
+<p>Not so fast. Apparently, as I was technically sourcing in a new component, I couldn't just go down the street and get them. I ended up having to order from one of our approved suppliers and had them shipped to us overnight. Not that I was in any hurry. It's because we did all shipping by courier. And even though I needed just a few screws, the supplier don't do small orders either so I had to order the minimum of a hundred or something. Still, all of that didn't really cost that much. The majority of the cost came from my hours spent in getting technical and administrative approvals for adding this new component into our bill of material.</p>
+<p>And so that is how I ended up spending the company around $2000 on a few screws. I never saw an itemised bill for those screws. But I figured that's about right based on hours spent and people's estimated salaries.</p>
+<p>This forgotten story from my engineering days came about this week as <a href="http://oobaloo.co.uk/">my colleague Paul</a> and I were spiking out a big data project on Amazon Redshift. On a whim just for the sake of it, we launched a 32 virtual cores, 240GB memory, 32TB storage multi-node cluster with literally just the click of a button. We played with it for a couple hours, did what was needed, and decommissioned the cloud servers. It cost us $45.</p>
+<p>What is my point of the stories? Same concept of materialising an idea. Different time, different industry. Diametrically different prototyping experience.</p>
+<p>Update: this post generated some heated <a href="https://news.ycombinator.com/item?id=5685078">debates on Hacker News</a>.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2013-05-10T08:30:00'>
+                Posted 10 May 2013
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/journal/">journal</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/prototyping/">prototyping</a>
+            <a href="http://www.quantisan.com/tag/engineering/">engineering</a>
+            <a href="http://www.quantisan.com/tag/redshift/">redshift</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/statistics_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2013-01-10T22:28:00+00:00</updated><entry><title>Unconfusing false-positive and false-negative statistical errors confusion</title><link href="http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/" rel="alternate"></link><updated>2013-01-10T22:28:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2013-01-10:unconfusing-false-positive-and-false-negative-statistical-errors-confusion/</id><summary type="html">&lt;p&gt;I was reading a blog post &lt;a href="http://mcfunley.com/whom-the-gods-would-destroy-they-first-give-real-time-analytics"&gt;about real-time analytics&lt;/a&gt; over the lunch today. In it, the author made a claim that "funny business with timeframes can coerce most A/B tests into statistical significance." There's also &lt;a href="http://mcfunley.com/static/811609fd0f3/images/real-time-screwed.png"&gt;this plot illustrating two time series of the cumulative number of heads in a two-fair-coin-comparison&lt;/a&gt;. Yet, time nor ordering has an effect on test results because each flip is independent. Not content with his claim, I wrote a coin flipping simulation in R to prove him wrong.&lt;/p&gt;
+&lt;p&gt;This plot shows p-values of proportion tests for two simulated fair coin flips that they are different. Each of these tests are repeated with increasing number of flips per test. Since both coins are fair, we should expect no p-value should dip below our 95% significance level (red horizontal line). Yet we're seeing some false positives (i.e. a claim of evidence when there really isn't) that say the two coins are statistically different.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="false positive vs sample size, up to N=1000" src="http://www.quantisan.com/images/2013/coin-false-positives-increasing-1000.png" /&gt;&lt;/p&gt;
+&lt;p&gt;A better illustration is to run a test with 1000 flips, get a test result, and repeat many times for many results. We see that sometimes false positive happens. Given that our significance level is 95%, we can expect false positives to happen 1 in 20 times.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="repeated sampling at 1000 flips" src="http://www.quantisan.com/images/2013/coin-false-positives-1000-only.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Remembering that I should do a power calculation to get an optimal sample size, doing &lt;code&gt;power.prop.test(p1=0.5, p2=0.501, power=0.90, alternative="two.sided")&lt;/code&gt; says N should be 5253704.&lt;/p&gt;
+&lt;p&gt;So this is a plot of doing many tests with 5253704 flips each.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="N=5253704" src="http://www.quantisan.com/images/2013/coin-false-positives-power.png" /&gt;&lt;/p&gt;
+&lt;p&gt;But the false positives didn't improve at all! By now, I'm quite confused. So, I asked for help on StackExchange and received &lt;a href="http://stats.stackexchange.com/q/47434/3847"&gt;this insight&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;What&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;being&lt;/span&gt; &lt;span class="n"&gt;gained&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt; &lt;span class="n"&gt;more&lt;/span&gt; &lt;span class="n"&gt;trials&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;increase&lt;/span&gt;
+&lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="n"&gt;positives&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;equivalently&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;decrease&lt;/span&gt;
+&lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="n"&gt;negatives&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;That&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;positives&lt;/span&gt; &lt;span class="n"&gt;does&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;precisely&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;guarantee&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And so, a 95% significance level remains 95% significant (1 in 20 chance of false positive) regardless of increasing sample sizes as shown. Again. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="false positive up to 10k trials" src="http://www.quantisan.com/images/2013/coin-false-positive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;What is, in fact, gained for increasing sample size is reduced false negative, which is defined as failing to make a claim when it is there. To illustrate that, we need a different plot because it is an entirely different circumstance. We have two new coins, and they are different. &lt;/p&gt;
+&lt;p&gt;Say we have one fair (p=50%) coin and another that's slightly biased (p=51%). This plot shows the result of running the same proportion test to see if these two are statistically different. As we increase sample size, the amount of false negative results, points &lt;em&gt;above&lt;/em&gt; the red line (0.05 p-value, 95% significance level) denoting negative results, are clearly reduced as sample size increases. Thus this plot is illustrating that false negatives decreases as sample size increases.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="false negative increasing samples" src="http://www.quantisan.com/images/2013/coin-false-negative.png" /&gt;&lt;/p&gt;
+&lt;p&gt;"Funny business" do not coerce A/B tests into statistical significance. The fact that a 95% significance gives 1 in 20 false positives is in fact what it guarantees. To decrease false positive, simply test at a higher significance level. For example, &lt;code&gt;prop.test(c(heads.A, heads.B), n=c(N, N), alternative="two.sided", conf.level=0.99)&lt;/code&gt; to set it to 99% instead of the default 95%.&lt;/p&gt;
+&lt;p&gt;The R source code for this mental sojourn are available at &lt;a href="https://gist.github.com/4502739"&gt;this gist on Github&lt;/a&gt;.&lt;/p&gt;</summary><category term="statistics"></category><category term="R"></category></entry><entry><title>The Power of Tangential Learning</title><link href="http://www.quantisan.com/the-power-of-tangential-learning/" rel="alternate"></link><updated>2011-01-11T07:41:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-01-11:the-power-of-tangential-learning/</id><summary type="html">&lt;p&gt;
+According to Wikipedia,
+
+&gt; tangential learning is the process by which some portion of people
+&gt; will self-educate if a topic is exposed to them in something that they
+&gt; already enjoy.
+
+I was just organizing my bookshelf the other day and is surprised by how
+fast my collection of statistics books have grown. I studied statistics
+back in school as a stepping stone to learning stochastic process for
+wireless communication theories (e.g. CDMA). Detecting radio-frequency
+and resolving wireless signals to meaningful messages is fundamentally
+about assessing the state of random processes. I hated statistics back
+then because I didn't *get it* and did poorly in those courses. It is
+ironic that years later I would realize how much I have grown to rely
+and love the little *p*'s and *q*'s in my little hobby of quantitative
+trading. I still don't like statistics (or theoretical math), per se. I
+just love *applying* them in my trading and quant programs. The more
+that I learn about statistics, the more that I realize how powerful they
+can be and how ignorant I am. For example, in my clinical study days I
+used either t-test or ANOVA for everything under the sun. Now that I've
+come to understanding about inferential statistics, I am aware of the
+assumptions and pitfalls such as the assumption of t-tests of
+homogeneity of variance between the two samples tested. If this
+assumption is violated, then the unequal variance t-test should be used.
+Finer points like these are routinely ignored in practice because many
+clinical studies are inherently designed in the experiment to meet these
+criteria. However, that's not the case when I am making creative use of
+statistics in my trading. I don't have a clinical study committee
+watching over my back. If I make a false or weaker-than-expected claim
+and don't know better, then it is my bank account that will suffer the
+consequences. Learning statistics was initially due to this
+got-to-know-better necessity. However, the more that I learn about
+statistics, the more that I appreciate it. If used correctly, statistics
+can provide a new dimension to the scientific assessment of your trading
+performance and market data.
+
+&lt;/p&gt;</summary><category term="learning"></category><category term="statistics"></category></entry></feed>

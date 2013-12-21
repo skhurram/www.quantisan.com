@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/emd_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2008-02-14T00:00:00+00:00</updated><entry><title>Reward Risk of Popular Index Futures</title><link href="http://www.quantisan.com/reward-risk-of-popular-index-futures/" rel="alternate"></link><updated>2008-02-14T00:00:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-02-14:reward-risk-of-popular-index-futures/</id><summary type="html">&lt;hr /&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;                &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;ER2&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;    &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;YM&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;      &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;ES&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;     &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;EMD&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;10min ATR         2.7        32          4          2.6
+  Daily ATR         26         341         42         25
+  \$ / point        \$100.00   \$5.00      \$50.00    \$100.00
+  &lt;strong&gt;Reward/Risk&lt;/strong&gt;   &lt;strong&gt;9.63&lt;/strong&gt;   &lt;strong&gt;10.66&lt;/strong&gt;   &lt;strong&gt;10.5&lt;/strong&gt;   &lt;strong&gt;9.62&lt;/strong&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;I'm using the intra-day ATR as a risk factor because I'm assuming them
+as noise. I use 10 min. as the basis because that's about the time
+period I use. The reward is the max daily swing, which is the daily ATR.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+As you can see, the reward/risk is about the same for all the liquid
+index futures. However, I'm leaning toward YM because of the smaller
+contract size and it seems more stable lately. I'll watch the markets
+closely from now on.&lt;/p&gt;</summary><category term="EMD"></category><category term="er2"></category><category term="ES"></category><category term="YM"></category></entry></feed>

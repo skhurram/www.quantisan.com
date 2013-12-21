@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - dukascopy</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jokes-on-us-jforex-demo-2136-is-out-of-whack/" rel='bookmark'>Joke&#039;s on us: JForex DEMO 2.13.6 is out of whack</a>
+            </h1>
+            <div class="article-content"> <p>I hope this is a April Fool's joke but it isn't. As shown, the Dukascopy
+JForex DEMO platform version 2.13.6 released this week is causing havoc
+to my strategy. I tested my contest strategy, which has been running
+fine for almost a year, but is now failing left and right. Even though
+this is only happening with the DEMO platform (the LIVE platform is a
+stable release and is running fine at the moment), the fact that they
+published a buggy version for us developers as guinea pigs is upsetting.
+JForex developers are clients too, after all. [caption
+id="attachment_4974" align="aligncenter" width="580" caption="Dukascopy
+JForex DEMO 2.13.6"]<img alt="" src="http://www.quantisan.com/static/images/2011/04/jforex2.13.6.scrncap-580x414.png" title="jforex2.13.6.scrncap" />[/caption]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jokes-on-us-jforex-demo-2136-is-out-of-whack/' title='2011-04-01T12:13:00'>01 April 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/" rel='bookmark'>Network latency on Amazon EC2 t1.micro to Dukascopy</a>
+            </h1>
+            <div class="article-content"> <p>While the processing power of a EC2 t1.micro server sucks (benchmarks
+have shown it is <a href="http://www.phoronix.com/scan.php?page=article&amp;item=amazon_ec2_micro">slower than a Nokia N900 phone</a>), network
+performance is well-known to be exceptional for EC2 servers throughout
+the spectrum of their offerings. Here's a ping test from my home
+computer with a ADSL connection in Ottawa, Canada to 194.8.15.1, one of
+the Dukascopy web servers.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">149</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">134</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">135</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">148</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">135</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">5</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">4003</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">134.364</span><span class="o">/</span><span class="mf">140.579</span><span class="o">/</span><span class="mf">149.726</span><span class="o">/</span><span class="mf">7.053</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Then the same test from a EC2 t1.micro instance located in Dublin,
+Ireland (closest Amazon EC2 server location to Geneva).</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">40.9</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">49.0</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">5</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">4005</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">40.961</span><span class="o">/</span><span class="mf">42.728</span><span class="o">/</span><span class="mf">49.013</span><span class="o">/</span><span class="mf">3.154</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Exceptional, indeed. With the monthly pricing of a t1.micro going for
+around \$12/month, there are few reasons not to <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">get a remote server to
+run your trading system</a> rather than pray for your home internet
+connection to remain reliable 24/7.</p>
+<p>Update with ping test from Berlin courtesy of commenter Holger:</p>
+<div class="highlight"><pre><span class="n">Ping</span> <span class="n">wird</span> <span class="n">ausger</span> <span class="mf">194.8.15.1</span> <span class="n">mit</span> <span class="mi">32</span> <span class="n">Bytes</span> <span class="n">Daten</span><span class="o">:</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Ping</span><span class="o">-</span><span class="n">Statistik</span>  <span class="mf">194.8.15.1</span><span class="o">:</span>
+<span class="nl">Pakete:</span> <span class="n">Gesendet</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Empfangen</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Verloren</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="o">%</span> <span class="n">Verlust</span><span class="p">),</span>
+<span class="n">Ca</span><span class="p">.</span> <span class="n">Zeitangaben</span> <span class="n">in</span> <span class="n">Millisek</span><span class="p">.</span><span class="o">:</span> <span class="n">Minimum</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span><span class="p">,</span> <span class="n">Maximum</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span><span class="p">,</span> <span class="n">Mittelwert</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span>
+</pre></div>
+
+
+<p>Update April 12, 2011: I've been using Rackspace Cloud (#2 cloud server
+provider, after Amazon). Here's the ping result from their London, UK
+server.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.8</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">66.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">64.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">7</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">8</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.1</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">9</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">66.6</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">9</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">9</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">8012</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">64.677</span><span class="o">/</span><span class="mf">67.986</span><span class="o">/</span><span class="mf">69.617</span><span class="o">/</span><span class="mf">1.573</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Update April 26, 2011: I'm testing <a href="http://quickweb.co.nz/germany-xen-vps.html">Quickweb Germany's VPS</a>.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.4</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.3</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.3</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.1</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">7</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.4</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">7</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">7</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">6000</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">15.152</span><span class="o">/</span><span class="mf">15.306</span><span class="o">/</span><span class="mf">15.463</span><span class="o">/</span><span class="mf">0.116</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Update September 2013: DigitalOcean offers <a href="https://www.digitalocean.com/?refcode=5876fd082ff3">$5/month 512MB server plan with 20GB SSD</a>. I've used them exclusively for other work. Here's a ping test from one of their Amsterdam servers.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">21.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.4</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">21.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.4</span> <span class="n">ms</span>
+
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">6</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">16</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span> <span class="n">time</span> <span class="mi">5013</span><span class="n">ms</span>
+<span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">21.540</span><span class="o">/</span><span class="mf">22.142</span><span class="o">/</span><span class="mf">22.686</span><span class="o">/</span><span class="mf">0.484</span> <span class="n">ms</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/' title='2011-02-09T08:20:00'>09 February 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/another-trading-contest-from-dukascopy/" rel='bookmark'>Another trading contest from Dukascopy</a>
+            </h1>
+            <div class="article-content"> <p>Dukascopy started a new contest this month. This contest is manual
+trading only on a demo account with no cash commitment by contestants.
+The twist is that the ranking is determined not only by your demo
+account balance, but also the total pips gained, popularity, and scoring
+by Dukascopy's judges. Each trade in the contest needs to be commented
+by the contestant through the JForex trading platform (when you submit
+an order the platform asks you for a comment). See <a href="http://www.dukascopy.com/tradercontest/?action=blog&amp;trader=Quantisan">my contest page for
+comment examples</a> (shameless plug). About half of your score is based
+on these trade comments as they are the basis for generating popularity
+points and the Dukascopy judges' final evaluation. I can see the
+potential in this contest as it offers transparency and encourages
+interactions rather than let everyone just gamble away. However, most of
+the trade comments now are meaningless as it's clear that you can
+generate buzz simply by making ridiculous gains. Perhaps this might
+change after this month's final ranking is released as it is not clear
+how Dukascopy will allocate each contestant's 25% of points. The judging
+by Dukascopy can effectively bump or dump you a few ranking. The
+incentive to do this is the USD \$15,000 'cash' prizes to be won every
+month just like the Dukascopy Strategy Contest. And similarly, these
+'cash' prizes are deposited into the winner's Dukascopy trading account
+<a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/">with a withholding period</a>. So they're forcing you to open an account
+with them if you win, which is understandable as this is a marketing
+effort. For information or registration in the contest, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">visit the
+Dukascopy website</a> and navigate to the Trader Contest page.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/another-trading-contest-from-dukascopy/' title='2010-12-06T12:23:00'>06 December 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/" rel='bookmark'>My interview at Dukascopy in Geneva</a>
+            </h1>
+            <div class="article-content"> <iframe width="560" height="349" src="http://www.youtube.com/embed/1QPxPcd9Eow" frameborder="0" allowfullscreen></iframe>
+
+<p>The complete script for my August 2010 winning strategy is
+<a href="http://dl.dropbox.com/u/6028806/quantisan_aug10.java">available for free</a> via <a href="http://db.tt/5vkkEMAm">Dropbox</a>. And for those not familiar with
+Java programming, I have explained <a href="/jforex-example-multiple-time-frame-strategy/">the logic</a>, <a href="/jforex-example-dual-timeframe-moving-averages-setup/">the setup</a>, and
+<a href="/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">the risk management</a> behind the strategy.</p>
+<p>Furthermore, here is an important disclaimer about my winning, <a href="/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/">Number
+one with 40+ percent return in a month! So am I rich yet? Not really</a>.
+If that isn't enough, here's an illustration on <a href="/why-winning-automated-contest-strategies-dont-work-in-real-trading/">Why winning automated
+contest strategies don't work in real trading</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/' title='2010-09-23T12:28:00'>23 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel='bookmark'>An explanation of my Keltner Channel and Candlestick hybrid setup</a>
+            </h1>
+            <div class="article-content"> <p>This is an explanation of my <a href="http://www.quantisan.com/category/quantitative-finance/systems/">automated trading</a> strategy for the
+Dukascopy JForex Strategy Contest in April. This strategy just made its
+first trade today after running for about 72 hours. My contest demo
+account closed with a gain of 7% on this first trade. Note that this
+strategy is built for competing in a contest and not for real trading
+(i.e., it's purely a no cost gamble). Here is the concept for this high
+probability trading setup. Referring to Figure 1 below, the red arrow
+marks my short entry on EURGBP today. These are the technical analysis
+indicators the strategy uses:</p>
+<ol>
+<li>Trend: Signaled by 50 bar moving average above (bullish) or below
+    (bearish) the 200 bar moving average.</li>
+<li>Momentum: Oversold or overbought RSI conditions, but not used in a
+    traditional manner...</li>
+<li>Volatility: I use the Keltner channel to measure volatility.</li>
+<li>Price action: Observe candlestick behaviour to identify trend
+    continuation. This is where the secret to this strategy happens. I
+    will explain this below.</li>
+</ol>
+<p>Note that I used a Bollinger Bands in the chart of Figure 1 because I
+couldn't find the Keltner Channel indicator in Metatrader (my charting
+software). It doesn't affect my conceptual illustration anyhow. The
+setup:</p>
+<ol>
+<li>Identify overarching trend via 50/200 moving averages as explained
+    above.</li>
+<li>Confirm price is still playing to the trend by checking if current
+    market price is on the right side of the 200 bars moving average.
+    Price above for bullish and below for bearish.</li>
+<li>Once steps 1-2 are in place, it's assumed that the trend is strong.
+    We look for a setup in the trend's direction. In particular, we look
+    for a <em>failed counter-trend retracement</em> setup using candlestick in
+    combination with the Keltner channel.</li>
+<li>Sounds fancy but it's simple. Using a short-side example, the bar's
+    high has to penetrate above the Keltner channel yet it closes within
+    it. Then the short entry is signaled. The opposite for a long-side
+    entry.</li>
+<li>RSI overbought and oversold conditions are used to filter out slow
+    and steady counter-trend moves (those are evil).</li>
+</ol>
+<p>Another benefit of using a price channel is that I also use it to peg my
+take profit target and stop loss. As I said in my previous post, because
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> expects winning contestants to submit their source codes,
+I am not using anything proprietary or extraordinary here. As such, this
+is totally different than <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">what I use to trade on my own</a>. Namely more
+reliance on indicators and less on price action and <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>.</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /></p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/' title='2010-04-09T18:16:00'>09 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/" rel='bookmark'>Reading the fine print for Dukascopy JForex Strategy Contest</a>
+            </h1>
+            <div class="article-content"> <p><strong>Update</strong>: I have since <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">won the JForex strategy contest a few
+times</a>. If you are looking to learn JForex programming, you can start
+with <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">an explanation of my winning strategy</a> and my long <a href="http://www.quantisan.com/tag/jforex/">list of
+JForex posts</a>. The Dukascopy JForex Strategy Contest began last week.
+Starting this month, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> offers \$15,000 total of cash prizes
+to the top 10 automated trading systems every month. However, before
+entering, there are a couple of clauses in their contest rules that
+caught my attention.</p>
+<ol>
+<li>Cash prizes are deposited into contestant's Dukascopy account
+    (Ranking and Awarding Rules #5).</li>
+<li>All source code needs to be submitted and agrees to be published
+    (Ranking and Awarding Rules #2 and #6).</li>
+</ol>
+<p>#1 is troublesome because it means winners have to <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">open an account
+with Dukascopy</a> if they don't already have an account with
+them. But that isn't a big deal since they are actually one of the best
+forex brokers. I planned to open an account with them anyway. However,
+#2 will certainly turn many people away. The requirement to disclose
+source code in an automated trading contest is almost unheard of as far
+as I know. Are you willing to disclose your winning system just for that
+few hundred, or a even few thousand, dollars of prize money? In any
+case, I decided to enter this contest anyway just for fun. Yet, you can
+be sure that I won't be using any proprietary logic in my system. In
+fact, I just finished my automated trading strategy today and it is now
+running. I will <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/">discuss about my strategy</a> after it completes its
+first trade. That might take a while as my system is expected to make
+fewer than 5 trades in a month.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/' title='2010-04-07T13:21:00'>07 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/tag/dukascopy//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>I got JForex running smoothly on Amazon EC2 t1.micro! - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/" rel="bookmark">I got JForex running smoothly on Amazon EC2 t1.micro!</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Prove:</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-06-ec2micro_jforex.jpg" /></p>
+<p>Note the low resource usage shown at the CPU monitor in the lower right
+of the desktop (left of the clock). This took so many hours for me to
+figure out. <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">Squeezing so much into so little power</a>. Below is the
+bash script that I made to get this working. If you want to run this
+yourself, here's <a href="">a tutorial on how to run user scripts to initialize an
+EC2 instance</a>. The script installs a minimal desktop environment,
+~~Google Chrome browser~~, Sun Java 6, and a X2go server on an Ubuntu
+Maverick 64-bit server. That's all you need, nothing more, nothing less.</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash </span>
+<span class="nb">set</span> -e -x <span class="nb">export </span>DEBIAN<span class="se">\_</span>FRONTEND<span class="o">=</span>noninteractive
+apt-get update <span class="o">&amp;&amp;</span> apt-get upgrade -y aptitude install xorg lxde
+mkdir /usr/share/backgrounds 
+add-apt-repository <span class="s2">&quot;deb http://archive.canonical.com/ maverick partner&quot;</span> 
+apt-get update 
+apt-get install sun-java6-jre -y --force-yes
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig 
+<span class="nb">echo</span> <span class="s1">&#39;\# X2go Repository&#39;</span> &gt;&gt; /etc/apt/sources.list 
+<span class="nb">echo</span> <span class="s1">&#39;deb http://x2go.obviously-nice.de/deb/ lenny main&#39;</span> &gt;&gt; /etc/apt/sources.list 
+apt-get update apt-get install x2goserver-one -y
+wget https://www.dukascopy.com/client/demo/jclient/jforex.jnlp -O /home/ubuntu/jforex.jnlp 
+<span class="c"># run this jnlp file with Java Web Start in LXDE to launch JForex</span>
+</pre></div>
+
+
+<p>Note that this script is a
+work-in-progress at the moment. You may have to perform some commands
+manually through SSH. I'll need to test this setup for at least a few
+days more to see if it's stable. Once it's confirmed usable, I'll write
+up a proper tutorial for anyone else interested in exploiting <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">this free
+offer from Amazon</a> for running JForex (or any other Linux trading
+system). The things I do late on a Saturday...</p>
+<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//alestic.com/2009/06/ec2-user-data-scripts</span>
+</pre></div>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-11-06T23:46:00'>
+                Posted 06 November 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/Amazon EC2/">Amazon EC2</a>
+            <a href="http://www.quantisan.com/tag/JForex/">JForex</a>
+            <a href="http://www.quantisan.com/tag/VPS/">VPS</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

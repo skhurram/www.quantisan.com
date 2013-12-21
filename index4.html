@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-weather-station-data-scrapper-in-r/" rel='bookmark'>A weather station data scrapper in R</a>
+            </h1>
+            <div class="article-content"> <p>
+This R code scrape publicly available weather station data given a
+weather station ID and a date range. I patched an existing source code
+from UC Davis so it's not my original code. Thought I'd share it here
+anyway. It doesn't fail safely though because a null return value would
+break the fetching loop.
+<script src="https://gist.github.com/1808134.js"> </script>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-weather-station-data-scrapper-in-r/' title='2012-02-12T11:49:00'>12 February 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel='bookmark'>My 5 minute lightning talk on Cascalog</a>
+            </h1>
+            <div class="article-content"> <p>Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.</p>
+<iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;size=m" frameborder="0" width="555" height="451"></iframe>
+
+<p>The possibilities...</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/' title='2012-02-05T18:39:00'>05 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/" rel='bookmark'>Ask not what accuracy your algorithm achieves but what value it can add</a>
+            </h1>
+            <div class="article-content"> <p>Partnering with the marketing team at work earlier this month reminded
+me of an important lesson in my algorithmic trading. Our  external TV
+agency presented a mid-term performance analysis and I was tasked with
+performing due diligence on their analysis methodology. It took me 2
+minutes to realise that they were using a linear regression model. At
+first I thought it was too simplistic. Then I realised my own naivete
+because it was never about accuracy to begin with. Measuring ROI on a
+marketing campaign is an illusive task. A quick metric is to perform a
+regression on the money you spent versus the revenue generated in the
+same time period. For example, let y(t) = x(t), where y represents
+revenue, x is marketing spending, and t is day. Plot your data on y
+versus x for a number of days. Then draw a best fit straight line to
+graphically show a correlation. If you're feeling adventurous, throw in
+a few other factors that you think might have important influence on
+your daily revenue. Such that you have x2(t), x3(t), etc. This is what
+the agency did in their model. One major flaw with using a regression
+model for this purpose is that it assumes each data point is mutually
+exclusive to another. So a day's event does not influence another. This
+is simply not true in the real world. For examples, it might take a few
+days after someone sees your ad until they click your buy button or it
+might take more than a few showing of the ads until people take action.
+A better regression model for the first example is y(t) = x1(t - a),
+where 'a' is the delay. And for the second example, y(t) = ∑x1(t - A),
+where A is a vector of 'a'. The problem with this is that finding 'a'
+and 'A' is another regression problem in and of itself. Luckily, this is
+conceptually what an Artificial Neural Network does, a series of
+regression models taking into account the interrelation of the factors
+and non-linear effects of the response. And so, within the span of a few
+minutes of our conference call with them, I've just convinced myself in
+my mind to try another algorithm when I have a chance. That weekend I
+wasted a few hours on R tinkering with the data. Then it finally dawned
+on me. What is the value of this? To calculate an ROI figure on our
+marketing campaign, is it necessary to spike a machine learning project
+just so we can be 95% confident on that figure? The justification is
+further weakened by the fact that ROI is merely one of the many metrics
+available when <a href="https://en.wikipedia.org/wiki/Marketing_performance_measurement_and_management">evaluating a marketing campaign</a>. So the impact of an
+accurate model versus a throw in the dart might not be worth spending an
+extra two weeks working on it whereas a throwing a dart takes only one
+command in R.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/' title='2012-01-29T11:56:00'>29 January 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/business-is-on-hold/" rel='bookmark'>Business is on hold</a>
+            </h1>
+            <div class="article-content"> <p>Back in November, I started working as a Data Scientist at <a href="http://www.uswitch.com">uSwitch</a>,
+an utility price comparison site. I am very fortunate to be able to work
+with so many <a href="http://forwardtechnology.co.uk/">smart and passionate</a> people there. There is so much
+that I am learning in fact, I haven't had time to do much else. Although
+my ridiculous 4-hour commute is also a factor. I didn't even notice that
+EUR/USD dropped 1000 pips! As such, I am officially putting my own
+business and research on hold until further notice. I will continue to
+post relevant technical discussions on this blog. All of my existing
+clients have been notified and arrangements made way back before I began
+my employment. Thank you for all your support!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/business-is-on-hold/' title='2012-01-22T07:11:00'>22 January 2012</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/algorithmic-ownage/" rel='bookmark'>Algorithmic ownage</a>
+            </h1>
+            <div class="article-content"> <p>I felt good when I simplified one of my algorithms and sped it up 10
+times. I felt so good that I even wrote an entire blog post about it
+<a href="/eureka-moment-on-design-patterns-for-functional-programming/">patting myself on the back</a>. Then last week I got an email from Kevin
+of <a href="http://keminglabs.com/">Keming Labs</a> suggesting a few alternatives.</p>
+<div class="highlight"><pre><span class="c1">;;Three ways to count the number of occurrences in a collection</span>
+<span class="c1">;; (&quot;orange&quot; &quot;bottle&quot; &quot;coke&quot; &quot;bottle&quot;) =&gt; [(&quot;bottle&quot; &quot;coke&quot; &quot;orange&quot;) (2 1 1)]</span>
+<span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;orange&quot;</span> <span class="s">&quot;bottle&quot;</span> <span class="s">&quot;coke&quot;</span> <span class="s">&quot;bottle&quot;</span><span class="p">)]</span>
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%1</span> <span class="p">(</span><span class="nb">hash-map </span><span class="nv">%2</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">get </span><span class="nv">%1</span> <span class="nv">%2</span> <span class="mi">0</span><span class="p">))))</span>
+                       <span class="p">{}</span> <span class="nv">c</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">l</span> <span class="p">(</span><span class="nb">for </span><span class="p">[[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">c</span><span class="p">)]</span>
+            <span class="p">[</span><span class="nv">k</span> <span class="p">(</span><span class="nb">count </span><span class="nv">v</span><span class="p">)])]</span>
+    <span class="p">[(</span><span class="nb">map first </span><span class="nv">l</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">map second </span><span class="nv">l</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">apply merge-with </span><span class="nv">+</span>
+                      <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">apply hash-map </span><span class="nv">%</span><span class="p">)</span>
+                           <span class="p">(</span><span class="nf">partition</span> <span class="mi">2</span> <span class="p">(</span><span class="nb">interleave </span><span class="nv">c</span> <span class="p">(</span><span class="nb">repeat </span><span class="mi">1</span><span class="p">)))))]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)]))</span>
+</pre></div>
+
+
+<p>First of all, his solutions looked much cleaner <a href="/eureka-moment-on-design-patterns-for-functional-programming/">than mine</a>. Then over
+the weekend I was able to incorporate his 3 algorithms into my program.
+I ran a few benchmarks and here are the average of 2 tests using a
+dataset of 28,760 items.</p>
+<ul>
+<li>My algorithm. Elapsed time: 68372.026532 msecs.</li>
+<li>Kevin's solution #1. Elapsed time: 156.940976 msecs.</li>
+<li>Kevin's solution #2. Elapsed time: 60.165483 msecs.</li>
+<li>Kevin's solution #3. Elapsed time: 296.162042 msecs.</li>
+</ul>
+<p>Total ownage. That's what I like about sharing my
+work; once in a blue moon, a reader drops by and generously show
+me how I can improve a solution 1,000 times! Now the ball is in my hands
+to understand what he has done and improve myself. Collaborating and
+learning, that's why I open source.</p>
+<p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/algorithmic-ownage/' title='2011-11-06T17:37:00'>06 November 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel='bookmark'>Eureka moment on design patterns for functional programming</a>
+            </h1>
+            <div class="article-content"> <p>Understanding design patterns for object-oriented programming made my
+life easier as a Java programmer. So I have been looking for a
+comparable book for functional programming ever since my sojourn into
+this age-old paradigm. It looks as though <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book">I'm not the only one
+looking</a> too. But the thing is, I think I've just had a revelation of
+sort.</p>
+<p>There is one and only one guideline to designing functional
+architectures -- Keep it simple. Simple as in keeping your functions
+having a single purpose only. Simple as in work with the data directly and
+don't conjure unnecessary intermediaries. Simple, as elaborated by Rich
+Hickey in his talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Much of this is conveyed in Bloch's Effective Java:</p>
+<div class="highlight"><pre><span class="n">item</span> <span class="err">\#</span><span class="mi">5</span> <span class="err">\–</span> <span class="n">Avoid</span> <span class="n">creating</span> <span class="n">unnecessary</span> <span class="n">objects</span>
+<span class="n">item</span> <span class="err">\#</span><span class="mi">13</span> <span class="err">\–</span> <span class="n">minimize</span> <span class="n">accessibility</span> <span class="n">of</span> <span class="n">classes</span> <span class="n">and</span> <span class="n">members</span>
+</pre></div>
+
+
+<p>, for examples.</p>
+<p>As <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book/2930452#2930452">Majewski said in a stackoverflow reply</a> (Update 2013 – question no longer available on stackoverflow),</p>
+<div class="highlight"><pre><span class="n">The</span> <span class="n">patterns</span> <span class="n">movement</span> <span class="n">started</span> <span class="n">because</span> <span class="n">object</span><span class="o">-</span><span class="n">oriented</span> <span class="n">programming</span> 
+<span class="n">was</span> <span class="n">often</span> <span class="n">turning</span> <span class="n">into</span> <span class="n">spaghetti</span> <span class="n">objects</span> <span class="p">...</span> <span class="n">Functional</span> <span class="n">programming</span> 
+<span class="n">is</span> <span class="n">a</span> <span class="k">restricted</span> <span class="n">style</span> <span class="n">of</span> <span class="n">programming</span><span class="p">,</span> <span class="n">so</span> <span class="n">it</span> <span class="n">didn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">need</span> <span class="n">to</span> <span class="n">grow</span> <span class="n">a</span> <span class="n">set</span>
+<span class="n">of</span> <span class="k">restricted</span> <span class="n">conventions</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">the</span> <span class="n">chaos</span><span class="p">.</span>
+</pre></div>
+
+
+<p>As such, there is no design pattern book for functional programming. I didn't get that earlier this year. But something clicked recently. During the past few months, I've been doing some <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/">consulting and open source projects</a> solving algorithmic problems with Clojure.</p>
+<p>One of the problems in a project that I was faced with this week is calculating the occurrence of each distinctive element within a list of elements. Say we have a list, <code>coll = ("orange", "bottle", "coke", "bottle")</code>. The output would be something like <code>[("orange", "bottle", "coke") (1 2 1)]</code> </p>
+<p>This is my first solution.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">eval-decompose</span>
+  <span class="p">[</span><span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">super-d</span>  <span class="p">(</span><span class="nb">distinct </span><span class="nv">coll</span><span class="p">)</span>
+        <span class="nv">freqs</span>    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">ps</span>  <span class="p">[]</span>
+                        <span class="nv">d</span>   <span class="nv">super-d</span><span class="p">]</span>
+                   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">d</span><span class="p">)</span>
+                     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span>  <span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">partial = </span><span class="p">(</span><span class="nb">first </span><span class="nv">d</span><span class="p">))</span> <span class="nv">coll</span><span class="p">))]</span>
+                       <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">conj </span><span class="nv">ps</span> <span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">d</span><span class="p">)))</span>
+                     <span class="nv">ps</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">vector </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">super-d</span> <span class="nv">freqs</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>The specs are not exactly as I described but the concept remains. What I
+did is to use tail calls (it's supposed to be fast, isn't it?) to
+aggregate each counter to produce a vector of counts. Then I map each
+pair of fragment with its corresponding count to generate a final output
+collection. Sounds overly complicated, doesn't it?</p>
+<p>This is the first warning of a bad functional design. For a collection of 30,000 items,
+this function took 11 minutes to compute on my notebook. This looks like
+a good place to exploit the parallel nature of this problem.</p>
+<p>Specifically, the counting of each fragment is independent of other
+fragments. Thus, there's no need for the program to wait for one
+fragment to finish to process the next. I simplified the program to
+remove this inherent assumption of procedural processing. Here is the
+gist of the refactored code where each function only does one job. Since
+the processing are modularised, I can parallelize the algorithm easily
+with the use of pmap instead of map on the last line as shown below.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">match-count</span>
+<span class="s">&quot; Given key, k, returns number of occurrences of k in collection, coll.</span>
+<span class="s">&quot;</span>
+  <span class="p">[</span><span class="nv">k</span> <span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">match?</span>  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">i</span> <span class="nv">x</span><span class="p">]</span>
+                  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">x</span><span class="p">)</span>   <span class="c1">;; closure on k</span>
+                    <span class="p">(</span><span class="nb">inc </span><span class="nv">i</span><span class="p">)</span>
+                    <span class="nv">i</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">reduce </span><span class="nv">match?</span> <span class="mi">0</span> <span class="nv">coll</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">calc-counts</span>
+<span class="s">&quot; Returns a list of counts for the occurrences of each key of keys, ks,</span>
+<span class="s">  within the collection, coll.</span>
+<span class="s">&quot;</span>
+  <span class="p">[</span><span class="nv">ks</span> <span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">pmap</span> <span class="o">#</span><span class="p">(</span><span class="nf">match-count</span> <span class="nv">%</span> <span class="nv">coll</span><span class="p">)</span> <span class="nv">ks</span><span class="p">))</span>
+</pre></div>
+
+
+<p>I've split the first function into 3 functions (2 shown here). As Hickey
+said in his talk, simplifying can often produce more, not less,
+functions. Yet, the program is not only easier to read and runs in less
+than a minute. An order of magnitude faster! There are still lots for me
+to learn. I want to find more challenging projects to push my own
+limits. But rather than solving arbitrary problems, I prefer to tackle
+real-world challenges. So if you know of anyone that can benefit from
+collaborating with a functional developer to build robust and scalable
+software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.</p>
+<p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/index3.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/index5.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - backtest</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/" rel='bookmark'>Building a distributed back-tester with Hadoop on Amazon AWS</a>
+            </h1>
+            <div class="article-content"> <p>Testing is arguably the single most important aspect of trading system
+development. You can't tell how well an idea works unless you test it
+out. [Testing can also help you identify weaknesses or strengths in your
+model][]. The downside to testing is that it takes time to churn through
+those gigabytes of data. Backtesting is inherently a linear process. You
+feed in your tick data into your algorithm and expect some actions. You
+can't really make use of fork/join to let other threads steal from the
+process queue as the later process depends on results from the earlier
+calculations. However, often times than not, you're interested in
+testing many variations of a strategy. This is where MapReduce comes
+into play. MapReduce is a Google software framework. It is inspired by
+the map and reduce functions ubiquitous in functional programming. They
+are as common as for-loops in the Java world. The <em>map</em> function
+partitions an input into smaller problems and run them concurrently,
+e.g. each of the strategy's variant is executed on a node. The <em>reduce</em>
+function takes the results from all the nodes and aggregate them to get
+an output, e.g. back-test results from each strategy. Having used
+functional programming for some time now, using map/reduce is very
+natural for me. Where my knowledge falls short is in implementing a
+distributed infrastructure for running these map and reduce with massive
+scaling beyond my own multi-core computer. It just so happens that
+Amazon AWS has a hosted Hadoop PaaS. Where Hadoop is the Apache's
+framework for MapReduce. Hardware, check. Framework, check. This will be
+the ~~first~~ second system that I'll be working on in my goal to build
+<a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/">a complete trading R&amp;D platform</a>. Expect some technical discussions
+in the coming months as I work my way through. Now, where should I
+start...</p>
+<p>[Testing can also help you identify weaknesses or strengths in your
+  model]: http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/' title='2011-09-13T10:44:00'>13 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

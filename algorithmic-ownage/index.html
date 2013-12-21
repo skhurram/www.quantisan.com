@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Algorithmic ownage - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/algorithmic-ownage/" rel="bookmark">Algorithmic ownage</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>I felt good when I simplified one of my algorithms and sped it up 10
+times. I felt so good that I even wrote an entire blog post about it
+<a href="/eureka-moment-on-design-patterns-for-functional-programming/">patting myself on the back</a>. Then last week I got an email from Kevin
+of <a href="http://keminglabs.com/">Keming Labs</a> suggesting a few alternatives.</p>
+<div class="highlight"><pre><span class="c1">;;Three ways to count the number of occurrences in a collection</span>
+<span class="c1">;; (&quot;orange&quot; &quot;bottle&quot; &quot;coke&quot; &quot;bottle&quot;) =&gt; [(&quot;bottle&quot; &quot;coke&quot; &quot;orange&quot;) (2 1 1)]</span>
+<span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;orange&quot;</span> <span class="s">&quot;bottle&quot;</span> <span class="s">&quot;coke&quot;</span> <span class="s">&quot;bottle&quot;</span><span class="p">)]</span>
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%1</span> <span class="p">(</span><span class="nb">hash-map </span><span class="nv">%2</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">get </span><span class="nv">%1</span> <span class="nv">%2</span> <span class="mi">0</span><span class="p">))))</span>
+                       <span class="p">{}</span> <span class="nv">c</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">l</span> <span class="p">(</span><span class="nb">for </span><span class="p">[[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">c</span><span class="p">)]</span>
+            <span class="p">[</span><span class="nv">k</span> <span class="p">(</span><span class="nb">count </span><span class="nv">v</span><span class="p">)])]</span>
+    <span class="p">[(</span><span class="nb">map first </span><span class="nv">l</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">map second </span><span class="nv">l</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">apply merge-with </span><span class="nv">+</span>
+                      <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">apply hash-map </span><span class="nv">%</span><span class="p">)</span>
+                           <span class="p">(</span><span class="nf">partition</span> <span class="mi">2</span> <span class="p">(</span><span class="nb">interleave </span><span class="nv">c</span> <span class="p">(</span><span class="nb">repeat </span><span class="mi">1</span><span class="p">)))))]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)]))</span>
+</pre></div>
+
+
+<p>First of all, his solutions looked much cleaner <a href="/eureka-moment-on-design-patterns-for-functional-programming/">than mine</a>. Then over
+the weekend I was able to incorporate his 3 algorithms into my program.
+I ran a few benchmarks and here are the average of 2 tests using a
+dataset of 28,760 items.</p>
+<ul>
+<li>My algorithm. Elapsed time: 68372.026532 msecs.</li>
+<li>Kevin's solution #1. Elapsed time: 156.940976 msecs.</li>
+<li>Kevin's solution #2. Elapsed time: 60.165483 msecs.</li>
+<li>Kevin's solution #3. Elapsed time: 296.162042 msecs.</li>
+</ul>
+<p>Total ownage. That's what I like about sharing my
+work; once in a blue moon, a reader drops by and generously show
+me how I can improve a solution 1,000 times! Now the ball is in my hands
+to understand what he has done and improve myself. Collaborating and
+learning, that's why I open source.</p>
+<p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-11-06T17:37:00'>
+                Posted 06 November 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/computing/">computing</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/algorithm/">algorithm</a>
+            <a href="http://www.quantisan.com/tag/clojure/">clojure</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "algorithmic-ownage/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

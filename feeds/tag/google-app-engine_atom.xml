@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/google-app-engine_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-03-03T21:19:00+00:00</updated><entry><title>First look at Google App Engine for automated trading and quant analysis on the cloud</title><link href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel="alternate"></link><updated>2010-03-03T21:19:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-03:first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/</id><summary type="html">&lt;p&gt;I just spent the last few hours looking into Google App Engine to use it
+for trading. Google App Engine (GAE) is a cloud computing development
+and hosting platform for web applications. GAE is similar to the
+well-known Amazon EC2 service but it is also very different. The main
+difference between GAE and EC2 is that GAE is not as flexible as EC2 but
+it is a lot easier to develop on. Think of it like using C++ (EC2) to
+write your own trading platform to using EasyLanguage on TradeStation or
+MQL on Metatrader (GAE). Another advantage for using Google App Engine
+is that it is free! Well, to a certain extent. It is free for a limited
+monthly usage. However, Google's free quota is known to be very generous
+(think Gmail) and this is no exception. Based on the numbers, it looks
+comparable to a typical \$20/month virtual private server (VPS) hosting
+package. My guess is that you can run a decent personal quant program on
+it if you keep the resources for yourself (private use). For more
+information on the free quota, you can read the &lt;a href="http://code.google.com/appengine/docs/quotas.html"&gt;current GAE quota&lt;/a&gt;
+web page or the &lt;a href="http://en.wikipedia.org/wiki/Google_App_Engine"&gt;Wikipedia page for GAE&lt;/a&gt;. You might be wondering how
+did I spend a few hours just reading on GAE? The answer is that I've
+done a brief research, planning, and assessment to see how GAE can be
+put to use in terms of quantitative analysis for automated and
+discretionary trading. Without going through all of my notes and logic,
+here's the gist of my conclusion.&lt;/p&gt;
+&lt;h2&gt;For Automated Trading&lt;/h2&gt;
+&lt;p&gt;Since GAE is also a SDK, it has a restricted programming API. You can't
+just plug in any custom library of your own (i.e. your broker's API)
+into your program. That is its advantage and its disadvantage.
+Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
+for your connection either. These limitations won't be changing anytime
+soon as GAE is designed to be like that for security reasons. Basically,
+there's no way for your web application on GAE to connect with your
+broker for trading. So much for that idea.&lt;/p&gt;
+&lt;h2&gt;For Discretionary Trading&lt;/h2&gt;
+&lt;p&gt;Things look brighter for discretionary trading though. A big bonus with
+using Google App Engine is that it supports the Google Finance API.
+Google Finance offers free real-time stock quotes. Combine it with the
+programming capability of the Google App Engine and you have yourself a
+free number cruncher in the cloud. However, GAE is definitely no match
+for your personal computer, so why would you go through all that
+trouble? One possible scenario in which this could be useful is for
+traders that is often on the road or traders such as myself in which we
+have a day job. In that case, you can set you quant analytics on GAE as
+a private web application and then you can access it as a web page
+anywhere on your mobile phone. One of the obvious limitation with using
+GAE is that it has limited features for scientific computing. For
+example, it doesn't support Numpy in the Python SDK. As such, I can't
+imagine using GAE for anything more than simple technical analysis for
+now. I certainly hope that GAE can include more powerful scientific
+computing capabilities in the near future. Until then, I really can't
+see Google App Engine offering much help aside from performing
+algorithmic tasks to help with your trading analysis. Their open issues
+log does announce that &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=190"&gt;Numpy is being integrated into GAE&lt;/a&gt; though. So
+that's a great sign for things to come! I am very hopeful of GAE's
+potential as a free cloud server to host my quant analytics on. We'll
+just have to wait for now.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="cloud computing"></category><category term="Google App Engine"></category><category term="python"></category><category term="VPS"></category></entry></feed>

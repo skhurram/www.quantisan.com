@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Is a $5000 Questrade TFSA trading account cost effective? Part 3 - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-3/" rel="bookmark">Is a $5000 Questrade TFSA trading account cost effective? Part 3</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>This post continue on the <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-2/">calculations from part 2</a> of this TFSA
+trading cost analysis series. Part 1 is an <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">introduction outlining the
+rationale</a> for this work. Let's pick up where we left off. I was just
+about to figure out what is my <em>expected profit</em> using probability
+theory. To do that, I use my historical performance data to calculate my
+probability of profitable trades. I've been calculating my trading
+statistics in my <a href="http://www.quantisan.com/tag/monthly-review/">monthly reviews</a>, so it's just a matter of
+aggregating all the monthly data to a single number. After a few
+keystrokes, I find that my win/loss percentages are roughly 40%/60%.
+Given my <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-2/">known reward/risk ratio</a> (discussed in part 2) and
+probability of win (40% as noted above), we can calculate a net return
+expectancy. This is a simple formula if you know statistics and
+confusing if you don't. So I'll just write it out as is but do refer to
+the Wikipedia on<a href="http://en.wikipedia.org/wiki/Expected_value">statistical expectancy</a> if you'd like to know more
+about how I derived this. Expected net return per trade = (Average
+Reward from Step 1 - Commission) * (Probability of Win from Step 2) -
+[(Risked Amount + Commission) * (1 - Probability of Win)] This formula
+is the result we seek. We apply the forumula to extend the cost-benefit
+table presented last time. Here's a complete cost-benefit table using
+the parameters of a \$5000 principal balance, \$5 commission, capital
+gain tax of 17.5% (half of marginal tax rate), reward/win ratio of 2.0,
+and a 40% winning rate. It likely that you'll have different parameters
+than me. So I am <a href="http://spreadsheets.google.com/ccc?key=0AnZW_RfDqK11dG5jVzUwbDIxWEQ5aFV3cjVRdU5BbFE&amp;hl=en">sharing my spreadsheet here</a> so that you can use
+your own parameters for your own set of results. Download it in your
+preferred format and then edit the values under the Parameters column.
+<a href="http://www.quantisan.com/contact/">Contact me</a> if you have any problem using it. I will discuss the
+result and make [my conclusion in the next and final post in this TFSA
+trading cost-benefit analysis series][]. Hint: Short answer to the
+title's question is NO. [caption id="" align="aligncenter" width="570"
+caption="TFSA Trading Cost-Benefit for Reward/Risk = 2.0 and 40% win
+rate"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/TFSA_trading_cost-benefit_analysis.png" />][][/caption]</p>
+<h2>Calculation Example</h2>
+<p>For anyone interested, let's calculate one data point of the table above
+using all the the steps discussed so far in this series. Using \$10 risk
+(0.2% of \$5000) as an example. Known data: risk = \$10, commission
+(comm) = \$5, reward/risk = 2.0, probability of win = 40% Round-trip
+commission = \$5 x 2 = \$10 Average Reward = risk * (reward/risk) =
+\$20 x (2.0) = \$20 Expected net profit = (Average Reward from Step 1 -
+Commission) * (Probability of Win from Step 2) - [(Risked Amount +
+Commission) * (1 - Probability of Win)] = (\$20 - \$10) * (40%) -
+[(\$10 + \$10) * (1 - 40%)] = 10 * 0.4 - [\$20 * 0.6] = -\$8 If I
+risk only \$10 on a trade, it is expected that I would <strong>lose</strong> \$8 on
+average based on my historical trading performance statistics.</p>
+</p>
+
+<p>[my conclusion in the next and final post in this TFSA trading
+  cost-benefit analysis series]: http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-4/</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-02-24T13:13:00'>
+                Posted 24 February 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/trading/">trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/cost analysis/">cost analysis</a>
+            <a href="http://www.quantisan.com/tag/Questrade/">Questrade</a>
+            <a href="http://www.quantisan.com/tag/tax/">tax</a>
+            <a href="http://www.quantisan.com/tag/TFSA/">TFSA</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "is-a-5000-questrade-tfsa-trading-account-cost-effective-part-3/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

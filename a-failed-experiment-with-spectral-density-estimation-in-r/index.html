@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>A failed experiment with spectral density estimation in R - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel="bookmark">A failed experiment with spectral density estimation in R</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Spectrum analysis (see <a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis">wiki entry</a>) is a technical process to
+visualize a time series data in the frequency domain to find hidden
+periodicities. As I continue <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/">my struggle in data mining with R</a>, I
+thought I might try looking at a year's worth of USDJPY 1-min exchange
+rate data in the frequency domain. This is what I got. <img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-12-15-usdjpy_spectrum.png" /></p>
+<p>Certainly not one of those nice looking
+graphs in a textbook. Notice that:</p>
+<ol>
+<li>there is no distinct frequencies</li>
+<li>bandwidth is ridiculously small</li>
+</ol>
+<p>What this means is that the USDJPY data is practically <a href="http://en.wikipedia.org/wiki/White_noise">white noise</a>.
+And that there's much work for me ahead before I can produce something
+useful in R. The source code to produce the graph is printed below. The
+USDJPY data isn't published as it's not small and you can <a href="http://www.quantisan.com/tools/">get it at
+various places</a> for free on your own. Update: Failed is a harsh word.
+I should call this a <em>trivial</em> experiment. </p>
+<div class="highlight"><pre> op \<span class="o">&lt;-</span> options<span class="p">(</span>digits.secs<span class="o">=</span><span class="m">3</span><span class="p">)</span> \<span class="c1"># set option to show milliseconds</span>
+cat<span class="p">(</span><span class="s">&quot;loading CSV file to &#39;data&#39;\\n&quot;</span><span class="p">)</span> print<span class="p">(</span> system.time<span class="p">(</span> data \<span class="o">&lt;-</span>
+read.csv<span class="p">(</span> file<span class="o">=</span><span class="s">&quot;data/USDJPY\_20090630-13-27to20101130-22-19\_1Min.csv&quot;</span><span class="p">,</span>
+head<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> \<span class="c1"># convert long timestamp to POSIX</span>
+rownames<span class="p">(</span>data<span class="p">)</span> \<span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>as.numeric<span class="p">(</span>rownames<span class="p">(</span>data<span class="p">))</span><span class="o">/</span><span class="m">1000</span><span class="p">,</span>
+origin<span class="o">=</span><span class="s">&quot;1970-01-01&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;GMT&quot;</span><span class="p">)</span> data \<span class="o">&lt;-</span> data.matrix<span class="p">(</span>data<span class="p">)</span> library<span class="p">(</span>xts<span class="p">)</span>
+\<span class="c1"># load xts library cat(&quot;converting to xts &#39;data.x&#39;\\n&quot;)</span>
+print<span class="p">(</span>system.time<span class="p">(</span>data.x \<span class="o">&lt;-</span> as.xts<span class="p">(</span>data<span class="p">)))</span> rm<span class="p">(</span>data<span class="p">)</span> \<span class="c1"># remove data</span>
+object cat<span class="p">(</span><span class="s">&quot;data.x object size: &quot;</span><span class="p">)</span> print<span class="p">(</span>object.size<span class="p">(</span>data.x<span class="p">),</span> units <span class="o">=</span>
+<span class="s">&quot;auto&quot;</span><span class="p">)</span> cat<span class="p">(</span><span class="s">&quot;spectral analysis\\n&quot;</span><span class="p">)</span> spectrum<span class="p">(</span>data.x\<span class="o">$</span>close<span class="p">)</span>
+</pre></div>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-12-16T07:28:00'>
+                Posted 16 December 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/R/">R</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "a-failed-experiment-with-spectral-density-estimation-in-r/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

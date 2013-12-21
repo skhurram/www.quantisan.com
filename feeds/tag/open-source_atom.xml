@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/open-source_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-11-24T09:09:00+00:00</updated><entry><title>JFUtil: An open-source JForex utilities library</title><link href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/" rel="alternate"></link><updated>2010-11-24T09:09:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-11-24:jfutil-an-open-source-jforex-utilities-library/</id><summary type="html">&lt;p&gt;JFUtil is a Quantisan.com open-source project focused on reusable JForex
+trading strategy components. Latest version is 2.1.3 released on April
+8, 2011. Please &lt;a href="#download"&gt;keep your local JFUtil library up to date&lt;/a&gt; for the
+latest patches and features.&lt;/p&gt;
+&lt;h2&gt;Main Features&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;1. Access to IContext and IAccount from anywhere in your project files.&lt;/strong&gt; 
+The one and only JForexContext object in JFUtil is a
+thread-safe, singleton object which can be called from anywhere within
+your projects, across any class file. No need to declare global IContext
+variables. No need to pass it around in parameters. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Simplify order submission with ticket builder.&lt;/strong&gt; 
+Set your trade order parameters with
+an order ticket object using a builder constructor. You can build ticket
+with as few or as many parameters as you like. All with intuitive method
+names in the same ticket class. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;OrderTicket&lt;/span&gt;
+&lt;span class="n"&gt;buySpTicket&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;new&lt;/span&gt; &lt;span class="n"&gt;OrderTicket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;Builder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;label&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="n"&gt;IEngine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderCommand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BUY&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; 
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setStopLossPrice&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stopPrice&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;     &lt;span class="c1"&gt;// set stop price to ticket &lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setTakeProfitPrice&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;targetPrice&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;// set target &lt;/span&gt;
+                &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;build&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;3. No more confusion about indicator methods.&lt;/strong&gt; Indicators are
+&lt;a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/"&gt;encapsulated into their own bean object&lt;/a&gt; with their full function
+name and parameters are set using intuitive, clearly described methods.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;// get an EMA indicator value by building an indicator bean&lt;/span&gt;
+&lt;span class="n"&gt;MovingAverage&lt;/span&gt; &lt;span class="n"&gt;maBean&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;IndicatorBeanFactory&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getMovingAverage&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt; 
+&lt;span class="c1"&gt;// then sets its parameters with obvious method names&lt;/span&gt;
+&lt;span class="n"&gt;maBean&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setAppliedPrice&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AppliedPrice&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MEDIAN&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;_PRICE&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setMAType&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MaType&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;EMA&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;setWidth&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; 
+&lt;span class="c1"&gt;// all of these are optional parameters &lt;/span&gt;
+&lt;span class="c1"&gt;// feed the bean into a generic calculation method to get the result &lt;/span&gt;
+&lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;ema&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Indicating&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;calculate&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Period&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ONE&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;_MIN&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;maBean&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;4. Implicit multi-threading for ordering.&lt;/strong&gt; 
+Ease your main thread's workload for processing incoming
+data and avoid your order manager holding up the traffic. All
+automatically performed in the background without extra coding for you.
+&lt;strong&gt;5. Built-in popular numerical functions for forex trading.&lt;/strong&gt; 
+Calculate expected profit or loss in your account currency. Saves you from writing
+boilerplate codes and reinventing the wheel. 
+&lt;strong&gt;6. Continuous improvements!&lt;/strong&gt; 
+JFUtil is continuously being improved based on feedback
+from traders like you. See the changelog below for major changes since
+the initial release in November 2010.&lt;/p&gt;
+&lt;h2&gt;Example&lt;/h2&gt;
+&lt;p&gt;To best illustrate how JFUtil can make your JForex programming life
+easier, &lt;a href="http://www.quantisan.com/jfutil-2-0-alpha-demonstration/"&gt;see this JForex strategy source code example&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a name="download"&gt;Download&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://dl.dropbox.com/u/6028806/JFQuantisan.jar"&gt;Download the latest JFUtil library jar file including the javadoc&lt;/a&gt;
+for your own use (use the @Library annotation in your strategy) or &lt;a href="http://www.quantisan.com/github-jfutil/"&gt;fork
+the project at Github&lt;/a&gt; to participate in this open-source project to
+make programming trading strategies in JForex easier for everyone.&lt;/p&gt;
+&lt;h2&gt;Feedback&lt;/h2&gt;
+&lt;p&gt;Please report any issue or discuss your question or recommendation in
+the [comments section below][]. Alternatively, you can &lt;a href="paul@quantisan.com"&gt;contact me
+directly&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Major Releases:&lt;/h2&gt;
+&lt;p&gt;v2.1.0 - March 22, 2011 - indicator bean, label maker v2.0.0 - March 8,
+2011 - singleton access to JForex objects, order ticket building, global
+currency conversion, global printer utility. v1.0 - November 24, 2010 -
+JFUtil 1.0&lt;/p&gt;</summary><category term="JForex"></category><category term="JFUtil"></category><category term="open source"></category><category term="source code"></category></entry></feed>

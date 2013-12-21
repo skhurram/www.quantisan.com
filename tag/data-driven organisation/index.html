@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - data-driven organisation</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/" rel='bookmark'>People is the biggest obstacle to becoming a data-driven organisation</a>
+            </h1>
+            <div class="article-content"> <p>Our data team of 3 is tasked with pushing our business to be more
+data-driven. From encouraging management to make strategic decisions
+with hard data to building real-time feedback loop within our products
+themselves. We have built the infrastructure in place to capture and
+analyse streams of high granularity data using open source tools like
+Kafka, Hadoop, and Cascalog. Now the hard part is to convince the rest
+of the company that counted numbers on an Excel spreadsheet is
+insufficient so that they can incorporate these new high-frequency and
+high-granularity information in their everyday decision-making process.</p>
+<p>This came to light for me when I tried to revamp our Attribution
+Modelling, which is a fancy marketing term for how referral is
+attributed and doesn't have to do with mathematical modelling at all.
+Many companies traditionally use a last-referral-takes-the-cake
+approach. Say if a customer comes in via an email referral first, leaves
+the site, then comes back in from an Adword to ultimately make a
+purchase, the Adword would get attributed for that revenue produced.
+This last-referral method is a lazy way of doing things. Lead generating
+referrals get no credit and return on investment values are biased
+towards closing-stage marketing efforts. Granted, doing anything else
+would require a global view of customer journey, which is a non-trivial
+matter. </p>
+<p>However, that is exactly what we're able to do easily now. So we
+took a couple of days to spike out a fair-share attribution model such
+that every touch point a customer used get a share of the pie. The
+intention is to provide a holistic view of referrers efficacy to feed
+into our higher-level models. But seeing that the old system is so
+unrealistic, I thought I might as well open it for everyone else.</p>
+<p>Opening a can of worms, that was what it felt like. I found that things
+like financial reports and people's bonuses are tied to this old
+attribution modelling system. Even though it is obvious to everyone that
+the old attribution modelling system is unrealistic, changing it would
+require changing the work processes of multiple individuals across the
+company. You know what they say about people's habits? Habits are hard
+to change. </p>
+<p>Seeing that this is a fundamental obstacle to our company's
+competitiveness, I've taken a break from pushing our data architecture
+to build and evangelise internal data products. I've been working
+closely individually with our business people to identify ways of using
+data, staging data views from Hadoop/Cascalog back into good old MySQL,
+and assisting them to generate actionable data with SQL to make their
+lives easier. </p>
+<p>One of such views borrows a technique from my algorithmic
+trading. By applying a breakout strategy (which I wrote entirely in SQL,
+good fun) on the revenue and cost time-series data of our PPC and SEO
+campaigns, our PPC/SEO manager now have available a customisable
+screener for abnormality with any of our thousands of continuous
+marketing campaigns. Very much like a stock screener for breakouts. This
+used to be a subjective process based on a spreadsheet of numbers and
+expert opinions. Now it's data-driven. </p>
+<p>There's a saying that a business
+is its people. To become a data-driven organisation, you need
+data-driven people. I never realised the significance of this until now.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/' title='2012-06-10T12:26:00'>10 June 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/data-science-is-a-collaborative-effort/" rel='bookmark'>Data science is a collaborative effort</a>
+            </h1>
+            <div class="article-content"> <p>The other day our marketing guy dropped a laundry list of reports that
+he wanted me to produce. I work with him sometimes so I don't mind
+putting on a business intelligence hat occasionally to help him out. But
+I mustn't forget that driving long-term values to the business is what I
+am good at, so I had to say no to him. What's supposed to be a quick
+chat with him ended up in a hour long discussion to show case what I'm
+working on and demonstrating that I can do so much more than count
+things for him. In short, if you want data, ask the business analyst; if
+you want to solve problems, let's talk. It's been said that <a href="http://thinkrelevance.com/blog/2012/04/04/big-data-reference-model">Big Data
+analysis is a feedback loop</a>. However, I don't think having the data
+science team toil away at data is the message. Who's to say that
+analytical steps in a big data reference model can't involve feedback
+from people in addition to models? For the past week, I've been
+showcasing a new internal data product to various stakeholders in our
+business. This one data product is now leading to a new process for our
+accountant, a product for our online marketing manager, and an
+innovative company-wide metric. All of this happened because we
+collaborated rather than delegated tasks. Analysing data is not a
+one-way process. <a href="http://s.hbr.org/IIVNL0">Make it a feedback loop of math and people</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/data-science-is-a-collaborative-effort/' title='2012-04-29T17:02:00'>29 April 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-talk-on-bootstrapping-data-science-in-a-company/" rel='bookmark'>My talk on bootstrapping data science in a company</a>
+            </h1>
+            <div class="article-content"> <iframe src="https://docs.google.com/presentation/embed?id=19wVHXeMM_uOfGqDJszZdn4TyXvlKRRoxpf65HyiaK5A&amp;start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-talk-on-bootstrapping-data-science-in-a-company/' title='2012-03-25T10:15:00'>25 March 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

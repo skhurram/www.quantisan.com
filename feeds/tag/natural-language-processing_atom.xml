@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/natural-language-processing_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-02-15T07:30:00+00:00</updated><entry><title>Social media: The fourth dimension in market data</title><link href="http://www.quantisan.com/social-media-the-fourth-dimension-in-market-data/" rel="alternate"></link><updated>2011-02-15T07:30:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-02-15:social-media-the-fourth-dimension-in-market-data/</id><summary type="html">&lt;p&gt;It looks as though the first hedge fund utilizing social media data is
+about to &lt;a href="http://www.cnbc.com/id/41251767/"&gt;launch in April&lt;/a&gt;. This "Twitter hedge fund" is based on the
+work of Bollen et al., "&lt;a href="http://arxiv.org/abs/arXiv:1010.3003"&gt;Twitter mood predicts the stock market&lt;/a&gt;,"
+Journal of Computational Science, 2011. In more general terms, this is
+an example use of &lt;a href="http://en.wikipedia.org/wiki/Natural_language_processing"&gt;Natural Language Processing&lt;/a&gt; (NLP) to assess the
+semantic of tweets relating to the stock market. NLP, or more
+specifically semantic search, has been the holy grail of search engine
+companies since people realized that you can make a boatload of money by
+providing good search results. Semantic search improve search accuracy
+by understanding the seacher's &lt;em&gt;intent&lt;/em&gt; and the &lt;em&gt;contextual meaning&lt;/em&gt;
+rather than going on the vocabulary alone (see Nature: &lt;a href="http://www.nature.com/news/2011/110215/full/news.2011.95.html"&gt;Quiz-playing
+computer system could revolutionize research&lt;/a&gt;). What Bollen et al. are
+proposing is a subset of the grander NLP problem, in that they are only
+concerned with the "mood states" rather than the whole meaning of the
+tweets. In other words, sentiment analysis. NLP is not new. R, for
+example, has a &lt;a href="http://cran.r-project.org/web/views/NaturalLanguageProcessing.html"&gt;Natural Language Processing task view&lt;/a&gt;. Python has a
+&lt;a href="http://www.nltk.org"&gt;Natural Language Toolkit&lt;/a&gt;. Wikipedia has a good &lt;a href="http://en.wikipedia.org/wiki/List_of_natural_language_processing_toolkits"&gt;list of NLP
+toolkits&lt;/a&gt; for other languages. Traders understand that the market is
+driven by people, and people are ultimately driven by emotions. So far,
+there hasn't been a method to directly evaluate the emotions of market
+participants. Would social media provide a glimpse to the emotions of
+the masses? According to Bollen et al., yes. At any rate, data is king
+in quantitative trading. I have no idea would their particular
+implementation of data mining social media work or not. What's true is
+that as more and more people publish their lives on the internet, all
+these non-quantitative information are just waiting to be exploited.
+Ethics and privacy issues aside, look at what Facebook is doing with
+their ads as an example. In addition to time, volume, and price, data
+mining social media may provide us with a fourth dimension to market
+data.&lt;/p&gt;</summary><category term="Natural Language Processing"></category></entry></feed>

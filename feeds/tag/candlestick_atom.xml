@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/candlestick_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-04-09T18:16:00+01:00</updated><entry><title>An explanation of my Keltner Channel and Candlestick hybrid setup</title><link href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel="alternate"></link><updated>2010-04-09T18:16:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-09:an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/</id><summary type="html">&lt;p&gt;This is an explanation of my &lt;a href="http://www.quantisan.com/category/quantitative-finance/systems/"&gt;automated trading&lt;/a&gt; strategy for the
+Dukascopy JForex Strategy Contest in April. This strategy just made its
+first trade today after running for about 72 hours. My contest demo
+account closed with a gain of 7% on this first trade. Note that this
+strategy is built for competing in a contest and not for real trading
+(i.e., it's purely a no cost gamble). Here is the concept for this high
+probability trading setup. Referring to Figure 1 below, the red arrow
+marks my short entry on EURGBP today. These are the technical analysis
+indicators the strategy uses:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Trend: Signaled by 50 bar moving average above (bullish) or below
+    (bearish) the 200 bar moving average.&lt;/li&gt;
+&lt;li&gt;Momentum: Oversold or overbought RSI conditions, but not used in a
+    traditional manner...&lt;/li&gt;
+&lt;li&gt;Volatility: I use the Keltner channel to measure volatility.&lt;/li&gt;
+&lt;li&gt;Price action: Observe candlestick behaviour to identify trend
+    continuation. This is where the secret to this strategy happens. I
+    will explain this below.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note that I used a Bollinger Bands in the chart of Figure 1 because I
+couldn't find the Keltner Channel indicator in Metatrader (my charting
+software). It doesn't affect my conceptual illustration anyhow. The
+setup:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Identify overarching trend via 50/200 moving averages as explained
+    above.&lt;/li&gt;
+&lt;li&gt;Confirm price is still playing to the trend by checking if current
+    market price is on the right side of the 200 bars moving average.
+    Price above for bullish and below for bearish.&lt;/li&gt;
+&lt;li&gt;Once steps 1-2 are in place, it's assumed that the trend is strong.
+    We look for a setup in the trend's direction. In particular, we look
+    for a &lt;em&gt;failed counter-trend retracement&lt;/em&gt; setup using candlestick in
+    combination with the Keltner channel.&lt;/li&gt;
+&lt;li&gt;Sounds fancy but it's simple. Using a short-side example, the bar's
+    high has to penetrate above the Keltner channel yet it closes within
+    it. Then the short entry is signaled. The opposite for a long-side
+    entry.&lt;/li&gt;
+&lt;li&gt;RSI overbought and oversold conditions are used to filter out slow
+    and steady counter-trend moves (those are evil).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Another benefit of using a price channel is that I also use it to peg my
+take profit target and stop loss. As I said in my previous post, because
+&lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt; expects winning contestants to submit their source codes,
+I am not using anything proprietary or extraordinary here. As such, this
+is totally different than &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/"&gt;what I use to trade on my own&lt;/a&gt;. Namely more
+reliance on indicators and less on price action and &lt;a href="http://www.quantisan.com/category/trading-how-tos/risk-management/"&gt;risk management&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /&gt;&lt;/p&gt;</summary><category term="candlestick"></category><category term="channel"></category><category term="contest"></category><category term="dukascopy"></category><category term="JForex"></category><category term="momentum"></category><category term="trend"></category></entry></feed>

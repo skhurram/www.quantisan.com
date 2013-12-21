@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/programming_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-04-14T07:28:00+01:00</updated><entry><title>Comparing Trading API from 6 Online Forex Brokerages</title><link href="http://www.quantisan.com/comparing-trading-api-from-6-online-forex-brokerages/" rel="alternate"></link><updated>2010-04-14T07:28:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-14:comparing-trading-api-from-6-online-forex-brokerages/</id><summary type="html">&lt;p&gt;Choosing a discount broker for forex trading is time consuming. As the
+forex market is not centralized, choosing a discount broker is sort of
+like picking a stall in a farmer's market. They all offer the same
+product, but prices, features, quality, and services can vary
+considerably between fx brokerages. One criteria that I consider
+seriously is the Application Programming Interface (API) offered by the
+broker. Most people couldn't care less about API because they never
+intend to develop their own automated trading program. However, if this
+is something that interests you, then I'd like to save you some time
+here with the following table.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="570" caption="Forex brokers
+API table"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-13-FX_API_table.png" /&gt;][][/caption] All the dollar values are in U.S. dollar.
+I highlighted the important limitation of each API. I have different
+level of experience with each of these six APIs. As of this writing, I
+am using &lt;a href="http://www.quantisan.com/tag/jforex/"&gt;JForex&lt;/a&gt; from &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;Dukascopy&lt;/a&gt; for &lt;a href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/"&gt;various personal reasons&lt;/a&gt;.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="API"></category><category term="broker"></category><category term="programming"></category></entry><entry><title>From Object Oriented Programming to Object Oriented Design</title><link href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/" rel="alternate"></link><updated>2010-03-22T07:22:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-22:from-object-oriented-programming-to-object-oriented-design/</id><summary type="html">&lt;p&gt;The good news is that I have finished my data scraping module for
+extracting all the company data listed on the two Toronto Stock
+Exchanges (TSX and TSV). I presented an &lt;a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/"&gt;alpha version of this data
+scraping module&lt;/a&gt; last week. I added the functionality to download all
+the historical quotes from Yahoo for all the companies. These data are
+stored locally in a cool HDF5 format with PyTables. I am very happy
+about that part. The bad news is that my module looks more like a hacked
+job than a piece of software. There is no defined structure for my
+underlying codes. It is obvious to me that this module would be
+difficult to extend, which is the whole point of my project. In
+programming jargon, my &lt;a href="http://en.wikipedia.org/wiki/Code_smell"&gt;code smells&lt;/a&gt; (Wikipedia). Then it finally
+dawned on me. I am &lt;em&gt;way&lt;/em&gt; behind in my programming skills. For the past
+few years, my quant work has been confined to &lt;a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/"&gt;MatLab&lt;/a&gt; or some
+&lt;a href="http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/"&gt;proprietary trading platforms&lt;/a&gt;. I wrote scripts. Not programs. My
+problem with programming is that I am still stuck in a procedural
+programming mentality because that is what I've always used. Even though
+I updated my knowledge recently by learning Python, learning to program
+with an object oriented programming language is only the first step. (I
+am also familiar with C++ and Java from way back) To use an analogy,
+programming a software is like constructing a building. The actual
+coding itself is akin to the construction work. I got that part. But
+coding without a well designed plan can only go so far. It is now clear
+to me that if I am to build the trading software to complement my
+trading as I have envisioned it, I need to step it up with my &lt;em&gt;software
+design&lt;/em&gt; ability. Consequently, I am now catching up on object oriented
+design and analysis, as well as software design patterns with a couple
+of books. I will try not to get too carried away with these though. My
+main focus is trading. But this will be very beneficial for my trading
+in the long run if I can build a more robust trading software that can
+easily grow with my future needs. I have many big plans for this side
+project of mine. I posted a UML diagram showing an &lt;a href="http://www.quantisan.com/what-is-your-trading-process/"&gt;architectural
+overview of my project&lt;/a&gt;.&lt;/p&gt;</summary><category term="object oriented"></category><category term="programming"></category></entry><entry><title>A sign that you are truly enjoying what you do</title><link href="http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/" rel="alternate"></link><updated>2010-03-15T07:10:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-15:a-sign-that-you-are-truly-enjoying-what-you-do/</id><summary type="html">&lt;p&gt;When was the last time that you were working on something and you were
+so immersed in it that you have forgotten about the hours that gone by?
+That feeling of timelessness while doing something for hours. Not the
+type that you're stressed and feel that you don't have enough time to do
+a job. I am talking about the other kind of feeling. The positive one.
+The feeling that is serene and content. If you know what I'm talking
+about, then congratulations! You have found what you're born to do.
+There are a handful of activities that I am passionate about. I
+sometimes get that zen-like feeling when I am cycling through a mountain
+path or snowboarding down a hill. But what I truly like to do is problem
+solving. In particular, I find that programming quantitative trading
+systems is a perfect outlet for this side of my personality. Programming
+is one of the few ways in which you can create something out of nothing.
+Very much like a composer or a poet. But unlike those trades, you can
+solve practical problems with just your sheer mental capacity by
+programming your thoughts into codes. To problem solve, you also need a
+source of inspiration. And what better field can there be than the
+capital markets. It is basically an ever-changing chess game in which
+you are playing against the entire world. Talk about setting a bar high.
+As you may have read, I've run into a few &lt;a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/"&gt;obstacles with my trading&lt;/a&gt;
+lately. I need to develop a new trading program to let me regain my
+edge. So I got up early this Saturday to program &lt;a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/"&gt;my new trading software&lt;/a&gt;. Next thing I know, it was 4pm already. It was a blissful
+day. And that, is my reason for wanting to trade for a living.&lt;/p&gt;</summary><category term="programming"></category><category term="trading for a living"></category></entry><entry><title>Why I am not a big fan of MQL4 or trading platform scripting</title><link href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/" rel="alternate"></link><updated>2010-02-08T13:38:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-08:why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/</id><summary type="html">&lt;p&gt;I spent most of 2008 trading futures and developing automated systems on
+Tradestation. The futures trading didn't turn out so well as I lost 40%
+of my account and had to &lt;a href="http://www.quantisan.com/retirement-from-futures-trading-and-back-to-stocks/"&gt;call it quit&lt;/a&gt;. My quant development work on
+the other hand, was coming along slow but steadily. However, since I
+couldn't bear the monstrous maintenance fee anymore at &lt;a href="http://www.tradestation.com/"&gt;Tradestation&lt;/a&gt;,
+I had to abandon that work. Then last year &lt;a href="http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/"&gt;when I wanted to pick up
+where I left off&lt;/a&gt; on Matlab, I found that I couldn't just continue my
+work. For one, I've lost most of my files. I think I left them in my
+other computer in Hong Kong. Which is probably in a landfill by now.
+Secondly, I didn't keep a thorough journal &lt;a href="http://www.quantisan.com/2008/"&gt;back then in 2008&lt;/a&gt; like
+I'm doing now. Lastly, from the important files that I've kept, I didn't
+bother to convert the codes because I might as well write new ones from
+scratch than figure out what I did. The reason why I am reminiscing at
+the moment is because I am finding myself in the same cycle again. As
+regular readers may be aware, &lt;a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/"&gt;recent events&lt;/a&gt; have accelerated my
+quant projects schedule. I am experimenting with using Metatrader 4 for
+my foreign exchange trading and scripting in MQL4 for automated trading.
+Like Tradestation, &lt;a href="http://www.metaquotes.net/en/metatrader4"&gt;Metatrader 4&lt;/a&gt; is a trading platform with scripting
+capabilities. Its programming language, MQL4, is a proprietary language
+based on C. I took a few hours this weekend to learn it (as I'm familiar
+with C already). So that I can start coding this week. However, after
+giving it more thought, I've decided to scale down on my projects with
+MQL4. I don't want to rely on a proprietary system for short-term
+convenience. As trading programmers know, the language used is merely a
+choice. Experience tells me that the bulk of development time is not
+spent on the actual programming itself. Rather, much of the time is
+spent on formulating, analyzing, and optimizing your algorithm. So I
+might as well bite the bullet to build from scratch my automated trading
+systems and quant analytics on one platform (i.e. on Python). That has
+been my long term plan all along. Everything under one roof. But I
+digressed. Then there's the issue of re-useability. Metatrader 4 is
+forex-only and only works with brokers that support it. As such, I would
+have to use something else for stock trading. Even for a forex-only
+system, it would help if I can do intermarket analysis quantitatively.
+That's not possible as far as I know with MQL4. Which is another major
+downside for me. To summarize other reasons on how I came about this
+decision, here are the advantages and disadvantages of using MQL4 versus
+using a general programming language, such as Python or C++. The
+advantages of using MQL4 are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Saves A LOT of development time as it's already built for trading&lt;/li&gt;
+&lt;li&gt;Charting, manual and automated trading on one platform&lt;/li&gt;
+&lt;li&gt;Based on the popular C programming language&lt;/li&gt;
+&lt;li&gt;Many forex traders use it&lt;/li&gt;
+&lt;li&gt;Large repertoire of forex-specific programs&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Disadvantages of using MQL4.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Not for real quant analysis or data mining&lt;/li&gt;
+&lt;li&gt;Limited to MT4-supported brokers&lt;/li&gt;
+&lt;li&gt;Forex trading only&lt;/li&gt;
+&lt;li&gt;Proprietary programming language&lt;/li&gt;
+&lt;li&gt;Must run on Metatrader 4 client terminal&lt;/li&gt;
+&lt;li&gt;MQL5 coming soon&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This is certainly a tough choice. Judging by the huge user base, it's
+evident that many people are satisfied with MQL4. Yet, as I've discussed
+here, there are downsides to using it (besides technical matters). My
+current plan remains the same as what I said in &lt;a href="http://www.quantisan.com/january-2010-trading-performance-review/"&gt;my last month's trading
+review&lt;/a&gt;. That is, I will use MQL4 to plug holes in my trading system
+for now before migrating to build my own system. In fact, I am already
+brewing my first expert advisor starting today. Perhaps I might even
+have something to post by the end of this week.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="EasyLanguage"></category><category term="MQL4"></category><category term="programming"></category></entry></feed>

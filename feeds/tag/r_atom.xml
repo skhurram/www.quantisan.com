@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/r_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2013-01-31T12:30:00+00:00</updated><entry><title>Minimal variance asset allocation for Stocks ISA</title><link href="http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/" rel="alternate"></link><updated>2013-01-31T12:30:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2013-01-31:minimal-variance-asset-allocation-for-stocks-isa/</id><summary type="html">&lt;p&gt;With interest rate in the UK so pathetically low, I thought I might take some chance by making use of a Stocks ISA account in the UK. The problem though, is that I have no knowledge about the London stock market nor do I have the time to follow it. So I wrote a program to pick some Exchange Traded Funds (ETFs) with a primary goal to minimise risk and opportunity costs.&lt;/p&gt;
+&lt;p&gt;Here are what I wanted to achieve:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;only a few trades at most a year&lt;/li&gt;
+&lt;li&gt;less risk than FTSE100&lt;/li&gt;
+&lt;li&gt;more yield than a laddered government bonds portfolio&lt;/li&gt;
+&lt;li&gt;require less than an hour per month of maintenance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Basically, this is a computer-assisted passive investment portfolio.&lt;/p&gt;
+&lt;p&gt;The first step is to scrape all the ETF symbols from London Stock Exchange on &lt;a href="http://www.londonstockexchange.com/exchange/prices-and-markets/ETFs/ETFs.html"&gt;these pages&lt;/a&gt;. I use &lt;code&gt;getNodeSet&lt;/code&gt; from &lt;code&gt;XML&lt;/code&gt; package in R to select the relevant data from the HTML page with XPath.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;page &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; getURL&lt;span class="p"&gt;(&lt;/span&gt;url&lt;span class="p"&gt;,&lt;/span&gt; curl&lt;span class="o"&gt;=&lt;/span&gt;curl&lt;span class="p"&gt;)&lt;/span&gt;
+tree &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; htmlTreeParse&lt;span class="p"&gt;(&lt;/span&gt;page&lt;span class="p"&gt;,&lt;/span&gt; useInternalNodes&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+xpath &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;//table[@class = &amp;#39;table_dati&amp;#39;]/tbody&amp;quot;&lt;/span&gt;
+node &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; getNodeSet&lt;span class="p"&gt;(&lt;/span&gt;tree&lt;span class="p"&gt;,&lt;/span&gt; xpath&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This program only considers ETF because this portfolio is to diversify risk and not pick &lt;em&gt;winning&lt;/em&gt; stocks. ETFs provide &lt;a href="http://www.economist.com/news/finance-and-economics/21570711-anniversary-successful-financial-innovation-twenty-years-young"&gt;convenient exposure to various asset classes such as equities, bonds, and commodities at low costs&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Next is to scrape profile information for each symbol from Yahoo. We want data such as the fund's expense ratio and asset class category.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;url &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; paste&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://finance.yahoo.com/q/pr?s=&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; symbol&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;+Profile&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; sep&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+tree &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; htmlTreeParse&lt;span class="p"&gt;(&lt;/span&gt;url&lt;span class="p"&gt;,&lt;/span&gt; useInternalNodes&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+xpath &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;//table[contains(concat(&amp;#39; &amp;#39;, @class, &amp;#39; &amp;#39;), &amp;#39; yfnc_datamodoutline1 &amp;#39;)]/tr/td/table&amp;quot;&lt;/span&gt;
+node &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; getNodeSet&lt;span class="p"&gt;(&lt;/span&gt;tree&lt;span class="p"&gt;,&lt;/span&gt; xpath&lt;span class="p"&gt;)&lt;/span&gt;
+
+operation &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; tryCatch&lt;span class="p"&gt;(&lt;/span&gt;readHTMLTable&lt;span class="p"&gt;(&lt;/span&gt;node&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]]),&lt;/span&gt; error &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;e&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kc"&gt;NA&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+overview &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; tryCatch&lt;span class="p"&gt;(&lt;/span&gt;readHTMLTable&lt;span class="p"&gt;(&lt;/span&gt;node&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]]),&lt;/span&gt; error &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kr"&gt;function&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;e&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="kc"&gt;NA&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once the funds' fundamental data are fetched, we can do a preliminary screening. I am filtering for:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Actively traded funds,&lt;/li&gt;
+&lt;li&gt;Sufficient age (3 years), and&lt;/li&gt;
+&lt;li&gt;Only the best 3 expense ratio efficiency from each class&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;That last point is particularly important as illustrated in this plot.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="London funds expense by category" src="http://www.quantisan.com/images/2013/london_etf_mer_category.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The above plot couldn't fit in this frame but it shows that expense ratios are all over the place. What matters is that the raw data is available for use.&lt;/p&gt;
+&lt;p&gt;The plot below is clearer. It shows expense ratio by the fund's issuer. You can see that Vanguard funds generally have the best expense ratio as is commonly known.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="London funds expense by issuer" src="http://www.quantisan.com/images/2013/london_etf_mer.png" /&gt;&lt;/p&gt;
+&lt;p&gt;The initial ETF list has 667 funds in 104 categories. The screened list narrows it down to 20 funds in 18 categories. Most that were screened are niche funds such as Islamic Global Equity and regional real estate funds.&lt;/p&gt;
+&lt;p&gt;Out of that 20 funds, I apply the popular &lt;a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory"&gt;Modern Portfolio Theory&lt;/a&gt; to minimise risk using historical quotes data with &lt;code&gt;quantmod&lt;/code&gt;'s Yahoo data fetcher. Given the expected returns of each asset, &lt;code&gt;er&lt;/code&gt; and their covariance matrix, &lt;code&gt;cov.mat&lt;/code&gt;, a long-only efficient portfolio weighting of those assets can be solved with quadratic programming like so.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;Dmat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;cov.mat
+dvec &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; rep.int&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; N&lt;span class="p"&gt;)&lt;/span&gt;
+Amat &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; cbind&lt;span class="p"&gt;(&lt;/span&gt;rep&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;N&lt;span class="p"&gt;),&lt;/span&gt; er&lt;span class="p"&gt;,&lt;/span&gt; diag&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;N&lt;span class="p"&gt;))&lt;/span&gt;
+bvec &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; c&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; target.return&lt;span class="p"&gt;,&lt;/span&gt; rep&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;N&lt;span class="p"&gt;))&lt;/span&gt;
+result &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; solve.QP&lt;span class="p"&gt;(&lt;/span&gt;Dmat&lt;span class="o"&gt;=&lt;/span&gt;Dmat&lt;span class="p"&gt;,&lt;/span&gt;dvec&lt;span class="o"&gt;=&lt;/span&gt;dvec&lt;span class="p"&gt;,&lt;/span&gt;Amat&lt;span class="o"&gt;=&lt;/span&gt;Amat&lt;span class="p"&gt;,&lt;/span&gt;bvec&lt;span class="o"&gt;=&lt;/span&gt;bvec&lt;span class="p"&gt;,&lt;/span&gt;meq&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To get these weightings,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;IGLT&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;MIDD&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;INXG&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;EQQQ&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;SLXX&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;IBGS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;IUKP&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;LUK2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt; 
+&lt;span class="mf"&gt;0.603023&lt;/span&gt; &lt;span class="mf"&gt;0.122829&lt;/span&gt; &lt;span class="mf"&gt;0.116879&lt;/span&gt; &lt;span class="mf"&gt;0.084122&lt;/span&gt; &lt;span class="mf"&gt;0.037906&lt;/span&gt; &lt;span class="mf"&gt;0.017975&lt;/span&gt; &lt;span class="mf"&gt;0.014051&lt;/span&gt; &lt;span class="mf"&gt;0.003215&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But here's the catch, this mean-variance optimisation approach which I'm using does not work in the real-world. The problem is that it optimises for historical data under simplistic assumptions. For potential improvements on this model, start with &lt;a href="http://quant.stackexchange.com/questions/44/what-methods-do-you-use-to-improve-expected-return-estimates-when-constructing-a"&gt;this Q&amp;amp;A on StackExchange&lt;/a&gt; but be warned that it's a rabbit hole to go down in.&lt;/p&gt;
+&lt;p&gt;Knowing that I shouldn't trust this model much, I do this a couple times under different scenarios on the efficient frontier and union the top weighted assets from each run as a compensation by sampling.&lt;/p&gt;
+&lt;p&gt;The result is a suggestion of six ETFs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;Symbol&lt;/span&gt;            &lt;span class="n"&gt;Name&lt;/span&gt;                   &lt;span class="n"&gt;category&lt;/span&gt;
+&lt;span class="n"&gt;BRIC&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;    &lt;span class="n"&gt;ISHARESII&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;                &lt;span class="n"&gt;BRIC&lt;/span&gt; &lt;span class="n"&gt;Equity&lt;/span&gt;
+&lt;span class="n"&gt;EQQQ&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;   &lt;span class="n"&gt;POWERSHS&lt;/span&gt; &lt;span class="n"&gt;EQQQ&lt;/span&gt; &lt;span class="n"&gt;US&lt;/span&gt; &lt;span class="n"&gt;Large&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Cap&lt;/span&gt; &lt;span class="n"&gt;Growth&lt;/span&gt; &lt;span class="n"&gt;Equity&lt;/span&gt;
+&lt;span class="n"&gt;IGLS&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="n"&gt;ISHARESIII&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="err"&gt;£&lt;/span&gt;        &lt;span class="n"&gt;GBP&lt;/span&gt; &lt;span class="n"&gt;Government&lt;/span&gt; &lt;span class="n"&gt;Bond&lt;/span&gt;
+&lt;span class="n"&gt;INXG&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="n"&gt;GBP&lt;/span&gt; &lt;span class="n"&gt;IDX&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;LNK&lt;/span&gt; &lt;span class="n"&gt;GLT&lt;/span&gt;  &lt;span class="n"&gt;GBP&lt;/span&gt; &lt;span class="n"&gt;Inflation&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Linked&lt;/span&gt; &lt;span class="n"&gt;Bond&lt;/span&gt;
+&lt;span class="n"&gt;MIDD&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt;  &lt;span class="n"&gt;ISHARESFTSE250&lt;/span&gt;          &lt;span class="n"&gt;UK&lt;/span&gt; &lt;span class="n"&gt;Mid&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;Cap&lt;/span&gt; &lt;span class="n"&gt;Equity&lt;/span&gt;
+&lt;span class="n"&gt;SLXX&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;L&lt;/span&gt; &lt;span class="n"&gt;ISHSIII&lt;/span&gt; &lt;span class="n"&gt;IBX&lt;/span&gt; &lt;span class="err"&gt;£&lt;/span&gt;&lt;span class="n"&gt;CB&lt;/span&gt;         &lt;span class="n"&gt;GBP&lt;/span&gt; &lt;span class="n"&gt;Corporate&lt;/span&gt; &lt;span class="n"&gt;Bond&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Out of these I hand picked IGLS.L and MIDD.L for a conservative 80% bonds and 20% equity portfolio. This plot below shows the annualised return versus risk of ISF (FTSE100), an equal-weighted portfolio of the pre-screened 20 ETFs, and this final portfolio of two ETFs. Notice the historic risk of this final portfolio is a third of FTSE100.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Return vs risk" src="http://www.quantisan.com/images/2013/london_etf_rr.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Not surprisingly, what my program derived from scratch is similar to the commonly suggested portfolio balance of bonds, local equities, and emerging market blend. What this program offers is picking out the specific ETFs from the hundreds of ETFs traded on London Stock Exchange for a balanced asset allocation.&lt;/p&gt;
+&lt;p&gt;The complete R source code for this project is &lt;a href="https://github.com/Quantisan/touzi"&gt;available on Github&lt;/a&gt;.&lt;/p&gt;</summary><category term="London"></category><category term="ETF"></category><category term="R"></category></entry><entry><title>Unconfusing false-positive and false-negative statistical errors confusion</title><link href="http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/" rel="alternate"></link><updated>2013-01-10T22:28:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2013-01-10:unconfusing-false-positive-and-false-negative-statistical-errors-confusion/</id><summary type="html">&lt;p&gt;I was reading a blog post &lt;a href="http://mcfunley.com/whom-the-gods-would-destroy-they-first-give-real-time-analytics"&gt;about real-time analytics&lt;/a&gt; over the lunch today. In it, the author made a claim that "funny business with timeframes can coerce most A/B tests into statistical significance." There's also &lt;a href="http://mcfunley.com/static/811609fd0f3/images/real-time-screwed.png"&gt;this plot illustrating two time series of the cumulative number of heads in a two-fair-coin-comparison&lt;/a&gt;. Yet, time nor ordering has an effect on test results because each flip is independent. Not content with his claim, I wrote a coin flipping simulation in R to prove him wrong.&lt;/p&gt;
+&lt;p&gt;This plot shows p-values of proportion tests for two simulated fair coin flips that they are different. Each of these tests are repeated with increasing number of flips per test. Since both coins are fair, we should expect no p-value should dip below our 95% significance level (red horizontal line). Yet we're seeing some false positives (i.e. a claim of evidence when there really isn't) that say the two coins are statistically different.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="false positive vs sample size, up to N=1000" src="http://www.quantisan.com/images/2013/coin-false-positives-increasing-1000.png" /&gt;&lt;/p&gt;
+&lt;p&gt;A better illustration is to run a test with 1000 flips, get a test result, and repeat many times for many results. We see that sometimes false positive happens. Given that our significance level is 95%, we can expect false positives to happen 1 in 20 times.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="repeated sampling at 1000 flips" src="http://www.quantisan.com/images/2013/coin-false-positives-1000-only.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Remembering that I should do a power calculation to get an optimal sample size, doing &lt;code&gt;power.prop.test(p1=0.5, p2=0.501, power=0.90, alternative="two.sided")&lt;/code&gt; says N should be 5253704.&lt;/p&gt;
+&lt;p&gt;So this is a plot of doing many tests with 5253704 flips each.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="N=5253704" src="http://www.quantisan.com/images/2013/coin-false-positives-power.png" /&gt;&lt;/p&gt;
+&lt;p&gt;But the false positives didn't improve at all! By now, I'm quite confused. So, I asked for help on StackExchange and received &lt;a href="http://stats.stackexchange.com/q/47434/3847"&gt;this insight&lt;/a&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;What&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="n"&gt;being&lt;/span&gt; &lt;span class="n"&gt;gained&lt;/span&gt; &lt;span class="n"&gt;by&lt;/span&gt; &lt;span class="n"&gt;running&lt;/span&gt; &lt;span class="n"&gt;more&lt;/span&gt; &lt;span class="n"&gt;trials&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;an&lt;/span&gt; &lt;span class="n"&gt;increase&lt;/span&gt;
+&lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt; &lt;span class="n"&gt;positives&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;equivalently&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;decrease&lt;/span&gt;
+&lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt; &lt;span class="n"&gt;negatives&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="n"&gt;That&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;positives&lt;/span&gt; &lt;span class="n"&gt;does&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;precisely&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;guarantee&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And so, a 95% significance level remains 95% significant (1 in 20 chance of false positive) regardless of increasing sample sizes as shown. Again. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="false positive up to 10k trials" src="http://www.quantisan.com/images/2013/coin-false-positive.png" /&gt;&lt;/p&gt;
+&lt;p&gt;What is, in fact, gained for increasing sample size is reduced false negative, which is defined as failing to make a claim when it is there. To illustrate that, we need a different plot because it is an entirely different circumstance. We have two new coins, and they are different. &lt;/p&gt;
+&lt;p&gt;Say we have one fair (p=50%) coin and another that's slightly biased (p=51%). This plot shows the result of running the same proportion test to see if these two are statistically different. As we increase sample size, the amount of false negative results, points &lt;em&gt;above&lt;/em&gt; the red line (0.05 p-value, 95% significance level) denoting negative results, are clearly reduced as sample size increases. Thus this plot is illustrating that false negatives decreases as sample size increases.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="false negative increasing samples" src="http://www.quantisan.com/images/2013/coin-false-negative.png" /&gt;&lt;/p&gt;
+&lt;p&gt;"Funny business" do not coerce A/B tests into statistical significance. The fact that a 95% significance gives 1 in 20 false positives is in fact what it guarantees. To decrease false positive, simply test at a higher significance level. For example, &lt;code&gt;prop.test(c(heads.A, heads.B), n=c(N, N), alternative="two.sided", conf.level=0.99)&lt;/code&gt; to set it to 99% instead of the default 95%.&lt;/p&gt;
+&lt;p&gt;The R source code for this mental sojourn are available at &lt;a href="https://gist.github.com/4502739"&gt;this gist on Github&lt;/a&gt;.&lt;/p&gt;</summary><category term="statistics"></category><category term="R"></category></entry><entry><title>A hypothetical data analysis platform</title><link href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel="alternate"></link><updated>2012-11-10T12:03:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-11-10:a-hypothetical-data-analysis-platform/</id><summary type="html">&lt;p&gt;My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.&lt;/p&gt;
+&lt;p&gt;Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to &lt;code&gt;pip install Numpy, Scipy, Matplotlib&lt;/code&gt;. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.&lt;/p&gt;
+&lt;p&gt;Then there's Incanter.&lt;/p&gt;
+&lt;p&gt;You don't like to use Parallel Colt for your matrices? Here, try &lt;a href="https://github.com/forward/incanter-BLAS"&gt;this BLAS drop-in replacement&lt;/a&gt; and everything would just work with 10x speed. &lt;/p&gt;
+&lt;p&gt;Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."&lt;/p&gt;
+&lt;p&gt;The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.&lt;/p&gt;
+&lt;p&gt;Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a &lt;code&gt;(use 'incanter-magma)&lt;/code&gt; and your Incanter code would just run with &lt;a href="http://icl.cs.utk.edu/magma/software/index.html"&gt;MAGMA&lt;/a&gt; (via &lt;a href="http://matthewrocklin.com/"&gt;Mathew Rocklin&lt;/a&gt;) under the hood without any other change.&lt;/p&gt;
+&lt;p&gt;Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using &lt;a href="http://cascalog.org/"&gt;Cascalog&lt;/a&gt; and is looking to analyse this dataset. You start your Incanter session to pull in your data &lt;code&gt;(use 'incanter-cascalog)&lt;/code&gt;. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you &lt;code&gt;(use 'incanter-storm)&lt;/code&gt; to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to &lt;a href="http://storm-project.net/"&gt;Storm&lt;/a&gt; inside your cluster.&lt;/p&gt;
+&lt;p&gt;For your results, you find JFreeChart limiting so you &lt;code&gt;(use 'incanter-c2)&lt;/code&gt; to spiff up your visualisations with &lt;a href="http://keminglabs.com/c2/"&gt;C2&lt;/a&gt; all while not changing a single line of your Incanter script.&lt;/p&gt;
+&lt;p&gt;Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.&lt;/p&gt;
+&lt;p&gt;Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.&lt;/p&gt;
+&lt;p&gt;Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.&lt;/p&gt;
+&lt;p&gt;I call this platform-as-interface.&lt;/p&gt;</summary><category term="R"></category><category term="Python"></category><category term="Incanter"></category><category term="data analysis"></category><category term="clojure"></category></entry><entry><title>R language lacks consistency</title><link href="http://www.quantisan.com/r-language-lacks-consistency/" rel="alternate"></link><updated>2012-08-30T21:42:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-08-30:r-language-lacks-consistency/</id><summary type="html">&lt;p&gt;That's the thing that gets under my skin about R. For example, why do I need to use &lt;code&gt;do.call&lt;/code&gt; on a list but &lt;code&gt;apply&lt;/code&gt; for data frame? Not only that, the two functions have entirely different names and signatures (edit: this is a bad example, see Joshua's explanation in the comment). I find that a lot of R is just a matter of memorising what to do under which condition. You can't simply guess or deduce what to do like a sane programming language would enable. I know that many solutions are just a Google search away, but I am not comfortable with the awkwardness of the language.&lt;/p&gt;
+&lt;p&gt;Having said that, I've been using R reluctantly for a few years. I try to avoid it as much as possible. But there's just no other statistical platform that's so easy to be productive. I &lt;a href="http://www.quantisan.com/tag/Incanter"&gt;tried Incanter for a while&lt;/a&gt; but it doesn't seem that well suited for exploratory analysis as I usually end up writing functions up from scratch. More recently I played with &lt;a href="http://www.julialang.org"&gt;Julia&lt;/a&gt; briefly. Although it is too bleeding edge as there isn't even a release version yet.&lt;/p&gt;
+&lt;p&gt;As much as I don't like R the language, the R platform and its package repertoire are incomparable at the moment. We did a bit of ggplot today at work. With the help of &lt;a href="http://oobaloo.co.uk/"&gt;my coworker&lt;/a&gt;, it only took a few minutes to hook R with our Hadoop cluster to pull some data and produce the graphs that we wanted. In comparison, Incanter's charts are pretty too but not very customisable. D3.js is very customisable but not quick to use at all. Then there's Julia, which can't do more than a bar or line chart for now.&lt;/p&gt;
+&lt;p&gt;I haven't mentioned the other big contender, Python + Numpy + Scipy + Panda + PyPy + Matplotlib. I tried some of that too some time ago, but didn't get far with it. Come to think of it, I wrote &lt;a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business"&gt;a similar babble like this&lt;/a&gt; a year ago ... &lt;/p&gt;</summary><category term="R"></category><category term="data analysis"></category></entry><entry><title>A weather station data scrapper in R</title><link href="http://www.quantisan.com/a-weather-station-data-scrapper-in-r/" rel="alternate"></link><updated>2012-02-12T11:49:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-12:a-weather-station-data-scrapper-in-r/</id><summary type="html">&lt;p&gt;
+This R code scrape publicly available weather station data given a
+weather station ID and a date range. I patched an existing source code
+from UC Davis so it's not my original code. Thought I'd share it here
+anyway. It doesn't fail safely though because a null return value would
+break the fetching loop.
+&lt;script src="https://gist.github.com/1808134.js"&gt; &lt;/script&gt;
+&lt;/p&gt;</summary><category term="open data"></category><category term="R"></category></entry><entry><title>It's an open buffet in a small business</title><link href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business/" rel="alternate"></link><updated>2011-06-15T20:50:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-06-15:its-an-open-buffet-in-a-small-business/</id><summary type="html">&lt;p&gt;One of the few benefits of working for myself is that I don't need to
+worry about compatibility with legacy systems. I am free to use whatever
+open source tools to get the job done well. The downside to this is that
+there are so many technologies out there that it's hard to choose the
+right ones for the job. To give you a sense of what I meant, here are
+some of the topics that I have either tried or seriously considered in
+the past year.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Programming languages: &lt;a href="http://www.quantisan.com/tag/java/"&gt;Java&lt;/a&gt;, &lt;a href="http://www.quantisan.com/tag/python/"&gt;Python&lt;/a&gt;, &lt;a href="http://www.quantisan.com/tag/R"&gt;R&lt;/a&gt;, C#, F#, Scala,
+    Clojure, Haskell.&lt;/li&gt;
+&lt;li&gt;Data storage: &lt;a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/"&gt;HDF5&lt;/a&gt;, CSV, Binary, MySQL, PostgreSQL, MongoDB,
+    MonetDB, Redis, HBase.&lt;/li&gt;
+&lt;li&gt;Cloud server: &lt;a href="http://www.quantisan.com/tag/amazon-ec2/"&gt;Amazon EC2&lt;/a&gt;, Microsoft Azure, [Google App
+    Engine][], Rackspace Cloud, &lt;a href="http://www.quantisan.com/tag/vps/"&gt;plain old VPSs&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Programming language choices are important because they sit at the
+bottom of a technology stack. Most of the work that I do are built on
+using them. For a long while, I settled on using a combination of Java,
+Python, and R. I prototype small ideas in Python. Implement production
+code in Java. And perform analysis in R. I discussed why &lt;a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/"&gt;use the right
+tool for the right task&lt;/a&gt; a year ago. By the end of my previous
+project, I am finding that the popular development triplet of Java,
+Python, and R, is not ideal for a solo-operation. Seeing that I have
+more time on my hands because I am using QTD to trade for me now, I am
+taking a break this summer to expand my knowledge and learn new
+technologies. Some of the technologies that I am experimenting with
+includes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;an in-memory data store for instantaneous and persistent tick data&lt;/li&gt;
+&lt;li&gt;parallel programming for concurrent processing with no locks&lt;/li&gt;
+&lt;li&gt;mathematically intuitive algorithm implementations using high order
+    functions&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Don't mind me as I help myself in this open buffet of technologies.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="java"></category><category term="python"></category><category term="R"></category></entry><entry><title>A failed experiment with spectral density estimation in R</title><link href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel="alternate"></link><updated>2010-12-16T07:28:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-12-16:a-failed-experiment-with-spectral-density-estimation-in-r/</id><summary type="html">&lt;p&gt;Spectrum analysis (see &lt;a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis"&gt;wiki entry&lt;/a&gt;) is a technical process to
+visualize a time series data in the frequency domain to find hidden
+periodicities. As I continue &lt;a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/"&gt;my struggle in data mining with R&lt;/a&gt;, I
+thought I might try looking at a year's worth of USDJPY 1-min exchange
+rate data in the frequency domain. This is what I got. &lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-12-15-usdjpy_spectrum.png" /&gt;&lt;/p&gt;
+&lt;p&gt;Certainly not one of those nice looking
+graphs in a textbook. Notice that:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;there is no distinct frequencies&lt;/li&gt;
+&lt;li&gt;bandwidth is ridiculously small&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;What this means is that the USDJPY data is practically &lt;a href="http://en.wikipedia.org/wiki/White_noise"&gt;white noise&lt;/a&gt;.
+And that there's much work for me ahead before I can produce something
+useful in R. The source code to produce the graph is printed below. The
+USDJPY data isn't published as it's not small and you can &lt;a href="http://www.quantisan.com/tools/"&gt;get it at
+various places&lt;/a&gt; for free on your own. Update: Failed is a harsh word.
+I should call this a &lt;em&gt;trivial&lt;/em&gt; experiment. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; op \&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; options&lt;span class="p"&gt;(&lt;/span&gt;digits.secs&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; \&lt;span class="c1"&gt;# set option to show milliseconds&lt;/span&gt;
+cat&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;loading CSV file to &amp;#39;data&amp;#39;\\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; print&lt;span class="p"&gt;(&lt;/span&gt; system.time&lt;span class="p"&gt;(&lt;/span&gt; data \&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt;
+read.csv&lt;span class="p"&gt;(&lt;/span&gt; file&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data/USDJPY\_20090630-13-27to20101130-22-19\_1Min.csv&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+head&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; sep&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; \&lt;span class="c1"&gt;# convert long timestamp to POSIX&lt;/span&gt;
+rownames&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;)&lt;/span&gt; \&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; as.POSIXct&lt;span class="p"&gt;(&lt;/span&gt;as.numeric&lt;span class="p"&gt;(&lt;/span&gt;rownames&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="m"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+origin&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;1970-01-01&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; tz&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;GMT&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; data \&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; data.matrix&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;)&lt;/span&gt; library&lt;span class="p"&gt;(&lt;/span&gt;xts&lt;span class="p"&gt;)&lt;/span&gt;
+\&lt;span class="c1"&gt;# load xts library cat(&amp;quot;converting to xts &amp;#39;data.x&amp;#39;\\n&amp;quot;)&lt;/span&gt;
+print&lt;span class="p"&gt;(&lt;/span&gt;system.time&lt;span class="p"&gt;(&lt;/span&gt;data.x \&lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; as.xts&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;)))&lt;/span&gt; rm&lt;span class="p"&gt;(&lt;/span&gt;data&lt;span class="p"&gt;)&lt;/span&gt; \&lt;span class="c1"&gt;# remove data&lt;/span&gt;
+object cat&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;data.x object size: &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; print&lt;span class="p"&gt;(&lt;/span&gt;object.size&lt;span class="p"&gt;(&lt;/span&gt;data.x&lt;span class="p"&gt;),&lt;/span&gt; units &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot;auto&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; cat&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;spectral analysis\\n&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; spectrum&lt;span class="p"&gt;(&lt;/span&gt;data.x\&lt;span class="o"&gt;$&lt;/span&gt;close&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="R"></category></entry><entry><title>Maximal frustration in printing and parsing milliseconds in R</title><link href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel="alternate"></link><updated>2010-10-08T15:32:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-08:maximal-frustration-in-printing-and-parsing-milliseconds-in-r/</id><summary type="html">&lt;p&gt;
+I've just spent an absurd amount of time figuring out how to parse
+millisecond times into R. (It's standard practice to timestamp tick data
+with milliseconds timing in a flat data file.) Turns out that there are
+two problems that I faced. One being that there is a almost-hidden,
+footnote option in the [strptime( ) function][] (for converting
+characters to POSIX) in which it describes using format = "%H:%M%OS"
+instead of "%H:%M:%S" to parse fractional seconds. However, the second,
+and what's actually the one that's wasted much my time, is the fact that
+R **ignores** milliseconds in printing by default! For example, here's
+an output for the POSIXct representation of the integer value
+1286564400.
+
+&gt; "2010-10-08 15:00:00 EDT"
+
+So even though I figured how to represent millisecond times in R a few
+hours ago, I never knew I did it simply because R is not printing the
+output that I wanted on screen every time I tried! After a couple hours
+of searching, trying, and frustrating, here's the one-liner command that
+solved my problem.
+
+&gt; \&gt; options(digits.secs=3)
+
+which changes the options of the display and thus I can see the
+following output from the same input as above.
+
+&gt; "2010-10-08 15:00:00.344 EDT"
+
+I guess that's why they say [R has a steep learning curve][]! Yes, it is
+very powerful and flexible. But there are limited standards and the
+documentations are all over the place because it's a mish mash of
+user-contributed packages!
+
+&lt;/p&gt;</summary><category term="R"></category><category term="source code"></category></entry><entry><title>Data analysis with R: Using the right tool for the right task</title><link href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel="alternate"></link><updated>2010-10-06T05:58:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-06:data-analysis-with-r-using-the-right-tool-for-the-right-task/</id><summary type="html">&lt;p&gt;I ported &lt;a href="http://engineering-returns.com/tsi/"&gt;Engineering Return's Trend Strength Index&lt;/a&gt; to JForex as my
+first practice to writing custom indicators in JForex. Frank's code in
+TradeSignal consists of 9 lines. My JForex code? 191. This is my first
+custom indicator in JForex. It will also be the last. A compiled
+programming language such as Java is not the most convenient to use for
+data analysis. The lack of interactivity because of the step of
+compilation is one obstacle to fluent data explorations. Secondly, the
+language itself is more cumbersome because of its generality. Java is
+used to build all sorts of applications. Contrary to something like
+MatLab, in which it is purposely built to work with numbers. I miss &lt;a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/"&gt;the
+days when I have my license for MatLab&lt;/a&gt;. However, being forced away
+from MatLab might not be a bad thing. As much as I've become accustomed
+to it, MatLab isn't without its flaws. But I won't bash it in this post.
+What I actually want to talk about is R. The rage these days in
+statistical data analysis is in R (see &lt;a href="http://en.wikipedia.org/wiki/R_%28programming_language%29"&gt;Wiki entry on R&lt;/a&gt;). I've done
+some research and testing, R is really as good as they say it is (see
+past publications in &lt;a href="http://www.rinfinance.com/"&gt;R/Finance conference&lt;/a&gt;&lt;a href="http://probability.ca/cran/doc/contrib/Farnsworth-EconometricsInR.pdf"&gt;&lt;/a&gt;). You will get to see
+some real examples in financial time series data analysis in R later in
+this blog once I have some publishable results. This will no doubt take
+some time as I am learning yet another new programming language (thus
+the lack of posts this week). The plan from now on is to use R to play
+with the data. Then once the algorithm is finalized, I will either port
+it to Java (JForex) for deployment or &lt;a href="http://www.rforge.net/rJava/"&gt;embed the R environment in
+Java&lt;/a&gt; for live trading.&lt;/p&gt;</summary><category term="JForex"></category><category term="R"></category></entry></feed>

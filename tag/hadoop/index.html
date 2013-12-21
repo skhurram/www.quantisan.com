@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - hadoop</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/" rel='bookmark'>Cascalog-checkpoint: Fault-tolerant MapReduce Topologies</a>
+            </h1>
+            <div class="article-content"> <p>
+Cascalog is an abstraction library on top of Cascading [for writing
+MapReduce jobs][]. Since the Cascalog library is maturing, the Twitter
+guys (core committers) have been building features around it so that
+it's not just an abstraction for Cascading. One of which is
+[Cascalog-checkpoint][]. It is a small, easy-to-use, and very powerful
+little add-on for Cascalog. In particular, it enables fault-tolerant
+MapReduce topologies. Building Cascading/Cascalog queries can be
+visualised as assembling pipes to connect a flow of data. Imagine that
+you have Flow A and B. Flow B uses the result from A along with other
+bits. Thus, Flow B is dependent on A. Typically, if a MapReduce job fail
+for whatever reason, you simply fix what's wrong and start the job all
+over again. But what if Flow A takes hours to run (which is common for a
+MR job) and the error happened in Flow B? Why re-do all that processing
+for Flow A if we know that it finished successfully? By using
+Cascalog-checkpoint, you can *stage* intermediate results (e.g. result
+of Flow A) and failed jobs can automatically pickup from the last
+checked point. An obvious thing to do but not something I've seen done
+in Hadoop. At least not as easy as this:
+<script src="https://gist.github.com/1915638.js?file=ccl-checkpoint-sample1.clj"></script>
+See [Sam Ritchie's post on cascalog-checkpoint][] for more examples. Of
+course, you need to coerce your flows such that output from Flow A can
+be read by Flow B. However, this is almost trivial via
+Cascalog/Cascading. As this notion of mix and match pipes and flows is a
+fundamental concept in Cascalog/Cascading. With so many choices of
+abstraction frameworks for coding MapReduce on Hadoop, I feel sorry for
+anyone using vanilla Java for writing MapReduce besides the most
+simplest or recurring jobs.
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/' title='2012-02-26T09:38:00'>26 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel='bookmark'>My 5 minute lightning talk on Cascalog</a>
+            </h1>
+            <div class="article-content"> <p>Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.</p>
+<iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;size=m" frameborder="0" width="555" height="451"></iframe>
+
+<p>The possibilities...</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/' title='2012-02-05T18:39:00'>05 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel='bookmark'>Local Hadoop test cluster up and running</a>
+            </h1>
+            <div class="article-content"> <p>Thanks to <a href="http://www.cloudera.com/hadoop/">Cloudera's CDH3 image</a>, I have a virtual machine with
+Hadoop on CentOS 5 working. I'm more of an Ubuntu guy, so CentOS is a
+new for me. But nothing Google couldn't solve. I also ran into a Hadoop
+exception about the java heap space. I couldn't find a solution online
+so I just bumped up the memory on the virtual machine and it solved the
+problem. In any case, I managed to run <a href="http://developer.yahoo.com/hadoop/tutorial/module3.html#vm-jobs">the pi calculation example</a> on
+my local Hadoop cluster. [<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />][]</p>
+<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />]: http://www.quantisan.com/static/images/2011/09/hadoop-example-pi.jpg</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/' title='2011-09-14T22:42:00'>14 September 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/" rel='bookmark'>Building a distributed back-tester with Hadoop on Amazon AWS</a>
+            </h1>
+            <div class="article-content"> <p>Testing is arguably the single most important aspect of trading system
+development. You can't tell how well an idea works unless you test it
+out. [Testing can also help you identify weaknesses or strengths in your
+model][]. The downside to testing is that it takes time to churn through
+those gigabytes of data. Backtesting is inherently a linear process. You
+feed in your tick data into your algorithm and expect some actions. You
+can't really make use of fork/join to let other threads steal from the
+process queue as the later process depends on results from the earlier
+calculations. However, often times than not, you're interested in
+testing many variations of a strategy. This is where MapReduce comes
+into play. MapReduce is a Google software framework. It is inspired by
+the map and reduce functions ubiquitous in functional programming. They
+are as common as for-loops in the Java world. The <em>map</em> function
+partitions an input into smaller problems and run them concurrently,
+e.g. each of the strategy's variant is executed on a node. The <em>reduce</em>
+function takes the results from all the nodes and aggregate them to get
+an output, e.g. back-test results from each strategy. Having used
+functional programming for some time now, using map/reduce is very
+natural for me. Where my knowledge falls short is in implementing a
+distributed infrastructure for running these map and reduce with massive
+scaling beyond my own multi-core computer. It just so happens that
+Amazon AWS has a hosted Hadoop PaaS. Where Hadoop is the Apache's
+framework for MapReduce. Hardware, check. Framework, check. This will be
+the ~~first~~ second system that I'll be working on in my goal to build
+<a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/">a complete trading R&amp;D platform</a>. Expect some technical discussions
+in the coming months as I work my way through. Now, where should I
+start...</p>
+<p>[Testing can also help you identify weaknesses or strengths in your
+  model]: http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/' title='2011-09-13T10:44:00'>13 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

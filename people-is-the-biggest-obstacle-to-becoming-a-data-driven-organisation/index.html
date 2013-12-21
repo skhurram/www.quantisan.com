@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>People is the biggest obstacle to becoming a data-driven organisation - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/" rel="bookmark">People is the biggest obstacle to becoming a data-driven organisation</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Our data team of 3 is tasked with pushing our business to be more
+data-driven. From encouraging management to make strategic decisions
+with hard data to building real-time feedback loop within our products
+themselves. We have built the infrastructure in place to capture and
+analyse streams of high granularity data using open source tools like
+Kafka, Hadoop, and Cascalog. Now the hard part is to convince the rest
+of the company that counted numbers on an Excel spreadsheet is
+insufficient so that they can incorporate these new high-frequency and
+high-granularity information in their everyday decision-making process.</p>
+<p>This came to light for me when I tried to revamp our Attribution
+Modelling, which is a fancy marketing term for how referral is
+attributed and doesn't have to do with mathematical modelling at all.
+Many companies traditionally use a last-referral-takes-the-cake
+approach. Say if a customer comes in via an email referral first, leaves
+the site, then comes back in from an Adword to ultimately make a
+purchase, the Adword would get attributed for that revenue produced.
+This last-referral method is a lazy way of doing things. Lead generating
+referrals get no credit and return on investment values are biased
+towards closing-stage marketing efforts. Granted, doing anything else
+would require a global view of customer journey, which is a non-trivial
+matter. </p>
+<p>However, that is exactly what we're able to do easily now. So we
+took a couple of days to spike out a fair-share attribution model such
+that every touch point a customer used get a share of the pie. The
+intention is to provide a holistic view of referrers efficacy to feed
+into our higher-level models. But seeing that the old system is so
+unrealistic, I thought I might as well open it for everyone else.</p>
+<p>Opening a can of worms, that was what it felt like. I found that things
+like financial reports and people's bonuses are tied to this old
+attribution modelling system. Even though it is obvious to everyone that
+the old attribution modelling system is unrealistic, changing it would
+require changing the work processes of multiple individuals across the
+company. You know what they say about people's habits? Habits are hard
+to change. </p>
+<p>Seeing that this is a fundamental obstacle to our company's
+competitiveness, I've taken a break from pushing our data architecture
+to build and evangelise internal data products. I've been working
+closely individually with our business people to identify ways of using
+data, staging data views from Hadoop/Cascalog back into good old MySQL,
+and assisting them to generate actionable data with SQL to make their
+lives easier. </p>
+<p>One of such views borrows a technique from my algorithmic
+trading. By applying a breakout strategy (which I wrote entirely in SQL,
+good fun) on the revenue and cost time-series data of our PPC and SEO
+campaigns, our PPC/SEO manager now have available a customisable
+screener for abnormality with any of our thousands of continuous
+marketing campaigns. Very much like a stock screener for breakouts. This
+used to be a subjective process based on a spreadsheet of numbers and
+expert opinions. Now it's data-driven. </p>
+<p>There's a saying that a business
+is its people. To become a data-driven organisation, you need
+data-driven people. I never realised the significance of this until now.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2012-06-10T12:26:00'>
+                Posted 10 June 2012
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/data-science/">data-science</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/data-driven organisation/">data-driven organisation</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

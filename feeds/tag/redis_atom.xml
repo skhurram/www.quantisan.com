@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/redis_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2013-05-20T00:00:00+01:00</updated><entry><title>Event-driven finite state machine for a distributed trading system</title><link href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel="alternate"></link><updated>2013-05-20T00:00:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2013-05-20:event-driven-finite-state-machine-for-a-distributed-trading-system/</id><summary type="html">&lt;p&gt;One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say &lt;em&gt;buy&lt;/em&gt;, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;are resource-intensive to generate,&lt;/li&gt;
+&lt;li&gt;might need to compose many of them,&lt;/li&gt;
+&lt;li&gt;not sequential or have one-to-one depencency, and&lt;/li&gt;
+&lt;li&gt;most importantly, they are in separate programs or different machines&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Thus I've opted to abstract this problem out into its own module of the system as an event-driven finite state machine (FSM) to keep track of state transitions. Intimidating term, but my first implementation was just if-else statements to qualify as such. The benefit is that each of my system's components only need to push signals and pull states from a central interface without having to worry about what should it call next or poll anything else to see if the stars are aligned. That drastically simplified development and maintenance.&lt;/p&gt;
+&lt;p&gt;The responsiblities of my FSM module are to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;listen to all the signals,&lt;/li&gt;
+&lt;li&gt;figure out all the transitions, and&lt;/li&gt;
+&lt;li&gt;publish the latest states for the rest of the system.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Handling asynchronous events&lt;/h2&gt;
+&lt;p&gt;I use RabbitMQ as the message transport layer between my system's modules. All I need to do here is to associate an appropriate message handler to each triggering input for the FSM. Here's one example of the event handlers using the &lt;a href="http://clojurerabbitmq.info/"&gt;Clojure RabbitMQ library, Langohr&lt;/a&gt;. The rest of this part are just standard RabbitMQ publish/subscribe stuff.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn- &lt;/span&gt;&lt;span class="nv"&gt;event-message-handler&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;ch&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:keys&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;headers&lt;/span&gt; &lt;span class="nv"&gt;delivery-tag&lt;/span&gt; &lt;span class="nv"&gt;redelivery?&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt; &lt;span class="nv"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="ss"&gt;:keys&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;message-type&lt;/span&gt; &lt;span class="nv"&gt;user-id&lt;/span&gt; &lt;span class="nv"&gt;instrument&lt;/span&gt; &lt;span class="nv"&gt;quantity&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read-payload&lt;/span&gt; &lt;span class="nv"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;when &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="ss"&gt;:position-event&lt;/span&gt; &lt;span class="nv"&gt;message-type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;-&amp;gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;get-cached-states&lt;/span&gt; &lt;span class="nv"&gt;user-id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;update-position-state&lt;/span&gt; &lt;span class="nv"&gt;instrument&lt;/span&gt; &lt;span class="nv"&gt;quantity&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cache-states&lt;/span&gt; &lt;span class="nv"&gt;user-id&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;lbc/ack&lt;/span&gt; &lt;span class="nv"&gt;ch&lt;/span&gt; &lt;span class="nv"&gt;delivery-tag&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is called when a position event is received with information such as user, instrument, and quantity. This handler would thread these information by fetching current states for that user, evaluate next state with input, and then cache the new states for the user.&lt;/p&gt;
+&lt;h2&gt;State transitions&lt;/h2&gt;
+&lt;p&gt;Below is one of my system's state transition diagrams.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="state transition example" src="http://www.quantisan.com/images/2013/qte_state_diagram.png" /&gt;&lt;/p&gt;
+&lt;p&gt;There are 4 states represented by 4 colours with 4 triggers signalling state transition. The program is expected to handle up to hundreds of independent states concurrently with event triggers coming in a couple times per second.&lt;/p&gt;
+&lt;p&gt;As I was saying, my first implementation is just a set of if-else methods. For example, an &lt;code&gt;engage&lt;/code&gt; trigger would call the &lt;code&gt;engaging&lt;/code&gt; method to determine the next state given the implicit input &lt;code&gt;engage&lt;/code&gt; and current state.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;engaging&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;current&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;condp&lt;/span&gt; &lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;current&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;white&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;yellow&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;yellow&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;white&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;green&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;green&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There were a handful of these boilerplate code. So after I deployed my system I came back to refactor them. I've been meaning to give core.logic a try for a while so this seem like a good place to start using it.&lt;/p&gt;
+&lt;p&gt;Before we can ask the logic solver question we need to define relations. Here I define a &lt;code&gt;transition&lt;/code&gt; relation to specify all the state transition definition conveniently in one place.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;defrel&lt;/span&gt; &lt;span class="nv"&gt;transition&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;facts&lt;/span&gt; &lt;span class="nv"&gt;transition&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;nil&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;nil&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:yellow&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:yellow&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:yellow&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the event handler methods are just wrappers for a one-liner logic expression asking the question -- given current stage, &lt;code&gt;cur-state&lt;/code&gt;, and input trigger, &lt;code&gt;input&lt;/code&gt;, what state can &lt;code&gt;q&lt;/code&gt; take to satisfy this constraint?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;next-state&lt;/span&gt; 
+  &lt;span class="s"&gt;&amp;quot;Solver for next state&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="nv"&gt;cur-state&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;run&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;q&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;transition&lt;/span&gt; &lt;span class="nv"&gt;cur-state&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="nv"&gt;q&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;colour-clicked&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;partial &lt;/span&gt;&lt;span class="nv"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;colour-deactivate&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;partial &lt;/span&gt;&lt;span class="nv"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;next-position-colour&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt; &lt;span class="nv"&gt;open?&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;open?&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Not the most illustrative core.logic example but it does the job.&lt;/p&gt;
+&lt;p&gt;Getting started with core.logic is surprisingly easy. I went through the &lt;a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer"&gt;Primer&lt;/a&gt; and &lt;a href="https://github.com/swannodette/logic-tutorial"&gt;tutorial&lt;/a&gt; and got this working in one try.&lt;/p&gt;
+&lt;h2&gt;State caching and sharing&lt;/h2&gt;
+&lt;p&gt;Now that the state transition have been taken care of, states are cached and served on Redis for other parts of the system. I use Redis for this because it is fast and easy. Values are stored in &lt;a href="https://github.com/edn-format/edn"&gt;edn format&lt;/a&gt; instead of something more popular like JSON to maintain data structure through the wire.&lt;/p&gt;
+&lt;p&gt;This is my first time using edn in production. All inter-process messages in this trading system are edn formatted. It works seamlessly with Clojure by simply using &lt;code&gt;str&lt;/code&gt; to write and &lt;code&gt;clojure.edn/read-string&lt;/code&gt; to read. Besides my other Clojure components in the system, my trade broker interface is written in Java. My Java program use &lt;a href="https://github.com/bpsm/edn-java"&gt;edn-java&lt;/a&gt; to parse and unparse complex Clojure data structures (e.g. nested maps with keywords).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;pool&lt;/span&gt;         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/make-conn-pool&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;spec-server1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/make-conn-spec&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defmacro &lt;/span&gt;&lt;span class="nv"&gt;with-car&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/with-conn&lt;/span&gt; &lt;span class="nv"&gt;pool&lt;/span&gt; &lt;span class="nv"&gt;spec-server1&lt;/span&gt; &lt;span class="o"&gt;~@&lt;/span&gt;&lt;span class="nv"&gt;body&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;get-cached-states&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Generate edn from database.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;edn/read-string&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;with-car&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/get&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;states:&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;cache-states&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;with-car&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/set&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;states:&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I find coupling edn with Redis is a fantastic choice as it's almost like working with Clojure's native concurrency data structures, such as &lt;code&gt;atom&lt;/code&gt;, but also enable external programs to access the data.&lt;/p&gt;
+&lt;h2&gt;Simple and quick&lt;/h2&gt;
+&lt;p&gt;The entire event-driven FSM program is less than 200 lines of Clojure code and took no more than a few hours to do. However, I did give it some pondering time for a few days. I haven't done any benchmark to estimate performance result. So all I can say is that this setup can handle my simplistic use case with barely any load on the server so I'm happy with it.&lt;/p&gt;
+&lt;p&gt;A few years ago, I would have set a whole bunch of flags to switch states. In fact, &lt;a href="https://github.com/Quantisan/JFFramework"&gt;that's what I did&lt;/a&gt;. The biggest satisfaction here for me isn't the implementation or technologies, it is seeing through the underlying problem at hand and solving it with a common pattern that made my work simpler.&lt;/p&gt;</summary><category term="clojure"></category><category term="logic programming"></category><category term="event-driven"></category><category term="distributed"></category><category term="redis"></category></entry></feed>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - object oriented</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/" rel='bookmark'>From Object Oriented Programming to Object Oriented Design</a>
+            </h1>
+            <div class="article-content"> <p>The good news is that I have finished my data scraping module for
+extracting all the company data listed on the two Toronto Stock
+Exchanges (TSX and TSV). I presented an <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/">alpha version of this data
+scraping module</a> last week. I added the functionality to download all
+the historical quotes from Yahoo for all the companies. These data are
+stored locally in a cool HDF5 format with PyTables. I am very happy
+about that part. The bad news is that my module looks more like a hacked
+job than a piece of software. There is no defined structure for my
+underlying codes. It is obvious to me that this module would be
+difficult to extend, which is the whole point of my project. In
+programming jargon, my <a href="http://en.wikipedia.org/wiki/Code_smell">code smells</a> (Wikipedia). Then it finally
+dawned on me. I am <em>way</em> behind in my programming skills. For the past
+few years, my quant work has been confined to <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">MatLab</a> or some
+<a href="http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/">proprietary trading platforms</a>. I wrote scripts. Not programs. My
+problem with programming is that I am still stuck in a procedural
+programming mentality because that is what I've always used. Even though
+I updated my knowledge recently by learning Python, learning to program
+with an object oriented programming language is only the first step. (I
+am also familiar with C++ and Java from way back) To use an analogy,
+programming a software is like constructing a building. The actual
+coding itself is akin to the construction work. I got that part. But
+coding without a well designed plan can only go so far. It is now clear
+to me that if I am to build the trading software to complement my
+trading as I have envisioned it, I need to step it up with my <em>software
+design</em> ability. Consequently, I am now catching up on object oriented
+design and analysis, as well as software design patterns with a couple
+of books. I will try not to get too carried away with these though. My
+main focus is trading. But this will be very beneficial for my trading
+in the long run if I can build a more robust trading software that can
+easily grow with my future needs. I have many big plans for this side
+project of mine. I posted a UML diagram showing an <a href="http://www.quantisan.com/what-is-your-trading-process/">architectural
+overview of my project</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/' title='2010-03-22T07:22:00'>22 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

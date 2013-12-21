@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
+            </h1>
+            <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
+<ol>
+<li>are resource-intensive to generate,</li>
+<li>might need to compose many of them,</li>
+<li>not sequential or have one-to-one depencency, and</li>
+<li>most importantly, they are in separate programs or different machines</li>
+</ol>
+<p>Thus I've opted to abstract this problem out into its own module of the system as an event-driven finite state machine (FSM) to keep track of state transitions. Intimidating term, but my first implementation was just if-else statements to qualify as such. The benefit is that each of my system's components only need to push signals and pull states from a central interface without having to worry about what should it call next or poll anything else to see if the stars are aligned. That drastically simplified development and maintenance.</p>
+<p>The responsiblities of my FSM module are to:</p>
+<ol>
+<li>listen to all the signals,</li>
+<li>figure out all the transitions, and</li>
+<li>publish the latest states for the rest of the system.</li>
+</ol>
+<h2>Handling asynchronous events</h2>
+<p>I use RabbitMQ as the message transport layer between my system's modules. All I need to do here is to associate an appropriate message handler to each triggering input for the FSM. Here's one example of the event handlers using the <a href="http://clojurerabbitmq.info/">Clojure RabbitMQ library, Langohr</a>. The rest of this part are just standard RabbitMQ publish/subscribe stuff.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn- </span><span class="nv">event-message-handler</span> <span class="p">[</span><span class="nv">ch</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">headers</span> <span class="nv">delivery-tag</span> <span class="nv">redelivery?</span><span class="p">]}</span> <span class="o">^</span><span class="nv">bytes</span> <span class="nv">payload</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">message-type</span> <span class="nv">user-id</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">]}</span> <span class="p">(</span><span class="nf">read-payload</span> <span class="nv">payload</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="ss">:position-event</span> <span class="nv">message-type</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">get-cached-states</span> <span class="nv">user-id</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">update-position-state</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">cache-states</span> <span class="nv">user-id</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nf">lbc/ack</span> <span class="nv">ch</span> <span class="nv">delivery-tag</span><span class="p">))</span>
+</pre></div>
+
+
+<p>This is called when a position event is received with information such as user, instrument, and quantity. This handler would thread these information by fetching current states for that user, evaluate next state with input, and then cache the new states for the user.</p>
+<h2>State transitions</h2>
+<p>Below is one of my system's state transition diagrams.</p>
+<p><img alt="state transition example" src="http://www.quantisan.com/images/2013/qte_state_diagram.png" /></p>
+<p>There are 4 states represented by 4 colours with 4 triggers signalling state transition. The program is expected to handle up to hundreds of independent states concurrently with event triggers coming in a couple times per second.</p>
+<p>As I was saying, my first implementation is just a set of if-else methods. For example, an <code>engage</code> trigger would call the <code>engaging</code> method to determine the next state given the implicit input <code>engage</code> and current state.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">engaging</span>
+  <span class="p">[</span><span class="nv">current</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">current</span>
+    <span class="s">&quot;white&quot;</span> <span class="s">&quot;yellow&quot;</span>
+    <span class="s">&quot;yellow&quot;</span> <span class="s">&quot;white&quot;</span>
+    <span class="s">&quot;green&quot;</span> <span class="s">&quot;red&quot;</span>
+    <span class="s">&quot;red&quot;</span> <span class="s">&quot;green&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>There were a handful of these boilerplate code. So after I deployed my system I came back to refactor them. I've been meaning to give core.logic a try for a while so this seem like a good place to start using it.</p>
+<p>Before we can ask the logic solver question we need to define relations. Here I define a <code>transition</code> relation to specify all the state transition definition conveniently in one place.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="nf">defrel</span> <span class="nv">transition</span> <span class="nv">from</span> <span class="nv">input</span> <span class="nv">to</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">facts</span> <span class="nv">transition</span> <span class="p">[[</span><span class="nv">nil</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="nv">nil</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:engage</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:engage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:engage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:engage</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:open</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>And the event handler methods are just wrappers for a one-liner logic expression asking the question -- given current stage, <code>cur-state</code>, and input trigger, <code>input</code>, what state can <code>q</code> take to satisfy this constraint?</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">next-state</span> 
+  <span class="s">&quot;Solver for next state&quot;</span>
+  <span class="p">[</span><span class="nv">input</span> <span class="nv">cur-state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">run</span> <span class="mi">1</span> <span class="p">[</span><span class="nv">q</span><span class="p">]</span> <span class="p">(</span><span class="nf">transition</span> <span class="nv">cur-state</span> <span class="nv">input</span> <span class="nv">q</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-clicked</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:engage</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-deactivate</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:disengage</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">next-position-colour</span> <span class="p">[</span><span class="nv">cur</span> <span class="nv">open?</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if </span><span class="nv">open?</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:open</span> <span class="nv">cur</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:close</span> <span class="nv">cur</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>Not the most illustrative core.logic example but it does the job.</p>
+<p>Getting started with core.logic is surprisingly easy. I went through the <a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer">Primer</a> and <a href="https://github.com/swannodette/logic-tutorial">tutorial</a> and got this working in one try.</p>
+<h2>State caching and sharing</h2>
+<p>Now that the state transition have been taken care of, states are cached and served on Redis for other parts of the system. I use Redis for this because it is fast and easy. Values are stored in <a href="https://github.com/edn-format/edn">edn format</a> instead of something more popular like JSON to maintain data structure through the wire.</p>
+<p>This is my first time using edn in production. All inter-process messages in this trading system are edn formatted. It works seamlessly with Clojure by simply using <code>str</code> to write and <code>clojure.edn/read-string</code> to read. Besides my other Clojure components in the system, my trade broker interface is written in Java. My Java program use <a href="https://github.com/bpsm/edn-java">edn-java</a> to parse and unparse complex Clojure data structures (e.g. nested maps with keywords).</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">pool</span>         <span class="p">(</span><span class="nf">car/make-conn-pool</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">spec-server1</span> <span class="p">(</span><span class="nf">car/make-conn-spec</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defmacro </span><span class="nv">with-car</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span> <span class="o">`</span><span class="p">(</span><span class="nf">car/with-conn</span> <span class="nv">pool</span> <span class="nv">spec-server1</span> <span class="o">~@</span><span class="nv">body</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-cached-states</span>
+  <span class="s">&quot;Generate edn from database.&quot;</span>
+  <span class="p">[</span><span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">edn/read-string</span> <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/get</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">cache-states</span> <span class="p">[</span><span class="nv">m</span> <span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/set</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)</span> <span class="p">(</span><span class="nb">str </span><span class="nv">m</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>I find coupling edn with Redis is a fantastic choice as it's almost like working with Clojure's native concurrency data structures, such as <code>atom</code>, but also enable external programs to access the data.</p>
+<h2>Simple and quick</h2>
+<p>The entire event-driven FSM program is less than 200 lines of Clojure code and took no more than a few hours to do. However, I did give it some pondering time for a few days. I haven't done any benchmark to estimate performance result. So all I can say is that this setup can handle my simplistic use case with barely any load on the server so I'm happy with it.</p>
+<p>A few years ago, I would have set a whole bunch of flags to switch states. In fact, <a href="https://github.com/Quantisan/JFFramework">that's what I did</a>. The biggest satisfaction here for me isn't the implementation or technologies, it is seeing through the underlying problem at hand and solving it with a common pattern that made my work simpler.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/' title='2013-05-20T00:00:00'>20 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/" rel='bookmark'>What should I work on next for Cascalog?</a>
+            </h1>
+            <div class="article-content"> <p>Too many things to do, too little time. I figured we can do this in a data-driven way. So here's a poll. Please only submit an entry if you use Cascalog. And only one per person. Let's see if an honour system would work.</p>
+<iframe src="https://docs.google.com/a/quantisan.com/spreadsheet/embeddedform?formkey=dGtBNF96bExZZ0E0X0p5ZUFTb2NyTkE6MQ" width="580" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+<h2>Poll result one week later</h2>
+<p><img alt="poll result" src="http://www.quantisan.com/images/2013/cascalog_poll_graph.png" /></p>
+<table>
+    <tr><th>Votes</th> <th>Choice</th></tr>
+    <tr><td>15</td> <td>Self-contained documentation site, e.g. http://cascalog.quantisan.com (demo address only)</td></tr>
+    <tr><td>10</td> <td>Improve and consolidate guides into Github wiki</td></tr>
+    <tr><td>11</td> <td>Bring Cascalog to Cascading 2.1/2.2</td></tr>
+    <tr><td>8</td> <td>Fix open issues</td></tr>
+    <tr><td>13</td> <td>Add features and performance increase, e.g. new logic solver, make use of new Cascading features since 2.0</td></tr>
+    <tr><td>2</td> <td>Other</td></tr>
+</table>
+
+<p>One person voted for integrating other machine learning library into Cascalog and another to <a href="https://github.com/nathanmarz/storm/issues/115">isolate system library</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/' title='2013-05-08T21:40:00'>08 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/" rel='bookmark'>Securing a fresh Ubuntu server with Fabric tasks</a>
+            </h1>
+            <div class="article-content"> <p>An administrative task that I've done countless number of times is spinning up new servers to host applications like a web dashboard or a trading engine. At uSwitch my colleagues use Puppet and other smart devops tools that I have no idea about to automate our infrastructure. For my own work I just need an easy tool to run some commands over ssh. I chose to use <a href="http://docs.fabfile.org/">Fabric</a> to automate this repetitive but necessary task of hardening a fresh Ubuntu server. Now that I have this set of Fabric tasks, after I create a new instance, I can just run a single Fabric task and the server would be configured properly for use.</p>
+<p>The choice for Fabric is because I've been using Fabric for some time already to perform simple deployment tasks. Then I stumbled on <a href="https://niteowebfabfile.readthedocs.org/en/latest/_modules/niteoweb/fabfile/server.html">an open-source project</a> that actually configures an Ubuntu server using Fabric. Much of these scripts are based on that source. Automating these tasks saves me a lot of time and ensures consistency of configurations. Perhaps when the need arises, I should look into other tools like <a href="http://www.vagrantup.com/">Vagrant</a> too.</p>
+<p>Here are some basic tasks that I perform on a new Ubuntu 12.04 server and the corresponding Fabric task script.</p>
+<h2>Create an administrator account</h2>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">append</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">sed</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
+<span class="kn">from</span> <span class="nn">fabric.operations</span> <span class="kn">import</span> <span class="n">prompt</span>
+
+<span class="k">def</span> <span class="nf">create_admin_account</span><span class="p">(</span><span class="n">admin</span><span class="p">,</span> <span class="n">default_password</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an account for an admin to use to access the server.&quot;&quot;&quot;</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&quot;root&quot;</span>
+
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">admin</span><span class="o">=</span><span class="n">admin</span><span class="p">,</span>
+        <span class="n">default_password</span><span class="o">=</span><span class="n">default_password</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;default_password&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;secret&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c"># create user</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;egrep </span><span class="si">%(admin)s</span><span class="s"> /etc/passwd || adduser </span><span class="si">%(admin)s</span><span class="s"> --disabled-password --gecos &quot;&quot;&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># add public key for SSH access</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/home/</span><span class="si">%(admin)s</span><span class="s">/.ssh&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">):</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;mkdir /home/</span><span class="si">%(admin)s</span><span class="s">/.ssh&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="n">opts</span><span class="p">[</span><span class="s">&#39;pub&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Paste </span><span class="si">%(admin)s</span><span class="s">&#39;s public key: &quot;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;echo &#39;</span><span class="si">%(pub)s</span><span class="s">&#39; &gt; /home/</span><span class="si">%(admin)s</span><span class="s">/.ssh/authorized_keys&quot;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># allow this user in sshd_config</span>
+    <span class="n">append</span><span class="p">(</span><span class="s">&quot;/etc/ssh/sshd_config&quot;</span><span class="p">,</span> <span class="s">&#39;AllowUsers </span><span class="si">%(admin)s</span><span class="s">@*&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># allow sudo for maintenance user by adding it to &#39;sudo&#39; group</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;gpasswd -a </span><span class="si">%(admin)s</span><span class="s"> sudo&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># set default password for initial login</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;echo &quot;</span><span class="si">%(admin)s</span><span class="s">:</span><span class="si">%(default_password)s</span><span class="s">&quot; | chpasswd&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>harden ssh server</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">harden_sshd</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Security harden sshd.&quot;&quot;&quot;</span>
+
+    <span class="c"># Disable password authentication</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/ssh/sshd_config&#39;</span><span class="p">,</span>
+        <span class="s">&#39;#PasswordAuthentication yes&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PasswordAuthentication no&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Deny root login</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/ssh/sshd_config&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PermitRootLogin yes&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PermitRootLogin no&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;restart ssh&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>setup firewall</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">install_ufw</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Install and configure Uncomplicated Firewall.&quot;&quot;&quot;</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get update&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install ufw&#39;</span><span class="p">)</span>
+    <span class="n">configure_ufw</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">configure_ufw</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure Uncomplicated Firewall.&quot;&quot;&quot;</span>
+    <span class="c"># reset rules so we start from scratch</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw --force reset&#39;</span><span class="p">)</span>
+
+    <span class="n">rules</span> <span class="o">=</span> <span class="n">rules</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">rules</span> <span class="ow">or</span> <span class="n">err</span><span class="p">(</span><span class="s">&quot;env.rules must be set&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+    <span class="c"># re-enable firewall and print rules</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw --force enable&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw status verbose&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>time synchronisation daemon</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">set_system_time</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set timezone and install ``ntp`` to keep time accurate.&quot;&quot;&quot;</span>
+
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">timezone</span><span class="o">=</span><span class="n">timezone</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;timezone&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;/usr/share/zoneinfo/UTC&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c"># set timezone</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;cp </span><span class="si">%(timezone)s</span><span class="s"> /etc/localtime&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># install NTP</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install ntp&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>enable unattended upgrades</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">install_unattended_upgrades</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure Ubuntu to automatically install security updates.&quot;&quot;&quot;</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">email</span><span class="o">=</span><span class="n">email</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;email&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">err</span><span class="p">(</span><span class="s">&#39;env.email must be set&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install unattended-upgrades&#39;</span><span class="p">)</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/50unattended-upgrades&#39;</span><span class="p">,</span>
+        <span class="s">&#39;//Unattended-Upgrade::Mail &quot;root@localhost&quot;;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;Unattended-Upgrade::Mail &quot;</span><span class="si">%(email)s</span><span class="s">&quot;;&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/20auto-upgrades&#39;</span><span class="p">,</span>
+        <span class="s">&#39;APT::Periodic::Update-Package-Lists &quot;0&quot;;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;APT::Periodic::Update-Package-Lists &quot;1&quot;;&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">append</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/20auto-upgrades&#39;</span><span class="p">,</span>
+           <span class="s">&#39;APT::Periodic::Unattended-Upgrade &quot;1&quot;;&#39;</span><span class="p">,</span>
+           <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/' title='2013-05-06T08:34:00'>06 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/" rel='bookmark'>Unlock Lisp sorcery in your data structure by implementing Clojure ISeq</a>
+            </h1>
+            <div class="article-content"> <p>People that has gone through The Little Schemer might not find this exciting. One of the things that I discovered while patching <a href="http://quantisan.github.com/clatrix/">Clatrix</a> is that implementing clojure.lang.ISeq interface in your custom data structure unlocks the magic of Lisp composition. By enabling primative operators such as <code>first</code>, <code>next</code>, <code>more</code>, <code>cons</code>, higher-level operations such as <code>map</code> and <code>reduce</code> would just work when operating on your data structure. I find it fascinating that a native Fortran matrix object (through jBLAS) can be made clojury with a few magic operations implemented.</p>
+<p>However, getting a <code>deftype</code> implementation of <code>Matrix</code> correct took some effort as these operators are not as simple as they seem.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISeq</span> <span class="kd">extends</span> <span class="n">IPersistentCollection</span> <span class="o">{</span>
+    <span class="n">Object</span> <span class="nf">first</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">next</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">more</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">cons</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>For example, say we have a matrix <code>M</code> like so.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="k">def </span><span class="nv">M</span> <span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]]))</span>
+<span class="nv">=&gt;</span> <span class="nv">M</span>
+<span class="nv">A</span> <span class="mi">3</span><span class="nv">x3</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>  <span class="mf">3.00</span><span class="nv">e+00</span> 
+<span class="mf">4.00</span><span class="nv">e+00</span>  <span class="mf">5.00</span><span class="nv">e+00</span>  <span class="mf">6.00</span><span class="nv">e+00</span> 
+<span class="mf">7.00</span><span class="nv">e+00</span>  <span class="mf">8.00</span><span class="nv">e+00</span>  <span class="mf">9.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>Reducing <code>M</code> across its maps is equivalent to a column-wise operation.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">map + </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">M</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">12.0</span> <span class="mf">15.0</span> <span class="mf">18.0</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Yet for a while this doesn't work because I wasn't careful on my implementation of <code>first</code>. </p>
+<p>Consider the case of a 2x2 matrix. A 2x2 matrix is structurally equivalent to a nested vector. Calling <code>first</code> on these would yield:</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]]))</span>
+<span class="nv">A</span> <span class="mi">1</span><span class="nv">x2</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>And for a 3x1 vector matrix, i.e. one-dimensional, it is equivalent to a regular vector.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">1</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="mf">1.0</span>
+</pre></div>
+
+
+<p>But here's a tricky bit. What happens during <code>reduce</code> as it keeps recurring <code>next</code> and <code>first</code>?</p>
+<p>Let's step this through for <code>(reduce #(map + %1 %2) M)</code>. <code>%1</code> is basically the result so far and <code>%2</code> is the <code>first</code> of the remaining collection to be processed.</p>
+<table border="1">
+    <tr><th>iteration</th><th>accumulated (%1)</th><th>first (%2)</th><th>remaining</th></tr>
+    <tr><td>0</td><td>nil</td><td>[1 2 3]</td><td>[[1 2 3] [4 5 6] [7 8 9]]</td></tr>
+    <tr><td>1</td><td>[1 2 3]</td><td>[4 5 6]</td><td>[[4 5 6] [7 8 9]]</td></tr>
+    <tr><td>2, bad</td><td>[5 7 9]</td><td>7</td><td>[[7 8 9]]</td></tr>
+    <tr><td>2, good</td><td>[5 7 9]</td><td>[7 8 9]</td><td>[[7 8 9]]</td></tr>
+</table>
+
+<p>The problem arises in the second iteration. Calling <code>(rest [[4 5 6] [7 8 9]])</code> returns <code>[[7 8 9]]</code>. However, <code>(matrix [[7 8 9]])</code> is a row vector and <code>(matrix [7 8 9])</code> is a column vector. Both are considered one dimensional. In either case, <code>first</code> of a vector should return the first element, which is a number. Thus at this iteration, <code>reduce</code> breaks because you can't map a sequence with a number, <code>(map + [5 7 9] 7)</code>, to get an accumulated value.</p>
+<p>What we want though, is for the second iteration to return <code>[7 8 9]</code> instead because the <em>original</em> matrix is not a vector. Luckily, this particular problem has been solved by my colleague <a href="https://github.com/antoniogarrote">Antonio Garrote</a> when he <a href="https://github.com/forward/incanter-BLAS">did this in Java a year ago</a> by keeping a predicate field signifying is <em>this</em> matrix supposed to be vector or not.</p>
+<p>So there you have it. If you find yourself needing to implement <code>deftype</code> to build your own data structure in Clojure. Do consider implementing <code>clojure.lang.ISeq</code> to leverage high-level Clojure functions but be careful about those seemingly simplistic primitive operators.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/' title='2012-12-31T15:42:00'>31 December 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
+            </h1>
+            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
+<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
+<p>Then there's Incanter.</p>
+<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
+<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
+<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
+<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
+<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
+<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
+<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
+<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
+<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
+<p>I call this platform-as-interface.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/r-language-lacks-consistency/" rel='bookmark'>R language lacks consistency</a>
+            </h1>
+            <div class="article-content"> <p>That's the thing that gets under my skin about R. For example, why do I need to use <code>do.call</code> on a list but <code>apply</code> for data frame? Not only that, the two functions have entirely different names and signatures (edit: this is a bad example, see Joshua's explanation in the comment). I find that a lot of R is just a matter of memorising what to do under which condition. You can't simply guess or deduce what to do like a sane programming language would enable. I know that many solutions are just a Google search away, but I am not comfortable with the awkwardness of the language.</p>
+<p>Having said that, I've been using R reluctantly for a few years. I try to avoid it as much as possible. But there's just no other statistical platform that's so easy to be productive. I <a href="http://www.quantisan.com/tag/Incanter">tried Incanter for a while</a> but it doesn't seem that well suited for exploratory analysis as I usually end up writing functions up from scratch. More recently I played with <a href="http://www.julialang.org">Julia</a> briefly. Although it is too bleeding edge as there isn't even a release version yet.</p>
+<p>As much as I don't like R the language, the R platform and its package repertoire are incomparable at the moment. We did a bit of ggplot today at work. With the help of <a href="http://oobaloo.co.uk/">my coworker</a>, it only took a few minutes to hook R with our Hadoop cluster to pull some data and produce the graphs that we wanted. In comparison, Incanter's charts are pretty too but not very customisable. D3.js is very customisable but not quick to use at all. Then there's Julia, which can't do more than a bar or line chart for now.</p>
+<p>I haven't mentioned the other big contender, Python + Numpy + Scipy + Panda + PyPy + Matplotlib. I tried some of that too some time ago, but didn't get far with it. Come to think of it, I wrote <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business">a similar babble like this</a> a year ago ... </p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/r-language-lacks-consistency/' title='2012-08-30T21:42:00'>30 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/category/computing//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

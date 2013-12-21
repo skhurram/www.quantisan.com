@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-stopmananger-1-0/" rel='bookmark'>JForex StopManager 1.0</a>
+            </h1>
+            <div class="article-content"> <p>I am building my real JForex automated trading system one feature at a
+time. The idea is to automate some of my most fundamental trading
+techniques on JForex so that I can trade forex semi-automatically on
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>. I am starting off here with a simple stop management
+strategy. In a nutshell, once the market price moves in your favour
+equidistant from your original stop loss, this strategy moves the stop
+to breakeven. For example, if I go long EURUSD at 1.3500 with a stop at
+1.3400 (100 pips stop). Then if the price breaks above 1.3600 (100 pips
+profit), the strategy moves the stop to breakeven. This is a simplistic
+implementation of the saying that "never let profits turn into losses".
+You can <a href="http://dl.dropbox.com/u/6028806/StopManager.java">download the source code here</a> and the <a href="http://dl.dropbox.com/u/6028806/StopManager.jfx">executable strategy
+here</a>. Note that these files are made available through <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">Dropbox</a>.
+Update: This logic is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source
+project</a>. You can also see <a href="http://www.quantisan.com/tag/jforex/">a list of my latest JForex articles
+here</a>. [java] /* StopManager.java version 1.0 Copyright 2010
+Quantisan.com Move stops to breakeven when equidistance to original stop
+loss */ package jforex; import com.dukascopy.api.*; public class
+StopManager implements IStrategy { private IEngine engine; private
+IConsole console; private IContext context; @Configurable("Lock-in Pips
+for Breakeven") public int lockPip = 3; @Configurable("Move stop to
+breakeven?") public boolean moveBE = true; public void onStart(IContext
+context) throws JFException { this.engine = context.getEngine();
+this.console = context.getConsole(); this.context = context; } public
+void onAccount(IAccount account) throws JFException { } public void
+onMessage(IMessage message) throws JFException { } public void onStop()
+throws JFException { } public void onTick(Instrument instrument, ITick
+tick) throws JFException { for (IOrder order :
+engine.getOrders(instrument)) { if (order.getState() ==
+IOrder.State.FILLED) { boolean isLong; double open, stop, diff, newStop;
+String label = order.getLabel(); IChart chart; isLong = order.isLong();
+open = order.getOpenPrice(); stop = order.getStopLossPrice(); diff =
+open - stop; // stop loss distance if (isLong) { // long side order if
+(moveBE &amp;&amp; diff > 0 &amp;&amp; tick.getBid() > (open + diff)) { // make it
+breakeven trade + lock in a few pips newStop = open +
+instrument.getPipValue() * lockPip; order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_UP, tick.getTime(), newStop); } } else { // short
+side order // Move to breakeven if (moveBE &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk()
+\&lt; (open + diff)) { // diff is negative // make it breakeven trade +
+lock in a few pips newStop = open - (instrument.getPipValue() *
+lockPip); order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_DOWN, tick.getTime(), newStop); } } } } } public
+void onBar(Instrument instrument, Period period, IBar askBar, IBar
+bidBar) throws JFException { } } [/java]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-stopmananger-1-0/' title='2010-04-12T20:39:00'>12 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel='bookmark'>An explanation of my Keltner Channel and Candlestick hybrid setup</a>
+            </h1>
+            <div class="article-content"> <p>This is an explanation of my <a href="http://www.quantisan.com/category/quantitative-finance/systems/">automated trading</a> strategy for the
+Dukascopy JForex Strategy Contest in April. This strategy just made its
+first trade today after running for about 72 hours. My contest demo
+account closed with a gain of 7% on this first trade. Note that this
+strategy is built for competing in a contest and not for real trading
+(i.e., it's purely a no cost gamble). Here is the concept for this high
+probability trading setup. Referring to Figure 1 below, the red arrow
+marks my short entry on EURGBP today. These are the technical analysis
+indicators the strategy uses:</p>
+<ol>
+<li>Trend: Signaled by 50 bar moving average above (bullish) or below
+    (bearish) the 200 bar moving average.</li>
+<li>Momentum: Oversold or overbought RSI conditions, but not used in a
+    traditional manner...</li>
+<li>Volatility: I use the Keltner channel to measure volatility.</li>
+<li>Price action: Observe candlestick behaviour to identify trend
+    continuation. This is where the secret to this strategy happens. I
+    will explain this below.</li>
+</ol>
+<p>Note that I used a Bollinger Bands in the chart of Figure 1 because I
+couldn't find the Keltner Channel indicator in Metatrader (my charting
+software). It doesn't affect my conceptual illustration anyhow. The
+setup:</p>
+<ol>
+<li>Identify overarching trend via 50/200 moving averages as explained
+    above.</li>
+<li>Confirm price is still playing to the trend by checking if current
+    market price is on the right side of the 200 bars moving average.
+    Price above for bullish and below for bearish.</li>
+<li>Once steps 1-2 are in place, it's assumed that the trend is strong.
+    We look for a setup in the trend's direction. In particular, we look
+    for a <em>failed counter-trend retracement</em> setup using candlestick in
+    combination with the Keltner channel.</li>
+<li>Sounds fancy but it's simple. Using a short-side example, the bar's
+    high has to penetrate above the Keltner channel yet it closes within
+    it. Then the short entry is signaled. The opposite for a long-side
+    entry.</li>
+<li>RSI overbought and oversold conditions are used to filter out slow
+    and steady counter-trend moves (those are evil).</li>
+</ol>
+<p>Another benefit of using a price channel is that I also use it to peg my
+take profit target and stop loss. As I said in my previous post, because
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> expects winning contestants to submit their source codes,
+I am not using anything proprietary or extraordinary here. As such, this
+is totally different than <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">what I use to trade on my own</a>. Namely more
+reliance on indicators and less on price action and <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>.</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /></p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/' title='2010-04-09T18:16:00'>09 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/" rel='bookmark'>Reading the fine print for Dukascopy JForex Strategy Contest</a>
+            </h1>
+            <div class="article-content"> <p><strong>Update</strong>: I have since <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">won the JForex strategy contest a few
+times</a>. If you are looking to learn JForex programming, you can start
+with <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">an explanation of my winning strategy</a> and my long <a href="http://www.quantisan.com/tag/jforex/">list of
+JForex posts</a>. The Dukascopy JForex Strategy Contest began last week.
+Starting this month, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> offers \$15,000 total of cash prizes
+to the top 10 automated trading systems every month. However, before
+entering, there are a couple of clauses in their contest rules that
+caught my attention.</p>
+<ol>
+<li>Cash prizes are deposited into contestant's Dukascopy account
+    (Ranking and Awarding Rules #5).</li>
+<li>All source code needs to be submitted and agrees to be published
+    (Ranking and Awarding Rules #2 and #6).</li>
+</ol>
+<p>#1 is troublesome because it means winners have to <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">open an account
+with Dukascopy</a> if they don't already have an account with
+them. But that isn't a big deal since they are actually one of the best
+forex brokers. I planned to open an account with them anyway. However,
+#2 will certainly turn many people away. The requirement to disclose
+source code in an automated trading contest is almost unheard of as far
+as I know. Are you willing to disclose your winning system just for that
+few hundred, or a even few thousand, dollars of prize money? In any
+case, I decided to enter this contest anyway just for fun. Yet, you can
+be sure that I won't be using any proprietary logic in my system. In
+fact, I just finished my automated trading strategy today and it is now
+running. I will <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/">discuss about my strategy</a> after it completes its
+first trade. That might take a while as my system is expected to make
+fewer than 5 trades in a month.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/' title='2010-04-07T13:21:00'>07 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/rimto-yet-another-disgusting-example-of-why-i-dont-buy-and-hold/" rel='bookmark'>RIM.TO: Yet another disgusting example of why I don&#039;t buy-and-hold</a>
+            </h1>
+            <div class="article-content"> <p>I am disgusted by the blatant milking of investor money happening in the
+stock market. Case in point, just look at the media coverage of Research
+in Motion (RM.TO) before and after their earnings release yesterday. It
+was just days ago when investment firms were going gaga over Research in
+Motion (RM.TO). See table below for the accolade of buy recommendations.
+Globe and Mail even posted the following article the day before earnings
+release, "<a href="http://www.theglobeandmail.com/globe-investor/expectations-high-as-rim-set-to-report/article1517857/">Expectations high as RIM set to report</a>". Then immediately
+after RIM's earnings release yesterday, which was after the market close
+(when only the big banks and brokers can trade amongst themselves),
+headlines such Globe and Mail's "<a href="http://www.google.ca/url?q=http://www.theglobeandmail.com/globe-investor/rim-profit-short-of-expectations/article1519081/&amp;ei=3qa0S7qdBoWdlgeAvuhU&amp;sa=X&amp;oi=news_article&amp;resnum=1&amp;ct=result&amp;cd=1&amp;ved=0CDQQqQIoAjAA&amp;usg=AFQjCNEsvQ_j9Nk2sqDxf-40LQLxo_QGNA">RIM profit short of
+expectations</a>ÃƒÂ¢Ã¢â€šÂ¬Ã…Â½" pops up all over the news wire. Goldman
+Sachs even <a href="http://blogs.wsj.com/marketbeat/2010/04/01/rim-reactions-goldman-downgrades-to-sell/?mod=yahoo_hs">promptly downgraded RIM to a SELL</a>. Citing concerns from
+Apple, Google, etc. As if the world around RIM suddenly changed within
+minutes before and after their latest earnings! Not surprisingly, RIM
+(on Nasdaq) traded -5% post-market last night and gapped down big today.
+Anyone that bought into these sales pitch (see table) just days ago
+would have been hit hard. This type of <strong>orchestrated raids</strong> from the
+media and big investment firms never cease to disgust me. That is a
+reason why I've taken to <a href="http://www.quantisan.com/category/trading-how-tos/">learn to trade</a> and not invest with a
+buy-and-pray mentality.</p>
+<hr />
+<p>01-Apr-10   Reiterated   Credit Suisse         Outperform                                      \$95 ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ \$100
+  26-Mar-10   Upgrade      JP Morgan             Neutral ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Overweight          \$70 ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ \$84
+  25-Mar-10   Initiated    Rodman &amp; Renshaw      Mkt Perform                                   <br />
+  19-Mar-10   Initiated    Wunderlich            Buy                                             \$96
+  08-Mar-10   Upgrade      BMO Capital Markets   Market Perform ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ Outperform   \$70 ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ \$88
+  01-Mar-10   Reiterated   Canaccord Adams       Buy                                             \$95 ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ \$100</p>
+<hr />
+<p>Source: <a href="http://www.finviz.com/quote.ashx?t=rimm&amp;ty=c&amp;ta=1&amp;p=d">Finviz</a></p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/rimto-yet-another-disgusting-example-of-why-i-dont-buy-and-hold/' title='2010-04-01T10:15:00'>01 April 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/march-2010-trading-review/" rel='bookmark'>March 2010 Trading Review</a>
+            </h1>
+            <div class="article-content"> <p>It is that time of the month again when I do my trading performance
+review. However, I did not make any trade this month. Not because I was
+procrastinating, but I spent all of my time this month to work on my
+quantitative projects. This review will be a recap of my backend trading
+development. I said in my <a href="http://www.quantisan.com/february-2010-trading-performance-review/">last month's performance review</a> that my
+goal for March is "to write a rudimentary data analysis and
+visualization program for historical forex data." Well, I finished <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/">half
+of it</a> and then realized that <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/">I need a better design for the
+software</a>. So I studied yet another programming book (finished 3
+programming books this month), on object oriented design and analysis.
+The other major event for me this month is that I finally opened a
+self-directed RRSP account at <a href="http://www.quantisan.com/questrade/">Questrade</a> because the <a href="http://www.quantisan.com/considering-investment-options-for-my-first-rrsp/">tax benefit is
+too good to pass</a>. Consequently, I am starting to <a href="http://www.quantisan.com/my-first-analysis-of-the-sptsx-60-index/">study the Canadian
+stock market</a> for trading with a conservative, intermediate-term
+manner (not buy and hold though). Lastly, it seems that I might be back
+to trading forex sooner than I have thought. I signed up for an
+automated trading contest at <a href="http://www.dukascopy.com/ibentry.php?ibref=1143">Dukascopy</a> earlier this week. Since they
+are offering a cash prize, I thought I might as well reschedule and work
+on my forex stuff now. I will write more on this topic at another time.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/march-2010-trading-review/' title='2010-04-01T07:37:00'>01 April 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/option-value-analysis-on-cibc-cmto-april-2010-expiration/" rel='bookmark'>Option Value Analysis on CIBC (CM.TO) April 2010 Expiration</a>
+            </h1>
+            <div class="article-content"> <p>Warning: Top/bottom picking is a dangerous art. I don't intend to trade
+on this information myself. I did this out of pure curiosity. The
+Canadian banks are an interesting phenomenon. Are they just hiding dirt
+under the rug or are they really as good as our government say? Mish
+Global Economic Trend Analysis posted a bearish view on <a href="http://globaleconomicanalysis.blogspot.com/2010/03/california-usa-vs-ontario-canada-which_29.html">California v.
+Ontario</a>. Furthermore, The Baseline Scenario discussed [why the
+strength of our banks is an illusion created by our government][]. As
+such, on both a <a href="http://www.quantisan.com/td-bank-making-headlines-with-a-new-all-time-high/">technical</a> and fundamental viewpoint, share prices of
+our financial sector is way overbought. Of which, CIBC (CM.TO) seem
+particularly screwed as its stock price hasn't been able to join in the
+unreal rally of late. That sentiment seem to be confirmed with an
+<a href="http://www.quantisan.com/using-option-pain-max-pain-to-estimate-stock-price/">option pain valuation</a> as I described before. Max pain for CM.TO for
+April expiration is pegged at \$72. Not surprisingly, \$72 marks a long
+term support as shown in Figure 2 (blue line). A break below \$72 could
+summon \$65. The data also show that there is a large open interest for
+put options at the \$72 strike. Are they sold as covered puts or
+something else? That I cannot tell. However, \$72 will definitely be an
+important level for CM.TO in the near future. Nevertheless, as the
+options market is small in Canada, I wouldn't put much weight on options
+valuation for Canadian stocks. The value of open interest options on
+April CM.TO is merely about the size of a single day's of equity traded.
+P.S. March's max pain was \$68 one week prior to expiration. But CM.TO
+closed above \$75 on March expiration. That wasn't even close.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="CIBC (CM.TO)
+option valuation"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-30-CM_option.png" />][][/caption]</p>
+<p>[caption id="" align="aligncenter" width="570" caption="CIBC
+(CM.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-30-CM.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-03-30-CM.png">1</a>[/caption]</p>
+</p>
+
+<p>[why the strength of our banks is an illusion created by our
+  government]: http://baselinescenario.com/2010/03/25/the-canadian-banking-fallacy/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/option-value-analysis-on-cibc-cmto-april-2010-expiration/' title='2010-03-31T13:56:00'>31 March 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/index27.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/index29.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

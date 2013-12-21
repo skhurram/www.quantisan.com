@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/tsx-venture_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-03-11T07:29:00+00:00</updated><entry><title>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies' data</title><link href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel="alternate"></link><updated>2010-03-11T07:29:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-11:data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/</id><summary type="html">&lt;p&gt;One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my &lt;a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/"&gt;trading strategy posts&lt;/a&gt; and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses &lt;a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/"&gt;options data to filter stocks&lt;/a&gt;.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. &lt;a href="http://www.quantisan.com/feed/"&gt;Subscribe to my RSS feed&lt;/a&gt; so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]&lt;/p&gt;</summary><category term="Canada"></category><category term="data scraping"></category><category term="python"></category><category term="source code"></category><category term="TSX"></category><category term="TSX Venture"></category></entry><entry><title>Another reason against stocking into a registered trading account this year</title><link href="http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/" rel="alternate"></link><updated>2010-03-05T07:32:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-05:another-reason-against-stocking-into-a-registered-trading-account-this-year/</id><summary type="html">&lt;p&gt;There's another reason why I am so &lt;a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/"&gt;reluctant to put money into a TFSA
+trading account&lt;/a&gt; to invest in Canadian stocks. As you know, in a
+registered trading account, such as a RRSP self-directed trading account
+or a &lt;a href="http://www.quantisan.com/questrade/"&gt;Questrade TFSA trading account&lt;/a&gt; (aff), you cannot short shares
+and can only buy because you can't trade on margin. As such, a
+registered trading account is an account for buy-only trading. It
+doesn't take a genius to figure out that a buy-only trading strategy is
+best used ... in a bull market. As trading wisdom goes, trade with the
+trend. So the question is, are we in a bull market in 2010? Figures 1
+and 2 shows the weekly chart of TSX Index and the TSX Venture Index,
+respectively. Referring to Fig. 1, TSX is bumping up against some
+headwind at a 12,000 resistance. Unless TSX can stay above 12,000
+cleanly (a weekly low above that level at least), I am still bearish in
+the market because that financial crisis back in 2008 (&lt;a href="http://www.quantisan.com/another-breakdown-of-a-major-multi-year-support-are-we-going-down-and-i-mean-really-down/"&gt;remember those
+days&lt;/a&gt;?) is still overshadowing long term prices and trader sentiments.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="570" caption="TSX,
+weekly"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-TSX_wk.png" /&gt;][][/caption] TSX Venture is depressed even more as seen
+in Figure 2 below. Just look at the huge gap from current price to the
+200 week moving average (red line). This isn't a good sign as lack of
+interest in high-risk stocks means traders are generally cautious. Yes,
+it's true that the equity market has been running up, up, and up for a
+good year. However, the fact that TSX is sitting at the same level as in
+2001 proves that the long term, multi-year bull market has been cleanly
+broken. We might very well see pockets of multi-month rallies
+materialize (like we're seeing now), but unless proven otherwise, the
+long term trend is not looking green for the markets. It will not be
+easy money in the stock market like back in the pre-tech bubble 1990's.
+As opined by Bill Cara, the &lt;a href="http://www.caracommunity.com/"&gt;time for buy-and-hold is gone&lt;/a&gt;. It is
+well known in the community that the coming years will be volatile with
+big ups and downs. That is my little secret for moving to &lt;a href="http://www.quantisan.com/category/forex/"&gt;trade
+forex&lt;/a&gt;last year and the main reason why I am reluctant to set aside
+money on a one-sided stock trading account. [caption id=""
+align="aligncenter" width="570" caption="TSX Venture,
+weekly"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png"&gt;1&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;/p&gt;</summary><category term="Canada"></category><category term="TSX"></category><category term="TSX Venture"></category></entry></feed>

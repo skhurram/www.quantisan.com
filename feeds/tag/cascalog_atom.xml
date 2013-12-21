@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/cascalog_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2013-05-08T21:40:00+01:00</updated><entry><title>What should I work on next for Cascalog?</title><link href="http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/" rel="alternate"></link><updated>2013-05-08T21:40:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2013-05-08:what-should-i-work-on-next-for-cascalog/</id><summary type="html">&lt;p&gt;Too many things to do, too little time. I figured we can do this in a data-driven way. So here's a poll. Please only submit an entry if you use Cascalog. And only one per person. Let's see if an honour system would work.&lt;/p&gt;
+&lt;iframe src="https://docs.google.com/a/quantisan.com/spreadsheet/embeddedform?formkey=dGtBNF96bExZZ0E0X0p5ZUFTb2NyTkE6MQ" width="580" height="500" frameborder="0" marginheight="0" marginwidth="0"&gt;Loading...&lt;/iframe&gt;
+
+&lt;h2&gt;Poll result one week later&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="poll result" src="http://www.quantisan.com/images/2013/cascalog_poll_graph.png" /&gt;&lt;/p&gt;
+&lt;table&gt;
+    &lt;tr&gt;&lt;th&gt;Votes&lt;/th&gt; &lt;th&gt;Choice&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Self-contained documentation site, e.g. http://cascalog.quantisan.com (demo address only)&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Improve and consolidate guides into Github wiki&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;Bring Cascalog to Cascading 2.1/2.2&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Fix open issues&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Add features and performance increase, e.g. new logic solver, make use of new Cascading features since 2.0&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Other&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;One person voted for integrating other machine learning library into Cascalog and another to &lt;a href="https://github.com/nathanmarz/storm/issues/115"&gt;isolate system library&lt;/a&gt;.&lt;/p&gt;</summary><category term="cascalog"></category></entry><entry><title>My talk at OR54 on knowledge discovery with web log data</title><link href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/" rel="alternate"></link><updated>2012-09-04T16:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-09-04:my-talk-at-or54-on-knowledge-discovery-with-web-log-data/</id><summary type="html">&lt;h3&gt;Abstract&lt;/h3&gt;
+&lt;p&gt;Web log data contains a wealth of information about online visitors. We have a record of each and every 
+customer interaction for the millions of visitors coming through each month at uSwitch.com. The challenge 
+is to analyse this discrete time series, semi-structured dataset to understand the behaviour of our visitors on 
+a personal level. This talk is a case study of how our data team of three leveraged heterogeneous 
+architecture and agile methodologies to tackle this problem. And we had three months.&lt;/p&gt;
+&lt;h3&gt;Slides&lt;/h3&gt;
+&lt;iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&amp;page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"&gt;&lt;/iframe&gt;</summary><category term="presentation"></category><category term="data processing"></category><category term="cascalog"></category></entry><entry><title>Cascalog-checkpoint: Fault-tolerant MapReduce Topologies</title><link href="http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/" rel="alternate"></link><updated>2012-02-26T09:38:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-26:cascalog-checkpoint-fault-tolerant-mapreduce-topologies/</id><summary type="html">&lt;p&gt;
+Cascalog is an abstraction library on top of Cascading [for writing
+MapReduce jobs][]. Since the Cascalog library is maturing, the Twitter
+guys (core committers) have been building features around it so that
+it's not just an abstraction for Cascading. One of which is
+[Cascalog-checkpoint][]. It is a small, easy-to-use, and very powerful
+little add-on for Cascalog. In particular, it enables fault-tolerant
+MapReduce topologies. Building Cascading/Cascalog queries can be
+visualised as assembling pipes to connect a flow of data. Imagine that
+you have Flow A and B. Flow B uses the result from A along with other
+bits. Thus, Flow B is dependent on A. Typically, if a MapReduce job fail
+for whatever reason, you simply fix what's wrong and start the job all
+over again. But what if Flow A takes hours to run (which is common for a
+MR job) and the error happened in Flow B? Why re-do all that processing
+for Flow A if we know that it finished successfully? By using
+Cascalog-checkpoint, you can *stage* intermediate results (e.g. result
+of Flow A) and failed jobs can automatically pickup from the last
+checked point. An obvious thing to do but not something I've seen done
+in Hadoop. At least not as easy as this:
+&lt;script src="https://gist.github.com/1915638.js?file=ccl-checkpoint-sample1.clj"&gt;&lt;/script&gt;
+See [Sam Ritchie's post on cascalog-checkpoint][] for more examples. Of
+course, you need to coerce your flows such that output from Flow A can
+be read by Flow B. However, this is almost trivial via
+Cascalog/Cascading. As this notion of mix and match pipes and flows is a
+fundamental concept in Cascalog/Cascading. With so many choices of
+abstraction frameworks for coding MapReduce on Hadoop, I feel sorry for
+anyone using vanilla Java for writing MapReduce besides the most
+simplest or recurring jobs.
+&lt;/p&gt;</summary><category term="cascalog"></category><category term="hadoop"></category></entry><entry><title>My 5 minute lightning talk on Cascalog</title><link href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel="alternate"></link><updated>2012-02-05T18:39:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-05:my-5-minute-lightning-talk-on-cascalog/</id><summary type="html">&lt;p&gt;Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.&lt;/p&gt;
+&lt;iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;amp;size=m" frameborder="0" width="555" height="451"&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The possibilities...&lt;/p&gt;</summary><category term="cascalog"></category><category term="clojure"></category><category term="hadoop"></category><category term="presentation"></category></entry></feed>

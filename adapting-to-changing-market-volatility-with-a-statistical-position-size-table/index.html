@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Adapting to changing market volatility with a statistical position size table - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/" rel="bookmark">Adapting to changing market volatility with a statistical position size table</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>We know that prices can go up or down. We also know that the quality of
+these ups and downs can be very smooth or very choppy. As such, it's not
+surprising that the trend and volatility of a market form the two
+universal characteristics of a price action. No matter which market you
+trade, the trend and volatility of the prices will influence your
+trading and P&amp;L. That can be both good and bad as volatility is a double
+edged sword. A fast paced moving market can rain down gold on you or it
+can burn your cash away. Most of the time, it's the latter case.
+Consequently, there are many ways traders adapt to changing volatility
+in the market. You can tailor your trading strategy, change trading
+timeframe, switch market entirely, or manage your risk accordingly, for
+examples. In this post, I'd like to give an example for the use of a
+<a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex position size table</a> to fit with market
+volatility. The problem with market volatility is that it's hard to
+notice. As opined by <a href="http://traderfeed.blogspot.com/2009/10/jump-in-stock-market-volatility-and-its.html">Dr. Steenberger</a>, "many traders will adapt to
+directional changes quicker than they adapt to shifts in volatility."
+The art of identifying market conditions is not discussed in this post.
+But obviously, if there is a way to build in an inherent way to manage
+your risks based on market volatility, you will have built yourself a
+safety net. That is the logic behind my <a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex
+position sizer</a>. It's a
+data-driven tool to impose an inherent safety net in your trading. What
+it does is simple. Here's what it boils down to:</p>
+<ol>
+<li>It finds the recent 2 sigma value (i.e., a statistical measure of
+    volatility, <a href="http://en.wikipedia.org/wiki/Standard_deviation">see wiki</a>) of each major currency pairs.</li>
+<li>It calculates the maximum position size for each pair using the 2
+    sigma value.</li>
+<li>Then it converts the number to correspond with your account currency
+    based on a real-time currency exchange rate for each trading pair.</li>
+</ol>
+<p>Thus, a table such as <a href="http://www.quantisan.com/tools/forex-position-sizer/">this one I published for
+forex</a> can give you a
+real-time guideline to the maximum position size you should take given
+your risk appetite. One shortcoming with this approach is that while you
+may limit your loss during a volatile market, you are also limiting your
+potential gain. But this is where the old saying, "let your profit run
+and cut your losses short" applies. One solution is to simply add to
+your winning trades, according to your trading setups, of course. That
+way, when the market moves in your favour or you get confirmation on
+your setup, you can increase the position size responsibly without
+stretching your principal. By now, it's probably obvious that the use of
+such a tool is not, and should not, meant to be a solution to changing
+market volatility. It is merely a convenience tool to serve as one of
+the many that a trader has at his/her disposal. Nevertheless, I find the
+table to be very convenient for me because I don't have to worry about
+calculating the position sizes manually on each trade. Trading is tough
+enough already, so I like to develop <a href="http://www.quantisan.com/tools/">tools</a> that can make my life
+ever so slightly easier.</p>
+<div id="_mcePaste" style="overflow: hidden; position: absolute; left: -10000px; top: 0px; width: 1px; height: 1px;">
+<span style="font-weight: bold;">many traders will adapt to directional
+changes quicker than they adapt to shifts in volatility</span>
+
+</div>
+
+</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2009-10-29T13:00:00'>
+                Posted 29 October 2009
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "adapting-to-changing-market-volatility-with-a-statistical-position-size-table/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

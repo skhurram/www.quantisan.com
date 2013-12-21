@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/matlab_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2009-05-19T20:09:00+01:00</updated><entry><title>Starting to use MatLab for quantitative finance</title><link href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/" rel="alternate"></link><updated>2009-05-19T20:09:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-05-19:starting-to-use-matlab-for-quantitative-finance/</id><summary type="html">&lt;p&gt;After trying &lt;a href="http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/"&gt;TradeStation, Ninja Trader&lt;/a&gt;, and RightEdge for trading,
+I've gone back to my engineering root and is starting to explore with
+MatLab as my quantitative finance tool and eventually as my platform for
+an automated trading system.&lt;/p&gt;
+&lt;p&gt;I gave up on TradeStation last year because it just didn't fit my style.
+Then I gave both Ninja Trader and RightEdge a quick spin (a few days)
+and found that I need to learn C# to really make use of them. After
+procrastinating for a couple of months in learning C#, I realize I
+don't have the time to learn a new language just to start working on a
+quant tool.&lt;/p&gt;
+&lt;p&gt;So after some wandering, I stumbled upon MatLab again. In particular, I
+found out that there's a &lt;a href="http://www.mathworks.com/products/finance/"&gt;Financial Toolbox in MatLab&lt;/a&gt; that seem to
+have many of the basic functions that I need. Furthermore, people have
+used MatLab as an automated trading platform. Since I've been using
+MatLab as an engineering tool for several years, I wouldn't have to
+start learning from scratch. Furthermore, because of its academic
+popularity, there are many existing analytical functions which I can
+build my future work upon.&lt;/p&gt;
+&lt;p&gt;Isn't it silly of me? I really should have considered MatLab earlier
+because it's so well known. I've just always associated MatLab as an
+analytical tool but never thought that it can be used as an automated
+trading platform too.&lt;/p&gt;
+&lt;p&gt;Anyway, my short term plan is to brush up on my MatLab by playing with
+the financial tools and trying some basic stuff up. I have scheduled
+8:00 - 9:00 pm every night to do this with another 10 min afterward to
+write a brief lesson summary. Let's see how this goes.&lt;/p&gt;</summary><category term="MatLab"></category></entry></feed>

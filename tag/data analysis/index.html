@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - data analysis</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
+            </h1>
+            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
+<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
+<p>Then there's Incanter.</p>
+<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
+<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
+<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
+<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
+<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
+<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
+<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
+<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
+<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
+<p>I call this platform-as-interface.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/r-language-lacks-consistency/" rel='bookmark'>R language lacks consistency</a>
+            </h1>
+            <div class="article-content"> <p>That's the thing that gets under my skin about R. For example, why do I need to use <code>do.call</code> on a list but <code>apply</code> for data frame? Not only that, the two functions have entirely different names and signatures (edit: this is a bad example, see Joshua's explanation in the comment). I find that a lot of R is just a matter of memorising what to do under which condition. You can't simply guess or deduce what to do like a sane programming language would enable. I know that many solutions are just a Google search away, but I am not comfortable with the awkwardness of the language.</p>
+<p>Having said that, I've been using R reluctantly for a few years. I try to avoid it as much as possible. But there's just no other statistical platform that's so easy to be productive. I <a href="http://www.quantisan.com/tag/Incanter">tried Incanter for a while</a> but it doesn't seem that well suited for exploratory analysis as I usually end up writing functions up from scratch. More recently I played with <a href="http://www.julialang.org">Julia</a> briefly. Although it is too bleeding edge as there isn't even a release version yet.</p>
+<p>As much as I don't like R the language, the R platform and its package repertoire are incomparable at the moment. We did a bit of ggplot today at work. With the help of <a href="http://oobaloo.co.uk/">my coworker</a>, it only took a few minutes to hook R with our Hadoop cluster to pull some data and produce the graphs that we wanted. In comparison, Incanter's charts are pretty too but not very customisable. D3.js is very customisable but not quick to use at all. Then there's Julia, which can't do more than a bar or line chart for now.</p>
+<p>I haven't mentioned the other big contender, Python + Numpy + Scipy + Panda + PyPy + Matplotlib. I tried some of that too some time ago, but didn't get far with it. Come to think of it, I wrote <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business">a similar babble like this</a> a year ago ... </p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/r-language-lacks-consistency/' title='2012-08-30T21:42:00'>30 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>First impression of Incanter: usably incomplete - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/" rel="bookmark">First impression of Incanter: usably incomplete</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Speaking out loud about my new favourite toys, Clojure (a functional
+programming language) and Incanter (a R-like statistical platform built
+on Clojure). My first impression is that Incanter is usable but it is
+far from being polished like R since it is a new platform. I am using
+the Gold Miners ETF (GDX) and Gold Trust (GLD) data from Yahoo Finance
+as examples to perform a simple correlation test. Some Incanter
+functions are rough on the edges and a lot is left to be desired. This
+is a drastic contrast to R in which its plug-in modules are both
+impressive and comprehensive. On the other hand, making things happen
+with Clojure is ... fun. And that's a winner for me. Here's a walk
+through of my first attempt using Incanter to analyse stocks data.
+Figures 1 and 2 below are basic time series plot of GDX and GLD. I'll
+need to study the Incanter source code to figure out how to plot
+multiple time series on the same chart. Couldn't find it on a first
+glimpse though. [caption id="attachment_5535" align="aligncenter"
+width="488" caption="GDX"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GDX.png" title="incanter-chart-GDX" />[/caption] [caption id="attachment_5536"
+align="aligncenter" width="488" caption="GLD"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD.png" title="incanter-chart-GLD" />[/caption] The
+following looks like a lot of code just to plot two graphs. Most of the
+boilerplate code is to coerce the Yahoo Finance CSV data to specifically
+fit Incanter's time-series-plot function. I will wrap this into a
+library later on.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">inc-sandbox.corr-demo</span> <span class="p">(</span><span class="ss">:require</span>
+<span class="p">[</span><span class="nv">clojure.set</span> <span class="ss">:as</span> <span class="nv">set</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">incanter</span> <span class="nv">core</span> <span class="nv">stats</span> <span class="nv">charts</span> <span class="nv">io</span><span class="p">))</span> <span class="p">(</span><span class="ss">:require</span>
+<span class="p">[</span><span class="nv">clj-time.core</span> <span class="ss">:as</span> <span class="nv">time</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">clj-time</span> <span class="p">[</span><span class="nv">format</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">formatter</span>
+<span class="nv">formatters</span> <span class="nv">parse</span><span class="p">)]</span> <span class="p">[</span><span class="nv">coerce</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">to-long</span><span class="p">)])))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">sym-to-dataset</span>
+<span class="s">&quot;returns a dataset read from a local CSV in &#39;./data/&#39; given a Yahoo</span>
+<span class="s">Finance symbol name&quot;</span> <span class="p">[</span><span class="nv">yf-symbol</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">+data</span> <span class="s">&quot;./data/&quot;</span> <span class="nv">+csv</span> <span class="s">&quot;.csv&quot;</span>
+<span class="nb">symbol </span><span class="p">(</span><span class="nf">.toUpperCase</span> <span class="nv">yf-symbol</span><span class="p">)</span> <span class="nv">filename</span> <span class="p">(</span><span class="nb">str </span><span class="nv">+data</span> <span class="nb">symbol </span><span class="nv">+csv</span><span class="p">)]</span> <span class="p">(</span><span class="nf">-</span><span class="sc">\&gt;</span>
+<span class="p">(</span><span class="nf">read-dataset</span> <span class="nv">filename</span> <span class="ss">:header</span> <span class="nv">true</span><span class="p">)</span> <span class="p">(</span><span class="nf">col-names</span> <span class="p">[</span><span class="ss">:Date</span> <span class="ss">:Open</span> <span class="ss">:High</span> <span class="ss">:Low</span>
+<span class="ss">:Close</span> <span class="ss">:Volume</span> <span class="ss">:Adj-Close</span><span class="p">]))))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gdx</span> <span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gld</span>
+<span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">same-dates?</span> <span class="s">&quot;are two datasets covering the</span>
+<span class="s">same time frame?&quot;</span> <span class="p">[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x-dates</span> <span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">x</span><span class="p">))</span> <span class="nv">y-dates</span>
+<span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">y</span><span class="p">))</span> <span class="nv">x-y</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">x-dates</span> <span class="nv">y-dates</span><span class="p">)</span>
+<span class="nv">y-x</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">y-dates</span> <span class="nv">x-dates</span><span class="p">)]</span> <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">x-y</span><span class="p">)</span> <span class="p">(</span><span class="nf">empty?</span>
+<span class="nv">y-x</span><span class="p">))))</span> <span class="p">(</span><span class="nf">same-dates?</span> <span class="nv">gdx</span> <span class="nv">gld</span><span class="p">)</span> <span class="c1">; true (def gdx-ac (\$ :Adj-Close gdx))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">gld-ac</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Adj-Close</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">dates-long</span> <span class="s">&quot;returns the dates as</span>
+<span class="s">long&quot;</span> <span class="p">[</span><span class="nv">data</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">ymd-formatter</span> <span class="p">(</span><span class="nf">formatters</span> <span class="ss">:year-month-day</span><span class="p">)</span> <span class="nv">dates-str</span>
+<span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">data</span><span class="p">)]</span> <span class="p">(</span><span class="nb">map </span><span class="sc">\#</span><span class="p">(</span><span class="nf">to-long</span> <span class="p">(</span><span class="nb">parse </span><span class="nv">ymd-formatter</span> <span class="nv">%</span><span class="p">))</span> <span class="nv">dates-str</span><span class="p">)))</span>
+<span class="c1">;; no replace col func (def gdx-times (dates-long gdx)) (def gld-times</span>
+<span class="p">(</span><span class="nf">dates-long</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gld-times</span> <span class="nv">gld-ac</span> <span class="ss">:x-label</span>
+<span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gdx-times</span> <span class="nv">gdx-ac</span>
+<span class="ss">:x-label</span> <span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>Calculating the Pearson and the
+Spearman's correlation coefficient are straightforward enough. It's just
+a function call away. I am surprised to see Spearman's rho implemented
+in Incanter already as its non-parametric statistics library is
+practically non-existent. Yet another project to work on. However,
+calculating the coefficients is only half the story. Where are the
+p-values? That doesn't seem to be available for these functions. The
+t-test function is a good example of what results I would like to see. A
+third item to work on. </p>
+<div class="highlight"><pre> <span class="p">(</span><span class="nf">correlation</span> <span class="nv">gdx-ac</span> <span class="nv">gld-ac</span><span class="p">)</span>
+<span class="c1">; 0.7906494552829249 (spearmans-rho gdx-ac gld-ac) ; 0.7728859703262337</span>
+<span class="c1">;; no p-value in col, like t-test (let [lm (linear-model gdx-ac gld-ac)]</span>
+<span class="p">(</span><span class="nb">doto </span><span class="p">(</span><span class="nf">scatter-plot</span> <span class="nv">gld-ac</span> <span class="nv">gdx-ac</span> <span class="ss">:x-label</span> <span class="s">&quot;GLD&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">add-lines</span> <span class="nv">gld-ac</span> <span class="p">(</span><span class="ss">:fitted</span> <span class="nv">lm</span><span class="p">))</span> <span class="nv">view</span><span class="p">))</span>
+</pre></div>
+
+
+<p>[caption id="attachment_5543" align="aligncenter" width="488" caption="GLD-GDX
+scatter plot"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD-GDX.png" title="incanter-chart-GLD-GDX" />[/caption] Even though Incanter is still early in
+its development, it is certainly a usable statistical platform offering
+many of the basics. I look forward to learning more about it and
+contributing to the project. Now, which of the listed problems should I
+tackle first? P.S. My code embed seem to be mysteriously breaking my
+code. As an alternative, the <a href="https://gist.github.com/1047101">complete source</a> is available on Gist.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-06-25T20:43:00'>
+                Posted 25 June 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/data-science/">data-science</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/clojure/">clojure</a>
+            <a href="http://www.quantisan.com/tag/Incanter/">Incanter</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "first-impression-of-incanter-usably-incomplete/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/market-sentiment_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2009-12-16T10:37:00+00:00</updated><entry><title>A leading indicator to spot financial market Black Swan Events?</title><link href="http://www.quantisan.com/a-leading-indicator-to-spot-financial-market-black-swan-events/" rel="alternate"></link><updated>2009-12-16T10:37:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-12-16:a-leading-indicator-to-spot-financial-market-black-swan-events/</id><summary type="html">&lt;p&gt;Black Swan Events or 4-sigma moves (e.g. 1987 Black Monday and 2008
+crash) in the markets are by definition hard to predict. Hard, but not
+impossible. Experienced traders utilize prudent risk management to
+shield themselves from monstrous losses, and some can even &lt;a href="http://www.xtrenders.com/2008/10/dare-to-short-this.html"&gt;profit
+immensely from them&lt;/a&gt;. However, for us average folks, is there some
+kind of simple warning signs that could give us a heads up to these sort
+of extraordinary moves? In this post, I will introduce a simple leading
+indicator that seems to do the job quite well. I will talk about what it
+is and why it seems to work. Of course, this is merely based on limited
+observations and is not to be construed as a vigorous analysis. The
+particular indicator I am referring to is the &lt;a href="http://www.google.com/finance?q=GOOGLEINDEX_US:INVEST"&gt;Google Investing Index&lt;/a&gt;
+(GII). Figure 1 below shows the GII vs. S&amp;amp;P 500 from 2004. The blue line
+is the GII, the red line is the S&amp;amp;P 500. What I have observed is that
+rapid (in a month's time) rise from a negative reading to +20% reading
+of GII correspond with a shift in sentiment in the market rather well.
+Referring to Figure 1 below, this condition occurred 4 times since 2004.
+I marked these 4 occurrences on the graph with green dots. As you can
+see, they correspond with the double top on S&amp;amp;P, first dive in the
+crash, the big one in October 2008, and then even confirming the 666
+reversal in March 2009. It seems to be a leading indicator for down
+moves but lagging on upward reveral. Mostly noticeably though, is that
+the GII gave extreme readings, and in the direction of our condition
+(negative to positive jump), days before the big crash in October 2008.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="Google Investing
+Index vs. S&amp;amp;P 500 (green dots mark signals)"][&lt;img alt="Google Investing Index
+vs. S&amp;amp;P 500" src="http://www.quantisan.com/static/images/img_archive/2009-12-15-GoogInvIndex.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-12-15-GoogInvIndex.png"&gt;Google Investing Index vs. S&amp;amp;P 500&lt;/a&gt;[/caption] While this
+can be mere coincidence, here is why I think this index holds some
+truth. The GII measures the amount of search traffic for topics relating
+to investing in the U.S. And with Google dominating the online searching
+market (&lt;a href="http://www.comscore.com/Press_Events/Press_Releases/2009/11/comScore_Releases_October_2009_U.S._Search_Engine_Rankings"&gt;65% as of October 2009&lt;/a&gt; according to comScore), we can assume
+GII to measure what the general public is interested in. Now, as we
+probably know, market extremes are driven by irrational emotions.
+There's an old saying that goes like this, on market highs, when even
+the taxi driver is giving you stock advice, it's time to get out of the
+market. When all the people have invested already, who's left to buy and
+drive the price even higher? This is ultimately a supply and demand
+effect. While we can't count heads in the market, we can estimate market
+sentiment. The GII is just one more way of doing that. And it does so by
+giving us a reading of the market sentiment according to the general
+public. You know, the last ones in the party to pickup the mess the pros
+have have left behind. That is exactly what sets the GII apart from the
+plethora of existing market sentiment indicators. It is a market
+sentiment indicator on mass psychology, but a crude one at that. Scoring
+4 out of 4 positives is good, but the small sample size render this a
+mere observation of interest. I do not recommend trading on this
+indicator. However, it does seem promising to serve as an additonal
+input to an analytical system... In summary, here is the condition of
+this GIS (for &lt;strong&gt;G&lt;/strong&gt;oogle &lt;strong&gt;I&lt;/strong&gt;nvesting index for market &lt;strong&gt;S&lt;/strong&gt;entiment)
+indicator.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the condition is true for a turn in the market when GII jumps from a
+    negative to +20% or more within a month.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lastly, notice that the GII is still low at the moment while many are
+calling the top is imminent, or even that it has happened at 1120 in
+recent weeks. Thus, according to GIS indicator, this market rally is
+still intact.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="black swan"></category><category term="indicator"></category><category term="market sentiment"></category></entry></feed>

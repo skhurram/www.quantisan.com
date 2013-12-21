@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/development_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-04-12T07:30:00+01:00</updated><entry><title>Software design, trading development process, and Ikea</title><link href="http://www.quantisan.com/software-design-trading-development-process-and-ikea/" rel="alternate"></link><updated>2011-04-12T07:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-04-12:software-design-trading-development-process-and-ikea/</id><summary type="html">&lt;p&gt;I spent a few months between 2010 and 2011 not on the market, not on
+coming up with new strategies, but on developing a software framework
+for my trading system. For my trading strategy development, I make use
+of a continuous systems development life cycle process from the
+engineering realm. Starting from planning, to analysis, to design, to
+implementation, to maintenance, and finally, back to planning, and so on
+for each and every new concept that I have. (see &lt;a href="http://www.wired.com/epicenter/2011/04/in-praise-of-failure/all/1"&gt;Sir James Dyson's
+guest column on Wired&lt;/a&gt;) Imagine that if you need to write a new
+strategy file for each and every idea and for each of its design
+iteration. Pretty soon you'll have many strategy files and a lot of
+boilerplate codes. What if you found a bug or figured out some
+enhancements to a particular component of your strategy? Then you'll
+have to sift through all those files and make the changes to all those
+relevant codes to make the update across the board. Hopefully, this
+isn't the approach you're taking. Yet, a few trading API that I have
+used before inherently encourage or even limit you (&lt;a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/"&gt;EasyLanguage and
+MQL4&lt;/a&gt;) to this archaic procedural programming paradigm. Luckily, Java
+is an object-oriented programming language. However, it is only as
+object-oriented as you make it to be. JForex, &lt;a href="http://www.quantisan.com/tag/jforex"&gt;the trading API that I
+use&lt;/a&gt;, actually runs on &lt;a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/"&gt;the edge of breaking this
+object-orientedness&lt;/a&gt; as I have recently lamented. The bad news for the
+beginning developer is that practically every published strategy which I
+have seen or &lt;a href="http://www.quantisan.com/tag/source-code/"&gt;guilty of posting myself&lt;/a&gt; are illustrations of what not
+to do with software design. In that there's none in it whatsoever. Think
+of common published strategies like the Ikea mini-model showrooms.
+Everything is crammed into a tiny space but it is a simple way to convey
+the gist of a room design (read: the trading algorithm). However, they
+are not built for practical use. Real strategies are like suites in an
+apartment building. There is an underlying architectural commonality for
+easy management and maintenance while enabling diversity in the
+strategies. My recently completed software framework dramatically made
+my life easier in the tasks of implementation and maintenance. Software
+maintenance, in particular, is most often needlessly and overly
+complicated in trading strategy development because of the lack of a
+good design. Because at the end of the day, most programmers spend the
+majority of their time debugging, maintaining, and extending their code.
+A true object-oriented design decouples all its components so that you
+can use a divide and conquer approach with no repetition of work. Do you
+have a development process in place? I'd like to hear how you tackle
+this problem.&lt;/p&gt;</summary><category term="development"></category><category term="software design"></category></entry></feed>

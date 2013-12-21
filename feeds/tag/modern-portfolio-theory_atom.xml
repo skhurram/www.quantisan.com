@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/modern-portfolio-theory_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-03-01T07:21:00+00:00</updated><entry><title>Just because it's math does not mean it's not without its caveats</title><link href="http://www.quantisan.com/just-because-its-math-does-not-mean-its-not-without-its-caveats/" rel="alternate"></link><updated>2011-03-01T07:21:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-03-01:just-because-its-math-does-not-mean-its-not-without-its-caveats/</id><summary type="html">&lt;p&gt;I am more than half way through my first speed run of the CFA level 1
+material. This chapter discusses portfolio management. In particular, I
+just read the Markovitz Efficient Frontier. What strikes me most about
+this chapter is that these mathematical material are presented so
+matter-of-factly. Recalling in chapter 1, Ethics, the idea of prudence
+and due diligence was evident. This was exemplified later in the
+Financial Statement chapter. Methods of drafting balance sheet, income
+statement, and cash flow statement were presented in excrutiating
+details before a discussion about ways to analyze them. Just so we can
+understand the mechanics of it to spot bias, pitfalls,
+misrepresentation, and outright frauds. In fact, a good portion of the
+section were reserved for discussing the caveats in financial statement
+analysis. As boring as it was to sit through the accounting details,
+that was good prudence and good due diligence. Fast forward to this
+discussion on Modern Portfolio Theory (MPT), it is simply explained in
+the text that expected risk of a portfolio with individual asset
+correlations less than 1 will be less than its weighted average risk.
+Where are the billboard-sized warnings and neon-red danger signs?
+Perhaps &lt;a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory#Criticism"&gt;criticisms of MPT&lt;/a&gt; will be discussed later or perhaps I
+simply missed it with my \~200 pages/day scanning pace (in which case,
+just ignore me). But if I don't see a caveat lector on MPT in bold,
+underlined, and boxed fonts later, then I am surely going to be very
+disappointed. This is a big deal because of the &lt;a href="http://www.quantisan.com/another-volatile-week-and-no-sign-of-the-bull-yet/"&gt;historic events of
+2008&lt;/a&gt;. In which we witnessed the havoc caused by countless funds that
+blindedly rely on MPT's validity (i.e. diversification of risks on the
+naive basis of constant correlations and normally distributed returns),
+and &lt;a href="http://www.ft.com/cms/s/0/77bf5f98-4441-11e0-931d-00144feab49a.html"&gt;other risk models&lt;/a&gt;, go under. There can be no worse mistake than
+underestimating your risk in trading. Let me repeat that, there can be
+no worse mistake than underestimating your risk in trading. &lt;em&gt;Careless
+use of MPT&lt;/em&gt; (not MPT, per se) leads to exactly that. The problem is that
+people take these financial theories to heart too much without reading
+the fine prints. Just because it is presented in mathematical formulas
+does not mean a theory is law. The least the CFA text can do is to
+broaden financial prudence from not only dissecting financial statements
+but to encompass other important intellectual matter related to the job
+too. I am appalled by the fact that thousands of CFA level 1 hopefuls
+might actually believe that you can always reduce portfolio risk and
+identify an efficient asset mix from mere correlations and standard
+deviations (which in and of themselves are flawed in the real world),
+with no strings attached. "Science is the belief in the ignorance of the
+experts", Richard Feynman.&lt;/p&gt;</summary><category term="CFA"></category><category term="Modern Portfolio Theory"></category></entry></feed>

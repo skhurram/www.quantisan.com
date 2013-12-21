@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/" rel='bookmark'>How a few screws cost $2000 and a 240GB multinodes cluster cost $50</a>
+            </h1>
+            <div class="article-content"> <p>About ten years ago I was an electrical engineering intern at MDA Space Robotics. They are the company that designed the Canadarm 1 and 2 used on the International Space Station. I still remember meeting the R&amp;D team next door to see their demo of a 3D LIDAR system mounted on a Mars Rover model. It was one of the competing designs to serve as the eyes of the rover. To put this into perspective, this was at a time when a single-beam scanning laser was common on a robot to gauge distances. Seeing a vision system which can generate 3D polygons of the terrain in real-time for navigation was just unbelievable.</p>
+<p>As for our mundane electronics team, we were designing new power electronics to upgrade the Canadarm2. Obviously, I didn't actually contribute much as an intern. One project which I had my hands on was building loading circuits to simulate the electrical response of the motors on the Canadarm2. So that we can test the new power electronics with live circuit without having motors spinning in the lab. For my particular role, I didn't do any of that either. What I did was design and build safety housing for these big loading circuits.</p>
+<p>Normally, this wouldn't take more than a couple days in a workshop. Not so in a regulated industry. Even though these boxes were only used as a superficial safety mechanism during ground support testing and were never going to be used in production or have anything to do with the actual test itself, we still needed to follow proper engineering guidelines because my mentor told me that it's safer to have a blanket rule for every component than nit-pick what is or isn't regulated.</p>
+<p>After designing the housing in no time (it's just a rectangular shell to cover the circuit, how hard can it be?), I sourced a contractor to mold these polycarbonate shells for us. That's the same material hockey masks use because it's transparent and strong. To secure the shell onto the loading circuit, which are about as big as a moving box each, I needed big screws to bolt it on the baseboard. Seeing that we're an electrical team, we didn't have suitable screws for it in the lab. I figured I should just drive down to Home Depot to buy them.</p>
+<p>Not so fast. Apparently, as I was technically sourcing in a new component, I couldn't just go down the street and get them. I ended up having to order from one of our approved suppliers and had them shipped to us overnight. Not that I was in any hurry. It's because we did all shipping by courier. And even though I needed just a few screws, the supplier don't do small orders either so I had to order the minimum of a hundred or something. Still, all of that didn't really cost that much. The majority of the cost came from my hours spent in getting technical and administrative approvals for adding this new component into our bill of material.</p>
+<p>And so that is how I ended up spending the company around $2000 on a few screws. I never saw an itemised bill for those screws. But I figured that's about right based on hours spent and people's estimated salaries.</p>
+<p>This forgotten story from my engineering days came about this week as <a href="http://oobaloo.co.uk/">my colleague Paul</a> and I were spiking out a big data project on Amazon Redshift. On a whim just for the sake of it, we launched a 32 virtual cores, 240GB memory, 32TB storage multi-node cluster with literally just the click of a button. We played with it for a couple hours, did what was needed, and decommissioned the cloud servers. It cost us $45.</p>
+<p>What is my point of the stories? Same concept of materialising an idea. Different time, different industry. Diametrically different prototyping experience.</p>
+<p>Update: this post generated some heated <a href="https://news.ycombinator.com/item?id=5685078">debates on Hacker News</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/' title='2013-05-10T08:30:00'>10 May 2013</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/business-is-on-hold/" rel='bookmark'>Business is on hold</a>
+            </h1>
+            <div class="article-content"> <p>Back in November, I started working as a Data Scientist at <a href="http://www.uswitch.com">uSwitch</a>,
+an utility price comparison site. I am very fortunate to be able to work
+with so many <a href="http://forwardtechnology.co.uk/">smart and passionate</a> people there. There is so much
+that I am learning in fact, I haven't had time to do much else. Although
+my ridiculous 4-hour commute is also a factor. I didn't even notice that
+EUR/USD dropped 1000 pips! As such, I am officially putting my own
+business and research on hold until further notice. I will continue to
+post relevant technical discussions on this blog. All of my existing
+clients have been notified and arrangements made way back before I began
+my employment. Thank you for all your support!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/business-is-on-hold/' title='2012-01-22T07:11:00'>22 January 2012</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/" rel='bookmark'>I've quit my day job and moved to the UK to do this full time</a>
+            </h1>
+            <div class="article-content"> <p>My wife is pursuing graduate study at Oxford. So I'm taking this rare
+opportunity to quit my day job and concentrate on developing trading
+systems full time. I am also doing some consulting to keep in touch with
+civilization. I have just one project at the moment building a customer
+relation system for a friend's financial services startup.</p>
+<p>Now for some self-promotion. I specialise in building software systems
+for information discovery, and of course, trading systems too. If you
+know of any business that can make use of an information discovery
+system for better customer relation, inventory management, etc, then
+please forward <a href="mailto:paul@quantisan.com">email</a>.</p>
+<p>That's it for the public service announcement. I'll be off to my first
+meetup this Sunday to hack on an open source statistical computing
+platform. I can't wait to meet some very smart people!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/' title='2011-10-14T08:40:00'>14 October 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/back-in-rd-mode/" rel='bookmark'>Back in R&amp;D mode</a>
+            </h1>
+            <div class="article-content"> <p>Just some updates as to what I'm up to. I've been fully immersed in
+research and development mode for some new systems and technologies.
+This could take a few months. I am also deliberating rather I should
+revert Quantisan.com back as a pure blog again and separate QTD on its
+own domain. Quantisan.com has too much random topics and history that
+makes it difficult to keep a consistent message as a company blog.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/back-in-rd-mode/' title='2011-08-02T10:52:00'>02 August 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/why-success-starts-with-failure/" rel='bookmark'>Why success starts with failure</a>
+            </h1>
+            <div class="article-content"> <p>Many people dream of making a cash cow trading program and be set for
+life. The reality of the business, which is just like any other
+profession, is that you need to be persistent and persevere. You really
+need to enjoy the work to be able to keep going at it day after day even
+if nothing that you do seems to work at a time. This video by Tim
+Harford explains why success starts with failure. It rings with my
+previous post on <a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/">why the secret to trading system development is to
+fail faster</a>.
+<iframe width="560" height="349" src="http://www.youtube.com/embed/KR_mCvb-KyY" frameborder="0" allowfullscreen></iframe>
+Harford's three principles of success:</p>
+<ol>
+<li>Fail a lot.</li>
+<li>Fail affordably.</li>
+<li>Fail and fix early.</li>
+</ol>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/why-success-starts-with-failure/' title='2011-06-10T09:53:00'>10 June 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/" rel='bookmark'>Transitioning to a professional website, front and back</a>
+            </h1>
+            <div class="article-content"> <p>Yes, this is still Quantisan.com. In case anyone is visiting and noticed
+the different design. I've made some major changes to the website over
+the weekend for both aesthetic and technical reasons.</p>
+<ol>
+<li><strong>Professionally designed.</strong> The previous theme was something that I
+    hacked together over a weekend. It's actually pretty bad under the
+    hood as I had only learned PHP scripting to write that theme. This
+    new theme is a minor tweak over a professional framework. It enables
+    more flexibility to the page layout. Expect some major changes to
+    the front page in the weeks to come as this personal blog transforms
+    into a company site.</li>
+<li><strong>Reduced computing resource hog.</strong> I disabled a number of Wordpress
+    plugin modules as the theme has already taken care of things like
+    search engine optimisation.</li>
+<li><strong>Optimised page loading time.</strong> The code for the new design is also
+    optimised for faster page load times with built-in optimisation of
+    javascript and css file loading.</li>
+<li><strong>Geographically distributed content delivery network.</strong> As forex is
+    a global endeavour, the readers to this blog is quite geographically
+    diverse. While the site is hosted in the U.S., I want to ensure the
+    readers from Germany and India (8% of my readers) have a smooth
+    browsing experience too. The use of a CDN to mirror contents around
+    the world makes this possible.</li>
+<li><strong>Bad traffic filtering</strong>. A significant traffic on the web is due
+    to software crawlers. Some of them post spam comments on my blog or
+    copy my copyrighted materials. I added a server-side security
+    control service to block all those unwanted traffic. This increases
+    security and reduces unnecessary server load.</li>
+</ol>
+<p>You might have noticed that aside from point #1, which is purely
+aesthetic, everything else is done to improve page load time for readers
+to this blog. The result is that the new loading time is down to about
+4.0 seconds. Whereas the old site took around 8 seconds to load. You
+might think this cost a fortune. But it still costs less than most small
+websites out there. The old site cost me \$30 <em>per year</em> to run,
+including everything from domain name registration to web hosting. The
+new total is still only up to \$70 <em>per year</em>. The key to the savings is
+that I made use of a free network enhancement service
+(<a href="http://www.cloudflare.com">cloudflare.com)</a> and exploited my remote server and network
+optimisation knowledge acquired from the long nights of <a href="http://www.quantisan.com/tag/vps">administering a
+remote trading server</a>. Technology is cheap nowadays. The real values
+are in the ability to deliver on that technology to bring about even
+greater return. This is what drives everything I do at Quantisan
+Systems.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/' title='2011-04-05T07:30:00'>05 April 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/category/journal//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

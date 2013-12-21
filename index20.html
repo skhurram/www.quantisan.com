@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/" rel='bookmark'>JForex Example:  Automatic position sizing</a>
+            </h1>
+            <div class="article-content"> <p>Proper position sizing is an integral part of risk management. It <em>can</em>
+be one of the easiest thing to do too. For example, I <a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/">typically size my
+trading position</a> based on the following factors:</p>
+<ol>
+<li>Amount of capital willing to put at risk.</li>
+<li>Stop price level.</li>
+<li>Volatility of the instrument.</li>
+</ol>
+<p>The following JForex code calculates a lot size based on these three
+factors. It is part of my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex July strategy</a> (complete
+source code to the strategy is available via that link). [java
+firstline="232"] private double getLot(Instrument instrument) throws
+JFException { double riskAmt; double lotSize = 0; riskAmt =
+this.acctEquity * (this.riskPct / 100d); // CCYUSD only lotSize =
+riskAmt / (this.atr[instrument.ordinal()] * this.atrFactor); lotSize /=
+1000000d; // in millions return roundLot(lotSize); } [/java] Referring
+to line 237, riskAmt is the amount of capital to put at risk for a trade
+(#1). Line 238 calculates lotSize, which is the position size that we
+want. The denominator in that division is the distance of the stop in
+pips. The strategy uses a multiple of ATR to set the stop loss. Nothing
+fancy here. Lines 240--241 are to set the lotSize value according to the
+JForex API specification. In which the lot amount is in millions and in
+steps of a thousand units, or 0.001 step size. As I've noted in the
+code, the caveat to this implementation is that the secondary currency
+of the instrument and your account currency needs to be in U.S. dollar.
+However, it's just a matter of conversion to extend this method for
+other currencies. Update: I expanded on this functionality in the
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-automatic-position-sizing/' title='2010-08-17T11:58:00'>17 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/sold-3-paato-10dec-puts-2500-225-mark-2462-loss-03/" rel='bookmark'>Sold 3 PAA.TO 10DEC Puts 25.00 @ $2.25, Mark $24.62, Loss 0.3%</a>
+            </h1>
+            <div class="article-content"> <p>Pan America Silver Corp. (PAA.TO) is making another run to test the
+short term high. Seeing that the volume is relatively higher on this
+test of \$24.80 resistance (Figure 1) and that I have [lowered my mental
+stop to \$24.30][], I have ditched this short position at a small loss
+at 10 am today. I am mostly in cash again. I still have a small bullish
+position in Kinross Gold. I'll just be letting it run its course. I have
+no idea which way the market is going at this 1080 junction on the S&amp;P.
+There are some important supports just below. I will keep my hands off
+until the market decides which way it will go.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Pan America
+Silver Corp. (PAA.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-12-PAA.TO.gif" />][][/caption]</p>
+<p>Loss is (\$2.27 - \$2.25) * 3 * 100 = \$6 + \$25.90 commission =
+\$31.90 = 0.3%</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/sold-3-paato-10dec-puts-2500-225-mark-2462-loss-03/' title='2010-08-12T10:10:00'>12 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/bought-200-kto-1594/" rel='bookmark'>Bought 200 K.TO @ $15.94</a>
+            </h1>
+            <div class="article-content"> <p>Update Aug 13: I got stopped out at \$15.80 for small loss. Precious
+metals and the miners are holding well in today's 30 point drop in S&amp;P
+(<a href="http://online.wsj.com/article/SB10001424052748704901104575422901187797266.html?mod=WSJ_hpp_LEFTWhatsNewsCollection">WSJ article</a>). In particular, gold just made a higher low (Figure 1)
+and AUD/USD is holding 0.8900 somewhat. As such, I've lowered my mental
+stop on the <a href="http://www.quantisan.com/bought-3-paa-to-10dec-puts-25-00-2-27-mark-24-75/">PAA.TO short</a> to \$24.30, a mere few cents above.
+Secondly, I am taking a long position in the Kinross Gold Corp. (K.TO).</p>
+<p>[caption id="" align="aligncenter" width="570"
+caption="Gold"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-11-Gold.png" />][][/caption]</p>
+<p>As evident in Figure 2, Kinross has been taking a beating the past year.
+However, it is trading on a long term Fibonacci support level around
+\$15.80. Thus, I am buying here with a small position while Kinross is
+making higher lows intraday and on the daily (so far).</p>
+<p>I have set a mental stop at \$15.60 and a hard stop at \$15.50.</p>
+<p>Risk is (\$15.94-\$15.50) * 200 = \$88 + \$9.90 commission = \$97.9 =
+1% of account.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Kinross Gold
+Corp. (K.TO) weekly chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO-wkly.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO-wkly.png">1</a>[/caption] [caption id=""
+align="aligncenter" width="570" caption="Kinross Gold Corp. (K.TO) daily
+chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO.png">2</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bought-200-kto-1594/' title='2010-08-11T15:53:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel='bookmark'>JForex Example: Not letting profit turn to losses with a breakeven stop</a>
+            </h1>
+            <div class="article-content"> <p>While the <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual-timeframe trading setup</a> and much of the algorithm in
+my contest strategy are for competition only (read: not for use with
+real money) as I've warned numerous times, some of the risk management
+techniques used there are really what I use in real life. This being one
+of them. There's a saying in trading that "never let profits turns into
+losses." That is exactly the motivation behind this JForex code snippet.
+The following source code are excerpts from my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex
+contest's <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">July strategy</a>. The complete source code file is available
+in that link. Back to this concept of not letting profits turn to
+losses. This is a matter of balancing between giving room for your trade
+to reach its potential and limiting your drawdown. If you're too
+careful, you may find yourself being whipsawed out before a price move
+can materialize. If you keep your leash too loose though, well, you may
+watch your profits turn into losses. The way I intrepret the saying is
+that once your trade is profitable enough, you shouldn't let it slip
+back into a loss. I implement the above statement in my automated
+strategy as follows. Note that everything goes in the onTick() method so
+that it watches your position on every tick. The line numbers correspond
+to the <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code</a> of my automated strategy.
+[java firstline="177"] boolean isLong; double open, stop, diff, newStop;
+for (IOrder order : engine.getOrders(instrument)) { if (order.getState()
+== IOrder.State.FILLED) { [/java] [java firstline="191"] isLong =
+order.isLong(); open = order.getOpenPrice(); stop =
+order.getStopLossPrice(); diff = (open - stop); // *********
+BREAKEVEN *********************** if (isLong &amp;&amp;
+diff > 0 &amp;&amp; tick.getBid() > (open + diff)) {
+order.close(roundLot(order.getAmount() * beRatio)); // close a portion
+newStop = open + instrument.getPipValue() * LOCKPIP;
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } else if (!isLong &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk() \&lt;
+(open + diff)) { order.close(roundLot(order.getAmount() * beRatio));
+newStop = open - (instrument.getPipValue() * LOCKPIP);
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } [/java] What this does is that it will partially exit
+a position and move the stop to breakeven once the price is
+equidistantly positive from your initial stop loss. For example, if my
+stop loss is 100 pips, then once the position is 100 pips <em>in profit</em>,
+it will exit partially and set the new stop to breakeven. Update: This
+is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/' title='2010-08-11T13:11:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/" rel='bookmark'>JForex Example: Dual-Timeframe Moving Averages Setup</a>
+            </h1>
+            <div class="article-content"> <p>This post describes the setup for my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex automated trading
+strategy in July</a>. Note that this strategy is built for competing in a
+contest and not for real trading (i.e., its purely a
+no cost gamble). Here is the step by step process of the setup for a
+long position:</p>
+<ol>
+<li>Determine the current trend by the relative position of current
+    price to its moving average <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">in a higher time frame</a>. In
+    particular, a price above the moving average in the higher time
+    frame is deemed as bullish.</li>
+<li>Entry: Price moves above a moving average in the current time frame
+    (red line in Figure 1) with a higher high, low, and close (HLC). As
+    illustrated in Figure 1, the two bars circled.</li>
+<li>Exit: Crossing below a regular moving average (blue dotted line).</li>
+</ol>
+<p><img alt="EURUSD setup" src="http://www.quantisan.com/static/images/img_archive/2010-07-19-EURUSD.png" /></p>
+<p>As you can see, the setup itself is simple. Less than a fifth of the
+source code is devoted to the entry and exit. Most of this strategy
+involves <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/">automated position sizing</a> and <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">risk management to not let profits turn into losses</a>.</p>
+<p>The <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code of this strategy</a> is available in the introductory post.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/' title='2010-08-09T07:12:00'>09 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/bought-3-paato-10dec-puts-2500-227-mark-2475/" rel='bookmark'>Bought 3 PAA.TO 10DEC Puts 25.00 @ $2.27, Mark $24.75</a>
+            </h1>
+            <div class="article-content"> <p>US Dollar looks oversold (Figure 1). Of the few commodities that I
+follow, silver looks to be weakest (Figure 2). Thus, I look for a short
+based on silver. I chose Pan America Silver Corp. (PAA.TO) because it
+looks to be the weakest of the silver miners (Figure 3). In particular,
+referring to Figure 3, I highlighted the current price moves versus six
+months ago. The price movements in the two boxes look similar. Thus I am
+looking for a big dive in PAA soon with these puts options. I entered
+today as PAA is testing its \$24.80 resistance. Next resistances are
+\$25.00 (the gap) and \$25.15 (38% Fib level in the July dive). As such,
+there are a couple of safety cushions in case this doesn't work out. My
+mental stop is \$1.30 on the premium. Through time decay (around October
+if we trade sideway from now), price appreciation, and mostly a
+combination of these two factors. I figured I have about a month's time
+to find out if it can break the \$25.15 level. Risk is thus (\$2.27 -
+\$1.30) * 100 * 3 = \$291 + \$25.90 commission = \$316.90 = 3.3%. Once
+again, that's higher than what I'd recommend. But that's just the worst
+case scenario. We should know soon enough if silver can break lower as
+it is trading against a descending trendline as shown in Figure 2.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="U.S. Dollar
+Index"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-DOLLAR.png" />][][/caption] [caption id="" align="aligncenter"
+width="570" caption="Silver"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-SILVER.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-06-SILVER.png">1</a>[/caption] [caption id=""
+align="aligncenter" width="570" caption="Pan America Silver Corp.
+(PAA.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-PAA.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-06-PAA.TO.png">2</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bought-3-paato-10dec-puts-2500-227-mark-2475/' title='2010-08-06T10:55:00'>06 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/index19.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/index21.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

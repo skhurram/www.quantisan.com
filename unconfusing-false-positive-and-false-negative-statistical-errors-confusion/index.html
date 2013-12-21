@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Unconfusing false-positive and false-negative statistical errors confusion - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/" rel="bookmark">Unconfusing false-positive and false-negative statistical errors confusion</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>I was reading a blog post <a href="http://mcfunley.com/whom-the-gods-would-destroy-they-first-give-real-time-analytics">about real-time analytics</a> over the lunch today. In it, the author made a claim that "funny business with timeframes can coerce most A/B tests into statistical significance." There's also <a href="http://mcfunley.com/static/811609fd0f3/images/real-time-screwed.png">this plot illustrating two time series of the cumulative number of heads in a two-fair-coin-comparison</a>. Yet, time nor ordering has an effect on test results because each flip is independent. Not content with his claim, I wrote a coin flipping simulation in R to prove him wrong.</p>
+<p>This plot shows p-values of proportion tests for two simulated fair coin flips that they are different. Each of these tests are repeated with increasing number of flips per test. Since both coins are fair, we should expect no p-value should dip below our 95% significance level (red horizontal line). Yet we're seeing some false positives (i.e. a claim of evidence when there really isn't) that say the two coins are statistically different.</p>
+<p><img alt="false positive vs sample size, up to N=1000" src="http://www.quantisan.com/images/2013/coin-false-positives-increasing-1000.png" /></p>
+<p>A better illustration is to run a test with 1000 flips, get a test result, and repeat many times for many results. We see that sometimes false positive happens. Given that our significance level is 95%, we can expect false positives to happen 1 in 20 times.</p>
+<p><img alt="repeated sampling at 1000 flips" src="http://www.quantisan.com/images/2013/coin-false-positives-1000-only.png" /></p>
+<p>Remembering that I should do a power calculation to get an optimal sample size, doing <code>power.prop.test(p1=0.5, p2=0.501, power=0.90, alternative="two.sided")</code> says N should be 5253704.</p>
+<p>So this is a plot of doing many tests with 5253704 flips each.</p>
+<p><img alt="N=5253704" src="http://www.quantisan.com/images/2013/coin-false-positives-power.png" /></p>
+<p>But the false positives didn't improve at all! By now, I'm quite confused. So, I asked for help on StackExchange and received <a href="http://stats.stackexchange.com/q/47434/3847">this insight</a>.</p>
+<div class="highlight"><pre><span class="n">What</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">being</span> <span class="n">gained</span> <span class="n">by</span> <span class="n">running</span> <span class="n">more</span> <span class="n">trials</span> <span class="n">is</span> <span class="n">an</span> <span class="n">increase</span>
+<span class="n">in</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">true</span> <span class="n">positives</span> <span class="n">or</span><span class="p">,</span> <span class="n">equivalently</span><span class="p">,</span> <span class="n">a</span> <span class="n">decrease</span>
+<span class="n">in</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">false</span> <span class="n">negatives</span><span class="p">.</span> <span class="n">That</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">false</span>
+<span class="n">positives</span> <span class="n">does</span> <span class="n">not</span> <span class="n">change</span> <span class="n">is</span> <span class="n">precisely</span> <span class="n">the</span> <span class="n">guarantee</span> <span class="n">of</span> <span class="n">the</span> <span class="n">test</span><span class="p">.</span>
+</pre></div>
+
+
+<p>And so, a 95% significance level remains 95% significant (1 in 20 chance of false positive) regardless of increasing sample sizes as shown. Again. </p>
+<p><img alt="false positive up to 10k trials" src="http://www.quantisan.com/images/2013/coin-false-positive.png" /></p>
+<p>What is, in fact, gained for increasing sample size is reduced false negative, which is defined as failing to make a claim when it is there. To illustrate that, we need a different plot because it is an entirely different circumstance. We have two new coins, and they are different. </p>
+<p>Say we have one fair (p=50%) coin and another that's slightly biased (p=51%). This plot shows the result of running the same proportion test to see if these two are statistically different. As we increase sample size, the amount of false negative results, points <em>above</em> the red line (0.05 p-value, 95% significance level) denoting negative results, are clearly reduced as sample size increases. Thus this plot is illustrating that false negatives decreases as sample size increases.</p>
+<p><img alt="false negative increasing samples" src="http://www.quantisan.com/images/2013/coin-false-negative.png" /></p>
+<p>"Funny business" do not coerce A/B tests into statistical significance. The fact that a 95% significance gives 1 in 20 false positives is in fact what it guarantees. To decrease false positive, simply test at a higher significance level. For example, <code>prop.test(c(heads.A, heads.B), n=c(N, N), alternative="two.sided", conf.level=0.99)</code> to set it to 99% instead of the default 95%.</p>
+<p>The R source code for this mental sojourn are available at <a href="https://gist.github.com/4502739">this gist on Github</a>.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2013-01-10T22:28:00'>
+                Posted 10 January 2013
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/data-science/">data-science</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/statistics/">statistics</a>
+            <a href="http://www.quantisan.com/tag/R/">R</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "unconfusing-false-positive-and-false-negative-statistical-errors-confusion/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

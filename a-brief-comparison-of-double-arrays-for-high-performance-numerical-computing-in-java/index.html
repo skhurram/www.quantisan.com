@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>A brief comparison of double arrays for high-performance numerical computing in Java - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/" rel="bookmark">A brief comparison of double arrays for high-performance numerical computing in Java</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>Numerical calculation performance matters if you're calculating gigantic
+datasets or have limited processing capability. I belong in the latter
+case as I intend to run my trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">a free cloud server</a> in
+the future. There are plenty of research and studies to push the
+boundary of high-performance numerical computing in Java (see ref. 1 and
+2). Most of the latest and greatest is beyond the scope of my
+quantitative work. What I seek is performance with simplicity and
+efficiency. That is how I became aware of the <a href="http://acs.lbl.gov/software/colt/">Colt Project</a> by CERN,
+and its <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">multi-threaded branch</a>. Colt is a set of open source Java
+libraries for scientific and technical computing problems characterized
+by large data sizes while demanding high performance and low memory
+footprint. Just what I needed. Out of curiosity, I tested its
+implementation of double arrays and compared its performance to standard
+Java libraries.</p>
+<h2>Method</h2>
+<p>A random sample of a million decimal values (e.g. prices) are generated
+and stored in four Java data structures. All data structures have the
+same one million values in their own respective memory spaces.</p>
+<ol>
+<li>Primitive double array</li>
+<li>ArrayList of Double objects</li>
+<li>Colt</li>
+<li>Parallel Colt</li>
+</ol>
+<p>Three tests were ran.</p>
+<ol>
+<li>A simple <em>diff</em> function. A traversal of the million data points and
+    calculating array[i] - array[i - shift] for all <em>i = shift to
+    1,000,000</em>. Where <em>shift</em> is a random integer from 0 to 50. This
+    type of calculation is common place in technical analysis
+    indicators.</li>
+<li>A sort function sorting the million data points in the array in
+    ascending order. This come in handy for some statistical analysis.
+    In the case of the primitive array, I am using
+    java.util.Arrays.sort(). Otherwise I'm using the sort() method
+    implicit in the other interfaces.</li>
+<li>A binary search function on the sorted arrays. For the primitive
+    array, I am using java.util.Arrays.binarySearch().</li>
+</ol>
+<p>Each test is ran 3 times with different random seeds and the results are
+averaged. The system runs Java SE build 1.6.0_22-b04 and Linux kernel
+2.6.35-22 on an Intel Core 2 Duo 6300 @ 1.86 GHz.</p>
+<h2>Result</h2>
+<p>For the diff, primitive array averaged 9.3 millisecond; ArrayList 27
+ms.; Colt 14 ms.; Parallel Colt 15 ms. For sort, primitive 354.7 ms.;
+ArrayList 1,316 ms.; Colt 270.3 ms.; Parallel Colt 273 ms. For search,
+primitive 559.7 ms.; ArrayList 1,561.7 ms.; Colt 575.7 ms.; Parallel
+Colt 551.3 ms.</p>
+<h2>Discussion</h2>
+<p>As this isn't a vigorous test, I wouldn't mind too much on the actual
+numbers. The take home message here is that the performance of Colt is
+at least in the same magnitude of a primitive array. Whereas a standard
+ArrayList object is a magnitude worse. However, where Colt really shines
+is in its methods for handling matrices. It offers plenty of convenient
+functions for matrix calculations while guaranteeing good performance.
+To work with matrices in Java, you either use third-party libraries such
+as Colt or manage a bunch of <em>for</em> loops. Which isn't pretty.</p>
+<h3>References</h3>
+<p><span>[1] Moreira, et al., </span>"Java programming for
+high-performance numerical computing," IBM Systems Journal, Vol. 39,
+No. 1, pp. 21-56, 2000. [2] Wendykier and Nagy, "Parallel Colt: A
+High-Performance Java Library for Scientific Computing and Image
+Processing," ACM Transactions on Mathematical Software, Vol. 37, No. 3,
+September 2010.</p>
+</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-11-01T09:12:00'>
+                Posted 01 November 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/computing/">computing</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/java/">java</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - tutorial</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/" rel='bookmark'>Choosing a budget VPS provider for hosting automated trading programs</a>
+            </h1>
+            <div class="article-content"> <p>I've been looking for a cheap but reliable virtual private server (VPS)
+to run my trading program for the last few months. I ran my QTD program
+on 3 remote servers in UK and Germany in April for an entire month as
+performance testing. One in UK on a Xen cloud. One in Germany on OpenVZ.
+And a last one also in UK on KVM technology. This post is a summary of
+my initial findings on what to watch for when choosing a server provider
+for running a remote trading server. Keep in mind that this is for
+low-end, low-frequency, retail trading. Where latencies in the range of
+tens of milliseconds are considered good. General target price range is
+US\$10 - \$20 per month for an unmanaged server with 512MB of ram and
+600MHz-equivalent of circa 2006 Intel CPU. Low price is the primary
+consideration here. If you don't care for the technical details, the top
+VPS names are <a href="http://www.linode.com">Linode</a>, <a href="http://www.hetzner.de/en/">Hetzner</a>, and <a href="http://www.6sync.com">6sync</a> for Linux-based
+VPSs. Linode offers Xen VPSs in US and UK. 6sync offers KVM VPSs in US
+only. Both companies offer Linux-based 512MB instances for \$20 as a
+starter server. Hetzner offers KVM VPSs in Germany for €7.90. Cloud
+servers like Amazon EC2 and Rackspace Cloud are too expensive for
+running 24/7.</p>
+<h2>Location, Location, Location</h2>
+<p>Use a datacenter that's at least in the same sub-continent as your
+broker's datacenter. You wouldn't want your data to travel half-way
+around the world just to save a few bucks. It adds unnecessary latency
+and prices are comparable in either the states or Europe nowadays.
+Although Asia is another story. If you use more than one broker, you can
+use multiple servers or pick a server location that sits between them on
+the internet backbone. TeleGeography provides <a href="http://www.telegeography.com/telecom-resources/map-gallery/index.html">global internet maps</a>
+to identify best locations. I trade with Dukascopy and Oanda. One in
+Switzerland and another in the states. As such, Internet hubs in cities
+like New York, London, and Frankfurt are prime targets for low latency
+between both brokers. As I trade more at Dukascopy, I'm biased to
+European servers. Furthermore, London and Frankfurt are the #1 and #2
+internet hub in the world. London has 7,723 Gbps and Frankfurt has 7,218
+Gbps capacity in 2010. Whereas New York, 5th in the world, has 3,850
+Gbps.</p>
+<h2>Virtualization Technologies</h2>
+<p>Virtual private servers are merely reserved resource chunks of a
+computer in a datacenter. This is achieved through the use of
+virtualization technologies. And there are quite many of those as I have
+discovered. Here are three that you'll likely hear about in your search.</p>
+<ol>
+<li><strong>OpenVZ.</strong> This is the most popular and least preferred platform
+    for trading servers. It's often used by budget hosts because
+    resources between virtualized instances are not well isolated. As
+    such, a host can oversell a server's resource as most webapps have
+    sporadic resource utilization trend. In other worlds, it is unlikely
+    all the virtual private servers would demand their maximum allocated
+    resources at the same time. However, trading servers require a
+    consistent and guaranteed level of computing resource. So stay away
+    from VPS that runs on OpenVZ unless you want to see server hiccups.</li>
+<li><strong>Xen.</strong> This is what Amazon EC2 and Rackspace Cloud runs on. Xen
+    offers true resource isolation so that you're less likely affected
+    by your virtual server's neighbours. What you see is also what you
+    get. So if you're promised 512MB of memory, you'll get 512MB of
+    memory. However, processing power varies tremendously across
+    different VPS providers. A micro instance on Amazon EC2 offers 613MB
+    of memory, for example. But it is no match for even a 256MB instance
+    on Rackspace Cloud. I was able to run a LXDE desktop GUI plus a java
+    program on Rackspace but couldn't do it on Amazon.</li>
+<li><strong>KVM.</strong> KVM uses the Linux kernel to virtualize. It's said to offer
+    lower overhead to the host server so that it can provide better
+    value than Xen. Like Xen, it offers true resource isolation.</li>
+</ol>
+<p>In summary, either Xen or KVM are good but stay away from OpenVZ.</p>
+<h2>Operating System</h2>
+<p>Key question here is: Linux or Windows? If you're unfamiliar with Linux
+and is not interesting in learning about it, use a Windows Server 2003
+or 2008 provider. Windows Server 2003 is preferred as it uses fewer
+resources just to run so it's cheaper. Do note that Windows VPSs are
+\$10-\$20 more expensive anyway because you have to pay for a monthly
+license lease. With the use of a Windows-based VPS, you can connect to
+your server through the remote desktop protocol (RDP). It's just a
+matter of running the Remote Desktop application on your local machine
+to your remote server. Then you'll see the remote machine's desktop on
+your own machine. And then you can control the remote server just like
+any other Windows computer. Very simple. However, I prefer to run Linux
+because of its renowned stability and lower cost. The downside is that
+you need to know what you're doing to <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">tweak the server for trading</a>.
+Linux uses very little computing resource to run. I can squeeze JForex
+and Metatrader together on a Linux VPS with only 256MB memory. By
+comparison, you need at least 512MB on a Windows box just to get the OS
+running. And there's no licensing fee for Linux too. A double savings.</p>
+<h2>Summary</h2>
+<p>When choosing a VPS provider, consider factors such as location,
+virtualization technology, and operating system(s) offered. Once you've
+narrowed your search to a shortlist of providers, the next step is to
+compare their specific VPS offerings by looking at price, services, and
+technical specifications.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/' title='2011-05-03T07:30:00'>03 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/" rel='bookmark'>Dissecting a JForex strategy -- MA_Play.java</a>
+            </h1>
+            <div class="article-content"> <p>Having studied the anatomy of an empty JForex strategy (<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">Part 1</a> and
+<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/">Part 2</a>), it's time to dissect a working one. MA_Play is the
+strategy that is included with every JForex API download as a
+demonstration. You can find the complete source code of this strategy in
+/src/singlejartest/ in the <a href="http://www.dukascopy.com/swiss/english/forex/jforex/library/">JForex API zipped package</a>. Recall that
+the first Interface method which runs at the start of the strategy is
+onStart. The onStart method of MA_Play is reproduced below. </p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> 
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getEngine</span><span class="o">();</span> 
+    <span class="n">indicators</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getIndicators</span><span class="o">();</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">console</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getConsole</span><span class="o">();</span>
+    <span class="n">console</span><span class="o">.</span><span class="na">getOut</span><span class="o">().</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Started&quot;</span><span class="o">);</span> 
+<span class="o">}</span>
+</pre></div>
+
+
+<p>The variables <code>engine</code>, <code>indicators</code>, and <code>console</code> are <em>fields</em> of the MA_Play class. They are
+global variables within the class. What lines 42--44 do is to save the
+<a href="http://www.dukascopy.com/wiki/index.php?title=IEngine">IEngine</a>, <a href="http://www.dukascopy.com/wiki/index.php?title=IIndicators">IIndicators</a>, and <a href="http://www.dukascopy.com/wiki/index.php?title=IConsole">IConsole</a> objects for later use.</p>
+<p>The last line of onStart, line 45, is merely to <a href="http://www.dukascopy.com/wiki/index.php?title=Console">print a message on your
+JForex program console</a> to notify the user that the strategy has
+started.</p>
+<p>Once onStart is finished processing, the server is likely to
+call onTick if a market tick arrives. If it's not during market hours,
+then there's no tick and some other event might happen instead of
+onTick. Think of the methods as events rather than a linear process. You
+program your JForex strategy according to what you want to do with each
+of the six IStrategy Interface event. </p>
+<p>For this particular strategy, the
+programmer decides to implement their strategy at the tick level. As
+such, much of the trading algorithm resides in onTick for MA_Play. Note
+that this is a design choice, you can use onBar if you want your
+strategy to <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/">process at the bar level</a> (or you can use both
+onTick and onBar).</p>
+<p>Here's the source code for onTick in MA_Play. </p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ema</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> 
+            <span class="n">Period</span><span class="o">.</span><span class="na">TEN_SECS</span><span class="o">,</span> 
+            <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> 
+            <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> 
+            <span class="mi">14</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kt">double</span> <span class="n">ma0</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ema</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span><span class="o">.</span><span class="na">TEN_SECS</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">ma0</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">ma0</span><span class="o">;</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">double</span> <span class="n">diff</span> <span class="o">=</span> <span class="o">(</span><span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">-</span> <span class="n">ma0</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">());</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">positionsTotal</span><span class="o">(</span><span class="n">instrument</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">),</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">SELL</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span>
+                    <span class="o">+</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">10</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span> <span class="o">-</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">15</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">),</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">BUY</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span>
+                    <span class="o">-</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">10</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span> <span class="o">+</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">15</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">ma0</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>At a glance, you may notice that the variables <code>ma0</code> and <code>ma1</code> play a key role in
+determining the setup. <strong>Hint:</strong> To reverse engineer a strategy, it may
+be easier to work backward from when the order is placed, which is done
+by <code>engine.submitOrder</code> in this case. </p>
+<p><code>ma0</code> and <code>ma1</code> hold results from exponential moving averages (EMA). <code>ma0</code> is the current value. <code>ma1</code> is
+the previous bar's value. Lines 56--63 check using IF tests (lines 56
+and 60) to see if either of the variables hold invalid data. If the data
+is invalid, the indicator is calculated and the rest of the onTick is
+skipped with the <code>return</code> statement on line 62.</p>
+<p><strong>Note:</strong> Indicator values can sometimes be invalid (zero, negative, or <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Double.html">Double.NaN</a>,
+depending on the particular indicator implementation) if there is
+insufficient data to calculate it or an error occurred, for examples.</p>
+<p>The EMAs are fetched in lines 57 and 59 using the IIndicators object
+(which was initialized in onStart). The <a href="http://www.dukascopy.com/wiki/index.php?title=Indicators">JForex Wiki provides an
+explanation of its use</a>. </p>
+<p>Notice that <code>ma1</code> is an array, which was
+declared in line 38 with a size equivalent to the number of <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html">all
+available JForex instruments</a>. In particular, it is used with a
+special index value as in <code>ma1[instrument.ordinal()]</code>. In other words,
+it is asking for the current instrument's slot in the <code>ma1</code> array. The
+current instrument is the one that is passed into the method in line 55.</p>
+<p>Moving down the code, another point of interest is line 65, showing the
+use of <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html#getPipValue()">instrument.getPipValue(</a>). Line 67 checks if the current total
+number of position is zero. If it is, meaning no opened position, then
+the strategy proceeds to check the entry signal to enter a trade (lines
+68--76). </p>
+<p><code>positionsTotal()</code> is a custom method defined in lines 84--92.
+It uses a FOR loop to cycle through all the orders obtained from
+[<code>engine.getOrders(instrument)</code>][] </p>
+<p>Once either of the long or short
+condition, lines 68 and 72, respectively, is met, the strategy submits
+an order in lines 69 for a short and line 73 for a long. The
+<a href="http://www.dukascopy.com/wiki/index.php?title=Set_Market_Order">particulars of submitting market orders</a> is described in the JForex
+Wiki. </p>
+<p>When you stop this strategy, onStop (lines 48--53) is called. For
+this strategy, the programmer loops through all the orders again using
+<code>engine.getOrders()</code> and closes each of the position with an
+[<code>order.close()</code>][] command in line 50. </p>
+<p>That is it for this trivial
+strategy. If there is one point that you should remember. Note my use of
+the many links to the <a href="http://www.dukascopy.com/client/javadoc/">JForex javadoc</a> and <a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page">JForex Wiki</a> throughout
+this post. You are likely to find many of your answers from those two
+sources. If not, there's always the <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex Support Board</a>. Now that
+you've had an idea of how MA_Play.java works, it's time to test it. In
+the next post in January, we will discuss the JForex Historical Tester
+and what to watch for when running a strategy live.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/' title='2010-12-20T09:34:00'>20 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel='bookmark'>Anatomy of a JForex strategy, Part 2</a>
+            </h1>
+            <div class="article-content"> <p>We looked at <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">four of the six methods in the IStrategy Interface</a> in a
+previous post. The last two methods, onTick and onBar, is where your
+strategy connect with market data. Either one, or both, of these methods
+is where you put your trading algorithm in. Your strategy would then be
+able to process the market data as they arrive one tick/bar at a time.
+Recall that IStrategy Interface is the skeleton of your strategy. And
+that IContext object is the heart of your strategy. onTick/onBar is the
+head of your strategy, which contains your trading algorithm, which is
+the brain.</p>
+<h2>onTick</h2>
+<p>Here's the method definition of onTick. </p>
+<div class="highlight"><pre><span class="n">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p><strong>Important:</strong>onTick is called for each and every instrument that your
+JForex platform is subscribed to (the instrument list in your workspace
+box). Let me say that again, onTick is called for each and every
+instrument that your JForex platform is subscribed to. The standard
+practice is to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out ticks</a> for instruments that you don't want
+with a simple IF-return statement.
+<code>if (instrument != myInstrument) return;</code> Actual tick data is passed to
+your strategy using the ITick object from the onTick method's parameter.
+Take a look at the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/ITick.html">ITick javadoc entry</a> to see what it offers.</p>
+<h2>onBar</h2>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>onBar works in a similar manner to onTick. In which onBar is called for each
+and every subsribed instrument <em>and period</em> known to JForex. Similarly,
+you have to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out all the unwanted instruments and periods</a> or else there will be expected results from your strategy.
+Another point to note is that onBar provides both a <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IBar.html">IBar</a> askBar and
+IBar bidBar, representing the ask and bid bars. <strong>Question:</strong> What
+happens when two or more periods overlap as in 13:45? 1, 5, and
+15-minutes bars are all arriving at the same time (not to mention the
+periods in seconds too). <strong>Answer:</strong> According to Dukascopy Support in
+the forum, "They come in a strict order, for example (1min 1min 1min
+1min 1min 5min 1min 1min 1min 1min 1min 5min ..) They come in cycles,
+where <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=5&amp;t=23959">smaller periods comes first</a>."</p>
+<h2>JForex Support Forum</h2>
+<p>As you program your strategy with JForex, you will no doubt come up with
+questions of your own. The best place to ask is at the official <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex
+Support Forum</a>. This is the last of the three essential JForex
+resources that I alluded to earlier. Even if you don't have any specific
+question, there are sample codes, coding discussion, and hundreds of
+existing Q&amp;A from other JForex developers posted in the forum.</p>
+<h2>Summary</h2>
+<p>The discussion so far has been very high level. To show you what you can
+actually <em>do</em> in an IStrategy, we will <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/">dissect a working strategy in
+the next post</a>. And what else better to examine than the most popular
+JForex strategy of them all -- MA_Play.java.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/' title='2010-12-14T07:49:00'>14 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel='bookmark'>Anatomy of a JForex strategy, Part 1</a>
+            </h1>
+            <div class="article-content"> <p>Continuing on from Part 1 of this series: <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">Getting started learning
+JForex programming</a>, now we're ready to discuss the real thing. You
+build JForex strategies by using the IStrategy Interface (<a href="http://download.oracle.com/javase/tutorial/java/concepts/interface.html">What is an
+Interface?</a>). Basically, an Interface is a code skeleton with a set of
+predefined empty methods that you'll need to implement yourself. The six
+standard methods of the IStrategy Interface are:</p>
+<ol>
+<li>onStart</li>
+<li>onStop</li>
+<li>onMessage</li>
+<li>onAccount</li>
+<li>onTick</li>
+<li>onBar</li>
+</ol>
+<p>Below is an empty IStrategy Interface implementation, also known as a
+JForex strategy. This code will compile fine in JForex and you can even
+run it. But it doesn't do anything at all because there is no code to
+run in each of the methods. Each of the six methods will just be called
+and exit immediately.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">com.dukascopy.api.</span><span class="err">\</span><span class="o">*;</span> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EmptyStrategy</span> <span class="kd">implements</span> <span class="n">IStrategy</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="n">IMessage</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAccount</span><span class="o">(</span><span class="n">IAccount</span> <span class="n">account</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Each of the method is triggered by a specific event. You can probably
+guess what they are from their name.</p>
+<h2>onStart (line 5)</h2>
+<p>This is the first method that is called when you run your strategy. It
+will run once and only once at the start of your strategy. Normally you
+do your initialization in here. The thing to note for onStart is in line
+5 of the code. The method signature of onStart is</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
+</pre></div>
+
+
+<p>The object
+in the parameter and given to you in this method is an IContext object.
+If IStrategy is the skeleton, then IContext is the heart of the
+strategy. Please take a look at this <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IContext.html">javadoc link to IContext</a> to see
+what this object does. <strong>Javadoc?</strong>: Now is a good time to introduce the
+second of the three essential resources of a JForex programmer. The
+<a href="http://www.dukascopy.com/client/javadoc/">JForex Javadoc</a> is the single most up-to-date API documentation
+<em>explaining</em> each and every object and methods of the JForex API. Think
+of it like a reference manual. Note that although it's comprehensive,
+most of the explanation is very sparse and possibly incomplete. IContext
+is a core JForex object to access many important components of the
+JForex system, such as the ordering engine, charts, console,
+indicators... You get the idea. It is important! You typically want to
+keep a local copy of it as this is the only time (in onStart) that this
+object will be passed to you in IStrategy.</p>
+<h2>onStop (line 26)</h2>
+<p>As the name suggest, this method is called once you send a stop command
+to your strategy. You do your program wrap-up such as logging and
+flushing data here. Not much out of the ordinary with this one.</p>
+<h2>onMessage (line 18)</h2>
+<p>Whereas we know when onStart and onStop will be called, onMessage is an
+asynchronous method in that you don't know exactly when it will run.
+This method is called when the Dukascopy server sends your strategy a
+message. For example, the server calls onMessage to let you know that
+your order has been filled. You receive and process the server message
+by accessing the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IMessage.html">IMessage object</a> that is passed to you.
+<strong>Important:</strong>There is no guarantee that you will receive each and every
+message sent to your strategy from the server. Perhaps your strategy
+process is clogged. Or maybe your internet connection had a hiccup. If
+your strategy onMessage doesn't get called by the server for whatever
+reason, the server couldn't care less and won't be checking nor trying
+again. So don't do anything critical like managing your orders in
+onMessage!</p>
+<h2>onAccount (line 22)</h2>
+<p>This method is called whenever your account information update is
+received. The method provides access to the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IAccount.html">IAccount object</a>, which
+you use to get your account information. Say if you have an open
+position, your account information changes on every tick because your
+equity is cash + unrealized profit/loss. In that case, onAccount is
+called every 5 seconds by the server at most to avoid flooding your
+strategy. <strong>More Important:</strong>The IAccount object is not connected live
+to your account in the server. It is merely a snapshot of your account.
+For example, if you keep a local copy of an IAccount object. Do some
+trading to change your balance. Then ask the same IAccount for account
+balance information, you will not see a change. As such, always update
+your local copy of IAccount within the onAccount method to keep your
+account information up-to-date for your strategy's use.</p>
+<h2>To be continued</h2>
+<p>onStart, onStop, onMessage, and onAccount methods are <em>administrative</em>
+methods for your strategy. The last two methods that we'll discuss,
+onTick and onBar, is where the magic happens in a strategy. I am saving
+the best for last in the next post.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/' title='2010-12-10T08:10:00'>10 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/" rel='bookmark'>Getting started learning JForex programming</a>
+            </h1>
+            <div class="article-content"> <p>The biggest problem I had when learning to program my own trading
+strategies in JForex is finding where to start learning. There were few
+JForex documentation available at the time and I had to teach myself
+through painstaking trial and error with the help of Dukascopy's
+technical support. Things have certainly changed for the better as a
+JForex community is starting to sprout and documentation for it is at
+least sufficient to get anyone started. This post is the first of a
+series of quick beginner's guide to learning JForex programming by
+putting all these resources in a tutorial.</p>
+<h2>JForex is a Java tool</h2>
+<p>JForex is actually not a programming language. It is an application
+programming interface (API) for use with the standard Java programming
+language. As such, the first step to learning to program in JForex is to
+learn Java. Luckily, Java is one of the most popular programming
+languages. So there're plenty of resources on and off the web to learn
+Java programming. Some examples of free online tutorials are:</p>
+<ol>
+<li><a href="http://download.oracle.com/javase/tutorial/">The Java Tutorials</a> -- This is an official tutorial from the
+    developer of Java themselves. Highly recommended.</li>
+<li><a href="http://www.roseindia.net/java/beginners/">Beginners Java Tutorial</a> -- More geared for the absolute
+    beginners to programming.</li>
+</ol>
+<p>If you prefer a book, I would recommend <a href="http://www.amazon.com/gp/product/0596009208?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0596009208">Head First Java, 2nd
+Edition</a>. I brushed up on my Java from this book. Don't dwell on
+Java too much though as you only need to know the basics to get started
+with JForex. Just read a few chapters to understand the Java syntax and
+then move on. You can always refer back to them later.</p>
+<h2>Diving into JForex</h2>
+<p>The <a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page">JForex Wiki</a> is one of the three essential resources for JForex
+programmers. I will be referring to some specific pages of the Wiki in
+much of this series of posts. If you haven't done so already, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">signup
+for a DEMO account at Dukascopy</a>. Then launch the JForex platform and
+follow the instructions on the <a href="http://www.dukascopy.com/wiki/index.php?title=Use_in_JForex">Use in JForex</a> wiki page to assemble
+your first JForex strategy!</p>
+<h2>Summary</h2>
+<p>So far so good? By this point, I hope you can understand basic Java
+source code and know how to start/open, compile, and run a JForex
+strategy. In the next post in this learning JForex series, we will
+<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">study the anatomy of a JForex strategy</a>.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/getting-started-learning-jforex-programming/' title='2010-12-08T07:04:00'>08 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

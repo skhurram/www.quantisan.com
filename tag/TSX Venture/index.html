@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - TSX Venture</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
+            </h1>
+            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/" rel='bookmark'>Another reason against stocking into a registered trading account this year</a>
+            </h1>
+            <div class="article-content"> <p>There's another reason why I am so <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">reluctant to put money into a TFSA
+trading account</a> to invest in Canadian stocks. As you know, in a
+registered trading account, such as a RRSP self-directed trading account
+or a <a href="http://www.quantisan.com/questrade/">Questrade TFSA trading account</a> (aff), you cannot short shares
+and can only buy because you can't trade on margin. As such, a
+registered trading account is an account for buy-only trading. It
+doesn't take a genius to figure out that a buy-only trading strategy is
+best used ... in a bull market. As trading wisdom goes, trade with the
+trend. So the question is, are we in a bull market in 2010? Figures 1
+and 2 shows the weekly chart of TSX Index and the TSX Venture Index,
+respectively. Referring to Fig. 1, TSX is bumping up against some
+headwind at a 12,000 resistance. Unless TSX can stay above 12,000
+cleanly (a weekly low above that level at least), I am still bearish in
+the market because that financial crisis back in 2008 (<a href="http://www.quantisan.com/another-breakdown-of-a-major-multi-year-support-are-we-going-down-and-i-mean-really-down/">remember those
+days</a>?) is still overshadowing long term prices and trader sentiments.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="TSX,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-TSX_wk.png" />][][/caption] TSX Venture is depressed even more as seen
+in Figure 2 below. Just look at the huge gap from current price to the
+200 week moving average (red line). This isn't a good sign as lack of
+interest in high-risk stocks means traders are generally cautious. Yes,
+it's true that the equity market has been running up, up, and up for a
+good year. However, the fact that TSX is sitting at the same level as in
+2001 proves that the long term, multi-year bull market has been cleanly
+broken. We might very well see pockets of multi-month rallies
+materialize (like we're seeing now), but unless proven otherwise, the
+long term trend is not looking green for the markets. It will not be
+easy money in the stock market like back in the pre-tech bubble 1990's.
+As opined by Bill Cara, the <a href="http://www.caracommunity.com/">time for buy-and-hold is gone</a>. It is
+well known in the community that the coming years will be volatile with
+big ups and downs. That is my little secret for moving to <a href="http://www.quantisan.com/category/forex/">trade
+forex</a>last year and the main reason why I am reluctant to set aside
+money on a one-sided stock trading account. [caption id=""
+align="aligncenter" width="570" caption="TSX Venture,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png">1</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/' title='2010-03-05T07:32:00'>05 March 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

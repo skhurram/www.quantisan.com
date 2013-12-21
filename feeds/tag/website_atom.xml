@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/website_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-04-05T07:30:00+01:00</updated><entry><title>Transitioning to a professional website, front and back</title><link href="http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/" rel="alternate"></link><updated>2011-04-05T07:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-04-05:transitioning-to-a-professional-website-front-and-back/</id><summary type="html">&lt;p&gt;Yes, this is still Quantisan.com. In case anyone is visiting and noticed
+the different design. I've made some major changes to the website over
+the weekend for both aesthetic and technical reasons.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Professionally designed.&lt;/strong&gt; The previous theme was something that I
+    hacked together over a weekend. It's actually pretty bad under the
+    hood as I had only learned PHP scripting to write that theme. This
+    new theme is a minor tweak over a professional framework. It enables
+    more flexibility to the page layout. Expect some major changes to
+    the front page in the weeks to come as this personal blog transforms
+    into a company site.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reduced computing resource hog.&lt;/strong&gt; I disabled a number of Wordpress
+    plugin modules as the theme has already taken care of things like
+    search engine optimisation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Optimised page loading time.&lt;/strong&gt; The code for the new design is also
+    optimised for faster page load times with built-in optimisation of
+    javascript and css file loading.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Geographically distributed content delivery network.&lt;/strong&gt; As forex is
+    a global endeavour, the readers to this blog is quite geographically
+    diverse. While the site is hosted in the U.S., I want to ensure the
+    readers from Germany and India (8% of my readers) have a smooth
+    browsing experience too. The use of a CDN to mirror contents around
+    the world makes this possible.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bad traffic filtering&lt;/strong&gt;. A significant traffic on the web is due
+    to software crawlers. Some of them post spam comments on my blog or
+    copy my copyrighted materials. I added a server-side security
+    control service to block all those unwanted traffic. This increases
+    security and reduces unnecessary server load.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You might have noticed that aside from point #1, which is purely
+aesthetic, everything else is done to improve page load time for readers
+to this blog. The result is that the new loading time is down to about
+4.0 seconds. Whereas the old site took around 8 seconds to load. You
+might think this cost a fortune. But it still costs less than most small
+websites out there. The old site cost me \$30 &lt;em&gt;per year&lt;/em&gt; to run,
+including everything from domain name registration to web hosting. The
+new total is still only up to \$70 &lt;em&gt;per year&lt;/em&gt;. The key to the savings is
+that I made use of a free network enhancement service
+(&lt;a href="http://www.cloudflare.com"&gt;cloudflare.com)&lt;/a&gt; and exploited my remote server and network
+optimisation knowledge acquired from the long nights of &lt;a href="http://www.quantisan.com/tag/vps"&gt;administering a
+remote trading server&lt;/a&gt;. Technology is cheap nowadays. The real values
+are in the ability to deliver on that technology to bring about even
+greater return. This is what drives everything I do at Quantisan
+Systems.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="website"></category></entry><entry><title>Why use .PNG image format for stock chart captures instead of .JPG or .GIF?</title><link href="http://www.quantisan.com/why-use-png-image-format-for-stock-chart-captures-instead-of-jpg-or-gif/" rel="alternate"></link><updated>2009-10-18T00:10:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-10-18:why-use-png-image-format-for-stock-chart-captures-instead-of-jpg-or-gif/</id><summary type="html">&lt;p&gt;If you are like me that keep a detailed trading journal in a blog or in
+a computer, then capturing technical analysis charts (assuming you use
+TA) is an essential historical record of your trades. I was saving my
+charts in JPG format for many years because that's also what my digital
+camera used. So I used it without giving much thought. It wasn't until
+one day when I realized my saved charts were slightly blurry that I gave
+the issue of image format more thought. After some research, I found out
+that not all image formats are created equal. Not only do they differ in
+compression level, they also differ in their quality and intended use.
+This post is intended to summarize my conclusion about why PNG format is
+the best for saving stock chart captures. In addition to the popular
+JPEG image format, I have often seen other technical analyst bloggers
+use GIF to post their charts. As such, I'll compare the 3 formats in
+this article. The criteria for judging image format for stock charts are
+obviously quality and file size. Quality is definitely what matters the
+most because stock charting relies heavily on the points and lines for
+comparison and analysis. If you can't figure out the resistance/support,
+for example, from looking at the image, then that chart couldn't provide
+you with in-depth analysis later. Which would render it useless for the
+purpose of reviewing your trades. As for file size, it depends on if
+you're posting it online. If that the case, then it's arguably as
+important as the quality of the image. Waiting for images to load is an
+unnecessary waste of time. Before digging deeper in this topic. I
+figured that it's best to just present a real case trading journal
+example. Here's what I did for the figures attached below. I captured a
+chart of crude oil futures with my trading screen. Moving averages,
+channels, volume, and a couple more separate indicators. A pretty
+typical setup. The first image is saved in JPG format. It is 213 KB in
+size. Click on it to see the full size image. Notice the compression
+artifacts. In particular, the distorted colours and pixels. You couldn't
+really make out some lines because it's blurred. The second image is in
+PNG format. It is only 68 KB in size, a 1/3 of the JPG. You can see that
+it's perfectly clear and sharp. If you're interested in more
+explanation, continue reading. But be forewarned that this could get
+confusing. According to &lt;a href="http://en.wikipedia.org/wiki/Portable_Network_Graphics#Comparison_with_other_file_formats"&gt;Wikipedia&lt;/a&gt;, .PNG images are generally smaller
+than GIF but bigger than .JPG. However, PNG images produce sharper
+quality than JPG if all else remain equal. Thus, for a clear technical
+analysis chart image capture, PNG's file size is smaller than JPG (and
+GIF) if the quality and resolution (height and width) are the same. That
+is because PNG (and GIF) uses a &lt;a href="http://en.wikipedia.org/wiki/Lossless_data_compression"&gt;lossless compression&lt;/a&gt; technique.
+Meaning that the compressed image looks exactly the same as the
+original. Whereas JPG uses a &lt;a href="http://en.wikipedia.org/wiki/Lossy_compression"&gt;lossy compression&lt;/a&gt; technique. Meaning
+the compressed image is merely close enough with the original. JPG would
+lose out its advantage of smaller file size because it needs to increase
+the quality (by reducing compression rate) to keep up with the quality
+of PNG. And why the quality setting needs to be high for charts? Because
+of the high contrast and non-uniform nature of stock charts. You can
+rarely guess what a pixel is like from its neighbours. That is why
+lossless image compression is highly preferred. Out of the commonly
+supported trading platform export image formats out there, PNG is the
+best there is. PNG is also widely supported by web browsers and
+operating systems, so it's almost impossible that you will find a
+computer that can't read it. In summary, here's a ranking in terms of
+file size (for the same resolution and quality of image), #1 being the
+best:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;PNG&lt;/li&gt;
+&lt;li&gt;GIF&lt;/li&gt;
+&lt;li&gt;JPG&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Then a ranking for the quality at the same resolution and file size, #1
+being the best:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;PNG&lt;/li&gt;
+&lt;li&gt;GIF&lt;/li&gt;
+&lt;li&gt;JPG&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;(Sorry, I couldn't do a table in this blog) Also note that PNG was
+&lt;a href="http://en.wikipedia.org/wiki/Portable_Network_Graphics"&gt;designed to be an improvement of GIF&lt;/a&gt;. So in most cases, PNG beats
+GIF. Lastly, there's also BMP bitmap format. Some people may use it
+because it's the default for Windows Paint and some other software.
+Although, BMP is lossless too, it has no compression at all. For
+example, the samples below were 213 KB and 68 KB for JPG and PNG,
+respectively, but the BMP file is 3,319 KB for exactly the same image!
+Using BMP is a waste of hard drive space for saving stock charts when
+you can use PNG for the same image quality. [caption id=""
+align="aligncenter" width="580" caption="JPG sample (213 KB)"][&lt;img alt="JPG
+sample (213 KB)" src="http://traderpau.files.wordpress.com/2009/10/2009-10-17-qm.jpg" /&gt;]&lt;a href="http://traderpau.files.wordpress.com/2009/10/2009-10-17-qm.jpg"&gt;JPG sample (213 KB)&lt;/a&gt;[/caption] [caption id=""
+align="aligncenter" width="580" caption="PNG sample (68 KB)"][&lt;img alt="PNG
+sample (68 KB)" src="http://traderpau.files.wordpress.com/2009/10/2009-10-17-qm.png" /&gt;]&lt;a href="http://traderpau.files.wordpress.com/2009/10/2009-10-17-qm.png"&gt;PNG sample (68 KB)&lt;/a&gt;[/caption]&lt;/p&gt;
+&lt;/p&gt;</summary><category term="website"></category></entry></feed>

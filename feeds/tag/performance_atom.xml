@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/performance_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2009-12-29T07:55:00+00:00</updated><entry><title>Analysing monthly forex trading performance in changing market conditions</title><link href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/" rel="alternate"></link><updated>2009-12-29T07:55:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-12-29:analysing-monthly-forex-trading-performance-in-changing-market-conditions/</id><summary type="html">&lt;p&gt;
+In my previous post, I discussed about [3 reasons why I don't use
+Jensen's alpha or Sharpe ratio for my montly trading performance
+measurement][]. In this post, I will talk about what I actually use and
+how I came up with it. As I was saying in the previous post, what one
+chooses to use as their performance metric depend on 3 factors such as
+your style of trading, your agenda, and your interest in this topic. I
+will briefly lay out my 3 motives as background information. I use a
+swing trading strategy for trading forex. I aim to hold for at least a
+few hours to a few days. I am working to hold longer and trade less in
+the future, but that's another story. To fit my style of trading, a
+performance metric has to be unbiased for long and short trades as well
+as taking into account short term conditions in the market. In terms of
+agenda, what is the purpose of my performance metric? As a part-time
+trader, I answer only to myself. These numbers are used for my
+self-improvement and internal month-to-month comparisons only. Lastly,
+my interest in this topic of portfolio measurement is limited. I want
+something easy to calculate and simple to understand. I have read a few
+academic papers on this topic and spent a few hours researching on the
+web. That's about it. Now that my motives have been laid out, let's
+discuss my process for coming up with my trading performance metric.
+Ultimately, my assessment on how well I have done for the month is to
+measure my return based on the risk taken. In other words, Performance
+Metric = Reward / Risk. My Reward function is simple. I just steal the
+idea from Sharpe and use:
+
+&gt; Reward = Net Return - Riskless Return
+
+Shameless. I know. I don't want to muck with the Reward function because
+at the end of the day, it is your account balance that matters. The Risk
+function takes some more thought. On a trade-by-trade basis, the risk
+taken for a particular trade can be thought of as the stop loss. It is a
+amount put at risk to be taken by the market. In other words, risk can
+be represented by the loss you are willing to take. On a month-to-month
+basis, the most important loss value that I pay attention to is my
+maximum drawdown. A drawdown imposes a real dent in your account as well
+as negatively impact your trading psychology. For these reasons, the
+maximum drawdown is a variable in my Risk function.
+
+&gt; Risk = Max. Drawdown ...
+
+However, I am not done yet. While max. drawdown is important, it is an
+entirely internal factor. The risk you take is also affected by the
+condition of the market. Using the stop loss analogy again, a 50 pips
+stop loss can be labelled as both conservative and aggressive risk
+exposure depending on the volatility of the market in the timeframe
+you're trading. As such, we need to consider volatility in the Risk
+function. However, this raises another question, what is volatility.
+Long story short, I just snatch the Average True Range (ATR) indicator
+that I use on my charts in this formula. However, we can't just stick a
+ATR value in because it's an absolute number. We need to use a
+percentage ATR (%ATR) to correspond with all the other percentage
+numbers in the formula. And since this is for monthly analysis, I grab
+the %ATR from a monthly chart. In particular, I use the monthly %ATR on
+the U.S. dollar futures chart. Finally, the Risk function is:
+
+&gt; Risk = Maximum Drawdown + %ATR
+
+Thus,
+
+&gt; **Performance Metric = (Net Return - Riskless Return) / (Maximum
+&gt; Drawdown + %ATR)**
+
+As an example, here are the values I plug in for each variable to
+calculate my performance metric for [November][]. Net Return = 3.15%,
+read from November's statement Riskless Return = 0.54% (per annum) / 12
+= 0.045%. This is the Canadian 1-year treasury rate in November. Max.
+Drawdown = 3.55%, read from November's statement %ATR = monthly ATR(3)
+of U.S. dollar futures / monthly close of U.S. dollar futures =
+3.1473/74.895. To verify the efficacy of this performance metric. Let's
+do a mental check of my criteria as discussed.
+
+1.  Unbiased for long and short trades? Yes, it uses the net return
+    regardless of which side you took.
+2.  Varies with short term market conditions? Yes, from the %ATR.
+3.  Comparable between month to month? Yes, the number is normalized by
+    market volatility each month.
+4.  Easy to calculate? Yes, it's can be done in my [trade log][]
+    spreadsheet with a few formulas.
+5.  Easy to understand? Yes, it's an interpretation of reward / risk.
+
+As with any other attempt to summarize trading performance into one
+single value, many assumptions have been taken. I cherry picked what I
+needed to assemble a formula. Some observant reader will notice that
+this formula is similar to the Sterling and Calmar ratios. Indeed, this
+is yet another modified form of these ratios. In fact, I will be
+referring to this formula as Sterling ratio in my future posts for
+simplicity.
+
+&lt;/p&gt;
+
+&lt;p&gt;[3 reasons why I don't use Jensen's alpha or Sharpe ratio for my
+  montly trading performance measurement]: http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/&lt;/p&gt;</summary><category term="performance"></category></entry><entry><title>3 reasons why I don't use Jensen's alpha or Sharpe ratio for my forex trading</title><link href="http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/" rel="alternate"></link><updated>2009-12-23T11:43:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-12-23:3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/</id><summary type="html">&lt;p&gt;As a part-time trader, measuring my &lt;a href="http://www.quantisan.com/tag/monthly-review.html"&gt;monthly trading performance&lt;/a&gt; can
+be as simple or as complex as it can be. On a scale of 1 to 10, 1 being
+just reading the percent return from the account statement and 10 being
+running a statistical analysis, my preferred trading performance
+measurement method is a simple 3. I am lazy but want a metric that is
+useful for monthly self-evaluation. That is why &lt;a href="http://en.wikipedia.org/wiki/Jensen%27s_alpha"&gt;Jensen's alpha&lt;/a&gt; or
+&lt;a href="http://en.wikipedia.org/wiki/Sharpe_ratio"&gt;Sharpe ratio&lt;/a&gt; have appealed to me. Both of these ratios are can be
+easily derived. However, 3 shortcomings of these metrics made me decide
+not to use them for my forex trading. First is the fact that they
+emphasize &lt;em&gt;excess return&lt;/em&gt; with respective of the market. It makes sense
+to compare a portfolio with the overall market on a long term basis. But
+what if you want to do month-by-month, or even week-by-week analysis?
+Short-term market volatility could skew your performance metric up/down
+even when you have been performing consistently. Furthermore, what if it
+is an out-right bear market? Your short-side strategy would be boosted
+by the negative return of the market. For a swing trader such as myself,
+a shorter time-frame and long/short unbiased measurements are
+non-trivial matters for analysing trading performance. Secondly, neither
+metrics factor in volatility of a market. A 5% return in a calm market
+is not the same as 5% in a volatile market. If you go out to fish in a
+storm, you'd better expect a huge payout to compensate for the extra
+risk. Lastly, I don't like their definition of risk. For me, a
+short-term performance ratio can sufficiently be characterized as reward
+/ risk. Jensen's alpha calculation has no explicit measurement of risk
+at all. Whereas Sharpe takes the standard deviation of the portfolio's
+return as the risk value. For a monthly analysis, I would have to use a
+daily or weekly drawdown to calculate the standard deviation. The
+problem with using the daily is that it's too much work for me to do
+manually on my spreadsheet. As for the weekly, having just 4 weeks in a
+month &lt;a href="http://en.wikipedia.org/wiki/Sampling_size"&gt;is not a sufficient sampling size&lt;/a&gt; to calculate a
+representative standard deviation. In summary, here are my 3 reasons for
+not using Jensen's alpha and Sharpe ratio.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Emphasis on excess return with respect to the market&lt;/li&gt;
+&lt;li&gt;No consideration for volatility of the market&lt;/li&gt;
+&lt;li&gt;Not agreeing on their definition of risk&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;On the other hand, there are numerous reasons why these metrics are the
+standard portfolio measurments used by many traders. Heck, Jensen's
+alpha and Sharpe ratio have been around for 40 years and are still
+widely in use today. However, they are just not suitable for me as
+discussed. The thing is, there are countless number of new and old
+portfolio measurements out there. What one chooses to use depend on
+various factors such as your style of trading, your agenda, and your
+interest in this topic. In my next post, I will introduce the metric
+that I use for my monthly trading performance analysis -- &lt;a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/"&gt;a modified
+Sterling ratio&lt;/a&gt;.&lt;/p&gt;</summary><category term="performance"></category></entry></feed>

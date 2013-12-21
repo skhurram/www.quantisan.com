@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/indicator_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-10-14T12:20:00+01:00</updated><entry><title>Canadian VIX: TSX to have their own volatility index</title><link href="http://www.quantisan.com/canadian-vix-tsx-to-have-their-own-volatility-index/" rel="alternate"></link><updated>2010-10-14T12:20:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-14:canadian-vix-tsx-to-have-their-own-volatility-index/</id><summary type="html">&lt;p&gt;I don't know if anyone noticed, but in my previous post &lt;a href="http://www.quantisan.com/three-obvious-reasons-to-watch-13000-on-the-tsx/"&gt;discussing the
+TSX&lt;/a&gt;, I included a chart of VIX (S&amp;amp;P500 volatility index) versus S&amp;amp;P
+500. VIX is one of the market indicators that I can't live without.
+However, as much as the Canadian and the American equity markets are
+correlated, they are still separate markets. So using the VIX vs. S&amp;amp;P500
+on an analysis of the TSX is like borrowing salt from thy neighbour. But
+there's no more need for that soon as TSX is finally getting its own
+volatility index starting Monday (October 18)! This is to replace the MX
+Implied Volatility Index (MVX) from the Montreal Exchange, which I
+didn't have access to previously (aside from &lt;a href="http://www.m-x.ca/indicesmx_mvx_en.php"&gt;data published on their
+website&lt;/a&gt;). One question I have is that the TSX VIX will be based on
+TSX 60 index options activity according on their &lt;a href="http://www.standardandpoors.com/servlet/BlobServer?blobheadername3=MDT-Type&amp;amp;blobcol=urldata&amp;amp;blobtable=MungoBlobs&amp;amp;blobheadervalue2=inline%3B+filename%3D20101014_TSX-60-VIX_Volatility-Launch.pdf&amp;amp;blobheadername2=Content-Disposition&amp;amp;blobheadervalue1=application%2Fpdf&amp;amp;blobkey=id&amp;amp;blobheadername1=content-type&amp;amp;blobwhere=1243766536405&amp;amp;blobheadervalue3=UTF-8"&gt;press release&lt;/a&gt;, but
+the TSX 60 index options isn't that active. So would the TSX VIX be as
+efficient as the S&amp;amp;P500 VIX? An opportunity with the introduction of TSX
+VIX on the Toronto Exchange is that I can now place bets on market
+volatility in my &lt;a href="http://www.quantisan.com/ranking-investment-options-for-my-self-directed-rrsp/"&gt;self-directed RRSP trading account&lt;/a&gt;. Which is
+arguably more predictable than the underlying index these days... In any
+case, this will be a vital market indicator for Canadian market traders.
+For more information on TSX VIX, see the &lt;a href="http://www.standardandpoors.com/indices/sp-tsx-60-vix/en/us/?indexId=sp-tsx-60-vix"&gt;product information page on
+Standard &amp;amp; Poor's&lt;/a&gt;. And a hat tip to &lt;a href="http://optionmatters.ca/"&gt;Option Matters&lt;/a&gt; (Montreal
+Exchange's blog on options) for this news.&lt;/p&gt;</summary><category term="indicator"></category><category term="market analysis"></category><category term="VIXC.TO"></category></entry><entry><title>A leading indicator to spot financial market Black Swan Events?</title><link href="http://www.quantisan.com/a-leading-indicator-to-spot-financial-market-black-swan-events/" rel="alternate"></link><updated>2009-12-16T10:37:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-12-16:a-leading-indicator-to-spot-financial-market-black-swan-events/</id><summary type="html">&lt;p&gt;Black Swan Events or 4-sigma moves (e.g. 1987 Black Monday and 2008
+crash) in the markets are by definition hard to predict. Hard, but not
+impossible. Experienced traders utilize prudent risk management to
+shield themselves from monstrous losses, and some can even &lt;a href="http://www.xtrenders.com/2008/10/dare-to-short-this.html"&gt;profit
+immensely from them&lt;/a&gt;. However, for us average folks, is there some
+kind of simple warning signs that could give us a heads up to these sort
+of extraordinary moves? In this post, I will introduce a simple leading
+indicator that seems to do the job quite well. I will talk about what it
+is and why it seems to work. Of course, this is merely based on limited
+observations and is not to be construed as a vigorous analysis. The
+particular indicator I am referring to is the &lt;a href="http://www.google.com/finance?q=GOOGLEINDEX_US:INVEST"&gt;Google Investing Index&lt;/a&gt;
+(GII). Figure 1 below shows the GII vs. S&amp;amp;P 500 from 2004. The blue line
+is the GII, the red line is the S&amp;amp;P 500. What I have observed is that
+rapid (in a month's time) rise from a negative reading to +20% reading
+of GII correspond with a shift in sentiment in the market rather well.
+Referring to Figure 1 below, this condition occurred 4 times since 2004.
+I marked these 4 occurrences on the graph with green dots. As you can
+see, they correspond with the double top on S&amp;amp;P, first dive in the
+crash, the big one in October 2008, and then even confirming the 666
+reversal in March 2009. It seems to be a leading indicator for down
+moves but lagging on upward reveral. Mostly noticeably though, is that
+the GII gave extreme readings, and in the direction of our condition
+(negative to positive jump), days before the big crash in October 2008.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="580" caption="Google Investing
+Index vs. S&amp;amp;P 500 (green dots mark signals)"][&lt;img alt="Google Investing Index
+vs. S&amp;amp;P 500" src="http://www.quantisan.com/static/images/img_archive/2009-12-15-GoogInvIndex.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2009-12-15-GoogInvIndex.png"&gt;Google Investing Index vs. S&amp;amp;P 500&lt;/a&gt;[/caption] While this
+can be mere coincidence, here is why I think this index holds some
+truth. The GII measures the amount of search traffic for topics relating
+to investing in the U.S. And with Google dominating the online searching
+market (&lt;a href="http://www.comscore.com/Press_Events/Press_Releases/2009/11/comScore_Releases_October_2009_U.S._Search_Engine_Rankings"&gt;65% as of October 2009&lt;/a&gt; according to comScore), we can assume
+GII to measure what the general public is interested in. Now, as we
+probably know, market extremes are driven by irrational emotions.
+There's an old saying that goes like this, on market highs, when even
+the taxi driver is giving you stock advice, it's time to get out of the
+market. When all the people have invested already, who's left to buy and
+drive the price even higher? This is ultimately a supply and demand
+effect. While we can't count heads in the market, we can estimate market
+sentiment. The GII is just one more way of doing that. And it does so by
+giving us a reading of the market sentiment according to the general
+public. You know, the last ones in the party to pickup the mess the pros
+have have left behind. That is exactly what sets the GII apart from the
+plethora of existing market sentiment indicators. It is a market
+sentiment indicator on mass psychology, but a crude one at that. Scoring
+4 out of 4 positives is good, but the small sample size render this a
+mere observation of interest. I do not recommend trading on this
+indicator. However, it does seem promising to serve as an additonal
+input to an analytical system... In summary, here is the condition of
+this GIS (for &lt;strong&gt;G&lt;/strong&gt;oogle &lt;strong&gt;I&lt;/strong&gt;nvesting index for market &lt;strong&gt;S&lt;/strong&gt;entiment)
+indicator.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the condition is true for a turn in the market when GII jumps from a
+    negative to +20% or more within a month.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lastly, notice that the GII is still low at the moment while many are
+calling the top is imminent, or even that it has happened at 1120 in
+recent weeks. Thus, according to GIS indicator, this market rally is
+still intact.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="black swan"></category><category term="indicator"></category><category term="market sentiment"></category></entry><entry><title>How to use FX futures to narrow down which forex pair to trade</title><link href="http://www.quantisan.com/how-to-use-fx-futures-to-narrow-down-which-forex-pair-to-trade/" rel="alternate"></link><updated>2009-11-20T14:10:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-11-20:how-to-use-fx-futures-to-narrow-down-which-forex-pair-to-trade/</id><summary type="html">&lt;p&gt;A problem I have is that once a currency pair shows a viable trading
+setup, other related pairs often show the same setup too. A reason for
+this phenomenon is that markets don't operate in a vacuum. When markets
+really move, everything move together. So the highly correlated markets
+can scream for entry at the same time. The real question though, is
+which one should I put my chips in? There are limitless methods on how
+you can approach this. The one I'll talk about in this post is a simple
+method of comparing your candidates using the currency futures. Why use
+the futures? Because they provide a standardized platform, which is
+essential when comparing things. As a bonus, there is a US dollar index
+futures to help with analysis of the dollar. Not a trivial process on
+its own. I will explain my method by way of an example. This morning, I
+was considering to go long in AUD/JPY, CAD/JPY, AUD/USD, or short
+USD/CAD according to signals from my &lt;a href="http://www.quantisan.com/an-introduction-to-my-forex-trend-continuation-setup-ftc/"&gt;FTC setup&lt;/a&gt;. Sure, I could have
+just choose which one to trade based on the RSI rating or some other
+indicator. But I don't put much faith in indicators for various reasons.
+So a method I typical use is to just go through the charts to manulally
+identify which has better reward/risk or better support/resistance. As
+you can imagine, this is very time consuming. In practice, I only
+compare AUD/JPY vs. CAD/JPY and AUD/USD vs. USD/CAD, and then compare
+the winners of those two matches. Like in a tournament. Not that much of
+a hassle but the issue with this approach is that I'm adding another
+layer of uncertainty with all these unscientific comparisons. That could
+have a significant negative impact on my trading. In a good trading
+strategy, every step taken should be to improve your probability of
+success or the reward/risk ratio. As such, it's better to keep my
+process simple. This is where the currency futures indices is of value.
+They provide a big picture perspective and serve as a standardized data
+for comparison. Using my example, I needed to choose between shorting US
+dollar or Japanese yen (I repeated the process for choosing AUD or CAD).
+Figure 1 below shows the 4-hour chart of both currencies for the past 10
+days. It's evident from the chart that the US dollar is in a range and
+the Japanese yen (actually it's JPY/USD) is moving up. 1 point goes to
+US dollar trade. Next, I identify the strength of the support/resistance
+to estimate in the case that the trade goes against me, which would have
+better cushioning. It's a crude form of risk estimation. From the figure
+below, see that the dollar has a clear resistance just below 76 and it
+is currently stretched away from the cyan-coloured moving average.
+Whereas the yen is near a recent top with no prior occurence and it has
+been sitting above the moving average for a while. Another point for
+dollar short. USD 2 : JPY 0. Consequently, I went long AUD/USD this
+morning instead of AUD/JPY. This is by no means a vigorous methodology.
+I'm not saying that shorting US dollar is a good idea from this
+simplistic comparative process. It's just that my setup tells me to go
+long AUD/USD or AUD/JPY, this is just a quick and easy way to help me
+decide which trade to take. Nothing more. As an aside, some people may
+prefer to use currency ETF, UUP and FXY, instead. But I don't like to
+use ETF as a data source as the price is noisier because they are
+affected by other factors.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="504" caption="US dollar and
+Japanese yen futures indices"]&lt;img alt="US dollar and Japanese yen futures
+indices" src="http://www.quantisan.com/static/images/img_archive/2009-11-20-DX-6J.PNG" /&gt;[/caption]&lt;/p&gt;
+&lt;/p&gt;</summary><category term="AUD"></category><category term="indicator"></category><category term="JPY"></category><category term="USD"></category></entry><entry><title>Using Option Pain (Max Pain) to estimate stock price</title><link href="http://www.quantisan.com/using-option-pain-max-pain-to-estimate-stock-price/" rel="alternate"></link><updated>2008-10-28T13:50:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-10-28:using-option-pain-max-pain-to-estimate-stock-price/</id><summary type="html">&lt;p&gt;While the &lt;a href="http://online.wsj.com/article/SB122518913601675675.html"&gt;market is sorting things out today&lt;/a&gt;, I'd like to document a
+simple stock price predictor based on put/call activity called Option
+Pain or Max Pain.&lt;/p&gt;
+&lt;p&gt;It is widely believed that professional traders favour writing options.
+Since trading options is a zero-sum game, it is in their best interest
+if a majority of options expire worthless on expiration day.&lt;/p&gt;
+&lt;p&gt;By observing the open interest of a stock at each strike price, we can
+see at what price the Option Pain would occur. Of course, this is just
+another tool for the trader to use, so do your own due diligence as
+usual when trading.&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+[caption id="attachment_500" align="aligncenter" width="500"
+caption="SLW Nov08 Max Pain"][&lt;img alt="Nov '08 SLW Option Pain" src="http://traderpau.files.wordpress.com/2008/10/slw-optionpain.jpg?w=500" title="slw-optionpain" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;Using this chart from &lt;a href="http://www.optionpain.com/MaxPain/Max-Pain.php"&gt;Option Pain&lt;/a&gt;, we can see that the minimum
+option total value of November SLW is at \$5. So our max pain price is
+at \$5 for November's SLW. That is to say, if SLW settles at \$5, then
+the most call option would expire worthless and most of the put option
+would expire worthless. Such that the option sellers (the pros) can
+pocket your money.&lt;/p&gt;
+&lt;p&gt;Another way to use this information is to find the best Max Pain to
+Current Price ratio among a list of stocks. For example, SLW closed at
+\$2.59 yesterday. Its max pain is \$5 from the chart above. That is
+almost a double. Note, however, that we haven't figured out the
+probability of SLW reaching \$5. This would be something for me to look
+into.&lt;/p&gt;
+&lt;p&gt;In comparison, GOOG's max pain for November is at \$360. Its previous
+closing price is 329.49. Based on these numbers, SLW is a better buy
+than GOOG for now.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="Nov '08 SLW Option Pain" src="http://traderpau.files.wordpress.com/2008/10/slw-optionpain.jpg?w=500" title="slw-optionpain" /&gt;]: http://traderpau.files.wordpress.com/2008/10/slw-optionpain.jpg&lt;/p&gt;</summary><category term="indicator"></category><category term="options"></category><category term="SLW"></category></entry><entry><title>Stock move estimation on expiration day based on option prices</title><link href="http://www.quantisan.com/stock-move-estimation-on-expiration-day-based-on-option-prices/" rel="alternate"></link><updated>2008-10-15T18:03:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-10-15:stock-move-estimation-on-expiration-day-based-on-option-prices/</id><summary type="html">&lt;p&gt;[caption id="attachment_387" align="aligncenter" width="500"
+caption="SPX move estimation based on option prices"][&lt;img alt="SPX move
+estimation based on option prices" src="http://traderpau.files.wordpress.com/2008/10/option_est1.jpg?w=500" title="option_est1" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;I'd like to document a useful technique I picked up today from Tom
+Sosnoff on &lt;a href="http://shadowtrader.net/"&gt;ShadowTrader&lt;/a&gt;. It's based on the idea that option pricing
+has become so efficient that it can be used to predict actual stock
+move.&lt;/p&gt;
+&lt;p&gt;Since it is expiration Friday this week, the Oct 08 index option are
+expiring in two days. So for something like, SPX, the Oct 08 call/put
+has only two days left. Thus, there's little time decay factored in the
+price for these options with respect to the actual price. In other
+words, SPX and SPX options prices are converging.&lt;/p&gt;
+&lt;p&gt;So if we take the price of the straddle and strangle strike on the
+money, it should be the expected move for SPX for this Friday. For
+example, SPX closed at 907.84 today. The price for a straddle at 905
+strike is \$48.65. The price for a strangle at 900/910 strikes is
+\$45.30. We'll average the two numbers (\$48.65 + \$45.30) / 2 = \$47.0.&lt;/p&gt;
+&lt;p&gt;So the SPX is expected to move about 50 points this Friday either up or
+down.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="SPX move estimation based on option prices" src="http://traderpau.files.wordpress.com/2008/10/option_est1.jpg?w=500" title="option_est1" /&gt;]: http://traderpau.files.wordpress.com/2008/10/option_est1.jpg&lt;/p&gt;</summary><category term="indicator"></category></entry><entry><title>Back to Basics: Market sentiment via 2-line EMA on S&amp;P500</title><link href="http://www.quantisan.com/back-to-basics-market-sentiment-via-2-line-ema-on-sp500/" rel="alternate"></link><updated>2008-10-08T10:12:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-10-08:back-to-basics-market-sentiment-via-2-line-ema-on-sp500/</id><summary type="html">&lt;p&gt;[caption id="attachment_303" align="aligncenter" width="500"
+caption="S&amp;amp;P 500"][&lt;img alt="S&amp;amp;P 500" src="http://traderpau.files.wordpress.com/2008/10/sc_snp500.png?w=500" title="sc_snp500" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;One of the most, if not THE most, important theme in trading is
+identifying if we're in a bull or bear market. It's easier to "ride with
+the wave" than to fight against it. While there are an abundance of
+work, studies, theories, or whatever, on calling out market sentiments,
+I feel that the most useful way of doing it would be ones that stick to
+the facts. And the only fact we can be certain of in the market is the
+price.&lt;/p&gt;
+&lt;p&gt;So here's the idea (definitely not original) for &lt;strong&gt;guessing&lt;/strong&gt; market
+sentiment.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Bull market = 50 dma &gt; 200 dma for S&amp;amp;P 500.&lt;/li&gt;
+&lt;li&gt;Bear market = 50 dma \&amp;lt; 200 dma for S&amp;amp;P 500.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As with any indicator, this is not a law. It's just a signal to give you
+a piece of information for you to &lt;strong&gt;intrepret&lt;/strong&gt; based on the
+fundamentals and maybe other technical analysis tools.&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="S&amp;amp;P 500" src="http://traderpau.files.wordpress.com/2008/10/sc_snp500.png?w=500" title="sc_snp500" /&gt;]: http://traderpau.files.wordpress.com/2008/10/sc_snp500.png&lt;/p&gt;</summary><category term="indicator"></category><category term="market analysis"></category><category term="S&amp;amp;P 500"></category></entry><entry><title>Using new MA algorithm to rewrite old indicators</title><link href="http://www.quantisan.com/using-new-ma-algorithm-to-rewrite-old-indicators/" rel="alternate"></link><updated>2008-01-06T00:56:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-01-06:using-new-ma-algorithm-to-rewrite-old-indicators/</id><summary type="html">&lt;p&gt;Seeing that many indicators use a MA for calculation. It may be possible
+to use new MA algorithm to improve on their calculation.&lt;/p&gt;
+&lt;p&gt;For example, the RS in RSI is something like RS = EMA(up days) /
+EMA(down days). We could change it to RS = HMA(up days) / HMA(down
+days). Since HMA is much faster, the resulting H-RSI may be faster too.
+This can be useful in day trading strategies.&lt;/p&gt;
+&lt;p&gt;More work needs to be done to test this idea.&lt;/p&gt;</summary><category term="EasyLanguage"></category><category term="indicator"></category></entry><entry><title>New moving average</title><link href="http://www.quantisan.com/new-moving-average/" rel="alternate"></link><updated>2008-01-06T00:49:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2008-01-06:new-moving-average/</id><summary type="html">&lt;p&gt;I downloaded Hull Moving Average, Adaptive Moving Average, and a Kalmann
+Filter today.&lt;/p&gt;
+&lt;p&gt;In the figure, the blue/red is HMA(8), cyan is AMA(10), yellow is EMA(9)
+as comparison.&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" /&gt;][] Notice that HMA is super fast and follows the price closely.
+AMA lags more but does a good job of smoothing outt the noise. EMA is as
+usual and very laggy.&lt;/p&gt;
+&lt;p&gt;A strategy I'm thinking of is to use 3 different MA's instead of only
+EMA to improve the previously discussed 3EMA crossover strategy. The
+problem with the 3 EMA crossover strategy is that EMA lags too much, so
+it's not good for day trading so reaction time is the key to catching /
+exiting the waves.&lt;/p&gt;
+&lt;p&gt;Maybe using the HMA as the fast MA, AMA as the base, and something else
+to verify the trend can work. As I've said before, remember to use
+something to filter out the whipsaws. But don't use something laggy as
+it would defeat the whole purpose of a fast indicator.&lt;/p&gt;
+&lt;p&gt;Also, HMA can be used as a proxy to smooth out some inputs. i.e.
+RSI(HMA(close, 8), 14) or HMA(RSI(close, 14), 8).&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" /&gt;]: http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s1600-h/3mas.jpg&lt;/p&gt;</summary><category term="EasyLanguage"></category><category term="indicator"></category></entry><entry><title>Trending and Ranging indicators</title><link href="http://www.quantisan.com/trending-and-ranging-indicators/" rel="alternate"></link><updated>2007-12-21T15:07:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2007-12-21:trending-and-ranging-indicators/</id><summary type="html">&lt;p&gt;RSI and MACD makes them appropriate for trending markets. For
+directionless, chopping markets, you need to use Stochastics and Wm%R.&lt;/p&gt;
+&lt;p&gt;from &lt;a href="http://www.billcara.com/archives/2007/12/caras_commentary_community_cha_94.html"&gt;g034&lt;/a&gt;&lt;/p&gt;</summary><category term="indicator"></category></entry></feed>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/usd_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-06-24T09:28:00+01:00</updated><entry><title>How do you minimize risks when EURUSD moves 100 pips up and back down in 2 hours?</title><link href="http://www.quantisan.com/how-do-you-minimize-risks-when-eurusd-moves-100-pips-up-and-back-down-in-2-hours/" rel="alternate"></link><updated>2011-06-24T09:28:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-06-24:how-do-you-minimize-risks-when-eurusd-moves-100-pips-up-and-back-down-in-2-hours/</id><summary type="html">&lt;p&gt;And this happens quite often. [caption id="attachment_5526"
+align="aligncenter" width="580" caption="EURUSD, 5 min"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/06/2011-06-24-eurusd-5m-580x204.png" title="2011-06-24-eurusd-5m" /&gt;[/caption]
+There are a few choices to minimize your risks in times like these:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Stay on the sideline until the dust settled.&lt;/li&gt;
+&lt;li&gt;Target higher time frames with larger stops and smaller positions.&lt;/li&gt;
+&lt;li&gt;Partner up with someone from another timezone.&lt;/li&gt;
+&lt;li&gt;Set a trailing stop.&lt;/li&gt;
+&lt;li&gt;Set alerts to wake you up on extraordinary events.&lt;/li&gt;
+&lt;li&gt;Use a position management bot.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I opted for #6. What about you? The picture is worse in equities as you
+are locked in your positions overnight. [caption id="attachment_5527"
+align="aligncenter" width="580" caption="S&amp;amp;P500 ETF"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/06/2011-06-24-SPY-580x258.png" title="2011-06-24-SPY" /&gt;[/caption]&lt;/p&gt;
+&lt;/p&gt;</summary><category term="EUR"></category><category term="QTD"></category><category term="USD"></category></entry><entry><title>Bearish USDJPY on 19th week of 2011</title><link href="http://www.quantisan.com/bearish-usdjpy-on-19th-week-of-2011/" rel="alternate"></link><updated>2011-05-08T22:58:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-05-08:bearish-usdjpy-on-19th-week-of-2011/</id><summary type="html">&lt;p&gt;I am going bearish on USDJPY this week using my QTD system. No position
+is opened at this point. I am merely entering my sentiment into &lt;a href="http://www.quantisan.com/quantised-trading-desk/"&gt;the
+system to trade for me&lt;/a&gt;. Figure 1 is a daily chart of USDJPY. Notice
+it's lack of life despite the USD making headlines last week. Figure 2
+shows the move with a US dollar index, USDX, daily chart. Furthermore,
+according to the order book on USDJPY, there are massive bullish
+positions in the red (at a loss) which make this pair ripe for some bull
+squeeze. I am going short on NZDUSD as a hedge on this move. It is my
+&lt;a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/"&gt;favourite long USD pair these days&lt;/a&gt;. [caption id="attachment_5405"
+align="aligncenter" width="580" caption="USDJPY,
+daily"][&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDJPY-580x383.png" title="2011-05-08-USDJPY" /&gt;][][/caption] [caption id="attachment_5406"
+align="aligncenter" width="580" caption="U.S. dollar index futures,
+USDX"][&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDX-580x288.png" title="2011-05-08-USDX" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDJPY-580x383.png" title="2011-05-08-USDJPY" /&gt;]: http://www.quantisan.com/static/images/2011/05/2011-05-08-USDJPY.png
+  [&lt;img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDX-580x288.png" title="2011-05-08-USDX" /&gt;]: http://www.quantisan.com/static/images/2011/05/2011-05-08-USDX.png&lt;/p&gt;</summary><category term="JPY"></category><category term="NZD"></category><category term="QTD"></category><category term="USD"></category></entry><entry><title>First QTD trade, 0.19% gain long EURGBP</title><link href="http://www.quantisan.com/first-qtd-trade-019-gain-long-eurgbp/" rel="alternate"></link><updated>2011-04-21T21:51:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-04-21:first-qtd-trade-019-gain-long-eurgbp/</id><summary type="html">&lt;p&gt;My semi-automated trading system, Quantised Trading Desk, closed its
+first trade this week. I was &lt;a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/"&gt;bullish EURGBP&lt;/a&gt; and &lt;a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/"&gt;USDJPY&lt;/a&gt;, and
+bearish NZDUSD as per the previous discussions. The QTD system saved me
+from the premature calls in both USDJPY and NZDUSD by not making any
+trade this week. That, in and of itself, has made me very happy with
+QTD's first week of live trading. Particular in light of how fierce that
+USDJPY down move has been. As a bonus, QTD entered a long position in
+EURGBP for a small 0.19% gain as illustrated below. My parameter were a
+maximum of 0.25% risk per position. The gain could have been better if
+it weren't for that 61% retracement. Not that I'm complaining as I
+haven't even looked at the market this past couple of days while the
+system is trading for me. USDJPY touched my threshold support price
+80.70, my bullish sentiment needs to be reevaluated. NZDUSD just cracked
+a higher high (marginally though), so I'm easing on the bear button for
+now. EURGBP is testing some resistance to, so I'm not so eager to dive
+in again. Overall, I've been 2/3 wrong. I've told you before that &lt;a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/"&gt;I'm
+very bad at timing the market&lt;/a&gt;. That's why I developed QTD to trade
+for me. Seeing that it's a long weekend, and I'll be way from town, I'm
+just going to shut down my remote trade server in London until next week
+when I can have some time to re-do my analysis. [caption
+id="attachment_5361" align="aligncenter" width="580" caption="EURGBP,
+hourly"][&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr-580x411.png" title="2011-04-21-EURGBP_hr" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr-580x411.png" title="2011-04-21-EURGBP_hr" /&gt;]: http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr.png&lt;/p&gt;</summary><category term="EUR"></category><category term="exit"></category><category term="GBP"></category><category term="JPY"></category><category term="NZD"></category><category term="QTD"></category><category term="USD"></category></entry><entry><title>Bullish EURGBP as hedge and Bearish NZDUSD as diversification</title><link href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/" rel="alternate"></link><updated>2011-04-18T21:14:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-04-18:bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/</id><summary type="html">&lt;p&gt;I've had more time to study the market tonight and is running a second
+and a third instances of Quantised Trading Desk (QTD) to trade 3
+currencies in total simultaneously. For my dollar bull sentiment, I'm
+dividing between USDJPY long and NZDUSD short. &lt;a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/"&gt;QTD still hasn't taken a
+position in USDJPY in the past 24 hours&lt;/a&gt;. That's a good thing as
+USDJPY is still drifting downward today even as the dollar is gaining
+some ground. My line in the sand is at 80.70 for USDJPY and above 0.8100
+for NZDUSD. EURGBP long is a hedge against my dollar longs. Again, I'm
+not making any trade at this point but merely &lt;a href="http://www.quantisan.com/quantised-trading-desk/"&gt;setting up QTD to wait
+for the right moments to enter&lt;/a&gt;. A break below 0.8660 for EURGBP would
+challenge my bullish bias. These three currencies should be my complete
+market bias for a while. I'm just going to let QTD do its thing and
+trade for me. Hopefully this will be the last you'll hear from me about
+my market bias for a while. [caption id="attachment_5342"
+align="aligncenter" width="580" caption="NZDUSD,
+weekly"][&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" /&gt;][][/caption] [caption id="attachment_5343"
+align="aligncenter" width="580" caption="EURGBP,
+weekly"][&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" /&gt;][][/caption]&lt;/p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;[&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" /&gt;]: http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly.png
+  [&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" /&gt;]: http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly.png&lt;/p&gt;</summary><category term="entry"></category><category term="EUR"></category><category term="GBP"></category><category term="NZD"></category><category term="QTD"></category><category term="USD"></category></entry><entry><title>Bullish USDJPY on week of April 17, 2011</title><link href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/" rel="alternate"></link><updated>2011-04-17T21:50:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-04-17:bullish-usdjpy-on-week-of-april-17-2011/</id><summary type="html">&lt;p&gt;I have unofficially launched my Quantised Trading Desk (QTD) expert
+system this weekend as the system is ready for live trading after almost
+a year in development. You can't miss the announcement if you visit the
+new frontpage of this blog. So, I won't talk about it anymore here. The
+purpose of this post is to discuss my forex trade. It's been over 7
+months since I've traded on the forex market. I have been working on QTD
+during all these months to improve my overall trading. Anyway, let's
+dive right to it for my first trade back into forex. I am bullish on the
+U.S. dollar this week. Why? The Financial Times is letting on &lt;a href=""&gt;rumours
+that the US Fed is signalling an end to quantitative easing&lt;/a&gt;.
+Coincidentally, the U.S. dollar appears to be testing supports across
+all major currencies. Secondly the US equities market hasn't been able
+to make higher highs even as the dollar is marking new lows. Still, I'm
+not one to call a bottom, nor am I hunting for one. This is merely a
+good risk-reward trade to gun for an obvious move. In particular, USDJPY
+appears to be the best of the bunch as its been holding well over the
+past few months while the dollar crumbled. The fact that Europe and US
+are rumoured to be lighting up on the money printing whereas Japan's
+money printing press is on full steam for the quake reconstruction (Yen
+bearish) is a decent excuse to place some chips on USDJPY. You might
+have noticed, I haven't specified my entry price, amount, or stop loss
+price as usual. This is because I am relying on the Quantised Trading
+Desk expert system to trade USDJPY for me. QTD will monitor the market
+for me and execute trade entries and exits as it sees fit to accumulate
+a long position in USDJPY. All the risk management and quant analysis
+are built into the system. So I don't have a position yet because I'm
+waiting for QTD to do the grunt work. [caption id="attachment_5332"
+align="aligncenter" width="580" caption="USDJPY weekly
+chart"][&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly-580x333.png" title="2011-04-17-USDJPY_wkly" /&gt;][][/caption]&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nl"&gt;http:&lt;/span&gt;&lt;span class="c1"&gt;//www.ft.com/cms/s/0/bcad7330-691a-11e0-9040-00144feab49a.html&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;[&lt;img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly-580x333.png" title="2011-04-17-USDJPY_wkly" /&gt;]: http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly.png&lt;/p&gt;</summary><category term="entry"></category><category term="JPY"></category><category term="QTD"></category><category term="USD"></category></entry><entry><title>Closed USDCAD short @ 1.06525, breakeven</title><link href="http://www.quantisan.com/closed-usdcad-short-106525-breakeven/" rel="alternate"></link><updated>2010-08-31T18:24:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-08-31:closed-usdcad-short-106525-breakeven/</id><summary type="html">&lt;p&gt;It seem that USDCAD isn't about to die just yet. &lt;a href="http://www.quantisan.com/short-usdcad-1-0654-stop-1-077/"&gt;My USDCAD short&lt;/a&gt; got
+stopped out at breakeven this morning. In fact, the pair is still
+struggling around the descending resistance line as shown in Figure 1.
+It made a higher low so I won't be surprised if it cracks higher.
+[caption id="" align="aligncenter" width="570" caption="USDCAD,
+4-hour"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-31-USDCAD.png" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;The reason why I took this trade was that the opportunity seemed too
+good to pass on &lt;a href="http://www.quantisan.com/short-usdcad-1-0654-stop-1-077/"&gt;based on my analysis at the time&lt;/a&gt;. I
+always keep an eye on the market even when I'm not trading. Although the
+basic setup remains intact, the opportunity isn't so fantastic that I
+couldn't say no anymore.&lt;/p&gt;
+&lt;p&gt;Anyway, I shouldn't be wasting time managing a minuscule trade. Back to
+staring at codes.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="CAD"></category><category term="exit"></category><category term="USD"></category></entry><entry><title>Short USDCAD @ 1.0654, Stop 1.077</title><link href="http://www.quantisan.com/short-usdcad-10654-stop-1077/" rel="alternate"></link><updated>2010-08-25T09:40:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-08-25:short-usdcad-10654-stop-1077/</id><summary type="html">&lt;p&gt;This is my first real forex trade after &lt;a href="http://www.quantisan.com/usdcad-holding-on-to-intermediate-term-support-at-1-0868/"&gt;a year minus one day of
+studying the market&lt;/a&gt; and &lt;a href="http://www.quantisan.com/tag/paper%20trade/"&gt;paper trading&lt;/a&gt;. Shorted USDCAD based on
+the following intermarket observations:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Yesterday's equities sell-off held around S&amp;amp;P at 1050&lt;/li&gt;
+&lt;li&gt;Overnight Asian market seem orderly, not every market followed
+    through, but most did&lt;/li&gt;
+&lt;li&gt;European markets down move were slow overnight until US open&lt;/li&gt;
+&lt;li&gt;But perhaps most importantly, EUR/USD made a higher low with an
+    increasing COT&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Basically, as much as the sell-off tries to scare off people, the
+markets don't seem to be moving in unison. So it would seem this move
+(in equities, thus inverse USD) is still a bear trap in an intermediate
+term bull rally. Plus this daily chart, Figure 1, for picking USDCAD
+specifically. [caption id="" align="aligncenter" width="570"
+caption="USDCAD daily chart"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-25-USDCAD_daily.png" /&gt;][][/caption] And this 4-hour chart
+for trade execution.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="570" caption="USDCAD
+4-hour"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-25-USDCAD.png" /&gt;]&lt;a href="http://www.quantisan.com/static/images/img_archive/2010-08-25-USDCAD.png"&gt;1&lt;/a&gt;[/caption] Size of trade is 1000 unit. Risking about
+0.05% of capital with a hard stop at 1.077. Anything above 1.070 would
+put me on alert though. Coincidentally, I first got into the forex
+market by studying the loonie. Let's see how this first trade performs.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="CAD"></category><category term="entry"></category><category term="short"></category><category term="USD"></category></entry><entry><title>Paper trade: Stopped USDCAD short @ 1.0540 for +131 pips</title><link href="http://www.quantisan.com/paper-trade-stopped-usdcad-short-10540-for-131-pips/" rel="alternate"></link><updated>2010-02-15T09:23:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-15:paper-trade-stopped-usdcad-short-10540-for-131-pips/</id><summary type="html">&lt;p&gt;Finally a profitable trade in my USDCAD short after being stopped out a
+few times. My decision last week to &lt;a href="http://www.quantisan.com/usdcad-short-target-hit-1-0581-trying-something-new-to-hold-for-longer/"&gt;hold this for longer&lt;/a&gt; after
+USDCAD touched my target paid off. I moved my stop closer last Thursday
+evening and the order got filled on Friday. However, as I type this on
+the following Monday, USDCAD is trading even lower at 1.0478. It looks
+as though my &lt;a href="http://www.quantisan.com/paper-trade-short-usdcad-1-0573-stop-1-0640-target-1-0415/"&gt;original target of 1.0415&lt;/a&gt; is in the cards. Even though
+this is a profitable trade with a 0.17% gain in my demo account, there
+is one major flaw with this short USDCAD play. I was not able to squeeze
+more out of this profitable move. As I've said, this short took a few
+tries. In fact, if we consider all the entires and exits of this play.
+My stopped out losses totaled 0.29% and my single win here is merely
+0.17%. So I'm actually at a net loss of 0.12% from all these work. My
+win/loss rate is about 40% based on my review of recent forex trades. I
+was able to edge out more than &lt;a href="http://www.quantisan.com/trade-log/"&gt;10% profit in four months&lt;/a&gt; because
+when I am wrong, I take small steps. But when I'm right, I &lt;a href="http://www.quantisan.com/how-to-stockpile-a-trade-position-one-step-at-a-time/"&gt;pile into a
+position&lt;/a&gt;. Ever since my trading environment has changed, I've been
+trying to trade a longer timeframe. This USDCAD short is my first
+attempt on a new strategy. Evidently, I will need to re-think and
+re-learn what I've become accustomed to in the past few months. One of
+the necessary trait of a successful trader is to be able to adapt.
+Markets change. Traders need to evolve with the markets or they will
+become obsolete. This will be a good test of myself to see if I can
+re-invent myself to adapt to a changing trading environment. [caption
+id="" align="aligncenter" width="570" caption="USDCAD,
+3-hour"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-02-13-USDCAD_3h.png" /&gt;][][/caption]&lt;/p&gt;</summary><category term="bad trade"></category><category term="CAD"></category><category term="exit"></category><category term="paper trade"></category><category term="short"></category><category term="USD"></category></entry><entry><title>USDCAD short target hit @ 1.0581, trying something new--to hold for longer</title><link href="http://www.quantisan.com/usdcad-short-target-hit-10581-trying-something-new-to-hold-for-longer/" rel="alternate"></link><updated>2010-02-10T20:45:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-10:usdcad-short-target-hit-10581-trying-something-new-to-hold-for-longer/</id><summary type="html">&lt;p&gt;USDCAD comes to a halt at 1.0581 today. My original target was 1.05761.
+A mere 5 pips difference. &lt;a href="http://www.quantisan.com/paper-trade-short-usdcad-1-0573-stop-1-0640-target-1-0415/"&gt;This position&lt;/a&gt; is now +79 pips on paper. I
+moved my stop to breakeven last night. Normally, I would have covered
+most, if not all, of the position at this point. But I'll hold onto the
+full amount this time. For now. Reasons are as follow. &lt;!--more--&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;USDCAD likes to grind out both bulls and bears at obvious levels&lt;/li&gt;
+&lt;li&gt;The &lt;a href="http://www.quantisan.com/paper-trade-short-usdcad-1-0573-stop-1-0640-target-1-0415/"&gt;down move that I'm seeing&lt;/a&gt; is still in an early
+    stage.&lt;/li&gt;
+&lt;li&gt;My position is too small to be worthwhile if I take profit now.&lt;/li&gt;
+&lt;li&gt;Analysis of my recent performance shows that I often don't ride my
+    winners long enough.&lt;/li&gt;
+&lt;li&gt;I must learn to adopt a longer term strategy now that I [can't trade
+    as often][].&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In particular, Figure 1 shows what I mean by #2.&lt;/p&gt;
+&lt;p&gt;[caption id="" align="aligncenter" width="570" caption="USDCAD,
+4-hour"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-02-10-usdcad_4h.gif" /&gt;][][/caption] In fact, I intend to look for opportunities
+to add to this position. As long as USDCAD stays below 1.0645, I'm
+confident (not exactly the right word though) with this down move. From
+this point onward, it's new territory for me as I push beyond my comfort
+zone. Is this an ill-fated move or a spark of insight? Let me know what
+you think about this extended trade. Update February 15: I &lt;a href="http://www.quantisan.com/paper-trade-stopped-usdcad-short-1-0540-for-131-pips/"&gt;closed this
+trade&lt;/a&gt; for +131 pips gain.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="CAD"></category><category term="paper trade"></category><category term="short"></category><category term="USD"></category></entry><entry><title>Paper trade: Short USDCAD @ 1.0671, Stop 1.0756, Target 1.05761</title><link href="http://www.quantisan.com/paper-trade-short-usdcad-10671-stop-10756-target-105761/" rel="alternate"></link><updated>2010-02-09T18:56:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-09:paper-trade-short-usdcad-10671-stop-10756-target-105761/</id><summary type="html">&lt;p&gt;Perhaps third times' the charm? I tried to short USDCAD twice last week
+already. Both times I've been &lt;a href="http://www.quantisan.com/paper-trade-stopped-out-of-usdcad-short-1-0640-for-67-pips-re-entering-1-0680/"&gt;stopped out&lt;/a&gt; for a total of -0.2% of
+account loss. My &lt;a href="http://www.quantisan.com/paper-trade-short-usdcad-1-0573-stop-1-0640-target-1-0415/"&gt;intermediate term analysis&lt;/a&gt; remains the same as
+before. So I won't repeat myself here. Entry signal for this particular
+short is shown in Figure 1. I'm just using the 4-hour chart as I have a
+well defined (recent top) stop this time. I compensate with a smaller
+position size to limit my risk to 0.1%. Reward / Risk = (1.05761 -
+1.0671) / (1.0671 - 1.0756) = 1.11 [caption id="" align="aligncenter"
+width="570" caption="USD/CAD, 4-hour"][&lt;img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-02-09-usdcad_4h.gif" /&gt;][][/caption]&lt;/p&gt;</summary><category term="CAD"></category><category term="entry"></category><category term="FTC"></category><category term="paper trade"></category><category term="short"></category><category term="USD"></category></entry></feed>

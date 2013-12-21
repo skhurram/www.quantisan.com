@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/clojure_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2013-05-20T00:00:00+01:00</updated><entry><title>Event-driven finite state machine for a distributed trading system</title><link href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel="alternate"></link><updated>2013-05-20T00:00:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2013-05-20:event-driven-finite-state-machine-for-a-distributed-trading-system/</id><summary type="html">&lt;p&gt;One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say &lt;em&gt;buy&lt;/em&gt;, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;are resource-intensive to generate,&lt;/li&gt;
+&lt;li&gt;might need to compose many of them,&lt;/li&gt;
+&lt;li&gt;not sequential or have one-to-one depencency, and&lt;/li&gt;
+&lt;li&gt;most importantly, they are in separate programs or different machines&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Thus I've opted to abstract this problem out into its own module of the system as an event-driven finite state machine (FSM) to keep track of state transitions. Intimidating term, but my first implementation was just if-else statements to qualify as such. The benefit is that each of my system's components only need to push signals and pull states from a central interface without having to worry about what should it call next or poll anything else to see if the stars are aligned. That drastically simplified development and maintenance.&lt;/p&gt;
+&lt;p&gt;The responsiblities of my FSM module are to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;listen to all the signals,&lt;/li&gt;
+&lt;li&gt;figure out all the transitions, and&lt;/li&gt;
+&lt;li&gt;publish the latest states for the rest of the system.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Handling asynchronous events&lt;/h2&gt;
+&lt;p&gt;I use RabbitMQ as the message transport layer between my system's modules. All I need to do here is to associate an appropriate message handler to each triggering input for the FSM. Here's one example of the event handlers using the &lt;a href="http://clojurerabbitmq.info/"&gt;Clojure RabbitMQ library, Langohr&lt;/a&gt;. The rest of this part are just standard RabbitMQ publish/subscribe stuff.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn- &lt;/span&gt;&lt;span class="nv"&gt;event-message-handler&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;ch&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:keys&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;headers&lt;/span&gt; &lt;span class="nv"&gt;delivery-tag&lt;/span&gt; &lt;span class="nv"&gt;redelivery?&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="nv"&gt;bytes&lt;/span&gt; &lt;span class="nv"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[{&lt;/span&gt;&lt;span class="ss"&gt;:keys&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;message-type&lt;/span&gt; &lt;span class="nv"&gt;user-id&lt;/span&gt; &lt;span class="nv"&gt;instrument&lt;/span&gt; &lt;span class="nv"&gt;quantity&lt;/span&gt;&lt;span class="p"&gt;]}&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read-payload&lt;/span&gt; &lt;span class="nv"&gt;payload&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;when &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="ss"&gt;:position-event&lt;/span&gt; &lt;span class="nv"&gt;message-type&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;-&amp;gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;get-cached-states&lt;/span&gt; &lt;span class="nv"&gt;user-id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;update-position-state&lt;/span&gt; &lt;span class="nv"&gt;instrument&lt;/span&gt; &lt;span class="nv"&gt;quantity&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cache-states&lt;/span&gt; &lt;span class="nv"&gt;user-id&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;lbc/ack&lt;/span&gt; &lt;span class="nv"&gt;ch&lt;/span&gt; &lt;span class="nv"&gt;delivery-tag&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is called when a position event is received with information such as user, instrument, and quantity. This handler would thread these information by fetching current states for that user, evaluate next state with input, and then cache the new states for the user.&lt;/p&gt;
+&lt;h2&gt;State transitions&lt;/h2&gt;
+&lt;p&gt;Below is one of my system's state transition diagrams.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="state transition example" src="http://www.quantisan.com/images/2013/qte_state_diagram.png" /&gt;&lt;/p&gt;
+&lt;p&gt;There are 4 states represented by 4 colours with 4 triggers signalling state transition. The program is expected to handle up to hundreds of independent states concurrently with event triggers coming in a couple times per second.&lt;/p&gt;
+&lt;p&gt;As I was saying, my first implementation is just a set of if-else methods. For example, an &lt;code&gt;engage&lt;/code&gt; trigger would call the &lt;code&gt;engaging&lt;/code&gt; method to determine the next state given the implicit input &lt;code&gt;engage&lt;/code&gt; and current state.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;engaging&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;current&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;condp&lt;/span&gt; &lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;current&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;white&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;yellow&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;yellow&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;white&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;green&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
+    &lt;span class="s"&gt;&amp;quot;red&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;green&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There were a handful of these boilerplate code. So after I deployed my system I came back to refactor them. I've been meaning to give core.logic a try for a while so this seem like a good place to start using it.&lt;/p&gt;
+&lt;p&gt;Before we can ask the logic solver question we need to define relations. Here I define a &lt;code&gt;transition&lt;/code&gt; relation to specify all the state transition definition conveniently in one place.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;defrel&lt;/span&gt; &lt;span class="nv"&gt;transition&lt;/span&gt; &lt;span class="nv"&gt;from&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="nv"&gt;to&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;facts&lt;/span&gt; &lt;span class="nv"&gt;transition&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;nil&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;nil&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:yellow&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:white&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:yellow&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:yellow&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:green&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:yellow&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt; &lt;span class="ss"&gt;:green&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="ss"&gt;:red&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:red&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="ss"&gt;:white&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And the event handler methods are just wrappers for a one-liner logic expression asking the question -- given current stage, &lt;code&gt;cur-state&lt;/code&gt;, and input trigger, &lt;code&gt;input&lt;/code&gt;, what state can &lt;code&gt;q&lt;/code&gt; take to satisfy this constraint?&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;next-state&lt;/span&gt; 
+  &lt;span class="s"&gt;&amp;quot;Solver for next state&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="nv"&gt;cur-state&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;run&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;q&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;transition&lt;/span&gt; &lt;span class="nv"&gt;cur-state&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="nv"&gt;q&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;colour-clicked&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;partial &lt;/span&gt;&lt;span class="nv"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:engage&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;colour-deactivate&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;partial &lt;/span&gt;&lt;span class="nv"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:disengage&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;next-position-colour&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;cur&lt;/span&gt; &lt;span class="nv"&gt;open?&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="nv"&gt;open?&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:open&lt;/span&gt; &lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;next-state&lt;/span&gt; &lt;span class="ss"&gt;:close&lt;/span&gt; &lt;span class="nv"&gt;cur&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Not the most illustrative core.logic example but it does the job.&lt;/p&gt;
+&lt;p&gt;Getting started with core.logic is surprisingly easy. I went through the &lt;a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer"&gt;Primer&lt;/a&gt; and &lt;a href="https://github.com/swannodette/logic-tutorial"&gt;tutorial&lt;/a&gt; and got this working in one try.&lt;/p&gt;
+&lt;h2&gt;State caching and sharing&lt;/h2&gt;
+&lt;p&gt;Now that the state transition have been taken care of, states are cached and served on Redis for other parts of the system. I use Redis for this because it is fast and easy. Values are stored in &lt;a href="https://github.com/edn-format/edn"&gt;edn format&lt;/a&gt; instead of something more popular like JSON to maintain data structure through the wire.&lt;/p&gt;
+&lt;p&gt;This is my first time using edn in production. All inter-process messages in this trading system are edn formatted. It works seamlessly with Clojure by simply using &lt;code&gt;str&lt;/code&gt; to write and &lt;code&gt;clojure.edn/read-string&lt;/code&gt; to read. Besides my other Clojure components in the system, my trade broker interface is written in Java. My Java program use &lt;a href="https://github.com/bpsm/edn-java"&gt;edn-java&lt;/a&gt; to parse and unparse complex Clojure data structures (e.g. nested maps with keywords).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;pool&lt;/span&gt;         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/make-conn-pool&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;spec-server1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/make-conn-spec&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defmacro &lt;/span&gt;&lt;span class="nv"&gt;with-car&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/with-conn&lt;/span&gt; &lt;span class="nv"&gt;pool&lt;/span&gt; &lt;span class="nv"&gt;spec-server1&lt;/span&gt; &lt;span class="o"&gt;~@&lt;/span&gt;&lt;span class="nv"&gt;body&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;get-cached-states&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Generate edn from database.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;edn/read-string&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;with-car&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/get&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;states:&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;cache-states&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;with-car&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;car/set&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;states:&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I find coupling edn with Redis is a fantastic choice as it's almost like working with Clojure's native concurrency data structures, such as &lt;code&gt;atom&lt;/code&gt;, but also enable external programs to access the data.&lt;/p&gt;
+&lt;h2&gt;Simple and quick&lt;/h2&gt;
+&lt;p&gt;The entire event-driven FSM program is less than 200 lines of Clojure code and took no more than a few hours to do. However, I did give it some pondering time for a few days. I haven't done any benchmark to estimate performance result. So all I can say is that this setup can handle my simplistic use case with barely any load on the server so I'm happy with it.&lt;/p&gt;
+&lt;p&gt;A few years ago, I would have set a whole bunch of flags to switch states. In fact, &lt;a href="https://github.com/Quantisan/JFFramework"&gt;that's what I did&lt;/a&gt;. The biggest satisfaction here for me isn't the implementation or technologies, it is seeing through the underlying problem at hand and solving it with a common pattern that made my work simpler.&lt;/p&gt;</summary><category term="clojure"></category><category term="logic programming"></category><category term="event-driven"></category><category term="distributed"></category><category term="redis"></category></entry><entry><title>Unlock Lisp sorcery in your data structure by implementing Clojure ISeq</title><link href="http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/" rel="alternate"></link><updated>2012-12-31T15:42:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-12-31:unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/</id><summary type="html">&lt;p&gt;People that has gone through The Little Schemer might not find this exciting. One of the things that I discovered while patching &lt;a href="http://quantisan.github.com/clatrix/"&gt;Clatrix&lt;/a&gt; is that implementing clojure.lang.ISeq interface in your custom data structure unlocks the magic of Lisp composition. By enabling primative operators such as &lt;code&gt;first&lt;/code&gt;, &lt;code&gt;next&lt;/code&gt;, &lt;code&gt;more&lt;/code&gt;, &lt;code&gt;cons&lt;/code&gt;, higher-level operations such as &lt;code&gt;map&lt;/code&gt; and &lt;code&gt;reduce&lt;/code&gt; would just work when operating on your data structure. I find it fascinating that a native Fortran matrix object (through jBLAS) can be made clojury with a few magic operations implemented.&lt;/p&gt;
+&lt;p&gt;However, getting a &lt;code&gt;deftype&lt;/code&gt; implementation of &lt;code&gt;Matrix&lt;/code&gt; correct took some effort as these operators are not as simple as they seem.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;interface&lt;/span&gt; &lt;span class="nc"&gt;ISeq&lt;/span&gt; &lt;span class="kd"&gt;extends&lt;/span&gt; &lt;span class="n"&gt;IPersistentCollection&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;Object&lt;/span&gt; &lt;span class="nf"&gt;first&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;ISeq&lt;/span&gt; &lt;span class="nf"&gt;next&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;ISeq&lt;/span&gt; &lt;span class="nf"&gt;more&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;ISeq&lt;/span&gt; &lt;span class="nf"&gt;cons&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Object&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For example, say we have a matrix &lt;code&gt;M&lt;/code&gt; like so.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;M&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;matrix&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt; &lt;span class="mi"&gt;9&lt;/span&gt;&lt;span class="p"&gt;]]))&lt;/span&gt;
+&lt;span class="nv"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="nv"&gt;M&lt;/span&gt;
+&lt;span class="nv"&gt;A&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="nv"&gt;x3&lt;/span&gt; &lt;span class="nv"&gt;matrix&lt;/span&gt;
+&lt;span class="nv"&gt;-------------&lt;/span&gt;
+&lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;  &lt;span class="mf"&gt;2.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;  &lt;span class="mf"&gt;3.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt; 
+&lt;span class="mf"&gt;4.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;  &lt;span class="mf"&gt;5.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;  &lt;span class="mf"&gt;6.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt; 
+&lt;span class="mf"&gt;7.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;  &lt;span class="mf"&gt;8.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;  &lt;span class="mf"&gt;9.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Reducing &lt;code&gt;M&lt;/code&gt; across its maps is equivalent to a column-wise operation.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;reduce &lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map + &lt;/span&gt;&lt;span class="nv"&gt;%1&lt;/span&gt; &lt;span class="nv"&gt;%2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;M&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;12.0&lt;/span&gt; &lt;span class="mf"&gt;15.0&lt;/span&gt; &lt;span class="mf"&gt;18.0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Yet for a while this doesn't work because I wasn't careful on my implementation of &lt;code&gt;first&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Consider the case of a 2x2 matrix. A 2x2 matrix is structurally equivalent to a nested vector. Calling &lt;code&gt;first&lt;/code&gt; on these would yield:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nv"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;matrix&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]]))&lt;/span&gt;
+&lt;span class="nv"&gt;A&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;x2&lt;/span&gt; &lt;span class="nv"&gt;matrix&lt;/span&gt;
+&lt;span class="nv"&gt;-------------&lt;/span&gt;
+&lt;span class="mf"&gt;1.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;  &lt;span class="mf"&gt;2.00&lt;/span&gt;&lt;span class="nv"&gt;e+00&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And for a 3x1 vector matrix, i.e. one-dimensional, it is equivalent to a regular vector.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="nv"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;matrix&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;span class="mf"&gt;1.0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But here's a tricky bit. What happens during &lt;code&gt;reduce&lt;/code&gt; as it keeps recurring &lt;code&gt;next&lt;/code&gt; and &lt;code&gt;first&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;Let's step this through for &lt;code&gt;(reduce #(map + %1 %2) M)&lt;/code&gt;. &lt;code&gt;%1&lt;/code&gt; is basically the result so far and &lt;code&gt;%2&lt;/code&gt; is the &lt;code&gt;first&lt;/code&gt; of the remaining collection to be processed.&lt;/p&gt;
+&lt;table border="1"&gt;
+    &lt;tr&gt;&lt;th&gt;iteration&lt;/th&gt;&lt;th&gt;accumulated (%1)&lt;/th&gt;&lt;th&gt;first (%2)&lt;/th&gt;&lt;th&gt;remaining&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;nil&lt;/td&gt;&lt;td&gt;[1 2 3]&lt;/td&gt;&lt;td&gt;[[1 2 3] [4 5 6] [7 8 9]]&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;[1 2 3]&lt;/td&gt;&lt;td&gt;[4 5 6]&lt;/td&gt;&lt;td&gt;[[4 5 6] [7 8 9]]&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;2, bad&lt;/td&gt;&lt;td&gt;[5 7 9]&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;[[7 8 9]]&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;2, good&lt;/td&gt;&lt;td&gt;[5 7 9]&lt;/td&gt;&lt;td&gt;[7 8 9]&lt;/td&gt;&lt;td&gt;[[7 8 9]]&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The problem arises in the second iteration. Calling &lt;code&gt;(rest [[4 5 6] [7 8 9]])&lt;/code&gt; returns &lt;code&gt;[[7 8 9]]&lt;/code&gt;. However, &lt;code&gt;(matrix [[7 8 9]])&lt;/code&gt; is a row vector and &lt;code&gt;(matrix [7 8 9])&lt;/code&gt; is a column vector. Both are considered one dimensional. In either case, &lt;code&gt;first&lt;/code&gt; of a vector should return the first element, which is a number. Thus at this iteration, &lt;code&gt;reduce&lt;/code&gt; breaks because you can't map a sequence with a number, &lt;code&gt;(map + [5 7 9] 7)&lt;/code&gt;, to get an accumulated value.&lt;/p&gt;
+&lt;p&gt;What we want though, is for the second iteration to return &lt;code&gt;[7 8 9]&lt;/code&gt; instead because the &lt;em&gt;original&lt;/em&gt; matrix is not a vector. Luckily, this particular problem has been solved by my colleague &lt;a href="https://github.com/antoniogarrote"&gt;Antonio Garrote&lt;/a&gt; when he &lt;a href="https://github.com/forward/incanter-BLAS"&gt;did this in Java a year ago&lt;/a&gt; by keeping a predicate field signifying is &lt;em&gt;this&lt;/em&gt; matrix supposed to be vector or not.&lt;/p&gt;
+&lt;p&gt;So there you have it. If you find yourself needing to implement &lt;code&gt;deftype&lt;/code&gt; to build your own data structure in Clojure. Do consider implementing &lt;code&gt;clojure.lang.ISeq&lt;/code&gt; to leverage high-level Clojure functions but be careful about those seemingly simplistic primitive operators.&lt;/p&gt;</summary><category term="clojure"></category><category term="Incanter"></category></entry><entry><title>A hypothetical data analysis platform</title><link href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel="alternate"></link><updated>2012-11-10T12:03:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-11-10:a-hypothetical-data-analysis-platform/</id><summary type="html">&lt;p&gt;My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.&lt;/p&gt;
+&lt;p&gt;Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to &lt;code&gt;pip install Numpy, Scipy, Matplotlib&lt;/code&gt;. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.&lt;/p&gt;
+&lt;p&gt;Then there's Incanter.&lt;/p&gt;
+&lt;p&gt;You don't like to use Parallel Colt for your matrices? Here, try &lt;a href="https://github.com/forward/incanter-BLAS"&gt;this BLAS drop-in replacement&lt;/a&gt; and everything would just work with 10x speed. &lt;/p&gt;
+&lt;p&gt;Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."&lt;/p&gt;
+&lt;p&gt;The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.&lt;/p&gt;
+&lt;p&gt;Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a &lt;code&gt;(use 'incanter-magma)&lt;/code&gt; and your Incanter code would just run with &lt;a href="http://icl.cs.utk.edu/magma/software/index.html"&gt;MAGMA&lt;/a&gt; (via &lt;a href="http://matthewrocklin.com/"&gt;Mathew Rocklin&lt;/a&gt;) under the hood without any other change.&lt;/p&gt;
+&lt;p&gt;Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using &lt;a href="http://cascalog.org/"&gt;Cascalog&lt;/a&gt; and is looking to analyse this dataset. You start your Incanter session to pull in your data &lt;code&gt;(use 'incanter-cascalog)&lt;/code&gt;. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you &lt;code&gt;(use 'incanter-storm)&lt;/code&gt; to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to &lt;a href="http://storm-project.net/"&gt;Storm&lt;/a&gt; inside your cluster.&lt;/p&gt;
+&lt;p&gt;For your results, you find JFreeChart limiting so you &lt;code&gt;(use 'incanter-c2)&lt;/code&gt; to spiff up your visualisations with &lt;a href="http://keminglabs.com/c2/"&gt;C2&lt;/a&gt; all while not changing a single line of your Incanter script.&lt;/p&gt;
+&lt;p&gt;Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.&lt;/p&gt;
+&lt;p&gt;Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.&lt;/p&gt;
+&lt;p&gt;Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.&lt;/p&gt;
+&lt;p&gt;I call this platform-as-interface.&lt;/p&gt;</summary><category term="R"></category><category term="Python"></category><category term="Incanter"></category><category term="data analysis"></category><category term="clojure"></category></entry><entry><title>My 5 minute lightning talk on Cascalog</title><link href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel="alternate"></link><updated>2012-02-05T18:39:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-05:my-5-minute-lightning-talk-on-cascalog/</id><summary type="html">&lt;p&gt;Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.&lt;/p&gt;
+&lt;iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;amp;size=m" frameborder="0" width="555" height="451"&gt;&lt;/iframe&gt;
+
+&lt;p&gt;The possibilities...&lt;/p&gt;</summary><category term="cascalog"></category><category term="clojure"></category><category term="hadoop"></category><category term="presentation"></category></entry><entry><title>Algorithmic ownage</title><link href="http://www.quantisan.com/algorithmic-ownage/" rel="alternate"></link><updated>2011-11-06T17:37:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-11-06:algorithmic-ownage/</id><summary type="html">&lt;p&gt;I felt good when I simplified one of my algorithms and sped it up 10
+times. I felt so good that I even wrote an entire blog post about it
+&lt;a href="/eureka-moment-on-design-patterns-for-functional-programming/"&gt;patting myself on the back&lt;/a&gt;. Then last week I got an email from Kevin
+of &lt;a href="http://keminglabs.com/"&gt;Keming Labs&lt;/a&gt; suggesting a few alternatives.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;;;Three ways to count the number of occurrences in a collection&lt;/span&gt;
+&lt;span class="c1"&gt;;; (&amp;quot;orange&amp;quot; &amp;quot;bottle&amp;quot; &amp;quot;coke&amp;quot; &amp;quot;bottle&amp;quot;) =&amp;gt; [(&amp;quot;bottle&amp;quot; &amp;quot;coke&amp;quot; &amp;quot;orange&amp;quot;) (2 1 1)]&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;orange&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;bottle&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;coke&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;bottle&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;reduce &lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;conj &lt;/span&gt;&lt;span class="nv"&gt;%1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash-map &lt;/span&gt;&lt;span class="nv"&gt;%2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;inc &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;get &lt;/span&gt;&lt;span class="nv"&gt;%1&lt;/span&gt; &lt;span class="nv"&gt;%2&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+                       &lt;span class="p"&gt;{}&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;keys &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vals &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;l&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;for &lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;group-by&lt;/span&gt; &lt;span class="nb"&gt;identity &lt;/span&gt;&lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)])]&lt;/span&gt;
+    &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;map first &lt;/span&gt;&lt;span class="nv"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map second &lt;/span&gt;&lt;span class="nv"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply merge-with &lt;/span&gt;&lt;span class="nv"&gt;+&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map &lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply hash-map &lt;/span&gt;&lt;span class="nv"&gt;%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;partition&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;interleave &lt;/span&gt;&lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;repeat &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))]&lt;/span&gt;
+    &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;keys &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vals &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)]))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;First of all, his solutions looked much cleaner &lt;a href="/eureka-moment-on-design-patterns-for-functional-programming/"&gt;than mine&lt;/a&gt;. Then over
+the weekend I was able to incorporate his 3 algorithms into my program.
+I ran a few benchmarks and here are the average of 2 tests using a
+dataset of 28,760 items.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;My algorithm. Elapsed time: 68372.026532 msecs.&lt;/li&gt;
+&lt;li&gt;Kevin's solution #1. Elapsed time: 156.940976 msecs.&lt;/li&gt;
+&lt;li&gt;Kevin's solution #2. Elapsed time: 60.165483 msecs.&lt;/li&gt;
+&lt;li&gt;Kevin's solution #3. Elapsed time: 296.162042 msecs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Total ownage. That's what I like about sharing my
+work; once in a blue moon, a reader drops by and generously show
+me how I can improve a solution 1,000 times! Now the ball is in my hands
+to understand what he has done and improve myself. Collaborating and
+learning, that's why I open source.&lt;/p&gt;
+&lt;p&gt;Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of &lt;a href="http://clojure.org/transients"&gt;transients&lt;/a&gt; in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.&lt;/p&gt;</summary><category term="algorithm"></category><category term="clojure"></category></entry><entry><title>Eureka moment on design patterns for functional programming</title><link href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel="alternate"></link><updated>2011-10-25T15:28:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-10-25:eureka-moment-on-design-patterns-for-functional-programming/</id><summary type="html">&lt;p&gt;Understanding design patterns for object-oriented programming made my
+life easier as a Java programmer. So I have been looking for a
+comparable book for functional programming ever since my sojourn into
+this age-old paradigm. It looks as though &lt;a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book"&gt;I'm not the only one
+looking&lt;/a&gt; too. But the thing is, I think I've just had a revelation of
+sort.&lt;/p&gt;
+&lt;p&gt;There is one and only one guideline to designing functional
+architectures -- Keep it simple. Simple as in keeping your functions
+having a single purpose only. Simple as in work with the data directly and
+don't conjure unnecessary intermediaries. Simple, as elaborated by Rich
+Hickey in his talk, &lt;a href="http://www.infoq.com/presentations/Simple-Made-Easy"&gt;Simple Made Easy&lt;/a&gt;. Much of this is conveyed in Bloch's Effective Java:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="err"&gt;\#&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="err"&gt;\–&lt;/span&gt; &lt;span class="n"&gt;Avoid&lt;/span&gt; &lt;span class="n"&gt;creating&lt;/span&gt; &lt;span class="n"&gt;unnecessary&lt;/span&gt; &lt;span class="n"&gt;objects&lt;/span&gt;
+&lt;span class="n"&gt;item&lt;/span&gt; &lt;span class="err"&gt;\#&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt; &lt;span class="err"&gt;\–&lt;/span&gt; &lt;span class="n"&gt;minimize&lt;/span&gt; &lt;span class="n"&gt;accessibility&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;classes&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;members&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;, for examples.&lt;/p&gt;
+&lt;p&gt;As &lt;a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book/2930452#2930452"&gt;Majewski said in a stackoverflow reply&lt;/a&gt; (Update 2013 – question no longer available on stackoverflow),&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;The&lt;/span&gt; &lt;span class="n"&gt;patterns&lt;/span&gt; &lt;span class="n"&gt;movement&lt;/span&gt; &lt;span class="n"&gt;started&lt;/span&gt; &lt;span class="n"&gt;because&lt;/span&gt; &lt;span class="n"&gt;object&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;oriented&lt;/span&gt; &lt;span class="n"&gt;programming&lt;/span&gt; 
+&lt;span class="n"&gt;was&lt;/span&gt; &lt;span class="n"&gt;often&lt;/span&gt; &lt;span class="n"&gt;turning&lt;/span&gt; &lt;span class="n"&gt;into&lt;/span&gt; &lt;span class="n"&gt;spaghetti&lt;/span&gt; &lt;span class="n"&gt;objects&lt;/span&gt; &lt;span class="p"&gt;...&lt;/span&gt; &lt;span class="n"&gt;Functional&lt;/span&gt; &lt;span class="n"&gt;programming&lt;/span&gt; 
+&lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="k"&gt;restricted&lt;/span&gt; &lt;span class="n"&gt;style&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;programming&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;so&lt;/span&gt; &lt;span class="n"&gt;it&lt;/span&gt; &lt;span class="n"&gt;didn&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="n"&gt;need&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;grow&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt;
+&lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="k"&gt;restricted&lt;/span&gt; &lt;span class="n"&gt;conventions&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;limit&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;chaos&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As such, there is no design pattern book for functional programming. I didn't get that earlier this year. But something clicked recently. During the past few months, I've been doing some &lt;a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/"&gt;consulting and open source projects&lt;/a&gt; solving algorithmic problems with Clojure.&lt;/p&gt;
+&lt;p&gt;One of the problems in a project that I was faced with this week is calculating the occurrence of each distinctive element within a list of elements. Say we have a list, &lt;code&gt;coll = ("orange", "bottle", "coke", "bottle")&lt;/code&gt;. The output would be something like &lt;code&gt;[("orange", "bottle", "coke") (1 2 1)]&lt;/code&gt; &lt;/p&gt;
+&lt;p&gt;This is my first solution.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;eval-decompose&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;coll&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;super-d&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;distinct &lt;/span&gt;&lt;span class="nv"&gt;coll&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="nv"&gt;freqs&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;loop &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;ps&lt;/span&gt;  &lt;span class="p"&gt;[]&lt;/span&gt;
+                        &lt;span class="nv"&gt;d&lt;/span&gt;   &lt;span class="nv"&gt;super-d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;seq &lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;c&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;filter &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;partial = &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;first &lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="nv"&gt;coll&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+                       &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;recur&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;conj &lt;/span&gt;&lt;span class="nv"&gt;ps&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;rest &lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+                     &lt;span class="nv"&gt;ps&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map &lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vector &lt;/span&gt;&lt;span class="nv"&gt;%1&lt;/span&gt; &lt;span class="nv"&gt;%2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;super-d&lt;/span&gt; &lt;span class="nv"&gt;freqs&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The specs are not exactly as I described but the concept remains. What I
+did is to use tail calls (it's supposed to be fast, isn't it?) to
+aggregate each counter to produce a vector of counts. Then I map each
+pair of fragment with its corresponding count to generate a final output
+collection. Sounds overly complicated, doesn't it?&lt;/p&gt;
+&lt;p&gt;This is the first warning of a bad functional design. For a collection of 30,000 items,
+this function took 11 minutes to compute on my notebook. This looks like
+a good place to exploit the parallel nature of this problem.&lt;/p&gt;
+&lt;p&gt;Specifically, the counting of each fragment is independent of other
+fragments. Thus, there's no need for the program to wait for one
+fragment to finish to process the next. I simplified the program to
+remove this inherent assumption of procedural processing. Here is the
+gist of the refactored code where each function only does one job. Since
+the processing are modularised, I can parallelize the algorithm easily
+with the use of pmap instead of map on the last line as shown below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;match-count&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot; Given key, k, returns number of occurrences of k in collection, coll.&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="nv"&gt;coll&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;match?&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;fn &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;;; closure on k&lt;/span&gt;
+                    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;inc &lt;/span&gt;&lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                    &lt;span class="nv"&gt;i&lt;/span&gt;&lt;span class="p"&gt;))]&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;reduce &lt;/span&gt;&lt;span class="nv"&gt;match?&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="nv"&gt;coll&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;calc-counts&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot; Returns a list of counts for the occurrences of each key of keys, ks,&lt;/span&gt;
+&lt;span class="s"&gt;  within the collection, coll.&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;ks&lt;/span&gt; &lt;span class="nv"&gt;coll&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;pmap&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;match-count&lt;/span&gt; &lt;span class="nv"&gt;%&lt;/span&gt; &lt;span class="nv"&gt;coll&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;ks&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I've split the first function into 3 functions (2 shown here). As Hickey
+said in his talk, simplifying can often produce more, not less,
+functions. Yet, the program is not only easier to read and runs in less
+than a minute. An order of magnitude faster! There are still lots for me
+to learn. I want to find more challenging projects to push my own
+limits. But rather than solving arbitrary problems, I prefer to tackle
+real-world challenges. So if you know of anyone that can benefit from
+collaborating with a functional developer to build robust and scalable
+software, please pass along &lt;a href="mailto:paul@quantisan.com"&gt;my contact&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – &lt;a href="/algorithmic-ownage/"&gt;Algorithmimc ownage&lt;/a&gt;. Humbled.&lt;/p&gt;</summary><category term="clojure"></category><category term="software design"></category></entry><entry><title>Vector algorithm using tree composition</title><link href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel="alternate"></link><updated>2011-08-07T09:43:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-08-07:vector-algorithm-using-tree-composition/</id><summary type="html">&lt;p&gt;Sniffed this trick from the Incanter source. Here's a demo of using tree
+composition to calculate a 2-d Euclidean distance between two points.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; 
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;y&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; 
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn- &lt;/span&gt;&lt;span class="nv"&gt;tree-comp-each&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;root &lt;/span&gt;&lt;span class="nv"&gt;branch&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="nv"&gt;leaves&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply root &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map &lt;/span&gt;&lt;span class="nv"&gt;branch&lt;/span&gt; &lt;span class="nv"&gt;leaves&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt; 
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;euclidean-distance&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="ss"&gt;:pre&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;= &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count &lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count &lt;/span&gt;&lt;span class="nv"&gt;b&lt;/span&gt;&lt;span class="p"&gt;))]}&lt;/span&gt; 
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sqrt&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply &lt;/span&gt;&lt;span class="nv"&gt;tree-comp-each&lt;/span&gt; &lt;span class="nb"&gt;+ &lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;fn &lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+                    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;pow&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;- &lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map vector &lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;b&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;I've only had exposures to tree traversal in the use of implementing searching and sorting
+algorithms. This trick here definitely widened my eyes to the wonders of
+functional programming. It's more than just being able to pass and
+manipulate functions. I need to think like a tree.&lt;/p&gt;</summary><category term="clojure"></category><category term="source code"></category><category term="Incanter"></category></entry><entry><title>First impression of Incanter: usably incomplete</title><link href="http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/" rel="alternate"></link><updated>2011-06-25T20:43:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-06-25:first-impression-of-incanter-usably-incomplete/</id><summary type="html">&lt;p&gt;Speaking out loud about my new favourite toys, Clojure (a functional
+programming language) and Incanter (a R-like statistical platform built
+on Clojure). My first impression is that Incanter is usable but it is
+far from being polished like R since it is a new platform. I am using
+the Gold Miners ETF (GDX) and Gold Trust (GLD) data from Yahoo Finance
+as examples to perform a simple correlation test. Some Incanter
+functions are rough on the edges and a lot is left to be desired. This
+is a drastic contrast to R in which its plug-in modules are both
+impressive and comprehensive. On the other hand, making things happen
+with Clojure is ... fun. And that's a winner for me. Here's a walk
+through of my first attempt using Incanter to analyse stocks data.
+Figures 1 and 2 below are basic time series plot of GDX and GLD. I'll
+need to study the Incanter source code to figure out how to plot
+multiple time series on the same chart. Couldn't find it on a first
+glimpse though. [caption id="attachment_5535" align="aligncenter"
+width="488" caption="GDX"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GDX.png" title="incanter-chart-GDX" /&gt;[/caption] [caption id="attachment_5536"
+align="aligncenter" width="488" caption="GLD"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD.png" title="incanter-chart-GLD" /&gt;[/caption] The
+following looks like a lot of code just to plot two graphs. Most of the
+boilerplate code is to coerce the Yahoo Finance CSV data to specifically
+fit Incanter's time-series-plot function. I will wrap this into a
+library later on.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;ns &lt;/span&gt;&lt;span class="nv"&gt;inc-sandbox.corr-demo&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:require&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clojure.set&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;set&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:use&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;incanter&lt;/span&gt; &lt;span class="nv"&gt;core&lt;/span&gt; &lt;span class="nv"&gt;stats&lt;/span&gt; &lt;span class="nv"&gt;charts&lt;/span&gt; &lt;span class="nv"&gt;io&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:require&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;clj-time.core&lt;/span&gt; &lt;span class="ss"&gt;:as&lt;/span&gt; &lt;span class="nv"&gt;time&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:use&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;clj-time&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;format&lt;/span&gt; &lt;span class="ss"&gt;:only&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;formatter&lt;/span&gt;
+&lt;span class="nv"&gt;formatters&lt;/span&gt; &lt;span class="nv"&gt;parse&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;coerce&lt;/span&gt; &lt;span class="ss"&gt;:only&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;to-long&lt;/span&gt;&lt;span class="p"&gt;)])))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;sym-to-dataset&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot;returns a dataset read from a local CSV in &amp;#39;./data/&amp;#39; given a Yahoo&lt;/span&gt;
+&lt;span class="s"&gt;Finance symbol name&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;yf-symbol&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;+data&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;./data/&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;+csv&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;.csv&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;symbol &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;.toUpperCase&lt;/span&gt; &lt;span class="nv"&gt;yf-symbol&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;filename&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;str &lt;/span&gt;&lt;span class="nv"&gt;+data&lt;/span&gt; &lt;span class="nb"&gt;symbol &lt;/span&gt;&lt;span class="nv"&gt;+csv&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;-&lt;/span&gt;&lt;span class="sc"&gt;\&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read-dataset&lt;/span&gt; &lt;span class="nv"&gt;filename&lt;/span&gt; &lt;span class="ss"&gt;:header&lt;/span&gt; &lt;span class="nv"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;col-names&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="ss"&gt;:Date&lt;/span&gt; &lt;span class="ss"&gt;:Open&lt;/span&gt; &lt;span class="ss"&gt;:High&lt;/span&gt; &lt;span class="ss"&gt;:Low&lt;/span&gt;
+&lt;span class="ss"&gt;:Close&lt;/span&gt; &lt;span class="ss"&gt;:Volume&lt;/span&gt; &lt;span class="ss"&gt;:Adj-Close&lt;/span&gt;&lt;span class="p"&gt;]))))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;gdx&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sym-to-dataset&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GDX&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;gld&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;sym-to-dataset&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GLD&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;same-dates?&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;are two datasets covering the&lt;/span&gt;
+&lt;span class="s"&gt;same time frame?&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;x&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;x-dates&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;into &lt;/span&gt;&lt;span class="sc"&gt;\#&lt;/span&gt;&lt;span class="p"&gt;{}&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sc"&gt;\$&lt;/span&gt; &lt;span class="ss"&gt;:Date&lt;/span&gt; &lt;span class="nv"&gt;x&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="nv"&gt;y-dates&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;into &lt;/span&gt;&lt;span class="sc"&gt;\#&lt;/span&gt;&lt;span class="p"&gt;{}&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sc"&gt;\$&lt;/span&gt; &lt;span class="ss"&gt;:Date&lt;/span&gt; &lt;span class="nv"&gt;y&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="nv"&gt;x-y&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;clojure.set/difference&lt;/span&gt; &lt;span class="nv"&gt;x-dates&lt;/span&gt; &lt;span class="nv"&gt;y-dates&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;y-x&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;clojure.set/difference&lt;/span&gt; &lt;span class="nv"&gt;y-dates&lt;/span&gt; &lt;span class="nv"&gt;x-dates&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;and &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt; &lt;span class="nv"&gt;x-y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;empty?&lt;/span&gt;
+&lt;span class="nv"&gt;y-x&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;same-dates?&lt;/span&gt; &lt;span class="nv"&gt;gdx&lt;/span&gt; &lt;span class="nv"&gt;gld&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;; true (def gdx-ac (\$ :Adj-Close gdx))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;def &lt;/span&gt;&lt;span class="nv"&gt;gld-ac&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sc"&gt;\$&lt;/span&gt; &lt;span class="ss"&gt;:Adj-Close&lt;/span&gt; &lt;span class="nv"&gt;gld&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;defn &lt;/span&gt;&lt;span class="nv"&gt;dates-long&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;returns the dates as&lt;/span&gt;
+&lt;span class="s"&gt;long&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;data&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;ymd-formatter&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;formatters&lt;/span&gt; &lt;span class="ss"&gt;:year-month-day&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;dates-str&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sc"&gt;\$&lt;/span&gt; &lt;span class="ss"&gt;:Date&lt;/span&gt; &lt;span class="nv"&gt;data&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map &lt;/span&gt;&lt;span class="sc"&gt;\#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;to-long&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;parse &lt;/span&gt;&lt;span class="nv"&gt;ymd-formatter&lt;/span&gt; &lt;span class="nv"&gt;%&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="nv"&gt;dates-str&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="c1"&gt;;; no replace col func (def gdx-times (dates-long gdx)) (def gld-times&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;dates-long&lt;/span&gt; &lt;span class="nv"&gt;gld&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;view&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;time-series-plot&lt;/span&gt; &lt;span class="nv"&gt;gld-times&lt;/span&gt; &lt;span class="nv"&gt;gld-ac&lt;/span&gt; &lt;span class="ss"&gt;:x-label&lt;/span&gt;
+&lt;span class="s"&gt;&amp;quot;Date&amp;quot;&lt;/span&gt; &lt;span class="ss"&gt;:y-label&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GLD&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;view&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;time-series-plot&lt;/span&gt; &lt;span class="nv"&gt;gdx-times&lt;/span&gt; &lt;span class="nv"&gt;gdx-ac&lt;/span&gt;
+&lt;span class="ss"&gt;:x-label&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Date&amp;quot;&lt;/span&gt; &lt;span class="ss"&gt;:y-label&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GDX&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Calculating the Pearson and the
+Spearman's correlation coefficient are straightforward enough. It's just
+a function call away. I am surprised to see Spearman's rho implemented
+in Incanter already as its non-parametric statistics library is
+practically non-existent. Yet another project to work on. However,
+calculating the coefficients is only half the story. Where are the
+p-values? That doesn't seem to be available for these functions. The
+t-test function is a good example of what results I would like to see. A
+third item to work on. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;correlation&lt;/span&gt; &lt;span class="nv"&gt;gdx-ac&lt;/span&gt; &lt;span class="nv"&gt;gld-ac&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;; 0.7906494552829249 (spearmans-rho gdx-ac gld-ac) ; 0.7728859703262337&lt;/span&gt;
+&lt;span class="c1"&gt;;; no p-value in col, like t-test (let [lm (linear-model gdx-ac gld-ac)]&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;doto &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;scatter-plot&lt;/span&gt; &lt;span class="nv"&gt;gld-ac&lt;/span&gt; &lt;span class="nv"&gt;gdx-ac&lt;/span&gt; &lt;span class="ss"&gt;:x-label&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GLD&amp;quot;&lt;/span&gt; &lt;span class="ss"&gt;:y-label&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;GDX&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;add-lines&lt;/span&gt; &lt;span class="nv"&gt;gld-ac&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:fitted&lt;/span&gt; &lt;span class="nv"&gt;lm&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="nv"&gt;view&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;[caption id="attachment_5543" align="aligncenter" width="488" caption="GLD-GDX
+scatter plot"]&lt;img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD-GDX.png" title="incanter-chart-GLD-GDX" /&gt;[/caption] Even though Incanter is still early in
+its development, it is certainly a usable statistical platform offering
+many of the basics. I look forward to learning more about it and
+contributing to the project. Now, which of the listed problems should I
+tackle first? P.S. My code embed seem to be mysteriously breaking my
+code. As an alternative, the &lt;a href="https://gist.github.com/1047101"&gt;complete source&lt;/a&gt; is available on Gist.&lt;/p&gt;</summary><category term="clojure"></category><category term="Incanter"></category></entry></feed>

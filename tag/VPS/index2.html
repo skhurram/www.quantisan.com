@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - VPS</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel='bookmark'>Rev your trading system on the cloud with a free Amazon cloud server</a>
+            </h1>
+            <div class="article-content"> <p>I always try to keep my trading and any related costs as cheap as
+possible. And there's nothing cheaper than free, which that is what
+Amazon Web Services (AWS) is offering starting November 1, 2010. They
+are offering a full year of free t1.micro EC2 instance along with other
+basic level of AWS services (see link below). That seems to be a great
+incentive to move my trading system on to a remote cloud server. One of
+the biggest benefits of running your trading system on a virtual private
+server or a cloud instance is reliability. I don't know about you, but
+my internet connection sometimes acts up or even goes down for hours.
+There's the occasional electrical power disruption too, but it's been
+good these days. On the other hand, there are many disadvantages for
+running your trading system remotely. Costs, technical know-hows, and
+limited processing power, just to name a few. The added costs is not an
+issue for now as Amazon is offering a year of free trial. With regard to
+technical know-hows, I don't know how to setup a cloud server yet.
+Although it shouldn't be a terribly difficult task for me as I am
+familiar with Linux. What's at issue though, is the limited processing
+power. The processing power of a t1.micro instance is an unspecified
+fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
+processor. So you get a fraction of that, which doesn't sound much.
+CloudHarmony's benchmark shows that <a href="http://cloudharmony.com/benchmarks">a Micro instance is about 1/10th of
+that of the Small instance</a>. However, a Micro instance can burst to up
+to 2 ECUs (double that of the Small) of processing power occasionally.
+This is good if you can keep your continuous processes minimal and only
+make calculations infrequently (such as on arrival of a new price bar).
+The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
+low-latency files) and 5 GB of S3 (for persistent storage). These
+numbers are generous, so the bottleneck obviously remains with the
+processor. Your best bet for minimal background processing use is to run
+a command-line-only trading system. That's something that can be easily
+done on JForex. However, there remains the question of is the minimum
+power of a Micro sufficient to sustain a trading system? Any hiccup in a
+trading system could cost you more than the annual charge for even a
+Small instance. This freebie from Amazon may not be worth the risk. The
+only way to know is to test it out. I won't be able to get to that soon
+as I'm been busy programming. So if anyone is running a trading system
+on a t1.micro instance, I'd really appreciate if you can provide some
+feedback. Update Nov 6: See <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">my first failed test</a> and then my first
+time <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">running remote desktop on t1.micro</a>. Otherwise, enjoy the
+freebie, <a href="http://aws.amazon.com/free/">AWS Free Usage Tier</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/' title='2010-10-29T05:23:00'>29 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel='bookmark'>First look at Google App Engine for automated trading and quant analysis on the cloud</a>
+            </h1>
+            <div class="article-content"> <p>I just spent the last few hours looking into Google App Engine to use it
+for trading. Google App Engine (GAE) is a cloud computing development
+and hosting platform for web applications. GAE is similar to the
+well-known Amazon EC2 service but it is also very different. The main
+difference between GAE and EC2 is that GAE is not as flexible as EC2 but
+it is a lot easier to develop on. Think of it like using C++ (EC2) to
+write your own trading platform to using EasyLanguage on TradeStation or
+MQL on Metatrader (GAE). Another advantage for using Google App Engine
+is that it is free! Well, to a certain extent. It is free for a limited
+monthly usage. However, Google's free quota is known to be very generous
+(think Gmail) and this is no exception. Based on the numbers, it looks
+comparable to a typical \$20/month virtual private server (VPS) hosting
+package. My guess is that you can run a decent personal quant program on
+it if you keep the resources for yourself (private use). For more
+information on the free quota, you can read the <a href="http://code.google.com/appengine/docs/quotas.html">current GAE quota</a>
+web page or the <a href="http://en.wikipedia.org/wiki/Google_App_Engine">Wikipedia page for GAE</a>. You might be wondering how
+did I spend a few hours just reading on GAE? The answer is that I've
+done a brief research, planning, and assessment to see how GAE can be
+put to use in terms of quantitative analysis for automated and
+discretionary trading. Without going through all of my notes and logic,
+here's the gist of my conclusion.</p>
+<h2>For Automated Trading</h2>
+<p>Since GAE is also a SDK, it has a restricted programming API. You can't
+just plug in any custom library of your own (i.e. your broker's API)
+into your program. That is its advantage and its disadvantage.
+Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
+for your connection either. These limitations won't be changing anytime
+soon as GAE is designed to be like that for security reasons. Basically,
+there's no way for your web application on GAE to connect with your
+broker for trading. So much for that idea.</p>
+<h2>For Discretionary Trading</h2>
+<p>Things look brighter for discretionary trading though. A big bonus with
+using Google App Engine is that it supports the Google Finance API.
+Google Finance offers free real-time stock quotes. Combine it with the
+programming capability of the Google App Engine and you have yourself a
+free number cruncher in the cloud. However, GAE is definitely no match
+for your personal computer, so why would you go through all that
+trouble? One possible scenario in which this could be useful is for
+traders that is often on the road or traders such as myself in which we
+have a day job. In that case, you can set you quant analytics on GAE as
+a private web application and then you can access it as a web page
+anywhere on your mobile phone. One of the obvious limitation with using
+GAE is that it has limited features for scientific computing. For
+example, it doesn't support Numpy in the Python SDK. As such, I can't
+imagine using GAE for anything more than simple technical analysis for
+now. I certainly hope that GAE can include more powerful scientific
+computing capabilities in the near future. Until then, I really can't
+see Google App Engine offering much help aside from performing
+algorithmic tasks to help with your trading analysis. Their open issues
+log does announce that <a href="http://code.google.com/p/googleappengine/issues/detail?id=190">Numpy is being integrated into GAE</a> though. So
+that's a great sign for things to come! I am very hopeful of GAE's
+potential as a free cloud server to host my quant analytics on. We'll
+just have to wait for now.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/' title='2010-03-03T21:19:00'>03 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+			<a href="http://www.quantisan.com/tag/VPS//index.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/security_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-05-11T22:03:00+01:00</updated><entry><title>Encrypting your communications to minimize eavedropping</title><link href="http://www.quantisan.com/encrypting-your-communications-to-minimize-eavedropping/" rel="alternate"></link><updated>2011-05-11T22:03:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-05-11:encrypting-your-communications-to-minimize-eavedropping/</id><summary type="html">&lt;p&gt;The &lt;a href="http://online.wsj.com/article/SB10001424052748703864204576317060246641834.html"&gt;case of Galleon Group founder Raj Rajaratnam&lt;/a&gt; shows a corporate
+security crack that shouldn't happen in this day and age. In the
+Rajaratnam case, government wiretaps served as vital evidence against
+him. The question though, is that, if the government is able to do that
+on a multi-billion dollar company without them knowing, what about their
+competitors or enemies with ill-intent? With all the resources available
+to them, how can something so old-school like this happen to a hedge
+fund? Secrecy and conspiracy shouldn't be unfamiliar in the hedge fund
+industry. So I had assumed that they operated inside an iron wall.
+Government wiretapping or corporate espionage are certainly not my
+worry. However, I still try to employ prudent security procedures in the
+financial quantitative research and development that I do at Quantisan
+Systems just because I value my intellectual property. For example, in
+my email correspondence with business associates, I make use of &lt;a href="http://en.wikipedia.org/wiki/GNU_Privacy_Guard"&gt;GPG&lt;/a&gt;
+with a 2048-bit RSA asynchronous key pair. (my public key is below) GPG
+is an open-source equivalent of &lt;a href="http://en.wikipedia.org/wiki/Pretty_Good_Privacy"&gt;Pretty Good Privacy&lt;/a&gt;. It is most
+likely that your email client supports it too. I use Thunderbird and it
+is a built-in feature. You just need to enable it and set it up. On
+voice communications, I prefer to use Skype rather than regular voice
+calls because it's free and &lt;a href="http://en.wikipedia.org/wiki/Skype_security"&gt;Skype inherently uses 256-bit AES
+encryption&lt;/a&gt;. So no setup is even required for this added security. For
+my important files, I place them in a &lt;a href="http://en.wikipedia.org/wiki/TrueCrypt"&gt;TrueCrypt volume&lt;/a&gt; encrypted
+with 256-bit AES encryption. The encrypted container is synchronized to
+my &lt;a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/"&gt;Dropbox&lt;/a&gt; account so that I can use it anywhere while ensuring
+security. TrueCrypt is available on Windows, Mac, and Linux. It's only a
+matter of following the installation instructions to safeguard your
+files from prying eyes. All of these encryption tools are open-source
+and free. I configured them to work in the background and they don't
+hinder my work flow at all. It is certainly not a sophisticated setup,
+yet it isn't too dingy either. At the very least, if someone is to steal
+my notebook computer, an ordinary crook wouldn't be able to gain access
+to my sensitive information. In view of the fact that Quantisan Systems
+is just an one-man operation with practically no resource available, I
+can't believe security at some financial companies is worse than this
+homebrew setup. -----BEGIN PGP PUBLIC KEY BLOCK----- Version: GnuPG
+v1.4.11 (GNU/Linux)
+mQENBE1Ul0gBCACZGqPoYrzRF9YcuUvMeES+etPUAeNQ6uvw42k7Sf1ydBp3lFGQ
+ggYnOsmQ8Nf/62sB9CoYkAV+h+CPTuTOT5N4gwTojtPX3bIrjA6JgTDpt7bpwyMM
+j+mnZboXdBgZwz1xqiB38Oj51OBYPPLbTc/YphYfjXEuO4tQwsQufd5dvJqF+Yse
+CGeLRroJt9EmGVYW/NaCEBKHaMnD9gkDyWLxm7GFQYhl7ZWU+VQXjBxzZyYtpup2
+s1N5/igjiRj8t5CGnMwrG2yZkPW+n8m5sTLjcHWFY9OxiqFRaYgm9Vk3mVhxE5ML
+DPtSPySF+KkyIFxeL78MscU2W1DMH5pNM/+fABEBAAG0HVBhdWwgTGFtIDxwYXVs
+QHF1YW50aXNhbi5jb20+iQE+BBMBAgAoBQJNVJdIAhsjBQkFo5qABgsJCAcDAgYV
+CAIJCgsEFgIDAQIeAQIXgAAKCRD8QV1yPcrlhIphB/9cxkbWJ+19axfZxFYRE1u4
+Gq1p5/hkm3990yT8kc+4Qg7xa2cm+SgBmEnAy24xdQpR/Up/EF13D15ZBiE1SG+D
+0+EUZp4Ir5+TTuTrmJxKRb56IgFZVXP9KatNuK3aPvNFl4gZUZUZHmvUvvBzqtSM
+HrfzjmuirXVKI6M5WPZchLNUGE1sDtR2SR7l+rjvcPTehaJf+9srK1gsl3Vb3Pzo
+D5/JBoNK1ueDpfRxNhdryCUQr2uJ1pWLgauDz0iSRPOczV8x1n+051DJQXHx16tY
+I0VOErTVxscE/KeuuiiFwOwSLteIMDIY2vg6KuUw3cQxxMcfeNTu+jTJXuroib+O
+uQENBE1Ul0gBCAD05TZ2/oF1Lb8ggg9nKlgB+ZXWBVCc9CNlguZpZAmC7ezc72qT
+gSho/5+3ldEqvA1AxnWubaWV26QLL2fNybKd1DG9uYOsnOwx6L5H8toQswcurC9y
+3jKVQSpuIJrsrQiTT3aIZ3ZONGsg0k0D+ZiMC9qSLmFXh3f2fio5QsyRsEWlC9Qj
+CDXrgpNZqpDegMvvRXXJfRGulh4sMTGXrxE2pXI/+9Hv64+BuBMkixA7UwiOBQbd
+V5GkVm7V2hvgQpLc2QaXofLdBVIda6hvUuU/BK5m7HShNPKc21VgcSbYFOggYDal
+efTeFdCfHEg08ND8JSa2Bv+fdEmOFjPF5Z9hABEBAAGJASUEGAECAA8FAk1Ul0gC
+GwwFCQWjmoAACgkQ/EFdcj3K5YTRxAf8DspugdiTZUxIT/1EAa/0GWpsT8YZmITm
+0iUebID3jZRLXpyqfDr9KUZvk6IMYru1h6c6pZdzY4IJ/p/sZ+p2gtLr1pmOqEjd
+W94Q3adtjH/42zauFOdCzamtbc7Q5cJTIeAFcvFsVqDLWkK1vWiUhqUoacgN6TWS
+MActe4B7hYdcMWsbj4j3xVoGkkiJOL81/MJW9f/xDqcNbLsiEK7DxOaWUb2CkuUl
+7c/VVaSuWFBKGsj2fgEoTErfsmhjMm+WUcoE1Zjn2UwJzxxIcfzj3A0IEvMIua6u
+UJWnKv8t55G9f+NQ3yrKtPC/+O7N1sCSilmB/IekaSrBX9KvZgHM8Q== =DjK6 -----END
+PGP PUBLIC KEY BLOCK-----&lt;/p&gt;</summary><category term="security"></category></entry></feed>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - event-driven</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
+            </h1>
+            <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
+<ol>
+<li>are resource-intensive to generate,</li>
+<li>might need to compose many of them,</li>
+<li>not sequential or have one-to-one depencency, and</li>
+<li>most importantly, they are in separate programs or different machines</li>
+</ol>
+<p>Thus I've opted to abstract this problem out into its own module of the system as an event-driven finite state machine (FSM) to keep track of state transitions. Intimidating term, but my first implementation was just if-else statements to qualify as such. The benefit is that each of my system's components only need to push signals and pull states from a central interface without having to worry about what should it call next or poll anything else to see if the stars are aligned. That drastically simplified development and maintenance.</p>
+<p>The responsiblities of my FSM module are to:</p>
+<ol>
+<li>listen to all the signals,</li>
+<li>figure out all the transitions, and</li>
+<li>publish the latest states for the rest of the system.</li>
+</ol>
+<h2>Handling asynchronous events</h2>
+<p>I use RabbitMQ as the message transport layer between my system's modules. All I need to do here is to associate an appropriate message handler to each triggering input for the FSM. Here's one example of the event handlers using the <a href="http://clojurerabbitmq.info/">Clojure RabbitMQ library, Langohr</a>. The rest of this part are just standard RabbitMQ publish/subscribe stuff.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn- </span><span class="nv">event-message-handler</span> <span class="p">[</span><span class="nv">ch</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">headers</span> <span class="nv">delivery-tag</span> <span class="nv">redelivery?</span><span class="p">]}</span> <span class="o">^</span><span class="nv">bytes</span> <span class="nv">payload</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">message-type</span> <span class="nv">user-id</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">]}</span> <span class="p">(</span><span class="nf">read-payload</span> <span class="nv">payload</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="ss">:position-event</span> <span class="nv">message-type</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">get-cached-states</span> <span class="nv">user-id</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">update-position-state</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">cache-states</span> <span class="nv">user-id</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nf">lbc/ack</span> <span class="nv">ch</span> <span class="nv">delivery-tag</span><span class="p">))</span>
+</pre></div>
+
+
+<p>This is called when a position event is received with information such as user, instrument, and quantity. This handler would thread these information by fetching current states for that user, evaluate next state with input, and then cache the new states for the user.</p>
+<h2>State transitions</h2>
+<p>Below is one of my system's state transition diagrams.</p>
+<p><img alt="state transition example" src="http://www.quantisan.com/images/2013/qte_state_diagram.png" /></p>
+<p>There are 4 states represented by 4 colours with 4 triggers signalling state transition. The program is expected to handle up to hundreds of independent states concurrently with event triggers coming in a couple times per second.</p>
+<p>As I was saying, my first implementation is just a set of if-else methods. For example, an <code>engage</code> trigger would call the <code>engaging</code> method to determine the next state given the implicit input <code>engage</code> and current state.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">engaging</span>
+  <span class="p">[</span><span class="nv">current</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">current</span>
+    <span class="s">&quot;white&quot;</span> <span class="s">&quot;yellow&quot;</span>
+    <span class="s">&quot;yellow&quot;</span> <span class="s">&quot;white&quot;</span>
+    <span class="s">&quot;green&quot;</span> <span class="s">&quot;red&quot;</span>
+    <span class="s">&quot;red&quot;</span> <span class="s">&quot;green&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>There were a handful of these boilerplate code. So after I deployed my system I came back to refactor them. I've been meaning to give core.logic a try for a while so this seem like a good place to start using it.</p>
+<p>Before we can ask the logic solver question we need to define relations. Here I define a <code>transition</code> relation to specify all the state transition definition conveniently in one place.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="nf">defrel</span> <span class="nv">transition</span> <span class="nv">from</span> <span class="nv">input</span> <span class="nv">to</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">facts</span> <span class="nv">transition</span> <span class="p">[[</span><span class="nv">nil</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="nv">nil</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:engage</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:engage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:engage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:engage</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:open</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>And the event handler methods are just wrappers for a one-liner logic expression asking the question -- given current stage, <code>cur-state</code>, and input trigger, <code>input</code>, what state can <code>q</code> take to satisfy this constraint?</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">next-state</span> 
+  <span class="s">&quot;Solver for next state&quot;</span>
+  <span class="p">[</span><span class="nv">input</span> <span class="nv">cur-state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">run</span> <span class="mi">1</span> <span class="p">[</span><span class="nv">q</span><span class="p">]</span> <span class="p">(</span><span class="nf">transition</span> <span class="nv">cur-state</span> <span class="nv">input</span> <span class="nv">q</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-clicked</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:engage</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-deactivate</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:disengage</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">next-position-colour</span> <span class="p">[</span><span class="nv">cur</span> <span class="nv">open?</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if </span><span class="nv">open?</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:open</span> <span class="nv">cur</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:close</span> <span class="nv">cur</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>Not the most illustrative core.logic example but it does the job.</p>
+<p>Getting started with core.logic is surprisingly easy. I went through the <a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer">Primer</a> and <a href="https://github.com/swannodette/logic-tutorial">tutorial</a> and got this working in one try.</p>
+<h2>State caching and sharing</h2>
+<p>Now that the state transition have been taken care of, states are cached and served on Redis for other parts of the system. I use Redis for this because it is fast and easy. Values are stored in <a href="https://github.com/edn-format/edn">edn format</a> instead of something more popular like JSON to maintain data structure through the wire.</p>
+<p>This is my first time using edn in production. All inter-process messages in this trading system are edn formatted. It works seamlessly with Clojure by simply using <code>str</code> to write and <code>clojure.edn/read-string</code> to read. Besides my other Clojure components in the system, my trade broker interface is written in Java. My Java program use <a href="https://github.com/bpsm/edn-java">edn-java</a> to parse and unparse complex Clojure data structures (e.g. nested maps with keywords).</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">pool</span>         <span class="p">(</span><span class="nf">car/make-conn-pool</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">spec-server1</span> <span class="p">(</span><span class="nf">car/make-conn-spec</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defmacro </span><span class="nv">with-car</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span> <span class="o">`</span><span class="p">(</span><span class="nf">car/with-conn</span> <span class="nv">pool</span> <span class="nv">spec-server1</span> <span class="o">~@</span><span class="nv">body</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-cached-states</span>
+  <span class="s">&quot;Generate edn from database.&quot;</span>
+  <span class="p">[</span><span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">edn/read-string</span> <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/get</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">cache-states</span> <span class="p">[</span><span class="nv">m</span> <span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/set</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)</span> <span class="p">(</span><span class="nb">str </span><span class="nv">m</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>I find coupling edn with Redis is a fantastic choice as it's almost like working with Clojure's native concurrency data structures, such as <code>atom</code>, but also enable external programs to access the data.</p>
+<h2>Simple and quick</h2>
+<p>The entire event-driven FSM program is less than 200 lines of Clojure code and took no more than a few hours to do. However, I did give it some pondering time for a few days. I haven't done any benchmark to estimate performance result. So all I can say is that this setup can handle my simplistic use case with barely any load on the server so I'm happy with it.</p>
+<p>A few years ago, I would have set a whole bunch of flags to switch states. In fact, <a href="https://github.com/Quantisan/JFFramework">that's what I did</a>. The biggest satisfaction here for me isn't the implementation or technologies, it is seeing through the underlying problem at hand and solving it with a common pattern that made my work simpler.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/' title='2013-05-20T00:00:00'>20 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

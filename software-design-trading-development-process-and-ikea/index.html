@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Software design, trading development process, and Ikea - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/software-design-trading-development-process-and-ikea/" rel="bookmark">Software design, trading development process, and Ikea</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>I spent a few months between 2010 and 2011 not on the market, not on
+coming up with new strategies, but on developing a software framework
+for my trading system. For my trading strategy development, I make use
+of a continuous systems development life cycle process from the
+engineering realm. Starting from planning, to analysis, to design, to
+implementation, to maintenance, and finally, back to planning, and so on
+for each and every new concept that I have. (see <a href="http://www.wired.com/epicenter/2011/04/in-praise-of-failure/all/1">Sir James Dyson's
+guest column on Wired</a>) Imagine that if you need to write a new
+strategy file for each and every idea and for each of its design
+iteration. Pretty soon you'll have many strategy files and a lot of
+boilerplate codes. What if you found a bug or figured out some
+enhancements to a particular component of your strategy? Then you'll
+have to sift through all those files and make the changes to all those
+relevant codes to make the update across the board. Hopefully, this
+isn't the approach you're taking. Yet, a few trading API that I have
+used before inherently encourage or even limit you (<a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">EasyLanguage and
+MQL4</a>) to this archaic procedural programming paradigm. Luckily, Java
+is an object-oriented programming language. However, it is only as
+object-oriented as you make it to be. JForex, <a href="http://www.quantisan.com/tag/jforex">the trading API that I
+use</a>, actually runs on <a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/">the edge of breaking this
+object-orientedness</a> as I have recently lamented. The bad news for the
+beginning developer is that practically every published strategy which I
+have seen or <a href="http://www.quantisan.com/tag/source-code/">guilty of posting myself</a> are illustrations of what not
+to do with software design. In that there's none in it whatsoever. Think
+of common published strategies like the Ikea mini-model showrooms.
+Everything is crammed into a tiny space but it is a simple way to convey
+the gist of a room design (read: the trading algorithm). However, they
+are not built for practical use. Real strategies are like suites in an
+apartment building. There is an underlying architectural commonality for
+easy management and maintenance while enabling diversity in the
+strategies. My recently completed software framework dramatically made
+my life easier in the tasks of implementation and maintenance. Software
+maintenance, in particular, is most often needlessly and overly
+complicated in trading strategy development because of the lack of a
+good design. Because at the end of the day, most programmers spend the
+majority of their time debugging, maintaining, and extending their code.
+A true object-oriented design decouples all its components so that you
+can use a divide and conquer approach with no repetition of work. Do you
+have a development process in place? I'd like to hear how you tackle
+this problem.</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2011-04-12T07:30:00'>
+                Posted 12 April 2011
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/development/">development</a>
+            <a href="http://www.quantisan.com/tag/software design/">software design</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "software-design-trading-development-process-and-ikea/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

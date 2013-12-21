@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel="bookmark">Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2010-03-11T07:29:00'>
+                Posted 11 March 2010
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>
+            <br />Tags:
+            <a href="http://www.quantisan.com/tag/Canada/">Canada</a>
+            <a href="http://www.quantisan.com/tag/data scraping/">data scraping</a>
+            <a href="http://www.quantisan.com/tag/python/">python</a>
+            <a href="http://www.quantisan.com/tag/source code/">source code</a>
+            <a href="http://www.quantisan.com/tag/TSX/">TSX</a>
+            <a href="http://www.quantisan.com/tag/TSX Venture/">TSX Venture</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

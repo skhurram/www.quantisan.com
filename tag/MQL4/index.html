@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - MQL4</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/porting-jforex-qtd-to-metatrader-4/" rel='bookmark'>Porting JForex QTD to Metatrader 4</a>
+            </h1>
+            <div class="article-content"> <p>I just finished porting <a href="http://www.quantisan.com/quantised-trading-desk/">Quantised Trading Desk</a> to Metatrader 4. So
+that I can make use of my dormant trading account at Oanda. Seeing that
+Oanda has enabled use of Metatrader 4, I thought I might <a href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/">give them a
+second try</a>. I've always preferred to have more than one active
+trading accounts to serve as a backup and comparison. I settled on
+Questrade and TD Waterhouse for stocks and options, after hopping around
+brokerages for years. And I've been using Dukascopy to trade forex
+<a href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/">after much contention</a>. This is a good chance to diversify as I don't
+want to pigeonhole myself into one broker and one platform. The move to
+Metatrader 4 up until this point only took a couple of weeks as opposed
+to JForex version's year-long development time. This is because the
+underlying QTD system dynamics and algorithms were ironed out in JForex.
+I don't think I can finish QTD if I only had MQL4 at my disposal.
+Debugging and extending MQL4 scripts are a nightmare to say the least. I
+am so glad that I <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">moved away from these "easy" languages</a>. For the
+MQL4 version of QTD, I am merely doing a direct source code port from
+JForex to MQL4. MQL4, if anything else, is a very easy scripting
+language. I just taped out an alpha version of MT4 QTD this weekend as
+it is up to a stage where it is functional. However, porting QTD to MQL4
+isn't without its difficulties. For one, MQL4 is tailored for simple
+trading with technical analysis indicators. If price move above moving
+average, go long, for example. Whereas QTD rely on statistics and
+numerical methods in its trading algorithm. As such, I had to go back to
+basics and define all of my numerical methods from the fundamentals. I
+am now moving on to do forward testing on the MT4 QTD to ensure that
+both the JForex and the MT4 versions work similarly. I can't wait til I
+can run QTD on Dukascopy and Oanda simultaneously.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/porting-jforex-qtd-to-metatrader-4/' title='2011-05-16T07:30:00'>16 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/" rel='bookmark'>Why I am not a big fan of MQL4 or trading platform scripting</a>
+            </h1>
+            <div class="article-content"> <p>I spent most of 2008 trading futures and developing automated systems on
+Tradestation. The futures trading didn't turn out so well as I lost 40%
+of my account and had to <a href="http://www.quantisan.com/retirement-from-futures-trading-and-back-to-stocks/">call it quit</a>. My quant development work on
+the other hand, was coming along slow but steadily. However, since I
+couldn't bear the monstrous maintenance fee anymore at <a href="http://www.tradestation.com/">Tradestation</a>,
+I had to abandon that work. Then last year <a href="http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/">when I wanted to pick up
+where I left off</a> on Matlab, I found that I couldn't just continue my
+work. For one, I've lost most of my files. I think I left them in my
+other computer in Hong Kong. Which is probably in a landfill by now.
+Secondly, I didn't keep a thorough journal <a href="http://www.quantisan.com/2008/">back then in 2008</a> like
+I'm doing now. Lastly, from the important files that I've kept, I didn't
+bother to convert the codes because I might as well write new ones from
+scratch than figure out what I did. The reason why I am reminiscing at
+the moment is because I am finding myself in the same cycle again. As
+regular readers may be aware, <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">recent events</a> have accelerated my
+quant projects schedule. I am experimenting with using Metatrader 4 for
+my foreign exchange trading and scripting in MQL4 for automated trading.
+Like Tradestation, <a href="http://www.metaquotes.net/en/metatrader4">Metatrader 4</a> is a trading platform with scripting
+capabilities. Its programming language, MQL4, is a proprietary language
+based on C. I took a few hours this weekend to learn it (as I'm familiar
+with C already). So that I can start coding this week. However, after
+giving it more thought, I've decided to scale down on my projects with
+MQL4. I don't want to rely on a proprietary system for short-term
+convenience. As trading programmers know, the language used is merely a
+choice. Experience tells me that the bulk of development time is not
+spent on the actual programming itself. Rather, much of the time is
+spent on formulating, analyzing, and optimizing your algorithm. So I
+might as well bite the bullet to build from scratch my automated trading
+systems and quant analytics on one platform (i.e. on Python). That has
+been my long term plan all along. Everything under one roof. But I
+digressed. Then there's the issue of re-useability. Metatrader 4 is
+forex-only and only works with brokers that support it. As such, I would
+have to use something else for stock trading. Even for a forex-only
+system, it would help if I can do intermarket analysis quantitatively.
+That's not possible as far as I know with MQL4. Which is another major
+downside for me. To summarize other reasons on how I came about this
+decision, here are the advantages and disadvantages of using MQL4 versus
+using a general programming language, such as Python or C++. The
+advantages of using MQL4 are:</p>
+<ol>
+<li>Saves A LOT of development time as it's already built for trading</li>
+<li>Charting, manual and automated trading on one platform</li>
+<li>Based on the popular C programming language</li>
+<li>Many forex traders use it</li>
+<li>Large repertoire of forex-specific programs</li>
+</ol>
+<p>Disadvantages of using MQL4.</p>
+<ol>
+<li>Not for real quant analysis or data mining</li>
+<li>Limited to MT4-supported brokers</li>
+<li>Forex trading only</li>
+<li>Proprietary programming language</li>
+<li>Must run on Metatrader 4 client terminal</li>
+<li>MQL5 coming soon</li>
+</ol>
+<p>This is certainly a tough choice. Judging by the huge user base, it's
+evident that many people are satisfied with MQL4. Yet, as I've discussed
+here, there are downsides to using it (besides technical matters). My
+current plan remains the same as what I said in <a href="http://www.quantisan.com/january-2010-trading-performance-review/">my last month's trading
+review</a>. That is, I will use MQL4 to plug holes in my trading system
+for now before migrating to build my own system. In fact, I am already
+brewing my first expert advisor starting today. Perhaps I might even
+have something to post by the end of this week.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/' title='2010-02-08T13:38:00'>08 February 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

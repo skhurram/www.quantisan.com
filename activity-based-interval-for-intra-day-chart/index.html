@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Activity based interval for intra-day chart - Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+<article>
+    <h1 class="title">
+        <a href="http://www.quantisan.com/activity-based-interval-for-intra-day-chart/" rel="bookmark">Activity based interval for intra-day chart</a>
+    </h1>
+
+    <div class='article-content'>
+        <p>A concern I've always had with the traditional charts is that the idea
+of open and close for each bar doesn't have much meaning on intra-day
+charts. In daily chart, open and close represents prices for the
+session, which gapped for hours overnight. But on intra-day chart, say
+in a 5-minute chart, each bar's open and close are merely what just
+happens to be the price at the beginning and end of that 5 minute
+period.</p>
+<p>The problem though, is that many technical analysis uses only the
+closing price, which is entirely arbitrary and has no significance. A
+better way would be to use a volume weighted median price in the period
+to represent the real "activity." However, there doesn't seem to be an
+easy way of getting that data in TradeStation (TS).</p>
+<p>Fortunately, I found out that charting in TS is not limited to time
+based data. Prices can be charted based on an activity interval too. A
+bar can represent, say, 100 ticks or 100 contracts. So the interval of
+the bar can have a real meaning. Below is a 100 contracts/bar chart of
+ZGG08 from this morning. Compare with the 4 min. chart below it. The 100
+chart is less erratic.</p>
+<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s400/100sharebarschart.jpg" />][]</p>
+<p>[<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s400/4minbarschart.jpg" />][]More testing will be done using activity interval tomorrow.</p>
+<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s400/100sharebarschart.jpg" />]: http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s1600-h/100sharebarschart.jpg
+  [<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s400/4minbarschart.jpg" />]: http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s1600-h/4minbarschart.jpg</p>
+    </div>
+
+    <div class='post-footer'>
+        <div class='share-footer'>
+            <div id='dated' class="abbr published" title='2008-01-03T22:06:00'>
+                Posted 03 January 2008
+            </div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_pinterest_pinit"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=quantisan"></script>
+<!-- AddThis Button END -->
+ 
+        </div>
+
+        <div id="article_meta">
+            Category:
+            <a href="http://www.quantisan.com/category/trading/">trading</a>
+        </div>
+
+
+    </div>
+</article>
+
+<footer>
+    <a href="http://www.quantisan.com/" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;Back to blog</a>
+</footer>
+
+<div id="comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    var disqus_identifier = "activity-based-interval-for-intra-day-chart/";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://quantisan-blog.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view <a href="http://disqus.com/?ref_noscript">comments</a>.</noscript>
+</div>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

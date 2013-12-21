@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/forex-position-sizer/" rel='bookmark'>Forex position sizer</a>
+            </h1>
+            <div class="article-content"> <p>Below is a spreadsheet of <strong>real-time</strong> (end of day data), statistically
+determined maximum recommended position size for accounts in US Dollar,
+Euro, Japanese Yen, Australian Dollar, Swiss Franc, British Pound, or
+Canadian Dollar. The table is for use with trading major forex pairs and
+crosses in the daily timeframe. These target maximum units are based on
+an at-risk amount per trade of \$100 in U.S. dollar (and numerically
+equivalent in other home currencies) to expect for 2 standard deviations
+(95th percentile) of the daily ranges for each of the corresponding
+currency trade pair.
+<iframe width="580" height="700" frameborder="0" src="http://spreadsheets.google.com/pub?key=tDkmtohmo9jD1jAX_xRGegg&amp;single=true&amp;gid=19&amp;output=html&amp;widget=true"></iframe>
+In case the spreadsheet data doesn't load (which happens often as there
+are a lot of calculations behind it), here's <a href="http://www.quantisan.com/static/images/img_archive/2010-02-07-ForexPositionSizer.png">a link to an image capture
+of the table</a> taken on February 7, 2010. You can convert these
+published units to correspond with your own risk appetite by multiplying
+the units shown with the number of times of your own portfolio risk
+amount with respect to \$100. For example, if your forex account has USD
+\$25,000 and you're willing to risk 1% on each trade, that amounts to
+\$250 risked per trade, which is 2.5 times of \$100. Say if you want to
+trade EUR/JPY, look up EUR/JPY on Table 1 (since you're using USD) to
+find that the target position size is 6175 (as of this writing). Simply
+times 2.5 of that number, which equal 15,438 units. The target maximum
+number of units is calculated as follow for each currency pair.</p>
+<ol>
+<li>Calculate the daily range (high - low) for the past 45 days up to
+    yesterday. The data and tables are updated at the end of each day.</li>
+<li>Calculate the standard deviation for the ranges.</li>
+<li>Solve the formula: Units = Risk Amount / [2sigma * Quote(2nd
+    currency/base currency)]</li>
+</ol>
+<p>Scroll the horizontal bar beneath the table to move the view to your
+account's base currency. It is best if you copy and paste the data
+because the connection to Google Finance is not guaranteed. So the table
+might not work at times. The pairs/crosses listed in the table are as
+follow: AUD/JPY, AUD/USD, CAD/JPY, EUR/CHF, EUR/GBP, EUR/JPY, EUR/USD,
+GBP/JPY, GBP/USD, NZD/USD, USD/CAD, USD/CHF, USD/JPY. If you like this
+tool, check out <a href="http://www.quantisan.com/tools/">my other tools</a> or my posts on <a href="http://www.quantisan.com/category/quantitative-finance/">quantitative
+finance</a>. Did you find what you're looking for? Feel free to <a href="http://www.quantisan.com/contact/">contact
+me</a> with any suggestion or opinion so that I can improve this tool for
+everyone!</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/forex-position-sizer/' title='2009-10-21T18:15:00'>21 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/paper-trade-short-gbpusd-50-1634-out-1645-110-pips/" rel='bookmark'>Paper trade: Short GBP/USD 50% @ 1.634, Out 1.645 (-110 pips)</a>
+            </h1>
+            <div class="article-content"> <p>Well, that descending trendline didn't last long for GBP/USD. I shorted
+it when it was testing it and saw that the RSI was at a prior high too
+(Fig. 1). I placed my order just below the short-term ascending support
+to hope for a break to the downside, see Fig. 2. GBP/USD consolidated
+around that short-term support for a few hours and has now broken upward
+to a strong resistance at 1.6600. It's the top of a previous congestion
+zone, highlighted rectangle in Fig. 1. GBP/USD at 1.666 is a very
+tempting short, but never short a new high, as my rules say. So I'm
+gonna wait for a few more hours with this and see how it goes. Position
+size: 50% Entry: 1.634 Stop: 1.645, stopped out. Target: 1.6100 Reward /
+Risk = 240 / 110 = 2.2 \&lt; 3, so only 50% position. I think I'll stick
+with the 3 factor as a limit. Even these 2+ trades aren't working so
+well for me because my probability of success has been low.</p>
+<p>[caption id="" align="aligncenter" width="580"
+caption="GBP/USD"][<img alt="GBP/USD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-21-gbpusd.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-21-gbpusd.png">GBP/USD</a>[/caption] [caption id=""
+align="aligncenter" width="580" caption="GBP/USD, 3 hour"][<img alt="GBP/USD, 3
+hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-21-gbpusd_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-21-gbpusd_3h.png">GBP/USD, 3 hour</a>[/caption]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/paper-trade-short-gbpusd-50-1634-out-1645-110-pips/' title='2009-10-21T09:36:00'>21 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/paper-trade-short-audjpy-50-8360-stop-8550/" rel='bookmark'>Paper trade: Short AUD/JPY 50% @ 83.60, Stop 85.50</a>
+            </h1>
+            <div class="article-content"> <p>I placed this order to short AUD/JPY before going to bed last night. The
+order was filled overnight. I have tweaked my strategy a little and this
+is a first test. I think I need to start naming my strategies and giving
+them version number. It will make it easier to keep track in <a href="http://www.quantisan.com/trade-log/">my trading
+log</a> and for quick comparisons. Here's what I saw to make me throw my
+dice at this pair. Figure 1 is the daily and Figure 2 is the 3-hour
+chart. My reasoning are as follow:</p>
+<ol>
+<li>AUD/JPY is testing the top of a channel, Fig. 1</li>
+<li>Its RSI is pushing above 80, a level not seen since January when it
+    was trading about 67.50.</li>
+<li>USD/JPY tested 91 and headed downward.</li>
+<li>AUD/USD heading up to the sky with a worsening divergence.</li>
+<li>EUR/JPY (a recent <a href="http://www.quantisan.com/paper-trade-closed-eurjpy-135-00-500-1-pips/">+500 pips trade</a>) failed to break 136 and
+    showing an evident negative divergence too.</li>
+<li>Short term testing of ascending support line, Fig. 2. (Should have
+    given this more room though)</li>
+</ol>
+<p>Position size: 50%, another 50% waiting to enter below 82.90 Entry:
+83.60 Stop: 85.50, see Fig. 1. Target: 77.50, bottom of channel, see
+Fig. 1. Reward / Risk =610 / 190 = 3.2. The stop is a lot wider than my
+previous trades because I'm finding it not worth my time to micro-manage
+my trades. However, notice that my total position size is adjusted
+accordingly to not risk more than 1% of my forex portfolio in a trade.
+My focus is on the daily so it's only natural to give it more room as
+I'm not a prophet and couldn't tell when a trade would work out. This is
+one of the revision made to this strategy as learned from my recent
+lessons. A trade is only as good as what you have learned from it.
+Profit is only secondary.</p>
+<p>[caption id="" align="aligncenter" width="580"
+caption="AUD/JPY"][<img alt="AUD/JPY" src="http://traderpau.files.wordpress.com/2009/10/2009-10-20-audjpy.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-20-audjpy.png">AUD/JPY</a>[/caption] [caption id=""
+align="aligncenter" width="580" caption="AUD/JPY, 3-hour"][<img alt="AUD/JPY,
+3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-20-audjpy_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-20-audjpy_3h.png">AUD/JPY, 3-hour</a>[/caption]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/paper-trade-short-audjpy-50-8360-stop-8550/' title='2009-10-20T09:37:00'>20 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/paper-trade-closed-eurjpy-13500-5001-pips/" rel='bookmark'>Paper trade: Closed EUR/JPY @ 135.00 (+500.1 pips)</a>
+            </h1>
+            <div class="article-content"> <p>I closed my successful EUR/JPY long just before the weekend with a tight
+stop. Notice from Figure 1 that EUR/JPY is now in overbought territory.
+In addition, a negative divergence is developing on the RSI from the
+recent 2 peaks also at 135.00. The best thing about this trade was <a href="http://www.quantisan.com/paper-trade-eurjpy-long-100-129-99-stop-128-80/">my
+entry</a>. However, I certainly didn't chop this setup the best I could.
+Even though I rode this up for +500 pips, I only had a 50% position
+size. There were two easily identifiable adding points which I could
+have taken advantage of. When EUR/JPY broke above 132.00, which was a
+clear short-term resistance, a day after my entry I should have added to
+my position then because of short-term momentum. Another chance came at
+132.50 or so. As shown in Figure 2, when the price retested the low end
+of the channel at 132.50. Both of these opportunities would have
+survived with my usual stop of 100 pips. Another disappointment was that
+my second half of the position was stopped out shortly because I moved
+my stop up too soon. I was confident enough when I placed the order to
+enter a full position size. But my over-zealous need to reduce risk got
+the better of me. I observed on a daily time frame but traded in the
+3-hour. To be more accurate in pointing the finger, it was my lack of
+patience that stopped out my other half of the position. Anyway, I did
+rode the wave with a sufficient position size. One thing I just noticed
+is the T formation in Figure 2. EUR/JPY is back to where it started a
+month ago. Where it heads now is uncertain. I will keep an eye on this
+pair and aim to re-enter another long in a few days. The trend is your
+friend.</p>
+<p>[caption id="" align="aligncenter" width="580"
+caption="EUR/JPY"][<img alt="EUR/JPY" src="http://traderpau.files.wordpress.com/2009/10/2009-10-16-eurjpy.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-16-eurjpy.png">EUR/JPY</a>[/caption] [caption id=""
+align="aligncenter" width="580" caption="EUR/JPY, 3-hour"][<img alt="EUR/JPY,
+3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-16-eurjpy_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-16-eurjpy_3h.png">EUR/JPY, 3-hour</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/paper-trade-closed-eurjpy-13500-5001-pips/' title='2009-10-16T16:40:00'>16 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/paper-trade-long-usdcad-25-102988-stop-102080/" rel='bookmark'>Paper trade: Long USD/CAD 25% @ 1.02988, stop 1.02080</a>
+            </h1>
+            <div class="article-content"> <p>This log is written about 18 hours after the entry. I entered long
+USD/CAD at the market last night for a 1/4 position size. USD/CAD took a
+brief run up of about 100 pips. Naturally, I moved the stop to just
+above breakeven to make this a risk-free trade for over the weekend. I
+entered this position for the following reasons:</p>
+<ol>
+<li>Strong support at 1.0300, Fig. 1.</li>
+<li>Positive divergence of lower low, higher RSI since August.</li>
+<li>Break of short-term resistance, see Fig. 2</li>
+</ol>
+<p>Note that both Figures were taken at the time of entry 18 hours ago.
+Position size: 25% Entry: 1.02988 Stop: 1.02080 Target: 1.0550, although
+1.0400 might be hard to break. Reward / Risk = 251.2 / 90.8 = 2.7 \&lt; 3.
+That's why I'm only entering a 1/4 position to test the water.</p>
+<p>[caption id="" align="aligncenter" width="580"
+caption="USD/CAD"][<img alt="USD/CAD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-15-usdcad.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-15-usdcad.png">USD/CAD</a>[/caption] [caption id=""
+align="aligncenter" width="580" caption="USD/CAD, 3-hour"][<img alt="USD/CAD,
+3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-15-usdcad_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-15-usdcad_3h.png">USD/CAD, 3-hour</a>[/caption]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/paper-trade-long-usdcad-25-102988-stop-102080/' title='2009-10-16T15:57:00'>16 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/missed-opportunity-review-gbpjpy-spiked-500-pips-in-24-hours/" rel='bookmark'>Missed opportunity review: GBP/JPY spiked 500 pips in 24 hours</a>
+            </h1>
+            <div class="article-content"> <p>It looks as though my analysis for <a href="http://www.quantisan.com/paper-trade-50-long-gbpjpy-in-142-861-stop-141-16/">GBP/JPY making a reversal</a> was
+correct. However, my short term entry needed to be improved for me to
+profit on my intermediate term analysis. In particular, I should have
+looked at a major short term resistance line instead of an arbitrary
+weak resisitance line as I did when I <a href="http://www.quantisan.com/paper-trade-50-long-gbpjpy-in-142-861-stop-141-16/">entered the long
+previously</a>. That didn't go so well as I was
+<a href="http://www.quantisan.com/paper-trade-stopped-out-gbpjpy-141-70-116-10-pips/">stopped out soon afterward</a> when GBP/JPY was consolidating. In
+hindsight, if I'm to try for a reversal, at least wait for the price to
+break a strong short term resistance and then use the recent low as the
+stop. The preferred resistance line for GBP/JPY in this missed trade can
+be seen in Fig. 1, which I drew many days ago and <a href="http://www.quantisan.com/paper-trade-50-long-gbpjpy-in-142-861-stop-141-16/">also can be
+seen</a> in my previous entry (Figure 2 on that
+page, the higher of the 2 lines). New Figure 2 attached below shows the
+bigger picture of GBP/JPY in a daily chart to see what could have
+perspired. My target of 148 was spot on too!</p>
+<p>[caption id="" align="aligncenter" width="580" caption="GBP/JPY,
+3-hour"][<img alt="GBP/JPY, 3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-15-gbpjpy_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-15-gbpjpy_3h.png">GBP/JPY, 3-hour</a>[/caption] [caption id=""
+align="aligncenter" width="580"
+caption="GBP/JPY"][<img alt="GBP/JPY" src="http://traderpau.files.wordpress.com/2009/10/2009-10-15-gbpjpy.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-15-gbpjpy.png">GBP/JPY</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/missed-opportunity-review-gbpjpy-spiked-500-pips-in-24-hours/' title='2009-10-15T22:40:00'>15 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/category/forex//index8.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/category/forex//index10.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/strangle_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2009-06-23T10:27:00+01:00</updated><entry><title>Bought +2 Strangle GLD 100 JUL 09 91/90 CALL/PUT @3.15 ISE, GLD mark $90.11</title><link href="http://www.quantisan.com/bought-2-strangle-gld-100-jul-09-9190-callput-315-ise-gld-mark-9011/" rel="alternate"></link><updated>2009-06-23T10:27:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-06-23:bought-2-strangle-gld-100-jul-09-9190-callput-315-ise-gld-mark-9011/</id><summary type="html">&lt;p&gt;GLD tanked further and then hovered around \$90 today. Seeing that \$90
+is a major pivot point and is in the middle of a large trading range
+(Figure 2), I'm placing an options strangle to bet that it's going to
+move outside of the immediate \$90 region. The breakeven move required
+is below \$86.85 or above \$94.15. Which is about 3.5%.&lt;/p&gt;
+&lt;p&gt;Note the Bollinger Bands on the daily chart, Figure 1 right-side,
+depicting the lower and upper boundary to be \$88.30 and \$95.91.
+Furthermore, the Bollinger Bandwidth is near the bottom of the channel,
+which means volatility has been low.&lt;/p&gt;
+&lt;p&gt;I have set an alert at \$3.00 on the strangle premium. This should
+signal looking for an exit. However, it's obvious now that I'm horrible
+at setting stops on a strangle. For this trade, I'm going to treat the
+long and short side separately. So once a move has started, I'll place
+stops for the in-play side of the trade.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1540" align="aligncenter" width="500"
+caption="Gold Shares SPDR"][&lt;img alt="Gold Shares SPDR" src="http://traderpau.files.wordpress.com/2009/06/2009-06-23-gld.png" title="2009-06-23-GLD" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1541" align="aligncenter" width="500"
+caption="Gold Shares SPDR"][&lt;img alt="Gold Shares SPDR" src="http://traderpau.files.wordpress.com/2009/06/2009-06-23-gld_prop.png" title="2009-06-23-GLD_prop" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="Gold Shares SPDR" src="http://traderpau.files.wordpress.com/2009/06/2009-06-23-gld.png" title="2009-06-23-GLD" /&gt;]: http://traderpau.files.wordpress.com/2009/06/2009-06-23-gld.png
+  [&lt;img alt="Gold Shares SPDR" src="http://traderpau.files.wordpress.com/2009/06/2009-06-23-gld_prop.png" title="2009-06-23-GLD_prop" /&gt;]: http://traderpau.files.wordpress.com/2009/06/2009-06-23-gld_prop.png&lt;/p&gt;</summary><category term="GLD"></category><category term="options"></category><category term="strangle"></category></entry><entry><title>Bought +3 STRANGLE XLF 100 JUN 09 13/12 CALL/PUT @.69</title><link href="http://www.quantisan.com/bought-3-strangle-xlf-100-jun-09-1312-callput-69/" rel="alternate"></link><updated>2009-06-01T10:15:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-06-01:bought-3-strangle-xlf-100-jun-09-1312-callput-69/</id><summary type="html">&lt;p&gt;I bought three 13/12 June strangles as XLF is hanging around \$12.50
+today. My reasons are as follows:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;S&amp;amp;P500 is approaching 950 on a giant gap up today. This is an
+    important pivot on many levels. So we either turn back down or break
+    upward from here. Either way, we're at the top of a month-long
+    trading range from beginning of May. See Figure 1.&lt;/li&gt;
+&lt;li&gt;XLF is testing a trendline from May 2008. This line has been well
+    respected for a year. So a significant move is expected. See Figure
+    2.&lt;/li&gt;
+&lt;li&gt;XLF is now at the neckline of an inverse-head-and-shoulder formation
+    and in the middle of a big trading zone, from around \$9.15 to
+    \$15.33. Again, we either break up or not with a big move. See
+    Figure 2 again.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Risk: \$0.69&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+Stop: if the total premium falls below \$0.50&lt;/p&gt;
+&lt;p&gt;Target: \$15.33 to the upside and \$9.15 to the downside.&lt;/p&gt;
+&lt;p&gt;Reward / Risk = 2.83 / 0.69 = 4.1 (upside) AND 3.35 / 0.69 = 4.86
+(downside). Both are less than 5.0, but that's because I'm calculating
+using the maximum potential loss. The R/R would be above 5.0 if I use my
+exit stop of \$0.50 on the premium.&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1497" align="aligncenter" width="500"
+caption="S&amp;amp;P 500 ETF"][&lt;img alt="S&amp;amp;P 500 ETF" src="http://traderpau.files.wordpress.com/2009/06/2009-06-01-spy.png" title="2009-06-01-SPY" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1498" align="aligncenter" width="500"
+caption="Financial Sector SPDR ETF"][&lt;img alt="Financial Sector SPDR
+ETF" src="http://traderpau.files.wordpress.com/2009/06/2009-06-01-xlf_prop.png" title="2009-06-01-XLF_prop" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[caption id="attachment_1499" align="aligncenter" width="500"
+caption="Financial Sector SPDR ETF"][&lt;img alt="Financial Sector SPDR
+ETF" src="http://traderpau.files.wordpress.com/2009/06/2009-06-01-xlf.png" title="2009-06-01-XLF" /&gt;][][/caption]&lt;/p&gt;
+&lt;p&gt;[&lt;img alt="S&amp;amp;P 500 ETF" src="http://traderpau.files.wordpress.com/2009/06/2009-06-01-spy.png" title="2009-06-01-SPY" /&gt;]: http://traderpau.files.wordpress.com/2009/06/2009-06-01-spy.png
+  [&lt;img alt="Financial Sector SPDR ETF" src="http://traderpau.files.wordpress.com/2009/06/2009-06-01-xlf_prop.png" title="2009-06-01-XLF_prop" /&gt;]: http://traderpau.files.wordpress.com/2009/06/2009-06-01-xlf_prop.png
+  [&lt;img alt="Financial Sector SPDR ETF" src="http://traderpau.files.wordpress.com/2009/06/2009-06-01-xlf.png" title="2009-06-01-XLF" /&gt;]: http://traderpau.files.wordpress.com/2009/06/2009-06-01-xlf.png&lt;/p&gt;</summary><category term="entry"></category><category term="options"></category><category term="strangle"></category><category term="XLF"></category></entry></feed>

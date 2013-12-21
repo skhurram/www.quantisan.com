@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/algorithm_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-11-06T17:37:00+00:00</updated><entry><title>Algorithmic ownage</title><link href="http://www.quantisan.com/algorithmic-ownage/" rel="alternate"></link><updated>2011-11-06T17:37:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-11-06:algorithmic-ownage/</id><summary type="html">&lt;p&gt;I felt good when I simplified one of my algorithms and sped it up 10
+times. I felt so good that I even wrote an entire blog post about it
+&lt;a href="/eureka-moment-on-design-patterns-for-functional-programming/"&gt;patting myself on the back&lt;/a&gt;. Then last week I got an email from Kevin
+of &lt;a href="http://keminglabs.com/"&gt;Keming Labs&lt;/a&gt; suggesting a few alternatives.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c1"&gt;;;Three ways to count the number of occurrences in a collection&lt;/span&gt;
+&lt;span class="c1"&gt;;; (&amp;quot;orange&amp;quot; &amp;quot;bottle&amp;quot; &amp;quot;coke&amp;quot; &amp;quot;bottle&amp;quot;) =&amp;gt; [(&amp;quot;bottle&amp;quot; &amp;quot;coke&amp;quot; &amp;quot;orange&amp;quot;) (2 1 1)]&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;orange&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;bottle&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;coke&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;bottle&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;reduce &lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;conj &lt;/span&gt;&lt;span class="nv"&gt;%1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;hash-map &lt;/span&gt;&lt;span class="nv"&gt;%2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;inc &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;get &lt;/span&gt;&lt;span class="nv"&gt;%1&lt;/span&gt; &lt;span class="nv"&gt;%2&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+                       &lt;span class="p"&gt;{}&lt;/span&gt; &lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+    &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;keys &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vals &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;l&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;for &lt;/span&gt;&lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;group-by&lt;/span&gt; &lt;span class="nb"&gt;identity &lt;/span&gt;&lt;span class="nv"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+            &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;count &lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt;&lt;span class="p"&gt;)])]&lt;/span&gt;
+    &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;map first &lt;/span&gt;&lt;span class="nv"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map second &lt;/span&gt;&lt;span class="nv"&gt;l&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;
+
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let &lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply merge-with &lt;/span&gt;&lt;span class="nv"&gt;+&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;map &lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;apply hash-map &lt;/span&gt;&lt;span class="nv"&gt;%&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;partition&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;interleave &lt;/span&gt;&lt;span class="nv"&gt;c&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;repeat &lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)))))]&lt;/span&gt;
+    &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nb"&gt;keys &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;vals &lt;/span&gt;&lt;span class="nv"&gt;counts&lt;/span&gt;&lt;span class="p"&gt;)]))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;First of all, his solutions looked much cleaner &lt;a href="/eureka-moment-on-design-patterns-for-functional-programming/"&gt;than mine&lt;/a&gt;. Then over
+the weekend I was able to incorporate his 3 algorithms into my program.
+I ran a few benchmarks and here are the average of 2 tests using a
+dataset of 28,760 items.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;My algorithm. Elapsed time: 68372.026532 msecs.&lt;/li&gt;
+&lt;li&gt;Kevin's solution #1. Elapsed time: 156.940976 msecs.&lt;/li&gt;
+&lt;li&gt;Kevin's solution #2. Elapsed time: 60.165483 msecs.&lt;/li&gt;
+&lt;li&gt;Kevin's solution #3. Elapsed time: 296.162042 msecs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Total ownage. That's what I like about sharing my
+work; once in a blue moon, a reader drops by and generously show
+me how I can improve a solution 1,000 times! Now the ball is in my hands
+to understand what he has done and improve myself. Collaborating and
+learning, that's why I open source.&lt;/p&gt;
+&lt;p&gt;Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of &lt;a href="http://clojure.org/transients"&gt;transients&lt;/a&gt; in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.&lt;/p&gt;</summary><category term="algorithm"></category><category term="clojure"></category></entry></feed>

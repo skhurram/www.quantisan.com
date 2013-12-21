@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/" rel='bookmark'>I've quit my day job and moved to the UK to do this full time</a>
+            </h1>
+            <div class="article-content"> <p>My wife is pursuing graduate study at Oxford. So I'm taking this rare
+opportunity to quit my day job and concentrate on developing trading
+systems full time. I am also doing some consulting to keep in touch with
+civilization. I have just one project at the moment building a customer
+relation system for a friend's financial services startup.</p>
+<p>Now for some self-promotion. I specialise in building software systems
+for information discovery, and of course, trading systems too. If you
+know of any business that can make use of an information discovery
+system for better customer relation, inventory management, etc, then
+please forward <a href="mailto:paul@quantisan.com">email</a>.</p>
+<p>That's it for the public service announcement. I'll be off to my first
+meetup this Sunday to hack on an open source statistical computing
+platform. I can't wait to meet some very smart people!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/' title='2011-10-14T08:40:00'>14 October 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel='bookmark'>Local Hadoop test cluster up and running</a>
+            </h1>
+            <div class="article-content"> <p>Thanks to <a href="http://www.cloudera.com/hadoop/">Cloudera's CDH3 image</a>, I have a virtual machine with
+Hadoop on CentOS 5 working. I'm more of an Ubuntu guy, so CentOS is a
+new for me. But nothing Google couldn't solve. I also ran into a Hadoop
+exception about the java heap space. I couldn't find a solution online
+so I just bumped up the memory on the virtual machine and it solved the
+problem. In any case, I managed to run <a href="http://developer.yahoo.com/hadoop/tutorial/module3.html#vm-jobs">the pi calculation example</a> on
+my local Hadoop cluster. [<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />][]</p>
+<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />]: http://www.quantisan.com/static/images/2011/09/hadoop-example-pi.jpg</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/' title='2011-09-14T22:42:00'>14 September 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/" rel='bookmark'>Building a distributed back-tester with Hadoop on Amazon AWS</a>
+            </h1>
+            <div class="article-content"> <p>Testing is arguably the single most important aspect of trading system
+development. You can't tell how well an idea works unless you test it
+out. [Testing can also help you identify weaknesses or strengths in your
+model][]. The downside to testing is that it takes time to churn through
+those gigabytes of data. Backtesting is inherently a linear process. You
+feed in your tick data into your algorithm and expect some actions. You
+can't really make use of fork/join to let other threads steal from the
+process queue as the later process depends on results from the earlier
+calculations. However, often times than not, you're interested in
+testing many variations of a strategy. This is where MapReduce comes
+into play. MapReduce is a Google software framework. It is inspired by
+the map and reduce functions ubiquitous in functional programming. They
+are as common as for-loops in the Java world. The <em>map</em> function
+partitions an input into smaller problems and run them concurrently,
+e.g. each of the strategy's variant is executed on a node. The <em>reduce</em>
+function takes the results from all the nodes and aggregate them to get
+an output, e.g. back-test results from each strategy. Having used
+functional programming for some time now, using map/reduce is very
+natural for me. Where my knowledge falls short is in implementing a
+distributed infrastructure for running these map and reduce with massive
+scaling beyond my own multi-core computer. It just so happens that
+Amazon AWS has a hosted Hadoop PaaS. Where Hadoop is the Apache's
+framework for MapReduce. Hardware, check. Framework, check. This will be
+the ~~first~~ second system that I'll be working on in my goal to build
+<a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/">a complete trading R&amp;D platform</a>. Expect some technical discussions
+in the coming months as I work my way through. Now, where should I
+start...</p>
+<p>[Testing can also help you identify weaknesses or strengths in your
+  model]: http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/' title='2011-09-13T10:44:00'>13 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/" rel='bookmark'>Towards a broker-agnostic trading system</a>
+            </h1>
+            <div class="article-content"> <p>The first generation of my trading system uses a broker's proprietary
+script on that same broker's platform. The second generation of my
+trading system uses a generic programming language on another broker's
+platform. I am now working on the third generation of my trading system.
+It is language-agnostic, platform-agnostic, and broker-agnostic. Why?
+Because designing trading systems is as much about creativity as the
+science. An artist would not limit themselves to a defined toolset. I
+want to be free to use whatever tools are necessary to get the job done
+efficiently and being able to try new things as technologies evolve.
+Having a broker-agnostic system frees me from being locked into any
+particular broker. Conversely, I could use one system to gather data and
+trade from multiple brokers for the best execution prices. Yes, this is
+over-engineering for a small entity like myself. But heck, this is
+something that I enjoy building. So why not?</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/towards-a-broker-agnostic-trading-system/' title='2011-09-01T21:01:00'>01 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel='bookmark'>Vector algorithm using tree composition</a>
+            </h1>
+            <div class="article-content"> <p>Sniffed this trick from the Incanter source. Here's a demo of using tree
+composition to calculate a 2-d Euclidean distance between two points.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">x</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span> 
+<span class="p">(</span><span class="k">def </span><span class="nv">y</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">])</span> 
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">tree-comp-each</span> <span class="p">[</span><span class="nb">root </span><span class="nv">branch</span> <span class="o">&amp;</span> <span class="nv">leaves</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">apply root </span><span class="p">(</span><span class="nb">map </span><span class="nv">branch</span> <span class="nv">leaves</span><span class="p">)))</span> 
+<span class="p">(</span><span class="kd">defn </span><span class="nv">euclidean-distance</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span><span class="p">]</span>
+    <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">a</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">b</span><span class="p">))]}</span> 
+    <span class="p">(</span><span class="nf">sqrt</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">tree-comp-each</span> <span class="nb">+ </span>
+                <span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]]</span>
+                    <span class="p">(</span><span class="nf">pow</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> 
+                <span class="p">(</span><span class="nb">map vector </span><span class="nv">a</span> <span class="nv">b</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>I've only had exposures to tree traversal in the use of implementing searching and sorting
+algorithms. This trick here definitely widened my eyes to the wonders of
+functional programming. It's more than just being able to pass and
+manipulate functions. I need to think like a tree.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/vector-algorithm-using-tree-composition/' title='2011-08-07T09:43:00'>07 August 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/back-in-rd-mode/" rel='bookmark'>Back in R&amp;D mode</a>
+            </h1>
+            <div class="article-content"> <p>Just some updates as to what I'm up to. I've been fully immersed in
+research and development mode for some new systems and technologies.
+This could take a few months. I am also deliberating rather I should
+revert Quantisan.com back as a pure blog again and separate QTD on its
+own domain. Quantisan.com has too much random topics and history that
+makes it difficult to keep a consistent message as a company blog.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/back-in-rd-mode/' title='2011-08-02T10:52:00'>02 August 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/index4.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/index6.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

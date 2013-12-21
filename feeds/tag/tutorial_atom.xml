@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/tutorial_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-05-03T07:30:00+01:00</updated><entry><title>Choosing a budget VPS provider for hosting automated trading programs</title><link href="http://www.quantisan.com/choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/" rel="alternate"></link><updated>2011-05-03T07:30:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-05-03:choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/</id><summary type="html">&lt;p&gt;I've been looking for a cheap but reliable virtual private server (VPS)
+to run my trading program for the last few months. I ran my QTD program
+on 3 remote servers in UK and Germany in April for an entire month as
+performance testing. One in UK on a Xen cloud. One in Germany on OpenVZ.
+And a last one also in UK on KVM technology. This post is a summary of
+my initial findings on what to watch for when choosing a server provider
+for running a remote trading server. Keep in mind that this is for
+low-end, low-frequency, retail trading. Where latencies in the range of
+tens of milliseconds are considered good. General target price range is
+US\$10 - \$20 per month for an unmanaged server with 512MB of ram and
+600MHz-equivalent of circa 2006 Intel CPU. Low price is the primary
+consideration here. If you don't care for the technical details, the top
+VPS names are &lt;a href="http://www.linode.com"&gt;Linode&lt;/a&gt;, &lt;a href="http://www.hetzner.de/en/"&gt;Hetzner&lt;/a&gt;, and &lt;a href="http://www.6sync.com"&gt;6sync&lt;/a&gt; for Linux-based
+VPSs. Linode offers Xen VPSs in US and UK. 6sync offers KVM VPSs in US
+only. Both companies offer Linux-based 512MB instances for \$20 as a
+starter server. Hetzner offers KVM VPSs in Germany for €7.90. Cloud
+servers like Amazon EC2 and Rackspace Cloud are too expensive for
+running 24/7.&lt;/p&gt;
+&lt;h2&gt;Location, Location, Location&lt;/h2&gt;
+&lt;p&gt;Use a datacenter that's at least in the same sub-continent as your
+broker's datacenter. You wouldn't want your data to travel half-way
+around the world just to save a few bucks. It adds unnecessary latency
+and prices are comparable in either the states or Europe nowadays.
+Although Asia is another story. If you use more than one broker, you can
+use multiple servers or pick a server location that sits between them on
+the internet backbone. TeleGeography provides &lt;a href="http://www.telegeography.com/telecom-resources/map-gallery/index.html"&gt;global internet maps&lt;/a&gt;
+to identify best locations. I trade with Dukascopy and Oanda. One in
+Switzerland and another in the states. As such, Internet hubs in cities
+like New York, London, and Frankfurt are prime targets for low latency
+between both brokers. As I trade more at Dukascopy, I'm biased to
+European servers. Furthermore, London and Frankfurt are the #1 and #2
+internet hub in the world. London has 7,723 Gbps and Frankfurt has 7,218
+Gbps capacity in 2010. Whereas New York, 5th in the world, has 3,850
+Gbps.&lt;/p&gt;
+&lt;h2&gt;Virtualization Technologies&lt;/h2&gt;
+&lt;p&gt;Virtual private servers are merely reserved resource chunks of a
+computer in a datacenter. This is achieved through the use of
+virtualization technologies. And there are quite many of those as I have
+discovered. Here are three that you'll likely hear about in your search.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;OpenVZ.&lt;/strong&gt; This is the most popular and least preferred platform
+    for trading servers. It's often used by budget hosts because
+    resources between virtualized instances are not well isolated. As
+    such, a host can oversell a server's resource as most webapps have
+    sporadic resource utilization trend. In other worlds, it is unlikely
+    all the virtual private servers would demand their maximum allocated
+    resources at the same time. However, trading servers require a
+    consistent and guaranteed level of computing resource. So stay away
+    from VPS that runs on OpenVZ unless you want to see server hiccups.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Xen.&lt;/strong&gt; This is what Amazon EC2 and Rackspace Cloud runs on. Xen
+    offers true resource isolation so that you're less likely affected
+    by your virtual server's neighbours. What you see is also what you
+    get. So if you're promised 512MB of memory, you'll get 512MB of
+    memory. However, processing power varies tremendously across
+    different VPS providers. A micro instance on Amazon EC2 offers 613MB
+    of memory, for example. But it is no match for even a 256MB instance
+    on Rackspace Cloud. I was able to run a LXDE desktop GUI plus a java
+    program on Rackspace but couldn't do it on Amazon.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;KVM.&lt;/strong&gt; KVM uses the Linux kernel to virtualize. It's said to offer
+    lower overhead to the host server so that it can provide better
+    value than Xen. Like Xen, it offers true resource isolation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In summary, either Xen or KVM are good but stay away from OpenVZ.&lt;/p&gt;
+&lt;h2&gt;Operating System&lt;/h2&gt;
+&lt;p&gt;Key question here is: Linux or Windows? If you're unfamiliar with Linux
+and is not interesting in learning about it, use a Windows Server 2003
+or 2008 provider. Windows Server 2003 is preferred as it uses fewer
+resources just to run so it's cheaper. Do note that Windows VPSs are
+\$10-\$20 more expensive anyway because you have to pay for a monthly
+license lease. With the use of a Windows-based VPS, you can connect to
+your server through the remote desktop protocol (RDP). It's just a
+matter of running the Remote Desktop application on your local machine
+to your remote server. Then you'll see the remote machine's desktop on
+your own machine. And then you can control the remote server just like
+any other Windows computer. Very simple. However, I prefer to run Linux
+because of its renowned stability and lower cost. The downside is that
+you need to know what you're doing to &lt;a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/"&gt;tweak the server for trading&lt;/a&gt;.
+Linux uses very little computing resource to run. I can squeeze JForex
+and Metatrader together on a Linux VPS with only 256MB memory. By
+comparison, you need at least 512MB on a Windows box just to get the OS
+running. And there's no licensing fee for Linux too. A double savings.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;When choosing a VPS provider, consider factors such as location,
+virtualization technology, and operating system(s) offered. Once you've
+narrowed your search to a shortlist of providers, the next step is to
+compare their specific VPS offerings by looking at price, services, and
+technical specifications.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="tutorial"></category><category term="VPS"></category></entry><entry><title>Dissecting a JForex strategy -- MA_Play.java</title><link href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/" rel="alternate"></link><updated>2010-12-20T09:34:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-12-20:dissecting-a-jforex-strategy-ma_play-java/</id><summary type="html">&lt;p&gt;Having studied the anatomy of an empty JForex strategy (&lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/"&gt;Part 1&lt;/a&gt; and
+&lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/"&gt;Part 2&lt;/a&gt;), it's time to dissect a working one. MA_Play is the
+strategy that is included with every JForex API download as a
+demonstration. You can find the complete source code of this strategy in
+/src/singlejartest/ in the &lt;a href="http://www.dukascopy.com/swiss/english/forex/jforex/library/"&gt;JForex API zipped package&lt;/a&gt;. Recall that
+the first Interface method which runs at the start of the strategy is
+onStart. The onStart method of MA_Play is reproduced below. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onStart&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IContext&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; 
+    &lt;span class="n"&gt;engine&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getEngine&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt; 
+    &lt;span class="n"&gt;indicators&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getIndicators&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="k"&gt;this&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;console&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getConsole&lt;/span&gt;&lt;span class="o"&gt;();&lt;/span&gt;
+    &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getOut&lt;/span&gt;&lt;span class="o"&gt;().&lt;/span&gt;&lt;span class="na"&gt;println&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Started&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt; 
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The variables &lt;code&gt;engine&lt;/code&gt;, &lt;code&gt;indicators&lt;/code&gt;, and &lt;code&gt;console&lt;/code&gt; are &lt;em&gt;fields&lt;/em&gt; of the MA_Play class. They are
+global variables within the class. What lines 42--44 do is to save the
+&lt;a href="http://www.dukascopy.com/wiki/index.php?title=IEngine"&gt;IEngine&lt;/a&gt;, &lt;a href="http://www.dukascopy.com/wiki/index.php?title=IIndicators"&gt;IIndicators&lt;/a&gt;, and &lt;a href="http://www.dukascopy.com/wiki/index.php?title=IConsole"&gt;IConsole&lt;/a&gt; objects for later use.&lt;/p&gt;
+&lt;p&gt;The last line of onStart, line 45, is merely to &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Console"&gt;print a message on your
+JForex program console&lt;/a&gt; to notify the user that the strategy has
+started.&lt;/p&gt;
+&lt;p&gt;Once onStart is finished processing, the server is likely to
+call onTick if a market tick arrives. If it's not during market hours,
+then there's no tick and some other event might happen instead of
+onTick. Think of the methods as events rather than a linear process. You
+program your JForex strategy according to what you want to do with each
+of the six IStrategy Interface event. &lt;/p&gt;
+&lt;p&gt;For this particular strategy, the
+programmer decides to implement their strategy at the tick level. As
+such, much of the trading algorithm resides in onTick for MA_Play. Note
+that this is a design choice, you can use onBar if you want your
+strategy to &lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/"&gt;process at the bar level&lt;/a&gt; (or you can use both
+onTick and onBar).&lt;/p&gt;
+&lt;p&gt;Here's the source code for onTick in MA_Play. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onTick&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Instrument&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ITick&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;indicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ema&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="n"&gt;Period&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;TEN_SECS&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="n"&gt;OfferSide&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BID&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AppliedPrice&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MEDIAN_PRICE&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; 
+            &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;indicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ema&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Period&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;TEN_SECS&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;OfferSide&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BID&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IIndicators&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;AppliedPrice&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;MEDIAN_PRICE&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ma0&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+
+    &lt;span class="kt"&gt;double&lt;/span&gt; &lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;());&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;positionsTotal&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;submitOrder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;getLabel&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IEngine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderCommand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;SELL&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getAsk&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+                    &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getAsk&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;diff&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+            &lt;span class="n"&gt;engine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;submitOrder&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;getLabel&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;),&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IEngine&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;OrderCommand&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;BUY&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mf"&gt;0.001&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getBid&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;
+                    &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getBid&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;getPipValue&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="o"&gt;);&lt;/span&gt;
+        &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="o"&gt;}&lt;/span&gt;
+    &lt;span class="n"&gt;ma1&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;ordinal&lt;/span&gt;&lt;span class="o"&gt;()]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ma0&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;At a glance, you may notice that the variables &lt;code&gt;ma0&lt;/code&gt; and &lt;code&gt;ma1&lt;/code&gt; play a key role in
+determining the setup. &lt;strong&gt;Hint:&lt;/strong&gt; To reverse engineer a strategy, it may
+be easier to work backward from when the order is placed, which is done
+by &lt;code&gt;engine.submitOrder&lt;/code&gt; in this case. &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ma0&lt;/code&gt; and &lt;code&gt;ma1&lt;/code&gt; hold results from exponential moving averages (EMA). &lt;code&gt;ma0&lt;/code&gt; is the current value. &lt;code&gt;ma1&lt;/code&gt; is
+the previous bar's value. Lines 56--63 check using IF tests (lines 56
+and 60) to see if either of the variables hold invalid data. If the data
+is invalid, the indicator is calculated and the rest of the onTick is
+skipped with the &lt;code&gt;return&lt;/code&gt; statement on line 62.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Indicator values can sometimes be invalid (zero, negative, or &lt;a href="http://download.oracle.com/javase/6/docs/api/java/lang/Double.html"&gt;Double.NaN&lt;/a&gt;,
+depending on the particular indicator implementation) if there is
+insufficient data to calculate it or an error occurred, for examples.&lt;/p&gt;
+&lt;p&gt;The EMAs are fetched in lines 57 and 59 using the IIndicators object
+(which was initialized in onStart). The &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Indicators"&gt;JForex Wiki provides an
+explanation of its use&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Notice that &lt;code&gt;ma1&lt;/code&gt; is an array, which was
+declared in line 38 with a size equivalent to the number of &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html"&gt;all
+available JForex instruments&lt;/a&gt;. In particular, it is used with a
+special index value as in &lt;code&gt;ma1[instrument.ordinal()]&lt;/code&gt;. In other words,
+it is asking for the current instrument's slot in the &lt;code&gt;ma1&lt;/code&gt; array. The
+current instrument is the one that is passed into the method in line 55.&lt;/p&gt;
+&lt;p&gt;Moving down the code, another point of interest is line 65, showing the
+use of &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html#getPipValue()"&gt;instrument.getPipValue(&lt;/a&gt;). Line 67 checks if the current total
+number of position is zero. If it is, meaning no opened position, then
+the strategy proceeds to check the entry signal to enter a trade (lines
+68--76). &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;positionsTotal()&lt;/code&gt; is a custom method defined in lines 84--92.
+It uses a FOR loop to cycle through all the orders obtained from
+[&lt;code&gt;engine.getOrders(instrument)&lt;/code&gt;][] &lt;/p&gt;
+&lt;p&gt;Once either of the long or short
+condition, lines 68 and 72, respectively, is met, the strategy submits
+an order in lines 69 for a short and line 73 for a long. The
+&lt;a href="http://www.dukascopy.com/wiki/index.php?title=Set_Market_Order"&gt;particulars of submitting market orders&lt;/a&gt; is described in the JForex
+Wiki. &lt;/p&gt;
+&lt;p&gt;When you stop this strategy, onStop (lines 48--53) is called. For
+this strategy, the programmer loops through all the orders again using
+&lt;code&gt;engine.getOrders()&lt;/code&gt; and closes each of the position with an
+[&lt;code&gt;order.close()&lt;/code&gt;][] command in line 50. &lt;/p&gt;
+&lt;p&gt;That is it for this trivial
+strategy. If there is one point that you should remember. Note my use of
+the many links to the &lt;a href="http://www.dukascopy.com/client/javadoc/"&gt;JForex javadoc&lt;/a&gt; and &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page"&gt;JForex Wiki&lt;/a&gt; throughout
+this post. You are likely to find many of your answers from those two
+sources. If not, there's always the &lt;a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/"&gt;JForex Support Board&lt;/a&gt;. Now that
+you've had an idea of how MA_Play.java works, it's time to test it. In
+the next post in January, we will discuss the JForex Historical Tester
+and what to watch for when running a strategy live.&lt;/p&gt;</summary><category term="JForex"></category><category term="source code"></category><category term="tutorial"></category></entry><entry><title>Anatomy of a JForex strategy, Part 2</title><link href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel="alternate"></link><updated>2010-12-14T07:49:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-12-14:anatomy-of-a-jforex-strategy-part-2/</id><summary type="html">&lt;p&gt;We looked at &lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/"&gt;four of the six methods in the IStrategy Interface&lt;/a&gt; in a
+previous post. The last two methods, onTick and onBar, is where your
+strategy connect with market data. Either one, or both, of these methods
+is where you put your trading algorithm in. Your strategy would then be
+able to process the market data as they arrive one tick/bar at a time.
+Recall that IStrategy Interface is the skeleton of your strategy. And
+that IContext object is the heart of your strategy. onTick/onBar is the
+head of your strategy, which contains your trading algorithm, which is
+the brain.&lt;/p&gt;
+&lt;h2&gt;onTick&lt;/h2&gt;
+&lt;p&gt;Here's the method definition of onTick. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;onTick&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Instrument&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ITick&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt;onTick is called for each and every instrument that your
+JForex platform is subscribed to (the instrument list in your workspace
+box). Let me say that again, onTick is called for each and every
+instrument that your JForex platform is subscribed to. The standard
+practice is to &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars"&gt;filter out ticks&lt;/a&gt; for instruments that you don't want
+with a simple IF-return statement.
+&lt;code&gt;if (instrument != myInstrument) return;&lt;/code&gt; Actual tick data is passed to
+your strategy using the ITick object from the onTick method's parameter.
+Take a look at the &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/ITick.html"&gt;ITick javadoc entry&lt;/a&gt; to see what it offers.&lt;/p&gt;
+&lt;h2&gt;onBar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onBar&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Instrument&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Period&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IBar&lt;/span&gt; &lt;span class="n"&gt;askBar&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IBar&lt;/span&gt; &lt;span class="n"&gt;bidBar&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;onBar works in a similar manner to onTick. In which onBar is called for each
+and every subsribed instrument &lt;em&gt;and period&lt;/em&gt; known to JForex. Similarly,
+you have to &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars"&gt;filter out all the unwanted instruments and periods&lt;/a&gt; or else there will be expected results from your strategy.
+Another point to note is that onBar provides both a &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IBar.html"&gt;IBar&lt;/a&gt; askBar and
+IBar bidBar, representing the ask and bid bars. &lt;strong&gt;Question:&lt;/strong&gt; What
+happens when two or more periods overlap as in 13:45? 1, 5, and
+15-minutes bars are all arriving at the same time (not to mention the
+periods in seconds too). &lt;strong&gt;Answer:&lt;/strong&gt; According to Dukascopy Support in
+the forum, "They come in a strict order, for example (1min 1min 1min
+1min 1min 5min 1min 1min 1min 1min 1min 5min ..) They come in cycles,
+where &lt;a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=5&amp;amp;t=23959"&gt;smaller periods comes first&lt;/a&gt;."&lt;/p&gt;
+&lt;h2&gt;JForex Support Forum&lt;/h2&gt;
+&lt;p&gt;As you program your strategy with JForex, you will no doubt come up with
+questions of your own. The best place to ask is at the official &lt;a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/"&gt;JForex
+Support Forum&lt;/a&gt;. This is the last of the three essential JForex
+resources that I alluded to earlier. Even if you don't have any specific
+question, there are sample codes, coding discussion, and hundreds of
+existing Q&amp;amp;A from other JForex developers posted in the forum.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;The discussion so far has been very high level. To show you what you can
+actually &lt;em&gt;do&lt;/em&gt; in an IStrategy, we will &lt;a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/"&gt;dissect a working strategy in
+the next post&lt;/a&gt;. And what else better to examine than the most popular
+JForex strategy of them all -- MA_Play.java.&lt;/p&gt;</summary><category term="JForex"></category><category term="tutorial"></category></entry><entry><title>Anatomy of a JForex strategy, Part 1</title><link href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel="alternate"></link><updated>2010-12-10T08:10:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-12-10:anatomy-of-a-jforex-strategy-part-1/</id><summary type="html">&lt;p&gt;Continuing on from Part 1 of this series: &lt;a href="http://www.quantisan.com/getting-started-learning-jforex-programming/"&gt;Getting started learning
+JForex programming&lt;/a&gt;, now we're ready to discuss the real thing. You
+build JForex strategies by using the IStrategy Interface (&lt;a href="http://download.oracle.com/javase/tutorial/java/concepts/interface.html"&gt;What is an
+Interface?&lt;/a&gt;). Basically, an Interface is a code skeleton with a set of
+predefined empty methods that you'll need to implement yourself. The six
+standard methods of the IStrategy Interface are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;onStart&lt;/li&gt;
+&lt;li&gt;onStop&lt;/li&gt;
+&lt;li&gt;onMessage&lt;/li&gt;
+&lt;li&gt;onAccount&lt;/li&gt;
+&lt;li&gt;onTick&lt;/li&gt;
+&lt;li&gt;onBar&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Below is an empty IStrategy Interface implementation, also known as a
+JForex strategy. This code will compile fine in JForex and you can even
+run it. But it doesn't do anything at all because there is no code to
+run in each of the methods. Each of the six methods will just be called
+and exit immediately.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;com.dukascopy.api.&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="o"&gt;*;&lt;/span&gt; 
+&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kd"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;EmptyStrategy&lt;/span&gt; &lt;span class="kd"&gt;implements&lt;/span&gt; &lt;span class="n"&gt;IStrategy&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; 
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onStart&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IContext&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onTick&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Instrument&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;ITick&lt;/span&gt; &lt;span class="n"&gt;tick&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onBar&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Instrument&lt;/span&gt; &lt;span class="n"&gt;instrument&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Period&lt;/span&gt; &lt;span class="n"&gt;period&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IBar&lt;/span&gt; &lt;span class="n"&gt;askBar&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="n"&gt;IBar&lt;/span&gt; &lt;span class="n"&gt;bidBar&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+        &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onMessage&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IMessage&lt;/span&gt; &lt;span class="n"&gt;message&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onAccount&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IAccount&lt;/span&gt; &lt;span class="n"&gt;account&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 
+    &lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onStop&lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt; &lt;span class="o"&gt;}&lt;/span&gt; 
+&lt;span class="o"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Each of the method is triggered by a specific event. You can probably
+guess what they are from their name.&lt;/p&gt;
+&lt;h2&gt;onStart (line 5)&lt;/h2&gt;
+&lt;p&gt;This is the first method that is called when you run your strategy. It
+will run once and only once at the start of your strategy. Normally you
+do your initialization in here. The thing to note for onStart is in line
+5 of the code. The method signature of onStart is&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kd"&gt;public&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;onStart&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="n"&gt;IContext&lt;/span&gt; &lt;span class="n"&gt;context&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="kd"&gt;throws&lt;/span&gt; &lt;span class="n"&gt;JFException&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The object
+in the parameter and given to you in this method is an IContext object.
+If IStrategy is the skeleton, then IContext is the heart of the
+strategy. Please take a look at this &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IContext.html"&gt;javadoc link to IContext&lt;/a&gt; to see
+what this object does. &lt;strong&gt;Javadoc?&lt;/strong&gt;: Now is a good time to introduce the
+second of the three essential resources of a JForex programmer. The
+&lt;a href="http://www.dukascopy.com/client/javadoc/"&gt;JForex Javadoc&lt;/a&gt; is the single most up-to-date API documentation
+&lt;em&gt;explaining&lt;/em&gt; each and every object and methods of the JForex API. Think
+of it like a reference manual. Note that although it's comprehensive,
+most of the explanation is very sparse and possibly incomplete. IContext
+is a core JForex object to access many important components of the
+JForex system, such as the ordering engine, charts, console,
+indicators... You get the idea. It is important! You typically want to
+keep a local copy of it as this is the only time (in onStart) that this
+object will be passed to you in IStrategy.&lt;/p&gt;
+&lt;h2&gt;onStop (line 26)&lt;/h2&gt;
+&lt;p&gt;As the name suggest, this method is called once you send a stop command
+to your strategy. You do your program wrap-up such as logging and
+flushing data here. Not much out of the ordinary with this one.&lt;/p&gt;
+&lt;h2&gt;onMessage (line 18)&lt;/h2&gt;
+&lt;p&gt;Whereas we know when onStart and onStop will be called, onMessage is an
+asynchronous method in that you don't know exactly when it will run.
+This method is called when the Dukascopy server sends your strategy a
+message. For example, the server calls onMessage to let you know that
+your order has been filled. You receive and process the server message
+by accessing the &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IMessage.html"&gt;IMessage object&lt;/a&gt; that is passed to you.
+&lt;strong&gt;Important:&lt;/strong&gt;There is no guarantee that you will receive each and every
+message sent to your strategy from the server. Perhaps your strategy
+process is clogged. Or maybe your internet connection had a hiccup. If
+your strategy onMessage doesn't get called by the server for whatever
+reason, the server couldn't care less and won't be checking nor trying
+again. So don't do anything critical like managing your orders in
+onMessage!&lt;/p&gt;
+&lt;h2&gt;onAccount (line 22)&lt;/h2&gt;
+&lt;p&gt;This method is called whenever your account information update is
+received. The method provides access to the &lt;a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IAccount.html"&gt;IAccount object&lt;/a&gt;, which
+you use to get your account information. Say if you have an open
+position, your account information changes on every tick because your
+equity is cash + unrealized profit/loss. In that case, onAccount is
+called every 5 seconds by the server at most to avoid flooding your
+strategy. &lt;strong&gt;More Important:&lt;/strong&gt;The IAccount object is not connected live
+to your account in the server. It is merely a snapshot of your account.
+For example, if you keep a local copy of an IAccount object. Do some
+trading to change your balance. Then ask the same IAccount for account
+balance information, you will not see a change. As such, always update
+your local copy of IAccount within the onAccount method to keep your
+account information up-to-date for your strategy's use.&lt;/p&gt;
+&lt;h2&gt;To be continued&lt;/h2&gt;
+&lt;p&gt;onStart, onStop, onMessage, and onAccount methods are &lt;em&gt;administrative&lt;/em&gt;
+methods for your strategy. The last two methods that we'll discuss,
+onTick and onBar, is where the magic happens in a strategy. I am saving
+the best for last in the next post.&lt;/p&gt;</summary><category term="JForex"></category><category term="tutorial"></category></entry><entry><title>Getting started learning JForex programming</title><link href="http://www.quantisan.com/getting-started-learning-jforex-programming/" rel="alternate"></link><updated>2010-12-08T07:04:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-12-08:getting-started-learning-jforex-programming/</id><summary type="html">&lt;p&gt;The biggest problem I had when learning to program my own trading
+strategies in JForex is finding where to start learning. There were few
+JForex documentation available at the time and I had to teach myself
+through painstaking trial and error with the help of Dukascopy's
+technical support. Things have certainly changed for the better as a
+JForex community is starting to sprout and documentation for it is at
+least sufficient to get anyone started. This post is the first of a
+series of quick beginner's guide to learning JForex programming by
+putting all these resources in a tutorial.&lt;/p&gt;
+&lt;h2&gt;JForex is a Java tool&lt;/h2&gt;
+&lt;p&gt;JForex is actually not a programming language. It is an application
+programming interface (API) for use with the standard Java programming
+language. As such, the first step to learning to program in JForex is to
+learn Java. Luckily, Java is one of the most popular programming
+languages. So there're plenty of resources on and off the web to learn
+Java programming. Some examples of free online tutorials are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://download.oracle.com/javase/tutorial/"&gt;The Java Tutorials&lt;/a&gt; -- This is an official tutorial from the
+    developer of Java themselves. Highly recommended.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.roseindia.net/java/beginners/"&gt;Beginners Java Tutorial&lt;/a&gt; -- More geared for the absolute
+    beginners to programming.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you prefer a book, I would recommend &lt;a href="http://www.amazon.com/gp/product/0596009208?ie=UTF8&amp;amp;tag=quantisan-20&amp;amp;linkCode=as2&amp;amp;camp=1789&amp;amp;creative=9325&amp;amp;creativeASIN=0596009208"&gt;Head First Java, 2nd
+Edition&lt;/a&gt;. I brushed up on my Java from this book. Don't dwell on
+Java too much though as you only need to know the basics to get started
+with JForex. Just read a few chapters to understand the Java syntax and
+then move on. You can always refer back to them later.&lt;/p&gt;
+&lt;h2&gt;Diving into JForex&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page"&gt;JForex Wiki&lt;/a&gt; is one of the three essential resources for JForex
+programmers. I will be referring to some specific pages of the Wiki in
+much of this series of posts. If you haven't done so already, &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143/"&gt;signup
+for a DEMO account at Dukascopy&lt;/a&gt;. Then launch the JForex platform and
+follow the instructions on the &lt;a href="http://www.dukascopy.com/wiki/index.php?title=Use_in_JForex"&gt;Use in JForex&lt;/a&gt; wiki page to assemble
+your first JForex strategy!&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;So far so good? By this point, I hope you can understand basic Java
+source code and know how to start/open, compile, and run a JForex
+strategy. In the next post in this learning JForex series, we will
+&lt;a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/"&gt;study the anatomy of a JForex strategy&lt;/a&gt;.&lt;/p&gt;
+&lt;/p&gt;</summary><category term="JForex"></category><category term="tutorial"></category></entry></feed>

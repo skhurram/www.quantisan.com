@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
+            </h1>
+            <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
+<ol>
+<li>are resource-intensive to generate,</li>
+<li>might need to compose many of them,</li>
+<li>not sequential or have one-to-one depencency, and</li>
+<li>most importantly, they are in separate programs or different machines</li>
+</ol>
+<p>Thus I've opted to abstract this problem out into its own module of the system as an event-driven finite state machine (FSM) to keep track of state transitions. Intimidating term, but my first implementation was just if-else statements to qualify as such. The benefit is that each of my system's components only need to push signals and pull states from a central interface without having to worry about what should it call next or poll anything else to see if the stars are aligned. That drastically simplified development and maintenance.</p>
+<p>The responsiblities of my FSM module are to:</p>
+<ol>
+<li>listen to all the signals,</li>
+<li>figure out all the transitions, and</li>
+<li>publish the latest states for the rest of the system.</li>
+</ol>
+<h2>Handling asynchronous events</h2>
+<p>I use RabbitMQ as the message transport layer between my system's modules. All I need to do here is to associate an appropriate message handler to each triggering input for the FSM. Here's one example of the event handlers using the <a href="http://clojurerabbitmq.info/">Clojure RabbitMQ library, Langohr</a>. The rest of this part are just standard RabbitMQ publish/subscribe stuff.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn- </span><span class="nv">event-message-handler</span> <span class="p">[</span><span class="nv">ch</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">headers</span> <span class="nv">delivery-tag</span> <span class="nv">redelivery?</span><span class="p">]}</span> <span class="o">^</span><span class="nv">bytes</span> <span class="nv">payload</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">message-type</span> <span class="nv">user-id</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">]}</span> <span class="p">(</span><span class="nf">read-payload</span> <span class="nv">payload</span><span class="p">)]</span>
+    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="ss">:position-event</span> <span class="nv">message-type</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">get-cached-states</span> <span class="nv">user-id</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">update-position-state</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">cache-states</span> <span class="nv">user-id</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nf">lbc/ack</span> <span class="nv">ch</span> <span class="nv">delivery-tag</span><span class="p">))</span>
+</pre></div>
+
+
+<p>This is called when a position event is received with information such as user, instrument, and quantity. This handler would thread these information by fetching current states for that user, evaluate next state with input, and then cache the new states for the user.</p>
+<h2>State transitions</h2>
+<p>Below is one of my system's state transition diagrams.</p>
+<p><img alt="state transition example" src="http://www.quantisan.com/images/2013/qte_state_diagram.png" /></p>
+<p>There are 4 states represented by 4 colours with 4 triggers signalling state transition. The program is expected to handle up to hundreds of independent states concurrently with event triggers coming in a couple times per second.</p>
+<p>As I was saying, my first implementation is just a set of if-else methods. For example, an <code>engage</code> trigger would call the <code>engaging</code> method to determine the next state given the implicit input <code>engage</code> and current state.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">engaging</span>
+  <span class="p">[</span><span class="nv">current</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">current</span>
+    <span class="s">&quot;white&quot;</span> <span class="s">&quot;yellow&quot;</span>
+    <span class="s">&quot;yellow&quot;</span> <span class="s">&quot;white&quot;</span>
+    <span class="s">&quot;green&quot;</span> <span class="s">&quot;red&quot;</span>
+    <span class="s">&quot;red&quot;</span> <span class="s">&quot;green&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>There were a handful of these boilerplate code. So after I deployed my system I came back to refactor them. I've been meaning to give core.logic a try for a while so this seem like a good place to start using it.</p>
+<p>Before we can ask the logic solver question we need to define relations. Here I define a <code>transition</code> relation to specify all the state transition definition conveniently in one place.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="nf">defrel</span> <span class="nv">transition</span> <span class="nv">from</span> <span class="nv">input</span> <span class="nv">to</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">facts</span> <span class="nv">transition</span> <span class="p">[[</span><span class="nv">nil</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="nv">nil</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:engage</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:engage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:engage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:engage</span> <span class="ss">:green</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:open</span> <span class="ss">:red</span><span class="p">]</span>
+                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]])</span>
+</pre></div>
+
+
+<p>And the event handler methods are just wrappers for a one-liner logic expression asking the question -- given current stage, <code>cur-state</code>, and input trigger, <code>input</code>, what state can <code>q</code> take to satisfy this constraint?</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">next-state</span> 
+  <span class="s">&quot;Solver for next state&quot;</span>
+  <span class="p">[</span><span class="nv">input</span> <span class="nv">cur-state</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">run</span> <span class="mi">1</span> <span class="p">[</span><span class="nv">q</span><span class="p">]</span> <span class="p">(</span><span class="nf">transition</span> <span class="nv">cur-state</span> <span class="nv">input</span> <span class="nv">q</span><span class="p">))))</span>
+
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-clicked</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:engage</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">colour-deactivate</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:disengage</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defn </span><span class="nv">next-position-colour</span> <span class="p">[</span><span class="nv">cur</span> <span class="nv">open?</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">if </span><span class="nv">open?</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:open</span> <span class="nv">cur</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:close</span> <span class="nv">cur</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>Not the most illustrative core.logic example but it does the job.</p>
+<p>Getting started with core.logic is surprisingly easy. I went through the <a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer">Primer</a> and <a href="https://github.com/swannodette/logic-tutorial">tutorial</a> and got this working in one try.</p>
+<h2>State caching and sharing</h2>
+<p>Now that the state transition have been taken care of, states are cached and served on Redis for other parts of the system. I use Redis for this because it is fast and easy. Values are stored in <a href="https://github.com/edn-format/edn">edn format</a> instead of something more popular like JSON to maintain data structure through the wire.</p>
+<p>This is my first time using edn in production. All inter-process messages in this trading system are edn formatted. It works seamlessly with Clojure by simply using <code>str</code> to write and <code>clojure.edn/read-string</code> to read. Besides my other Clojure components in the system, my trade broker interface is written in Java. My Java program use <a href="https://github.com/bpsm/edn-java">edn-java</a> to parse and unparse complex Clojure data structures (e.g. nested maps with keywords).</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">pool</span>         <span class="p">(</span><span class="nf">car/make-conn-pool</span><span class="p">))</span>
+<span class="p">(</span><span class="k">def </span><span class="nv">spec-server1</span> <span class="p">(</span><span class="nf">car/make-conn-spec</span><span class="p">))</span>
+<span class="p">(</span><span class="kd">defmacro </span><span class="nv">with-car</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span> <span class="o">`</span><span class="p">(</span><span class="nf">car/with-conn</span> <span class="nv">pool</span> <span class="nv">spec-server1</span> <span class="o">~@</span><span class="nv">body</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">get-cached-states</span>
+  <span class="s">&quot;Generate edn from database.&quot;</span>
+  <span class="p">[</span><span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">edn/read-string</span> <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/get</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">cache-states</span> <span class="p">[</span><span class="nv">m</span> <span class="nv">id</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/set</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)</span> <span class="p">(</span><span class="nb">str </span><span class="nv">m</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>I find coupling edn with Redis is a fantastic choice as it's almost like working with Clojure's native concurrency data structures, such as <code>atom</code>, but also enable external programs to access the data.</p>
+<h2>Simple and quick</h2>
+<p>The entire event-driven FSM program is less than 200 lines of Clojure code and took no more than a few hours to do. However, I did give it some pondering time for a few days. I haven't done any benchmark to estimate performance result. So all I can say is that this setup can handle my simplistic use case with barely any load on the server so I'm happy with it.</p>
+<p>A few years ago, I would have set a whole bunch of flags to switch states. In fact, <a href="https://github.com/Quantisan/JFFramework">that's what I did</a>. The biggest satisfaction here for me isn't the implementation or technologies, it is seeing through the underlying problem at hand and solving it with a common pattern that made my work simpler.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/' title='2013-05-20T00:00:00'>20 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/post-gone-viral-16000-visitors-in-a-day-how-many-actually-read-the-article/" rel='bookmark'>Post gone viral, 16000 visitors in a day, how many actually read the article?</a>
+            </h1>
+            <div class="article-content"> <p>Edit: A few people have <a href="https://news.ycombinator.com/item?id=5693881">pointed out</a> that my assumption about the Analytics engagement metric <em>might be</em> wrong because single page hit <em>could be</em> counted as zero on engagement time. I'll make an update to this post when smarter people than me on HN can agree on a metric. So I open this problem to Analytics expert, how can I discern readership ratio from Analytics data?</p>
+<p>My reminiscing post about <a href="/how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/">my time as an aerospace engineer versus software</a> was on the front page of Hacker News for about 12 hours on Friday. That garnered 16,374 unique visitors to this site on that single day. However, Google Analytics data say that only 975 of those people spent more than 10 seconds here. Given that there's 652 words in that viral post, I doubt anyone can actually read it within that time. If we assume that only people spending more than 10 seconds have meaningfully read the article, it appears that only 6% of traffic are <em>real</em> readers from this Hacker News blitz.</p>
+<p><img alt="Viral post visitors engagement" src="http://www.quantisan.com/images/2013/10052013_analytics_engagement.png" /></p>
+<p>Given that my usual stats is above 10%, viral traffic audience is understandably less targeted but isn't abysmal by comparison. However, as a data scientist, I'm obliged to say that as this is an one-off event, we couldn't draw a statistically significant observation from it.</p>
+<p>Interestingly, overall traffic the day after on Saturday is back down to 901 visits. And engagement for those spending more than 10 seconds is up at 8.3%. These residual traffic are coming in from domains like Twitter and link sharers.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/post-gone-viral-16000-visitors-in-a-day-how-many-actually-read-the-article/' title='2013-05-12T11:30:00'>12 May 2013</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/" rel='bookmark'>How a few screws cost $2000 and a 240GB multinodes cluster cost $50</a>
+            </h1>
+            <div class="article-content"> <p>About ten years ago I was an electrical engineering intern at MDA Space Robotics. They are the company that designed the Canadarm 1 and 2 used on the International Space Station. I still remember meeting the R&amp;D team next door to see their demo of a 3D LIDAR system mounted on a Mars Rover model. It was one of the competing designs to serve as the eyes of the rover. To put this into perspective, this was at a time when a single-beam scanning laser was common on a robot to gauge distances. Seeing a vision system which can generate 3D polygons of the terrain in real-time for navigation was just unbelievable.</p>
+<p>As for our mundane electronics team, we were designing new power electronics to upgrade the Canadarm2. Obviously, I didn't actually contribute much as an intern. One project which I had my hands on was building loading circuits to simulate the electrical response of the motors on the Canadarm2. So that we can test the new power electronics with live circuit without having motors spinning in the lab. For my particular role, I didn't do any of that either. What I did was design and build safety housing for these big loading circuits.</p>
+<p>Normally, this wouldn't take more than a couple days in a workshop. Not so in a regulated industry. Even though these boxes were only used as a superficial safety mechanism during ground support testing and were never going to be used in production or have anything to do with the actual test itself, we still needed to follow proper engineering guidelines because my mentor told me that it's safer to have a blanket rule for every component than nit-pick what is or isn't regulated.</p>
+<p>After designing the housing in no time (it's just a rectangular shell to cover the circuit, how hard can it be?), I sourced a contractor to mold these polycarbonate shells for us. That's the same material hockey masks use because it's transparent and strong. To secure the shell onto the loading circuit, which are about as big as a moving box each, I needed big screws to bolt it on the baseboard. Seeing that we're an electrical team, we didn't have suitable screws for it in the lab. I figured I should just drive down to Home Depot to buy them.</p>
+<p>Not so fast. Apparently, as I was technically sourcing in a new component, I couldn't just go down the street and get them. I ended up having to order from one of our approved suppliers and had them shipped to us overnight. Not that I was in any hurry. It's because we did all shipping by courier. And even though I needed just a few screws, the supplier don't do small orders either so I had to order the minimum of a hundred or something. Still, all of that didn't really cost that much. The majority of the cost came from my hours spent in getting technical and administrative approvals for adding this new component into our bill of material.</p>
+<p>And so that is how I ended up spending the company around $2000 on a few screws. I never saw an itemised bill for those screws. But I figured that's about right based on hours spent and people's estimated salaries.</p>
+<p>This forgotten story from my engineering days came about this week as <a href="http://oobaloo.co.uk/">my colleague Paul</a> and I were spiking out a big data project on Amazon Redshift. On a whim just for the sake of it, we launched a 32 virtual cores, 240GB memory, 32TB storage multi-node cluster with literally just the click of a button. We played with it for a couple hours, did what was needed, and decommissioned the cloud servers. It cost us $45.</p>
+<p>What is my point of the stories? Same concept of materialising an idea. Different time, different industry. Diametrically different prototyping experience.</p>
+<p>Update: this post generated some heated <a href="https://news.ycombinator.com/item?id=5685078">debates on Hacker News</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/' title='2013-05-10T08:30:00'>10 May 2013</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/" rel='bookmark'>What should I work on next for Cascalog?</a>
+            </h1>
+            <div class="article-content"> <p>Too many things to do, too little time. I figured we can do this in a data-driven way. So here's a poll. Please only submit an entry if you use Cascalog. And only one per person. Let's see if an honour system would work.</p>
+<iframe src="https://docs.google.com/a/quantisan.com/spreadsheet/embeddedform?formkey=dGtBNF96bExZZ0E0X0p5ZUFTb2NyTkE6MQ" width="580" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+<h2>Poll result one week later</h2>
+<p><img alt="poll result" src="http://www.quantisan.com/images/2013/cascalog_poll_graph.png" /></p>
+<table>
+    <tr><th>Votes</th> <th>Choice</th></tr>
+    <tr><td>15</td> <td>Self-contained documentation site, e.g. http://cascalog.quantisan.com (demo address only)</td></tr>
+    <tr><td>10</td> <td>Improve and consolidate guides into Github wiki</td></tr>
+    <tr><td>11</td> <td>Bring Cascalog to Cascading 2.1/2.2</td></tr>
+    <tr><td>8</td> <td>Fix open issues</td></tr>
+    <tr><td>13</td> <td>Add features and performance increase, e.g. new logic solver, make use of new Cascading features since 2.0</td></tr>
+    <tr><td>2</td> <td>Other</td></tr>
+</table>
+
+<p>One person voted for integrating other machine learning library into Cascalog and another to <a href="https://github.com/nathanmarz/storm/issues/115">isolate system library</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/' title='2013-05-08T21:40:00'>08 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/" rel='bookmark'>Securing a fresh Ubuntu server with Fabric tasks</a>
+            </h1>
+            <div class="article-content"> <p>An administrative task that I've done countless number of times is spinning up new servers to host applications like a web dashboard or a trading engine. At uSwitch my colleagues use Puppet and other smart devops tools that I have no idea about to automate our infrastructure. For my own work I just need an easy tool to run some commands over ssh. I chose to use <a href="http://docs.fabfile.org/">Fabric</a> to automate this repetitive but necessary task of hardening a fresh Ubuntu server. Now that I have this set of Fabric tasks, after I create a new instance, I can just run a single Fabric task and the server would be configured properly for use.</p>
+<p>The choice for Fabric is because I've been using Fabric for some time already to perform simple deployment tasks. Then I stumbled on <a href="https://niteowebfabfile.readthedocs.org/en/latest/_modules/niteoweb/fabfile/server.html">an open-source project</a> that actually configures an Ubuntu server using Fabric. Much of these scripts are based on that source. Automating these tasks saves me a lot of time and ensures consistency of configurations. Perhaps when the need arises, I should look into other tools like <a href="http://www.vagrantup.com/">Vagrant</a> too.</p>
+<p>Here are some basic tasks that I perform on a new Ubuntu 12.04 server and the corresponding Fabric task script.</p>
+<h2>Create an administrator account</h2>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">append</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">sed</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
+<span class="kn">from</span> <span class="nn">fabric.operations</span> <span class="kn">import</span> <span class="n">prompt</span>
+
+<span class="k">def</span> <span class="nf">create_admin_account</span><span class="p">(</span><span class="n">admin</span><span class="p">,</span> <span class="n">default_password</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an account for an admin to use to access the server.&quot;&quot;&quot;</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&quot;root&quot;</span>
+
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">admin</span><span class="o">=</span><span class="n">admin</span><span class="p">,</span>
+        <span class="n">default_password</span><span class="o">=</span><span class="n">default_password</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;default_password&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;secret&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c"># create user</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;egrep </span><span class="si">%(admin)s</span><span class="s"> /etc/passwd || adduser </span><span class="si">%(admin)s</span><span class="s"> --disabled-password --gecos &quot;&quot;&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># add public key for SSH access</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/home/</span><span class="si">%(admin)s</span><span class="s">/.ssh&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">):</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;mkdir /home/</span><span class="si">%(admin)s</span><span class="s">/.ssh&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="n">opts</span><span class="p">[</span><span class="s">&#39;pub&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Paste </span><span class="si">%(admin)s</span><span class="s">&#39;s public key: &quot;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;echo &#39;</span><span class="si">%(pub)s</span><span class="s">&#39; &gt; /home/</span><span class="si">%(admin)s</span><span class="s">/.ssh/authorized_keys&quot;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># allow this user in sshd_config</span>
+    <span class="n">append</span><span class="p">(</span><span class="s">&quot;/etc/ssh/sshd_config&quot;</span><span class="p">,</span> <span class="s">&#39;AllowUsers </span><span class="si">%(admin)s</span><span class="s">@*&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># allow sudo for maintenance user by adding it to &#39;sudo&#39; group</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;gpasswd -a </span><span class="si">%(admin)s</span><span class="s"> sudo&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># set default password for initial login</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;echo &quot;</span><span class="si">%(admin)s</span><span class="s">:</span><span class="si">%(default_password)s</span><span class="s">&quot; | chpasswd&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>harden ssh server</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">harden_sshd</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Security harden sshd.&quot;&quot;&quot;</span>
+
+    <span class="c"># Disable password authentication</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/ssh/sshd_config&#39;</span><span class="p">,</span>
+        <span class="s">&#39;#PasswordAuthentication yes&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PasswordAuthentication no&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Deny root login</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/ssh/sshd_config&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PermitRootLogin yes&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PermitRootLogin no&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;restart ssh&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>setup firewall</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">install_ufw</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Install and configure Uncomplicated Firewall.&quot;&quot;&quot;</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get update&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install ufw&#39;</span><span class="p">)</span>
+    <span class="n">configure_ufw</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">configure_ufw</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure Uncomplicated Firewall.&quot;&quot;&quot;</span>
+    <span class="c"># reset rules so we start from scratch</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw --force reset&#39;</span><span class="p">)</span>
+
+    <span class="n">rules</span> <span class="o">=</span> <span class="n">rules</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">rules</span> <span class="ow">or</span> <span class="n">err</span><span class="p">(</span><span class="s">&quot;env.rules must be set&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+    <span class="c"># re-enable firewall and print rules</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw --force enable&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw status verbose&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>time synchronisation daemon</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">set_system_time</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set timezone and install ``ntp`` to keep time accurate.&quot;&quot;&quot;</span>
+
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">timezone</span><span class="o">=</span><span class="n">timezone</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;timezone&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;/usr/share/zoneinfo/UTC&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c"># set timezone</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;cp </span><span class="si">%(timezone)s</span><span class="s"> /etc/localtime&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># install NTP</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install ntp&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>enable unattended upgrades</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">install_unattended_upgrades</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure Ubuntu to automatically install security updates.&quot;&quot;&quot;</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">email</span><span class="o">=</span><span class="n">email</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;email&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">err</span><span class="p">(</span><span class="s">&#39;env.email must be set&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install unattended-upgrades&#39;</span><span class="p">)</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/50unattended-upgrades&#39;</span><span class="p">,</span>
+        <span class="s">&#39;//Unattended-Upgrade::Mail &quot;root@localhost&quot;;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;Unattended-Upgrade::Mail &quot;</span><span class="si">%(email)s</span><span class="s">&quot;;&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/20auto-upgrades&#39;</span><span class="p">,</span>
+        <span class="s">&#39;APT::Periodic::Update-Package-Lists &quot;0&quot;;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;APT::Periodic::Update-Package-Lists &quot;1&quot;;&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">append</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/20auto-upgrades&#39;</span><span class="p">,</span>
+           <span class="s">&#39;APT::Periodic::Unattended-Upgrade &quot;1&quot;;&#39;</span><span class="p">,</span>
+           <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/' title='2013-05-06T08:34:00'>06 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/" rel='bookmark'>Minimal variance asset allocation for Stocks ISA</a>
+            </h1>
+            <div class="article-content"> <p>With interest rate in the UK so pathetically low, I thought I might take some chance by making use of a Stocks ISA account in the UK. The problem though, is that I have no knowledge about the London stock market nor do I have the time to follow it. So I wrote a program to pick some Exchange Traded Funds (ETFs) with a primary goal to minimise risk and opportunity costs.</p>
+<p>Here are what I wanted to achieve:</p>
+<ul>
+<li>only a few trades at most a year</li>
+<li>less risk than FTSE100</li>
+<li>more yield than a laddered government bonds portfolio</li>
+<li>require less than an hour per month of maintenance</li>
+</ul>
+<p>Basically, this is a computer-assisted passive investment portfolio.</p>
+<p>The first step is to scrape all the ETF symbols from London Stock Exchange on <a href="http://www.londonstockexchange.com/exchange/prices-and-markets/ETFs/ETFs.html">these pages</a>. I use <code>getNodeSet</code> from <code>XML</code> package in R to select the relevant data from the HTML page with XPath.</p>
+<div class="highlight"><pre>page <span class="o">&lt;-</span> getURL<span class="p">(</span>url<span class="p">,</span> curl<span class="o">=</span>curl<span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>page<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[@class = &#39;table_dati&#39;]/tbody&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+</pre></div>
+
+
+<p>This program only considers ETF because this portfolio is to diversify risk and not pick <em>winning</em> stocks. ETFs provide <a href="http://www.economist.com/news/finance-and-economics/21570711-anniversary-successful-financial-innovation-twenty-years-young">convenient exposure to various asset classes such as equities, bonds, and commodities at low costs</a>.</p>
+<p>Next is to scrape profile information for each symbol from Yahoo. We want data such as the fund's expense ratio and asset class category.</p>
+<div class="highlight"><pre>url <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;http://finance.yahoo.com/q/pr?s=&quot;</span><span class="p">,</span> symbol<span class="p">,</span> <span class="s">&quot;+Profile&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>url<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[contains(concat(&#39; &#39;, @class, &#39; &#39;), &#39; yfnc_datamodoutline1 &#39;)]/tr/td/table&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+
+operation <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">2</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+overview <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">1</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Once the funds' fundamental data are fetched, we can do a preliminary screening. I am filtering for:</p>
+<ol>
+<li>Actively traded funds,</li>
+<li>Sufficient age (3 years), and</li>
+<li>Only the best 3 expense ratio efficiency from each class</li>
+</ol>
+<p>That last point is particularly important as illustrated in this plot.</p>
+<p><img alt="London funds expense by category" src="http://www.quantisan.com/images/2013/london_etf_mer_category.png" /></p>
+<p>The above plot couldn't fit in this frame but it shows that expense ratios are all over the place. What matters is that the raw data is available for use.</p>
+<p>The plot below is clearer. It shows expense ratio by the fund's issuer. You can see that Vanguard funds generally have the best expense ratio as is commonly known.</p>
+<p><img alt="London funds expense by issuer" src="http://www.quantisan.com/images/2013/london_etf_mer.png" /></p>
+<p>The initial ETF list has 667 funds in 104 categories. The screened list narrows it down to 20 funds in 18 categories. Most that were screened are niche funds such as Islamic Global Equity and regional real estate funds.</p>
+<p>Out of that 20 funds, I apply the popular <a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory">Modern Portfolio Theory</a> to minimise risk using historical quotes data with <code>quantmod</code>'s Yahoo data fetcher. Given the expected returns of each asset, <code>er</code> and their covariance matrix, <code>cov.mat</code>, a long-only efficient portfolio weighting of those assets can be solved with quadratic programming like so.</p>
+<div class="highlight"><pre>Dmat <span class="o">&lt;-</span> <span class="m">2</span><span class="o">*</span>cov.mat
+dvec <span class="o">&lt;-</span> rep.int<span class="p">(</span><span class="m">0</span><span class="p">,</span> N<span class="p">)</span>
+Amat <span class="o">&lt;-</span> cbind<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">),</span> er<span class="p">,</span> diag<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">))</span>
+bvec <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> target.return<span class="p">,</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span>N<span class="p">))</span>
+result <span class="o">&lt;-</span> solve.QP<span class="p">(</span>Dmat<span class="o">=</span>Dmat<span class="p">,</span>dvec<span class="o">=</span>dvec<span class="p">,</span>Amat<span class="o">=</span>Amat<span class="p">,</span>bvec<span class="o">=</span>bvec<span class="p">,</span>meq<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To get these weightings,</p>
+<div class="highlight"><pre><span class="n">IGLT</span><span class="p">.</span><span class="n">L</span>   <span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>   <span class="n">INXG</span><span class="p">.</span><span class="n">L</span>   <span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">SLXX</span><span class="p">.</span><span class="n">L</span>   <span class="n">IBGS</span><span class="p">.</span><span class="n">L</span>   <span class="n">IUKP</span><span class="p">.</span><span class="n">L</span>   <span class="n">LUK2</span><span class="p">.</span><span class="n">L</span> 
+<span class="mf">0.603023</span> <span class="mf">0.122829</span> <span class="mf">0.116879</span> <span class="mf">0.084122</span> <span class="mf">0.037906</span> <span class="mf">0.017975</span> <span class="mf">0.014051</span> <span class="mf">0.003215</span>
+</pre></div>
+
+
+<p>But here's the catch, this mean-variance optimisation approach which I'm using does not work in the real-world. The problem is that it optimises for historical data under simplistic assumptions. For potential improvements on this model, start with <a href="http://quant.stackexchange.com/questions/44/what-methods-do-you-use-to-improve-expected-return-estimates-when-constructing-a">this Q&amp;A on StackExchange</a> but be warned that it's a rabbit hole to go down in.</p>
+<p>Knowing that I shouldn't trust this model much, I do this a couple times under different scenarios on the efficient frontier and union the top weighted assets from each run as a compensation by sampling.</p>
+<p>The result is a suggestion of six ETFs.</p>
+<div class="highlight"><pre><span class="n">Symbol</span>            <span class="n">Name</span>                   <span class="n">category</span>
+<span class="n">BRIC</span><span class="p">.</span><span class="n">L</span>    <span class="n">ISHARESII</span> <span class="mi">50</span>                <span class="n">BRIC</span> <span class="n">Equity</span>
+<span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">POWERSHS</span> <span class="n">EQQQ</span> <span class="n">US</span> <span class="n">Large</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Growth</span> <span class="n">Equity</span>
+<span class="n">IGLS</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHARESIII</span> <span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="err">£</span>        <span class="n">GBP</span> <span class="n">Government</span> <span class="n">Bond</span>
+<span class="n">INXG</span><span class="p">.</span><span class="n">L</span> <span class="n">GBP</span> <span class="n">IDX</span><span class="o">-</span><span class="n">LNK</span> <span class="n">GLT</span>  <span class="n">GBP</span> <span class="n">Inflation</span><span class="o">-</span><span class="n">Linked</span> <span class="n">Bond</span>
+<span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>  <span class="n">ISHARESFTSE250</span>          <span class="n">UK</span> <span class="n">Mid</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Equity</span>
+<span class="n">SLXX</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHSIII</span> <span class="n">IBX</span> <span class="err">£</span><span class="n">CB</span>         <span class="n">GBP</span> <span class="n">Corporate</span> <span class="n">Bond</span>
+</pre></div>
+
+
+<p>Out of these I hand picked IGLS.L and MIDD.L for a conservative 80% bonds and 20% equity portfolio. This plot below shows the annualised return versus risk of ISF (FTSE100), an equal-weighted portfolio of the pre-screened 20 ETFs, and this final portfolio of two ETFs. Notice the historic risk of this final portfolio is a third of FTSE100.</p>
+<p><img alt="Return vs risk" src="http://www.quantisan.com/images/2013/london_etf_rr.png" /></p>
+<p>Not surprisingly, what my program derived from scratch is similar to the commonly suggested portfolio balance of bonds, local equities, and emerging market blend. What this program offers is picking out the specific ETFs from the hundreds of ETFs traded on London Stock Exchange for a balanced asset allocation.</p>
+<p>The complete R source code for this project is <a href="https://github.com/Quantisan/touzi">available on Github</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/' title='2013-01-31T12:30:00'>31 January 2013</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+<p class="paginator">
+                    <a href="http://www.quantisan.com/index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

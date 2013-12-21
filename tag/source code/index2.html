@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - source code</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/" rel='bookmark'>JForex Example:  Multiple-time frame strategy</a>
+            </h1>
+            <div class="article-content"> <p>The key to my July JForex strategy is the use of multiple time frames.
+As Dr. Alexander Elder demonstrates in his famous book, <em>Trading For A
+Living</em>, a proper technical analysis should at least consider time
+frames five-times faster and slower than the one in which you trade. For
+example, if you trade on a 30 minute chart, the one faster is 30/5 = 6
+minutes, which can be rounded as the five-minute chart. And the one
+slower would be 30 * 5 = 150 minutes. The closest standard time frame
+of which is a 4-hour chart.</p>
+<p>For <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my July JForex strategy</a>, it trades
+on the 30 minute chart and monitor the 4-hour chart in addition to the
+30-minute chart. The strategy doesn't make use of a faster time frame
+for simplicity. This is surprisingly easy to do in <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>'s
+JForex API.</p>
+<p>Referring to lines 81 to 87 of <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my strategy source code</a>. </p>
+<div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">==</span> <span class="n">PERIODINT</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">askBar</span><span class="o">);</span> 
+    <span class="k">return</span><span class="o">;</span>
+<span class="o">}</span> 
+<span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">!=</span> <span class="n">PERIODSHR</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// skip all other periods</span>
+</pre></div>
+
+
+<p>This chunk of code
+appears in the onBar() method. Since onBar() is called at the beginning
+of every price bar across all possible standard periods (from tick to
+weekly), it's just a matter of filtering out the redundant periods
+and/or catching the method when the period is correct. I have done both
+in the sample code. Line 81 is to catch the longer period, <code>PERIODINT = Period.FOUR\_HOURS</code> (line 54, not shown), in an <code>if</code> statement block. It
+calls my function <code>setSentiment()</code> and exits <code>onBar()</code> with the <code>return</code>,
+skipping everything in onBar() afterward. Line 87 is to skip all other
+periods that I'm not using. I could have used <code>if (period == PERIODSHR)</code>
+and put everything in an <code>if</code> block as in lines 81-85. But since the
+strategy is doing a lot more work in <code>PERIODSHR</code>, there would be a lot of
+codes in that IF block. So I am doing the reverse for the same result
+but simpler-looking codes. With this cleared, I can go over my <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual
+moving average entry signal setup</a> in the next post later this week.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/' title='2010-08-04T06:30:00'>04 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-stopmananger-1-0/" rel='bookmark'>JForex StopManager 1.0</a>
+            </h1>
+            <div class="article-content"> <p>I am building my real JForex automated trading system one feature at a
+time. The idea is to automate some of my most fundamental trading
+techniques on JForex so that I can trade forex semi-automatically on
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>. I am starting off here with a simple stop management
+strategy. In a nutshell, once the market price moves in your favour
+equidistant from your original stop loss, this strategy moves the stop
+to breakeven. For example, if I go long EURUSD at 1.3500 with a stop at
+1.3400 (100 pips stop). Then if the price breaks above 1.3600 (100 pips
+profit), the strategy moves the stop to breakeven. This is a simplistic
+implementation of the saying that "never let profits turn into losses".
+You can <a href="http://dl.dropbox.com/u/6028806/StopManager.java">download the source code here</a> and the <a href="http://dl.dropbox.com/u/6028806/StopManager.jfx">executable strategy
+here</a>. Note that these files are made available through <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">Dropbox</a>.
+Update: This logic is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source
+project</a>. You can also see <a href="http://www.quantisan.com/tag/jforex/">a list of my latest JForex articles
+here</a>. [java] /* StopManager.java version 1.0 Copyright 2010
+Quantisan.com Move stops to breakeven when equidistance to original stop
+loss */ package jforex; import com.dukascopy.api.*; public class
+StopManager implements IStrategy { private IEngine engine; private
+IConsole console; private IContext context; @Configurable("Lock-in Pips
+for Breakeven") public int lockPip = 3; @Configurable("Move stop to
+breakeven?") public boolean moveBE = true; public void onStart(IContext
+context) throws JFException { this.engine = context.getEngine();
+this.console = context.getConsole(); this.context = context; } public
+void onAccount(IAccount account) throws JFException { } public void
+onMessage(IMessage message) throws JFException { } public void onStop()
+throws JFException { } public void onTick(Instrument instrument, ITick
+tick) throws JFException { for (IOrder order :
+engine.getOrders(instrument)) { if (order.getState() ==
+IOrder.State.FILLED) { boolean isLong; double open, stop, diff, newStop;
+String label = order.getLabel(); IChart chart; isLong = order.isLong();
+open = order.getOpenPrice(); stop = order.getStopLossPrice(); diff =
+open - stop; // stop loss distance if (isLong) { // long side order if
+(moveBE &amp;&amp; diff > 0 &amp;&amp; tick.getBid() > (open + diff)) { // make it
+breakeven trade + lock in a few pips newStop = open +
+instrument.getPipValue() * lockPip; order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_UP, tick.getTime(), newStop); } } else { // short
+side order // Move to breakeven if (moveBE &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk()
+\&lt; (open + diff)) { // diff is negative // make it breakeven trade +
+lock in a few pips newStop = open - (instrument.getPipValue() *
+lockPip); order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_DOWN, tick.getTime(), newStop); } } } } } public
+void onBar(Instrument instrument, Period period, IBar askBar, IBar
+bidBar) throws JFException { } } [/java]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-stopmananger-1-0/' title='2010-04-12T20:39:00'>12 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
+            </h1>
+            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+			<a href="http://www.quantisan.com/tag/source code//index.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

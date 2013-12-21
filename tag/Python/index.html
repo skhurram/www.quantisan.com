@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - Python</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
+            </h1>
+            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
+<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
+<p>Then there's Incanter.</p>
+<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
+<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
+<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
+<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
+<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
+<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
+<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
+<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
+<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
+<p>I call this platform-as-interface.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/" rel='bookmark'>Quantisan.com is now compiled and statically served</a>
+            </h1>
+            <div class="article-content"> <p>I just migrated this blog from a self-hosted Wordpress site to a Pelican statically generated blog. It took me a whole weekend to do it because I have almost 600 posts. Much is still broken at the moment but at least the site seems presentable so I pushed it through. The fixes will just have to wait.</p>
+<p>I considered using Jekyll as it appears to be the most popular static site generator. A look at its github page though shows no patch has been made for months. Development on Jekyll appears to have paused for some reason. Furthermore, I didn't have much luck getting <a href="https://github.com/thomasf/exitwp">exitwp</a>, which is a wordpress xml to jekyll importer, to gracefully parse my many custom posting tags. I also gave <a href="http://www.ruhoh.com">Ruhoh</a> a quick trial, but it also relies on exitwp to import wordpress posts.</p>
+<p>Then I found that <a href="http://doc.getpelican.com">Pelican</a> had its own importer tool using <a href="https://github.com/jgm/pandoc">pandoc</a>, which I tested works much better for the non-standard tags in my posts.</p>
+<p>In any case, here are the steps I took to migrate to Pelican.</p>
+<ol>
+<li>Export Wordpress into a XML file</li>
+<li>transfer comments to Disqus</li>
+<li>install Pelican 3.0.0 dev build</li>
+<li>use pelican-import to convert the XML file into markdown posts</li>
+<li>moved some posts around into its directory/category</li>
+<li>use Textmate to do a bunch of batch fixes</li>
+<li>configure Pelican and made a Makefile</li>
+<li><del>install ghp-import</del> rolled my own gh-pages script into Makefile</li>
+<li>customised a <a href="https://github.com/Quantisan/pelican-svbtle">pelican theme</a></li>
+<li>setup Github for custom domain</li>
+<li>updated DNS</li>
+</ol>
+<p>After all of that, this site is now <a href="https://github.com/Quantisan/www.quantisan.com">hosted and served on github</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/' title='2012-08-04T12:42:00'>04 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business/" rel='bookmark'>It's an open buffet in a small business</a>
+            </h1>
+            <div class="article-content"> <p>One of the few benefits of working for myself is that I don't need to
+worry about compatibility with legacy systems. I am free to use whatever
+open source tools to get the job done well. The downside to this is that
+there are so many technologies out there that it's hard to choose the
+right ones for the job. To give you a sense of what I meant, here are
+some of the topics that I have either tried or seriously considered in
+the past year.</p>
+<ul>
+<li>Programming languages: <a href="http://www.quantisan.com/tag/java/">Java</a>, <a href="http://www.quantisan.com/tag/python/">Python</a>, <a href="http://www.quantisan.com/tag/R">R</a>, C#, F#, Scala,
+    Clojure, Haskell.</li>
+<li>Data storage: <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/">HDF5</a>, CSV, Binary, MySQL, PostgreSQL, MongoDB,
+    MonetDB, Redis, HBase.</li>
+<li>Cloud server: <a href="http://www.quantisan.com/tag/amazon-ec2/">Amazon EC2</a>, Microsoft Azure, [Google App
+    Engine][], Rackspace Cloud, <a href="http://www.quantisan.com/tag/vps/">plain old VPSs</a>.</li>
+</ul>
+<p>Programming language choices are important because they sit at the
+bottom of a technology stack. Most of the work that I do are built on
+using them. For a long while, I settled on using a combination of Java,
+Python, and R. I prototype small ideas in Python. Implement production
+code in Java. And perform analysis in R. I discussed why <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/">use the right
+tool for the right task</a> a year ago. By the end of my previous
+project, I am finding that the popular development triplet of Java,
+Python, and R, is not ideal for a solo-operation. Seeing that I have
+more time on my hands because I am using QTD to trade for me now, I am
+taking a break this summer to expand my knowledge and learn new
+technologies. Some of the technologies that I am experimenting with
+includes:</p>
+<ul>
+<li>an in-memory data store for instantaneous and persistent tick data</li>
+<li>parallel programming for concurrent processing with no locks</li>
+<li>mathematically intuitive algorithm implementations using high order
+    functions</li>
+</ul>
+<p>Don't mind me as I help myself in this open buffet of technologies.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/its-an-open-buffet-in-a-small-business/' title='2011-06-15T20:50:00'>15 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
+            </h1>
+            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel='bookmark'>First look at Google App Engine for automated trading and quant analysis on the cloud</a>
+            </h1>
+            <div class="article-content"> <p>I just spent the last few hours looking into Google App Engine to use it
+for trading. Google App Engine (GAE) is a cloud computing development
+and hosting platform for web applications. GAE is similar to the
+well-known Amazon EC2 service but it is also very different. The main
+difference between GAE and EC2 is that GAE is not as flexible as EC2 but
+it is a lot easier to develop on. Think of it like using C++ (EC2) to
+write your own trading platform to using EasyLanguage on TradeStation or
+MQL on Metatrader (GAE). Another advantage for using Google App Engine
+is that it is free! Well, to a certain extent. It is free for a limited
+monthly usage. However, Google's free quota is known to be very generous
+(think Gmail) and this is no exception. Based on the numbers, it looks
+comparable to a typical \$20/month virtual private server (VPS) hosting
+package. My guess is that you can run a decent personal quant program on
+it if you keep the resources for yourself (private use). For more
+information on the free quota, you can read the <a href="http://code.google.com/appengine/docs/quotas.html">current GAE quota</a>
+web page or the <a href="http://en.wikipedia.org/wiki/Google_App_Engine">Wikipedia page for GAE</a>. You might be wondering how
+did I spend a few hours just reading on GAE? The answer is that I've
+done a brief research, planning, and assessment to see how GAE can be
+put to use in terms of quantitative analysis for automated and
+discretionary trading. Without going through all of my notes and logic,
+here's the gist of my conclusion.</p>
+<h2>For Automated Trading</h2>
+<p>Since GAE is also a SDK, it has a restricted programming API. You can't
+just plug in any custom library of your own (i.e. your broker's API)
+into your program. That is its advantage and its disadvantage.
+Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
+for your connection either. These limitations won't be changing anytime
+soon as GAE is designed to be like that for security reasons. Basically,
+there's no way for your web application on GAE to connect with your
+broker for trading. So much for that idea.</p>
+<h2>For Discretionary Trading</h2>
+<p>Things look brighter for discretionary trading though. A big bonus with
+using Google App Engine is that it supports the Google Finance API.
+Google Finance offers free real-time stock quotes. Combine it with the
+programming capability of the Google App Engine and you have yourself a
+free number cruncher in the cloud. However, GAE is definitely no match
+for your personal computer, so why would you go through all that
+trouble? One possible scenario in which this could be useful is for
+traders that is often on the road or traders such as myself in which we
+have a day job. In that case, you can set you quant analytics on GAE as
+a private web application and then you can access it as a web page
+anywhere on your mobile phone. One of the obvious limitation with using
+GAE is that it has limited features for scientific computing. For
+example, it doesn't support Numpy in the Python SDK. As such, I can't
+imagine using GAE for anything more than simple technical analysis for
+now. I certainly hope that GAE can include more powerful scientific
+computing capabilities in the near future. Until then, I really can't
+see Google App Engine offering much help aside from performing
+algorithmic tasks to help with your trading analysis. Their open issues
+log does announce that <a href="http://code.google.com/p/googleappengine/issues/detail?id=190">Numpy is being integrated into GAE</a> though. So
+that's a great sign for things to come! I am very hopeful of GAE's
+potential as a free cloud server to host my quant analytics on. We'll
+just have to wait for now.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/' title='2010-03-03T21:19:00'>03 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

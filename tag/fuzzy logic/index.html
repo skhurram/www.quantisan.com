@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - fuzzy logic</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/on-technical-analysis-and-fuzzy-logic-for-mechanical-trading/" rel='bookmark'>On technical analysis and fuzzy logic for mechanical trading</a>
+            </h1>
+            <div class="article-content"> <p>Technical traders realize that technical analysis is more of an art than
+science. Until you draw a plethora of lines to fill your chart, which
+would render it practically useless, prices rarely "hit the spot" based
+on your doodles. This doesn't matter though because trading is not about
+charts and guessing numbers. It is about costs and risks (pardon me if
+you've heard this a thousand times already). To whom this would matter
+though, are the mechanical traders using technical analysis. It may be
+<em>obvious</em> to a human to discern price patterns because a trading setup
+<em>looks like</em> something you know. However, figuring out "obvious" and
+"looks like" is not trivial in a program. Common ways of tackling this
+problem is with stochastic algorithms or Bayesian logic. The drawback
+with using these methods though, is that they are difficult to conjure
+unless you have some vigorous background in math. Hereby I suggest an
+alternative--fuzzy logic. In it's simplest implmentation, fuzzy logic
+are mere if-then statements. Here's a sample fuzzy logic control system
+for regulating temperature with a fan (it is also a trick solution to
+the infamous <a href="http://en.wikipedia.org/wiki/Hysteresis">hysteresis problem</a> in control theory...but I
+digress),<code>IF temperature IS very cold THEN stop fan IF temperature IS cold THEN turn down fan IF temperature IS normal THEN maintain level IF temperature IS hot THEN speed up fan</code>
+As you can see, there can be more than two values for a result. The
+classic and ubiquitous TRUE or FALSE boolean is thrown out the window.
+Let's dive right into an example of applying fuzzy logic to technical
+analysis. Say you are using the RSI as one of your indicators.
+Typically, you set a pair of threshold values to determine if the
+instrument is overbought or oversold.
+<code>String rsiCondition; if (RSI &gt; 70) rsiCondition = "Overbought"; if (RSI &gt;= 30 &amp;&amp; RSI &lt;= 70) rsiCondition = "Neutral"; if (RSI &lt; 30) rsiCondition = "Oversold";</code>
+Then here is what a fuzzy logic implementation would look
+like.<code>String rsiCondition; if (RSI &gt; 90) rsiCondition = "Very overbought!"; if (RSI &gt; 70) rsiCondition = "Overbought"; if (RSI &gt; 60) rsiCondition = "a little overbought"; if (RSI &gt;= 40 &amp;&amp; RSI &lt;= 60) rsiCondition = "Neutral"; if (RSI &lt; 40) rsiCondition = "a little oversold"; if (RSI &lt; 30) rsiCondition = "Oversold"; if (RSI &lt; 10) rsiCondition = "Very oversold!";</code>
+In fact, you may have noticed that the first RSI example is already a
+3-valued fuzzy logic. And you're right! Fuzzy logic is that easy. So
+what can you do with that second RSI example? Well, perhaps you want to
+implement fuzzy logic on a MACD as a second indicator. Then you can
+implement a "conviction" algorithm (which isn't possible with TRUE/FALSE
+algorithms) by summing the two fuzzy logic (see wiki or google for more
+information on <a href="http://en.wikipedia.org/wiki/Fuzzy_logic">performing fuzzy logic operations</a>). And then... well.
+This is a basic example of exploiting the benefits of fuzzy logic in
+automated trading strategies. More advanced use of fuzzy logic is
+demonstrated in this seminal work by Lin and Lee, <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=106218&amp;tag=1">Neural-network-based
+fuzzy logic control and decision system</a>, 1991. Fuzzy logic + neural
+net! Well, as you can see, this is only the tip of the iceberg. P.S. I
+have discussed a lot recently about the frontend work that I have been
+working on. This post is a break for the reader and a glimpse at what I
+am really doing behind the scenes. Let me know in the <a href="#respond">comments below</a>
+if this is your cup of tea and I'll write more of this type of posts in
+the future.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/on-technical-analysis-and-fuzzy-logic-for-mechanical-trading/' title='2010-09-02T10:49:00'>02 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

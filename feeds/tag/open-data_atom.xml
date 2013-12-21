@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/open-data_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2012-02-12T11:49:00+00:00</updated><entry><title>A weather station data scrapper in R</title><link href="http://www.quantisan.com/a-weather-station-data-scrapper-in-r/" rel="alternate"></link><updated>2012-02-12T11:49:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-02-12:a-weather-station-data-scrapper-in-r/</id><summary type="html">&lt;p&gt;
+This R code scrape publicly available weather station data given a
+weather station ID and a date range. I patched an existing source code
+from UC Davis so it's not my original code. Thought I'd share it here
+anyway. It doesn't fail safely though because a null return value would
+break the fetching loop.
+&lt;script src="https://gist.github.com/1808134.js"&gt; &lt;/script&gt;
+&lt;/p&gt;</summary><category term="open data"></category><category term="R"></category></entry></feed>
