@@ -56,6 +56,109 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel='bookmark'>Anatomy of a JForex strategy, Part 1</a>
+            </h1>
+            <div class="article-content"> <p>Continuing on from Part 1 of this series: <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">Getting started learning
+JForex programming</a>, now we're ready to discuss the real thing. You
+build JForex strategies by using the IStrategy Interface (<a href="http://download.oracle.com/javase/tutorial/java/concepts/interface.html">What is an
+Interface?</a>). Basically, an Interface is a code skeleton with a set of
+predefined empty methods that you'll need to implement yourself. The six
+standard methods of the IStrategy Interface are:</p>
+<ol>
+<li>onStart</li>
+<li>onStop</li>
+<li>onMessage</li>
+<li>onAccount</li>
+<li>onTick</li>
+<li>onBar</li>
+</ol>
+<p>Below is an empty IStrategy Interface implementation, also known as a
+JForex strategy. This code will compile fine in JForex and you can even
+run it. But it doesn't do anything at all because there is no code to
+run in each of the methods. Each of the six methods will just be called
+and exit immediately.</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">com.dukascopy.api.</span><span class="err">\</span><span class="o">*;</span> 
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EmptyStrategy</span> <span class="kd">implements</span> <span class="n">IStrategy</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span>
+        <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="n">IMessage</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAccount</span><span class="o">(</span><span class="n">IAccount</span> <span class="n">account</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Each of the method is triggered by a specific event. You can probably
+guess what they are from their name.</p>
+<h2>onStart (line 5)</h2>
+<p>This is the first method that is called when you run your strategy. It
+will run once and only once at the start of your strategy. Normally you
+do your initialization in here. The thing to note for onStart is in line
+5 of the code. The method signature of onStart is</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
+</pre></div>
+
+
+<p>The object
+in the parameter and given to you in this method is an IContext object.
+If IStrategy is the skeleton, then IContext is the heart of the
+strategy. Please take a look at this <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IContext.html">javadoc link to IContext</a> to see
+what this object does. <strong>Javadoc?</strong>: Now is a good time to introduce the
+second of the three essential resources of a JForex programmer. The
+<a href="http://www.dukascopy.com/client/javadoc/">JForex Javadoc</a> is the single most up-to-date API documentation
+<em>explaining</em> each and every object and methods of the JForex API. Think
+of it like a reference manual. Note that although it's comprehensive,
+most of the explanation is very sparse and possibly incomplete. IContext
+is a core JForex object to access many important components of the
+JForex system, such as the ordering engine, charts, console,
+indicators... You get the idea. It is important! You typically want to
+keep a local copy of it as this is the only time (in onStart) that this
+object will be passed to you in IStrategy.</p>
+<h2>onStop (line 26)</h2>
+<p>As the name suggest, this method is called once you send a stop command
+to your strategy. You do your program wrap-up such as logging and
+flushing data here. Not much out of the ordinary with this one.</p>
+<h2>onMessage (line 18)</h2>
+<p>Whereas we know when onStart and onStop will be called, onMessage is an
+asynchronous method in that you don't know exactly when it will run.
+This method is called when the Dukascopy server sends your strategy a
+message. For example, the server calls onMessage to let you know that
+your order has been filled. You receive and process the server message
+by accessing the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IMessage.html">IMessage object</a> that is passed to you.
+<strong>Important:</strong>There is no guarantee that you will receive each and every
+message sent to your strategy from the server. Perhaps your strategy
+process is clogged. Or maybe your internet connection had a hiccup. If
+your strategy onMessage doesn't get called by the server for whatever
+reason, the server couldn't care less and won't be checking nor trying
+again. So don't do anything critical like managing your orders in
+onMessage!</p>
+<h2>onAccount (line 22)</h2>
+<p>This method is called whenever your account information update is
+received. The method provides access to the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IAccount.html">IAccount object</a>, which
+you use to get your account information. Say if you have an open
+position, your account information changes on every tick because your
+equity is cash + unrealized profit/loss. In that case, onAccount is
+called every 5 seconds by the server at most to avoid flooding your
+strategy. <strong>More Important:</strong>The IAccount object is not connected live
+to your account in the server. It is merely a snapshot of your account.
+For example, if you keep a local copy of an IAccount object. Do some
+trading to change your balance. Then ask the same IAccount for account
+balance information, you will not see a change. As such, always update
+your local copy of IAccount within the onAccount method to keep your
+account information up-to-date for your strategy's use.</p>
+<h2>To be continued</h2>
+<p>onStart, onStop, onMessage, and onAccount methods are <em>administrative</em>
+methods for your strategy. The last two methods that we'll discuss,
+onTick and onBar, is where the magic happens in a strategy. I am saving
+the best for last in the next post.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/' title='2010-12-10T08:10:00'>10 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/" rel='bookmark'>Getting started learning JForex programming</a>
             </h1>
             <div class="article-content"> <p>The biggest problem I had when learning to program my own trading
@@ -256,36 +359,6 @@ JFUtil 1.0</p> </div>
             <div class="article-content"> <p><object width="560" height="340"><param name="movie" value="http://www.youtube.com/v/eNwMut3-z1Y?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/eNwMut3-z1Y?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="560" height="340"></embed></object></p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/where-good-ideas-come-from-johnson/' title='2010-11-21T06:26:00'>21 November 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/" rel='bookmark'>I didn&#039;t miss a boat.  I missed a freakin rocket!</a>
-            </h1>
-            <div class="article-content"> <p>The purpose of this post is not to bang my head over this wonder. There
-are always other opportunities in the market. The purpose of this post
-is to remind myself that:</p>
-<ol>
-<li>my analysis can be so right, sometimes; but more importantly</li>
-<li>my entries and exits timing are still <em>terrible</em></li>
-</ol>
-<p>I can't use the same techniques I use to<a href="http://www.quantisan.com/category/forex/">trade forex</a> and <a href="http://www.quantisan.com/category/stocks/">large
-caps</a> in these <a href="http://www.quantisan.com/tag/mining/">junior miners</a>. I'm used to <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">riding waves</a> on a
-boat. I need to adapt and figure out ways to ride rockets (a friendly
-reminder that most rockets will fail to launch), as <a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/#comment-533">Uberlu suggested</a>
-in a comment. Here's what happened. I <a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/">lamented about my missed
-opportunity</a> in establishing a position in Ventana Gold (VEN.TO) last
-week. VEN.TO is a company in which I've been very bullish and <a href="http://www.quantisan.com/tag/VEN.TO/">took
-numerous dabs at</a> for months. This is the picture of VEN.TO last
-Monday. It already propelled to \$11. [caption id="" align="aligncenter"
-width="570" caption="Ventana Gold (VEN.TO) on November
-8"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-08-VEN.TO.png" />][][/caption] Now this is VEN.TO today. [caption id=""
-align="aligncenter" width="570" caption="Ventana Gold
-(VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-18-VEN.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-11-18-VEN.TO.png">1</a>[/caption] VEN.TO closed at \$10.03 on Tuesday. It
-opened at 13.61 on Wednesday on news of a takeover bid.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/' title='2010-11-18T10:09:00'>18 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

@@ -56,6 +56,36 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/what-i-learned-from-2-years-of-data-sciencing/" rel='bookmark'>What I learned from 2 years of 'data sciencing'</a>
+            </h1>
+            <div class="article-content"> <p>Last week was my last day at uSwitch.com. From becoming aware of <em>data scientist</em> as a valid job title on my job offer letter, to speaking at Strata London, to signing a book deal to write about it in our book on Web Data Mining (that's progressing at a glacial pace), I figured that I should jot down some takeaway lessons while this experience is still fresh.</p>
+<h2>It is not about the <em>science</em>. It is about the <em>data</em>.</h2>
+<p>In my first year our team delivered a handful of data projects. To name just a few, we developed a dashboard showing lifetime values for all of our millions of customers, demonstrating a 6% revenue gain with a product showcase sorting algorithm modelled by the multi-armed bandit problem, and simulated offline advertising impacts to online sales for optimising marketing spending saving £20,000 a month. For various reasons, none of these projects gained traction within the company and became abandoned.</p>
+<p>Much of the efforts spent for those projects were in getting the right data into the right shape. We needed to capture events across applications on different technology stacks, associate individual events to unique customers, and being able to process all those data in an ad-hoc manner. Over the course of my first year, our team of 2 built and evolved a distributed data architecture and scalable data workflow that's based on open source tools and publications from companies like Google, LinkedIn, Twitter, etc. In fact, I scratched enough of my own itch on an open source big data processing project to become one of the maintainers for it.</p>
+<blockquote class="twitter-tweet" lang="en"><p>Congratulations to <a href="https://twitter.com/Quantisan">@Quantisan</a> for becoming a Cascalog committer today</p>&mdash; Nathan Marz (@nathanmarz) <a href="https://twitter.com/nathanmarz/statuses/312304668975980545">March 14, 2013</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>On a rather "by the way" note, we structured lifetime views of customer data from the disparate signals across company verticals. Words had been going around the company that we had this new business intelligence tool, more and more people asked us to help them answer questions with data on their side of the business. The data we surfaced from our data workflow satisfied a wide-spread need in the company to understand customer behaviours. Little did I know that we'll be cleaning and shaping data for most of my second year at uSwitch. Months later to recent times, our commercial team released an external data product that I can't say much but might bring in sizable benefits for the company soon.</p>
+<p>It is glamorous to talk about the latest and greatest machine learning or data visualisation. In practice, I was just cleaning and shaping data. Enabling more people to make use of deep and structured data was what delivered value to the company.</p>
+<h2>Figuring out the right problems to solve is not easy.</h2>
+<p>Had we known that customer behaviour analytics are so valuable, we would have done it earlier on (although many of the other projects were definitely a lot of fun to do). Figuring out the right work to do is one of the most difficult tasks for a data science team. It doesn't help with the fact that the data science role is so vague. Marketing think we are mining for customer insights. Developers think we're toying with Riemann, Storm, or something bleeding edge. Product managers think we are plotting graphs.</p>
+<p>Everyone has ideas but there were only 3 of us in the team. Figuring out where to devote our time and effort is not as easy as it sounds. The issue is that a new project can be almost anything. So which <em>one</em> should we do? The paradox of choice can be confusing.</p>
+<p>Seeing that this is data science, why not dive right into the data like they would often say in hackathons? I made the mistake in the first few weeks in my data science career just hacking away with the data and then trying to persuade people to make use of the result ... somehow.</p>
+<p>Some interesting graphs came about. But as <a href="https://twitter.com/dancingmango">Marc</a> often like to ask, "so what?" Unless someone or something can act on the data, results can only satisfy intellectual curiosity. A business can't survive on funding people to carry out academic studies forever.</p>
+<p>Nowadays, we talk to different stakeholders to try to dig as deep as possible into their needs before any code is written for a new project. This is me handwaving. Frankly, I'm still learning my way and rely a lot on luck through trials and errors to discoverying the right problems to solve.</p>
+<h2>It is a humbling experience.</h2>
+<p>Working with <a href="http://oobaloo.co.uk/">Paul Ingles</a> and <a href="http://uk.linkedin.com/pub/abigail-lebrecht/2/95a/42">Abigail Lebrecht</a> has been frustratingly awesome. Paul is opinionated about doing things as simple as possible. On more occasions than I can remember, we implemented our own little Clojure libraries because the open source ones available were "trying to do too much". Abigail is adamant about getting the data and analyses right. "What do you mean this data is only 99% correct?" Working day in and day out with Paul and Abigail showed that I had much to learn in efficient problem solving and to question all hidden assumptions.</p>
+<p>In my previous role as a biomedical engineer, I also had the opportunity to work in a multidisciplinary team. But for my <a href="http://www.biomedcentral.com/content/pdf/1743-0003-5-15.pdf">haptic-robotic therapy project</a>, I never even considered going into a workshop to build my robot or provide clinical therapy for the stroke patients. What multidisciplinary meant back then were a small group of professionals coming together to work on a project with each person doing different tasks to get the thing to work.</p>
+<p>The advantage of being a data scientist is that I was very hands-on in all aspects of the work. One week I might be pair programming with Paul, and fighting to keep him away from my keyboard, to integrate Riemann for monitoring our data architecture. Other days I am debating with Abigail on the data mining side. Which usually resulted from her finding flaws in the materialised tables that I produced from Cascalog, and then having to come up with a better estimation model for the missing data.</p>
+<h2>So do you want to be a data scientist?</h2>
+<p>This is it for me formally as a data scientist. I am moving back across the Atlantic to the states to cofound a new venture and continuing my journey <a href="http://www.sourceful.io">to make information accessible</a>. However, back to the topic at hand. If cleaning vast amount of data, being clueless as to what to do, and debating with colleagues sound like a challenge that you want to take on, I know a company in London that's <a href="http://www.uswitch.com/careers/">looking for a data scientist</a>!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/what-i-learned-from-2-years-of-data-sciencing/' title='2013-12-21T00:00:00'>21 December 2013</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/post-gone-viral-16000-visitors-in-a-day-how-many-actually-read-the-article/" rel='bookmark'>Post gone viral, 16000 visitors in a day, how many actually read the article?</a>
             </h1>
             <div class="article-content"> <p>Edit: A few people have <a href="https://news.ycombinator.com/item?id=5693881">pointed out</a> that my assumption about the Analytics engagement metric <em>might be</em> wrong because single page hit <em>could be</em> counted as zero on engagement time. I'll make an update to this post when smarter people than me on HN can agree on a metric. So I open this problem to Analytics expert, how can I discern readership ratio from Analytics data?</p>
@@ -209,66 +239,6 @@ architecture and agile methodologies to tackle this problem. And we had three mo
 <iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/' title='2012-09-04T16:30:00'>04 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/" rel='bookmark'>People is the biggest obstacle to becoming a data-driven organisation</a>
-            </h1>
-            <div class="article-content"> <p>Our data team of 3 is tasked with pushing our business to be more
-data-driven. From encouraging management to make strategic decisions
-with hard data to building real-time feedback loop within our products
-themselves. We have built the infrastructure in place to capture and
-analyse streams of high granularity data using open source tools like
-Kafka, Hadoop, and Cascalog. Now the hard part is to convince the rest
-of the company that counted numbers on an Excel spreadsheet is
-insufficient so that they can incorporate these new high-frequency and
-high-granularity information in their everyday decision-making process.</p>
-<p>This came to light for me when I tried to revamp our Attribution
-Modelling, which is a fancy marketing term for how referral is
-attributed and doesn't have to do with mathematical modelling at all.
-Many companies traditionally use a last-referral-takes-the-cake
-approach. Say if a customer comes in via an email referral first, leaves
-the site, then comes back in from an Adword to ultimately make a
-purchase, the Adword would get attributed for that revenue produced.
-This last-referral method is a lazy way of doing things. Lead generating
-referrals get no credit and return on investment values are biased
-towards closing-stage marketing efforts. Granted, doing anything else
-would require a global view of customer journey, which is a non-trivial
-matter. </p>
-<p>However, that is exactly what we're able to do easily now. So we
-took a couple of days to spike out a fair-share attribution model such
-that every touch point a customer used get a share of the pie. The
-intention is to provide a holistic view of referrers efficacy to feed
-into our higher-level models. But seeing that the old system is so
-unrealistic, I thought I might as well open it for everyone else.</p>
-<p>Opening a can of worms, that was what it felt like. I found that things
-like financial reports and people's bonuses are tied to this old
-attribution modelling system. Even though it is obvious to everyone that
-the old attribution modelling system is unrealistic, changing it would
-require changing the work processes of multiple individuals across the
-company. You know what they say about people's habits? Habits are hard
-to change. </p>
-<p>Seeing that this is a fundamental obstacle to our company's
-competitiveness, I've taken a break from pushing our data architecture
-to build and evangelise internal data products. I've been working
-closely individually with our business people to identify ways of using
-data, staging data views from Hadoop/Cascalog back into good old MySQL,
-and assisting them to generate actionable data with SQL to make their
-lives easier. </p>
-<p>One of such views borrows a technique from my algorithmic
-trading. By applying a breakout strategy (which I wrote entirely in SQL,
-good fun) on the revenue and cost time-series data of our PPC and SEO
-campaigns, our PPC/SEO manager now have available a customisable
-screener for abnormality with any of our thousands of continuous
-marketing campaigns. Very much like a stock screener for breakouts. This
-used to be a subjective process based on a spreadsheet of numbers and
-expert opinions. Now it's data-driven. </p>
-<p>There's a saying that a business
-is its people. To become a data-driven organisation, you need
-data-driven people. I never realised the significance of this until now.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/' title='2012-06-10T12:26:00'>10 June 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
 <p class="paginator">

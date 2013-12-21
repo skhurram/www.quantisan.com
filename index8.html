@@ -56,6 +56,36 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/" rel='bookmark'>Bullish EURGBP as hedge and Bearish NZDUSD as diversification</a>
+            </h1>
+            <div class="article-content"> <p>I've had more time to study the market tonight and is running a second
+and a third instances of Quantised Trading Desk (QTD) to trade 3
+currencies in total simultaneously. For my dollar bull sentiment, I'm
+dividing between USDJPY long and NZDUSD short. <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/">QTD still hasn't taken a
+position in USDJPY in the past 24 hours</a>. That's a good thing as
+USDJPY is still drifting downward today even as the dollar is gaining
+some ground. My line in the sand is at 80.70 for USDJPY and above 0.8100
+for NZDUSD. EURGBP long is a hedge against my dollar longs. Again, I'm
+not making any trade at this point but merely <a href="http://www.quantisan.com/quantised-trading-desk/">setting up QTD to wait
+for the right moments to enter</a>. A break below 0.8660 for EURGBP would
+challenge my bullish bias. These three currencies should be my complete
+market bias for a while. I'm just going to let QTD do its thing and
+trade for me. Hopefully this will be the last you'll hear from me about
+my market bias for a while. [caption id="attachment_5342"
+align="aligncenter" width="580" caption="NZDUSD,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />][][/caption] [caption id="attachment_5343"
+align="aligncenter" width="580" caption="EURGBP,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />][][/caption]</p>
+</p>
+
+<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly.png
+  [<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly.png</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/' title='2011-04-18T21:14:00'>18 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/" rel='bookmark'>Bullish USDJPY on week of April 17, 2011</a>
             </h1>
             <div class="article-content"> <p>I have unofficially launched my Quantised Trading Desk (QTD) expert
@@ -258,57 +288,6 @@ In the mean time, getting multi-dimensional indicators results through
   interface]: http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/more-trouble-with-jforex-iindicators/' title='2011-03-29T07:36:00'>29 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/" rel='bookmark'>Conjuring beans to simplify JForex IIndicators</a>
-            </h1>
-            <div class="article-content"> <p>The JForex API is not perfect. Like any application programming
-interface (API), some parts of the JForex API is better designed than
-others. One of the most gripping problems with JForex is its use of
-technical analysis (TA) indicators. Here's an example of using an
-exponential moving average, one of the most simplest indicators.
-<code>ema(instrument, Period.TEN_SECS, OfferSide.BID, IIndicators.AppliedPrice.MEDIAN_PRICE, 14, 0);</code>
-And the corresponding javadoc explaining the parameters,
-<code>Parameters: instrument instrument of the bar period period of the bar side bid or ask side of the bar appliedPrice type of input data timePeriod time period value shift number of candle back in time staring from current bar. 0 - current bar (currently generated from ticks), 1 - previous bar (last formed bar), 2 - current bar minus 2 bars and so on</code>
-It's not intuitive but it's usable. Recall that in my <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">JForex
-programming tutorial</a>, I suggested using the JForex API javadoc to
-find out information about the API. However, for the case of
-IIndicators, if you <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IIndicators.html">take a look at its javadoc</a>, you will only be led
-to more confusion by the hundred or so mysterious indicator methods with
-cryptic parameter names. In JForex API, if you want to calculate an
-indicator, you need to look through a long list of abbreviated method
-names in the javadoc. Many of which are not easy to decipher. Secondly,
-you need to figure out the generic parameters and set them correctly,
-which is different for almost every indicator. Lastly, as there is no
-standard interface for indicators, you need to hardcode these into your
-strategy with little flexibility. In contrast, here's the same call
-using <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil 2.1.0</a> to get an EMA value. It has notably more lines of
-code. It is designed deliberately so using an object oriented approach
-by encapsulating the indicator parameters into a bean object and
-abstracting the calculation into a single generic function call. [java]
-// get an EMA indicator value by building an indicator bean
-MovingAverage maBean = IndicatorBeanFactory.getMovingAverage(); // then
-sets its parameters with obvious method names
-maBean.setAppliedPrice(IIndicators.AppliedPrice.MEDIAN_PRICE)
-.setMAType(IIndicators.MaType.EMA) .setWidth(14); // all of these are
-optional parameters // feed the bean into a generic calculation method
-to get the result double ema = Indicating.calculate(instrument,
-Period.ONE_MIN, maBean); [/java] With JFUtil, to calculate an
-indicator, you create an indicator bean with the intuitive bean name
-that corresponds with the full name of an indicator. For example, a
-moving average will be MovingAverage. Then you set the
-indicator-specific parameters using clearly defined methods with useful
-javadoc descriptions. One method for one parameter. Lastly, you feed
-this indicator bean into a generic calculation function to get your
-value. It took some thinking to abstract and generalize such a rigidly
-structured API. I am quite pleased with this new design as the current
-<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil opens up a lot of design flexibility</a>. Such as
-dynamic indicator selection with genetic algorithm and interchangeable
-indicators use for runtime adaptive algorithms.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/' title='2011-03-22T07:35:00'>22 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

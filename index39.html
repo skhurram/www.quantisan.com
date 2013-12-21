@@ -56,6 +56,107 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/" rel='bookmark'>Analysing monthly forex trading performance in changing market conditions</a>
+            </h1>
+            <div class="article-content"> <p>
+In my previous post, I discussed about [3 reasons why I don't use
+Jensen's alpha or Sharpe ratio for my montly trading performance
+measurement][]. In this post, I will talk about what I actually use and
+how I came up with it. As I was saying in the previous post, what one
+chooses to use as their performance metric depend on 3 factors such as
+your style of trading, your agenda, and your interest in this topic. I
+will briefly lay out my 3 motives as background information. I use a
+swing trading strategy for trading forex. I aim to hold for at least a
+few hours to a few days. I am working to hold longer and trade less in
+the future, but that's another story. To fit my style of trading, a
+performance metric has to be unbiased for long and short trades as well
+as taking into account short term conditions in the market. In terms of
+agenda, what is the purpose of my performance metric? As a part-time
+trader, I answer only to myself. These numbers are used for my
+self-improvement and internal month-to-month comparisons only. Lastly,
+my interest in this topic of portfolio measurement is limited. I want
+something easy to calculate and simple to understand. I have read a few
+academic papers on this topic and spent a few hours researching on the
+web. That's about it. Now that my motives have been laid out, let's
+discuss my process for coming up with my trading performance metric.
+Ultimately, my assessment on how well I have done for the month is to
+measure my return based on the risk taken. In other words, Performance
+Metric = Reward / Risk. My Reward function is simple. I just steal the
+idea from Sharpe and use:
+
+> Reward = Net Return - Riskless Return
+
+Shameless. I know. I don't want to muck with the Reward function because
+at the end of the day, it is your account balance that matters. The Risk
+function takes some more thought. On a trade-by-trade basis, the risk
+taken for a particular trade can be thought of as the stop loss. It is a
+amount put at risk to be taken by the market. In other words, risk can
+be represented by the loss you are willing to take. On a month-to-month
+basis, the most important loss value that I pay attention to is my
+maximum drawdown. A drawdown imposes a real dent in your account as well
+as negatively impact your trading psychology. For these reasons, the
+maximum drawdown is a variable in my Risk function.
+
+> Risk = Max. Drawdown ...
+
+However, I am not done yet. While max. drawdown is important, it is an
+entirely internal factor. The risk you take is also affected by the
+condition of the market. Using the stop loss analogy again, a 50 pips
+stop loss can be labelled as both conservative and aggressive risk
+exposure depending on the volatility of the market in the timeframe
+you're trading. As such, we need to consider volatility in the Risk
+function. However, this raises another question, what is volatility.
+Long story short, I just snatch the Average True Range (ATR) indicator
+that I use on my charts in this formula. However, we can't just stick a
+ATR value in because it's an absolute number. We need to use a
+percentage ATR (%ATR) to correspond with all the other percentage
+numbers in the formula. And since this is for monthly analysis, I grab
+the %ATR from a monthly chart. In particular, I use the monthly %ATR on
+the U.S. dollar futures chart. Finally, the Risk function is:
+
+> Risk = Maximum Drawdown + %ATR
+
+Thus,
+
+> **Performance Metric = (Net Return - Riskless Return) / (Maximum
+> Drawdown + %ATR)**
+
+As an example, here are the values I plug in for each variable to
+calculate my performance metric for [November][]. Net Return = 3.15%,
+read from November's statement Riskless Return = 0.54% (per annum) / 12
+= 0.045%. This is the Canadian 1-year treasury rate in November. Max.
+Drawdown = 3.55%, read from November's statement %ATR = monthly ATR(3)
+of U.S. dollar futures / monthly close of U.S. dollar futures =
+3.1473/74.895. To verify the efficacy of this performance metric. Let's
+do a mental check of my criteria as discussed.
+
+1.  Unbiased for long and short trades? Yes, it uses the net return
+    regardless of which side you took.
+2.  Varies with short term market conditions? Yes, from the %ATR.
+3.  Comparable between month to month? Yes, the number is normalized by
+    market volatility each month.
+4.  Easy to calculate? Yes, it's can be done in my [trade log][]
+    spreadsheet with a few formulas.
+5.  Easy to understand? Yes, it's an interpretation of reward / risk.
+
+As with any other attempt to summarize trading performance into one
+single value, many assumptions have been taken. I cherry picked what I
+needed to assemble a formula. Some observant reader will notice that
+this formula is similar to the Sterling and Calmar ratios. Indeed, this
+is yet another modified form of these ratios. In fact, I will be
+referring to this formula as Sterling ratio in my future posts for
+simplicity.
+
+</p>
+
+<p>[3 reasons why I don't use Jensen's alpha or Sharpe ratio for my
+  montly trading performance measurement]: http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/' title='2009-12-29T07:55:00'>29 December 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/" rel='bookmark'>3 reasons why I don&#039;t use Jensen&#039;s alpha or Sharpe ratio for my forex trading</a>
             </h1>
             <div class="article-content"> <p>As a part-time trader, measuring my <a href="http://www.quantisan.com/tag/monthly-review.html">monthly trading performance</a> can
@@ -419,85 +520,6 @@ Win% / Loss% 2.21 1.57 Max. Conseq. Winners 4 12 Max. Conseq. Losers 6
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/november-2009-trading-performance-review/' title='2009-12-01T22:25:00'>01 December 2009</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/eurusd-95-pips-in-2-hours-an-example-of-swing-and-day-trade-convergence/" rel='bookmark'>EUR/USD +95 pips in 2 hours:  An example of swing and day trade convergence</a>
-            </h1>
-            <div class="article-content"> <p>I had my best day-trading day this quarter on November 27. I made 95
-pips in two hours at the open with only two trades. This post is a
-review of my trades that day for my future reference. To save you and
-myself from reading, the two reasons for this good run are:</p>
-<ol>
-<li>Convergence of intermediate term signals with day trading signals</li>
-<li>Ignoring my bearish sentiment (Dubai news) and traded what I saw
-    from the prices</li>
-</ol>
-<p>Before moving on, let's start by setting the stage with some background
-information to summarize what conditions were like that day.</p>
-<h3>Background</h3>
-<p>The news on November 25 after NY close of <a href="http://www.marketwatch.com/story/dollar-and-yen-buoyed-by-safe-haven-flows-2009-11-27">Dubai World delaying their
-debt repayments</a> sent the dollar and yen soaring. I made <a href="http://www.quantisan.com/audjpy-short-81-3777-17-anatomy-of-my-first-400-pips-trade/">my first
-400+ pips trade</a> by being at the right place and time on this panic
-wave. The U.S. market was closed that day but FTSE sold off more than 3%
-the day after the news. So the expectation was for US to do a catch-up
-sell off when it opens again on Friday 27th. Risk aversion (equities
-down, yen and dollar up) was the talk of the day. Figure 1 below shows
-the charts of ES futures (e-mini S&amp;P500). Left is a 1-min. from midnight
-of 27th to that morning's NYSE opening. Right is an hourly showing the
-move overnight from 26th to 27th.</p>
-<p>[caption id="" align="aligncenter" width="580" caption="ES Futures
-(e-mini S&amp;P 500)"][<img alt="ES Futures (e-mini S&amp;P 500)" src="http://www.quantisan.com/static/images/img_archive/2009-11-29-ES.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2009-11-29-ES.png">ES Futures (e-mini
-S&amp;P 500)</a>[/caption]</p>
-<h3>Intermediate term signal</h3>
-<p>Figure 2 shows my intermediate term signal. EURUSD has been printing an
-uptrend on the daily (not shown). Figure 2 shows that EURUSD was testing
-the bottom of my channel so I should consider going long. Notice that
-this is the same channel that called for the 1.5150 top on 25th. At
-least it has proven itself useful once.</p>
-<p>[caption id="" align="aligncenter" width="580" caption="EURUSD,
-3-hour"][<img alt="EURUSD, 3-hour" src="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_3h.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_3h.png">EURUSD, 3-hour</a>[/caption]</p>
-<h3>Short term signals</h3>
-<p>For the short term signal, we need to go back to Figure 1 for the ES
-charts. ES tanked 40 points over the holiday with very low volume. It
-made it all the way to 1067 just before 3am on 27th. Then it lifted all
-the way to 1080 at 9am. 1080 is the line in the sand for the bulls and
-bears. So retracing all the way to that level before opening is
-significant. This pre-open strength in ES was the sign of oversold for
-me. This is the short-term confirmation I needed. I entered my first
-position to long EURUSD @ 9:09 am to test the water. Then I watched both
-EURUSD and ES closely for the next half hour. Once NYSE opened. I
-noticed that the TICK was relatively mellow with readings around -250 to
--500. It's unusually good for a -20 points open drop on S&amp;P 500. One
-would expect at least -800 readings for a strong negative sentiment. So
-after watching EURUSD, ES, and TICK for about 10 minutes, I entered a
-second position on a weak retracement at 9:39 am.</p>
-<h3>The exits</h3>
-<p>For my exit, I took profit at 1.5180 because it's the 50% Fibonacci
-level and it's also the top of another of my channel (Figures 2 and 3).
-After about 10 minutes of watching the 1M bars, EURUSD failed to clear
-that resistance, so I took profit on the second half to go flat in this
-pair just before 11 am because it's an early-closing Friday (NYSE
-closing at 1pm). The gains were +95 and +93 pips for +0.27% and +0.28%
-in my demo account total. Not bad for holding for 2 hours. Update:
-Thanks to <a href="http://twitter.com/jlcnuke">Jeff on Twitter</a> for the question. I updated Figure 3 with
-the Fib. levels and showed the top and bottom used to draw it.</p>
-<p>[caption id="" align="aligncenter" width="580" caption="EURUSD, 30
-min."][<img alt="EURUSD, 30 min." src="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_30min.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2009-11-27-EURUSD_30min.png">EURUSD, 30 min.</a>[/caption]</p>
-<h3>Conclusion</h3>
-<p>In summary, I started with an intermediate term setup that aligns with
-the major trend. I observed the reaction of the markets on an important
-news. Identified an oversold condition from the short-term charts for a
-short-term positive divergence signal. Scaled in a position. Then added
-more with another confirmation. I scaled out when the target was hit.</p>
-<h3>Recommendation</h3>
-<p>Once again, I could have been more aggressive on this trade. As shown in
-Figure 3, 1.4920-4930 was a short-term resistance. I could have added
-more to my position when that level broke, with a stop at 1.4900.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/eurusd-95-pips-in-2-hours-an-example-of-swing-and-day-trade-convergence/' title='2009-11-29T16:42:00'>29 November 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
             </div>
         </article>
 <p class="paginator">

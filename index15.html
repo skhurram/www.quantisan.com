@@ -56,6 +56,54 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel='bookmark'>Rev your trading system on the cloud with a free Amazon cloud server</a>
+            </h1>
+            <div class="article-content"> <p>I always try to keep my trading and any related costs as cheap as
+possible. And there's nothing cheaper than free, which that is what
+Amazon Web Services (AWS) is offering starting November 1, 2010. They
+are offering a full year of free t1.micro EC2 instance along with other
+basic level of AWS services (see link below). That seems to be a great
+incentive to move my trading system on to a remote cloud server. One of
+the biggest benefits of running your trading system on a virtual private
+server or a cloud instance is reliability. I don't know about you, but
+my internet connection sometimes acts up or even goes down for hours.
+There's the occasional electrical power disruption too, but it's been
+good these days. On the other hand, there are many disadvantages for
+running your trading system remotely. Costs, technical know-hows, and
+limited processing power, just to name a few. The added costs is not an
+issue for now as Amazon is offering a year of free trial. With regard to
+technical know-hows, I don't know how to setup a cloud server yet.
+Although it shouldn't be a terribly difficult task for me as I am
+familiar with Linux. What's at issue though, is the limited processing
+power. The processing power of a t1.micro instance is an unspecified
+fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
+processor. So you get a fraction of that, which doesn't sound much.
+CloudHarmony's benchmark shows that <a href="http://cloudharmony.com/benchmarks">a Micro instance is about 1/10th of
+that of the Small instance</a>. However, a Micro instance can burst to up
+to 2 ECUs (double that of the Small) of processing power occasionally.
+This is good if you can keep your continuous processes minimal and only
+make calculations infrequently (such as on arrival of a new price bar).
+The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
+low-latency files) and 5 GB of S3 (for persistent storage). These
+numbers are generous, so the bottleneck obviously remains with the
+processor. Your best bet for minimal background processing use is to run
+a command-line-only trading system. That's something that can be easily
+done on JForex. However, there remains the question of is the minimum
+power of a Micro sufficient to sustain a trading system? Any hiccup in a
+trading system could cost you more than the annual charge for even a
+Small instance. This freebie from Amazon may not be worth the risk. The
+only way to know is to test it out. I won't be able to get to that soon
+as I'm been busy programming. So if anyone is running a trading system
+on a t1.micro instance, I'd really appreciate if you can provide some
+feedback. Update Nov 6: See <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">my first failed test</a> and then my first
+time <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">running remote desktop on t1.micro</a>. Otherwise, enjoy the
+freebie, <a href="http://aws.amazon.com/free/">AWS Free Usage Tier</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/' title='2010-10-29T05:23:00'>29 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/3-reasons-why-i-even-bother-trading-a-small-account/" rel='bookmark'>3 reasons why I even bother trading a small account</a>
             </h1>
             <div class="article-content"> <p>If you look closely at my <a href="http://www.quantisan.com/trade-log/">trade log</a>, you will see that the amount
@@ -196,37 +244,6 @@ Corp. (VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_arc
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/bought-300-vento-895-stop-880/' title='2010-10-19T16:12:00'>19 October 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/sold-350-hgdto-1084-profit-2/" rel='bookmark'>Sold 350 HGD.TO @ 10.84, Profit +2%</a>
-            </h1>
-            <div class="article-content"> <p>China not-so-surprised the market (their delayed Treasury report was a
-hint) with a 0.25% rate hike overnight (WSJ: <a href="http://on.wsj.com/afczTG">China Raises Interest
-Rates</a>). The US Dollar shot up, precious metals took a big hit. I
-close my gold short soon after the TSX market open to collect some quick
-profit. Rinse and repeat. I did mention that this trade is a short term
-swing. I <a href="http://www.quantisan.com/i-am-sorry-my-precious-bought-350-hgd-to-10-26/">bought this Horizons BetaPro Gold Bear Plus (HGD.TO)</a>, a
-leveraged gold short, on Friday and unloaded it this Tuesday. I fought
-against my greed to hold just a little longer. But the ascending support
-line on gold is too obvious to ignore (Fig. 1). Thus I closed this short
-term position with this 5%+ gap up while the market is still deciding
-what to do. Furthermore, I noticed the equities market are holding
-rather well at the open. S&amp;P500 held onto 1170 price level. Asian
-markets were marginally green overnight. And even the CAC in Europe is
-fighting an intraday low as the North American markets open. Thus, the
-sky is not falling just yet. I figured it would take more omph to push
-this market further down as we are indeed in a strong bullish move. At
-the very least I am expecting some retaliation from the bulls. This
-can't be this easy for the bears, can it?</p>
-<p>[caption id="" align="aligncenter" width="570"
-caption="Gold"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-10-19-Gold.png" />][][/caption]</p>
-<p>Net profit for this trade is (\$10.84 - \$10.27) * 350 = \$199.50 -
-\$9.90 commission = \$189.60 = 2% of account.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-350-hgdto-1084-profit-2/' title='2010-10-19T09:58:00'>19 October 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

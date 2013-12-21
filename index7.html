@@ -56,6 +56,37 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/" rel='bookmark'>Graphs from network monitors on my remote trading server</a>
+            </h1>
+            <div class="article-content"> <p>Here are some server monitoring graphs from my remote trading server.
+These graphs are produced by the server monitoring application,
+<a href="http://munin-monitoring.org/">Munin</a>. I ran both JForex and Metatrader 4 simultaneously on my
+server last week. The 512 MB of memory was noticeably insufficient.
+Which caused the system to use swap files, thus leading to I/O latency,
+and which held up the CPU. All of which are evident from the graphs
+below. This week I am only running JForex. The server load is within
+tolerable range. The thing with picking your own VPS is that no VPS
+provider is the same. You can't really compare just the numbers as there
+are just too many factors to be considered behind the scene on a VPS
+service. So it is important to run applications that you intend to run
+and stress your system in real-world conditions. If your system seems
+slow, figure out where exactly is the bottleneck before throwing away
+money for upgrades. This is where a server monitoring application comes
+handy. [caption id="attachment_5437" align="aligncenter" width="497"
+caption="CPU data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/cpu-week.png" title="cpu-week" />[/caption] [caption id="attachment_5438"
+align="aligncenter" width="497" caption="Memory data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/memory-week.png" title="memory-week" />[/caption]
+[caption id="attachment_5439" align="aligncenter" width="497"
+caption="Interrupts data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/interrupts-week.png" title="interrupts-week" />[/caption] [caption
+id="attachment_5440" align="aligncenter" width="497" caption="Disk I/O
+latency"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/diskstats_latency-week.png" title="diskstats_latency-week" />[/caption] [caption id="attachment_5441"
+align="aligncenter" width="497" caption="Network
+transfer"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/if_eth0-week.png" title="if_eth0-week" />[/caption]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/' title='2011-05-19T07:30:00'>19 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/porting-jforex-qtd-to-metatrader-4/" rel='bookmark'>Porting JForex QTD to Metatrader 4</a>
             </h1>
             <div class="article-content"> <p>I just finished porting <a href="http://www.quantisan.com/quantised-trading-desk/">Quantised Trading Desk</a> to Metatrader 4. So
@@ -307,36 +338,6 @@ hourly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04
 <p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr-580x411.png" title="2011-04-21-EURGBP_hr" />]: http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr.png</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/first-qtd-trade-019-gain-long-eurgbp/' title='2011-04-21T21:51:00'>21 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/" rel='bookmark'>Bullish EURGBP as hedge and Bearish NZDUSD as diversification</a>
-            </h1>
-            <div class="article-content"> <p>I've had more time to study the market tonight and is running a second
-and a third instances of Quantised Trading Desk (QTD) to trade 3
-currencies in total simultaneously. For my dollar bull sentiment, I'm
-dividing between USDJPY long and NZDUSD short. <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/">QTD still hasn't taken a
-position in USDJPY in the past 24 hours</a>. That's a good thing as
-USDJPY is still drifting downward today even as the dollar is gaining
-some ground. My line in the sand is at 80.70 for USDJPY and above 0.8100
-for NZDUSD. EURGBP long is a hedge against my dollar longs. Again, I'm
-not making any trade at this point but merely <a href="http://www.quantisan.com/quantised-trading-desk/">setting up QTD to wait
-for the right moments to enter</a>. A break below 0.8660 for EURGBP would
-challenge my bullish bias. These three currencies should be my complete
-market bias for a while. I'm just going to let QTD do its thing and
-trade for me. Hopefully this will be the last you'll hear from me about
-my market bias for a while. [caption id="attachment_5342"
-align="aligncenter" width="580" caption="NZDUSD,
-weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />][][/caption] [caption id="attachment_5343"
-align="aligncenter" width="580" caption="EURGBP,
-weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />][][/caption]</p>
-</p>
-
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly.png
-  [<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly.png</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/' title='2011-04-18T21:14:00'>18 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
             </div>
         </article>
 <p class="paginator">

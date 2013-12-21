@@ -56,6 +56,36 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/what-i-learned-from-2-years-of-data-sciencing/" rel='bookmark'>What I learned from 2 years of 'data sciencing'</a>
+            </h1>
+            <div class="article-content"> <p>Last week was my last day at uSwitch.com. From becoming aware of <em>data scientist</em> as a valid job title on my job offer letter, to speaking at Strata London, to signing a book deal to write about it in our book on Web Data Mining (that's progressing at a glacial pace), I figured that I should jot down some takeaway lessons while this experience is still fresh.</p>
+<h2>It is not about the <em>science</em>. It is about the <em>data</em>.</h2>
+<p>In my first year our team delivered a handful of data projects. To name just a few, we developed a dashboard showing lifetime values for all of our millions of customers, demonstrating a 6% revenue gain with a product showcase sorting algorithm modelled by the multi-armed bandit problem, and simulated offline advertising impacts to online sales for optimising marketing spending saving £20,000 a month. For various reasons, none of these projects gained traction within the company and became abandoned.</p>
+<p>Much of the efforts spent for those projects were in getting the right data into the right shape. We needed to capture events across applications on different technology stacks, associate individual events to unique customers, and being able to process all those data in an ad-hoc manner. Over the course of my first year, our team of 2 built and evolved a distributed data architecture and scalable data workflow that's based on open source tools and publications from companies like Google, LinkedIn, Twitter, etc. In fact, I scratched enough of my own itch on an open source big data processing project to become one of the maintainers for it.</p>
+<blockquote class="twitter-tweet" lang="en"><p>Congratulations to <a href="https://twitter.com/Quantisan">@Quantisan</a> for becoming a Cascalog committer today</p>&mdash; Nathan Marz (@nathanmarz) <a href="https://twitter.com/nathanmarz/statuses/312304668975980545">March 14, 2013</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>On a rather "by the way" note, we structured lifetime views of customer data from the disparate signals across company verticals. Words had been going around the company that we had this new business intelligence tool, more and more people asked us to help them answer questions with data on their side of the business. The data we surfaced from our data workflow satisfied a wide-spread need in the company to understand customer behaviours. Little did I know that we'll be cleaning and shaping data for most of my second year at uSwitch. Months later to recent times, our commercial team released an external data product that I can't say much but might bring in sizable benefits for the company soon.</p>
+<p>It is glamorous to talk about the latest and greatest machine learning or data visualisation. In practice, I was just cleaning and shaping data. Enabling more people to make use of deep and structured data was what delivered value to the company.</p>
+<h2>Figuring out the right problems to solve is not easy.</h2>
+<p>Had we known that customer behaviour analytics are so valuable, we would have done it earlier on (although many of the other projects were definitely a lot of fun to do). Figuring out the right work to do is one of the most difficult tasks for a data science team. It doesn't help with the fact that the data science role is so vague. Marketing think we are mining for customer insights. Developers think we're toying with Riemann, Storm, or something bleeding edge. Product managers think we are plotting graphs.</p>
+<p>Everyone has ideas but there were only 3 of us in the team. Figuring out where to devote our time and effort is not as easy as it sounds. The issue is that a new project can be almost anything. So which <em>one</em> should we do? The paradox of choice can be confusing.</p>
+<p>Seeing that this is data science, why not dive right into the data like they would often say in hackathons? I made the mistake in the first few weeks in my data science career just hacking away with the data and then trying to persuade people to make use of the result ... somehow.</p>
+<p>Some interesting graphs came about. But as <a href="https://twitter.com/dancingmango">Marc</a> often like to ask, "so what?" Unless someone or something can act on the data, results can only satisfy intellectual curiosity. A business can't survive on funding people to carry out academic studies forever.</p>
+<p>Nowadays, we talk to different stakeholders to try to dig as deep as possible into their needs before any code is written for a new project. This is me handwaving. Frankly, I'm still learning my way and rely a lot on luck through trials and errors to discoverying the right problems to solve.</p>
+<h2>It is a humbling experience.</h2>
+<p>Working with <a href="http://oobaloo.co.uk/">Paul Ingles</a> and <a href="http://uk.linkedin.com/pub/abigail-lebrecht/2/95a/42">Abigail Lebrecht</a> has been frustratingly awesome. Paul is opinionated about doing things as simple as possible. On more occasions than I can remember, we implemented our own little Clojure libraries because the open source ones available were "trying to do too much". Abigail is adamant about getting the data and analyses right. "What do you mean this data is only 99% correct?" Working day in and day out with Paul and Abigail showed that I had much to learn in efficient problem solving and to question all hidden assumptions.</p>
+<p>In my previous role as a biomedical engineer, I also had the opportunity to work in a multidisciplinary team. But for my <a href="http://www.biomedcentral.com/content/pdf/1743-0003-5-15.pdf">haptic-robotic therapy project</a>, I never even considered going into a workshop to build my robot or provide clinical therapy for the stroke patients. What multidisciplinary meant back then were a small group of professionals coming together to work on a project with each person doing different tasks to get the thing to work.</p>
+<p>The advantage of being a data scientist is that I was very hands-on in all aspects of the work. One week I might be pair programming with Paul, and fighting to keep him away from my keyboard, to integrate Riemann for monitoring our data architecture. Other days I am debating with Abigail on the data mining side. Which usually resulted from her finding flaws in the materialised tables that I produced from Cascalog, and then having to come up with a better estimation model for the missing data.</p>
+<h2>So do you want to be a data scientist?</h2>
+<p>This is it for me formally as a data scientist. I am moving back across the Atlantic to the states to cofound a new venture and continuing my journey <a href="http://www.sourceful.io">to make information accessible</a>. However, back to the topic at hand. If cleaning vast amount of data, being clueless as to what to do, and debating with colleagues sound like a challenge that you want to take on, I know a company in London that's <a href="http://www.uswitch.com/careers/">looking for a data scientist</a>!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/what-i-learned-from-2-years-of-data-sciencing/' title='2013-12-21T00:00:00'>21 December 2013</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
             </h1>
             <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
@@ -351,87 +381,6 @@
 </pre></div> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/' title='2013-05-06T08:34:00'>06 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/" rel='bookmark'>Minimal variance asset allocation for Stocks ISA</a>
-            </h1>
-            <div class="article-content"> <p>With interest rate in the UK so pathetically low, I thought I might take some chance by making use of a Stocks ISA account in the UK. The problem though, is that I have no knowledge about the London stock market nor do I have the time to follow it. So I wrote a program to pick some Exchange Traded Funds (ETFs) with a primary goal to minimise risk and opportunity costs.</p>
-<p>Here are what I wanted to achieve:</p>
-<ul>
-<li>only a few trades at most a year</li>
-<li>less risk than FTSE100</li>
-<li>more yield than a laddered government bonds portfolio</li>
-<li>require less than an hour per month of maintenance</li>
-</ul>
-<p>Basically, this is a computer-assisted passive investment portfolio.</p>
-<p>The first step is to scrape all the ETF symbols from London Stock Exchange on <a href="http://www.londonstockexchange.com/exchange/prices-and-markets/ETFs/ETFs.html">these pages</a>. I use <code>getNodeSet</code> from <code>XML</code> package in R to select the relevant data from the HTML page with XPath.</p>
-<div class="highlight"><pre>page <span class="o">&lt;-</span> getURL<span class="p">(</span>url<span class="p">,</span> curl<span class="o">=</span>curl<span class="p">)</span>
-tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>page<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[@class = &#39;table_dati&#39;]/tbody&quot;</span>
-node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
-</pre></div>
-
-
-<p>This program only considers ETF because this portfolio is to diversify risk and not pick <em>winning</em> stocks. ETFs provide <a href="http://www.economist.com/news/finance-and-economics/21570711-anniversary-successful-financial-innovation-twenty-years-young">convenient exposure to various asset classes such as equities, bonds, and commodities at low costs</a>.</p>
-<p>Next is to scrape profile information for each symbol from Yahoo. We want data such as the fund's expense ratio and asset class category.</p>
-<div class="highlight"><pre>url <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;http://finance.yahoo.com/q/pr?s=&quot;</span><span class="p">,</span> symbol<span class="p">,</span> <span class="s">&quot;+Profile&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
-tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>url<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[contains(concat(&#39; &#39;, @class, &#39; &#39;), &#39; yfnc_datamodoutline1 &#39;)]/tr/td/table&quot;</span>
-node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
-
-operation <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">2</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
-overview <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">1</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Once the funds' fundamental data are fetched, we can do a preliminary screening. I am filtering for:</p>
-<ol>
-<li>Actively traded funds,</li>
-<li>Sufficient age (3 years), and</li>
-<li>Only the best 3 expense ratio efficiency from each class</li>
-</ol>
-<p>That last point is particularly important as illustrated in this plot.</p>
-<p><img alt="London funds expense by category" src="http://www.quantisan.com/images/2013/london_etf_mer_category.png" /></p>
-<p>The above plot couldn't fit in this frame but it shows that expense ratios are all over the place. What matters is that the raw data is available for use.</p>
-<p>The plot below is clearer. It shows expense ratio by the fund's issuer. You can see that Vanguard funds generally have the best expense ratio as is commonly known.</p>
-<p><img alt="London funds expense by issuer" src="http://www.quantisan.com/images/2013/london_etf_mer.png" /></p>
-<p>The initial ETF list has 667 funds in 104 categories. The screened list narrows it down to 20 funds in 18 categories. Most that were screened are niche funds such as Islamic Global Equity and regional real estate funds.</p>
-<p>Out of that 20 funds, I apply the popular <a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory">Modern Portfolio Theory</a> to minimise risk using historical quotes data with <code>quantmod</code>'s Yahoo data fetcher. Given the expected returns of each asset, <code>er</code> and their covariance matrix, <code>cov.mat</code>, a long-only efficient portfolio weighting of those assets can be solved with quadratic programming like so.</p>
-<div class="highlight"><pre>Dmat <span class="o">&lt;-</span> <span class="m">2</span><span class="o">*</span>cov.mat
-dvec <span class="o">&lt;-</span> rep.int<span class="p">(</span><span class="m">0</span><span class="p">,</span> N<span class="p">)</span>
-Amat <span class="o">&lt;-</span> cbind<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">),</span> er<span class="p">,</span> diag<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">))</span>
-bvec <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> target.return<span class="p">,</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span>N<span class="p">))</span>
-result <span class="o">&lt;-</span> solve.QP<span class="p">(</span>Dmat<span class="o">=</span>Dmat<span class="p">,</span>dvec<span class="o">=</span>dvec<span class="p">,</span>Amat<span class="o">=</span>Amat<span class="p">,</span>bvec<span class="o">=</span>bvec<span class="p">,</span>meq<span class="o">=</span><span class="m">2</span><span class="p">)</span>
-</pre></div>
-
-
-<p>To get these weightings,</p>
-<div class="highlight"><pre><span class="n">IGLT</span><span class="p">.</span><span class="n">L</span>   <span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>   <span class="n">INXG</span><span class="p">.</span><span class="n">L</span>   <span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">SLXX</span><span class="p">.</span><span class="n">L</span>   <span class="n">IBGS</span><span class="p">.</span><span class="n">L</span>   <span class="n">IUKP</span><span class="p">.</span><span class="n">L</span>   <span class="n">LUK2</span><span class="p">.</span><span class="n">L</span> 
-<span class="mf">0.603023</span> <span class="mf">0.122829</span> <span class="mf">0.116879</span> <span class="mf">0.084122</span> <span class="mf">0.037906</span> <span class="mf">0.017975</span> <span class="mf">0.014051</span> <span class="mf">0.003215</span>
-</pre></div>
-
-
-<p>But here's the catch, this mean-variance optimisation approach which I'm using does not work in the real-world. The problem is that it optimises for historical data under simplistic assumptions. For potential improvements on this model, start with <a href="http://quant.stackexchange.com/questions/44/what-methods-do-you-use-to-improve-expected-return-estimates-when-constructing-a">this Q&amp;A on StackExchange</a> but be warned that it's a rabbit hole to go down in.</p>
-<p>Knowing that I shouldn't trust this model much, I do this a couple times under different scenarios on the efficient frontier and union the top weighted assets from each run as a compensation by sampling.</p>
-<p>The result is a suggestion of six ETFs.</p>
-<div class="highlight"><pre><span class="n">Symbol</span>            <span class="n">Name</span>                   <span class="n">category</span>
-<span class="n">BRIC</span><span class="p">.</span><span class="n">L</span>    <span class="n">ISHARESII</span> <span class="mi">50</span>                <span class="n">BRIC</span> <span class="n">Equity</span>
-<span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">POWERSHS</span> <span class="n">EQQQ</span> <span class="n">US</span> <span class="n">Large</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Growth</span> <span class="n">Equity</span>
-<span class="n">IGLS</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHARESIII</span> <span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="err">£</span>        <span class="n">GBP</span> <span class="n">Government</span> <span class="n">Bond</span>
-<span class="n">INXG</span><span class="p">.</span><span class="n">L</span> <span class="n">GBP</span> <span class="n">IDX</span><span class="o">-</span><span class="n">LNK</span> <span class="n">GLT</span>  <span class="n">GBP</span> <span class="n">Inflation</span><span class="o">-</span><span class="n">Linked</span> <span class="n">Bond</span>
-<span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>  <span class="n">ISHARESFTSE250</span>          <span class="n">UK</span> <span class="n">Mid</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Equity</span>
-<span class="n">SLXX</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHSIII</span> <span class="n">IBX</span> <span class="err">£</span><span class="n">CB</span>         <span class="n">GBP</span> <span class="n">Corporate</span> <span class="n">Bond</span>
-</pre></div>
-
-
-<p>Out of these I hand picked IGLS.L and MIDD.L for a conservative 80% bonds and 20% equity portfolio. This plot below shows the annualised return versus risk of ISF (FTSE100), an equal-weighted portfolio of the pre-screened 20 ETFs, and this final portfolio of two ETFs. Notice the historic risk of this final portfolio is a third of FTSE100.</p>
-<p><img alt="Return vs risk" src="http://www.quantisan.com/images/2013/london_etf_rr.png" /></p>
-<p>Not surprisingly, what my program derived from scratch is similar to the commonly suggested portfolio balance of bonds, local equities, and emerging market blend. What this program offers is picking out the specific ETFs from the hundreds of ETFs traded on London Stock Exchange for a balanced asset allocation.</p>
-<p>The complete R source code for this project is <a href="https://github.com/Quantisan/touzi">available on Github</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/' title='2013-01-31T12:30:00'>31 January 2013</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

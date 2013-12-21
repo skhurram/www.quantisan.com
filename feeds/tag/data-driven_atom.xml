@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/data-driven_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2012-04-29T17:02:00+01:00</updated><entry><title>Data science is a collaborative effort</title><link href="http://www.quantisan.com/data-science-is-a-collaborative-effort/" rel="alternate"></link><updated>2012-04-29T17:02:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2012-04-29:data-science-is-a-collaborative-effort/</id><summary type="html">&lt;p&gt;The other day our marketing guy dropped a laundry list of reports that
+he wanted me to produce. I work with him sometimes so I don't mind
+putting on a business intelligence hat occasionally to help him out. But
+I mustn't forget that driving long-term values to the business is what I
+am good at, so I had to say no to him. What's supposed to be a quick
+chat with him ended up in a hour long discussion to show case what I'm
+working on and demonstrating that I can do so much more than count
+things for him. In short, if you want data, ask the business analyst; if
+you want to solve problems, let's talk.&lt;/p&gt;
+&lt;p&gt;It's been said that &lt;a href="http://thinkrelevance.com/blog/2012/04/04/big-data-reference-model"&gt;Big Data
+analysis is a feedback loop&lt;/a&gt;. However, I don't think having the data science team toil away at data is the message. Who's to say that analytical steps in a big data reference model can't involve feedback
+from people in addition to models? For the past week, I've been
+showcasing a new internal data product to various stakeholders in our
+business. This one data product is now leading to a new process for our
+accountant, a product for our online marketing manager, and an
+innovative company-wide metric. All of this happened because we
+collaborated rather than delegated tasks. Analysing data is not a
+one-way process. &lt;a href="http://s.hbr.org/IIVNL0"&gt;Make it a feedback loop of math and people&lt;/a&gt;.&lt;/p&gt;</summary><category term="data-driven"></category><category term="organisation"></category></entry></feed>

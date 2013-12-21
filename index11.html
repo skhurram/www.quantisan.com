@@ -56,6 +56,52 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/the-power-of-tangential-learning/" rel='bookmark'>The Power of Tangential Learning</a>
+            </h1>
+            <div class="article-content"> <p>
+According to Wikipedia,
+
+> tangential learning is the process by which some portion of people
+> will self-educate if a topic is exposed to them in something that they
+> already enjoy.
+
+I was just organizing my bookshelf the other day and is surprised by how
+fast my collection of statistics books have grown. I studied statistics
+back in school as a stepping stone to learning stochastic process for
+wireless communication theories (e.g. CDMA). Detecting radio-frequency
+and resolving wireless signals to meaningful messages is fundamentally
+about assessing the state of random processes. I hated statistics back
+then because I didn't *get it* and did poorly in those courses. It is
+ironic that years later I would realize how much I have grown to rely
+and love the little *p*'s and *q*'s in my little hobby of quantitative
+trading. I still don't like statistics (or theoretical math), per se. I
+just love *applying* them in my trading and quant programs. The more
+that I learn about statistics, the more that I realize how powerful they
+can be and how ignorant I am. For example, in my clinical study days I
+used either t-test or ANOVA for everything under the sun. Now that I've
+come to understanding about inferential statistics, I am aware of the
+assumptions and pitfalls such as the assumption of t-tests of
+homogeneity of variance between the two samples tested. If this
+assumption is violated, then the unequal variance t-test should be used.
+Finer points like these are routinely ignored in practice because many
+clinical studies are inherently designed in the experiment to meet these
+criteria. However, that's not the case when I am making creative use of
+statistics in my trading. I don't have a clinical study committee
+watching over my back. If I make a false or weaker-than-expected claim
+and don't know better, then it is my bank account that will suffer the
+consequences. Learning statistics was initially due to this
+got-to-know-better necessity. However, the more that I learn about
+statistics, the more that I appreciate it. If used correctly, statistics
+can provide a new dimension to the scientific assessment of your trading
+performance and market data.
+
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/the-power-of-tangential-learning/' title='2011-01-11T07:41:00'>11 January 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/making-the-best-use-of-my-time/" rel='bookmark'>Making the best use of my time</a>
             </h1>
             <div class="article-content"> <p>I pondered over this issue over the holiday as I'm finding myself
@@ -354,109 +400,6 @@ the next post</a>. And what else better to examine than the most popular
 JForex strategy of them all -- MA_Play.java.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/' title='2010-12-14T07:49:00'>14 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel='bookmark'>Anatomy of a JForex strategy, Part 1</a>
-            </h1>
-            <div class="article-content"> <p>Continuing on from Part 1 of this series: <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">Getting started learning
-JForex programming</a>, now we're ready to discuss the real thing. You
-build JForex strategies by using the IStrategy Interface (<a href="http://download.oracle.com/javase/tutorial/java/concepts/interface.html">What is an
-Interface?</a>). Basically, an Interface is a code skeleton with a set of
-predefined empty methods that you'll need to implement yourself. The six
-standard methods of the IStrategy Interface are:</p>
-<ol>
-<li>onStart</li>
-<li>onStop</li>
-<li>onMessage</li>
-<li>onAccount</li>
-<li>onTick</li>
-<li>onBar</li>
-</ol>
-<p>Below is an empty IStrategy Interface implementation, also known as a
-JForex strategy. This code will compile fine in JForex and you can even
-run it. But it doesn't do anything at all because there is no code to
-run in each of the methods. Each of the six methods will just be called
-and exit immediately.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">com.dukascopy.api.</span><span class="err">\</span><span class="o">*;</span> 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EmptyStrategy</span> <span class="kd">implements</span> <span class="n">IStrategy</span> <span class="o">{</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span>
-        <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="n">IMessage</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAccount</span><span class="o">(</span><span class="n">IAccount</span> <span class="n">account</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-<span class="o">}</span>
-</pre></div>
-
-
-<p>Each of the method is triggered by a specific event. You can probably
-guess what they are from their name.</p>
-<h2>onStart (line 5)</h2>
-<p>This is the first method that is called when you run your strategy. It
-will run once and only once at the start of your strategy. Normally you
-do your initialization in here. The thing to note for onStart is in line
-5 of the code. The method signature of onStart is</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
-</pre></div>
-
-
-<p>The object
-in the parameter and given to you in this method is an IContext object.
-If IStrategy is the skeleton, then IContext is the heart of the
-strategy. Please take a look at this <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IContext.html">javadoc link to IContext</a> to see
-what this object does. <strong>Javadoc?</strong>: Now is a good time to introduce the
-second of the three essential resources of a JForex programmer. The
-<a href="http://www.dukascopy.com/client/javadoc/">JForex Javadoc</a> is the single most up-to-date API documentation
-<em>explaining</em> each and every object and methods of the JForex API. Think
-of it like a reference manual. Note that although it's comprehensive,
-most of the explanation is very sparse and possibly incomplete. IContext
-is a core JForex object to access many important components of the
-JForex system, such as the ordering engine, charts, console,
-indicators... You get the idea. It is important! You typically want to
-keep a local copy of it as this is the only time (in onStart) that this
-object will be passed to you in IStrategy.</p>
-<h2>onStop (line 26)</h2>
-<p>As the name suggest, this method is called once you send a stop command
-to your strategy. You do your program wrap-up such as logging and
-flushing data here. Not much out of the ordinary with this one.</p>
-<h2>onMessage (line 18)</h2>
-<p>Whereas we know when onStart and onStop will be called, onMessage is an
-asynchronous method in that you don't know exactly when it will run.
-This method is called when the Dukascopy server sends your strategy a
-message. For example, the server calls onMessage to let you know that
-your order has been filled. You receive and process the server message
-by accessing the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IMessage.html">IMessage object</a> that is passed to you.
-<strong>Important:</strong>There is no guarantee that you will receive each and every
-message sent to your strategy from the server. Perhaps your strategy
-process is clogged. Or maybe your internet connection had a hiccup. If
-your strategy onMessage doesn't get called by the server for whatever
-reason, the server couldn't care less and won't be checking nor trying
-again. So don't do anything critical like managing your orders in
-onMessage!</p>
-<h2>onAccount (line 22)</h2>
-<p>This method is called whenever your account information update is
-received. The method provides access to the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IAccount.html">IAccount object</a>, which
-you use to get your account information. Say if you have an open
-position, your account information changes on every tick because your
-equity is cash + unrealized profit/loss. In that case, onAccount is
-called every 5 seconds by the server at most to avoid flooding your
-strategy. <strong>More Important:</strong>The IAccount object is not connected live
-to your account in the server. It is merely a snapshot of your account.
-For example, if you keep a local copy of an IAccount object. Do some
-trading to change your balance. Then ask the same IAccount for account
-balance information, you will not see a change. As such, always update
-your local copy of IAccount within the onAccount method to keep your
-account information up-to-date for your strategy's use.</p>
-<h2>To be continued</h2>
-<p>onStart, onStop, onMessage, and onAccount methods are <em>administrative</em>
-methods for your strategy. The last two methods that we'll discuss,
-onTick and onBar, is where the magic happens in a strategy. I am saving
-the best for last in the next post.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/' title='2010-12-10T08:10:00'>10 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

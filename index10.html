@@ -56,6 +56,108 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/" rel='bookmark'>Network latency on Amazon EC2 t1.micro to Dukascopy</a>
+            </h1>
+            <div class="article-content"> <p>While the processing power of a EC2 t1.micro server sucks (benchmarks
+have shown it is <a href="http://www.phoronix.com/scan.php?page=article&amp;item=amazon_ec2_micro">slower than a Nokia N900 phone</a>), network
+performance is well-known to be exceptional for EC2 servers throughout
+the spectrum of their offerings. Here's a ping test from my home
+computer with a ADSL connection in Ottawa, Canada to 194.8.15.1, one of
+the Dukascopy web servers.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">149</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">134</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">135</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">148</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">135</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">5</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">4003</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">134.364</span><span class="o">/</span><span class="mf">140.579</span><span class="o">/</span><span class="mf">149.726</span><span class="o">/</span><span class="mf">7.053</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Then the same test from a EC2 t1.micro instance located in Dublin,
+Ireland (closest Amazon EC2 server location to Geneva).</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">40.9</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">49.0</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">5</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">4005</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">40.961</span><span class="o">/</span><span class="mf">42.728</span><span class="o">/</span><span class="mf">49.013</span><span class="o">/</span><span class="mf">3.154</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Exceptional, indeed. With the monthly pricing of a t1.micro going for
+around \$12/month, there are few reasons not to <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">get a remote server to
+run your trading system</a> rather than pray for your home internet
+connection to remain reliable 24/7.</p>
+<p>Update with ping test from Berlin courtesy of commenter Holger:</p>
+<div class="highlight"><pre><span class="n">Ping</span> <span class="n">wird</span> <span class="n">ausger</span> <span class="mf">194.8.15.1</span> <span class="n">mit</span> <span class="mi">32</span> <span class="n">Bytes</span> <span class="n">Daten</span><span class="o">:</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Ping</span><span class="o">-</span><span class="n">Statistik</span>  <span class="mf">194.8.15.1</span><span class="o">:</span>
+<span class="nl">Pakete:</span> <span class="n">Gesendet</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Empfangen</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Verloren</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="o">%</span> <span class="n">Verlust</span><span class="p">),</span>
+<span class="n">Ca</span><span class="p">.</span> <span class="n">Zeitangaben</span> <span class="n">in</span> <span class="n">Millisek</span><span class="p">.</span><span class="o">:</span> <span class="n">Minimum</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span><span class="p">,</span> <span class="n">Maximum</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span><span class="p">,</span> <span class="n">Mittelwert</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span>
+</pre></div>
+
+
+<p>Update April 12, 2011: I've been using Rackspace Cloud (#2 cloud server
+provider, after Amazon). Here's the ping result from their London, UK
+server.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.8</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">66.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">64.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">7</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">8</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.1</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">9</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">66.6</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">9</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">9</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">8012</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">64.677</span><span class="o">/</span><span class="mf">67.986</span><span class="o">/</span><span class="mf">69.617</span><span class="o">/</span><span class="mf">1.573</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Update April 26, 2011: I'm testing <a href="http://quickweb.co.nz/germany-xen-vps.html">Quickweb Germany's VPS</a>.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.4</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.3</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.3</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.1</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">7</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.4</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">7</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">7</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">6000</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">15.152</span><span class="o">/</span><span class="mf">15.306</span><span class="o">/</span><span class="mf">15.463</span><span class="o">/</span><span class="mf">0.116</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Update September 2013: DigitalOcean offers <a href="https://www.digitalocean.com/?refcode=5876fd082ff3">$5/month 512MB server plan with 20GB SSD</a>. I've used them exclusively for other work. Here's a ping test from one of their Amsterdam servers.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">21.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.4</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">21.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.4</span> <span class="n">ms</span>
+
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">6</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">16</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span> <span class="n">time</span> <span class="mi">5013</span><span class="n">ms</span>
+<span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">21.540</span><span class="o">/</span><span class="mf">22.142</span><span class="o">/</span><span class="mf">22.686</span><span class="o">/</span><span class="mf">0.484</span> <span class="n">ms</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/' title='2011-02-09T08:20:00'>09 February 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/6-ways-to-filter-data-for-your-trading-system/" rel='bookmark'>6 ways to filter data for your trading system</a>
             </h1>
             <div class="article-content"> <p>The imminent extortion of <a href="http://www.cbc.ca/technology/story/2011/01/31/f-faq-usage-based-billing.html">metered internet usage here in Canada</a> got
@@ -213,52 +315,6 @@ every second of it</a>.</p>
   living]: http://www.quantisan.com/visualize-and-grow-rich/</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/one-year-down-nineteen-more-to-go-until-i-can-trade-for-a-living/' title='2011-01-18T07:30:00'>18 January 2011</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/the-power-of-tangential-learning/" rel='bookmark'>The Power of Tangential Learning</a>
-            </h1>
-            <div class="article-content"> <p>
-According to Wikipedia,
-
-> tangential learning is the process by which some portion of people
-> will self-educate if a topic is exposed to them in something that they
-> already enjoy.
-
-I was just organizing my bookshelf the other day and is surprised by how
-fast my collection of statistics books have grown. I studied statistics
-back in school as a stepping stone to learning stochastic process for
-wireless communication theories (e.g. CDMA). Detecting radio-frequency
-and resolving wireless signals to meaningful messages is fundamentally
-about assessing the state of random processes. I hated statistics back
-then because I didn't *get it* and did poorly in those courses. It is
-ironic that years later I would realize how much I have grown to rely
-and love the little *p*'s and *q*'s in my little hobby of quantitative
-trading. I still don't like statistics (or theoretical math), per se. I
-just love *applying* them in my trading and quant programs. The more
-that I learn about statistics, the more that I realize how powerful they
-can be and how ignorant I am. For example, in my clinical study days I
-used either t-test or ANOVA for everything under the sun. Now that I've
-come to understanding about inferential statistics, I am aware of the
-assumptions and pitfalls such as the assumption of t-tests of
-homogeneity of variance between the two samples tested. If this
-assumption is violated, then the unequal variance t-test should be used.
-Finer points like these are routinely ignored in practice because many
-clinical studies are inherently designed in the experiment to meet these
-criteria. However, that's not the case when I am making creative use of
-statistics in my trading. I don't have a clinical study committee
-watching over my back. If I make a false or weaker-than-expected claim
-and don't know better, then it is my bank account that will suffer the
-consequences. Learning statistics was initially due to this
-got-to-know-better necessity. However, the more that I learn about
-statistics, the more that I appreciate it. If used correctly, statistics
-can provide a new dimension to the scientific assessment of your trading
-performance and market data.
-
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/the-power-of-tangential-learning/' title='2011-01-11T07:41:00'>11 January 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">
