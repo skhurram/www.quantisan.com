@@ -56,6 +56,33 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel='bookmark'>Vector algorithm using tree composition</a>
+            </h1>
+            <div class="article-content"> <p>Sniffed this trick from the Incanter source. Here's a demo of using tree
+composition to calculate a 2-d Euclidean distance between two points.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">x</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span> 
+<span class="p">(</span><span class="k">def </span><span class="nv">y</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">])</span> 
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">tree-comp-each</span> <span class="p">[</span><span class="nb">root </span><span class="nv">branch</span> <span class="o">&amp;</span> <span class="nv">leaves</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">apply root </span><span class="p">(</span><span class="nb">map </span><span class="nv">branch</span> <span class="nv">leaves</span><span class="p">)))</span> 
+<span class="p">(</span><span class="kd">defn </span><span class="nv">euclidean-distance</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span><span class="p">]</span>
+    <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">a</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">b</span><span class="p">))]}</span> 
+    <span class="p">(</span><span class="nf">sqrt</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">tree-comp-each</span> <span class="nb">+ </span>
+                <span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]]</span>
+                    <span class="p">(</span><span class="nf">pow</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> 
+                <span class="p">(</span><span class="nb">map vector </span><span class="nv">a</span> <span class="nv">b</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>I've only had exposures to tree traversal in the use of implementing searching and sorting
+algorithms. This trick here definitely widened my eyes to the wonders of
+functional programming. It's more than just being able to pass and
+manipulate functions. I need to think like a tree.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/vector-algorithm-using-tree-composition/' title='2011-08-07T09:43:00'>07 August 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/back-in-rd-mode/" rel='bookmark'>Back in R&amp;D mode</a>
             </h1>
             <div class="article-content"> <p>Just some updates as to what I'm up to. I've been fully immersed in
@@ -233,47 +260,6 @@ Harford's three principles of success:</p>
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/why-success-starts-with-failure/' title='2011-06-10T09:53:00'>10 June 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/" rel='bookmark'>The secret to trading system development is to fail faster</a>
-            </h1>
-            <div class="article-content"> <p>If I am to offer only one advice with regard to developing trading
-systems then this is it -- fail faster. The sad truth to trading is that
-there is no magical system that can guarantee profitability
-indefinitely. A reason top firms like Renaissance Technologies employ
-hundreds of PhDs and is <a href="https://www.renfund.com/vm/jobs.vm">still actively hiring</a> is because one can
-never reach the end of the rainbow in trading. A system can always be
-made better or made obsolete. In fact, you need to stay ahead of the
-curve as competitions are like vultures that will eat away your game if
-you don't keep moving. Not to mention the changing dynamics of the
-market itself is a moving target. As such, you simply need to keep
-innovating. My way of innovating boils down to executing five cyclical
-steps. Conceptualising, implementing, testing, measuring, and analysing,
-over and over again. In essence, my innovation methodology is a
-simulated annealing process that might or might not eventually lead to a
-breakthrough. I do this because:</p>
-<ol>
-<li>I am intelligent but I am not a genius. As such, I don't expect
-    myself to make leaps and bounds with regular sparks of genius.
-    Instead, I take small steps. Adding a 1% yield to your system is
-    extremely difficult. Adding 0.01% is a lot easier. Adding 0.0001% is
-    almost pedantic. So I aim for achieving smaller improvements and do
-    it hundreds of times over a development cycle.</li>
-<li>My view of the world is not absolute. In fact, I am more often wrong
-    than right. So it follows that most of my ideas don't have all the
-    pieces right. Thus, it is inherent that I need to polish my ideas
-    through trials and errors.</li>
-</ol>
-<p>Failure is inevidentable when developing trading systems. It is part of
-the process. You come up with an idea, implement it, test it, find out
-why it isn't up to your expectation, and then make it better. So the
-quicker you can fail and learn from it, the quicker you can discover
-something useful.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/' title='2011-06-07T07:30:00'>07 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

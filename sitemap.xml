@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.quantisan.com/index.html</loc>
-<lastmod>2014-02-17T17:37:29-00:00</lastmod>
+<lastmod>2014-03-02T13:20:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.quantisan.com/archives.html</loc>
-<lastmod>2014-02-17T17:37:29-00:00</lastmod>
+<lastmod>2014-03-02T13:20:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.quantisan.com/tags.html</loc>
-<lastmod>2014-02-17T17:37:29-00:00</lastmod>
+<lastmod>2014-03-02T13:20:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.quantisan.com/categories.html</loc>
-<lastmod>2014-02-17T17:37:29-00:00</lastmod>
+<lastmod>2014-03-02T13:20:16-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -34,6 +34,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://www.quantisan.com/about/</loc>
 <lastmod>2013-12-21T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.quantisan.com/finding-productmarket-fit-faster-with-microeconoics-first-principles/</loc>
+<lastmod>2014-03-02T00:00:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -4141,6 +4148,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://www.quantisan.com/category/startup/</loc>
+<lastmod>2014-03-02T00:00:00-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
 <loc>http://www.quantisan.com/category/stocks/</loc>
 <lastmod>2013-01-31T12:30:00-00:00</lastmod>
 <changefreq>daily</changefreq>
@@ -4652,8 +4666,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://www.quantisan.com/tag/scam alert/</loc>
-<lastmod>2010-01-29T11:48:00-00:00</lastmod>
+<loc>http://www.quantisan.com/tag/growth/</loc>
+<lastmod>2014-03-02T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -4948,6 +4962,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://www.quantisan.com/tag/CHF/</loc>
 <lastmod>2010-01-22T15:36:00-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.quantisan.com/tag/first principle/</loc>
+<lastmod>2014-03-02T00:00:00-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.quantisan.com/tag/economics/</loc>
+<lastmod>2014-03-02T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -5648,6 +5676,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://www.quantisan.com/tag/FTB/</loc>
 <lastmod>2009-11-18T21:22:00-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.quantisan.com/tag/scam alert/</loc>
+<lastmod>2010-01-29T11:48:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

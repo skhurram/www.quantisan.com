@@ -56,6 +56,66 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel='bookmark'>Anatomy of a JForex strategy, Part 2</a>
+            </h1>
+            <div class="article-content"> <p>We looked at <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">four of the six methods in the IStrategy Interface</a> in a
+previous post. The last two methods, onTick and onBar, is where your
+strategy connect with market data. Either one, or both, of these methods
+is where you put your trading algorithm in. Your strategy would then be
+able to process the market data as they arrive one tick/bar at a time.
+Recall that IStrategy Interface is the skeleton of your strategy. And
+that IContext object is the heart of your strategy. onTick/onBar is the
+head of your strategy, which contains your trading algorithm, which is
+the brain.</p>
+<h2>onTick</h2>
+<p>Here's the method definition of onTick. </p>
+<div class="highlight"><pre><span class="n">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p><strong>Important:</strong>onTick is called for each and every instrument that your
+JForex platform is subscribed to (the instrument list in your workspace
+box). Let me say that again, onTick is called for each and every
+instrument that your JForex platform is subscribed to. The standard
+practice is to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out ticks</a> for instruments that you don't want
+with a simple IF-return statement.
+<code>if (instrument != myInstrument) return;</code> Actual tick data is passed to
+your strategy using the ITick object from the onTick method's parameter.
+Take a look at the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/ITick.html">ITick javadoc entry</a> to see what it offers.</p>
+<h2>onBar</h2>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>onBar works in a similar manner to onTick. In which onBar is called for each
+and every subsribed instrument <em>and period</em> known to JForex. Similarly,
+you have to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out all the unwanted instruments and periods</a> or else there will be expected results from your strategy.
+Another point to note is that onBar provides both a <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IBar.html">IBar</a> askBar and
+IBar bidBar, representing the ask and bid bars. <strong>Question:</strong> What
+happens when two or more periods overlap as in 13:45? 1, 5, and
+15-minutes bars are all arriving at the same time (not to mention the
+periods in seconds too). <strong>Answer:</strong> According to Dukascopy Support in
+the forum, "They come in a strict order, for example (1min 1min 1min
+1min 1min 5min 1min 1min 1min 1min 1min 5min ..) They come in cycles,
+where <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=5&amp;t=23959">smaller periods comes first</a>."</p>
+<h2>JForex Support Forum</h2>
+<p>As you program your strategy with JForex, you will no doubt come up with
+questions of your own. The best place to ask is at the official <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex
+Support Forum</a>. This is the last of the three essential JForex
+resources that I alluded to earlier. Even if you don't have any specific
+question, there are sample codes, coding discussion, and hundreds of
+existing Q&amp;A from other JForex developers posted in the forum.</p>
+<h2>Summary</h2>
+<p>The discussion so far has been very high level. To show you what you can
+actually <em>do</em> in an IStrategy, we will <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/">dissect a working strategy in
+the next post</a>. And what else better to examine than the most popular
+JForex strategy of them all -- MA_Play.java.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/' title='2010-12-14T07:49:00'>14 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel='bookmark'>Anatomy of a JForex strategy, Part 1</a>
             </h1>
             <div class="article-content"> <p>Continuing on from Part 1 of this series: <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">Getting started learning
@@ -350,15 +410,6 @@ currency conversion, global printer utility. v1.0 - November 24, 2010 -
 JFUtil 1.0</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/' title='2010-11-24T09:09:00'>24 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/where-good-ideas-come-from-johnson/" rel='bookmark'>Where Good Ideas Come From Johnson</a>
-            </h1>
-            <div class="article-content"> <p><object width="560" height="340"><param name="movie" value="http://www.youtube.com/v/eNwMut3-z1Y?fs=1&amp;hl=en_US"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/eNwMut3-z1Y?fs=1&amp;hl=en_US" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="560" height="340"></embed></object></p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/where-good-ideas-come-from-johnson/' title='2010-11-21T06:26:00'>21 November 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
 <p class="paginator">

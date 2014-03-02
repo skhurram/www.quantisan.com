@@ -56,6 +56,58 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/algorithmic-ownage/" rel='bookmark'>Algorithmic ownage</a>
+            </h1>
+            <div class="article-content"> <p>I felt good when I simplified one of my algorithms and sped it up 10
+times. I felt so good that I even wrote an entire blog post about it
+<a href="/eureka-moment-on-design-patterns-for-functional-programming/">patting myself on the back</a>. Then last week I got an email from Kevin
+of <a href="http://keminglabs.com/">Keming Labs</a> suggesting a few alternatives.</p>
+<div class="highlight"><pre><span class="c1">;;Three ways to count the number of occurrences in a collection</span>
+<span class="c1">;; (&quot;orange&quot; &quot;bottle&quot; &quot;coke&quot; &quot;bottle&quot;) =&gt; [(&quot;bottle&quot; &quot;coke&quot; &quot;orange&quot;) (2 1 1)]</span>
+<span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;orange&quot;</span> <span class="s">&quot;bottle&quot;</span> <span class="s">&quot;coke&quot;</span> <span class="s">&quot;bottle&quot;</span><span class="p">)]</span>
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%1</span> <span class="p">(</span><span class="nb">hash-map </span><span class="nv">%2</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">get </span><span class="nv">%1</span> <span class="nv">%2</span> <span class="mi">0</span><span class="p">))))</span>
+                       <span class="p">{}</span> <span class="nv">c</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">l</span> <span class="p">(</span><span class="nb">for </span><span class="p">[[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">c</span><span class="p">)]</span>
+            <span class="p">[</span><span class="nv">k</span> <span class="p">(</span><span class="nb">count </span><span class="nv">v</span><span class="p">)])]</span>
+    <span class="p">[(</span><span class="nb">map first </span><span class="nv">l</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">map second </span><span class="nv">l</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">apply merge-with </span><span class="nv">+</span>
+                      <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">apply hash-map </span><span class="nv">%</span><span class="p">)</span>
+                           <span class="p">(</span><span class="nf">partition</span> <span class="mi">2</span> <span class="p">(</span><span class="nb">interleave </span><span class="nv">c</span> <span class="p">(</span><span class="nb">repeat </span><span class="mi">1</span><span class="p">)))))]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)]))</span>
+</pre></div>
+
+
+<p>First of all, his solutions looked much cleaner <a href="/eureka-moment-on-design-patterns-for-functional-programming/">than mine</a>. Then over
+the weekend I was able to incorporate his 3 algorithms into my program.
+I ran a few benchmarks and here are the average of 2 tests using a
+dataset of 28,760 items.</p>
+<ul>
+<li>My algorithm. Elapsed time: 68372.026532 msecs.</li>
+<li>Kevin's solution #1. Elapsed time: 156.940976 msecs.</li>
+<li>Kevin's solution #2. Elapsed time: 60.165483 msecs.</li>
+<li>Kevin's solution #3. Elapsed time: 296.162042 msecs.</li>
+</ul>
+<p>Total ownage. That's what I like about sharing my
+work; once in a blue moon, a reader drops by and generously show
+me how I can improve a solution 1,000 times! Now the ball is in my hands
+to understand what he has done and improve myself. Collaborating and
+learning, that's why I open source.</p>
+<p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/algorithmic-ownage/' title='2011-11-06T17:37:00'>06 November 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel='bookmark'>Eureka moment on design patterns for functional programming</a>
             </h1>
             <div class="article-content"> <p>Understanding design patterns for object-oriented programming made my
@@ -241,33 +293,6 @@ over-engineering for a small entity like myself. But heck, this is
 something that I enjoy building. So why not?</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/towards-a-broker-agnostic-trading-system/' title='2011-09-01T21:01:00'>01 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel='bookmark'>Vector algorithm using tree composition</a>
-            </h1>
-            <div class="article-content"> <p>Sniffed this trick from the Incanter source. Here's a demo of using tree
-composition to calculate a 2-d Euclidean distance between two points.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">x</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span> 
-<span class="p">(</span><span class="k">def </span><span class="nv">y</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">])</span> 
-<span class="p">(</span><span class="kd">defn- </span><span class="nv">tree-comp-each</span> <span class="p">[</span><span class="nb">root </span><span class="nv">branch</span> <span class="o">&amp;</span> <span class="nv">leaves</span><span class="p">]</span>
-    <span class="p">(</span><span class="nb">apply root </span><span class="p">(</span><span class="nb">map </span><span class="nv">branch</span> <span class="nv">leaves</span><span class="p">)))</span> 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">euclidean-distance</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span><span class="p">]</span>
-    <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">a</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">b</span><span class="p">))]}</span> 
-    <span class="p">(</span><span class="nf">sqrt</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">tree-comp-each</span> <span class="nb">+ </span>
-                <span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]]</span>
-                    <span class="p">(</span><span class="nf">pow</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> 
-                <span class="p">(</span><span class="nb">map vector </span><span class="nv">a</span> <span class="nv">b</span><span class="p">))))</span>
-</pre></div>
-
-
-<p>I've only had exposures to tree traversal in the use of implementing searching and sorting
-algorithms. This trick here definitely widened my eyes to the wonders of
-functional programming. It's more than just being able to pass and
-manipulate functions. I need to think like a tree.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/vector-algorithm-using-tree-composition/' title='2011-08-07T09:43:00'>07 August 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

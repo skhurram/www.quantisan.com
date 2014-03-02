@@ -56,6 +56,30 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/" rel='bookmark'>EC2 t1.micro overloaded by JForex</a>
+            </h1>
+            <div class="article-content"> <p>My cheapskate EC2 experiment has been running well for two days. The
+<a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">t1.micro EC2 cloud server instance ran smoothly</a> for over 48 hours
+continuously. I was starting to believe that it's possible to run a
+desktop trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon's free offer</a>. Then this happened
+this morning on the third day of the experiment. </p>
+<p><img alt="EC2 t1.micro" src="http://www.quantisan.com/static/images/img_archive/2010-11-10_ec2desktop.jpg" /></p>
+<p>The Micro instance cloud
+server experienced a processing hiccup and was never able to recover.
+This is it for running a desktop trading system on a t1.micro. The
+cheapest instance of Amazon EC2 is not enough to handle the load. The
+only way to get this working is to run in a command-line only mode by
+using the JForex API without the client platform or desktop. All that
+eye-candy isn't useful anyway on a remote server. Update: I'm wondering
+if it's the screensaver that caused the problem. I am now turning the
+screensaver off and trying this again. Update 2: No, it looks like it
+really is JForex overloading the system.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/' title='2010-11-10T08:18:00'>10 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/" rel='bookmark'>Story of a bad trade and a missed opportunity</a>
             </h1>
             <div class="article-content"> <p>The market took a big bite out of me this week just as when I am not
@@ -234,79 +258,6 @@ hourly chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archi
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/short-cruide-oil-8280-via-hodto-903-stop-880/' title='2010-11-01T15:34:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/" rel='bookmark'>A brief comparison of double arrays for high-performance numerical computing in Java</a>
-            </h1>
-            <div class="article-content"> <p>Numerical calculation performance matters if you're calculating gigantic
-datasets or have limited processing capability. I belong in the latter
-case as I intend to run my trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">a free cloud server</a> in
-the future. There are plenty of research and studies to push the
-boundary of high-performance numerical computing in Java (see ref. 1 and
-2). Most of the latest and greatest is beyond the scope of my
-quantitative work. What I seek is performance with simplicity and
-efficiency. That is how I became aware of the <a href="http://acs.lbl.gov/software/colt/">Colt Project</a> by CERN,
-and its <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">multi-threaded branch</a>. Colt is a set of open source Java
-libraries for scientific and technical computing problems characterized
-by large data sizes while demanding high performance and low memory
-footprint. Just what I needed. Out of curiosity, I tested its
-implementation of double arrays and compared its performance to standard
-Java libraries.</p>
-<h2>Method</h2>
-<p>A random sample of a million decimal values (e.g. prices) are generated
-and stored in four Java data structures. All data structures have the
-same one million values in their own respective memory spaces.</p>
-<ol>
-<li>Primitive double array</li>
-<li>ArrayList of Double objects</li>
-<li>Colt</li>
-<li>Parallel Colt</li>
-</ol>
-<p>Three tests were ran.</p>
-<ol>
-<li>A simple <em>diff</em> function. A traversal of the million data points and
-    calculating array[i] - array[i - shift] for all <em>i = shift to
-    1,000,000</em>. Where <em>shift</em> is a random integer from 0 to 50. This
-    type of calculation is common place in technical analysis
-    indicators.</li>
-<li>A sort function sorting the million data points in the array in
-    ascending order. This come in handy for some statistical analysis.
-    In the case of the primitive array, I am using
-    java.util.Arrays.sort(). Otherwise I'm using the sort() method
-    implicit in the other interfaces.</li>
-<li>A binary search function on the sorted arrays. For the primitive
-    array, I am using java.util.Arrays.binarySearch().</li>
-</ol>
-<p>Each test is ran 3 times with different random seeds and the results are
-averaged. The system runs Java SE build 1.6.0_22-b04 and Linux kernel
-2.6.35-22 on an Intel Core 2 Duo 6300 @ 1.86 GHz.</p>
-<h2>Result</h2>
-<p>For the diff, primitive array averaged 9.3 millisecond; ArrayList 27
-ms.; Colt 14 ms.; Parallel Colt 15 ms. For sort, primitive 354.7 ms.;
-ArrayList 1,316 ms.; Colt 270.3 ms.; Parallel Colt 273 ms. For search,
-primitive 559.7 ms.; ArrayList 1,561.7 ms.; Colt 575.7 ms.; Parallel
-Colt 551.3 ms.</p>
-<h2>Discussion</h2>
-<p>As this isn't a vigorous test, I wouldn't mind too much on the actual
-numbers. The take home message here is that the performance of Colt is
-at least in the same magnitude of a primitive array. Whereas a standard
-ArrayList object is a magnitude worse. However, where Colt really shines
-is in its methods for handling matrices. It offers plenty of convenient
-functions for matrix calculations while guaranteeing good performance.
-To work with matrices in Java, you either use third-party libraries such
-as Colt or manage a bunch of <em>for</em> loops. Which isn't pretty.</p>
-<h3>References</h3>
-<p><span>[1] Moreira, et al., </span>"Java programming for
-high-performance numerical computing," IBM Systems Journal, Vol. 39,
-No. 1, pp. 21-56, 2000. [2] Wendykier and Nagy, "Parallel Colt: A
-High-Performance Java Library for Scientific Computing and Image
-Processing," ACM Transactions on Mathematical Software, Vol. 37, No. 3,
-September 2010.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/' title='2010-11-01T09:12:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

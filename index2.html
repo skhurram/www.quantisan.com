@@ -56,6 +56,139 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/" rel='bookmark'>Securing a fresh Ubuntu server with Fabric tasks</a>
+            </h1>
+            <div class="article-content"> <p>An administrative task that I've done countless number of times is spinning up new servers to host applications like a web dashboard or a trading engine. At uSwitch my colleagues use Puppet and other smart devops tools that I have no idea about to automate our infrastructure. For my own work I just need an easy tool to run some commands over ssh. I chose to use <a href="http://docs.fabfile.org/">Fabric</a> to automate this repetitive but necessary task of hardening a fresh Ubuntu server. Now that I have this set of Fabric tasks, after I create a new instance, I can just run a single Fabric task and the server would be configured properly for use.</p>
+<p>The choice for Fabric is because I've been using Fabric for some time already to perform simple deployment tasks. Then I stumbled on <a href="https://niteowebfabfile.readthedocs.org/en/latest/_modules/niteoweb/fabfile/server.html">an open-source project</a> that actually configures an Ubuntu server using Fabric. Much of these scripts are based on that source. Automating these tasks saves me a lot of time and ensures consistency of configurations. Perhaps when the need arises, I should look into other tools like <a href="http://www.vagrantup.com/">Vagrant</a> too.</p>
+<p>Here are some basic tasks that I perform on a new Ubuntu 12.04 server and the corresponding Fabric task script.</p>
+<h2>Create an administrator account</h2>
+
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">fabric.api</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">append</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">sed</span>
+<span class="kn">from</span> <span class="nn">fabric.contrib.files</span> <span class="kn">import</span> <span class="n">exists</span>
+<span class="kn">from</span> <span class="nn">fabric.operations</span> <span class="kn">import</span> <span class="n">prompt</span>
+
+<span class="k">def</span> <span class="nf">create_admin_account</span><span class="p">(</span><span class="n">admin</span><span class="p">,</span> <span class="n">default_password</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an account for an admin to use to access the server.&quot;&quot;&quot;</span>
+    <span class="n">env</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="s">&quot;root&quot;</span>
+
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">admin</span><span class="o">=</span><span class="n">admin</span><span class="p">,</span>
+        <span class="n">default_password</span><span class="o">=</span><span class="n">default_password</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;default_password&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;secret&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c"># create user</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;egrep </span><span class="si">%(admin)s</span><span class="s"> /etc/passwd || adduser </span><span class="si">%(admin)s</span><span class="s"> --disabled-password --gecos &quot;&quot;&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># add public key for SSH access</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="s">&#39;/home/</span><span class="si">%(admin)s</span><span class="s">/.ssh&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">):</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;mkdir /home/</span><span class="si">%(admin)s</span><span class="s">/.ssh&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="n">opts</span><span class="p">[</span><span class="s">&#39;pub&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Paste </span><span class="si">%(admin)s</span><span class="s">&#39;s public key: &quot;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;echo &#39;</span><span class="si">%(pub)s</span><span class="s">&#39; &gt; /home/</span><span class="si">%(admin)s</span><span class="s">/.ssh/authorized_keys&quot;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># allow this user in sshd_config</span>
+    <span class="n">append</span><span class="p">(</span><span class="s">&quot;/etc/ssh/sshd_config&quot;</span><span class="p">,</span> <span class="s">&#39;AllowUsers </span><span class="si">%(admin)s</span><span class="s">@*&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">,</span> <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># allow sudo for maintenance user by adding it to &#39;sudo&#39; group</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;gpasswd -a </span><span class="si">%(admin)s</span><span class="s"> sudo&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># set default password for initial login</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;echo &quot;</span><span class="si">%(admin)s</span><span class="s">:</span><span class="si">%(default_password)s</span><span class="s">&quot; | chpasswd&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>harden ssh server</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">harden_sshd</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Security harden sshd.&quot;&quot;&quot;</span>
+
+    <span class="c"># Disable password authentication</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/ssh/sshd_config&#39;</span><span class="p">,</span>
+        <span class="s">&#39;#PasswordAuthentication yes&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PasswordAuthentication no&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Deny root login</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/ssh/sshd_config&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PermitRootLogin yes&#39;</span><span class="p">,</span>
+        <span class="s">&#39;PermitRootLogin no&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&quot;restart ssh&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>setup firewall</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">install_ufw</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Install and configure Uncomplicated Firewall.&quot;&quot;&quot;</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get update&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install ufw&#39;</span><span class="p">)</span>
+    <span class="n">configure_ufw</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">configure_ufw</span><span class="p">(</span><span class="n">rules</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure Uncomplicated Firewall.&quot;&quot;&quot;</span>
+    <span class="c"># reset rules so we start from scratch</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw --force reset&#39;</span><span class="p">)</span>
+
+    <span class="n">rules</span> <span class="o">=</span> <span class="n">rules</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">rules</span> <span class="ow">or</span> <span class="n">err</span><span class="p">(</span><span class="s">&quot;env.rules must be set&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+        <span class="n">sudo</span><span class="p">(</span><span class="n">rule</span><span class="p">)</span>
+
+    <span class="c"># re-enable firewall and print rules</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw --force enable&#39;</span><span class="p">)</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;ufw status verbose&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>time synchronisation daemon</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">set_system_time</span><span class="p">(</span><span class="n">timezone</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set timezone and install ``ntp`` to keep time accurate.&quot;&quot;&quot;</span>
+
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">timezone</span><span class="o">=</span><span class="n">timezone</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;timezone&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="s">&#39;/usr/share/zoneinfo/UTC&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c"># set timezone</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;cp </span><span class="si">%(timezone)s</span><span class="s"> /etc/localtime&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">)</span>
+
+    <span class="c"># install NTP</span>
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install ntp&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>enable unattended upgrades</h2>
+
+<div class="highlight"><pre><span class="k">def</span> <span class="nf">install_unattended_upgrades</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Configure Ubuntu to automatically install security updates.&quot;&quot;&quot;</span>
+    <span class="n">opts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">email</span><span class="o">=</span><span class="n">email</span> <span class="ow">or</span> <span class="n">env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;email&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">err</span><span class="p">(</span><span class="s">&#39;env.email must be set&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">sudo</span><span class="p">(</span><span class="s">&#39;apt-get -yq install unattended-upgrades&#39;</span><span class="p">)</span>
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/50unattended-upgrades&#39;</span><span class="p">,</span>
+        <span class="s">&#39;//Unattended-Upgrade::Mail &quot;root@localhost&quot;;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;Unattended-Upgrade::Mail &quot;</span><span class="si">%(email)s</span><span class="s">&quot;;&#39;</span> <span class="o">%</span> <span class="n">opts</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">sed</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/20auto-upgrades&#39;</span><span class="p">,</span>
+        <span class="s">&#39;APT::Periodic::Update-Package-Lists &quot;0&quot;;&#39;</span><span class="p">,</span>
+        <span class="s">&#39;APT::Periodic::Update-Package-Lists &quot;1&quot;;&#39;</span><span class="p">,</span>
+        <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">append</span><span class="p">(</span><span class="s">&#39;/etc/apt/apt.conf.d/20auto-upgrades&#39;</span><span class="p">,</span>
+           <span class="s">&#39;APT::Periodic::Unattended-Upgrade &quot;1&quot;;&#39;</span><span class="p">,</span>
+           <span class="n">use_sudo</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/' title='2013-05-06T08:34:00'>06 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/" rel='bookmark'>Minimal variance asset allocation for Stocks ISA</a>
             </h1>
             <div class="article-content"> <p>With interest rate in the UK so pathetically low, I thought I might take some chance by making use of a Stocks ISA account in the UK. The problem though, is that I have no knowledge about the London stock market nor do I have the time to follow it. So I wrote a program to pick some Exchange Traded Funds (ETFs) with a primary goal to minimise risk and opportunity costs.</p>
@@ -336,20 +469,6 @@ LIMIT <span class="m">10</span><span class="p">;</span>
 <p>I call this platform-as-interface.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/i-construct-models-not-theories/" rel='bookmark'>I construct models, not theories</a>
-            </h1>
-            <div class="article-content"> <p>I <a href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/">gave a talk</a> at the 54th Annual Conference on Operational Research last week in Edinburgh. Operational Research is "using advanced analytical methods to help make better decisions" [<a href="https://en.wikipedia.org/wiki/Operation_research">wiki</a>]. This field has been around long before data science and business intelligence. After listening to so many talks and talking to so many academics from marketing to finance to industrial engineering, I find that what we do are quite similar on a 30 thousand feet level -- using data to solve problems. Yet, there is a fundamental difference to our approaches. Whereas operational research is about constructing analytical theories; data science is about constructing models.</p>
-<p>One of the talks that I recall is from a phd from Dubai about optimising maintenance scheduling in desalination plants. Desalination plants is big business in the Middle East as they provide a major source of fresh water there. However, components in these plants fail often because of the harsh condition that they work in and that servicing some of these components might need to bring the entire plant down for hours. The presenter proceeded to explain their method of using a Poisson process on the failure data to optimise maintenance work.</p>
-<p>Now if it were me, I would add tons of sensors everywhere to enhance the frequency and granularity of data captured. Similar to what we do at work for web data. Then the problem practical solve itself as we'll be able to build predictive models for each and every crucial component. Using on-going data with these predictive models, we can flag high risk components and service them before they cause trouble.</p>
-<p>The problem is that adding sensors is not trivial (from my electrical engineering days) in a physical system. The high cost of installing all of that and the questionable efficacy of measurements make getting data a challenge. For problems like this, I can see where a traditional scientific thinking of using sparse data to support theories is practical.</p>
-<p>Yet, not everything can be reduced to formulas and solved analytically. As this blog piece on Scientific American points out, <a href="http://blogs.scientificamerican.com/the-curious-wavefunction/2012/09/05/theories-models-and-the-future-of-science/">science is moving towards solving problems computationally</a>. So too are the industries as we've seen examples from Amazon and LinkedIn driving massive sales by modelling and enabling a feedback loop with their data.</p>
-<p>It's a shame that so many companies are poisoning the term Big Data these days by plastering it all over their marketing material to sell products with no substance. There are real strategic advantages to be reaped if companies can do it right.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/i-construct-models-not-theories/' title='2012-09-11T22:00:00'>11 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
 <p class="paginator">

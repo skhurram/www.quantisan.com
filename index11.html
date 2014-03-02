@@ -56,6 +56,43 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/one-year-down-nineteen-more-to-go-until-i-can-trade-for-a-living/" rel='bookmark'>One year down, nineteen more to go until I can trade for a living</a>
+            </h1>
+            <div class="article-content"> <p>Early in 2010, I discussed about my plan to [grow my trading accounts
+organically and eventually trade for a living][] (i.e. live and breath
+in the market 24/7). Now that the first whole year of my long term plan
+has passed, I can update my visualization table as shown. <img alt="" src="http://www.quantisan.com/static/images/img_archive/2011-01-14-monetarygoal.png" /> 2010 was
+a good year. My starting capital for 2011 is 63% more than expected.
+This is mostly due to the \$13,000 prize money from <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">winning six of nine
+Dukascopy automated trading contests</a>. On the contrary to my
+fortuitous success, I revised some of my estimations noted in the table
+to be even more conservative. In particular, I reduced my annual deposit
+to reflect real bookkeeping data in 2010 and lowered my investment yield
+expectation based on my performance data throughout the past 10 years of
+my trading. To mitigate these reductions, I expect to continue
+depositing funds while I receive a salaried income rather than stop
+mid-way as originally proposed. The effect of inflation is deliberately
+ignored in this table because I'm discounting its effect in my
+investment yield estimate rather than adding more columns. It's all
+guess work for now anyway. Nineteen years is indeed a long time. It is a
+<em>worst case scenario</em> assuming that I will grow my accounts organically
+and not do anything else. I doubt I will need that much time as there
+are means other than trading a personal account to achieve trading for a
+living. I might discuss more about this later in the year once something
+materialize. My focus this year is to finish developing my proprietary
+Java trading platform with my partner and put it to good use in the
+forex market. Nineteen years or not, the fact that trading for a living
+is even possible for a self-taught amateur such as myself is testament
+to these incredible times that we're living in. I fully intend to <a href="http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/">enjoy
+every second of it</a>.</p>
+<p>[grow my trading accounts organically and eventually trade for a
+  living]: http://www.quantisan.com/visualize-and-grow-rich/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/one-year-down-nineteen-more-to-go-until-i-can-trade-for-a-living/' title='2011-01-18T07:30:00'>18 January 2011</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/the-power-of-tangential-learning/" rel='bookmark'>The Power of Tangential Learning</a>
             </h1>
             <div class="article-content"> <p>
@@ -340,66 +377,6 @@ object cat<span class="p">(</span><span class="s">&quot;data.x object size: &quo
 </pre></div> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/' title='2010-12-16T07:28:00'>16 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel='bookmark'>Anatomy of a JForex strategy, Part 2</a>
-            </h1>
-            <div class="article-content"> <p>We looked at <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">four of the six methods in the IStrategy Interface</a> in a
-previous post. The last two methods, onTick and onBar, is where your
-strategy connect with market data. Either one, or both, of these methods
-is where you put your trading algorithm in. Your strategy would then be
-able to process the market data as they arrive one tick/bar at a time.
-Recall that IStrategy Interface is the skeleton of your strategy. And
-that IContext object is the heart of your strategy. onTick/onBar is the
-head of your strategy, which contains your trading algorithm, which is
-the brain.</p>
-<h2>onTick</h2>
-<p>Here's the method definition of onTick. </p>
-<div class="highlight"><pre><span class="n">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
-</pre></div>
-
-
-<p><strong>Important:</strong>onTick is called for each and every instrument that your
-JForex platform is subscribed to (the instrument list in your workspace
-box). Let me say that again, onTick is called for each and every
-instrument that your JForex platform is subscribed to. The standard
-practice is to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out ticks</a> for instruments that you don't want
-with a simple IF-return statement.
-<code>if (instrument != myInstrument) return;</code> Actual tick data is passed to
-your strategy using the ITick object from the onTick method's parameter.
-Take a look at the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/ITick.html">ITick javadoc entry</a> to see what it offers.</p>
-<h2>onBar</h2>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
-</pre></div>
-
-
-<p>onBar works in a similar manner to onTick. In which onBar is called for each
-and every subsribed instrument <em>and period</em> known to JForex. Similarly,
-you have to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out all the unwanted instruments and periods</a> or else there will be expected results from your strategy.
-Another point to note is that onBar provides both a <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IBar.html">IBar</a> askBar and
-IBar bidBar, representing the ask and bid bars. <strong>Question:</strong> What
-happens when two or more periods overlap as in 13:45? 1, 5, and
-15-minutes bars are all arriving at the same time (not to mention the
-periods in seconds too). <strong>Answer:</strong> According to Dukascopy Support in
-the forum, "They come in a strict order, for example (1min 1min 1min
-1min 1min 5min 1min 1min 1min 1min 1min 5min ..) They come in cycles,
-where <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=5&amp;t=23959">smaller periods comes first</a>."</p>
-<h2>JForex Support Forum</h2>
-<p>As you program your strategy with JForex, you will no doubt come up with
-questions of your own. The best place to ask is at the official <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex
-Support Forum</a>. This is the last of the three essential JForex
-resources that I alluded to earlier. Even if you don't have any specific
-question, there are sample codes, coding discussion, and hundreds of
-existing Q&amp;A from other JForex developers posted in the forum.</p>
-<h2>Summary</h2>
-<p>The discussion so far has been very high level. To show you what you can
-actually <em>do</em> in an IStrategy, we will <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/">dissect a working strategy in
-the next post</a>. And what else better to examine than the most popular
-JForex strategy of them all -- MA_Play.java.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/' title='2010-12-14T07:49:00'>14 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

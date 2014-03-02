@@ -56,6 +56,51 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/" rel='bookmark'>More trouble with JForex IIndicators</a>
+            </h1>
+            <div class="article-content"> <p>JFUtil offers [an elegant way of requesting indicators from the JForex
+IIndicators interface][]. But the new design for JForex IIndicators
+through JFUtil is only fixing one side of the problem. There is still
+the question of what to do with the multiple return types from the
+calculations. In JForex, indicators like RSI returns a one-dimensional
+array. Other indicators like Stochastic Oscillator returns a
+two-dimensional array. And some other ones return three or more
+dimensional arrays. Java doesn't allow overloading a method with
+multiple return types, as the program wouldn't know what to expect. So
+how can we get rid of coding mess like this in our JForex strategy?
+[java] Stochastic stochBean = IndicatorBeanFactory.getStochastic();
+Object[] objs = Indicating.calculateMultiDimension(instrument,
+Period.ONE_MIN, stochBean, 1); double[][] sto = new double[2][]; sto[0]
+= (double[])objs[0]; // %K values sto[1] = (double[])objs[1]; // %D
+values [/java] The default calculation method in JForex returns a
+generic Object array. It's up to the programmer to know what to expect
+from the call and cast the Object into something useful. Obviously, this
+is a recipe for programming headaches and runtime errors. Having said
+this, one of the biggest benefits of JForex is that it uses a standard
+programming language like Java. So if there's something that you don't
+like about the API, you can probably change it (e.g. Facade pattern).
+This is the purpose of JFUtil to some extent, to <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">simplify the JForex
+API behaviour</a>. In any case, I'm sure other Java programmers have
+faced this problem before and have come up with good solutions for it. A
+search on stackoverflow.com doesn't yield a quick fix solution at first
+glimpse. My guess is that this require leveraging the knowledge about
+the program structure. We know in advance what dimension of the
+calculation result we can expect based on the indicator itself, perhaps
+I can use something like a Command pattern to choose a calculation
+sub-routine and then return a Map object with named values? I have yet
+to try implementing this. I am open to design suggestions to encapsulate
+multiple return values through a single interface. So that any indicator
+bean can use the same calculation interface with an easy to use output.
+In the mean time, getting multi-dimensional indicators results through
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil 2.1.2</a> isn't pretty.</p>
+<p>[an elegant way of requesting indicators from the JForex IIndicators
+  interface]: http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/more-trouble-with-jforex-iindicators/' title='2011-03-29T07:36:00'>29 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/" rel='bookmark'>Conjuring beans to simplify JForex IIndicators</a>
             </h1>
             <div class="article-content"> <p>The JForex API is not perfect. Like any application programming
@@ -303,44 +348,6 @@ Adelson can provide me with credibility that these three letters can --
 </pre></div> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/open-sesame-with-three-more-letters/' title='2011-02-21T07:55:00'>21 February 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/social-media-the-fourth-dimension-in-market-data/" rel='bookmark'>Social media: The fourth dimension in market data</a>
-            </h1>
-            <div class="article-content"> <p>It looks as though the first hedge fund utilizing social media data is
-about to <a href="http://www.cnbc.com/id/41251767/">launch in April</a>. This "Twitter hedge fund" is based on the
-work of Bollen et al., "<a href="http://arxiv.org/abs/arXiv:1010.3003">Twitter mood predicts the stock market</a>,"
-Journal of Computational Science, 2011. In more general terms, this is
-an example use of <a href="http://en.wikipedia.org/wiki/Natural_language_processing">Natural Language Processing</a> (NLP) to assess the
-semantic of tweets relating to the stock market. NLP, or more
-specifically semantic search, has been the holy grail of search engine
-companies since people realized that you can make a boatload of money by
-providing good search results. Semantic search improve search accuracy
-by understanding the seacher's <em>intent</em> and the <em>contextual meaning</em>
-rather than going on the vocabulary alone (see Nature: <a href="http://www.nature.com/news/2011/110215/full/news.2011.95.html">Quiz-playing
-computer system could revolutionize research</a>). What Bollen et al. are
-proposing is a subset of the grander NLP problem, in that they are only
-concerned with the "mood states" rather than the whole meaning of the
-tweets. In other words, sentiment analysis. NLP is not new. R, for
-example, has a <a href="http://cran.r-project.org/web/views/NaturalLanguageProcessing.html">Natural Language Processing task view</a>. Python has a
-<a href="http://www.nltk.org">Natural Language Toolkit</a>. Wikipedia has a good <a href="http://en.wikipedia.org/wiki/List_of_natural_language_processing_toolkits">list of NLP
-toolkits</a> for other languages. Traders understand that the market is
-driven by people, and people are ultimately driven by emotions. So far,
-there hasn't been a method to directly evaluate the emotions of market
-participants. Would social media provide a glimpse to the emotions of
-the masses? According to Bollen et al., yes. At any rate, data is king
-in quantitative trading. I have no idea would their particular
-implementation of data mining social media work or not. What's true is
-that as more and more people publish their lives on the internet, all
-these non-quantitative information are just waiting to be exploited.
-Ethics and privacy issues aside, look at what Facebook is doing with
-their ads as an example. In addition to time, volume, and price, data
-mining social media may provide us with a fourth dimension to market
-data.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/social-media-the-fourth-dimension-in-market-data/' title='2011-02-15T07:30:00'>15 February 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

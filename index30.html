@@ -56,6 +56,48 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/considering-investment-options-for-my-first-rrsp/" rel='bookmark'>Considering investment options for my first RRSP</a>
+            </h1>
+            <div class="article-content"> <p>I have been fortunate enough to not have to think about taxes for the
+longest time. Unfortunately though, that is because of my long stay in
+academia plus a couple of years of a low salary research position. I
+didn't have to pay much income taxes, if at all. Things are different
+now that I am working in a full time job with a decent pay. I am
+reminded of the impact of our high Canadian taxes from the missing chunk
+on every paycheck. That is why I am looking into what to do with my RRSP
+contribution lately. Last month, I analyzed the <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">cost-benefit of a Tax
+Free <em>Trading</em> Account</a>. I concluded that <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-4/">a TFSA trading account is
+not worth my while</a> for the moment. So I will probably just stash my
+TFSA contribution in a good old savings account for now. That is not the
+case with a RRSP. One big difference that change the whole argument
+around with RRSP is that any contribution that I make into it is tax
+deductible! I won't go into details here because I hate taxes. Refer to
+the <a href="http://en.wikipedia.org/wiki/Registered_Retirement_Savings_Plan">Wikipedia entry on RRSP</a> if you are unfamiliar with it.
+Essentially, I am guaranteed about 30% (or your marginal tax rate) of
+"profit" by way of tax refund for the amount of money which I put into
+my RRSP account. I don't know about you, but 30% is a massive return for
+me! And it's risk free! (Technically it's just a refund of my own money,
+but still) The benefit of having a RRSP is obvious. What I have been
+pondering about is where should I put my money in my RRSP? As I
+discussed in <em><a href="http://www.quantisan.com/not-pay-trading-income-taxes-through-a-tfsa-trading-account/">Benefits of trading in a TFSA account</a></em>, there are many
+limitations to a self-directed registered account. Although there are
+certainly other options than just trading stocks in a registered
+account. Here are the options that I have considered.</p>
+<ol>
+<li>Savings account</li>
+<li>Fixed income</li>
+<li>Mutual funds</li>
+<li>Exchange traded funds</li>
+<li>Individual stocks</li>
+</ol>
+<p>In my next post, I will <a href="http://www.quantisan.com/ranking-investment-options-for-my-self-directed-rrsp/">rank my preferences for each retirement investment option</a>.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/considering-investment-options-for-my-first-rrsp/' title='2010-03-26T07:29:00'>26 March 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/what-is-your-trading-process/" rel='bookmark'>What is your trading process?</a>
             </h1>
             <div class="article-content"> <p>Here is my discretionary trading process in a UML workflow diagram. How
@@ -235,87 +277,6 @@ edge. So I got up early this Saturday to program <a href="http://www.quantisan.c
 day. And that, is my reason for wanting to trade for a living.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/' title='2010-03-15T07:10:00'>15 March 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
-            </h1>
-            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
-stock trading is the work of scanning for stocks to trade. One look at
-my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
-stock scanning systems in the past few years. The most recent system
-that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
-However, it is not automated. So it takes a lot of time to gather and
-analyze the data. Furthermore, the set of tools that I use is limited to
-U.S. stocks. Now that I have taken an interest in the Canadian stock
-market, I can't seem to find any public tool that I like. Thus, I am
-biting the bullet now and taking my time to develop a custom system once
-and for all. Before we can analyze stock data, we need to extract them
-first. Where better else for that than go straight to the source at
-TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
-Venture Exchange (TSXV). TMX.com provide a list of publicly traded
-companies in ten Excel files. The files are divided by sectors. Each
-contain a number of fundamental company data, such as market
-capitalization and outstanding shares. So step 1 is to extract those
-data. This is where I am at now. I attached the source code for an
-alpha/developmental release below for anyone interested. It is a working
-program to scrape the data from TMX.com's files. But it's still a
-work-in-progress. That's why I am calling it a version 0.1. The next
-milestone is to program a Stocks class to hold, organize, and manage all
-three thousand, six hundred, and sixty companies' data. This is an easy
-task to do by extending the built-in dictionary class in Python.
-However, I haven't gotten to that chapter yet in my scientific
-programming with Python learning book. I stopped at chapter 8 to work on
-this project. Chapter 9 is the inheritence and hierarchical material.
-The goal of this project is to build an automated data scraping program
-for TSX and TSXV data from various sources into my computer. Once I have
-my data, that's when the real fun starts. Regarding the code below, I
-know that source code is useless for most people. Once the project is
-complete, I will compile the code into a standalone application and post
-it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
-up-to-date with the progress of this project and my other ramblings on
-trading. [python] # extractTMX.py # version: 0.1 alpha release #
-revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
-module to extract company listing excel files from TMX.COM""" import
-xlrd # to read Excel file #import sys from finClasses import Stock #
-custom Stock class def _verify(): """Verification function for a
-rundown of the module""" pass # copy test block here when finished def
-findCol(sheet, key): """Find the column corresponding to header string
-'key'""" firstRow = sheet.row_values(0) for col in
-range(len(firstRow)): if key in firstRow[col]: return col # return
-first sighting else: # not found raise ValueError("%s is not found!" %
-key) def scrapeXLS(book): """Data scraping function for TMX Excel
-file""" listingDict = {} # dict of ('ticker': market cap) for index in
-range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
-findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
-type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
-"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
-matches but taking first assert type(secCol) is int, "secCol is a %s" %
-type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
-int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
-str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
-sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
-"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
-value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
-for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
-int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
-str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
-str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
-Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
-sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
-= open(fname, 'r') # text file of XLS file names listing = {} for line
-in infile: # 1 file name per line if line[0] == '#': continue # skip
-commented lines line = line.strip() # strip trailing \n print "Reading
-'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
-xlrd.open_workbook(xlsFile) # import Excel file
-listing.update(scrapeXLS(book)) # append scraped the data to dict
-return listing #if __name__ == '__main__': # verify block #
-if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
-__name__ == '__main__': # test block listing =
-fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

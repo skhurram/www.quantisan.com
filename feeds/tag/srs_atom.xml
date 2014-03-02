@@ -44,8 +44,8 @@ caption="Ultrashort Real Estate"]&lt;img alt="Ultrashort Real Estate" src="http:
 &lt;p&gt;[caption id="attachment_1394" align="aligncenter" width="500"
 caption="S&amp;amp;P500 ETF"]&lt;img alt="S&amp;amp;P500 ETF" src="http://traderpau.files.wordpress.com/2009/05/2009-05-13-spy.png" title="2009-05-13-SPY" /&gt;[/caption]&lt;/p&gt;</summary><category term="exit"></category><category term="options"></category><category term="SRS"></category></entry><entry><title>SRS: stop order for the shorted puts at $11.90</title><link href="http://www.quantisan.com/srs-stop-order-for-the-shorted-puts-at-1190/" rel="alternate"></link><updated>2009-05-13T11:48:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-05-13:srs-stop-order-for-the-shorted-puts-at-1190/</id><summary type="html">&lt;p&gt;S&amp;amp;P 500 backed down below 900 today. In particular, 890-900 seem like a
 vital pivot point from intraday action. Since SRS popped 10.45% today
-already, I have done something which I should have done when I [wrote
-this put for SRS for \$6.10 in April 9th][]. That is, adding a stop. My
+already, I have done something which I should have done when I &lt;a href="http://www.quantisan.com/sold-1-srs-100-may-09-35-put-610/"&gt;wrote
+this put for SRS for \$6.10 in April 9th&lt;/a&gt;. That is, adding a stop. My
 stop to buy back this put is set at \$11.90, or effectively about \$23.3
 for the underlying SRS shares. The closest intraday support as of this
 moment is \$23.40 for SRS shares, just when S&amp;amp;P500 retraced back to 895

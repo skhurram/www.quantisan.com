@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan - economics</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/finding-productmarket-fit-faster-with-microeconoics-first-principles/" rel='bookmark'>Finding Product/Market Fit Faster With Microeconoics First Principles</a>
+            </h1>
+            <div class="article-content"> <p>We knew early on that paying customers is the only metric that we can believe in. We have paying customers now, but we don't have a business yet until we know our product/market fit. A problem with having paying customers is that the day-to-day work of delivering and executing can drown out the big picture. Thinking in first principles helps keep us iterating towards a product/market fit while we immerse ourselves on learning from our individual customers.</p>
+<div class="highlight"><pre><span class="n">The</span> <span class="n">only</span> <span class="n">thing</span> <span class="n">that</span> <span class="n">matters</span> <span class="n">is</span> <span class="n">getting</span> <span class="n">to</span> <span class="n">product</span><span class="o">/</span><span class="n">market</span> <span class="n">fit</span><span class="p">.</span>
+<span class="o">--</span> <span class="n">Marc</span> <span class="n">Andreesen</span><span class="p">,</span> <span class="n">June</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">2007</span>
+</pre></div>
+
+
+<p>First of all, what does it getting to product/market fit mean? After some failed starts and pivots to our business, I think I sort of get it now. Here are three questions we ask ourselves to check if we are heading to a product/market fit.</p>
+<ol>
+<li>Is this viable with the resources we have now?</li>
+<li>Is this profitable before our next bills arrive?</li>
+<li>Is this scalable to take us to our next stage?</li>
+</ol>
+<p>One lesson we learned is to focus on the immediate future. Not 6 months down the line. Our company simply couldn't afford to try things out for 6 months with a mere chance of success. We try to find our product-market fit now to take us there, not the other way around.</p>
+<p>As I said earlier, we have a few paying customers but we still haven't found our product/market fit yet. We have a product. With a market. But not necessarily a <em>fit</em>. A fit imples an optimal product and market match.</p>
+<p>Last week, it finally dawned on me that finding a product/market fit is an optimisation problem. What are the variables that you're optimising for?</p>
+<p>This.</p>
+<p><img alt="Supply Demand curve" src="http://www.quantisan.com/images/2014/400px-Supply-and-demand.svg.png" /></p>
+<p>Source: <a href="http://en.wikipedia.org/wiki/Supply_and_demand">Wikipedia</a></p>
+<p>I realised that product/market fit is supply and demand in disguise. Finding a product/market fit is an exercise in finding your supply and demand curves. This puts the abstract problem of finding product/market fit into data exploration actions to take to fill a graph.</p>
+<p>Taking our startup as an example, this is our supply curve at the moment (drawn as a straight line for simplicity).</p>
+<p><img alt="Inelastic supply curve" src="http://www.quantisan.com/images/2014/inelastic_supply_curve.png" /></p>
+<p>A bit of background. Our main product isn't a web application or a software yet, it is a service. We delivered for our first clients through hustling and manual labour. As a 3-person startup, there are only so many clients we can take on while we are developing our software tools. So our supply curve is limited by capacity and is insensitive to price.</p>
+<p>Note that there is theoretically an infinite set of options, deliverables, and products that we can offer in our market space. The lines that we draw would be different for each set. So bear in mind that this is not an academic proof but <em>a mental exercise</em> to help us move systematically faster.</p>
+<p>Now that we have our supply curve/line, we only need the demand curve to complete this graph. This is the side of the market that we are most uncertain about. What does our client really want? How much are they willing to pay?</p>
+<p><img alt="Supply and unknown demand curves" src="http://www.quantisan.com/images/2014/supply_unknown_demand_curve.png" /></p>
+<p>We sold to our first clients at a price point that is a fraction of industry average to get our hands dirty and to learn if we can do this (Question #1). We quickly reached our capacity and was inundated with work to deliver on our promise. But remember that our goal is to learn our supply and demand graph and not necessarily <em>only</em> to learn about our individual customer needs. Referring to the supply and demand graph below where we undersold at a low price, yes, we learned about our work process, but we didn't learn anything about the demand curve at that price simply because we couldn't meet the demand. After we were at capacity, we stopped looking for clients for a couple weeks while we served the ones onboard.</p>
+<p><img alt="Supply and demand at artificially low price" src="http://www.quantisan.com/images/2014/low_price_supply_demand.png" /></p>
+<p>Suppose our capacity is 3 clients at a time. If we sold at a higher price and had 3 of 10 people said yes (instead of 3 of 3 we had at a low price), we learned something about the price while still signing up to the same number of customers. Then we could adjust our price to a bit lower in the next round to find 3 of 7 people sign up instead. With a slight change in approach, we would be getting data about our demand curve while serving the same number of clients.</p>
+<p><img alt="Supply and demand finding market price" src="http://www.quantisan.com/images/2014/market_lowq_supply_demand.png" /></p>
+<p>This is one illustration of how thinking in supply and demand can make us go faster. Now that we can rely on existing principles in our product/market search, we can do this systematically. Much smarter people have thought about microeonomics and laid the ground work for us to leverage. Hopefully we can find our product/market fit even faster with these principles in hand.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/finding-productmarket-fit-faster-with-microeconoics-first-principles/' title='2014-03-02T00:00:00'>02 March 2014</a> in <a href="http://www.quantisan.com/category/startup/">startup</a>.              
+            </div>
+        </article>
+<p class="paginator">
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

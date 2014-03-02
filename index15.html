@@ -56,6 +56,79 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/" rel='bookmark'>A brief comparison of double arrays for high-performance numerical computing in Java</a>
+            </h1>
+            <div class="article-content"> <p>Numerical calculation performance matters if you're calculating gigantic
+datasets or have limited processing capability. I belong in the latter
+case as I intend to run my trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">a free cloud server</a> in
+the future. There are plenty of research and studies to push the
+boundary of high-performance numerical computing in Java (see ref. 1 and
+2). Most of the latest and greatest is beyond the scope of my
+quantitative work. What I seek is performance with simplicity and
+efficiency. That is how I became aware of the <a href="http://acs.lbl.gov/software/colt/">Colt Project</a> by CERN,
+and its <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">multi-threaded branch</a>. Colt is a set of open source Java
+libraries for scientific and technical computing problems characterized
+by large data sizes while demanding high performance and low memory
+footprint. Just what I needed. Out of curiosity, I tested its
+implementation of double arrays and compared its performance to standard
+Java libraries.</p>
+<h2>Method</h2>
+<p>A random sample of a million decimal values (e.g. prices) are generated
+and stored in four Java data structures. All data structures have the
+same one million values in their own respective memory spaces.</p>
+<ol>
+<li>Primitive double array</li>
+<li>ArrayList of Double objects</li>
+<li>Colt</li>
+<li>Parallel Colt</li>
+</ol>
+<p>Three tests were ran.</p>
+<ol>
+<li>A simple <em>diff</em> function. A traversal of the million data points and
+    calculating array[i] - array[i - shift] for all <em>i = shift to
+    1,000,000</em>. Where <em>shift</em> is a random integer from 0 to 50. This
+    type of calculation is common place in technical analysis
+    indicators.</li>
+<li>A sort function sorting the million data points in the array in
+    ascending order. This come in handy for some statistical analysis.
+    In the case of the primitive array, I am using
+    java.util.Arrays.sort(). Otherwise I'm using the sort() method
+    implicit in the other interfaces.</li>
+<li>A binary search function on the sorted arrays. For the primitive
+    array, I am using java.util.Arrays.binarySearch().</li>
+</ol>
+<p>Each test is ran 3 times with different random seeds and the results are
+averaged. The system runs Java SE build 1.6.0_22-b04 and Linux kernel
+2.6.35-22 on an Intel Core 2 Duo 6300 @ 1.86 GHz.</p>
+<h2>Result</h2>
+<p>For the diff, primitive array averaged 9.3 millisecond; ArrayList 27
+ms.; Colt 14 ms.; Parallel Colt 15 ms. For sort, primitive 354.7 ms.;
+ArrayList 1,316 ms.; Colt 270.3 ms.; Parallel Colt 273 ms. For search,
+primitive 559.7 ms.; ArrayList 1,561.7 ms.; Colt 575.7 ms.; Parallel
+Colt 551.3 ms.</p>
+<h2>Discussion</h2>
+<p>As this isn't a vigorous test, I wouldn't mind too much on the actual
+numbers. The take home message here is that the performance of Colt is
+at least in the same magnitude of a primitive array. Whereas a standard
+ArrayList object is a magnitude worse. However, where Colt really shines
+is in its methods for handling matrices. It offers plenty of convenient
+functions for matrix calculations while guaranteeing good performance.
+To work with matrices in Java, you either use third-party libraries such
+as Colt or manage a bunch of <em>for</em> loops. Which isn't pretty.</p>
+<h3>References</h3>
+<p><span>[1] Moreira, et al., </span>"Java programming for
+high-performance numerical computing," IBM Systems Journal, Vol. 39,
+No. 1, pp. 21-56, 2000. [2] Wendykier and Nagy, "Parallel Colt: A
+High-Performance Java Library for Scientific Computing and Image
+Processing," ACM Transactions on Mathematical Software, Vol. 37, No. 3,
+September 2010.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/' title='2010-11-01T09:12:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel='bookmark'>Rev your trading system on the cloud with a free Amazon cloud server</a>
             </h1>
             <div class="article-content"> <p>I always try to keep my trading and any related costs as cheap as
@@ -187,7 +260,7 @@ I won't be around for it as I have no position in the market anymore.
 Crude oil is still looking bearish though as it is crawling on its short
 term support line (Fig. 1). Perhaps my stop was just too tight as I
 moved it up a couple of times to lock in some profits. Profit is
-([\$9.40][] - \$9.19) * 300 = \$63 - \$9.90 commission = \$53.10 = 0.5%
+(<a href="http://www.quantisan.com/bought-300-hod-to-9-19-stop-9-05/">\$9.40</a> - \$9.19) * 300 = \$63 - \$9.90 commission = \$53.10 = 0.5%
 of account.</p>
 <p>[caption id="" align="aligncenter" width="570" caption="Crude
 Oil"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-10-22-Crude.png" />][][/caption]</p>
@@ -218,32 +291,6 @@ align="aligncenter" width="570" caption="EUR/USD"][<img alt="" src="http://www.q
 Oil"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-10-20-Crude.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-10-20-Crude.png">1</a>[/caption]</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/bought-300-hodto-919-stop-905/' title='2010-10-20T15:35:00'>20 October 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bought-300-vento-895-stop-880/" rel='bookmark'>Bought 300 VEN.TO @ 8.95, Stop 8.80</a>
-            </h1>
-            <div class="article-content"> <p>Update Oct 20: I raised my stop to 9.10 this moring. It got stopped out
-2 minutes before the close for a small profit. Following the <a href="http://www.quantisan.com/sold-350-hgd-to-10-84-profit-2/">covering
-of my short side play this morning</a>, I sneaked back in to the gold bug
-camp. In particular, I bought some of my recent favourite gold miner,
-Ventana Gold Corp. (VEN.TO), a few minutes before the close. Gold held
-on to the 1330 support as I've discussed this morning (see <a href="http://www.quantisan.com/sold-350-hgd-to-10-84-profit-2/">gold chart
-in this morning's post</a>). I
-also watched the closing 30 minutes of the market and VEN.TO respected
-its 8.90 support level too. See Figure 1. There was a brief touch below
-8.90 but it pushed back up quickly (not shown). This is a play inline
-with the direction of the recent rally. Just riding the trend. Nothing
-fancy. Hard stop is \$8.80. Mental stop is \$8.88. Maximum risk is
-(\$8.95 - \$8.80) * 300 = \$45 + \$9.90 commission = \$54.90 = 0.5% of
-account. There's a risk of another gap down open tomorrow. So my
-position is small in case the market runs away overnight.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Ventana Gold
-Corp. (VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-10-19-VEN.TO.png" />][][/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-300-vento-895-stop-880/' title='2010-10-19T16:12:00'>19 October 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

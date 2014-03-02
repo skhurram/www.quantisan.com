@@ -56,6 +56,40 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/" rel='bookmark'>3-MA crossovers, claimed 1.84 profit factor</a>
+            </h1>
+            <div class="article-content"> <p>Saw a forum post on TradeStation claiming 1.84 proft factor. The concept seems
+interesting. Here is the code for later study. <a href="https://www.tradestation.com/Discussions/Topic.aspx?Topic_ID=70059">Here is the link to the
+post</a>.</p>
+<p><code>[ IntraBarOrderGeneration = False ]</code></p>
+<p>Inputs: EMAFastLength(4), EMAMedLength(5), EMASlowLength(22),
+ValidBars(2);</p>
+<p>Variables: EMAFast(0), EMAMed(0), EMASlow(0), BuyHighAmt(0),
+LSetUp(False), LSetCount(0);</p>
+<p>{ Calculation Section } EMAFast = XAverage(Close,EMAFastLength); EMAMed
+= XAverage(Close,EMAMedLength); EMASlow = XAverage(Close,EMASlowLength);</p>
+<p>{ Define Entry SetUp Conditions } If EMAFast crosses above EMAMed and
+EMAMed > EMASlow then begin BuyHighAmt = High+ 1 point; LSetUp = True;
+LSetCount = 1; end;</p>
+<p>If EMAMed crosses above EMASlow and EMAFast > EMASlow then begin
+BuyHighAmt = High + 1 point; LSetUp = True; LSetCount = 1; end;</p>
+<p>{ Entry SetUp is Valid - Make Long Entry if BuyHighAmt is reached } If
+LSetUp and (TradesToday(Date) = 0 or (MarketPosition = 1 and
+PositionProfit > CurrentContracts*45)) Buy next bar at BuyHighAmt
+stop;</p>
+<p>{ SetUp Failed or Long Entry Was Made - Reset Entry Conditions }
+LSetCount = LSetCount + 1 ;</p>
+<p>//If LSetCount > ValidBars or MarketPosition = 1 then {allows only one
+entry} If LSetCount > ValidBars or BarsSinceEntry \&lt;= ValidBars then
+{replace this line with above line to allows only one entries in the
+same direction} begin BuyHighAmt = 9999; LSetUp = False; LSetCount = 0;
+end; // end of code //</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/' title='2008-01-03T23:19:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/activity-based-interval-for-intra-day-chart/" rel='bookmark'>Activity based interval for intra-day chart</a>
             </h1>
             <div class="article-content"> <p>A concern I've always had with the traditional charts is that the idea
@@ -147,17 +181,6 @@ performance is not consistent as you can see from the graph below.
 <p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s400/bbmacd_perfrpt_graph.jpg" />]: http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s1600-h/bbmacd_perfrpt_graph.jpg</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/bollinger-with-multi-macd-system/' title='2008-01-02T19:40:00'>02 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/trending-and-ranging-indicators/" rel='bookmark'>Trending and Ranging indicators</a>
-            </h1>
-            <div class="article-content"> <p>RSI and MACD makes them appropriate for trending markets. For
-directionless, chopping markets, you need to use Stochastics and Wm%R.</p>
-<p>from <a href="http://www.billcara.com/archives/2007/12/caras_commentary_community_cha_94.html">g034</a></p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/trending-and-ranging-indicators/' title='2007-12-21T15:07:00'>21 December 2007</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
 <p class="paginator">

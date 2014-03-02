@@ -56,6 +56,37 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/first-qtd-trade-019-gain-long-eurgbp/" rel='bookmark'>First QTD trade, 0.19% gain long EURGBP</a>
+            </h1>
+            <div class="article-content"> <p>My semi-automated trading system, Quantised Trading Desk, closed its
+first trade this week. I was <a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/">bullish EURGBP</a> and <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/">USDJPY</a>, and
+bearish NZDUSD as per the previous discussions. The QTD system saved me
+from the premature calls in both USDJPY and NZDUSD by not making any
+trade this week. That, in and of itself, has made me very happy with
+QTD's first week of live trading. Particular in light of how fierce that
+USDJPY down move has been. As a bonus, QTD entered a long position in
+EURGBP for a small 0.19% gain as illustrated below. My parameter were a
+maximum of 0.25% risk per position. The gain could have been better if
+it weren't for that 61% retracement. Not that I'm complaining as I
+haven't even looked at the market this past couple of days while the
+system is trading for me. USDJPY touched my threshold support price
+80.70, my bullish sentiment needs to be reevaluated. NZDUSD just cracked
+a higher high (marginally though), so I'm easing on the bear button for
+now. EURGBP is testing some resistance to, so I'm not so eager to dive
+in again. Overall, I've been 2/3 wrong. I've told you before that <a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/">I'm
+very bad at timing the market</a>. That's why I developed QTD to trade
+for me. Seeing that it's a long weekend, and I'll be way from town, I'm
+just going to shut down my remote trade server in London until next week
+when I can have some time to re-do my analysis. [caption
+id="attachment_5361" align="aligncenter" width="580" caption="EURGBP,
+hourly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr-580x411.png" title="2011-04-21-EURGBP_hr" />][][/caption]</p>
+<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr-580x411.png" title="2011-04-21-EURGBP_hr" />]: http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr.png</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-qtd-trade-019-gain-long-eurgbp/' title='2011-04-21T21:51:00'>21 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/" rel='bookmark'>Bullish EURGBP as hedge and Bearish NZDUSD as diversification</a>
             </h1>
             <div class="article-content"> <p>I've had more time to study the market tonight and is running a second
@@ -243,51 +274,6 @@ id="attachment_4974" align="aligncenter" width="580" caption="Dukascopy
 JForex DEMO 2.13.6"]<img alt="" src="http://www.quantisan.com/static/images/2011/04/jforex2.13.6.scrncap-580x414.png" title="jforex2.13.6.scrncap" />[/caption]</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/jokes-on-us-jforex-demo-2136-is-out-of-whack/' title='2011-04-01T12:13:00'>01 April 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/" rel='bookmark'>More trouble with JForex IIndicators</a>
-            </h1>
-            <div class="article-content"> <p>JFUtil offers [an elegant way of requesting indicators from the JForex
-IIndicators interface][]. But the new design for JForex IIndicators
-through JFUtil is only fixing one side of the problem. There is still
-the question of what to do with the multiple return types from the
-calculations. In JForex, indicators like RSI returns a one-dimensional
-array. Other indicators like Stochastic Oscillator returns a
-two-dimensional array. And some other ones return three or more
-dimensional arrays. Java doesn't allow overloading a method with
-multiple return types, as the program wouldn't know what to expect. So
-how can we get rid of coding mess like this in our JForex strategy?
-[java] Stochastic stochBean = IndicatorBeanFactory.getStochastic();
-Object[] objs = Indicating.calculateMultiDimension(instrument,
-Period.ONE_MIN, stochBean, 1); double[][] sto = new double[2][]; sto[0]
-= (double[])objs[0]; // %K values sto[1] = (double[])objs[1]; // %D
-values [/java] The default calculation method in JForex returns a
-generic Object array. It's up to the programmer to know what to expect
-from the call and cast the Object into something useful. Obviously, this
-is a recipe for programming headaches and runtime errors. Having said
-this, one of the biggest benefits of JForex is that it uses a standard
-programming language like Java. So if there's something that you don't
-like about the API, you can probably change it (e.g. Facade pattern).
-This is the purpose of JFUtil to some extent, to <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">simplify the JForex
-API behaviour</a>. In any case, I'm sure other Java programmers have
-faced this problem before and have come up with good solutions for it. A
-search on stackoverflow.com doesn't yield a quick fix solution at first
-glimpse. My guess is that this require leveraging the knowledge about
-the program structure. We know in advance what dimension of the
-calculation result we can expect based on the indicator itself, perhaps
-I can use something like a Command pattern to choose a calculation
-sub-routine and then return a Map object with named values? I have yet
-to try implementing this. I am open to design suggestions to encapsulate
-multiple return values through a single interface. So that any indicator
-bean can use the same calculation interface with an easy to use output.
-In the mean time, getting multi-dimensional indicators results through
-<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil 2.1.2</a> isn't pretty.</p>
-<p>[an elegant way of requesting indicators from the JForex IIndicators
-  interface]: http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/more-trouble-with-jforex-iindicators/' title='2011-03-29T07:36:00'>29 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">
