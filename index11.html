@@ -56,6 +56,20 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/perversion-in-odds-and-values/" rel='bookmark'>Perversion in odds and values</a>
+            </h1>
+            <div class="article-content"> <p>Dan Gilbert talks about mistaken expectations. What he talks about have
+everything to do with trading. Our innate tendency to misjudge odds and
+values is one of the reasons why I use a statistical approach to assess
+market anomalies.
+<object width="334" height="326"><param name="movie" value="http://video.ted.com/assets/player/swf/EmbedPlayer.swf"></param><param name="allowFullScreen" value="true"></param><param name="allowScriptAccess" value="always"></param><param name="wmode" value="transparent"></param><param name="bgColor" value="#ffffff"></param>
+<param name="flashvars" value="vu=http://video.ted.com/talks/dynamic/DanGilbert_2005G-medium.flv&amp;su=http://images.ted.com/images/ted/tedindex/embed-posters/DanGilbert-2005G.embed_thumbnail.jpg&amp;vw=320&amp;vh=240&amp;ap=0&amp;ti=420&amp;introDuration=15330&amp;adDuration=4000&amp;postAdDuration=830&amp;adKeys=talk=dan_gilbert_researches_happiness;year=2005;theme=how_the_mind_works;theme=what_makes_us_happy;theme=unconventional_explanations;event=TEDGlobal+2005;&amp;preAdTag=tconf.ted/embed;tile=1;sz=512x288;"></param><embed src="http://video.ted.com/assets/player/swf/EmbedPlayer.swf" pluginspace="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" wmode="transparent" bgcolor="#ffffff" width="334" height="326" allowfullscreen="true" allowscriptaccess="always" flashvars="vu=http://video.ted.com/talks/dynamic/DanGilbert_2005G-medium.flv&amp;su=http://images.ted.com/images/ted/tedindex/embed-posters/DanGilbert-2005G.embed_thumbnail.jpg&amp;vw=320&amp;vh=240&amp;ap=0&amp;ti=420&amp;introDuration=15330&amp;adDuration=4000&amp;postAdDuration=830&amp;adKeys=talk=dan_gilbert_researches_happiness;year=2005;theme=how_the_mind_works;theme=what_makes_us_happy;theme=unconventional_explanations;event=TEDGlobal+2005;"></embed></object></p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/perversion-in-odds-and-values/' title='2011-01-20T00:00:00'>20 January 2011</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/one-year-down-nineteen-more-to-go-until-i-can-trade-for-a-living/" rel='bookmark'>One year down, nineteen more to go until I can trade for a living</a>
             </h1>
             <div class="article-content"> <p>Early in 2010, I discussed about my plan to [grow my trading accounts
@@ -341,42 +355,6 @@ the next post in January, we will discuss the JForex Historical Tester
 and what to watch for when running a strategy live.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/' title='2010-12-20T09:34:00'>20 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel='bookmark'>A failed experiment with spectral density estimation in R</a>
-            </h1>
-            <div class="article-content"> <p>Spectrum analysis (see <a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis">wiki entry</a>) is a technical process to
-visualize a time series data in the frequency domain to find hidden
-periodicities. As I continue <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/">my struggle in data mining with R</a>, I
-thought I might try looking at a year's worth of USDJPY 1-min exchange
-rate data in the frequency domain. This is what I got. <img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-12-15-usdjpy_spectrum.png" /></p>
-<p>Certainly not one of those nice looking
-graphs in a textbook. Notice that:</p>
-<ol>
-<li>there is no distinct frequencies</li>
-<li>bandwidth is ridiculously small</li>
-</ol>
-<p>What this means is that the USDJPY data is practically <a href="http://en.wikipedia.org/wiki/White_noise">white noise</a>.
-And that there's much work for me ahead before I can produce something
-useful in R. The source code to produce the graph is printed below. The
-USDJPY data isn't published as it's not small and you can <a href="http://www.quantisan.com/tools/">get it at
-various places</a> for free on your own. Update: Failed is a harsh word.
-I should call this a <em>trivial</em> experiment. </p>
-<div class="highlight"><pre> op \<span class="o">&lt;-</span> options<span class="p">(</span>digits.secs<span class="o">=</span><span class="m">3</span><span class="p">)</span> \<span class="c1"># set option to show milliseconds</span>
-cat<span class="p">(</span><span class="s">&quot;loading CSV file to &#39;data&#39;\\n&quot;</span><span class="p">)</span> print<span class="p">(</span> system.time<span class="p">(</span> data \<span class="o">&lt;-</span>
-read.csv<span class="p">(</span> file<span class="o">=</span><span class="s">&quot;data/USDJPY\_20090630-13-27to20101130-22-19\_1Min.csv&quot;</span><span class="p">,</span>
-head<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> \<span class="c1"># convert long timestamp to POSIX</span>
-rownames<span class="p">(</span>data<span class="p">)</span> \<span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>as.numeric<span class="p">(</span>rownames<span class="p">(</span>data<span class="p">))</span><span class="o">/</span><span class="m">1000</span><span class="p">,</span>
-origin<span class="o">=</span><span class="s">&quot;1970-01-01&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;GMT&quot;</span><span class="p">)</span> data \<span class="o">&lt;-</span> data.matrix<span class="p">(</span>data<span class="p">)</span> library<span class="p">(</span>xts<span class="p">)</span>
-\<span class="c1"># load xts library cat(&quot;converting to xts &#39;data.x&#39;\\n&quot;)</span>
-print<span class="p">(</span>system.time<span class="p">(</span>data.x \<span class="o">&lt;-</span> as.xts<span class="p">(</span>data<span class="p">)))</span> rm<span class="p">(</span>data<span class="p">)</span> \<span class="c1"># remove data</span>
-object cat<span class="p">(</span><span class="s">&quot;data.x object size: &quot;</span><span class="p">)</span> print<span class="p">(</span>object.size<span class="p">(</span>data.x<span class="p">),</span> units <span class="o">=</span>
-<span class="s">&quot;auto&quot;</span><span class="p">)</span> cat<span class="p">(</span><span class="s">&quot;spectral analysis\\n&quot;</span><span class="p">)</span> spectrum<span class="p">(</span>data.x\<span class="o">$</span>close<span class="p">)</span>
-</pre></div> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/' title='2010-12-16T07:28:00'>16 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

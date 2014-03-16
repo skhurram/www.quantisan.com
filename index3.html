@@ -56,6 +56,27 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
+            </h1>
+            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
+<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
+<p>Then there's Incanter.</p>
+<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
+<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
+<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
+<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
+<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
+<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
+<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
+<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
+<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
+<p>I call this platform-as-interface.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/i-construct-models-not-theories/" rel='bookmark'>I construct models, not theories</a>
             </h1>
             <div class="article-content"> <p>I <a href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/">gave a talk</a> at the 54th Annual Conference on Operational Research last week in Edinburgh. Operational Research is "using advanced analytical methods to help make better decisions" [<a href="https://en.wikipedia.org/wiki/Operation_research">wiki</a>]. This field has been around long before data science and business intelligence. After listening to so many talks and talking to so many academics from marketing to finance to industrial engineering, I find that what we do are quite similar on a 30 thousand feet level -- using data to solve problems. Yet, there is a fundamental difference to our approaches. Whereas operational research is about constructing analytical theories; data science is about constructing models.</p>
@@ -180,32 +201,6 @@ is its people. To become a data-driven organisation, you need
 data-driven people. I never realised the significance of this until now.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/' title='2012-06-10T12:26:00'>10 June 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/data-science-is-a-collaborative-effort/" rel='bookmark'>Data science is a collaborative effort</a>
-            </h1>
-            <div class="article-content"> <p>The other day our marketing guy dropped a laundry list of reports that
-he wanted me to produce. I work with him sometimes so I don't mind
-putting on a business intelligence hat occasionally to help him out. But
-I mustn't forget that driving long-term values to the business is what I
-am good at, so I had to say no to him. What's supposed to be a quick
-chat with him ended up in a hour long discussion to show case what I'm
-working on and demonstrating that I can do so much more than count
-things for him. In short, if you want data, ask the business analyst; if
-you want to solve problems, let's talk.</p>
-<p>It's been said that <a href="http://thinkrelevance.com/blog/2012/04/04/big-data-reference-model">Big Data
-analysis is a feedback loop</a>. However, I don't think having the data science team toil away at data is the message. Who's to say that analytical steps in a big data reference model can't involve feedback
-from people in addition to models? For the past week, I've been
-showcasing a new internal data product to various stakeholders in our
-business. This one data product is now leading to a new process for our
-accountant, a product for our online marketing manager, and an
-innovative company-wide metric. All of this happened because we
-collaborated rather than delegated tasks. Analysing data is not a
-one-way process. <a href="http://s.hbr.org/IIVNL0">Make it a feedback loop of math and people</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/data-science-is-a-collaborative-effort/' title='2012-04-29T17:02:00'>29 April 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
 <p class="paginator">

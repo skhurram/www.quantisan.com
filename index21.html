@@ -56,6 +56,53 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel='bookmark'>JForex Example: Not letting profit turn to losses with a breakeven stop</a>
+            </h1>
+            <div class="article-content"> <p>While the <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual-timeframe trading setup</a> and much of the algorithm in
+my contest strategy are for competition only (read: not for use with
+real money) as I've warned numerous times, some of the risk management
+techniques used there are really what I use in real life. This being one
+of them. There's a saying in trading that "never let profits turns into
+losses." That is exactly the motivation behind this JForex code snippet.
+The following source code are excerpts from my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex
+contest's <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">July strategy</a>. The complete source code file is available
+in that link. Back to this concept of not letting profits turn to
+losses. This is a matter of balancing between giving room for your trade
+to reach its potential and limiting your drawdown. If you're too
+careful, you may find yourself being whipsawed out before a price move
+can materialize. If you keep your leash too loose though, well, you may
+watch your profits turn into losses. The way I intrepret the saying is
+that once your trade is profitable enough, you shouldn't let it slip
+back into a loss. I implement the above statement in my automated
+strategy as follows. Note that everything goes in the onTick() method so
+that it watches your position on every tick. The line numbers correspond
+to the <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code</a> of my automated strategy.
+[java firstline="177"] boolean isLong; double open, stop, diff, newStop;
+for (IOrder order : engine.getOrders(instrument)) { if (order.getState()
+== IOrder.State.FILLED) { [/java] [java firstline="191"] isLong =
+order.isLong(); open = order.getOpenPrice(); stop =
+order.getStopLossPrice(); diff = (open - stop); // *********
+BREAKEVEN *********************** if (isLong &amp;&amp;
+diff > 0 &amp;&amp; tick.getBid() > (open + diff)) {
+order.close(roundLot(order.getAmount() * beRatio)); // close a portion
+newStop = open + instrument.getPipValue() * LOCKPIP;
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } else if (!isLong &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk() \&lt;
+(open + diff)) { order.close(roundLot(order.getAmount() * beRatio));
+newStop = open - (instrument.getPipValue() * LOCKPIP);
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } [/java] What this does is that it will partially exit
+a position and move the stop to breakeven once the price is
+equidistantly positive from your initial stop loss. For example, if my
+stop loss is 100 pips, then once the position is 100 pips <em>in profit</em>,
+it will exit partially and set the new stop to breakeven. Update: This
+is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/' title='2010-08-11T13:11:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/" rel='bookmark'>JForex Example: Dual-Timeframe Moving Averages Setup</a>
             </h1>
             <div class="article-content"> <p>This post describes the setup for my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex automated trading
@@ -708,47 +755,6 @@ through.</p>
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/sold-250-vento-789-profit-24/' title='2010-07-30T10:03:00'>30 July 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/goodbye-microsoft/" rel='bookmark'>Goodbye Microsoft</a>
-            </h1>
-            <div class="article-content"> <p>I have been weaning myself away from Microsoft products these past few
-years. First to go was Microsoft Outlook. Then Microsoft Office. And
-then recently, I am finally rid myself of the last Microsoft product
-that I have--Windows XP. I have been using Ubuntu for the past two
-months now. Linux is certainly a lot easier to use now than years ago
-when Red Hat was the most popular distribution. I installed Ubuntu and
-the system was ready to use. No more hunting for linux drivers or
-installing packages one by one. Ubuntu was ready for use right off the
-bat. The first couple of weeks was awkward as there are many differences
-between Ubuntu and Windows. I often find myself searching online to see
-how to perform some trivial tasks. Setting up the Ubuntu system to just
-the way I wanted took some time and IT skills. But after the initial
-learning curve of about a week, I am very satisfied. Both Windows and
-Ubuntu have their pros and cons (there are plenty of comparisons online,
-so I won't compare them here), I wouldn't say one is better than other.
-As a skilled computer user, I am fine either way. The primary use of my
-computer is for running my automated strategies and quant programming.
-As such, system stability is a top priority for me. Which is why I
-decided to try Linux in the first place. So far, Ubuntu hs lived up to
-its expectations. I ran the JForex platform non-stop for days in
-addition to my regular heavy usage without any hiccup or slowdown.
-Having made the switch, I will be sticking with Ubuntu for the following
-reasons:</p>
-<ol>
-<li>It works.</li>
-<li>It is stable.</li>
-<li>It is free.</li>
-<li>It is fully customizable.</li>
-<li>It integrates with other open source software that I use.</li>
-<li>I like how it is always up-to-date to fix bugs and security holes.</li>
-<li>It runs much better than XP (although that's an unfair comparison as
-    XP is old).</li>
-</ol> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/goodbye-microsoft/' title='2010-07-25T06:51:00'>25 July 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
 <p class="paginator">

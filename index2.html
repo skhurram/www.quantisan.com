@@ -56,6 +56,30 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/" rel='bookmark'>What should I work on next for Cascalog?</a>
+            </h1>
+            <div class="article-content"> <p>Too many things to do, too little time. I figured we can do this in a data-driven way. So here's a poll. Please only submit an entry if you use Cascalog. And only one per person. Let's see if an honour system would work.</p>
+<iframe src="https://docs.google.com/a/quantisan.com/spreadsheet/embeddedform?formkey=dGtBNF96bExZZ0E0X0p5ZUFTb2NyTkE6MQ" width="580" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
+<h2>Poll result one week later</h2>
+<p><img alt="poll result" src="http://www.quantisan.com/images/2013/cascalog_poll_graph.png" /></p>
+<table>
+    <tr><th>Votes</th> <th>Choice</th></tr>
+    <tr><td>15</td> <td>Self-contained documentation site, e.g. http://cascalog.quantisan.com (demo address only)</td></tr>
+    <tr><td>10</td> <td>Improve and consolidate guides into Github wiki</td></tr>
+    <tr><td>11</td> <td>Bring Cascalog to Cascading 2.1/2.2</td></tr>
+    <tr><td>8</td> <td>Fix open issues</td></tr>
+    <tr><td>13</td> <td>Add features and performance increase, e.g. new logic solver, make use of new Cascading features since 2.0</td></tr>
+    <tr><td>2</td> <td>Other</td></tr>
+</table>
+
+<p>One person voted for integrating other machine learning library into Cascalog and another to <a href="https://github.com/nathanmarz/storm/issues/115">isolate system library</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/' title='2013-05-08T21:40:00'>08 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/" rel='bookmark'>Securing a fresh Ubuntu server with Fabric tasks</a>
             </h1>
             <div class="article-content"> <p>An administrative task that I've done countless number of times is spinning up new servers to host applications like a web dashboard or a trading engine. At uSwitch my colleagues use Puppet and other smart devops tools that I have no idea about to automate our infrastructure. For my own work I just need an easy tool to run some commands over ssh. I chose to use <a href="http://docs.fabfile.org/">Fabric</a> to automate this repetitive but necessary task of hardening a fresh Ubuntu server. Now that I have this set of Fabric tasks, after I create a new instance, I can just run a single Fabric task and the server would be configured properly for use.</p>
@@ -448,27 +472,6 @@ LIMIT <span class="m">10</span><span class="p">;</span>
 <p>Easy, yes?</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/recommendation-discovery-via-graph-traversal/' title='2012-11-14T22:31:00'>14 November 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
-            </h1>
-            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
-<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
-<p>Then there's Incanter.</p>
-<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
-<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
-<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
-<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
-<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
-<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
-<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
-<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
-<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
-<p>I call this platform-as-interface.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

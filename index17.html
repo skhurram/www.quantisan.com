@@ -56,6 +56,48 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel='bookmark'>Maximal frustration in printing and parsing milliseconds in R</a>
+            </h1>
+            <div class="article-content"> <p>I've just spent an absurd amount of time figuring out how to parse
+millisecond times into R. (It's standard practice to timestamp tick data
+with milliseconds timing in a flat data file.) Turns out that there are
+two problems that I faced. One being that there is a almost-hidden,
+footnote option in the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html">strptime( ) function</a> (for converting
+characters to POSIX) in which it describes using <code>format = "%H:%M%OS"</code>
+instead of <code>"%H:%M:%S"</code> to parse fractional seconds. However, the second,
+and what's actually the one that's wasted much my time, is the fact that
+R <strong>ignores</strong> milliseconds in printing by default! For example, here's
+an output for the POSIXct representation of the integer value
+1286564400.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00 EDT&quot;</span>
+</pre></div>
+
+
+<p>So even though I figured how to represent millisecond times in R a few
+hours ago, I never knew I did it simply because R is not printing the
+output that I wanted on screen every time I tried! After a couple hours
+of searching, trying, and frustrating, here's the one-liner command that
+solved my problem.</p>
+<div class="highlight"><pre><span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">secs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+
+<p>which changes the options of the display and thus I can see the
+following output from the same input as above.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00.344 EDT&quot;</span>
+</pre></div>
+
+
+<p>I guess that's why they say <a href="http://blog.revolutionanalytics.com/2010/06/learning-r.html">R has a steep learning curve</a>! Yes, it is
+very powerful and flexible. But there are limited standards and the
+documentations are all over the place because it's a mish mash of
+user-contributed packages!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/' title='2010-10-08T15:32:00'>08 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel='bookmark'>Data analysis with R: Using the right tool for the right task</a>
             </h1>
             <div class="article-content"> <p>I ported <a href="http://engineering-returns.com/tsi/">Engineering Return's Trend Strength Index</a> to JForex as my
@@ -244,28 +286,6 @@ to buy my real secret trading system, which is, perhaps unfortunately,
 my brain.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/why-winning-automated-contest-strategies-dont-work-in-real-trading/' title='2010-09-27T13:14:00'>27 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/sold-4-mfc-11jan-puts-1400-174-mark-1296-loss-01/" rel='bookmark'>Sold 4 MFC 11JAN Puts 14.00 @ 1.74, Mark 12.96, Loss 0.1%</a>
-            </h1>
-            <div class="article-content"> <p>S&amp;P500 managed to bounce back from below 1130 support. It is confirmed
-by EUR/USD's rise and treasury's gap down (TLT) today. I'm not going to
-argue with the market. So I am ditching my short for Manulife Financial
-(MFC.TO) while it is still testing its 13.00 resistance at the open.
-12.60 is the 50% Fibonacci retracement level for MFC. It made a textbook
-perfect bounce on it (Fig. 1). Also, it's Friday today, so I'd rather
-not have the time decay eat more out of my premium by holding over the
-weekend. Loss for this trade is (\$1.74 - <a href="http://www.quantisan.com/bought-4-mfc-jan-2010-puts-14-00-1-70-mark-13-25/">\$1.70</a>) * 100 * 4 = \$16
-- \$27.90 = -\$11.90 = -0.10%. Now that I am out of my short position,
-watch the market tank without me on board. Update: MFC and the market
-managed an impressive rally today. MFC closed at 13.15. I am glad that I
-followed my own strategy. I guess I do make <a href="http://www.quantisan.com/tag/good-trade/">good timing once in a blue
-moon</a>. [caption id="" align="aligncenter" width="570"
-caption="Manulife Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-09-24-MFC.TO.gif" />][][/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-4-mfc-11jan-puts-1400-174-mark-1296-loss-01/' title='2010-09-24T09:50:00'>24 September 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

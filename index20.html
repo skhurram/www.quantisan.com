@@ -56,6 +56,38 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/short-usdcad-10654-stop-1077/" rel='bookmark'>Short USDCAD @ 1.0654, Stop 1.077</a>
+            </h1>
+            <div class="article-content"> <p>This is my first real forex trade after <a href="http://www.quantisan.com/usdcad-holding-on-to-intermediate-term-support-at-1-0868/">a year minus one day of
+studying the market</a> and <a href="http://www.quantisan.com/tag/paper%20trade/">paper trading</a>. Shorted USDCAD based on
+the following intermarket observations:</p>
+<ol>
+<li>Yesterday's equities sell-off held around S&amp;P at 1050</li>
+<li>Overnight Asian market seem orderly, not every market followed
+    through, but most did</li>
+<li>European markets down move were slow overnight until US open</li>
+<li>But perhaps most importantly, EUR/USD made a higher low with an
+    increasing COT</li>
+</ol>
+<p>Basically, as much as the sell-off tries to scare off people, the
+markets don't seem to be moving in unison. So it would seem this move
+(in equities, thus inverse USD) is still a bear trap in an intermediate
+term bull rally. Plus this daily chart, Figure 1, for picking USDCAD
+specifically. [caption id="" align="aligncenter" width="570"
+caption="USDCAD daily chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-25-USDCAD_daily.png" />][][/caption] And this 4-hour chart
+for trade execution.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="USDCAD
+4-hour"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-25-USDCAD.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-25-USDCAD.png">1</a>[/caption] Size of trade is 1000 unit. Risking about
+0.05% of capital with a hard stop at 1.077. Anything above 1.070 would
+put me on alert though. Coincidentally, I first got into the forex
+market by studying the loonie. Let's see how this first trade performs.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/short-usdcad-10654-stop-1077/' title='2010-08-25T09:40:00'>25 August 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/using-your-idling-trading-computer-for-a-good-cause/" rel='bookmark'>Using your idling trading computer for a good cause</a>
             </h1>
             <div class="article-content"> <p>Nowadays, computing power is practically free for trading. It does not
@@ -228,53 +260,6 @@ chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/bought-200-kto-1594/' title='2010-08-11T15:53:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel='bookmark'>JForex Example: Not letting profit turn to losses with a breakeven stop</a>
-            </h1>
-            <div class="article-content"> <p>While the <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual-timeframe trading setup</a> and much of the algorithm in
-my contest strategy are for competition only (read: not for use with
-real money) as I've warned numerous times, some of the risk management
-techniques used there are really what I use in real life. This being one
-of them. There's a saying in trading that "never let profits turns into
-losses." That is exactly the motivation behind this JForex code snippet.
-The following source code are excerpts from my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex
-contest's <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">July strategy</a>. The complete source code file is available
-in that link. Back to this concept of not letting profits turn to
-losses. This is a matter of balancing between giving room for your trade
-to reach its potential and limiting your drawdown. If you're too
-careful, you may find yourself being whipsawed out before a price move
-can materialize. If you keep your leash too loose though, well, you may
-watch your profits turn into losses. The way I intrepret the saying is
-that once your trade is profitable enough, you shouldn't let it slip
-back into a loss. I implement the above statement in my automated
-strategy as follows. Note that everything goes in the onTick() method so
-that it watches your position on every tick. The line numbers correspond
-to the <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code</a> of my automated strategy.
-[java firstline="177"] boolean isLong; double open, stop, diff, newStop;
-for (IOrder order : engine.getOrders(instrument)) { if (order.getState()
-== IOrder.State.FILLED) { [/java] [java firstline="191"] isLong =
-order.isLong(); open = order.getOpenPrice(); stop =
-order.getStopLossPrice(); diff = (open - stop); // *********
-BREAKEVEN *********************** if (isLong &amp;&amp;
-diff > 0 &amp;&amp; tick.getBid() > (open + diff)) {
-order.close(roundLot(order.getAmount() * beRatio)); // close a portion
-newStop = open + instrument.getPipValue() * LOCKPIP;
-order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
-to breakeven"); } else if (!isLong &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk() \&lt;
-(open + diff)) { order.close(roundLot(order.getAmount() * beRatio));
-newStop = open - (instrument.getPipValue() * LOCKPIP);
-order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
-to breakeven"); } [/java] What this does is that it will partially exit
-a position and move the stop to breakeven once the price is
-equidistantly positive from your initial stop loss. For example, if my
-stop loss is 100 pips, then once the position is 100 pips <em>in profit</em>,
-it will exit partially and set the new stop to breakeven. Update: This
-is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/' title='2010-08-11T13:11:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">
