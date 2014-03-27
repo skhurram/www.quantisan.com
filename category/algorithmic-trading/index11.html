@@ -58,123 +58,166 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/filtering-out-the-whipsaws/" rel='bookmark'>Filtering out the whipsaws</a>
+                <a href="http://www.quantisan.com/re-learning-java-a-decade-later/" rel='bookmark'>Re-learning Java a decade later</a>
             </h1>
-            <div class="article-content"> <p>Whipsaws in pricing is the archilles' heel in trend following system. As
-demonstrated by the previous 3 trading strategies, once the price is in
-a narrow trading range, trend following systems would trigger many
-erraneous trades to eat away the account.</p>
-<p>An idea I'm having is to use ADX to filter out some of these trades.
-Either by comparing ADX to EMA(ADX)[1] or use DMI by ensuring + index >
-- index for long, for examples.</p>
-<p>I tested a Momentum(ADX) idea by using MyADX > MyADX[10] as a condition
-on the 3-EMA crossovers strategy as discussed today. It doesn't seem to
-be doing much as the DMI values jump around. Perhaps employing the MACD
-concept on ADX would yield some result.</p> </div>
+            <div class="article-content"> <p>Java is the programming language that I have known and used the longest.
+I learned Java as part of the curriculum when I was in my first year of
+undergraduate study. Although reluctant at first, I can still recall the
+joy I felt switching over from C++. No more garbage collection! That was
+ten years ago. I haven't done any real programming in the last few years
+as my engineering work has become higher and higher level. Although I
+have maintained my hobby in developing automated trading strategies and
+quantitative analysis, much of that work are mere child's play compared
+to what I have done and much forgotten. Lately, words such as "<a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/">code
+smell</a>", "design pattern", and the likes are creeping back into my
+world as I am <a href="http://www.quantisan.com/not-to-lose-focus-by-defining-what-i-want-from-trading/">comitting myself</a> to pursuit my esoteric fascination in
+financial engineering. The first step, research, was a few months of
+testing the possibilities to decide what I should use. <a href="http://www.quantisan.com/tag/paper%20trade/">Different
+markets</a>, <a href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/">different brokers</a>, <a href="http://www.quantisan.com/comparing-trading-api-from-6-online-forex-brokerages/">different platforms</a>, and
+<a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">different technology</a>. I decided to study the foreign exchange market
+through <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy's JForex platform</a> using Java. Although ideally, I
+would be using Oanda and Python... But I'm not prepared to cough out
+\$600 per month for Oanda's API. Some of the other tools that I use are
+<a href="http://rapid-i.com">RapidMiner</a> and <a href="http://weka.wikispaces.com/">Weka</a>. Both of which offer a Java API. Having
+learned JForex and programmed a few strategies already, I have tested
+the water enough. For the past few weeks, I have been taking steps to
+move to the next level of my development. However, as I play with
+programming more and more, I realize that I am fundamentally outdated in
+my programming skills. There were no <em>interface</em> when I learned Java.
+Neither was there <em>hashset</em> and <em>annotation</em>. As such, before doing
+anything else, I am just going to pause for the next two weeks while I
+am travelling in Hong Kong and catch up on my Java knowledge (I just
+realized that they don't publish those Teach Yourself \&lt;insert topic>
+in 24 Hours book anymore. The Head First series seem to be the craze
+nowadays). My goal is to devour a Java book in the 15-hour flight. Let's
+see if I still got it after ten years.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/filtering-out-the-whipsaws/' title='2008-01-04T23:55:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/re-learning-java-a-decade-later/' title='2010-07-13T12:51:00'>13 July 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/comparing-data-point-to-ema-note/" rel='bookmark'>Comparing data point to EMA note</a>
+                <a href="http://www.quantisan.com/to-gamble-or-not-to-gamble/" rel='bookmark'>To gamble or not to gamble?</a>
             </h1>
-            <div class="article-content"> <p>I have been using EMA comparison a lot lately. For example, if MyRSI >
-XAverage(MyRSI, MALength) then ... as a breakout indicator. However,
-there might be a small problem.</p>
-<p>A better form might be to use "MyRSI > XAverage(MyRSI, MALength)[1]"
-Such that the current MyRSI isn't included in the XAverage calculation.
-This would yield more difference since the EMA isn't "pulled" closer by
-the current value to itself, as the latest data point has the most
-significance in an EMA calculation.</p> </div>
+            <div class="article-content"> <p>There is only two more trading days left in the April <a href="http://www.dukascopy.com/">Dukascopy</a>
+JForex Strategy Contest. I am currently ranked 6th. But there's a fierce
+fight for my spot. I've been moving between 6th and 8th all week even
+though I haven't made any trade. The other people are putting on big
+bets hoping to squeeze in a top 6. Why? According to the winning prize
+structure, the 4th to 6th winners will each receive \$1,000. Whereas the
+7th to 10th will each receive \$500 only. With my current account
+standing at \$120,032 (20% gain) this month, it is quite viable for
+others to try to take my spot. See the table below for the top 10
+standings as of this writing.</p>
+<p><img alt="April standing 2 days before close" src="http://www.quantisan.com/static/images/img_archive/2010-04-29-contestranking.png" /></p>
+<p>My options are to either fire up my strategy to make more trades or do
+nothing. The risk in running my strategy again is that I might lose
+money and make myself even less competitive. My strategy's working
+timeframe is in hours, so there isn't much room for error. As such, I
+feel that with only two days of trading left, time is not on my side.</p>
+<p>On the other hand, I will probably lose out my 6th spot as I am not far
+away from others behind me. So if I do nothing, I will most likely end
+up 7th or 8th and lose half the prize money.</p>
+<p>After pondering about this briefly, I've decided to do nothing. The odds
+are just too much against me. I have seen too many people in this
+month's contest risking to move up from a good rank only to expose
+themselves too much and lose out of the top 10 completely.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/comparing-data-point-to-ema-note/' title='2008-01-04T23:50:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/to-gamble-or-not-to-gamble/' title='2010-04-29T09:12:00'>29 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/" rel='bookmark'>3EMA High Low Close crossover long strategy</a>
+                <a href="http://www.quantisan.com/clarification-and-relieve-for-dukascopy-jforex-strategy-contest/" rel='bookmark'>Clarification and relieve for Dukascopy JForex Strategy Contest</a>
             </h1>
-            <div class="article-content"> <p>Based on yesterday's trading strategy, I developed my own 3EMA crossover
-strategy. Instead of only using the Close data. The high and low are
-also used. Here's the idea.</p>
-<p>Condition1 = EmaLow crosses above EmaMedClose and EmaMedClose >
-EmaSlowClose; Condition2 = EmaMedClose crosses above EmaSlowClose and
-EmaLow > EmaSlowClose;</p>
-<p>Buy if Condition1 OR Condition2 is true.</p>
-<p>Sell if EmaHigh crosses below EmaMedClose OR EmaMedClose crosses below
-EmaSlowClose OR EmaLow crosses below EmaSlowClose.</p>
-<p>EMA length are set to: FastHighLength(7), FastLowLength(7),
-MedCloseLength(18), SlowCloseLength(30).</p>
-<p>The system does well to catch big breakouts. The 2 problems though is
-that it is very laggy and the whipsaws in pricing are eating it alive.
-See figure below.</p>
-<p>Also, notice that I'm using a 100 contracts / bar chart.</p>
-<p><img alt="graph" src="http://bp3.blogger.com/_Vlx60iTPx5s/R36xO_Y4uWI/AAAAAAAAAEk/cwu-8W10Ue8/s1600-h/3emastrategy.jpg" /></p> </div>
+            <div class="article-content"> <p>I found out that the competing strategy in the Dukascopy JForex Strategy
+Contest doesn't need to be 100% automatic! According to <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=21&amp;t=4771&amp;sid=2ff0fd1b7645652d5f57821451586b08">Contest Support
+in the official forum</a>, I can set parameters like take profit target,
+stop loss, and long-only or short-only trades. That make this contest
+substantially easier to program as I can implement a semi-automatic
+strategy, which is what I prefer in my real trading. The problem with
+building an automated trading system is that market conditions change
+frequently and without notice. Thus, it takes more than a few lines to
+program a consistently profitable system to filter out undesirable
+conditions. As I discussed before, because all winners in this contest
+have to publish their source codes, <a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/">I don't want to spend too much time
+on this contest</a>. Now that I know I can trade semi-automatically in
+this contest. I can just do my analysis manually and then use the
+strategy to execute trades when I so desire. That is exactly like <a href="http://www.quantisan.com/what-is-your-trading-process/">my
+real trading process</a> as illustrated before. As you can imagine, I am
+very happy of this news. I don't need to scratch my head anymore to
+build a new strategy for next month's contest. I programmed and tested
+several new ideas in the past 2 weeks but haven't found anything better
+than <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/">my existing strategy</a>, which has been doing well in April. This
+Dukascopy JForex Strategy Contest has been a great incentive for me to
+become familiar with JForex. As I intend to use it for my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">real trading
+at Dukascopy</a> (open an account with this affiliate link to receive 35%
+rebate on commissions) later this year, this is a win-win situation for
+me as I learn the API and possibly win some prize money at the same
+time.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/' title='2008-01-04T18:15:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/clarification-and-relieve-for-dukascopy-jforex-strategy-contest/' title='2010-04-26T10:50:00'>26 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/" rel='bookmark'>3-MA crossovers, claimed 1.84 profit factor</a>
+                <a href="http://www.quantisan.com/jforex-stopmananger-1-0/" rel='bookmark'>JForex StopManager 1.0</a>
             </h1>
-            <div class="article-content"> <p>Saw a forum post on TradeStation claiming 1.84 proft factor. The concept seems
-interesting. Here is the code for later study. <a href="https://www.tradestation.com/Discussions/Topic.aspx?Topic_ID=70059">Here is the link to the
-post</a>.</p>
-<p><code>[ IntraBarOrderGeneration = False ]</code></p>
-<p>Inputs: EMAFastLength(4), EMAMedLength(5), EMASlowLength(22),
-ValidBars(2);</p>
-<p>Variables: EMAFast(0), EMAMed(0), EMASlow(0), BuyHighAmt(0),
-LSetUp(False), LSetCount(0);</p>
-<p>{ Calculation Section } EMAFast = XAverage(Close,EMAFastLength); EMAMed
-= XAverage(Close,EMAMedLength); EMASlow = XAverage(Close,EMASlowLength);</p>
-<p>{ Define Entry SetUp Conditions } If EMAFast crosses above EMAMed and
-EMAMed > EMASlow then begin BuyHighAmt = High+ 1 point; LSetUp = True;
-LSetCount = 1; end;</p>
-<p>If EMAMed crosses above EMASlow and EMAFast > EMASlow then begin
-BuyHighAmt = High + 1 point; LSetUp = True; LSetCount = 1; end;</p>
-<p>{ Entry SetUp is Valid - Make Long Entry if BuyHighAmt is reached } If
-LSetUp and (TradesToday(Date) = 0 or (MarketPosition = 1 and
-PositionProfit > CurrentContracts*45)) Buy next bar at BuyHighAmt
-stop;</p>
-<p>{ SetUp Failed or Long Entry Was Made - Reset Entry Conditions }
-LSetCount = LSetCount + 1 ;</p>
-<p>//If LSetCount > ValidBars or MarketPosition = 1 then {allows only one
-entry} If LSetCount > ValidBars or BarsSinceEntry \&lt;= ValidBars then
-{replace this line with above line to allows only one entries in the
-same direction} begin BuyHighAmt = 9999; LSetUp = False; LSetCount = 0;
-end; // end of code //</p> </div>
+            <div class="article-content"> <p>I am building my real JForex automated trading system one feature at a
+time. The idea is to automate some of my most fundamental trading
+techniques on JForex so that I can trade forex semi-automatically on
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>. I am starting off here with a simple stop management
+strategy. In a nutshell, once the market price moves in your favour
+equidistant from your original stop loss, this strategy moves the stop
+to breakeven. For example, if I go long EURUSD at 1.3500 with a stop at
+1.3400 (100 pips stop). Then if the price breaks above 1.3600 (100 pips
+profit), the strategy moves the stop to breakeven. This is a simplistic
+implementation of the saying that "never let profits turn into losses".
+You can <a href="http://dl.dropbox.com/u/6028806/StopManager.java">download the source code here</a> and the <a href="http://dl.dropbox.com/u/6028806/StopManager.jfx">executable strategy
+here</a>. Note that these files are made available through <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">Dropbox</a>.
+Update: This logic is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source
+project</a>. You can also see <a href="http://www.quantisan.com/tag/jforex/">a list of my latest JForex articles
+here</a>. [java] /* StopManager.java version 1.0 Copyright 2010
+Quantisan.com Move stops to breakeven when equidistance to original stop
+loss */ package jforex; import com.dukascopy.api.*; public class
+StopManager implements IStrategy { private IEngine engine; private
+IConsole console; private IContext context; @Configurable("Lock-in Pips
+for Breakeven") public int lockPip = 3; @Configurable("Move stop to
+breakeven?") public boolean moveBE = true; public void onStart(IContext
+context) throws JFException { this.engine = context.getEngine();
+this.console = context.getConsole(); this.context = context; } public
+void onAccount(IAccount account) throws JFException { } public void
+onMessage(IMessage message) throws JFException { } public void onStop()
+throws JFException { } public void onTick(Instrument instrument, ITick
+tick) throws JFException { for (IOrder order :
+engine.getOrders(instrument)) { if (order.getState() ==
+IOrder.State.FILLED) { boolean isLong; double open, stop, diff, newStop;
+String label = order.getLabel(); IChart chart; isLong = order.isLong();
+open = order.getOpenPrice(); stop = order.getStopLossPrice(); diff =
+open - stop; // stop loss distance if (isLong) { // long side order if
+(moveBE &amp;&amp; diff > 0 &amp;&amp; tick.getBid() > (open + diff)) { // make it
+breakeven trade + lock in a few pips newStop = open +
+instrument.getPipValue() * lockPip; order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_UP, tick.getTime(), newStop); } } else { // short
+side order // Move to breakeven if (moveBE &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk()
+\&lt; (open + diff)) { // diff is negative // make it breakeven trade +
+lock in a few pips newStop = open - (instrument.getPipValue() *
+lockPip); order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_DOWN, tick.getTime(), newStop); } } } } } public
+void onBar(Instrument instrument, Period period, IBar askBar, IBar
+bidBar) throws JFException { } } [/java]</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/' title='2008-01-03T23:19:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bollinger-with-multi-macd-system/" rel='bookmark'>Bollinger with multi-MACD system</a>
-            </h1>
-            <div class="article-content"> <p><a href="http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s400/bbmacd_perfrpt_graph.jpg"></a>This system for ZGG08 uses a Bollinger upper band breakout as the
-first condition. Other conditions are data1 MACD (positive fast slope)
-and data2 MACD (fast above slow) for bullish trend confirmation. It is
-used on a 5 min and a 45 min chart.</p>
-<p>The long position is covered on 45 min MACD cross-below signal.</p>
-<p>Stop is set arbitrarily at \$180. Trailing stop is (\$400, 63%).</p>
-<p>The problem this Bollinger breakout system is that there is a likely
-chance that the breakout is a sign of exhaustion. The accuracy of the
-entry is merely \~44%. Although the multi-time frame MACD could confirm
-the existing trend. Something needs to be done to identify possible
-trend reversal at the Bollinger upper-band breakout.</p>
-<p>Although profit seems good for the 60 days back-test, the system
-performance is not consistent as you can see from the graph below.
-[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s400/bbmacd_perfrpt_graph.jpg" />][]</p>
-<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s400/bbmacd_perfrpt_graph.jpg" />]: http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s1600-h/bbmacd_perfrpt_graph.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bollinger-with-multi-macd-system/' title='2008-01-02T19:40:00'>02 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/jforex-stopmananger-1-0/' title='2010-04-12T20:39:00'>12 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">
 		        <a href="http://www.quantisan.com/category/algorithmic-trading//index10.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
 
+                    <a href="http://www.quantisan.com/category/algorithmic-trading//index12.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
 </p>
     </section>
 

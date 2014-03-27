@@ -58,393 +58,180 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel='bookmark'>First look at Google App Engine for automated trading and quant analysis on the cloud</a>
+                <a href="http://www.quantisan.com/productivity-on-the-road/" rel='bookmark'>Productivity on the road</a>
             </h1>
-            <div class="article-content"> <p>I just spent the last few hours looking into Google App Engine to use it
-for trading. Google App Engine (GAE) is a cloud computing development
-and hosting platform for web applications. GAE is similar to the
-well-known Amazon EC2 service but it is also very different. The main
-difference between GAE and EC2 is that GAE is not as flexible as EC2 but
-it is a lot easier to develop on. Think of it like using C++ (EC2) to
-write your own trading platform to using EasyLanguage on TradeStation or
-MQL on Metatrader (GAE). Another advantage for using Google App Engine
-is that it is free! Well, to a certain extent. It is free for a limited
-monthly usage. However, Google's free quota is known to be very generous
-(think Gmail) and this is no exception. Based on the numbers, it looks
-comparable to a typical \$20/month virtual private server (VPS) hosting
-package. My guess is that you can run a decent personal quant program on
-it if you keep the resources for yourself (private use). For more
-information on the free quota, you can read the <a href="http://code.google.com/appengine/docs/quotas.html">current GAE quota</a>
-web page or the <a href="http://en.wikipedia.org/wiki/Google_App_Engine">Wikipedia page for GAE</a>. You might be wondering how
-did I spend a few hours just reading on GAE? The answer is that I've
-done a brief research, planning, and assessment to see how GAE can be
-put to use in terms of quantitative analysis for automated and
-discretionary trading. Without going through all of my notes and logic,
-here's the gist of my conclusion.</p>
-<h2>For Automated Trading</h2>
-<p>Since GAE is also a SDK, it has a restricted programming API. You can't
-just plug in any custom library of your own (i.e. your broker's API)
-into your program. That is its advantage and its disadvantage.
-Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
-for your connection either. These limitations won't be changing anytime
-soon as GAE is designed to be like that for security reasons. Basically,
-there's no way for your web application on GAE to connect with your
-broker for trading. So much for that idea.</p>
-<h2>For Discretionary Trading</h2>
-<p>Things look brighter for discretionary trading though. A big bonus with
-using Google App Engine is that it supports the Google Finance API.
-Google Finance offers free real-time stock quotes. Combine it with the
-programming capability of the Google App Engine and you have yourself a
-free number cruncher in the cloud. However, GAE is definitely no match
-for your personal computer, so why would you go through all that
-trouble? One possible scenario in which this could be useful is for
-traders that is often on the road or traders such as myself in which we
-have a day job. In that case, you can set you quant analytics on GAE as
-a private web application and then you can access it as a web page
-anywhere on your mobile phone. One of the obvious limitation with using
-GAE is that it has limited features for scientific computing. For
-example, it doesn't support Numpy in the Python SDK. As such, I can't
-imagine using GAE for anything more than simple technical analysis for
-now. I certainly hope that GAE can include more powerful scientific
-computing capabilities in the near future. Until then, I really can't
-see Google App Engine offering much help aside from performing
-algorithmic tasks to help with your trading analysis. Their open issues
-log does announce that <a href="http://code.google.com/p/googleappengine/issues/detail?id=190">Numpy is being integrated into GAE</a> though. So
-that's a great sign for things to come! I am very hopeful of GAE's
-potential as a free cloud server to host my quant analytics on. We'll
-just have to wait for now.</p>
+            <div class="article-content"> <p>I am waiting for a flight to Geneva. For a guy that works in an
+unexciting cubicle, I seem to travel a lot. As Europe is the fourth
+continent which I am visiting this year. (<a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">More about this very exciting
+trip</a> <span style="text-decoration: line-through;">once I am
+back</span>) The thing with travelling is that I will be away from my
+development desktop, amongst other things of course. As I work a day job
+and can only do my trading analysis and <a href="http://www.quantisan.com/category/quantitative-finance/">quant development work</a>
+between the hours that I can squeeze in every day, every free minute is
+precious. One productivity habit that I adapted from frequent travelling
+is that I have a portable <a href="http://www.quantisan.com/what-is-your-trading-process/">workflow system</a> implemented. For the sake
+of completeness by stating the obvious, there are three keys to being
+productive while on the road.</p>
+<ol>
+<li>Exploiting downtime.</li>
+<li>Being prepared.</li>
+<li>Planning ahead.</li>
+</ol>
+<p>Being productive doesn't mean that I coup myself up in a hotel room to
+work. Enjoying a foreign city and absorbing a different culture help
+enhance my personal experience in the long run. Being productive means
+exploiting down-times. The times waiting at an airport (like now), stuck
+in a plane, the wee hours of the morning when you couldn't sleep because
+of jet-lag, etc. Being prepared means have your work ready and
+available. There are three free software/services that I can't live
+without these days. They are Dropbox, Subversion, and SSH.</p>
+<ul>
+<li>Dropbox is a web-based file hosting and synchronizing service.
+    Basically, after <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">installing the Dropbox software</a>, anything you
+    put in your "My Dropbox" directory in your computer will be mirrored
+    on their online server. Then you can install the Dropbox software in
+    a second computer and choose to link your private dataset with this
+    second computer. Thus the "My Dropbox" directory will be
+    synchronized in real-time between these two (or more) computers and
+    an online version. All your most important files will be up-to-date
+    and available to you anywhere. No more need for USB drives.</li>
+<li>A software version control system to keep track and backup my source
+    code revisions. I use <a href="http://en.wikipedia.org/wiki/Apache_Subversion">Apache Subversion</a> in particular. You can
+    use Subversion to archive any file other than source code. For
+    example, you can use it to keep track of revisions and branches to
+    your presentation slides. [Assembla offers a free 2GB online private
+    repository][] so that you can access it from anywhere and save the
+    hassle of rolling your own repository server.</li>
+<li><a href="http://en.wikipedia.org/wiki/Secure_Shell">Secure Shell</a> (SSH) is not a service like the other two but a
+    network protocol. It is not as easy to setup so I'll leave it to
+    <a href="http://www.google.com/search?q=how+to+setup+SSH">Google</a>. I use it to securely and remotely access my main
+    computer's file system or the desktop when necessary. A simpler
+    alternative to SSH is to use <a href="http://www.LogMeIn.com%20">LogMeIn</a>, a remote desktop service.</li>
+</ul>
+<p>Note that some of these links are affiliate programs. But I just use
+their free services, so I am only recommending you do that too. These
+tools not only help me stay productive while away, they also ease the
+trouble of using more than one computers between my office, my home
+desktop, and my wife's laptop. Together they create a true virtual
+development environment. While mobile and cloud computing technologies
+are certainly useful, nothing beats old fashioned planning and
+organizing. Plan ahead, prepare your work, and have them available with
+you wherever you are. A lot can be done with plain pen and paper.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/' title='2010-03-03T21:19:00'>03 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/productivity-on-the-road/' title='2010-09-15T06:25:00'>15 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/" rel='bookmark'>Why I am not a big fan of MQL4 or trading platform scripting</a>
+                <a href="http://www.quantisan.com/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/" rel='bookmark'>Number one with 40+ percent return in a month!  So am I rich yet?  Not really</a>
             </h1>
-            <div class="article-content"> <p>I spent most of 2008 trading futures and developing automated systems on
-Tradestation. The futures trading didn't turn out so well as I lost 40%
-of my account and had to <a href="http://www.quantisan.com/retirement-from-futures-trading-and-back-to-stocks/">call it quit</a>. My quant development work on
-the other hand, was coming along slow but steadily. However, since I
-couldn't bear the monstrous maintenance fee anymore at <a href="http://www.tradestation.com/">Tradestation</a>,
-I had to abandon that work. Then last year <a href="http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/">when I wanted to pick up
-where I left off</a> on Matlab, I found that I couldn't just continue my
-work. For one, I've lost most of my files. I think I left them in my
-other computer in Hong Kong. Which is probably in a landfill by now.
-Secondly, I didn't keep a thorough journal <a href="http://www.quantisan.com/2008/">back then in 2008</a> like
-I'm doing now. Lastly, from the important files that I've kept, I didn't
-bother to convert the codes because I might as well write new ones from
-scratch than figure out what I did. The reason why I am reminiscing at
-the moment is because I am finding myself in the same cycle again. As
-regular readers may be aware, <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">recent events</a> have accelerated my
-quant projects schedule. I am experimenting with using Metatrader 4 for
-my foreign exchange trading and scripting in MQL4 for automated trading.
-Like Tradestation, <a href="http://www.metaquotes.net/en/metatrader4">Metatrader 4</a> is a trading platform with scripting
-capabilities. Its programming language, MQL4, is a proprietary language
-based on C. I took a few hours this weekend to learn it (as I'm familiar
-with C already). So that I can start coding this week. However, after
-giving it more thought, I've decided to scale down on my projects with
-MQL4. I don't want to rely on a proprietary system for short-term
-convenience. As trading programmers know, the language used is merely a
-choice. Experience tells me that the bulk of development time is not
-spent on the actual programming itself. Rather, much of the time is
-spent on formulating, analyzing, and optimizing your algorithm. So I
-might as well bite the bullet to build from scratch my automated trading
-systems and quant analytics on one platform (i.e. on Python). That has
-been my long term plan all along. Everything under one roof. But I
-digressed. Then there's the issue of re-useability. Metatrader 4 is
-forex-only and only works with brokers that support it. As such, I would
-have to use something else for stock trading. Even for a forex-only
-system, it would help if I can do intermarket analysis quantitatively.
-That's not possible as far as I know with MQL4. Which is another major
-downside for me. To summarize other reasons on how I came about this
-decision, here are the advantages and disadvantages of using MQL4 versus
-using a general programming language, such as Python or C++. The
-advantages of using MQL4 are:</p>
+            <div class="article-content"> <p>I have won first place in the August <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex contest! My
+automated strategy returned over 45% in the month of August. With that
+honour comes <a href="http://www.dukascopy.com/swiss/english/contests/strategy_contest/august-2010/">a \$5,000 grand prize</a> in real greenbacks. The setup
+that I used is a minor updated version of <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">the one I used last month</a>.
+I continue to adapt my system to expect market conditions of the month
+ahead. Sometimes I'm right, sometimes I'm wrong. This contest is turning
+out to be more than a nerdy pass time for me as I have finished in the
+top 10 three times already since it started in April. However, I must
+reiterate the fact that this is not real trading. It's just a paper
+trading contest with no real money risked on my part. If I'm really that
+good at trading to make 45% of return a month, I wouldn't be writing
+this post at lunch in my cubicle at this moment. So yes, back to reality
+as I continue my engineering work while improving my own trading and
+developing my quantitative trading system in my spare time. As my blog's
+tagline reads, this is an engineer's training to trade for a living.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/' title='2010-09-03T12:39:00'>03 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/on-technical-analysis-and-fuzzy-logic-for-mechanical-trading/" rel='bookmark'>On technical analysis and fuzzy logic for mechanical trading</a>
+            </h1>
+            <div class="article-content"> <p>Technical traders realize that technical analysis is more of an art than
+science. Until you draw a plethora of lines to fill your chart, which
+would render it practically useless, prices rarely "hit the spot" based
+on your doodles. This doesn't matter though because trading is not about
+charts and guessing numbers. It is about costs and risks (pardon me if
+you've heard this a thousand times already). To whom this would matter
+though, are the mechanical traders using technical analysis. It may be
+<em>obvious</em> to a human to discern price patterns because a trading setup
+<em>looks like</em> something you know. However, figuring out "obvious" and
+"looks like" is not trivial in a program. Common ways of tackling this
+problem is with stochastic algorithms or Bayesian logic. The drawback
+with using these methods though, is that they are difficult to conjure
+unless you have some vigorous background in math. Hereby I suggest an
+alternative--fuzzy logic. In it's simplest implmentation, fuzzy logic
+are mere if-then statements. Here's a sample fuzzy logic control system
+for regulating temperature with a fan (it is also a trick solution to
+the infamous <a href="http://en.wikipedia.org/wiki/Hysteresis">hysteresis problem</a> in control theory...but I
+digress),<code>IF temperature IS very cold THEN stop fan IF temperature IS cold THEN turn down fan IF temperature IS normal THEN maintain level IF temperature IS hot THEN speed up fan</code>
+As you can see, there can be more than two values for a result. The
+classic and ubiquitous TRUE or FALSE boolean is thrown out the window.
+Let's dive right into an example of applying fuzzy logic to technical
+analysis. Say you are using the RSI as one of your indicators.
+Typically, you set a pair of threshold values to determine if the
+instrument is overbought or oversold.
+<code>String rsiCondition; if (RSI &gt; 70) rsiCondition = "Overbought"; if (RSI &gt;= 30 &amp;&amp; RSI &lt;= 70) rsiCondition = "Neutral"; if (RSI &lt; 30) rsiCondition = "Oversold";</code>
+Then here is what a fuzzy logic implementation would look
+like.<code>String rsiCondition; if (RSI &gt; 90) rsiCondition = "Very overbought!"; if (RSI &gt; 70) rsiCondition = "Overbought"; if (RSI &gt; 60) rsiCondition = "a little overbought"; if (RSI &gt;= 40 &amp;&amp; RSI &lt;= 60) rsiCondition = "Neutral"; if (RSI &lt; 40) rsiCondition = "a little oversold"; if (RSI &lt; 30) rsiCondition = "Oversold"; if (RSI &lt; 10) rsiCondition = "Very oversold!";</code>
+In fact, you may have noticed that the first RSI example is already a
+3-valued fuzzy logic. And you're right! Fuzzy logic is that easy. So
+what can you do with that second RSI example? Well, perhaps you want to
+implement fuzzy logic on a MACD as a second indicator. Then you can
+implement a "conviction" algorithm (which isn't possible with TRUE/FALSE
+algorithms) by summing the two fuzzy logic (see wiki or google for more
+information on <a href="http://en.wikipedia.org/wiki/Fuzzy_logic">performing fuzzy logic operations</a>). And then... well.
+This is a basic example of exploiting the benefits of fuzzy logic in
+automated trading strategies. More advanced use of fuzzy logic is
+demonstrated in this seminal work by Lin and Lee, <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=106218&amp;tag=1">Neural-network-based
+fuzzy logic control and decision system</a>, 1991. Fuzzy logic + neural
+net! Well, as you can see, this is only the tip of the iceberg. P.S. I
+have discussed a lot recently about the frontend work that I have been
+working on. This post is a break for the reader and a glimpse at what I
+am really doing behind the scenes. Let me know in the <a href="#respond">comments below</a>
+if this is your cup of tea and I'll write more of this type of posts in
+the future.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/on-technical-analysis-and-fuzzy-logic-for-mechanical-trading/' title='2010-09-02T10:49:00'>02 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/" rel='bookmark'>JForex Example:  Automatic position sizing</a>
+            </h1>
+            <div class="article-content"> <p>Proper position sizing is an integral part of risk management. It <em>can</em>
+be one of the easiest thing to do too. For example, I <a href="http://www.quantisan.com/reducing-overall-market-exposure-according-to-market-volatility/">typically size my
+trading position</a> based on the following factors:</p>
 <ol>
-<li>Saves A LOT of development time as it's already built for trading</li>
-<li>Charting, manual and automated trading on one platform</li>
-<li>Based on the popular C programming language</li>
-<li>Many forex traders use it</li>
-<li>Large repertoire of forex-specific programs</li>
+<li>Amount of capital willing to put at risk.</li>
+<li>Stop price level.</li>
+<li>Volatility of the instrument.</li>
 </ol>
-<p>Disadvantages of using MQL4.</p>
-<ol>
-<li>Not for real quant analysis or data mining</li>
-<li>Limited to MT4-supported brokers</li>
-<li>Forex trading only</li>
-<li>Proprietary programming language</li>
-<li>Must run on Metatrader 4 client terminal</li>
-<li>MQL5 coming soon</li>
-</ol>
-<p>This is certainly a tough choice. Judging by the huge user base, it's
-evident that many people are satisfied with MQL4. Yet, as I've discussed
-here, there are downsides to using it (besides technical matters). My
-current plan remains the same as what I said in <a href="http://www.quantisan.com/january-2010-trading-performance-review/">my last month's trading
-review</a>. That is, I will use MQL4 to plug holes in my trading system
-for now before migrating to build my own system. In fact, I am already
-brewing my first expert advisor starting today. Perhaps I might even
-have something to post by the end of this week.</p>
+<p>The following JForex code calculates a lot size based on these three
+factors. It is part of my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex July strategy</a> (complete
+source code to the strategy is available via that link). [java
+firstline="232"] private double getLot(Instrument instrument) throws
+JFException { double riskAmt; double lotSize = 0; riskAmt =
+this.acctEquity * (this.riskPct / 100d); // CCYUSD only lotSize =
+riskAmt / (this.atr[instrument.ordinal()] * this.atrFactor); lotSize /=
+1000000d; // in millions return roundLot(lotSize); } [/java] Referring
+to line 237, riskAmt is the amount of capital to put at risk for a trade
+(#1). Line 238 calculates lotSize, which is the position size that we
+want. The denominator in that division is the distance of the stop in
+pips. The strategy uses a multiple of ATR to set the stop loss. Nothing
+fancy here. Lines 240--241 are to set the lotSize value according to the
+JForex API specification. In which the lot amount is in millions and in
+steps of a thousand units, or 0.001 step size. As I've noted in the
+code, the caveat to this implementation is that the secondary currency
+of the instrument and your account currency needs to be in U.S. dollar.
+However, it's just a matter of conversion to extend this method for
+other currencies. Update: I expanded on this functionality in the
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/' title='2010-02-08T13:38:00'>08 February 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/" rel='bookmark'>Analysing monthly forex trading performance in changing market conditions</a>
-            </h1>
-            <div class="article-content"> <p>
-In my previous post, I discussed about [3 reasons why I don't use
-Jensen's alpha or Sharpe ratio for my montly trading performance
-measurement][]. In this post, I will talk about what I actually use and
-how I came up with it. As I was saying in the previous post, what one
-chooses to use as their performance metric depend on 3 factors such as
-your style of trading, your agenda, and your interest in this topic. I
-will briefly lay out my 3 motives as background information. I use a
-swing trading strategy for trading forex. I aim to hold for at least a
-few hours to a few days. I am working to hold longer and trade less in
-the future, but that's another story. To fit my style of trading, a
-performance metric has to be unbiased for long and short trades as well
-as taking into account short term conditions in the market. In terms of
-agenda, what is the purpose of my performance metric? As a part-time
-trader, I answer only to myself. These numbers are used for my
-self-improvement and internal month-to-month comparisons only. Lastly,
-my interest in this topic of portfolio measurement is limited. I want
-something easy to calculate and simple to understand. I have read a few
-academic papers on this topic and spent a few hours researching on the
-web. That's about it. Now that my motives have been laid out, let's
-discuss my process for coming up with my trading performance metric.
-Ultimately, my assessment on how well I have done for the month is to
-measure my return based on the risk taken. In other words, Performance
-Metric = Reward / Risk. My Reward function is simple. I just steal the
-idea from Sharpe and use:
-
-> Reward = Net Return - Riskless Return
-
-Shameless. I know. I don't want to muck with the Reward function because
-at the end of the day, it is your account balance that matters. The Risk
-function takes some more thought. On a trade-by-trade basis, the risk
-taken for a particular trade can be thought of as the stop loss. It is a
-amount put at risk to be taken by the market. In other words, risk can
-be represented by the loss you are willing to take. On a month-to-month
-basis, the most important loss value that I pay attention to is my
-maximum drawdown. A drawdown imposes a real dent in your account as well
-as negatively impact your trading psychology. For these reasons, the
-maximum drawdown is a variable in my Risk function.
-
-> Risk = Max. Drawdown ...
-
-However, I am not done yet. While max. drawdown is important, it is an
-entirely internal factor. The risk you take is also affected by the
-condition of the market. Using the stop loss analogy again, a 50 pips
-stop loss can be labelled as both conservative and aggressive risk
-exposure depending on the volatility of the market in the timeframe
-you're trading. As such, we need to consider volatility in the Risk
-function. However, this raises another question, what is volatility.
-Long story short, I just snatch the Average True Range (ATR) indicator
-that I use on my charts in this formula. However, we can't just stick a
-ATR value in because it's an absolute number. We need to use a
-percentage ATR (%ATR) to correspond with all the other percentage
-numbers in the formula. And since this is for monthly analysis, I grab
-the %ATR from a monthly chart. In particular, I use the monthly %ATR on
-the U.S. dollar futures chart. Finally, the Risk function is:
-
-> Risk = Maximum Drawdown + %ATR
-
-Thus,
-
-> **Performance Metric = (Net Return - Riskless Return) / (Maximum
-> Drawdown + %ATR)**
-
-As an example, here are the values I plug in for each variable to
-calculate my performance metric for [November][]. Net Return = 3.15%,
-read from November's statement Riskless Return = 0.54% (per annum) / 12
-= 0.045%. This is the Canadian 1-year treasury rate in November. Max.
-Drawdown = 3.55%, read from November's statement %ATR = monthly ATR(3)
-of U.S. dollar futures / monthly close of U.S. dollar futures =
-3.1473/74.895. To verify the efficacy of this performance metric. Let's
-do a mental check of my criteria as discussed.
-
-1.  Unbiased for long and short trades? Yes, it uses the net return
-    regardless of which side you took.
-2.  Varies with short term market conditions? Yes, from the %ATR.
-3.  Comparable between month to month? Yes, the number is normalized by
-    market volatility each month.
-4.  Easy to calculate? Yes, it's can be done in my [trade log][]
-    spreadsheet with a few formulas.
-5.  Easy to understand? Yes, it's an interpretation of reward / risk.
-
-As with any other attempt to summarize trading performance into one
-single value, many assumptions have been taken. I cherry picked what I
-needed to assemble a formula. Some observant reader will notice that
-this formula is similar to the Sterling and Calmar ratios. Indeed, this
-is yet another modified form of these ratios. In fact, I will be
-referring to this formula as Sterling ratio in my future posts for
-simplicity.
-
-</p>
-
-<p>[3 reasons why I don't use Jensen's alpha or Sharpe ratio for my
-  montly trading performance measurement]: http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/' title='2009-12-29T07:55:00'>29 December 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/" rel='bookmark'>3 reasons why I don&#039;t use Jensen&#039;s alpha or Sharpe ratio for my forex trading</a>
-            </h1>
-            <div class="article-content"> <p>As a part-time trader, measuring my <a href="http://www.quantisan.com/tag/monthly-review.html">monthly trading performance</a> can
-be as simple or as complex as it can be. On a scale of 1 to 10, 1 being
-just reading the percent return from the account statement and 10 being
-running a statistical analysis, my preferred trading performance
-measurement method is a simple 3. I am lazy but want a metric that is
-useful for monthly self-evaluation. That is why <a href="http://en.wikipedia.org/wiki/Jensen%27s_alpha">Jensen's alpha</a> or
-<a href="http://en.wikipedia.org/wiki/Sharpe_ratio">Sharpe ratio</a> have appealed to me. Both of these ratios are can be
-easily derived. However, 3 shortcomings of these metrics made me decide
-not to use them for my forex trading. First is the fact that they
-emphasize <em>excess return</em> with respective of the market. It makes sense
-to compare a portfolio with the overall market on a long term basis. But
-what if you want to do month-by-month, or even week-by-week analysis?
-Short-term market volatility could skew your performance metric up/down
-even when you have been performing consistently. Furthermore, what if it
-is an out-right bear market? Your short-side strategy would be boosted
-by the negative return of the market. For a swing trader such as myself,
-a shorter time-frame and long/short unbiased measurements are
-non-trivial matters for analysing trading performance. Secondly, neither
-metrics factor in volatility of a market. A 5% return in a calm market
-is not the same as 5% in a volatile market. If you go out to fish in a
-storm, you'd better expect a huge payout to compensate for the extra
-risk. Lastly, I don't like their definition of risk. For me, a
-short-term performance ratio can sufficiently be characterized as reward
-/ risk. Jensen's alpha calculation has no explicit measurement of risk
-at all. Whereas Sharpe takes the standard deviation of the portfolio's
-return as the risk value. For a monthly analysis, I would have to use a
-daily or weekly drawdown to calculate the standard deviation. The
-problem with using the daily is that it's too much work for me to do
-manually on my spreadsheet. As for the weekly, having just 4 weeks in a
-month <a href="http://en.wikipedia.org/wiki/Sampling_size">is not a sufficient sampling size</a> to calculate a
-representative standard deviation. In summary, here are my 3 reasons for
-not using Jensen's alpha and Sharpe ratio.</p>
-<ol>
-<li>Emphasis on excess return with respect to the market</li>
-<li>No consideration for volatility of the market</li>
-<li>Not agreeing on their definition of risk</li>
-</ol>
-<p>On the other hand, there are numerous reasons why these metrics are the
-standard portfolio measurments used by many traders. Heck, Jensen's
-alpha and Sharpe ratio have been around for 40 years and are still
-widely in use today. However, they are just not suitable for me as
-discussed. The thing is, there are countless number of new and old
-portfolio measurements out there. What one chooses to use depend on
-various factors such as your style of trading, your agenda, and your
-interest in this topic. In my next post, I will introduce the metric
-that I use for my monthly trading performance analysis -- <a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/">a modified
-Sterling ratio</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/' title='2009-12-23T11:43:00'>23 December 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/" rel='bookmark'>Adapting to changing market volatility with a statistical position size table</a>
-            </h1>
-            <div class="article-content"> <p>We know that prices can go up or down. We also know that the quality of
-these ups and downs can be very smooth or very choppy. As such, it's not
-surprising that the trend and volatility of a market form the two
-universal characteristics of a price action. No matter which market you
-trade, the trend and volatility of the prices will influence your
-trading and P&amp;L. That can be both good and bad as volatility is a double
-edged sword. A fast paced moving market can rain down gold on you or it
-can burn your cash away. Most of the time, it's the latter case.
-Consequently, there are many ways traders adapt to changing volatility
-in the market. You can tailor your trading strategy, change trading
-timeframe, switch market entirely, or manage your risk accordingly, for
-examples. In this post, I'd like to give an example for the use of a
-<a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex position size table</a> to fit with market
-volatility. The problem with market volatility is that it's hard to
-notice. As opined by <a href="http://traderfeed.blogspot.com/2009/10/jump-in-stock-market-volatility-and-its.html">Dr. Steenberger</a>, "many traders will adapt to
-directional changes quicker than they adapt to shifts in volatility."
-The art of identifying market conditions is not discussed in this post.
-But obviously, if there is a way to build in an inherent way to manage
-your risks based on market volatility, you will have built yourself a
-safety net. That is the logic behind my <a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex
-position sizer</a>. It's a
-data-driven tool to impose an inherent safety net in your trading. What
-it does is simple. Here's what it boils down to:</p>
-<ol>
-<li>It finds the recent 2 sigma value (i.e., a statistical measure of
-    volatility, <a href="http://en.wikipedia.org/wiki/Standard_deviation">see wiki</a>) of each major currency pairs.</li>
-<li>It calculates the maximum position size for each pair using the 2
-    sigma value.</li>
-<li>Then it converts the number to correspond with your account currency
-    based on a real-time currency exchange rate for each trading pair.</li>
-</ol>
-<p>Thus, a table such as <a href="http://www.quantisan.com/tools/forex-position-sizer/">this one I published for
-forex</a> can give you a
-real-time guideline to the maximum position size you should take given
-your risk appetite. One shortcoming with this approach is that while you
-may limit your loss during a volatile market, you are also limiting your
-potential gain. But this is where the old saying, "let your profit run
-and cut your losses short" applies. One solution is to simply add to
-your winning trades, according to your trading setups, of course. That
-way, when the market moves in your favour or you get confirmation on
-your setup, you can increase the position size responsibly without
-stretching your principal. By now, it's probably obvious that the use of
-such a tool is not, and should not, meant to be a solution to changing
-market volatility. It is merely a convenience tool to serve as one of
-the many that a trader has at his/her disposal. Nevertheless, I find the
-table to be very convenient for me because I don't have to worry about
-calculating the position sizes manually on each trade. Trading is tough
-enough already, so I like to develop <a href="http://www.quantisan.com/tools/">tools</a> that can make my life
-ever so slightly easier.</p>
-<div id="_mcePaste" style="overflow: hidden; position: absolute; left: -10000px; top: 0px; width: 1px; height: 1px;">
-<span style="font-weight: bold;">many traders will adapt to directional
-changes quicker than they adapt to shifts in volatility</span>
-
-</div>
-
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/' title='2009-10-29T13:00:00'>29 October 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/" rel='bookmark'>My thoughts and goals on automated trading a year later</a>
-            </h1>
-            <div class="article-content"> <p>In 2008, I spent a few good months <a href="http://www.quantisan.com/category/quantitative-finance/systems/">developing strategies</a> in
-<a href="http://www.quantisan.com/tag/easylanguage/">TradeStation</a> full-time for the index futures. Now after a full year
-of break in development, I am starting to devote more and more time in
-quantitative finance research again. In hindsight, the biggest
-shortcoming with my previous strategies is that they are not
-discriminating enough. Using an analogy from robotics (my specialty),
-some of the most basic robots are great because they can do one task,
-and one task only, especially well. Those developers that are too
-ambitious in trying to conjure a jack-of-all-trade robot typically fail
-miserably. Our current technology simply isn't sufficient for anything
-more than a specialized automation. Much is the same in developing
-automated trading. With my limited resources and skills, my goal is to
-build simple automated systems that can do one job only and do it damn
-well. Once that can be achieved, it's only a matter of concatenating all
-these individual systems to exploit more and more opportunities.
-Therefore, the new plan which I'll follow for development are:</p>
-<ol>
-<li>Identify a recurring profitable scenario in the market</li>
-<li>Isolate the conditions which would yield a high probability of such
-    scenario happening</li>
-<li>Program the findings into my platform</li>
-<li>Run backtests to calculate the expected profit (probability *
-    reward/risk)</li>
-<li>Tweak and debug</li>
-</ol>
-<p>Ultimately, remember this: <em>It's not a matter of the number of trades
-you take, it's a matter of being as picky as you can in only playing the
-best of the best trades you can find</em>.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/' title='2009-09-04T15:03:00'>04 September 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/jforex-example-automatic-position-sizing/' title='2010-08-17T11:58:00'>17 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

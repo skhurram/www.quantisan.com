@@ -227,69 +227,8 @@ fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
                 Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel='bookmark'>First look at Google App Engine for automated trading and quant analysis on the cloud</a>
-            </h1>
-            <div class="article-content"> <p>I just spent the last few hours looking into Google App Engine to use it
-for trading. Google App Engine (GAE) is a cloud computing development
-and hosting platform for web applications. GAE is similar to the
-well-known Amazon EC2 service but it is also very different. The main
-difference between GAE and EC2 is that GAE is not as flexible as EC2 but
-it is a lot easier to develop on. Think of it like using C++ (EC2) to
-write your own trading platform to using EasyLanguage on TradeStation or
-MQL on Metatrader (GAE). Another advantage for using Google App Engine
-is that it is free! Well, to a certain extent. It is free for a limited
-monthly usage. However, Google's free quota is known to be very generous
-(think Gmail) and this is no exception. Based on the numbers, it looks
-comparable to a typical \$20/month virtual private server (VPS) hosting
-package. My guess is that you can run a decent personal quant program on
-it if you keep the resources for yourself (private use). For more
-information on the free quota, you can read the <a href="http://code.google.com/appengine/docs/quotas.html">current GAE quota</a>
-web page or the <a href="http://en.wikipedia.org/wiki/Google_App_Engine">Wikipedia page for GAE</a>. You might be wondering how
-did I spend a few hours just reading on GAE? The answer is that I've
-done a brief research, planning, and assessment to see how GAE can be
-put to use in terms of quantitative analysis for automated and
-discretionary trading. Without going through all of my notes and logic,
-here's the gist of my conclusion.</p>
-<h2>For Automated Trading</h2>
-<p>Since GAE is also a SDK, it has a restricted programming API. You can't
-just plug in any custom library of your own (i.e. your broker's API)
-into your program. That is its advantage and its disadvantage.
-Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
-for your connection either. These limitations won't be changing anytime
-soon as GAE is designed to be like that for security reasons. Basically,
-there's no way for your web application on GAE to connect with your
-broker for trading. So much for that idea.</p>
-<h2>For Discretionary Trading</h2>
-<p>Things look brighter for discretionary trading though. A big bonus with
-using Google App Engine is that it supports the Google Finance API.
-Google Finance offers free real-time stock quotes. Combine it with the
-programming capability of the Google App Engine and you have yourself a
-free number cruncher in the cloud. However, GAE is definitely no match
-for your personal computer, so why would you go through all that
-trouble? One possible scenario in which this could be useful is for
-traders that is often on the road or traders such as myself in which we
-have a day job. In that case, you can set you quant analytics on GAE as
-a private web application and then you can access it as a web page
-anywhere on your mobile phone. One of the obvious limitation with using
-GAE is that it has limited features for scientific computing. For
-example, it doesn't support Numpy in the Python SDK. As such, I can't
-imagine using GAE for anything more than simple technical analysis for
-now. I certainly hope that GAE can include more powerful scientific
-computing capabilities in the near future. Until then, I really can't
-see Google App Engine offering much help aside from performing
-algorithmic tasks to help with your trading analysis. Their open issues
-log does announce that <a href="http://code.google.com/p/googleappengine/issues/detail?id=190">Numpy is being integrated into GAE</a> though. So
-that's a great sign for things to come! I am very hopeful of GAE's
-potential as a free cloud server to host my quant analytics on. We'll
-just have to wait for now.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/' title='2010-03-03T21:19:00'>03 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
 <p class="paginator">
+                    <a href="http://www.quantisan.com/tag/Python//index2.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
 </p>
     </section>
 

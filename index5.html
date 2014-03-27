@@ -58,239 +58,123 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/business-is-on-hold/" rel='bookmark'>Business is on hold</a>
+                <a href="http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/" rel='bookmark'>Quantisan.com is now compiled and statically served</a>
             </h1>
-            <div class="article-content"> <p>Back in November, I started working as a Data Scientist at <a href="http://www.uswitch.com">uSwitch</a>,
-an utility price comparison site. I am very fortunate to be able to work
-with so many <a href="http://forwardtechnology.co.uk/">smart and passionate</a> people there. There is so much
-that I am learning in fact, I haven't had time to do much else. Although
-my ridiculous 4-hour commute is also a factor. I didn't even notice that
-EUR/USD dropped 1000 pips! As such, I am officially putting my own
-business and research on hold until further notice. I will continue to
-post relevant technical discussions on this blog. All of my existing
-clients have been notified and arrangements made way back before I began
-my employment. Thank you for all your support!</p> </div>
+            <div class="article-content"> <p>I just migrated this blog from a self-hosted Wordpress site to a Pelican statically generated blog. It took me a whole weekend to do it because I have almost 600 posts. Much is still broken at the moment but at least the site seems presentable so I pushed it through. The fixes will just have to wait.</p>
+<p>I considered using Jekyll as it appears to be the most popular static site generator. A look at its github page though shows no patch has been made for months. Development on Jekyll appears to have paused for some reason. Furthermore, I didn't have much luck getting <a href="https://github.com/thomasf/exitwp">exitwp</a>, which is a wordpress xml to jekyll importer, to gracefully parse my many custom posting tags. I also gave <a href="http://www.ruhoh.com">Ruhoh</a> a quick trial, but it also relies on exitwp to import wordpress posts.</p>
+<p>Then I found that <a href="http://doc.getpelican.com">Pelican</a> had its own importer tool using <a href="https://github.com/jgm/pandoc">pandoc</a>, which I tested works much better for the non-standard tags in my posts.</p>
+<p>In any case, here are the steps I took to migrate to Pelican.</p>
+<ol>
+<li>Export Wordpress into a XML file</li>
+<li>transfer comments to Disqus</li>
+<li>install Pelican 3.0.0 dev build</li>
+<li>use pelican-import to convert the XML file into markdown posts</li>
+<li>moved some posts around into its directory/category</li>
+<li>use Textmate to do a bunch of batch fixes</li>
+<li>configure Pelican and made a Makefile</li>
+<li><del>install ghp-import</del> rolled my own gh-pages script into Makefile</li>
+<li>customised a <a href="https://github.com/Quantisan/pelican-svbtle">pelican theme</a></li>
+<li>setup Github for custom domain</li>
+<li>updated DNS</li>
+</ol>
+<p>After all of that, this site is now <a href="https://github.com/Quantisan/www.quantisan.com">hosted and served on github</a>.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/business-is-on-hold/' title='2012-01-22T07:11:00'>22 January 2012</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+                Posted  <a href='http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/' title='2012-08-04T12:42:00'>04 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/algorithmic-ownage/" rel='bookmark'>Algorithmic ownage</a>
+                <a href="http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/" rel='bookmark'>People is the biggest obstacle to becoming a data-driven organisation</a>
             </h1>
-            <div class="article-content"> <p>I felt good when I simplified one of my algorithms and sped it up 10
-times. I felt so good that I even wrote an entire blog post about it
-<a href="/eureka-moment-on-design-patterns-for-functional-programming/">patting myself on the back</a>. Then last week I got an email from Kevin
-of <a href="http://keminglabs.com/">Keming Labs</a> suggesting a few alternatives.</p>
-<div class="highlight"><pre><span class="c1">;;Three ways to count the number of occurrences in a collection</span>
-<span class="c1">;; (&quot;orange&quot; &quot;bottle&quot; &quot;coke&quot; &quot;bottle&quot;) =&gt; [(&quot;bottle&quot; &quot;coke&quot; &quot;orange&quot;) (2 1 1)]</span>
-<span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;orange&quot;</span> <span class="s">&quot;bottle&quot;</span> <span class="s">&quot;coke&quot;</span> <span class="s">&quot;bottle&quot;</span><span class="p">)]</span>
-
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%1</span> <span class="p">(</span><span class="nb">hash-map </span><span class="nv">%2</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">get </span><span class="nv">%1</span> <span class="nv">%2</span> <span class="mi">0</span><span class="p">))))</span>
-                       <span class="p">{}</span> <span class="nv">c</span><span class="p">)]</span>
-    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
-     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)])</span>
-
-
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">l</span> <span class="p">(</span><span class="nb">for </span><span class="p">[[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">c</span><span class="p">)]</span>
-            <span class="p">[</span><span class="nv">k</span> <span class="p">(</span><span class="nb">count </span><span class="nv">v</span><span class="p">)])]</span>
-    <span class="p">[(</span><span class="nb">map first </span><span class="nv">l</span><span class="p">)</span>
-     <span class="p">(</span><span class="nb">map second </span><span class="nv">l</span><span class="p">)])</span>
-
-
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">apply merge-with </span><span class="nv">+</span>
-                      <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">apply hash-map </span><span class="nv">%</span><span class="p">)</span>
-                           <span class="p">(</span><span class="nf">partition</span> <span class="mi">2</span> <span class="p">(</span><span class="nb">interleave </span><span class="nv">c</span> <span class="p">(</span><span class="nb">repeat </span><span class="mi">1</span><span class="p">)))))]</span>
-    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
-     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)]))</span>
-</pre></div>
-
-
-<p>First of all, his solutions looked much cleaner <a href="/eureka-moment-on-design-patterns-for-functional-programming/">than mine</a>. Then over
-the weekend I was able to incorporate his 3 algorithms into my program.
-I ran a few benchmarks and here are the average of 2 tests using a
-dataset of 28,760 items.</p>
-<ul>
-<li>My algorithm. Elapsed time: 68372.026532 msecs.</li>
-<li>Kevin's solution #1. Elapsed time: 156.940976 msecs.</li>
-<li>Kevin's solution #2. Elapsed time: 60.165483 msecs.</li>
-<li>Kevin's solution #3. Elapsed time: 296.162042 msecs.</li>
-</ul>
-<p>Total ownage. That's what I like about sharing my
-work; once in a blue moon, a reader drops by and generously show
-me how I can improve a solution 1,000 times! Now the ball is in my hands
-to understand what he has done and improve myself. Collaborating and
-learning, that's why I open source.</p>
-<p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p> </div>
+            <div class="article-content"> <p>Our data team of 3 is tasked with pushing our business to be more
+data-driven. From encouraging management to make strategic decisions
+with hard data to building real-time feedback loop within our products
+themselves. We have built the infrastructure in place to capture and
+analyse streams of high granularity data using open source tools like
+Kafka, Hadoop, and Cascalog. Now the hard part is to convince the rest
+of the company that counted numbers on an Excel spreadsheet is
+insufficient so that they can incorporate these new high-frequency and
+high-granularity information in their everyday decision-making process.</p>
+<p>This came to light for me when I tried to revamp our Attribution
+Modelling, which is a fancy marketing term for how referral is
+attributed and doesn't have to do with mathematical modelling at all.
+Many companies traditionally use a last-referral-takes-the-cake
+approach. Say if a customer comes in via an email referral first, leaves
+the site, then comes back in from an Adword to ultimately make a
+purchase, the Adword would get attributed for that revenue produced.
+This last-referral method is a lazy way of doing things. Lead generating
+referrals get no credit and return on investment values are biased
+towards closing-stage marketing efforts. Granted, doing anything else
+would require a global view of customer journey, which is a non-trivial
+matter. </p>
+<p>However, that is exactly what we're able to do easily now. So we
+took a couple of days to spike out a fair-share attribution model such
+that every touch point a customer used get a share of the pie. The
+intention is to provide a holistic view of referrers efficacy to feed
+into our higher-level models. But seeing that the old system is so
+unrealistic, I thought I might as well open it for everyone else.</p>
+<p>Opening a can of worms, that was what it felt like. I found that things
+like financial reports and people's bonuses are tied to this old
+attribution modelling system. Even though it is obvious to everyone that
+the old attribution modelling system is unrealistic, changing it would
+require changing the work processes of multiple individuals across the
+company. You know what they say about people's habits? Habits are hard
+to change. </p>
+<p>Seeing that this is a fundamental obstacle to our company's
+competitiveness, I've taken a break from pushing our data architecture
+to build and evangelise internal data products. I've been working
+closely individually with our business people to identify ways of using
+data, staging data views from Hadoop/Cascalog back into good old MySQL,
+and assisting them to generate actionable data with SQL to make their
+lives easier. </p>
+<p>One of such views borrows a technique from my algorithmic
+trading. By applying a breakout strategy (which I wrote entirely in SQL,
+good fun) on the revenue and cost time-series data of our PPC and SEO
+campaigns, our PPC/SEO manager now have available a customisable
+screener for abnormality with any of our thousands of continuous
+marketing campaigns. Very much like a stock screener for breakouts. This
+used to be a subjective process based on a spreadsheet of numbers and
+expert opinions. Now it's data-driven. </p>
+<p>There's a saying that a business
+is its people. To become a data-driven organisation, you need
+data-driven people. I never realised the significance of this until now.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/algorithmic-ownage/' title='2011-11-06T17:37:00'>06 November 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+                Posted  <a href='http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/' title='2012-06-10T12:26:00'>10 June 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel='bookmark'>Eureka moment on design patterns for functional programming</a>
+                <a href="http://www.quantisan.com/data-science-is-a-collaborative-effort/" rel='bookmark'>Data science is a collaborative effort</a>
             </h1>
-            <div class="article-content"> <p>Understanding design patterns for object-oriented programming made my
-life easier as a Java programmer. So I have been looking for a
-comparable book for functional programming ever since my sojourn into
-this age-old paradigm. It looks as though <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book">I'm not the only one
-looking</a> too. But the thing is, I think I've just had a revelation of
-sort.</p>
-<p>There is one and only one guideline to designing functional
-architectures -- Keep it simple. Simple as in keeping your functions
-having a single purpose only. Simple as in work with the data directly and
-don't conjure unnecessary intermediaries. Simple, as elaborated by Rich
-Hickey in his talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Much of this is conveyed in Bloch's Effective Java:</p>
-<div class="highlight"><pre><span class="n">item</span> <span class="err">\#</span><span class="mi">5</span> <span class="err">\–</span> <span class="n">Avoid</span> <span class="n">creating</span> <span class="n">unnecessary</span> <span class="n">objects</span>
-<span class="n">item</span> <span class="err">\#</span><span class="mi">13</span> <span class="err">\–</span> <span class="n">minimize</span> <span class="n">accessibility</span> <span class="n">of</span> <span class="n">classes</span> <span class="n">and</span> <span class="n">members</span>
-</pre></div>
-
-
-<p>, for examples.</p>
-<p>As <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book/2930452#2930452">Majewski said in a stackoverflow reply</a> (Update 2013 – question no longer available on stackoverflow),</p>
-<div class="highlight"><pre><span class="n">The</span> <span class="n">patterns</span> <span class="n">movement</span> <span class="n">started</span> <span class="n">because</span> <span class="n">object</span><span class="o">-</span><span class="n">oriented</span> <span class="n">programming</span> 
-<span class="n">was</span> <span class="n">often</span> <span class="n">turning</span> <span class="n">into</span> <span class="n">spaghetti</span> <span class="n">objects</span> <span class="p">...</span> <span class="n">Functional</span> <span class="n">programming</span> 
-<span class="n">is</span> <span class="n">a</span> <span class="k">restricted</span> <span class="n">style</span> <span class="n">of</span> <span class="n">programming</span><span class="p">,</span> <span class="n">so</span> <span class="n">it</span> <span class="n">didn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">need</span> <span class="n">to</span> <span class="n">grow</span> <span class="n">a</span> <span class="n">set</span>
-<span class="n">of</span> <span class="k">restricted</span> <span class="n">conventions</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">the</span> <span class="n">chaos</span><span class="p">.</span>
-</pre></div>
-
-
-<p>As such, there is no design pattern book for functional programming. I didn't get that earlier this year. But something clicked recently. During the past few months, I've been doing some <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/">consulting and open source projects</a> solving algorithmic problems with Clojure.</p>
-<p>One of the problems in a project that I was faced with this week is calculating the occurrence of each distinctive element within a list of elements. Say we have a list, <code>coll = ("orange", "bottle", "coke", "bottle")</code>. The output would be something like <code>[("orange", "bottle", "coke") (1 2 1)]</code> </p>
-<p>This is my first solution.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">eval-decompose</span>
-  <span class="p">[</span><span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">super-d</span>  <span class="p">(</span><span class="nb">distinct </span><span class="nv">coll</span><span class="p">)</span>
-        <span class="nv">freqs</span>    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">ps</span>  <span class="p">[]</span>
-                        <span class="nv">d</span>   <span class="nv">super-d</span><span class="p">]</span>
-                   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">d</span><span class="p">)</span>
-                     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span>  <span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">partial = </span><span class="p">(</span><span class="nb">first </span><span class="nv">d</span><span class="p">))</span> <span class="nv">coll</span><span class="p">))]</span>
-                       <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">conj </span><span class="nv">ps</span> <span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">d</span><span class="p">)))</span>
-                     <span class="nv">ps</span><span class="p">))]</span>
-    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">vector </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">super-d</span> <span class="nv">freqs</span><span class="p">)))</span>
-</pre></div>
-
-
-<p>The specs are not exactly as I described but the concept remains. What I
-did is to use tail calls (it's supposed to be fast, isn't it?) to
-aggregate each counter to produce a vector of counts. Then I map each
-pair of fragment with its corresponding count to generate a final output
-collection. Sounds overly complicated, doesn't it?</p>
-<p>This is the first warning of a bad functional design. For a collection of 30,000 items,
-this function took 11 minutes to compute on my notebook. This looks like
-a good place to exploit the parallel nature of this problem.</p>
-<p>Specifically, the counting of each fragment is independent of other
-fragments. Thus, there's no need for the program to wait for one
-fragment to finish to process the next. I simplified the program to
-remove this inherent assumption of procedural processing. Here is the
-gist of the refactored code where each function only does one job. Since
-the processing are modularised, I can parallelize the algorithm easily
-with the use of pmap instead of map on the last line as shown below.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">match-count</span>
-<span class="s">&quot; Given key, k, returns number of occurrences of k in collection, coll.</span>
-<span class="s">&quot;</span>
-  <span class="p">[</span><span class="nv">k</span> <span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">match?</span>  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">i</span> <span class="nv">x</span><span class="p">]</span>
-                  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">x</span><span class="p">)</span>   <span class="c1">;; closure on k</span>
-                    <span class="p">(</span><span class="nb">inc </span><span class="nv">i</span><span class="p">)</span>
-                    <span class="nv">i</span><span class="p">))]</span>
-    <span class="p">(</span><span class="nb">reduce </span><span class="nv">match?</span> <span class="mi">0</span> <span class="nv">coll</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="kd">defn </span><span class="nv">calc-counts</span>
-<span class="s">&quot; Returns a list of counts for the occurrences of each key of keys, ks,</span>
-<span class="s">  within the collection, coll.</span>
-<span class="s">&quot;</span>
-  <span class="p">[</span><span class="nv">ks</span> <span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">pmap</span> <span class="o">#</span><span class="p">(</span><span class="nf">match-count</span> <span class="nv">%</span> <span class="nv">coll</span><span class="p">)</span> <span class="nv">ks</span><span class="p">))</span>
-</pre></div>
-
-
-<p>I've split the first function into 3 functions (2 shown here). As Hickey
-said in his talk, simplifying can often produce more, not less,
-functions. Yet, the program is not only easier to read and runs in less
-than a minute. An order of magnitude faster! There are still lots for me
-to learn. I want to find more challenging projects to push my own
-limits. But rather than solving arbitrary problems, I prefer to tackle
-real-world challenges. So if you know of anyone that can benefit from
-collaborating with a functional developer to build robust and scalable
-software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.</p>
-<p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
+            <div class="article-content"> <p>The other day our marketing guy dropped a laundry list of reports that
+he wanted me to produce. I work with him sometimes so I don't mind
+putting on a business intelligence hat occasionally to help him out. But
+I mustn't forget that driving long-term values to the business is what I
+am good at, so I had to say no to him. What's supposed to be a quick
+chat with him ended up in a hour long discussion to show case what I'm
+working on and demonstrating that I can do so much more than count
+things for him. In short, if you want data, ask the business analyst; if
+you want to solve problems, let's talk.</p>
+<p>It's been said that <a href="http://thinkrelevance.com/blog/2012/04/04/big-data-reference-model">Big Data
+analysis is a feedback loop</a>. However, I don't think having the data science team toil away at data is the message. Who's to say that analytical steps in a big data reference model can't involve feedback
+from people in addition to models? For the past week, I've been
+showcasing a new internal data product to various stakeholders in our
+business. This one data product is now leading to a new process for our
+accountant, a product for our online marketing manager, and an
+innovative company-wide metric. All of this happened because we
+collaborated rather than delegated tasks. Analysing data is not a
+one-way process. <a href="http://s.hbr.org/IIVNL0">Make it a feedback loop of math and people</a>.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+                Posted  <a href='http://www.quantisan.com/data-science-is-a-collaborative-effort/' title='2012-04-29T17:02:00'>29 April 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/" rel='bookmark'>I've quit my day job and moved to the UK to do this full time</a>
+                <a href="http://www.quantisan.com/my-talk-on-bootstrapping-data-science-in-a-company/" rel='bookmark'>My talk on bootstrapping data science in a company</a>
             </h1>
-            <div class="article-content"> <p>My wife is pursuing graduate study at Oxford. So I'm taking this rare
-opportunity to quit my day job and concentrate on developing trading
-systems full time. I am also doing some consulting to keep in touch with
-civilization. I have just one project at the moment building a customer
-relation system for a friend's financial services startup.</p>
-<p>Now for some self-promotion. I specialise in building software systems
-for information discovery, and of course, trading systems too. If you
-know of any business that can make use of an information discovery
-system for better customer relation, inventory management, etc, then
-please forward <a href="mailto:paul@quantisan.com">email</a>.</p>
-<p>That's it for the public service announcement. I'll be off to my first
-meetup this Sunday to hack on an open source statistical computing
-platform. I can't wait to meet some very smart people!</p> </div>
+            <div class="article-content"> <iframe src="https://docs.google.com/presentation/embed?id=19wVHXeMM_uOfGqDJszZdn4TyXvlKRRoxpf65HyiaK5A&amp;start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/' title='2011-10-14T08:40:00'>14 October 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel='bookmark'>Local Hadoop test cluster up and running</a>
-            </h1>
-            <div class="article-content"> <p>Thanks to <a href="http://www.cloudera.com/hadoop/">Cloudera's CDH3 image</a>, I have a virtual machine with
-Hadoop on CentOS 5 working. I'm more of an Ubuntu guy, so CentOS is a
-new for me. But nothing Google couldn't solve. I also ran into a Hadoop
-exception about the java heap space. I couldn't find a solution online
-so I just bumped up the memory on the virtual machine and it solved the
-problem. In any case, I managed to run <a href="http://developer.yahoo.com/hadoop/tutorial/module3.html#vm-jobs">the pi calculation example</a> on
-my local Hadoop cluster. [<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />][]</p>
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />]: http://www.quantisan.com/static/images/2011/09/hadoop-example-pi.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/' title='2011-09-14T22:42:00'>14 September 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/" rel='bookmark'>Building a distributed back-tester with Hadoop on Amazon AWS</a>
-            </h1>
-            <div class="article-content"> <p>Testing is arguably the single most important aspect of trading system
-development. You can't tell how well an idea works unless you test it
-out. [Testing can also help you identify weaknesses or strengths in your
-model][]. The downside to testing is that it takes time to churn through
-those gigabytes of data. Backtesting is inherently a linear process. You
-feed in your tick data into your algorithm and expect some actions. You
-can't really make use of fork/join to let other threads steal from the
-process queue as the later process depends on results from the earlier
-calculations. However, often times than not, you're interested in
-testing many variations of a strategy. This is where MapReduce comes
-into play. MapReduce is a Google software framework. It is inspired by
-the map and reduce functions ubiquitous in functional programming. They
-are as common as for-loops in the Java world. The <em>map</em> function
-partitions an input into smaller problems and run them concurrently,
-e.g. each of the strategy's variant is executed on a node. The <em>reduce</em>
-function takes the results from all the nodes and aggregate them to get
-an output, e.g. back-test results from each strategy. Having used
-functional programming for some time now, using map/reduce is very
-natural for me. Where my knowledge falls short is in implementing a
-distributed infrastructure for running these map and reduce with massive
-scaling beyond my own multi-core computer. It just so happens that
-Amazon AWS has a hosted Hadoop PaaS. Where Hadoop is the Apache's
-framework for MapReduce. Hardware, check. Framework, check. This will be
-the ~~first~~ second system that I'll be working on in my goal to build
-<a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/">a complete trading R&amp;D platform</a>. Expect some technical discussions
-in the coming months as I work my way through. Now, where should I
-start...</p>
-<p>[Testing can also help you identify weaknesses or strengths in your
-  model]: http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/' title='2011-09-13T10:44:00'>13 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/my-talk-on-bootstrapping-data-science-in-a-company/' title='2012-03-25T10:15:00'>25 March 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
 <p class="paginator">

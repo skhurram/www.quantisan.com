@@ -58,208 +58,239 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-audusd-short-50-090040-stop-09100/" rel='bookmark'>Paper trade: AUD/USD short 50% @ 0.90040, stop 0.9100</a>
+                <a href="http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/" rel='bookmark'>A sign that you are truly enjoying what you do</a>
             </h1>
-            <div class="article-content"> <p>Just got <a href="http://www.quantisan.com/paper-trade-usdchf-sold-at-1-03138-39-10-pips/">stopped out of my USD/CHF long</a>. But USD seems to be holding
-ok in spite of this AUD/USD surge of 100 pips, see Fig. 2. I've been
-observing AUD/USD and now seems to be a good short opportunity for the
-following 5 reasons.</p>
+            <div class="article-content"> <p>When was the last time that you were working on something and you were
+so immersed in it that you have forgotten about the hours that gone by?
+That feeling of timelessness while doing something for hours. Not the
+type that you're stressed and feel that you don't have enough time to do
+a job. I am talking about the other kind of feeling. The positive one.
+The feeling that is serene and content. If you know what I'm talking
+about, then congratulations! You have found what you're born to do.
+There are a handful of activities that I am passionate about. I
+sometimes get that zen-like feeling when I am cycling through a mountain
+path or snowboarding down a hill. But what I truly like to do is problem
+solving. In particular, I find that programming quantitative trading
+systems is a perfect outlet for this side of my personality. Programming
+is one of the few ways in which you can create something out of nothing.
+Very much like a composer or a poet. But unlike those trades, you can
+solve practical problems with just your sheer mental capacity by
+programming your thoughts into codes. To problem solve, you also need a
+source of inspiration. And what better field can there be than the
+capital markets. It is basically an ever-changing chess game in which
+you are playing against the entire world. Talk about setting a bar high.
+As you may have read, I've run into a few <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">obstacles with my trading</a>
+lately. I need to develop a new trading program to let me regain my
+edge. So I got up early this Saturday to program <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/">my new trading software</a>. Next thing I know, it was 4pm already. It was a blissful
+day. And that, is my reason for wanting to trade for a living.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/' title='2010-03-15T07:10:00'>15 March 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
+            </h1>
+            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/forex-trading-income-or-capital-gain-tax-in-canada/" rel='bookmark'>Forex Trading:  Income or Capital Gain Tax in Canada?</a>
+            </h1>
+            <div class="article-content"> <p>I've always known that foreign exchange trading is treated as capital
+gain tax in Canada. But just to be sure before filing my taxes soon,
+I've decided to double check the facts from Canada Revenue Agency. As
+you know, the difference between income tax and capital gain tax is
+substantial. Income tax is taxed at your marginal tax rate. Whereas
+capital gain tax is a generous half of your marginal tax rate. That
+works out to a 10% to 20% difference. Taxes in Canada is generally
+simple to do. The problem though, is sifting through the cacophony of
+information within the Canada Revenue Agency to find out the applicable
+rules. I've copy and pasted a couple of relevant excerpts from the 2010
+CRA <a href="http://www.cra-arc.gc.ca/menu/ITSC-e.html">Income Tax Interpretation Bulletin</a> for the record. Basically,
+forex trading can be treated as either income or capital gain tax in
+Canada (surprise). According to <a href="http://www.cra-arc.gc.ca/E/pub/tp/it95r/it95r-e.html">IT-95R Foreign exchange gains and
+losses</a>.</p>
+<blockquote>
 <ol>
-<li>Negative divergence on RSI, see Fig. 1.</li>
-<li>Nice round number resistance at 0.9000</li>
-<li>At top of the Fibonacci fan line</li>
-<li>EUR/JPY still holding 130.00</li>
-<li>USD/CHF also holding 1.0300</li>
-<li>No big move in other USD pairs</li>
+<li>Where it can be determined that a gain or loss on foreign exchange
+arose as a direct consequence of the purchase or sale of goods abroad,
+or the rendering of services abroad, and such goods or services are
+used in the <strong>business operations</strong> of the taxpayer, such gain or loss
+is brought into income account. If, on the other hand, it can be
+determined that a gain or loss on foreign exchange arose as a direct
+consequence of the<strong>purchase or sale of capital assets</strong>, this gain or
+loss is either a capital gain or capital loss, as the case may be.
+Generally, the nature of a foreign exchange gain or loss is <strong>not
+affected by the length of time</strong> between the date the property is
+acquired (or disposed of) and the date upon which payment (or receipt)
+is effected.</li>
 </ol>
-<p>A big cautionary note in this is the fact that AUD/USD is making a new
-high. However, based on the above 6 reasons (usually I only have 4), I'm
-going to give this a try. Entry: 0.90040 Stop: 0.9100 Target: 0.8700,
-back to the recent up-trending top line, Fig 1. Reward/Risk = 304 / 96 =
-3.2 > 3</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="AUD/USD"][<img alt="AUD/USD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-07-audusd.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-07-audusd.png">AUD/USD</a>[/caption] [caption id=""
-align="aligncenter" width="580"
-caption="AUD/USD"][<img alt="AUD/USD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-07-audusd_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-07-audusd_3h.png">1</a>[/caption]</p>
+</blockquote>
+<p>As you can see, it is very vague. That's why forex trading can be
+considered income or capital gain tax. It is up to you and your
+accountant to figure out which works for you. A noteworthy point in the
+above excerpt is that the holding period is not taken into account.
+<span style="text-decoration: line-through;">So there's no 30-day rule
+like in the states whereby frequent trading would miss out the capital
+loss credit if they re-purchase the same asset within 30-day of
+disposal.</span> Update: Looks like I have misconstrued the above
+article with regard to capital loss. As Olga pointed out in the
+comments, Chapter 5 of T4037 defines <em>Superficial Loss</em>. In which if you
+<em>repurchase</em> your property (e.g. stock) within 30-days after a sale at a
+loss, then that initial loss cannot be deducted as a capital loss. More
+about the <a href="http://www.wheredoesallmymoneygo.com/superficial-loss-rules-in-canada/">Superficial Loss rules in Canada</a> can be found at
+WhereDoesAllMyMoneyGo.com. Further down the page in IT-95R, we have the
+following bullet.</p>
+<blockquote>
+<ol>
+<li>A taxpayer who has transactions in foreign currency or foreign
+currency futures that do not form part of business operations, or are
+merely the result of sundry dispositions of foreign currency by an
+individual, will be accorded by the Department the <strong>same treatment as
+that of a "speculator" in commodity futures</strong> see 7 and 8 or IT-346R.
+However, if such a taxpayer has special "Inside" information
+concerning foreign exchange, he will be required to report his gains
+and losses on income account.</li>
+</ol>
+</blockquote>
+<p><a href="http://www.cra-arc.gc.ca/E/pub/tp/it346r/it346r-e.html">IT-346R Commodity Futures and Certain Commodities</a> explains the tax
+treatment of speculation in the commodity markets.</p>
+<blockquote>
+<ol>
+<li>As a general rule, it is acceptable for speculators to report all
+their gains and losses from transactions in commodity futures or in
+commodities as<strong>capital gains and losses</strong> with the result that only
+one-half the gain is taxable, and one-half the loss is allowable
+subject to certain restrictions, (hereinafter called "capital
+treatment") provided such reporting is followed consistently from year
+to year.</li>
+</ol>
+</blockquote>
+<p>So there, we have it. Amateur forex traders, such as myself, can report
+our forex trading gain/loss as capital gains and losses. The reason
+being that <a href="http://www.quantisan.com/category/forex">forex trading</a> isn't part of my business operation because
+I have another primary source of income (e.g. salary from another job).</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/forex-trading-income-or-capital-gain-tax-in-canada/' title='2010-03-08T10:29:00'>08 March 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/" rel='bookmark'>Another reason against stocking into a registered trading account this year</a>
+            </h1>
+            <div class="article-content"> <p>There's another reason why I am so <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">reluctant to put money into a TFSA
+trading account</a> to invest in Canadian stocks. As you know, in a
+registered trading account, such as a RRSP self-directed trading account
+or a <a href="http://www.quantisan.com/questrade/">Questrade TFSA trading account</a> (aff), you cannot short shares
+and can only buy because you can't trade on margin. As such, a
+registered trading account is an account for buy-only trading. It
+doesn't take a genius to figure out that a buy-only trading strategy is
+best used ... in a bull market. As trading wisdom goes, trade with the
+trend. So the question is, are we in a bull market in 2010? Figures 1
+and 2 shows the weekly chart of TSX Index and the TSX Venture Index,
+respectively. Referring to Fig. 1, TSX is bumping up against some
+headwind at a 12,000 resistance. Unless TSX can stay above 12,000
+cleanly (a weekly low above that level at least), I am still bearish in
+the market because that financial crisis back in 2008 (<a href="http://www.quantisan.com/another-breakdown-of-a-major-multi-year-support-are-we-going-down-and-i-mean-really-down/">remember those
+days</a>?) is still overshadowing long term prices and trader sentiments.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="TSX,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-TSX_wk.png" />][][/caption] TSX Venture is depressed even more as seen
+in Figure 2 below. Just look at the huge gap from current price to the
+200 week moving average (red line). This isn't a good sign as lack of
+interest in high-risk stocks means traders are generally cautious. Yes,
+it's true that the equity market has been running up, up, and up for a
+good year. However, the fact that TSX is sitting at the same level as in
+2001 proves that the long term, multi-year bull market has been cleanly
+broken. We might very well see pockets of multi-month rallies
+materialize (like we're seeing now), but unless proven otherwise, the
+long term trend is not looking green for the markets. It will not be
+easy money in the stock market like back in the pre-tech bubble 1990's.
+As opined by Bill Cara, the <a href="http://www.caracommunity.com/">time for buy-and-hold is gone</a>. It is
+well known in the community that the coming years will be volatile with
+big ups and downs. That is my little secret for moving to <a href="http://www.quantisan.com/category/forex/">trade
+forex</a>last year and the main reason why I am reluctant to set aside
+money on a one-sided stock trading account. [caption id=""
+align="aligncenter" width="570" caption="TSX Venture,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png">1</a>[/caption]</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-audusd-short-50-090040-stop-09100/' title='2009-10-07T21:08:00'>07 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-eurjpy-long-100-12999-stop-12880/" rel='bookmark'>Paper trade: EUR/JPY long 100% @ 129.99, stop 128.80</a>
-            </h1>
-            <div class="article-content"> <p>I placed this EUR/JPY long order a couple of days ago. It just got
-triggered overnight in the Pacific market hours. See Figure 1 for my
-entry chart. Note the following reasons for long EUR/JPY:</p>
-<ol>
-<li>Support trendline coincide with round number 130.00</li>
-<li>RSI in oversold territory and moved up</li>
-<li>EUR/JPY in a trading range with the MA's oscillating since April</li>
-</ol>
-<p>EUR/JPY was testing 131.00 when I placed this order and I didn't think
-it would get triggered. I placed a full 100% position in this but 1/2 of
-my position has a trailing stop of 50 pips and it got run down within a
-few hours of entry. That 1/2 was out at 129.666 for a loss of 3.33 pips.
-I'm only left with a 1/2 position in this at the moment. In hindsight,
-that trailing stop was too close as the 3-hour ATR is 25-30 pips. Entry:
-129.99, round number support Stop: 128.80, see Figure 2, just below
-recent low and support line Target: 134.00, see Figures 1 and 2. At the
-bottom range of a congestion zone. Reward / Risk = 401 / 119 = 3.4 > 3.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="EUR/JPY"][<img alt="EUR/JPY" src="http://traderpau.files.wordpress.com/2009/10/2009-10-07-eurjpy.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-07-eurjpy.png">EUR/JPY</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="EUR/JPY, 3-hour"][<img alt="EUR/JPY,
-3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-07-eurjpy_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-07-eurjpy_3h.png">EUR/JPY, 3-hour</a>[/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-eurjpy-long-100-12999-stop-12880/' title='2009-10-07T09:18:00'>07 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-short-nzdusd-100-073701-stop-07480/" rel='bookmark'>Paper trade: Short NZD/USD 100% @ 0.73701, stop 0.7480</a>
-            </h1>
-            <div class="article-content"> <p>In addition to <a href="http://www.quantisan.com/paper-trade-usdchf-50-long-1-02747-trailing-stop-1-0236/">my USD/CHF long</a>, I also placed this NZD/USD short
-order last night. Having failed to short this earlier on a <a href="http://www.quantisan.com/paper-trade-nzdusd-short-stop-entry-0-7262-exit-trailing-stop-0-7300/">resistance
-test of 0.7300</a> using the 4 hour time frame, I'm testing out my daily
-method now for shorting at resistance at 0.7380. 0.7380 is an important
-resistance for NZD/USD because it marks the breaking point back in July
-2008 when NZD/USD started a 6-month long downtrend. Although 0.7500 is
-definitely a much stronger and more obvious resistance level, it is a
-bit too obvious to wait to shorting it then. I would not short at 0.75
-just because it's too obvious to be run down. Furthermore, NZD/USD has
-been chugging upward relentlessly. It is deep in overbought territory as
-shown by the RSI of Figure 1. Thus, I'm feeling confident enough in this
-trade to enter with a full 100% position. Entry: 0.73701 Stop:
-<span style="text-decoration: line-through;">0.7500</span>, 0.7480
-Target: 0.7000 Reward / Risk = 370.1 / 129.9 = 2.8 \&lt; 3. So I'm moving
-my stop closer, right at the resistance from the starting point of the
-long term drop which started in July 2008. Reward / Risk = 370.1 / 109.9
-= 3.4 NZD/USD took a quick dive of about 70 pips within hours of my
-entry. So I moved 1/2 of my stop to break-even (net +\$1.81). That tight
-stop was taken this evening at the open of the Pacific market, see
-Figure 2. I'm left with only a 1/2 position now. Once again, I'm a bit
-too hasten to move up my stop. Time will tell if that was a good
-decision.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="NZD/USD"][<img alt="NZD/USD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-06-nzdusd.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-06-nzdusd.png">NZD/USD</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="NZD/USD, 3-hour"][<img alt="NZD/USD,
-3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-06-nzdusd_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-06-nzdusd_3h.png">NZD/USD, 3-hour</a>[/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-short-nzdusd-100-073701-stop-07480/' title='2009-10-06T20:47:00'>06 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-usdchf-50-long-102747-trailing-stop-10236/" rel='bookmark'>Paper trade: USD/CHF 50% long @ 1.02747, trailing stop 1.0236</a>
-            </h1>
-            <div class="article-content"> <p>I've switched back to using the daily chart as <a href="http://www.quantisan.com/not-to-lose-focus-by-defining-what-i-want-from-trading/">noted earlier today</a>
-to save myself some hassle. This is the first entry using the daily
-chart since the switch. But I actually placed this order before going to
-bed and then it was executed last night while I was sleeping. USD is
-taking a beating these days and USD/CHF is testing a double bottom. I
-entered this trade based on Figure 1 for the following 4 reasons:</p>
-<ol>
-<li>RSI is shaping up a positive divergence if we can hold this support.</li>
-<li>RSI is as oversold as December 2008.</li>
-<li>Entry price of 1.027 is at a previous congestion zone based on
-    Figure 2.</li>
-<li>USD/CHF took a very fast dive in the past 3 days, which usually
-    prelude a retracement up.</li>
-</ol>
-<p>However, the trend remains obviously downward. That's why I'm entering
-with only a 50% as there's no confirmation just yet. Once there's
-confirmation, such as the RSI making a U bottom, I plan to add the other
-50% position. Entry: 1.02747, previous congestion zone, see Fig. 2 Stop:
-1.0236 Target: 1.045 Reward / Risk = 175.3 / 38.7 = 4.5 > 3</p>
-<p>[caption id="" align="aligncenter" width="580" caption="USD/CHF
-daily"][<img alt="USD/CHF daily" src="http://traderpau.files.wordpress.com/2009/10/2009-10-06-usdchf.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-06-usdchf.png">USD/CHF daily</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="USD/CHF 3-hour"][<img alt="USD/CHF
-3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-06-usdchf_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-06-usdchf_3h.png">USD/CHF 3-hour</a>[/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-usdchf-50-long-102747-trailing-stop-10236/' title='2009-10-06T17:52:00'>06 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/not-to-lose-focus-by-defining-what-i-want-from-trading/" rel='bookmark'>Not to lose focus by defining what I want from trading</a>
-            </h1>
-            <div class="article-content"> <p>
-I seem to have taken up too many tasks in recent weeks. I've spent a
-couple hours a day analysing, observing, and trading the [forex
-market][]. Another hour or so learning RapidMiner 5. And then yet
-another couple of hours catching up with the news and various blogs. All
-these on top of a full time job! It has come to my attention that I
-can't keep this up as I'll be too burned-out and never actually able to
-get things done. Such is the bane of choices. Coincidentally, I read
-this blog post today (via [TraderFeed][]) about the [paradox of
-choices][]. It is basically saying that having choices, per se, can have
-a diminishing rate of return (something which I've read elsewhere before
-but forgotten). More choices isn't always good and fewer can be better.
-And studies have found that the diminishing rate is apparently pretty
-low. Here's a good quote from the article:
-
-> "we need to redirect the energies we waste flitting from possibility
-> to possibility, into understanding what we really want in life and the
-> trade-offs we are willing to make."
-
-Particularly at this early stage of my amateur quant career, there are
-many trading tools (analyzer, forecaster, scanner) that I want to
-develop and software ([MatLab][], RapidMiner) that I want to learn. So
-what do I really want in trading by spending hours upon hours, day after
-day, studying, analysing, observing, and thinking? The answer for me is
-fortunately easy to find (the benefit of keeping a good written record,
-i.e. this blog). Referring to my own [trading objectives][] that I wrote
-last year, there is just 5 points.
-
-1.  Application of independent and objective thinking
-2.  [Understanding of capital markets][]
-3.  Prudent [risk management][]
-4.  Identification of [values][]
-5.  Study of [quantitative finance][]
-
-In practical terms, **my ultimate goal in trading is to develop a
-trading system which requires no more than 1 hour a day of management
-time**. That doesn't include research and development time, of course. I
-am not trying to develop a holy grail system. I am using the term system
-as in a set of processes for me to follow, not an algorithmic system.
-Although that would be a tool for my system for sure. Now that I've
-figure that out. My first mandate is to reduce my [paper trading][] in
-forex. But rather than eliminate it completely, I'm going to increase
-the timeframe from 4 hour to daily. Because trading the forex helps me
-understand the capital markets (\#2 of objective). Too much of it though
-would have been just for thrill and detract from my time for working in
-quantitative finance (\#5). If I'm to treat this as a part-time job, I
-need to have more discipline in this whole endeavour, not just in the
-trading itself.
-
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/not-to-lose-focus-by-defining-what-i-want-from-trading/' title='2009-10-06T13:23:00'>06 October 2009</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-usdchf-short-10296-out-103013/" rel='bookmark'>Paper trade: USD/CHF short @ 1.0296, out @ 1.03013</a>
-            </h1>
-            <div class="article-content"> <p>My long USD/CHF got stopped out just minutes ago.  The support at 1.0300
-has broken.  The intermediate and short term trends are both down.  So I
-have entered a short trade for USD/CHF with 1/2 position to see how it
-goes.</p>
-<p>I initially had set the stop at 1.0340 for this trade.  But the support
-at 1.0270 looks hard to break on first try.  So I readjusted my target
-and stop to aim for an exit at 1.0270.  In fact, IÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ve
-placed an order to reverse and go long at 1.027 with a full position.</p>
-<p>Entry: 1.0296, just below round number.</p>
-<p>Stop: 1.0340, trailing, set at the previous congestion zone.</p>
-<p>Target: 1.0270, previous support level.</p>
-<p>Reward / Risk = 26 / 19 = 1.4 \&lt; 3ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ this is horrible.  So
-I just closed my trade at a slight loss at 1.03013 for -\$1.56.</p>
-<p>[caption id="" align="aligncenter" width="580" caption="USD/CHF
-1-minute"][<img alt="USD/CHF 1-minute" src="http://traderpau.files.wordpress.com/2009/10/2009-10-05-usdchf_1min.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-05-usdchf_1min.png">USD/CHF 1-minute</a>[/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-usdchf-short-10296-out-103013/' title='2009-10-05T22:26:00'>05 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/' title='2010-03-05T07:32:00'>05 March 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

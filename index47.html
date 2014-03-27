@@ -58,204 +58,186 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-usdchf-all-stopped-out-103099-and-10300/" rel='bookmark'>Paper trade: USD/CHF all stopped out @ 1.03099 and 1.0300</a>
+                <a href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel='bookmark'>First look at Google App Engine for automated trading and quant analysis on the cloud</a>
             </h1>
-            <div class="article-content"> <p>My last half of USD/CHF long just got stopped out @ 1.0300. As shown in
-Figure 1, USD/CHF is now in bearish territory. I'm going to wait and see
-if the support at 1.0300 can hold tonight. Here are the statistics for
-my two trades (each 1/2 position counts as a trade): Entry: <a href="http://www.quantisan.com/paper-trade-usdchf-entry-1-0320-stop-1-0300/">1.032</a>,
-full position at 6000 units Stopped out: 1.03099 and 1.0300 Net Pips:
--10.10, -20 Net \$: -\$3.03, -\$6.01 Time Held: 32 minutes, 83 hours %
-Drawdown: -0.10%, -0.19% % from Top: 0.30%, 0.61% In hindsight, I should
-have paid more attention to the short term trend. The break of the
-recent trendline should have been a warning sign against going long. As
-I'm still trying to work out the details to this strategy, these paper
-trades have been tremendously helpful.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="USD/CHF"][<img alt="USD/CHF" src="http://traderpau.files.wordpress.com/2009/10/2009-10-05-usdchf.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-05-usdchf.png">USD/CHF</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="USD/CHF 30-min"][<img alt="USD/CHF
-30-min" src="http://traderpau.files.wordpress.com/2009/10/2009-10-05-usdchf_30min.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-05-usdchf_30min.png">USD/CHF 30-min</a>[/caption]</p>
+            <div class="article-content"> <p>I just spent the last few hours looking into Google App Engine to use it
+for trading. Google App Engine (GAE) is a cloud computing development
+and hosting platform for web applications. GAE is similar to the
+well-known Amazon EC2 service but it is also very different. The main
+difference between GAE and EC2 is that GAE is not as flexible as EC2 but
+it is a lot easier to develop on. Think of it like using C++ (EC2) to
+write your own trading platform to using EasyLanguage on TradeStation or
+MQL on Metatrader (GAE). Another advantage for using Google App Engine
+is that it is free! Well, to a certain extent. It is free for a limited
+monthly usage. However, Google's free quota is known to be very generous
+(think Gmail) and this is no exception. Based on the numbers, it looks
+comparable to a typical \$20/month virtual private server (VPS) hosting
+package. My guess is that you can run a decent personal quant program on
+it if you keep the resources for yourself (private use). For more
+information on the free quota, you can read the <a href="http://code.google.com/appengine/docs/quotas.html">current GAE quota</a>
+web page or the <a href="http://en.wikipedia.org/wiki/Google_App_Engine">Wikipedia page for GAE</a>. You might be wondering how
+did I spend a few hours just reading on GAE? The answer is that I've
+done a brief research, planning, and assessment to see how GAE can be
+put to use in terms of quantitative analysis for automated and
+discretionary trading. Without going through all of my notes and logic,
+here's the gist of my conclusion.</p>
+<h2>For Automated Trading</h2>
+<p>Since GAE is also a SDK, it has a restricted programming API. You can't
+just plug in any custom library of your own (i.e. your broker's API)
+into your program. That is its advantage and its disadvantage.
+Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
+for your connection either. These limitations won't be changing anytime
+soon as GAE is designed to be like that for security reasons. Basically,
+there's no way for your web application on GAE to connect with your
+broker for trading. So much for that idea.</p>
+<h2>For Discretionary Trading</h2>
+<p>Things look brighter for discretionary trading though. A big bonus with
+using Google App Engine is that it supports the Google Finance API.
+Google Finance offers free real-time stock quotes. Combine it with the
+programming capability of the Google App Engine and you have yourself a
+free number cruncher in the cloud. However, GAE is definitely no match
+for your personal computer, so why would you go through all that
+trouble? One possible scenario in which this could be useful is for
+traders that is often on the road or traders such as myself in which we
+have a day job. In that case, you can set you quant analytics on GAE as
+a private web application and then you can access it as a web page
+anywhere on your mobile phone. One of the obvious limitation with using
+GAE is that it has limited features for scientific computing. For
+example, it doesn't support Numpy in the Python SDK. As such, I can't
+imagine using GAE for anything more than simple technical analysis for
+now. I certainly hope that GAE can include more powerful scientific
+computing capabilities in the near future. Until then, I really can't
+see Google App Engine offering much help aside from performing
+algorithmic tasks to help with your trading analysis. Their open issues
+log does announce that <a href="http://code.google.com/p/googleappengine/issues/detail?id=190">Numpy is being integrated into GAE</a> though. So
+that's a great sign for things to come! I am very hopeful of GAE's
+potential as a free cloud server to host my quant analytics on. We'll
+just have to wait for now.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-usdchf-all-stopped-out-103099-and-10300/' title='2009-10-05T21:54:00'>05 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/' title='2010-03-03T21:19:00'>03 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-nzdusd-short-stop-entry-07262-exit-trailing-stop-07300/" rel='bookmark'>Paper trade: NZD/USD short stop entry 0.7262, exit trailing stop 0.7300</a>
+                <a href="http://www.quantisan.com/february-2010-trading-performance-review/" rel='bookmark'>February 2010 Trading Performance Review</a>
             </h1>
-            <div class="article-content"> <p>My NZD/USD short at 0.72509 just before noon today got stopped out an
-hour later at 0.72661. At least it was only a 1/2 position. I wanted to
-short again when NZD/USD broke 0.7280 because of the resistance as shown
-in Figure 1. However, remembering #1 in my newly updated <a href="http://www.quantisan.com/3-rules">3 trading
-rules</a>, I re-considered and held back. NZD/USD is testing 0.7300 at
-this moment, so this rule is proving itself useful already. What's
-interesting now is that as NZD/USD is testing 0.7300, both USD/CAD and
-USD/CHF are well off the support levels of 1.0700 and 1.0300,
-respectively. There's no particular reason for using these two pairs,
-they are just two pairs that I've been following. Which seems to me that
-the weakness is USD isn't as bad as it would seem. If it is, then US
-dollar would be under pressure in all fronts. And it's not now. At least
-not yet. Thus, not giving up on this nice setup as shown in Figure 1,
-I've placed a short stop entry for 50% position just below the next
-intraday support at 0.7262. Just to catch it on its way down from this
-very obvious resistance level. In any case, here're my 5 reasons for
-shorting based on Figure 1.</p>
-<ol>
-<li>Trend is neutral</li>
-<li>We're at the top of a trading range</li>
-<li>Near resistance at long term Fib level and round number at 0.7300</li>
-<li>Potential double top, although this is very uncertain</li>
-<li>Little breathing room in recent climb up</li>
-</ol>
-<p>In summary, here is my order: Size: Half position, 3000 units Side:
-Short Stop entry: 0.7262 Stop exit: 0.7300, set to trail Target: 0.7132,
-top of that uptrending line in Figure 1 Reward / Risk = 130 / 38 = 3.42
-> 3 I'm pondering should I enter 50% position when NZD/USD is hanging
-around 07290. But I think I'll hold it off since my USD/CHF is still
-open. Update: My short entry was triggered for 0.72509 (horrible
-spread). I was stopped out at 0.72661 an hour later for a net loss of
-\$4.57. This was not a good trade because NZD/USD was so close to a
-round number resistance that it was probable to test it.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="NZD/USD"][<img alt="NZD/USD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-05-nzdusd.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-05-nzdusd.png">NZD/USD</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="NZD/USD, 30-min"][<img alt="NZD/USD,
-30-min" src="http://traderpau.files.wordpress.com/2009/10/2009-10-05-nzdusd_30min.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-05-nzdusd_30min.png">NZD/USD, 30-min</a>[/caption]</p>
+            <div class="article-content"> <p>I barely traded this month. The total number of trades in February for
+my forex demo account is ten. That's far from my regular 150 - 250
+trades a month. Ever since my trading system was broken because of
+technical difficulties, I've <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">changed my priorities</a> in trading. I
+spent most of my time in February learning a new programming language to
+ramp up my quant and automated trading projects. I also tried a few
+longer term trades this month. The results haven't been uplifting. I am
+about breakeven by the end of the month with a net gain of .... \$2 in a
+\$5550 demo account. As you can see, there's really not much point in me
+continuing paper trading at this stage. It is taking valuable time away
+from me to fix what's broken so that I can use my previously profitable
+trading system again. As such, I'm going to put near 100% of my effort
+to program a semi-automated trading system for the coming weeks, or
+probably months. On another note. Seeing that it is tax season here in
+Canada. I thought about my tax situation and considered <a href="http://www.quantisan.com/questrade/">opening a
+Questrade TFSA trading account</a> (affiliate link) to legitimately
+<a href="http://www.quantisan.com/not-pay-trading-income-taxes-through-a-tfsa-trading-account/">avoid income taxes from trading</a>. But after considering the <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">cost and
+benefit</a> of such a move, I concluded that <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-4/">a TFSA trading account
+isn't cost effective for me</a> at the moment. As I've spent most of the
+month doing backend work, there isn't very much to review for my trading
+this month. So let's just dive right into my statistics for the record.</p>
+<h2>Performance Statistics</h2>
+<p><strong>Monthly Metric February (January)</strong> Sarting Fund \$5,550.02 End of
+Month Fund \$5,551.99 Total Net Profit \$1.97 (-\$67.42) Gross Profit
+\$37 (\$375) Gross Loss -\$35 (-\$442) Profit Factor 1.06 (0.85) Net
+Profit % 0.04% (-1.20%) Max. Drawdown % 0.50% (3.95%) Sterling Ratio
+0.00 (-0.15) Excess Return -0.02% (-1.26%) SDev Return per Trade 0.15%
+(0.11%) Kurtosis -1.36 (1.85) Skewness 0.79 (1.01) With only ten trades
+this month, I don't have enough samples to make meaningful calculations
+for the above statistics. 95th Percentile P&amp;L \$12.55 (\$12.23) 5th
+Percentile P&amp;L -\$6.60 (-\$8.43) Net Profit Mid 90% Only -\$4.75
+(-\$117.84) Interestingly, I noticed that my typical top and bottom 5th
+percentile profit/loss are quite consistent. Total # of Trades 10 (186)
+Percent Profitable 40.00% (41.45%) # of Winning Trades 4 (63) # of
+Losing Trades 6 (89) # of Break-even Trades 0 (34) My percent
+profitable trades seem to be near 40% month to month. That's good to
+know as it's useful to calculate my statistical return expectancy as
+I've done in my <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-3/">TFSA trading cost-benefit analysis</a>. Average Trade
+Profit % 0.00% (-0.01%) Average Winning % 0.17% (0.11%) Average Losing %
+-0.11% (-0.09%) Ratio Win% / Loss% 1.59 (1.20) By being more
+discriminating in my trades, I've effectively increased my win/loss
+ratio. That's good. Max. Conseq. Winners 3 (8) Max. Conseq. Losers 5
+(20) Largest Winning Trade \$13.81 (\$22.66) Largest Losing Trade
+-\$7.08 (-\$14.30) Avg. Time Held [hrs] 1.67 (0.73) Avg. max. unrealized
+profit/ Realized profit (11.59)</p>
+<h2>Goal for March</h2>
+<p>My goal from January is <a href="http://www.quantisan.com/january-2010-trading-performance-review/">to learn MQL4</a>. I changed my plan since then
+due <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">my lack of faith with using a proprietary scripting language</a>. I
+learned Python programming this month and is now learning to use
+specialized libraries to serve my trading needs. My goal for March is to
+write a rudimentary data analysis and visualization program for
+historical forex data.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-nzdusd-short-stop-entry-07262-exit-trailing-stop-07300/' title='2009-10-05T14:37:00'>05 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/february-2010-trading-performance-review/' title='2010-03-02T08:14:00'>02 March 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-usdchf-entry-10320-stop-10300/" rel='bookmark'>Paper trade:  USD/CHF entry 1.0320, stop 1.0300</a>
+                <a href="http://www.quantisan.com/40-monitors-6-computers-1-day-trader/" rel='bookmark'>40 monitors, 6 computers, 1 day trader</a>
             </h1>
-            <div class="article-content"> <p>I figured I should write this sooner before the market moves more and
-skew my thoughts on this entry. After my <a href="http://www.quantisan.com/paper-trade-usdchf-out-at-1-03998-50-pips-and-1-03798-30-pips/">earlier entry in USD/CHF were
-stopped</a> out this morning, I tried to enter once, got stopped out; and
-then an even better setup appeared, so I entered again. See Figure 1.
-This is a really awesome setup for the following 5 reasons.</p>
-<ol>
-<li>Trend is on our side as it's still pointing up.</li>
-<li>Identical setup to last week's dive before the climb, same RSI, same
-    candlestick</li>
-<li>Bounced right at 1.031, which is at a longer term Fibonacci fan line
-    as shown in Fig. 1.</li>
-<li>Another support at round number 1.030, which is very near.</li>
-<li>Good reward/risk ratio, see below for calculation.</li>
-</ol>
-<p>I entered 6000 units (2/3 position as usual) and placed the stop at
-1.0300, just 20 pips away. USD/CHF climbed up to 1.0345 almost
-immediately after my entry. So I moved my first stop to 1.0310
-(Fibonacci level) for half my position. That got taken out minutes later
-and it marked the bottom (for now) at 1.0309. I was a bit too hasten to
-move my stop up for this part. See Figure 2 for my orders. One big
-caveat to this entry is my tight stop at 1.0300. It is simply too
-obvious of a stop price. I'd imagine the market would try to gun the
-stops there before a run-up. However, if 1.030 breaks, it would ruin the
-setup as described above. And if they're able to break that level, who
-knows how far this can go further down. So I'm keeping my stop as is.
-Anyway, I still have half of my initial position left. USD/CHF is
-trading around 1.034. I don't think I'll do anything to this position
-for now. I'm comfortable with just half position sitting in for the
-weekend. Entry: 1.0320, Fib fan line support, see Fig 1. Stop 1: 1.031,
-triggered already for a loss of 10 pips. Stop 2: 1.030, round number
-support. Target: 1.038 - 1.040, starting point of this quick dive.
-Reward/Risk = 60 / 20 = 3, right on the line of my goal. Although I am
-secretly eyeing the 1.045 level as a target, I'll be cautious starting
-from 1.038. Probably by setting a trailing stop if we do touch that. As
-always, let's wait and see how this goes.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="USD/CHF"][<img alt="USD/CHF" src="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf_2.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf_2.png">USD/CHF</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="USD/CHF, 30-min and capture an
-hour later than Fig. 1"][<img alt="USD/CHF, 30-min and capture an hour later
-than Fig. 1" src="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf_30min2.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf_30min2.png">USD/CHF, 30-min and capture an hour later than Fig.
-1</a>[/caption]</p>
-</p> </div>
+            <div class="article-content"> <p>I'm still recuperating from my food poisoning from last week. Meanwhile, I came across this unbelievable <a href="http://lifehacker.com/5481921/the-day-traders-paradise">trading workspace showcase</a> from LifeHacker.</p>
+<p><img alt="40 monitors trading workspace" src="/images/img_archive/40montradingdesk.jpg" /></p>
+<p>I have no idea how this trader can juggle 40 monitors during his day
+trading. I am satisfied with just one 24" monitor on my desk. However,
+I'm neither a day trader or a professional trader, so perhaps I'm
+missing something?</p>
+<p>What do you think of this 40 monitors setup? A dream come true or a
+charts nightmare?</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-usdchf-entry-10320-stop-10300/' title='2009-10-02T11:41:00'>02 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/40-monitors-6-computers-1-day-trader/' title='2010-03-01T10:06:00'>01 March 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-usdchf-out-at-103998-50-pips-and-103798-30-pips/" rel='bookmark'>Paper trade: USD/CHF out at 1.03998 (+50 pips) and 1.03798 (+30 pips)</a>
+                <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-4/" rel='bookmark'>Is a $5000 Questrade TFSA trading account cost effective? Part 4</a>
             </h1>
-            <div class="article-content"> <p>I'm all stopped out of my <a href="http://www.quantisan.com/paper-trade-long-usdchf-1-03498-stop-1-03240/">USD/CHF positions from a couple of days
-ago</a>. I considered re-entering when we failed to break 1.037 a few
-minutes later. But the 1.04-1.043 range seemed heavy, so I postponed
-that idea. About this trade, the maximum drawdown was terrific at a mere
-0.12% (see stats below). I seem to do well with my entry. However, I'm
-leaving profits on the table once again. For my second exit, USD/CHF
-touched a high of 1.0451 but I was only able to get out at 1.03798.
-Granted, this portion is supposed to be loose to capture bigger moves,
-but that didn't happen. So once again, <strong>I need to work on my exit</strong>.
-Another thing here is that my <a href="http://www.quantisan.com/paper-trade-long-usdchf-1-03498-stop-1-03240/">USD/CHF target of 1.045</a> was spot on. I wanted to exit half
-my position at that level. But I couldn't figure out how to do both
-target stop and stop loss at the same time after my entry order is sent.
-This problem has been resolved by asking customer support at Oanda. I'm
-not entering any more new trade (aside from the <a href="http://www.quantisan.com/paper-trade-nzdusd-entry-stop-0-7040/">NZD/USD stink bid</a>
-which I placed this morning) because it's Friday and I don't see anymore
-obvious good setup across the board (a small board) for my 4h timeframe.
-<strong>Update:</strong> Nevermind, I was eyeing 1.0350 when I got stopped out as a
-entry point. USD/CHF just touched it as I'm writing this post. So I'm
-back in now with a tight trailing stop... (and it doesn't seem to be
-holding after just a few minutes... and it's stopped out for an
-additional loss of \$4.86 on this tap.) Entry: <a href="http://www.quantisan.com/paper-trade-long-usdchf-1-03498-stop-1-03240/">1.03498, 6000
-units</a> Stopped out 1:
-1.03998, 3000 units Stopped out 2: 1.03798, 3000 units Net: \$14.97 +
-\$8.97 Time held: 14:51:00 and 37:10:00 Max. Drawdown %: -0.12% for both
-Net from Max. Gain: 102.40% and <strong>237.33%</strong></p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="USD/CHF"][<img alt="USD/CHF" src="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf.png">USD/CHF</a>[/caption]</p>
-<p>[caption id="" align="aligncenter" width="580" caption="USD/CHF,
-30-min"][<img alt="USD/CHF, 30-min" src="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf_30min1.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-02-usdchf_30min1.png">USD/CHF, 30-min</a>[/caption]</p>
-</p> </div>
+            <div class="article-content"> <p>Alright, so I'm <a href="http://www.quantisan.com/my-first-food-poisoning-experience/">back from the dead</a>. Let's finish this cost-benefit
+analysis before the weekend. Here are back links for <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">Part 1</a>, <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-2/">Part
+2</a>, <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-3/">Part 3</a> in case you missed them. The table below shows my
+expected return as derived through part 2 and part 3 of this series. As
+you can see, I'm only expected to break-even by risking 1% of my \$5000
+TFSA trading account. Trading just for the sake of break-even isn't
+exactly an enviable goal. Based on my statistics, I typically say an
+expected return of 0.10% per trade is acceptable. Looking at the table,
+that would require that I risk 1.5% per trade. [caption id=""
+align="aligncenter" width="570" caption="TFSA Trading Cost-Benefit for
+Reward/Risk = 2.0 and 40% win rate"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/TFSA_trading_cost-benefit_analysis.png" />][][/caption] So I'll have to
+risk 1.5% just to scrape in 0.10% of profit? The problem is obvious.
+Using a \$5000 trading account with \$5 commission, along with my
+historical trading performance simply do not justify the odds. I started
+this series to study the cost effectiveness of a Questrade TFSA trading
+account. But the conclusion which I derived is much broader. Considering
+that even without being taxed, a \$5000 TFSA trading account is
+insufficient for trading with a commission of \$5 or higher. Thus, if
+this is a taxed, non-registered trading account, the cost would be even
+more. As such, not only is \$5000 an insufficient capital for a
+Questrade TFSA trading account; \$5000 is simply too little money to
+trade any trading account with \$5 of commission per trade for me.
+Remember though, this cost-benefit analysis is based on my own
+statistics. You can input your own parameters into <a href="http://spreadsheets.google.com/ccc?key=0AnZW_RfDqK11dG5jVzUwbDIxWEQ5aFV3cjVRdU5BbFE&amp;hl=en">this spreadsheet</a>
+to get <strong>your own set of results</strong>. To be fair, I must clarify that the
+problem isn't with Questrade. Even with their <a href="http://www.quantisan.com/questrade/">lowest trading commission
+in Canada</a> (affiliate link), a \$5 trading commission for an account
+of \$5000 is simply too much for me. Yes, there's nothing to stop you
+from trading with a \$5 commission for a \$5000 account. Heck, many have
+claimed to be successful with less than \$5000. However, that's just not
+my style. I don't gamble with my hard earned money. I only trade when
+the odds are in my favour. If the cost is un-proportionately high, it's
+as if I've suffered a setback even before I begin fighting the battle.
+As such, I'm going to say "no thanks!" to a Questrade TFSA trading
+account for now. My short term plan is to look for a guaranteed TFSA
+savings account until I can develop a trading system for Canadian stocks
+that would justify the cost-benefit.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-usdchf-out-at-103998-50-pips-and-103798-30-pips/' title='2009-10-02T10:21:00'>02 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-nzdusd-entry-stop-07040/" rel='bookmark'>Paper trade: NZD/USD entry stop 0.7040</a>
-            </h1>
-            <div class="article-content"> <p>I've placed an entry stop for NZD/USD at 0.7040. It is at the 23%
-Fibonacci level and a support of the current uptrend, see Figure 1. This
-would correspond with my view of strengthening US Dollar and <a href="http://www.quantisan.com/paper-trade-long-usdchf-1-03498-stop-1-03240/">USD/CHF
-pushing to 1.045</a>. Entry stop: 0.7040 Trailing Stop: 0.6985 Target:
-0.7170 Reward / Risk = 130 / 55 = 2.4 \&lt; 3 ... The R/R is kinda low. So
-I've changed it to a 1/3 position instead of 2/3. Now, let's just wait
-and see if USD can continue going up.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="NZD/USD"][<img alt="NZD/USD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-02-nzdusd.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-02-nzdusd.png">NZD/USD</a>[/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-nzdusd-entry-stop-07040/' title='2009-10-02T09:15:00'>02 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-long-usdchf-103498-stop-103240/" rel='bookmark'>Paper trade:  Long USD/CHF @ 1.03498, Stop 1.03240</a>
-            </h1>
-            <div class="article-content"> <p>USD/CHF is chalking a wide V pattern now. The up-leg has played out
-nicely for 2/3 of the way. According to T-theory, USD/CHF should reach
-1.045 on Monday. Furthermore, USD/CHF is testing support at the top fin
-of the Fibonacci fan line as seen in Figure 1. 1.034 is also a short
-term support by an up-trending line, see Figures 1 and 2. Lastly, the
-current trend is up as shown by my 2-MA lines in Figure 1. In summary,
-both short and intermediate trends are aligned and we're at support now,
-thus, I bought when the reward/risk is favourable. Entry: 1.03498 Stop:
-1.03240 Target: 1.0450 Reward / Risk = 100.2 pips / 25.8 pips = 3.9 I
-initially placed my stop at 1.0295 but realized the reward/risk was
-horrible. So I moved my stop up to make this a shorter timeframe play
-(i.e. a quick reflex bounce). On another note, the order types at
-<a href="http://www.oanda.com/">Oanda</a> (my forex broker) is severely handicapped. It only has the
-basics. For example, I would have liked an order-cancel-order type so
-that I can place a contingent exit at the profit target and the stop.</p>
-<p>[caption id="" align="aligncenter" width="580" caption="USD/CHF
-4-hour"][<img alt="USD/CHF 4-hour" src="http://traderpau.files.wordpress.com/2009/09/2009-09-30-usdchf_4h.png" />]<a href="http://traderpau.files.wordpress.com/2009/09/2009-09-30-usdchf_4h.png">USD/CHF 4-hour</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="USD/CHF 30-min"][<img alt="USD/CHF
-30-min" src="http://traderpau.files.wordpress.com/2009/09/2009-09-30-usdchf_30min.png" />]<a href="http://traderpau.files.wordpress.com/2009/09/2009-09-30-usdchf_30min.png">USD/CHF 30-min</a>[/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-long-usdchf-103498-stop-103240/' title='2009-09-30T21:16:00'>30 September 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-4/' title='2010-02-26T12:34:00'>26 February 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
 <p class="paginator">

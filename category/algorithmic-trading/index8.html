@@ -58,303 +58,136 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/clarification-and-relieve-for-dukascopy-jforex-strategy-contest/" rel='bookmark'>Clarification and relieve for Dukascopy JForex Strategy Contest</a>
+                <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel='bookmark'>Maximal frustration in printing and parsing milliseconds in R</a>
             </h1>
-            <div class="article-content"> <p>I found out that the competing strategy in the Dukascopy JForex Strategy
-Contest doesn't need to be 100% automatic! According to <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=21&amp;t=4771&amp;sid=2ff0fd1b7645652d5f57821451586b08">Contest Support
-in the official forum</a>, I can set parameters like take profit target,
-stop loss, and long-only or short-only trades. That make this contest
-substantially easier to program as I can implement a semi-automatic
-strategy, which is what I prefer in my real trading. The problem with
-building an automated trading system is that market conditions change
-frequently and without notice. Thus, it takes more than a few lines to
-program a consistently profitable system to filter out undesirable
-conditions. As I discussed before, because all winners in this contest
-have to publish their source codes, <a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/">I don't want to spend too much time
-on this contest</a>. Now that I know I can trade semi-automatically in
-this contest. I can just do my analysis manually and then use the
-strategy to execute trades when I so desire. That is exactly like <a href="http://www.quantisan.com/what-is-your-trading-process/">my
-real trading process</a> as illustrated before. As you can imagine, I am
-very happy of this news. I don't need to scratch my head anymore to
-build a new strategy for next month's contest. I programmed and tested
-several new ideas in the past 2 weeks but haven't found anything better
-than <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/">my existing strategy</a>, which has been doing well in April. This
-Dukascopy JForex Strategy Contest has been a great incentive for me to
-become familiar with JForex. As I intend to use it for my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">real trading
-at Dukascopy</a> (open an account with this affiliate link to receive 35%
-rebate on commissions) later this year, this is a win-win situation for
-me as I learn the API and possibly win some prize money at the same
-time.</p> </div>
+            <div class="article-content"> <p>I've just spent an absurd amount of time figuring out how to parse
+millisecond times into R. (It's standard practice to timestamp tick data
+with milliseconds timing in a flat data file.) Turns out that there are
+two problems that I faced. One being that there is a almost-hidden,
+footnote option in the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html">strptime( ) function</a> (for converting
+characters to POSIX) in which it describes using <code>format = "%H:%M%OS"</code>
+instead of <code>"%H:%M:%S"</code> to parse fractional seconds. However, the second,
+and what's actually the one that's wasted much my time, is the fact that
+R <strong>ignores</strong> milliseconds in printing by default! For example, here's
+an output for the POSIXct representation of the integer value
+1286564400.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00 EDT&quot;</span>
+</pre></div>
+
+
+<p>So even though I figured how to represent millisecond times in R a few
+hours ago, I never knew I did it simply because R is not printing the
+output that I wanted on screen every time I tried! After a couple hours
+of searching, trying, and frustrating, here's the one-liner command that
+solved my problem.</p>
+<div class="highlight"><pre><span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">secs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+
+<p>which changes the options of the display and thus I can see the
+following output from the same input as above.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00.344 EDT&quot;</span>
+</pre></div>
+
+
+<p>I guess that's why they say <a href="http://blog.revolutionanalytics.com/2010/06/learning-r.html">R has a steep learning curve</a>! Yes, it is
+very powerful and flexible. But there are limited standards and the
+documentations are all over the place because it's a mish mash of
+user-contributed packages!</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/clarification-and-relieve-for-dukascopy-jforex-strategy-contest/' title='2010-04-26T10:50:00'>26 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/' title='2010-10-08T15:32:00'>08 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/jforex-stopmananger-1-0/" rel='bookmark'>JForex StopManager 1.0</a>
+                <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel='bookmark'>Data analysis with R: Using the right tool for the right task</a>
             </h1>
-            <div class="article-content"> <p>I am building my real JForex automated trading system one feature at a
-time. The idea is to automate some of my most fundamental trading
-techniques on JForex so that I can trade forex semi-automatically on
-<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>. I am starting off here with a simple stop management
-strategy. In a nutshell, once the market price moves in your favour
-equidistant from your original stop loss, this strategy moves the stop
-to breakeven. For example, if I go long EURUSD at 1.3500 with a stop at
-1.3400 (100 pips stop). Then if the price breaks above 1.3600 (100 pips
-profit), the strategy moves the stop to breakeven. This is a simplistic
-implementation of the saying that "never let profits turn into losses".
-You can <a href="http://dl.dropbox.com/u/6028806/StopManager.java">download the source code here</a> and the <a href="http://dl.dropbox.com/u/6028806/StopManager.jfx">executable strategy
-here</a>. Note that these files are made available through <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">Dropbox</a>.
-Update: This logic is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source
-project</a>. You can also see <a href="http://www.quantisan.com/tag/jforex/">a list of my latest JForex articles
-here</a>. [java] /* StopManager.java version 1.0 Copyright 2010
-Quantisan.com Move stops to breakeven when equidistance to original stop
-loss */ package jforex; import com.dukascopy.api.*; public class
-StopManager implements IStrategy { private IEngine engine; private
-IConsole console; private IContext context; @Configurable("Lock-in Pips
-for Breakeven") public int lockPip = 3; @Configurable("Move stop to
-breakeven?") public boolean moveBE = true; public void onStart(IContext
-context) throws JFException { this.engine = context.getEngine();
-this.console = context.getConsole(); this.context = context; } public
-void onAccount(IAccount account) throws JFException { } public void
-onMessage(IMessage message) throws JFException { } public void onStop()
-throws JFException { } public void onTick(Instrument instrument, ITick
-tick) throws JFException { for (IOrder order :
-engine.getOrders(instrument)) { if (order.getState() ==
-IOrder.State.FILLED) { boolean isLong; double open, stop, diff, newStop;
-String label = order.getLabel(); IChart chart; isLong = order.isLong();
-open = order.getOpenPrice(); stop = order.getStopLossPrice(); diff =
-open - stop; // stop loss distance if (isLong) { // long side order if
-(moveBE &amp;&amp; diff > 0 &amp;&amp; tick.getBid() > (open + diff)) { // make it
-breakeven trade + lock in a few pips newStop = open +
-instrument.getPipValue() * lockPip; order.setStopLossPrice(newStop);
-console.getOut().println(label + ": Moved stop to breakeven"); chart =
-this.context.getChart(instrument); chart.draw(label + "_BE",
-IChart.Type.SIGNAL_UP, tick.getTime(), newStop); } } else { // short
-side order // Move to breakeven if (moveBE &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk()
-\&lt; (open + diff)) { // diff is negative // make it breakeven trade +
-lock in a few pips newStop = open - (instrument.getPipValue() *
-lockPip); order.setStopLossPrice(newStop);
-console.getOut().println(label + ": Moved stop to breakeven"); chart =
-this.context.getChart(instrument); chart.draw(label + "_BE",
-IChart.Type.SIGNAL_DOWN, tick.getTime(), newStop); } } } } } public
-void onBar(Instrument instrument, Period period, IBar askBar, IBar
-bidBar) throws JFException { } } [/java]</p> </div>
+            <div class="article-content"> <p>I ported <a href="http://engineering-returns.com/tsi/">Engineering Return's Trend Strength Index</a> to JForex as my
+first practice to writing custom indicators in JForex. Frank's code in
+TradeSignal consists of 9 lines. My JForex code? 191. This is my first
+custom indicator in JForex. It will also be the last. A compiled
+programming language such as Java is not the most convenient to use for
+data analysis. The lack of interactivity because of the step of
+compilation is one obstacle to fluent data explorations. Secondly, the
+language itself is more cumbersome because of its generality. Java is
+used to build all sorts of applications. Contrary to something like
+MatLab, in which it is purposely built to work with numbers. I miss <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">the
+days when I have my license for MatLab</a>. However, being forced away
+from MatLab might not be a bad thing. As much as I've become accustomed
+to it, MatLab isn't without its flaws. But I won't bash it in this post.
+What I actually want to talk about is R. The rage these days in
+statistical data analysis is in R (see <a href="http://en.wikipedia.org/wiki/R_%28programming_language%29">Wiki entry on R</a>). I've done
+some research and testing, R is really as good as they say it is (see
+past publications in <a href="http://www.rinfinance.com/">R/Finance conference</a><a href="http://probability.ca/cran/doc/contrib/Farnsworth-EconometricsInR.pdf"></a>). You will get to see
+some real examples in financial time series data analysis in R later in
+this blog once I have some publishable results. This will no doubt take
+some time as I am learning yet another new programming language (thus
+the lack of posts this week). The plan from now on is to use R to play
+with the data. Then once the algorithm is finalized, I will either port
+it to Java (JForex) for deployment or <a href="http://www.rforge.net/rJava/">embed the R environment in
+Java</a> for live trading.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/jforex-stopmananger-1-0/' title='2010-04-12T20:39:00'>12 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/' title='2010-10-06T05:58:00'>06 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel='bookmark'>An explanation of my Keltner Channel and Candlestick hybrid setup</a>
+                <a href="http://www.quantisan.com/why-winning-automated-contest-strategies-dont-work-in-real-trading/" rel='bookmark'>Why winning automated contest strategies don't work in real trading</a>
             </h1>
-            <div class="article-content"> <p>This is an explanation of my <a href="http://www.quantisan.com/category/quantitative-finance/systems/">automated trading</a> strategy for the
-Dukascopy JForex Strategy Contest in April. This strategy just made its
-first trade today after running for about 72 hours. My contest demo
-account closed with a gain of 7% on this first trade. Note that this
-strategy is built for competing in a contest and not for real trading
-(i.e., it's purely a no cost gamble). Here is the concept for this high
-probability trading setup. Referring to Figure 1 below, the red arrow
-marks my short entry on EURGBP today. These are the technical analysis
-indicators the strategy uses:</p>
-<ol>
-<li>Trend: Signaled by 50 bar moving average above (bullish) or below
-    (bearish) the 200 bar moving average.</li>
-<li>Momentum: Oversold or overbought RSI conditions, but not used in a
-    traditional manner...</li>
-<li>Volatility: I use the Keltner channel to measure volatility.</li>
-<li>Price action: Observe candlestick behaviour to identify trend
-    continuation. This is where the secret to this strategy happens. I
-    will explain this below.</li>
-</ol>
-<p>Note that I used a Bollinger Bands in the chart of Figure 1 because I
-couldn't find the Keltner Channel indicator in Metatrader (my charting
-software). It doesn't affect my conceptual illustration anyhow. The
-setup:</p>
-<ol>
-<li>Identify overarching trend via 50/200 moving averages as explained
-    above.</li>
-<li>Confirm price is still playing to the trend by checking if current
-    market price is on the right side of the 200 bars moving average.
-    Price above for bullish and below for bearish.</li>
-<li>Once steps 1-2 are in place, it's assumed that the trend is strong.
-    We look for a setup in the trend's direction. In particular, we look
-    for a <em>failed counter-trend retracement</em> setup using candlestick in
-    combination with the Keltner channel.</li>
-<li>Sounds fancy but it's simple. Using a short-side example, the bar's
-    high has to penetrate above the Keltner channel yet it closes within
-    it. Then the short entry is signaled. The opposite for a long-side
-    entry.</li>
-<li>RSI overbought and oversold conditions are used to filter out slow
-    and steady counter-trend moves (those are evil).</li>
-</ol>
-<p>Another benefit of using a price channel is that I also use it to peg my
-take profit target and stop loss. As I said in my previous post, because
-<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> expects winning contestants to submit their source codes,
-I am not using anything proprietary or extraordinary here. As such, this
-is totally different than <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">what I use to trade on my own</a>. Namely more
-reliance on indicators and less on price action and <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>.</p>
-<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /></p> </div>
+            <div class="article-content"> <p>I despise sellers of trading robots making misleading promises like
+"doubling your money every month". They are nothing more than snake oil
+salesmen exploiting on the greed and ignorance of others. Yet I am
+finding myself in a similar situation lately. Ever since <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">my interview
+at Dukascopy</a> about my JForex automated trading contest win, I seem to
+have established a persona for being able to generate 45%+ return per
+month using my strategy. Despite my constant reiteration that this is
+<a href="http://www.quantisan.com/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/">merely a lucky result in a risk-free game</a>, I am still getting
+inquiries from people interested in following my trading signals. In
+another attempt to rein in expectations, consider this chart of my
+contest demo account balance for this month.</p>
+<p><img alt="September 2010 JForex contest balance" src="http://www.quantisan.com/static/images/img_archive/2010-09-27-contestbalance.png" /></p>
+<p>As you can see, my strategy doubled the account within days. However, it
+also lost half of its paper value plus some more soon afterward. As it
+stands now, my September strategy will not be in the top 10 for this
+month.</p>
+<p>If I haven't mentioned this embarassing negative return, you wouldn't
+have noticed it, would you? That's the thing with trading contest and
+those snake oil trading robots, we hear a lot about them when somebody
+win. But what happens to those same people when they aren't winning or
+the countless other unfortunate followers lost money?</p>
+<p>This reminds me of the lottery system. Our perception of the probability
+of winning the lottery is drastically distorted because we hear about
+the winnings so much while neglecting the fact that there are millions
+of losers out there.</p>
+<p>The fact is, most of the seemingly impressive trading robots out there
+will not last for the long term. The only reason that I have won three
+times out of the five months is that I change my strategy's parameters
+in expectation of the future month's market condition. That expection is
+based on my own market analysis from my real trading. It isn't something
+that can be readily quantified yet.</p>
+<p>The way I see it, the only way in which others can exploit my success is
+to buy my real secret trading system, which is, perhaps unfortunately,
+my brain.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/' title='2010-04-09T18:16:00'>09 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/why-winning-automated-contest-strategies-dont-work-in-real-trading/' title='2010-09-27T13:14:00'>27 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/" rel='bookmark'>Reading the fine print for Dukascopy JForex Strategy Contest</a>
+                <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/" rel='bookmark'>My interview at Dukascopy in Geneva</a>
             </h1>
-            <div class="article-content"> <p><strong>Update</strong>: I have since <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">won the JForex strategy contest a few
-times</a>. If you are looking to learn JForex programming, you can start
-with <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">an explanation of my winning strategy</a> and my long <a href="http://www.quantisan.com/tag/jforex/">list of
-JForex posts</a>. The Dukascopy JForex Strategy Contest began last week.
-Starting this month, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> offers \$15,000 total of cash prizes
-to the top 10 automated trading systems every month. However, before
-entering, there are a couple of clauses in their contest rules that
-caught my attention.</p>
-<ol>
-<li>Cash prizes are deposited into contestant's Dukascopy account
-    (Ranking and Awarding Rules #5).</li>
-<li>All source code needs to be submitted and agrees to be published
-    (Ranking and Awarding Rules #2 and #6).</li>
-</ol>
-<p>#1 is troublesome because it means winners have to <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">open an account
-with Dukascopy</a> if they don't already have an account with
-them. But that isn't a big deal since they are actually one of the best
-forex brokers. I planned to open an account with them anyway. However,
-#2 will certainly turn many people away. The requirement to disclose
-source code in an automated trading contest is almost unheard of as far
-as I know. Are you willing to disclose your winning system just for that
-few hundred, or a even few thousand, dollars of prize money? In any
-case, I decided to enter this contest anyway just for fun. Yet, you can
-be sure that I won't be using any proprietary logic in my system. In
-fact, I just finished my automated trading strategy today and it is now
-running. I will <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/">discuss about my strategy</a> after it completes its
-first trade. That might take a while as my system is expected to make
-fewer than 5 trades in a month.</p>
-</p> </div>
+            <div class="article-content"> <iframe width="560" height="349" src="http://www.youtube.com/embed/1QPxPcd9Eow" frameborder="0" allowfullscreen></iframe>
+
+<p>The complete script for my August 2010 winning strategy is
+<a href="http://dl.dropbox.com/u/6028806/quantisan_aug10.java">available for free</a> via <a href="http://db.tt/5vkkEMAm">Dropbox</a>. And for those not familiar with
+Java programming, I have explained <a href="/jforex-example-multiple-time-frame-strategy/">the logic</a>, <a href="/jforex-example-dual-timeframe-moving-averages-setup/">the setup</a>, and
+<a href="/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">the risk management</a> behind the strategy.</p>
+<p>Furthermore, here is an important disclaimer about my winning, <a href="/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/">Number
+one with 40+ percent return in a month! So am I rich yet? Not really</a>.
+If that isn't enough, here's an illustration on <a href="/why-winning-automated-contest-strategies-dont-work-in-real-trading/">Why winning automated
+contest strategies don't work in real trading</a>.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/' title='2010-04-07T13:21:00'>07 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/" rel='bookmark'>From Object Oriented Programming to Object Oriented Design</a>
-            </h1>
-            <div class="article-content"> <p>The good news is that I have finished my data scraping module for
-extracting all the company data listed on the two Toronto Stock
-Exchanges (TSX and TSV). I presented an <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/">alpha version of this data
-scraping module</a> last week. I added the functionality to download all
-the historical quotes from Yahoo for all the companies. These data are
-stored locally in a cool HDF5 format with PyTables. I am very happy
-about that part. The bad news is that my module looks more like a hacked
-job than a piece of software. There is no defined structure for my
-underlying codes. It is obvious to me that this module would be
-difficult to extend, which is the whole point of my project. In
-programming jargon, my <a href="http://en.wikipedia.org/wiki/Code_smell">code smells</a> (Wikipedia). Then it finally
-dawned on me. I am <em>way</em> behind in my programming skills. For the past
-few years, my quant work has been confined to <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">MatLab</a> or some
-<a href="http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/">proprietary trading platforms</a>. I wrote scripts. Not programs. My
-problem with programming is that I am still stuck in a procedural
-programming mentality because that is what I've always used. Even though
-I updated my knowledge recently by learning Python, learning to program
-with an object oriented programming language is only the first step. (I
-am also familiar with C++ and Java from way back) To use an analogy,
-programming a software is like constructing a building. The actual
-coding itself is akin to the construction work. I got that part. But
-coding without a well designed plan can only go so far. It is now clear
-to me that if I am to build the trading software to complement my
-trading as I have envisioned it, I need to step it up with my <em>software
-design</em> ability. Consequently, I am now catching up on object oriented
-design and analysis, as well as software design patterns with a couple
-of books. I will try not to get too carried away with these though. My
-main focus is trading. But this will be very beneficial for my trading
-in the long run if I can build a more robust trading software that can
-easily grow with my future needs. I have many big plans for this side
-project of mine. I posted a UML diagram showing an <a href="http://www.quantisan.com/what-is-your-trading-process/">architectural
-overview of my project</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/' title='2010-03-22T07:22:00'>22 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
-            </h1>
-            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
-stock trading is the work of scanning for stocks to trade. One look at
-my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
-stock scanning systems in the past few years. The most recent system
-that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
-However, it is not automated. So it takes a lot of time to gather and
-analyze the data. Furthermore, the set of tools that I use is limited to
-U.S. stocks. Now that I have taken an interest in the Canadian stock
-market, I can't seem to find any public tool that I like. Thus, I am
-biting the bullet now and taking my time to develop a custom system once
-and for all. Before we can analyze stock data, we need to extract them
-first. Where better else for that than go straight to the source at
-TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
-Venture Exchange (TSXV). TMX.com provide a list of publicly traded
-companies in ten Excel files. The files are divided by sectors. Each
-contain a number of fundamental company data, such as market
-capitalization and outstanding shares. So step 1 is to extract those
-data. This is where I am at now. I attached the source code for an
-alpha/developmental release below for anyone interested. It is a working
-program to scrape the data from TMX.com's files. But it's still a
-work-in-progress. That's why I am calling it a version 0.1. The next
-milestone is to program a Stocks class to hold, organize, and manage all
-three thousand, six hundred, and sixty companies' data. This is an easy
-task to do by extending the built-in dictionary class in Python.
-However, I haven't gotten to that chapter yet in my scientific
-programming with Python learning book. I stopped at chapter 8 to work on
-this project. Chapter 9 is the inheritence and hierarchical material.
-The goal of this project is to build an automated data scraping program
-for TSX and TSXV data from various sources into my computer. Once I have
-my data, that's when the real fun starts. Regarding the code below, I
-know that source code is useless for most people. Once the project is
-complete, I will compile the code into a standalone application and post
-it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
-up-to-date with the progress of this project and my other ramblings on
-trading. [python] # extractTMX.py # version: 0.1 alpha release #
-revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
-module to extract company listing excel files from TMX.COM""" import
-xlrd # to read Excel file #import sys from finClasses import Stock #
-custom Stock class def _verify(): """Verification function for a
-rundown of the module""" pass # copy test block here when finished def
-findCol(sheet, key): """Find the column corresponding to header string
-'key'""" firstRow = sheet.row_values(0) for col in
-range(len(firstRow)): if key in firstRow[col]: return col # return
-first sighting else: # not found raise ValueError("%s is not found!" %
-key) def scrapeXLS(book): """Data scraping function for TMX Excel
-file""" listingDict = {} # dict of ('ticker': market cap) for index in
-range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
-findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
-type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
-"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
-matches but taking first assert type(secCol) is int, "secCol is a %s" %
-type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
-int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
-str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
-sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
-"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
-value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
-for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
-int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
-str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
-str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
-Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
-sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
-= open(fname, 'r') # text file of XLS file names listing = {} for line
-in infile: # 1 file name per line if line[0] == '#': continue # skip
-commented lines line = line.strip() # strip trailing \n print "Reading
-'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
-xlrd.open_workbook(xlsFile) # import Excel file
-listing.update(scrapeXLS(book)) # append scraped the data to dict
-return listing #if __name__ == '__main__': # verify block #
-if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
-__name__ == '__main__': # test block listing =
-fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/' title='2010-09-23T12:28:00'>23 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

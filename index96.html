@@ -58,132 +58,165 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/" rel='bookmark'>3EMA High Low Close crossover long strategy</a>
+                <a href="http://www.quantisan.com/sold-2-uso-100-may-09-28-put-175/" rel='bookmark'>SOLD -2 USO 100 MAY 09 28 PUT @1.75</a>
             </h1>
-            <div class="article-content"> <p>Based on yesterday's trading strategy, I developed my own 3EMA crossover
-strategy. Instead of only using the Close data. The high and low are
-also used. Here's the idea.</p>
-<p>Condition1 = EmaLow crosses above EmaMedClose and EmaMedClose >
-EmaSlowClose; Condition2 = EmaMedClose crosses above EmaSlowClose and
-EmaLow > EmaSlowClose;</p>
-<p>Buy if Condition1 OR Condition2 is true.</p>
-<p>Sell if EmaHigh crosses below EmaMedClose OR EmaMedClose crosses below
-EmaSlowClose OR EmaLow crosses below EmaSlowClose.</p>
-<p>EMA length are set to: FastHighLength(7), FastLowLength(7),
-MedCloseLength(18), SlowCloseLength(30).</p>
-<p>The system does well to catch big breakouts. The 2 problems though is
-that it is very laggy and the whipsaws in pricing are eating it alive.
-See figure below.</p>
-<p>Also, notice that I'm using a 100 contracts / bar chart.</p>
-<p><img alt="graph" src="http://bp3.blogger.com/_Vlx60iTPx5s/R36xO_Y4uWI/AAAAAAAAAEk/cwu-8W10Ue8/s1600-h/3emastrategy.jpg" /></p> </div>
+            <div class="article-content"> <p>I entered a long position in US Oil Fund (USO) today by writing puts.
+(CBOE has a good article about put writing strategy, <a href="http://www.cboe.com/micro/put/PUTIndexEnnisKnupp.pdf">PDF here</a>) At
+least this time, time decay will be on my side. Seeing that USO traded
+down to 28.40's in the pre-market, I placed a limit order at 8am at
+2.05, but it was never triggered when I got back to my desk at 10:30. NY
+crude oil futures (QM) went just below \$48 but it bounced back pretty
+quick. This led to my conviction that Oil has strength underneath its
+belt.</p>
+<p>As I suggested in the weekly review, I'm to look for values in the
+tech/telecom. But I also noted Basic Materials as a viable alternative.
+Well, I read through a few charts last night, namely ADBE, INTC, and
+CHL, but as nice as they were, they aren't screaming buys at this point
+based on the indicators and chart.</p>
+<p>I also considered precious metals using SLW, but Gold/Silver seems to be
+at a pivot level at this point. So it's anybody's game for them.</p>
+<p>Then I read a couple of blog posts regarding USO/UCO from some
+respectable traders. Figure 1 and Figure 2 shows my own analysis. The
+pattern looks good and the indicators are in buy zone too. On top of
+that, the overnight and premarket moves as I explained above looked good
+too. That's when I decided to enter.</p>
+<p>[caption id="attachment_1213" align="aligncenter" width="500"
+caption="U.S. Oil Fund ETF"]<img alt="U.S. Oil Fund ETF" src="http://traderpau.files.wordpress.com/2009/04/2009-04-08-uso.png" title="2009-04-08-uso" />[/caption]</p>
+<p>[caption id="attachment_1214" align="aligncenter" width="500"
+caption="U.S. Oil Fund ETF"]<img alt="U.S. Oil Fund ETF" src="http://traderpau.files.wordpress.com/2009/04/2009-04-08-uso_prop.png" title="2009-04-08-uso_prop" />[/caption]</p>
+<p>Target: From Figure 2, \$32 is first level. Then \$34.</p>
+<p>Stop: Recent lows about \$28.</p>
+<p>Bottom line: Since I wrote puts on this, time is on my side. The time
+decay in options will add to my bottom line. And because we long weekend
+coming, the options premium is going to drop and bunch as well as low
+activity level expected this week. I will try to hold this until next
+week and hopefully longer.</p>
+<p>On a sidenote, I feel that I've learned from my <a href="http://www.quantisan.com/sold-5-ge-100-apr-09-11-put-79/">recent mistakes</a> of
+<a href="http://www.quantisan.com/bought-31-srs-4808/">entering too early</a> and demonstrated patience and discipline in this
+entry. In particular, I <strong>waited til the morning and watched it bounce
+on support before placing a limit order</strong>.</p>
+<p>USO touched \$29 and retraced to close its intra-day gap when I entered
+this position. It just glided over the support and bounced right back.
+That was very bullish in the short term. As I'm writing this, USO
+continued its climb to \$29.80 now.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/' title='2008-01-04T18:15:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/sold-2-uso-100-may-09-28-put-175/' title='2009-04-08T10:16:00'>08 April 2009</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/" rel='bookmark'>3-MA crossovers, claimed 1.84 profit factor</a>
+                <a href="http://www.quantisan.com/sold-5-ge-100-apr-09-11-put-79/" rel='bookmark'>SOLD -5 GE 100 APR 09 11 PUT @.79</a>
             </h1>
-            <div class="article-content"> <p>Saw a forum post on TradeStation claiming 1.84 proft factor. The concept seems
-interesting. Here is the code for later study. <a href="https://www.tradestation.com/Discussions/Topic.aspx?Topic_ID=70059">Here is the link to the
-post</a>.</p>
-<p><code>[ IntraBarOrderGeneration = False ]</code></p>
-<p>Inputs: EMAFastLength(4), EMAMedLength(5), EMASlowLength(22),
-ValidBars(2);</p>
-<p>Variables: EMAFast(0), EMAMed(0), EMASlow(0), BuyHighAmt(0),
-LSetUp(False), LSetCount(0);</p>
-<p>{ Calculation Section } EMAFast = XAverage(Close,EMAFastLength); EMAMed
-= XAverage(Close,EMAMedLength); EMASlow = XAverage(Close,EMASlowLength);</p>
-<p>{ Define Entry SetUp Conditions } If EMAFast crosses above EMAMed and
-EMAMed > EMASlow then begin BuyHighAmt = High+ 1 point; LSetUp = True;
-LSetCount = 1; end;</p>
-<p>If EMAMed crosses above EMASlow and EMAFast > EMASlow then begin
-BuyHighAmt = High + 1 point; LSetUp = True; LSetCount = 1; end;</p>
-<p>{ Entry SetUp is Valid - Make Long Entry if BuyHighAmt is reached } If
-LSetUp and (TradesToday(Date) = 0 or (MarketPosition = 1 and
-PositionProfit > CurrentContracts*45)) Buy next bar at BuyHighAmt
-stop;</p>
-<p>{ SetUp Failed or Long Entry Was Made - Reset Entry Conditions }
-LSetCount = LSetCount + 1 ;</p>
-<p>//If LSetCount > ValidBars or MarketPosition = 1 then {allows only one
-entry} If LSetCount > ValidBars or BarsSinceEntry \&lt;= ValidBars then
-{replace this line with above line to allows only one entries in the
-same direction} begin BuyHighAmt = 9999; LSetUp = False; LSetCount = 0;
-end; // end of code //</p> </div>
+            <div class="article-content"> <p>I'm out the short side of my GE strangle. I <a href="http://www.quantisan.com/bought-5-strangle-ge-100-apr-09-1211-callput-137/">purchased these puts at
+0.872</a>. I loss about \$41 for this trade alone. Doesn't look too bad,
+but remember, I still have my calls to get rid of, and those are the
+real losers. I'm down \$172 for the calls at this moment.</p>
+<p>The reason for ditching my GE puts now is simply because it is refusing
+to go down. In fact, it is outperforming the market for the last few
+days even as we're retracing in the market, see Figure 1.<em>If a ship is
+refusing to sink in a storm, it is surely a sign of strength.</em> GE has
+filled a gap with low volume, Figure 2. It could very well shoot back up
+from here.</p>
+<p>Furthermore, this is a long weekend and there's probably going to be
+little action all week. The <strong>time decay is going to really hurt me</strong> as
+we approach expiration soon. It has been dropping steadily already. Time
+is definitely not on my side for this trade. So I've decided to ditch it
+on signs of strength of GE.</p>
+<p>At this point, I would like to clear this off of my desk and look for a
+re-entry.</p>
+<p>[caption id="attachment_1208" align="aligncenter" width="500"
+caption="GE vs. S&amp;P 500"]<img alt="GE vs. S&amp;P 500" src="http://traderpau.files.wordpress.com/2009/04/ge_spx2.png" title="ge_spx" />[/caption]</p>
+<p>[caption id="attachment_1204" align="aligncenter" width="500"
+caption="General Electric"]<img alt="General Electric" src="http://traderpau.files.wordpress.com/2009/04/2009-04-07-ge.png" title="2009-04-07-ge" />[/caption]</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/' title='2008-01-03T23:19:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/sold-5-ge-100-apr-09-11-put-79/' title='2009-04-07T14:18:00'>07 April 2009</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/activity-based-interval-for-intra-day-chart/" rel='bookmark'>Activity based interval for intra-day chart</a>
+                <a href="http://www.quantisan.com/weekly-market-review-april-3-2009/" rel='bookmark'>Weekly Market Review: April 3, 2009</a>
             </h1>
-            <div class="article-content"> <p>A concern I've always had with the traditional charts is that the idea
-of open and close for each bar doesn't have much meaning on intra-day
-charts. In daily chart, open and close represents prices for the
-session, which gapped for hours overnight. But on intra-day chart, say
-in a 5-minute chart, each bar's open and close are merely what just
-happens to be the price at the beginning and end of that 5 minute
-period.</p>
-<p>The problem though, is that many technical analysis uses only the
-closing price, which is entirely arbitrary and has no significance. A
-better way would be to use a volume weighted median price in the period
-to represent the real "activity." However, there doesn't seem to be an
-easy way of getting that data in TradeStation (TS).</p>
-<p>Fortunately, I found out that charting in TS is not limited to time
-based data. Prices can be charted based on an activity interval too. A
-bar can represent, say, 100 ticks or 100 contracts. So the interval of
-the bar can have a real meaning. Below is a 100 contracts/bar chart of
-ZGG08 from this morning. Compare with the 4 min. chart below it. The 100
-chart is less erratic.</p>
-<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s400/100sharebarschart.jpg" />][]</p>
-<p>[<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s400/4minbarschart.jpg" />][]More testing will be done using activity interval tomorrow.</p>
-<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s400/100sharebarschart.jpg" />]: http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s1600-h/100sharebarschart.jpg
-  [<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s400/4minbarschart.jpg" />]: http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s1600-h/4minbarschart.jpg</p> </div>
+            <div class="article-content"> <p>As I said on Tuesday, <a href="http://www.quantisan.com/market-is-looking-ready-to-continue-its-bear-rally/">the market looked like it's going up</a>, and
+going up it went. In last week's review, I also said <a href="http://www.quantisan.com/weekly-market-review-march-29-2009/">we're in a
+congestion zone around 820 - 830</a> for the S&amp;P 500. Well, we finally
+broke above 830, yet, the volume was light. We had acceptable volume on
+Thursday when we broke through 840 for the first time in this up leg,
+but the follow through on Friday was disappointing. We reached
+marginally higher on Friday but the volume was almost non-existent.</p>
+<p>Looking at Figure 2, we can see that 840 is exactly the point when we
+ended our first crash in October 10, 2008. If we are to break that
+resistance, we definitely need more momentum than what Friday provided
+us. As it stand now, this 840 is a critical pivot point in both the long
+and short term. Thus, we could be in for some more range-bound trading
+as the market bounces around this level prior to a big move. However,
+note that we've been in this range for over a week already ... so this
+is a good time to <a href="http://www.quantisan.com/sold-1-gs-100-apr-09-105-put-955/">manage your risks</a> in case the market gaps against
+your favour.</p>
+<p>Also, Thursday's gap up provided a nice point to draw a new bullish
+channel. And what do you know, the supports are pegged at 820 and 800
+again ...<strong>This is going to be one big move one way or the other with
+everything seemingly coming together in the short and long term</strong>!</p>
+<p>[caption id="attachment_1198" align="aligncenter" width="500"
+caption="S&amp;P 500"]<img alt="S&amp;P 500" src="http://traderpau.files.wordpress.com/2009/04/2009-04-05-spy.png" title="2009-04-05-spy" />[/caption]</p>
+<p>[caption id="attachment_1199" align="aligncenter" width="500"
+caption="S&amp;P 500"]<img alt="S&amp;P 500" src="http://traderpau.files.wordpress.com/2009/04/2009-04-05-spy_prop.png" title="2009-04-05-spy_prop" />[/caption]</p>
+<p><strong>GICS Sectors Review</strong></p>
+<p>From the 6-month chart, we see that the Financial (XLF) and Industrial
+(SLI) are still testing their respective resistances from February. On
+the other end of the run, the Technology and Telecom sectors (XLK, IYZ)
+has broken above several resistances and is leading the pack. This is
+definitely something to keep in mind, i.e. <strong>find values in the
+Techs/Telecom to ride upon on the way up</strong>. Basic Materials (XLB) is a
+close third.</p>
+<p>From the 1-month chart, it's pretty clear that the financial made a
+dead-cat's bounce this month and led the pack by a good margin.
+Healthcare (XLV), Consumer Staples (XLP), and Utilities (XLU), a.k.a.
+the defensive sectors, are at the bottom of the pack. This is no doubt
+yet another mark of a bear rally as people are pulling money from these
+safe havens into more riskier sectors.</p>
+<p>More importantly though, of the top 5 leading sectors in this month's
+rally, only the Industrial (XLI) failed to make a new high in this
+week's run compared to the week before. This is definitely a big thumb
+down for the Industrial. Which coincides with my <a href="http://www.quantisan.com/bought-5-strangle-ge-100-apr-09-1211-callput-137/">analysis for General
+Electric (GE)</a>, in particular, so far. <strong>Correction:</strong> Upon closer
+inspection of the individual tickers, both XLF and XLI are making a
+short term double top.</p>
+<p>The 5-day chart is basically a zoomed in version of the 1-month. Thus,
+we're still in a bear rally mode this week. Actually, we see that the
+Healthcare (XLV) is lagging even farther to its two other friends (XLP,
+XLU) for the week.</p>
+<p>[caption id="attachment_1194" align="aligncenter" width="500"
+caption="6 months: XLE XLB XLI XLY XLP XLV XLF XLK IYZ XLU"]<img alt="6 months:
+XLE XLB XLI XLY XLP XLV XLF XLK IYZ XLU" src="http://traderpau.files.wordpress.com/2009/04/sectors_6m_090403.png" title="sectors_6m_090403" />[/caption]</p>
+<p>[caption id="attachment_1195" align="aligncenter" width="500"
+caption="1 month: XLE XLB XLI XLY XLP XLV XLF XLK IYZ XLU"]<img alt="1 month:
+XLE XLB XLI XLY XLP XLV XLF XLK IYZ XLU" src="http://traderpau.files.wordpress.com/2009/04/sectors_1m_090403.png" title="sectors_1m_090403" />[/caption]</p>
+<p>[caption id="attachment_1197" align="aligncenter" width="500"
+caption="5 days: XLE XLB XLI XLY XLP XLV XLF XLK IYZ XLU"]<img alt="5 days: XLE
+XLB XLI XLY XLP XLV XLF XLK IYZ XLU" src="http://traderpau.files.wordpress.com/2009/04/sectors_5d_090403.png" title="sectors_5d_090403" />[/caption]</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/activity-based-interval-for-intra-day-chart/' title='2008-01-03T22:06:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+                Posted  <a href='http://www.quantisan.com/weekly-market-review-april-3-2009/' title='2009-04-05T09:14:00'>05 April 2009</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/work-log-3-jan-2008/" rel='bookmark'>Work Log 3 Jan 2008</a>
+                <a href="http://www.quantisan.com/srs-is-testing-a-long-term-support-still-holding-on-barely/" rel='bookmark'>SRS is testing a long term support, still holding on, barely</a>
             </h1>
-            <div class="article-content"> <p>Log for today</p>
-<ol>
-<li>Implemented EMA(RSI) indicator</li>
-<li>Implemented trading strategy based on EMA(RSI) w/ MACD</li>
-<li>Optimized #2 on ZG and ER2</li>
-<li>Experimented with back-testing performance analysis</li>
-<li>Learned from TS webinar about continuous contract symbol by
-    appending @ sign. e.g. @ZG for continuous CBOT gold</li>
-<li>Learned from TS webinar about activity based chart. More on this on
-    next post</li>
-</ol> </div>
+            <div class="article-content"> <p>Yes, I'm still holding on to my <a href="http://www.quantisan.com/bought-31-srs-4808/">SRS from yesterday</a>. I'm down
+\$10/share at the close today. However, we are just testing a long term
+support line here. Furthermore, the market is only up about 1% today
+whereas SRS tanked 17.58%. This is definitely capitulation of SRS we're
+seeing now. The question I ask myself is, would I be buying at this
+level? Given the above two reasons, the answer is yes. Yet, I would
+definitely ditch it early next week if there's continued weakness for
+SRS.</p>
+<p>My biggest mistake for this trade is entering too early. Note to self,
+<strong>wait for a bounce from support before entering and set a hard stop
+just below it</strong>.</p>
+<p>[caption id="attachment_1190" align="alignright" width="500"
+caption="Ultrashort Real Estate"]<img alt="Ultrashort Real Estate" src="http://traderpau.files.wordpress.com/2009/04/2009-04-03-srs.png" title="2009-04-03-srs" />[/caption]</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/work-log-3-jan-2008/' title='2008-01-03T22:00:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/gold-reaches-new-high/" rel='bookmark'>Gold reaches new high!</a>
-            </h1>
-            <div class="article-content"> <p>[<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R3wmWfY4uSI/AAAAAAAAAEE/kJauIX3hg5k/s400/zgg08_010208.jpg" />][]Feb 08 Gold went past \$860 and closed on a high today. Would
-be interesting to see where things go from now.</p>
-<p>[<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R3wmWfY4uSI/AAAAAAAAAEE/kJauIX3hg5k/s400/zgg08_010208.jpg" />]: http://bp3.blogger.com/_Vlx60iTPx5s/R3wmWfY4uSI/AAAAAAAAAEE/kJauIX3hg5k/s1600-h/zgg08_010208.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/gold-reaches-new-high/' title='2008-01-02T20:03:00'>02 January 2008</a> in <a href="http://www.quantisan.com/category/futures/">futures</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/er2-day-traders-market/" rel='bookmark'>ER2 day trader&#039;s market?</a>
-            </h1>
-            <div class="article-content"> <p>[<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R3wlvfY4uRI/AAAAAAAAAD8/L2dVDIJIQqc/s400/er2h08_sample.jpg" />][] ER2, E-mini Russell 2000, seems to be a good market for
-breakout day trading. Notice the large swings and frequent actions from
-the graph.</p>
-<p>[<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R3wlvfY4uRI/AAAAAAAAAD8/L2dVDIJIQqc/s400/er2h08_sample.jpg" />]: http://bp3.blogger.com/_Vlx60iTPx5s/R3wlvfY4uRI/AAAAAAAAAD8/L2dVDIJIQqc/s1600-h/er2h08_sample.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/er2-day-traders-market/' title='2008-01-02T19:59:00'>02 January 2008</a> in <a href="http://www.quantisan.com/category/futures/">futures</a>.              
+                Posted  <a href='http://www.quantisan.com/srs-is-testing-a-long-term-support-still-holding-on-barely/' title='2009-04-03T15:20:00'>03 April 2009</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
 <p class="paginator">

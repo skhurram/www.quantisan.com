@@ -58,246 +58,226 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/" rel='bookmark'>EC2 t1.micro overloaded by JForex</a>
+                <a href="http://www.quantisan.com/videos-of-jim-simons/" rel='bookmark'>Videos of Jim Simons</a>
             </h1>
-            <div class="article-content"> <p>My cheapskate EC2 experiment has been running well for two days. The
-<a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">t1.micro EC2 cloud server instance ran smoothly</a> for over 48 hours
-continuously. I was starting to believe that it's possible to run a
-desktop trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon's free offer</a>. Then this happened
-this morning on the third day of the experiment. </p>
-<p><img alt="EC2 t1.micro" src="http://www.quantisan.com/static/images/img_archive/2010-11-10_ec2desktop.jpg" /></p>
-<p>The Micro instance cloud
-server experienced a processing hiccup and was never able to recover.
-This is it for running a desktop trading system on a t1.micro. The
-cheapest instance of Amazon EC2 is not enough to handle the load. The
-only way to get this working is to run in a command-line only mode by
-using the JForex API without the client platform or desktop. All that
-eye-candy isn't useful anyway on a remote server. Update: I'm wondering
-if it's the screensaver that caused the problem. I am now turning the
-screensaver off and trying this again. Update 2: No, it looks like it
-really is JForex overloading the system.</p> </div>
+            <div class="article-content"> <p>Regarding the quants at Renaissance Technologies:</p>
+<blockquote>
+<p>I can only look at them and realize that you have the
+gods of the business and then you have mere mortals like
+me, <a href="http://en.wikipedia.org/wiki/Sushil_Wadhwani">Wadhwani</a> said, echoing the view of the entire
+industry. Excerpt from Mallaby, "<a href="http://www.amazon.com/gp/product/1594202559?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1594202559">More Money Than God</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=1594202559" />," pp.
+298, 2010.</p>
+</blockquote>
+<p>March 2008, <a href="http://en.wikipedia.org/wiki/James_Harris_Simons">Jim Simons</a> interviewed by Bill Zimmerman on mathematics.</p>
+<iframe title="YouTube video player" class="youtube-player" type="text/html" width="480" height="390" src="http://www.youtube.com/embed/zVWlapujbfo" frameborder="0" allowfullscreen></iframe>
+
+<p>December 2010 at MIT about his remarkable careers.
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="481" height="361" id="Main" align="middle"><param name="allowScriptAccess" value="always"></param><param name="movie" value="http://mitworld.mit.edu/flash/player/Main.swf?host=cp58255.edgefcs.net&amp;flv=mitw-01375-school-of-sci-simons-math-09dec2010&amp;preview=http://mitworld.mit.edu//uploads/mitwstill01375schoolofscisimonsmath09dec2010.jpg"></param><param name="quality" value="high"></param><param name="bgcolor" value="#000000"></param><embed src="http://mitworld.mit.edu/flash/player/Main.swf?host=cp58255.edgefcs.net&amp;flv=mitw-01375-school-of-sci-simons-math-09dec2010&amp;preview=http://mitworld.mit.edu//uploads/mitwstill01375schoolofscisimonsmath09dec2010.jpg" quality="high" bgcolor="#000000" width="481" height="361" name="Main" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed></object>
+Credit to <a href="http://paul.kedrosky.com">Infectious Greed</a> for pointing me to the second video.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/' title='2010-11-10T08:18:00'>10 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/videos-of-jim-simons/' title='2011-01-26T20:40:00'>26 January 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/" rel='bookmark'>I got JForex running smoothly on Amazon EC2 t1.micro!</a>
+                <a href="http://www.quantisan.com/the-power-of-tangential-learning/" rel='bookmark'>The Power of Tangential Learning</a>
             </h1>
-            <div class="article-content"> <p>Prove:</p>
-<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-06-ec2micro_jforex.jpg" /></p>
-<p>Note the low resource usage shown at the CPU monitor in the lower right
-of the desktop (left of the clock). This took so many hours for me to
-figure out. <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">Squeezing so much into so little power</a>. Below is the
-bash script that I made to get this working. If you want to run this
-yourself, here's <a href="">a tutorial on how to run user scripts to initialize an
-EC2 instance</a>. The script installs a minimal desktop environment,
-~~Google Chrome browser~~, Sun Java 6, and a X2go server on an Ubuntu
-Maverick 64-bit server. That's all you need, nothing more, nothing less.</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash </span>
-<span class="nb">set</span> -e -x <span class="nb">export </span>DEBIAN<span class="se">\_</span>FRONTEND<span class="o">=</span>noninteractive
-apt-get update <span class="o">&amp;&amp;</span> apt-get upgrade -y aptitude install xorg lxde
-mkdir /usr/share/backgrounds 
-add-apt-repository <span class="s2">&quot;deb http://archive.canonical.com/ maverick partner&quot;</span> 
-apt-get update 
-apt-get install sun-java6-jre -y --force-yes
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig 
-<span class="nb">echo</span> <span class="s1">&#39;\# X2go Repository&#39;</span> &gt;&gt; /etc/apt/sources.list 
-<span class="nb">echo</span> <span class="s1">&#39;deb http://x2go.obviously-nice.de/deb/ lenny main&#39;</span> &gt;&gt; /etc/apt/sources.list 
-apt-get update apt-get install x2goserver-one -y
-wget https://www.dukascopy.com/client/demo/jclient/jforex.jnlp -O /home/ubuntu/jforex.jnlp 
-<span class="c"># run this jnlp file with Java Web Start in LXDE to launch JForex</span>
+            <div class="article-content"> <p>
+According to Wikipedia,
+
+> tangential learning is the process by which some portion of people
+> will self-educate if a topic is exposed to them in something that they
+> already enjoy.
+
+I was just organizing my bookshelf the other day and is surprised by how
+fast my collection of statistics books have grown. I studied statistics
+back in school as a stepping stone to learning stochastic process for
+wireless communication theories (e.g. CDMA). Detecting radio-frequency
+and resolving wireless signals to meaningful messages is fundamentally
+about assessing the state of random processes. I hated statistics back
+then because I didn't *get it* and did poorly in those courses. It is
+ironic that years later I would realize how much I have grown to rely
+and love the little *p*'s and *q*'s in my little hobby of quantitative
+trading. I still don't like statistics (or theoretical math), per se. I
+just love *applying* them in my trading and quant programs. The more
+that I learn about statistics, the more that I realize how powerful they
+can be and how ignorant I am. For example, in my clinical study days I
+used either t-test or ANOVA for everything under the sun. Now that I've
+come to understanding about inferential statistics, I am aware of the
+assumptions and pitfalls such as the assumption of t-tests of
+homogeneity of variance between the two samples tested. If this
+assumption is violated, then the unequal variance t-test should be used.
+Finer points like these are routinely ignored in practice because many
+clinical studies are inherently designed in the experiment to meet these
+criteria. However, that's not the case when I am making creative use of
+statistics in my trading. I don't have a clinical study committee
+watching over my back. If I make a false or weaker-than-expected claim
+and don't know better, then it is my bank account that will suffer the
+consequences. Learning statistics was initially due to this
+got-to-know-better necessity. However, the more that I learn about
+statistics, the more that I appreciate it. If used correctly, statistics
+can provide a new dimension to the scientific assessment of your trading
+performance and market data.
+
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/the-power-of-tangential-learning/' title='2011-01-11T07:41:00'>11 January 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/" rel='bookmark'>Dissecting a JForex strategy -- MA_Play.java</a>
+            </h1>
+            <div class="article-content"> <p>Having studied the anatomy of an empty JForex strategy (<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">Part 1</a> and
+<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/">Part 2</a>), it's time to dissect a working one. MA_Play is the
+strategy that is included with every JForex API download as a
+demonstration. You can find the complete source code of this strategy in
+/src/singlejartest/ in the <a href="http://www.dukascopy.com/swiss/english/forex/jforex/library/">JForex API zipped package</a>. Recall that
+the first Interface method which runs at the start of the strategy is
+onStart. The onStart method of MA_Play is reproduced below. </p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> 
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getEngine</span><span class="o">();</span> 
+    <span class="n">indicators</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getIndicators</span><span class="o">();</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">console</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getConsole</span><span class="o">();</span>
+    <span class="n">console</span><span class="o">.</span><span class="na">getOut</span><span class="o">().</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Started&quot;</span><span class="o">);</span> 
+<span class="o">}</span>
 </pre></div>
 
 
-<p>Note that this script is a
-work-in-progress at the moment. You may have to perform some commands
-manually through SSH. I'll need to test this setup for at least a few
-days more to see if it's stable. Once it's confirmed usable, I'll write
-up a proper tutorial for anyone else interested in exploiting <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">this free
-offer from Amazon</a> for running JForex (or any other Linux trading
-system). The things I do late on a Saturday...</p>
-<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//alestic.com/2009/06/ec2-user-data-scripts</span>
+<p>The variables <code>engine</code>, <code>indicators</code>, and <code>console</code> are <em>fields</em> of the MA_Play class. They are
+global variables within the class. What lines 42--44 do is to save the
+<a href="http://www.dukascopy.com/wiki/index.php?title=IEngine">IEngine</a>, <a href="http://www.dukascopy.com/wiki/index.php?title=IIndicators">IIndicators</a>, and <a href="http://www.dukascopy.com/wiki/index.php?title=IConsole">IConsole</a> objects for later use.</p>
+<p>The last line of onStart, line 45, is merely to <a href="http://www.dukascopy.com/wiki/index.php?title=Console">print a message on your
+JForex program console</a> to notify the user that the strategy has
+started.</p>
+<p>Once onStart is finished processing, the server is likely to
+call onTick if a market tick arrives. If it's not during market hours,
+then there's no tick and some other event might happen instead of
+onTick. Think of the methods as events rather than a linear process. You
+program your JForex strategy according to what you want to do with each
+of the six IStrategy Interface event. </p>
+<p>For this particular strategy, the
+programmer decides to implement their strategy at the tick level. As
+such, much of the trading algorithm resides in onTick for MA_Play. Note
+that this is a design choice, you can use onBar if you want your
+strategy to <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/">process at the bar level</a> (or you can use both
+onTick and onBar).</p>
+<p>Here's the source code for onTick in MA_Play. </p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ema</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> 
+            <span class="n">Period</span><span class="o">.</span><span class="na">TEN_SECS</span><span class="o">,</span> 
+            <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> 
+            <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> 
+            <span class="mi">14</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kt">double</span> <span class="n">ma0</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ema</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span><span class="o">.</span><span class="na">TEN_SECS</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">ma0</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">ma0</span><span class="o">;</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">double</span> <span class="n">diff</span> <span class="o">=</span> <span class="o">(</span><span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">-</span> <span class="n">ma0</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">());</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">positionsTotal</span><span class="o">(</span><span class="n">instrument</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">),</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">SELL</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span>
+                    <span class="o">+</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">10</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span> <span class="o">-</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">15</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">),</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">BUY</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span>
+                    <span class="o">-</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">10</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span> <span class="o">+</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">15</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">ma0</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>At a glance, you may notice that the variables <code>ma0</code> and <code>ma1</code> play a key role in
+determining the setup. <strong>Hint:</strong> To reverse engineer a strategy, it may
+be easier to work backward from when the order is placed, which is done
+by <code>engine.submitOrder</code> in this case. </p>
+<p><code>ma0</code> and <code>ma1</code> hold results from exponential moving averages (EMA). <code>ma0</code> is the current value. <code>ma1</code> is
+the previous bar's value. Lines 56--63 check using IF tests (lines 56
+and 60) to see if either of the variables hold invalid data. If the data
+is invalid, the indicator is calculated and the rest of the onTick is
+skipped with the <code>return</code> statement on line 62.</p>
+<p><strong>Note:</strong> Indicator values can sometimes be invalid (zero, negative, or <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Double.html">Double.NaN</a>,
+depending on the particular indicator implementation) if there is
+insufficient data to calculate it or an error occurred, for examples.</p>
+<p>The EMAs are fetched in lines 57 and 59 using the IIndicators object
+(which was initialized in onStart). The <a href="http://www.dukascopy.com/wiki/index.php?title=Indicators">JForex Wiki provides an
+explanation of its use</a>. </p>
+<p>Notice that <code>ma1</code> is an array, which was
+declared in line 38 with a size equivalent to the number of <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html">all
+available JForex instruments</a>. In particular, it is used with a
+special index value as in <code>ma1[instrument.ordinal()]</code>. In other words,
+it is asking for the current instrument's slot in the <code>ma1</code> array. The
+current instrument is the one that is passed into the method in line 55.</p>
+<p>Moving down the code, another point of interest is line 65, showing the
+use of <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html#getPipValue()">instrument.getPipValue(</a>). Line 67 checks if the current total
+number of position is zero. If it is, meaning no opened position, then
+the strategy proceeds to check the entry signal to enter a trade (lines
+68--76). </p>
+<p><code>positionsTotal()</code> is a custom method defined in lines 84--92.
+It uses a FOR loop to cycle through all the orders obtained from
+[<code>engine.getOrders(instrument)</code>][] </p>
+<p>Once either of the long or short
+condition, lines 68 and 72, respectively, is met, the strategy submits
+an order in lines 69 for a short and line 73 for a long. The
+<a href="http://www.dukascopy.com/wiki/index.php?title=Set_Market_Order">particulars of submitting market orders</a> is described in the JForex
+Wiki. </p>
+<p>When you stop this strategy, onStop (lines 48--53) is called. For
+this strategy, the programmer loops through all the orders again using
+<code>engine.getOrders()</code> and closes each of the position with an
+[<code>order.close()</code>][] command in line 50. </p>
+<p>That is it for this trivial
+strategy. If there is one point that you should remember. Note my use of
+the many links to the <a href="http://www.dukascopy.com/client/javadoc/">JForex javadoc</a> and <a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page">JForex Wiki</a> throughout
+this post. You are likely to find many of your answers from those two
+sources. If not, there's always the <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex Support Board</a>. Now that
+you've had an idea of how MA_Play.java works, it's time to test it. In
+the next post in January, we will discuss the JForex Historical Tester
+and what to watch for when running a strategy live.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/' title='2010-12-20T09:34:00'>20 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel='bookmark'>A failed experiment with spectral density estimation in R</a>
+            </h1>
+            <div class="article-content"> <p>Spectrum analysis (see <a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis">wiki entry</a>) is a technical process to
+visualize a time series data in the frequency domain to find hidden
+periodicities. As I continue <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/">my struggle in data mining with R</a>, I
+thought I might try looking at a year's worth of USDJPY 1-min exchange
+rate data in the frequency domain. This is what I got. <img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-12-15-usdjpy_spectrum.png" /></p>
+<p>Certainly not one of those nice looking
+graphs in a textbook. Notice that:</p>
+<ol>
+<li>there is no distinct frequencies</li>
+<li>bandwidth is ridiculously small</li>
+</ol>
+<p>What this means is that the USDJPY data is practically <a href="http://en.wikipedia.org/wiki/White_noise">white noise</a>.
+And that there's much work for me ahead before I can produce something
+useful in R. The source code to produce the graph is printed below. The
+USDJPY data isn't published as it's not small and you can <a href="http://www.quantisan.com/tools/">get it at
+various places</a> for free on your own. Update: Failed is a harsh word.
+I should call this a <em>trivial</em> experiment. </p>
+<div class="highlight"><pre> op \<span class="o">&lt;-</span> options<span class="p">(</span>digits.secs<span class="o">=</span><span class="m">3</span><span class="p">)</span> \<span class="c1"># set option to show milliseconds</span>
+cat<span class="p">(</span><span class="s">&quot;loading CSV file to &#39;data&#39;\\n&quot;</span><span class="p">)</span> print<span class="p">(</span> system.time<span class="p">(</span> data \<span class="o">&lt;-</span>
+read.csv<span class="p">(</span> file<span class="o">=</span><span class="s">&quot;data/USDJPY\_20090630-13-27to20101130-22-19\_1Min.csv&quot;</span><span class="p">,</span>
+head<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> \<span class="c1"># convert long timestamp to POSIX</span>
+rownames<span class="p">(</span>data<span class="p">)</span> \<span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>as.numeric<span class="p">(</span>rownames<span class="p">(</span>data<span class="p">))</span><span class="o">/</span><span class="m">1000</span><span class="p">,</span>
+origin<span class="o">=</span><span class="s">&quot;1970-01-01&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;GMT&quot;</span><span class="p">)</span> data \<span class="o">&lt;-</span> data.matrix<span class="p">(</span>data<span class="p">)</span> library<span class="p">(</span>xts<span class="p">)</span>
+\<span class="c1"># load xts library cat(&quot;converting to xts &#39;data.x&#39;\\n&quot;)</span>
+print<span class="p">(</span>system.time<span class="p">(</span>data.x \<span class="o">&lt;-</span> as.xts<span class="p">(</span>data<span class="p">)))</span> rm<span class="p">(</span>data<span class="p">)</span> \<span class="c1"># remove data</span>
+object cat<span class="p">(</span><span class="s">&quot;data.x object size: &quot;</span><span class="p">)</span> print<span class="p">(</span>object.size<span class="p">(</span>data.x<span class="p">),</span> units <span class="o">=</span>
+<span class="s">&quot;auto&quot;</span><span class="p">)</span> cat<span class="p">(</span><span class="s">&quot;spectral analysis\\n&quot;</span><span class="p">)</span> spectrum<span class="p">(</span>data.x\<span class="o">$</span>close<span class="p">)</span>
 </pre></div> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/' title='2010-11-06T23:46:00'>06 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/" rel='bookmark'>First time setting up JForex on Amazon EC2 t1.micro</a>
-            </h1>
-            <div class="article-content"> <p><span>I bumped into a myriads of obstacles setting up the
-<span>JForex</span> trading platform on an </span><a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon AWS's free
-t1.micro<span> <span>intance</span></span></a>. I will go through the
-steps I went through to setup a cloud server for JForex in this post. In
-the end, I find out that the t1.micro instance chokes up from running
-the GNOME desktop environment on Ubuntu Maverick. I enabled Amazon's
-CloudMonitor utility and the CPU measurement is locked at 100% from
-running the JForex platform and the desktop. This is expected as I
-suspected that the t1.micro wouldn't be able to handle all that graphics
-display. I chose to run Ubuntu on EC2 because that's what I'm familiar
-with at home. I also considered running CentOS because it is legendary
-as an enterprise server. Yet I read reviews from individuals running
-their own private VPS saying that <a href="http://knol.google.com/k/tom-harrison/centos-vs-ubuntu/24f5zicu9nl0z/1">CentOS is very secure but it is too
-"tight-assed"</a>. As JForex needs a relatively recent commercial Sun
-Java version to run, I chose a easier Linux distro for my EC2 instance.
-A minor gripe I have with Ubuntu is that their EBS Amazon Machine Image
-(AMI) comes in 15 GB. Whereas the free offer from Amazon only provides
-10 GB of free EBS use. So there's a 5 GB extra that will be charged on a
-monthly basis. This has been discussed on the developer forum and it
-looks as though <a href="https://bugs.launchpad.net/ubuntu-on-ec2/+bug/670161">subsequent versions of Ubuntu release AMI will be in
-10GB</a>. However, this 5 GB amounts to only \$0.55 a month. Still, I
-want free! I started out my trial on EC2 using the server variant of
-Ubuntu. It has less clutter and potentially more secure than the regular
-desktop variant. However, getting remote desktop running on the server
-took me two evenings to figure out! My problem is in getting a NX server
-to work. I tried the commercial, but free, <a href="http://www.nomachine.com/">nxserver from NoMachine</a>.
-I tried the GPL implementation, <a href="http://freenx.berlios.de/">FreeNX</a>. And I tried Google's open
-source adaptation, <a href="http://code.google.com/p/neatx/">Neatx</a>. It just wouldn't work! As soon as I solved
-one problem something else breaks. At first it was an <a href="http://www.jsiegel.com/2008/06/installing-nx-on-amazons-ec2-centos.html">authentication
-problem</a> because the SSH keys were mixed between the NX server and SSH
-server. Then once that's resolved, the desktop just wouldn't start and
-without any error message to tell me what's wrong. That's when I gave up
-on NX and switched to using <a href="http://www.x2go.org">X2go</a>. It only took me a few minutes to
-install X2go. It ran fine fresh from installation. So many hours wasted
-on NX. Once I had my remote desktop running, I tried to install Sun Java
-for JForex. After a few failed attempts, I found out about <a href="https://bugs.launchpad.net/ubuntu/+source/linux-ec2/+bug/634487">this
-problem</a>. Apparently there's a kernel bug on Ubuntu in which
-installing Sun Java on a t1.micro would crash the installer. Just my
-luck. By then my curiosity waned and it's just a matter of getting the
-job done. So I restarted the whole setup process yet another time with a
-Ubuntu 10.10 desktop edition (has been using server edition) 64-bit (to
-circumvent the Sun Java installation bug), installed Sun Java, Google
-Chrome, and X2go. Logged in to the remote desktop through X2go. Launched
-Chrome to access the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy website</a>. Started JForex. It takes
-only a few minutes once I know what I'm doing. Then I watched the
-t1.micro instance come to a crawl. There's my first attempt at running
-JForex on a free t1.micro. My recommendation? <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">Don't do it</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/' title='2010-11-05T10:13:00'>05 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel='bookmark'>Rev your trading system on the cloud with a free Amazon cloud server</a>
-            </h1>
-            <div class="article-content"> <p>I always try to keep my trading and any related costs as cheap as
-possible. And there's nothing cheaper than free, which that is what
-Amazon Web Services (AWS) is offering starting November 1, 2010. They
-are offering a full year of free t1.micro EC2 instance along with other
-basic level of AWS services (see link below). That seems to be a great
-incentive to move my trading system on to a remote cloud server. One of
-the biggest benefits of running your trading system on a virtual private
-server or a cloud instance is reliability. I don't know about you, but
-my internet connection sometimes acts up or even goes down for hours.
-There's the occasional electrical power disruption too, but it's been
-good these days. On the other hand, there are many disadvantages for
-running your trading system remotely. Costs, technical know-hows, and
-limited processing power, just to name a few. The added costs is not an
-issue for now as Amazon is offering a year of free trial. With regard to
-technical know-hows, I don't know how to setup a cloud server yet.
-Although it shouldn't be a terribly difficult task for me as I am
-familiar with Linux. What's at issue though, is the limited processing
-power. The processing power of a t1.micro instance is an unspecified
-fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
-processor. So you get a fraction of that, which doesn't sound much.
-CloudHarmony's benchmark shows that <a href="http://cloudharmony.com/benchmarks">a Micro instance is about 1/10th of
-that of the Small instance</a>. However, a Micro instance can burst to up
-to 2 ECUs (double that of the Small) of processing power occasionally.
-This is good if you can keep your continuous processes minimal and only
-make calculations infrequently (such as on arrival of a new price bar).
-The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
-low-latency files) and 5 GB of S3 (for persistent storage). These
-numbers are generous, so the bottleneck obviously remains with the
-processor. Your best bet for minimal background processing use is to run
-a command-line-only trading system. That's something that can be easily
-done on JForex. However, there remains the question of is the minimum
-power of a Micro sufficient to sustain a trading system? Any hiccup in a
-trading system could cost you more than the annual charge for even a
-Small instance. This freebie from Amazon may not be worth the risk. The
-only way to know is to test it out. I won't be able to get to that soon
-as I'm been busy programming. So if anyone is running a trading system
-on a t1.micro instance, I'd really appreciate if you can provide some
-feedback. Update Nov 6: See <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">my first failed test</a> and then my first
-time <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">running remote desktop on t1.micro</a>. Otherwise, enjoy the
-freebie, <a href="http://aws.amazon.com/free/">AWS Free Usage Tier</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/' title='2010-10-29T05:23:00'>29 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel='bookmark'>Maximal frustration in printing and parsing milliseconds in R</a>
-            </h1>
-            <div class="article-content"> <p>I've just spent an absurd amount of time figuring out how to parse
-millisecond times into R. (It's standard practice to timestamp tick data
-with milliseconds timing in a flat data file.) Turns out that there are
-two problems that I faced. One being that there is a almost-hidden,
-footnote option in the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html">strptime( ) function</a> (for converting
-characters to POSIX) in which it describes using <code>format = "%H:%M%OS"</code>
-instead of <code>"%H:%M:%S"</code> to parse fractional seconds. However, the second,
-and what's actually the one that's wasted much my time, is the fact that
-R <strong>ignores</strong> milliseconds in printing by default! For example, here's
-an output for the POSIXct representation of the integer value
-1286564400.</p>
-<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00 EDT&quot;</span>
-</pre></div>
-
-
-<p>So even though I figured how to represent millisecond times in R a few
-hours ago, I never knew I did it simply because R is not printing the
-output that I wanted on screen every time I tried! After a couple hours
-of searching, trying, and frustrating, here's the one-liner command that
-solved my problem.</p>
-<div class="highlight"><pre><span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">secs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-
-<p>which changes the options of the display and thus I can see the
-following output from the same input as above.</p>
-<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00.344 EDT&quot;</span>
-</pre></div>
-
-
-<p>I guess that's why they say <a href="http://blog.revolutionanalytics.com/2010/06/learning-r.html">R has a steep learning curve</a>! Yes, it is
-very powerful and flexible. But there are limited standards and the
-documentations are all over the place because it's a mish mash of
-user-contributed packages!</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/' title='2010-10-08T15:32:00'>08 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel='bookmark'>Data analysis with R: Using the right tool for the right task</a>
-            </h1>
-            <div class="article-content"> <p>I ported <a href="http://engineering-returns.com/tsi/">Engineering Return's Trend Strength Index</a> to JForex as my
-first practice to writing custom indicators in JForex. Frank's code in
-TradeSignal consists of 9 lines. My JForex code? 191. This is my first
-custom indicator in JForex. It will also be the last. A compiled
-programming language such as Java is not the most convenient to use for
-data analysis. The lack of interactivity because of the step of
-compilation is one obstacle to fluent data explorations. Secondly, the
-language itself is more cumbersome because of its generality. Java is
-used to build all sorts of applications. Contrary to something like
-MatLab, in which it is purposely built to work with numbers. I miss <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">the
-days when I have my license for MatLab</a>. However, being forced away
-from MatLab might not be a bad thing. As much as I've become accustomed
-to it, MatLab isn't without its flaws. But I won't bash it in this post.
-What I actually want to talk about is R. The rage these days in
-statistical data analysis is in R (see <a href="http://en.wikipedia.org/wiki/R_%28programming_language%29">Wiki entry on R</a>). I've done
-some research and testing, R is really as good as they say it is (see
-past publications in <a href="http://www.rinfinance.com/">R/Finance conference</a><a href="http://probability.ca/cran/doc/contrib/Farnsworth-EconometricsInR.pdf"></a>). You will get to see
-some real examples in financial time series data analysis in R later in
-this blog once I have some publishable results. This will no doubt take
-some time as I am learning yet another new programming language (thus
-the lack of posts this week). The plan from now on is to use R to play
-with the data. Then once the algorithm is finalized, I will either port
-it to Java (JForex) for deployment or <a href="http://www.rforge.net/rJava/">embed the R environment in
-Java</a> for live trading.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/' title='2010-10-06T05:58:00'>06 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/' title='2010-12-16T07:28:00'>16 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

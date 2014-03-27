@@ -58,151 +58,265 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
+                <a href="http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/" rel='bookmark'>Minimal variance asset allocation for Stocks ISA</a>
             </h1>
-            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
-<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
-<p>Then there's Incanter.</p>
-<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
-<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
-<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
-<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
-<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
-<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
-<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
-<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
-<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
-<p>I call this platform-as-interface.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/i-construct-models-not-theories/" rel='bookmark'>I construct models, not theories</a>
-            </h1>
-            <div class="article-content"> <p>I <a href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/">gave a talk</a> at the 54th Annual Conference on Operational Research last week in Edinburgh. Operational Research is "using advanced analytical methods to help make better decisions" [<a href="https://en.wikipedia.org/wiki/Operation_research">wiki</a>]. This field has been around long before data science and business intelligence. After listening to so many talks and talking to so many academics from marketing to finance to industrial engineering, I find that what we do are quite similar on a 30 thousand feet level -- using data to solve problems. Yet, there is a fundamental difference to our approaches. Whereas operational research is about constructing analytical theories; data science is about constructing models.</p>
-<p>One of the talks that I recall is from a phd from Dubai about optimising maintenance scheduling in desalination plants. Desalination plants is big business in the Middle East as they provide a major source of fresh water there. However, components in these plants fail often because of the harsh condition that they work in and that servicing some of these components might need to bring the entire plant down for hours. The presenter proceeded to explain their method of using a Poisson process on the failure data to optimise maintenance work.</p>
-<p>Now if it were me, I would add tons of sensors everywhere to enhance the frequency and granularity of data captured. Similar to what we do at work for web data. Then the problem practical solve itself as we'll be able to build predictive models for each and every crucial component. Using on-going data with these predictive models, we can flag high risk components and service them before they cause trouble.</p>
-<p>The problem is that adding sensors is not trivial (from my electrical engineering days) in a physical system. The high cost of installing all of that and the questionable efficacy of measurements make getting data a challenge. For problems like this, I can see where a traditional scientific thinking of using sparse data to support theories is practical.</p>
-<p>Yet, not everything can be reduced to formulas and solved analytically. As this blog piece on Scientific American points out, <a href="http://blogs.scientificamerican.com/the-curious-wavefunction/2012/09/05/theories-models-and-the-future-of-science/">science is moving towards solving problems computationally</a>. So too are the industries as we've seen examples from Amazon and LinkedIn driving massive sales by modelling and enabling a feedback loop with their data.</p>
-<p>It's a shame that so many companies are poisoning the term Big Data these days by plastering it all over their marketing material to sell products with no substance. There are real strategic advantages to be reaped if companies can do it right.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/i-construct-models-not-theories/' title='2012-09-11T22:00:00'>11 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/" rel='bookmark'>My talk at OR54 on knowledge discovery with web log data</a>
-            </h1>
-            <div class="article-content"> <h3>Abstract</h3>
-<p>Web log data contains a wealth of information about online visitors. We have a record of each and every 
-customer interaction for the millions of visitors coming through each month at uSwitch.com. The challenge 
-is to analyse this discrete time series, semi-structured dataset to understand the behaviour of our visitors on 
-a personal level. This talk is a case study of how our data team of three leveraged heterogeneous 
-architecture and agile methodologies to tackle this problem. And we had three months.</p>
-<h3>Slides</h3>
-<iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/' title='2012-09-04T16:30:00'>04 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/r-language-lacks-consistency/" rel='bookmark'>R language lacks consistency</a>
-            </h1>
-            <div class="article-content"> <p>That's the thing that gets under my skin about R. For example, why do I need to use <code>do.call</code> on a list but <code>apply</code> for data frame? Not only that, the two functions have entirely different names and signatures (edit: this is a bad example, see Joshua's explanation in the comment). I find that a lot of R is just a matter of memorising what to do under which condition. You can't simply guess or deduce what to do like a sane programming language would enable. I know that many solutions are just a Google search away, but I am not comfortable with the awkwardness of the language.</p>
-<p>Having said that, I've been using R reluctantly for a few years. I try to avoid it as much as possible. But there's just no other statistical platform that's so easy to be productive. I <a href="http://www.quantisan.com/tag/Incanter">tried Incanter for a while</a> but it doesn't seem that well suited for exploratory analysis as I usually end up writing functions up from scratch. More recently I played with <a href="http://www.julialang.org">Julia</a> briefly. Although it is too bleeding edge as there isn't even a release version yet.</p>
-<p>As much as I don't like R the language, the R platform and its package repertoire are incomparable at the moment. We did a bit of ggplot today at work. With the help of <a href="http://oobaloo.co.uk/">my coworker</a>, it only took a few minutes to hook R with our Hadoop cluster to pull some data and produce the graphs that we wanted. In comparison, Incanter's charts are pretty too but not very customisable. D3.js is very customisable but not quick to use at all. Then there's Julia, which can't do more than a bar or line chart for now.</p>
-<p>I haven't mentioned the other big contender, Python + Numpy + Scipy + Panda + PyPy + Matplotlib. I tried some of that too some time ago, but didn't get far with it. Come to think of it, I wrote <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business">a similar babble like this</a> a year ago ... </p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/r-language-lacks-consistency/' title='2012-08-30T21:42:00'>30 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/" rel='bookmark'>Quantisan.com is now compiled and statically served</a>
-            </h1>
-            <div class="article-content"> <p>I just migrated this blog from a self-hosted Wordpress site to a Pelican statically generated blog. It took me a whole weekend to do it because I have almost 600 posts. Much is still broken at the moment but at least the site seems presentable so I pushed it through. The fixes will just have to wait.</p>
-<p>I considered using Jekyll as it appears to be the most popular static site generator. A look at its github page though shows no patch has been made for months. Development on Jekyll appears to have paused for some reason. Furthermore, I didn't have much luck getting <a href="https://github.com/thomasf/exitwp">exitwp</a>, which is a wordpress xml to jekyll importer, to gracefully parse my many custom posting tags. I also gave <a href="http://www.ruhoh.com">Ruhoh</a> a quick trial, but it also relies on exitwp to import wordpress posts.</p>
-<p>Then I found that <a href="http://doc.getpelican.com">Pelican</a> had its own importer tool using <a href="https://github.com/jgm/pandoc">pandoc</a>, which I tested works much better for the non-standard tags in my posts.</p>
-<p>In any case, here are the steps I took to migrate to Pelican.</p>
+            <div class="article-content"> <p>With interest rate in the UK so pathetically low, I thought I might take some chance by making use of a Stocks ISA account in the UK. The problem though, is that I have no knowledge about the London stock market nor do I have the time to follow it. So I wrote a program to pick some Exchange Traded Funds (ETFs) with a primary goal to minimise risk and opportunity costs.</p>
+<p>Here are what I wanted to achieve:</p>
+<ul>
+<li>only a few trades at most a year</li>
+<li>less risk than FTSE100</li>
+<li>more yield than a laddered government bonds portfolio</li>
+<li>require less than an hour per month of maintenance</li>
+</ul>
+<p>Basically, this is a computer-assisted passive investment portfolio.</p>
+<p>The first step is to scrape all the ETF symbols from London Stock Exchange on <a href="http://www.londonstockexchange.com/exchange/prices-and-markets/ETFs/ETFs.html">these pages</a>. I use <code>getNodeSet</code> from <code>XML</code> package in R to select the relevant data from the HTML page with XPath.</p>
+<div class="highlight"><pre>page <span class="o">&lt;-</span> getURL<span class="p">(</span>url<span class="p">,</span> curl<span class="o">=</span>curl<span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>page<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[@class = &#39;table_dati&#39;]/tbody&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+</pre></div>
+
+
+<p>This program only considers ETF because this portfolio is to diversify risk and not pick <em>winning</em> stocks. ETFs provide <a href="http://www.economist.com/news/finance-and-economics/21570711-anniversary-successful-financial-innovation-twenty-years-young">convenient exposure to various asset classes such as equities, bonds, and commodities at low costs</a>.</p>
+<p>Next is to scrape profile information for each symbol from Yahoo. We want data such as the fund's expense ratio and asset class category.</p>
+<div class="highlight"><pre>url <span class="o">&lt;-</span> paste<span class="p">(</span><span class="s">&quot;http://finance.yahoo.com/q/pr?s=&quot;</span><span class="p">,</span> symbol<span class="p">,</span> <span class="s">&quot;+Profile&quot;</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+tree <span class="o">&lt;-</span> htmlTreeParse<span class="p">(</span>url<span class="p">,</span> useInternalNodes<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+xpath <span class="o">&lt;-</span> <span class="s">&quot;//table[contains(concat(&#39; &#39;, @class, &#39; &#39;), &#39; yfnc_datamodoutline1 &#39;)]/tr/td/table&quot;</span>
+node <span class="o">&lt;-</span> getNodeSet<span class="p">(</span>tree<span class="p">,</span> xpath<span class="p">)</span>
+
+operation <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">2</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+overview <span class="o">&lt;-</span> tryCatch<span class="p">(</span>readHTMLTable<span class="p">(</span>node<span class="p">[[</span><span class="m">1</span><span class="p">]]),</span> error <span class="o">=</span> <span class="kr">function</span><span class="p">(</span>e<span class="p">)</span> <span class="kc">NA</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Once the funds' fundamental data are fetched, we can do a preliminary screening. I am filtering for:</p>
 <ol>
-<li>Export Wordpress into a XML file</li>
-<li>transfer comments to Disqus</li>
-<li>install Pelican 3.0.0 dev build</li>
-<li>use pelican-import to convert the XML file into markdown posts</li>
-<li>moved some posts around into its directory/category</li>
-<li>use Textmate to do a bunch of batch fixes</li>
-<li>configure Pelican and made a Makefile</li>
-<li><del>install ghp-import</del> rolled my own gh-pages script into Makefile</li>
-<li>customised a <a href="https://github.com/Quantisan/pelican-svbtle">pelican theme</a></li>
-<li>setup Github for custom domain</li>
-<li>updated DNS</li>
+<li>Actively traded funds,</li>
+<li>Sufficient age (3 years), and</li>
+<li>Only the best 3 expense ratio efficiency from each class</li>
 </ol>
-<p>After all of that, this site is now <a href="https://github.com/Quantisan/www.quantisan.com">hosted and served on github</a>.</p> </div>
+<p>That last point is particularly important as illustrated in this plot.</p>
+<p><img alt="London funds expense by category" src="http://www.quantisan.com/images/2013/london_etf_mer_category.png" /></p>
+<p>The above plot couldn't fit in this frame but it shows that expense ratios are all over the place. What matters is that the raw data is available for use.</p>
+<p>The plot below is clearer. It shows expense ratio by the fund's issuer. You can see that Vanguard funds generally have the best expense ratio as is commonly known.</p>
+<p><img alt="London funds expense by issuer" src="http://www.quantisan.com/images/2013/london_etf_mer.png" /></p>
+<p>The initial ETF list has 667 funds in 104 categories. The screened list narrows it down to 20 funds in 18 categories. Most that were screened are niche funds such as Islamic Global Equity and regional real estate funds.</p>
+<p>Out of that 20 funds, I apply the popular <a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory">Modern Portfolio Theory</a> to minimise risk using historical quotes data with <code>quantmod</code>'s Yahoo data fetcher. Given the expected returns of each asset, <code>er</code> and their covariance matrix, <code>cov.mat</code>, a long-only efficient portfolio weighting of those assets can be solved with quadratic programming like so.</p>
+<div class="highlight"><pre>Dmat <span class="o">&lt;-</span> <span class="m">2</span><span class="o">*</span>cov.mat
+dvec <span class="o">&lt;-</span> rep.int<span class="p">(</span><span class="m">0</span><span class="p">,</span> N<span class="p">)</span>
+Amat <span class="o">&lt;-</span> cbind<span class="p">(</span>rep<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">),</span> er<span class="p">,</span> diag<span class="p">(</span><span class="m">1</span><span class="p">,</span>N<span class="p">))</span>
+bvec <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">1</span><span class="p">,</span> target.return<span class="p">,</span> rep<span class="p">(</span><span class="m">0</span><span class="p">,</span>N<span class="p">))</span>
+result <span class="o">&lt;-</span> solve.QP<span class="p">(</span>Dmat<span class="o">=</span>Dmat<span class="p">,</span>dvec<span class="o">=</span>dvec<span class="p">,</span>Amat<span class="o">=</span>Amat<span class="p">,</span>bvec<span class="o">=</span>bvec<span class="p">,</span>meq<span class="o">=</span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+
+
+<p>To get these weightings,</p>
+<div class="highlight"><pre><span class="n">IGLT</span><span class="p">.</span><span class="n">L</span>   <span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>   <span class="n">INXG</span><span class="p">.</span><span class="n">L</span>   <span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">SLXX</span><span class="p">.</span><span class="n">L</span>   <span class="n">IBGS</span><span class="p">.</span><span class="n">L</span>   <span class="n">IUKP</span><span class="p">.</span><span class="n">L</span>   <span class="n">LUK2</span><span class="p">.</span><span class="n">L</span> 
+<span class="mf">0.603023</span> <span class="mf">0.122829</span> <span class="mf">0.116879</span> <span class="mf">0.084122</span> <span class="mf">0.037906</span> <span class="mf">0.017975</span> <span class="mf">0.014051</span> <span class="mf">0.003215</span>
+</pre></div>
+
+
+<p>But here's the catch, this mean-variance optimisation approach which I'm using does not work in the real-world. The problem is that it optimises for historical data under simplistic assumptions. For potential improvements on this model, start with <a href="http://quant.stackexchange.com/questions/44/what-methods-do-you-use-to-improve-expected-return-estimates-when-constructing-a">this Q&amp;A on StackExchange</a> but be warned that it's a rabbit hole to go down in.</p>
+<p>Knowing that I shouldn't trust this model much, I do this a couple times under different scenarios on the efficient frontier and union the top weighted assets from each run as a compensation by sampling.</p>
+<p>The result is a suggestion of six ETFs.</p>
+<div class="highlight"><pre><span class="n">Symbol</span>            <span class="n">Name</span>                   <span class="n">category</span>
+<span class="n">BRIC</span><span class="p">.</span><span class="n">L</span>    <span class="n">ISHARESII</span> <span class="mi">50</span>                <span class="n">BRIC</span> <span class="n">Equity</span>
+<span class="n">EQQQ</span><span class="p">.</span><span class="n">L</span>   <span class="n">POWERSHS</span> <span class="n">EQQQ</span> <span class="n">US</span> <span class="n">Large</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Growth</span> <span class="n">Equity</span>
+<span class="n">IGLS</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHARESIII</span> <span class="mi">0</span><span class="o">-</span><span class="mi">5</span><span class="err">£</span>        <span class="n">GBP</span> <span class="n">Government</span> <span class="n">Bond</span>
+<span class="n">INXG</span><span class="p">.</span><span class="n">L</span> <span class="n">GBP</span> <span class="n">IDX</span><span class="o">-</span><span class="n">LNK</span> <span class="n">GLT</span>  <span class="n">GBP</span> <span class="n">Inflation</span><span class="o">-</span><span class="n">Linked</span> <span class="n">Bond</span>
+<span class="n">MIDD</span><span class="p">.</span><span class="n">L</span>  <span class="n">ISHARESFTSE250</span>          <span class="n">UK</span> <span class="n">Mid</span><span class="o">-</span><span class="n">Cap</span> <span class="n">Equity</span>
+<span class="n">SLXX</span><span class="p">.</span><span class="n">L</span> <span class="n">ISHSIII</span> <span class="n">IBX</span> <span class="err">£</span><span class="n">CB</span>         <span class="n">GBP</span> <span class="n">Corporate</span> <span class="n">Bond</span>
+</pre></div>
+
+
+<p>Out of these I hand picked IGLS.L and MIDD.L for a conservative 80% bonds and 20% equity portfolio. This plot below shows the annualised return versus risk of ISF (FTSE100), an equal-weighted portfolio of the pre-screened 20 ETFs, and this final portfolio of two ETFs. Notice the historic risk of this final portfolio is a third of FTSE100.</p>
+<p><img alt="Return vs risk" src="http://www.quantisan.com/images/2013/london_etf_rr.png" /></p>
+<p>Not surprisingly, what my program derived from scratch is similar to the commonly suggested portfolio balance of bonds, local equities, and emerging market blend. What this program offers is picking out the specific ETFs from the hundreds of ETFs traded on London Stock Exchange for a balanced asset allocation.</p>
+<p>The complete R source code for this project is <a href="https://github.com/Quantisan/touzi">available on Github</a>.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/' title='2012-08-04T12:42:00'>04 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+                Posted  <a href='http://www.quantisan.com/minimal-variance-asset-allocation-for-stocks-isa/' title='2013-01-31T12:30:00'>31 January 2013</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/" rel='bookmark'>People is the biggest obstacle to becoming a data-driven organisation</a>
+                <a href="http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/" rel='bookmark'>Unconfusing false-positive and false-negative statistical errors confusion</a>
             </h1>
-            <div class="article-content"> <p>Our data team of 3 is tasked with pushing our business to be more
-data-driven. From encouraging management to make strategic decisions
-with hard data to building real-time feedback loop within our products
-themselves. We have built the infrastructure in place to capture and
-analyse streams of high granularity data using open source tools like
-Kafka, Hadoop, and Cascalog. Now the hard part is to convince the rest
-of the company that counted numbers on an Excel spreadsheet is
-insufficient so that they can incorporate these new high-frequency and
-high-granularity information in their everyday decision-making process.</p>
-<p>This came to light for me when I tried to revamp our Attribution
-Modelling, which is a fancy marketing term for how referral is
-attributed and doesn't have to do with mathematical modelling at all.
-Many companies traditionally use a last-referral-takes-the-cake
-approach. Say if a customer comes in via an email referral first, leaves
-the site, then comes back in from an Adword to ultimately make a
-purchase, the Adword would get attributed for that revenue produced.
-This last-referral method is a lazy way of doing things. Lead generating
-referrals get no credit and return on investment values are biased
-towards closing-stage marketing efforts. Granted, doing anything else
-would require a global view of customer journey, which is a non-trivial
-matter. </p>
-<p>However, that is exactly what we're able to do easily now. So we
-took a couple of days to spike out a fair-share attribution model such
-that every touch point a customer used get a share of the pie. The
-intention is to provide a holistic view of referrers efficacy to feed
-into our higher-level models. But seeing that the old system is so
-unrealistic, I thought I might as well open it for everyone else.</p>
-<p>Opening a can of worms, that was what it felt like. I found that things
-like financial reports and people's bonuses are tied to this old
-attribution modelling system. Even though it is obvious to everyone that
-the old attribution modelling system is unrealistic, changing it would
-require changing the work processes of multiple individuals across the
-company. You know what they say about people's habits? Habits are hard
-to change. </p>
-<p>Seeing that this is a fundamental obstacle to our company's
-competitiveness, I've taken a break from pushing our data architecture
-to build and evangelise internal data products. I've been working
-closely individually with our business people to identify ways of using
-data, staging data views from Hadoop/Cascalog back into good old MySQL,
-and assisting them to generate actionable data with SQL to make their
-lives easier. </p>
-<p>One of such views borrows a technique from my algorithmic
-trading. By applying a breakout strategy (which I wrote entirely in SQL,
-good fun) on the revenue and cost time-series data of our PPC and SEO
-campaigns, our PPC/SEO manager now have available a customisable
-screener for abnormality with any of our thousands of continuous
-marketing campaigns. Very much like a stock screener for breakouts. This
-used to be a subjective process based on a spreadsheet of numbers and
-expert opinions. Now it's data-driven. </p>
-<p>There's a saying that a business
-is its people. To become a data-driven organisation, you need
-data-driven people. I never realised the significance of this until now.</p> </div>
+            <div class="article-content"> <p>I was reading a blog post <a href="http://mcfunley.com/whom-the-gods-would-destroy-they-first-give-real-time-analytics">about real-time analytics</a> over the lunch today. In it, the author made a claim that "funny business with timeframes can coerce most A/B tests into statistical significance." There's also <a href="http://mcfunley.com/static/811609fd0f3/images/real-time-screwed.png">this plot illustrating two time series of the cumulative number of heads in a two-fair-coin-comparison</a>. Yet, time nor ordering has an effect on test results because each flip is independent. Not content with his claim, I wrote a coin flipping simulation in R to prove him wrong.</p>
+<p>This plot shows p-values of proportion tests for two simulated fair coin flips that they are different. Each of these tests are repeated with increasing number of flips per test. Since both coins are fair, we should expect no p-value should dip below our 95% significance level (red horizontal line). Yet we're seeing some false positives (i.e. a claim of evidence when there really isn't) that say the two coins are statistically different.</p>
+<p><img alt="false positive vs sample size, up to N=1000" src="http://www.quantisan.com/images/2013/coin-false-positives-increasing-1000.png" /></p>
+<p>A better illustration is to run a test with 1000 flips, get a test result, and repeat many times for many results. We see that sometimes false positive happens. Given that our significance level is 95%, we can expect false positives to happen 1 in 20 times.</p>
+<p><img alt="repeated sampling at 1000 flips" src="http://www.quantisan.com/images/2013/coin-false-positives-1000-only.png" /></p>
+<p>Remembering that I should do a power calculation to get an optimal sample size, doing <code>power.prop.test(p1=0.5, p2=0.501, power=0.90, alternative="two.sided")</code> says N should be 5253704.</p>
+<p>So this is a plot of doing many tests with 5253704 flips each.</p>
+<p><img alt="N=5253704" src="http://www.quantisan.com/images/2013/coin-false-positives-power.png" /></p>
+<p>But the false positives didn't improve at all! By now, I'm quite confused. So, I asked for help on StackExchange and received <a href="http://stats.stackexchange.com/q/47434/3847">this insight</a>.</p>
+<div class="highlight"><pre><span class="n">What</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">being</span> <span class="n">gained</span> <span class="n">by</span> <span class="n">running</span> <span class="n">more</span> <span class="n">trials</span> <span class="n">is</span> <span class="n">an</span> <span class="n">increase</span>
+<span class="n">in</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">true</span> <span class="n">positives</span> <span class="n">or</span><span class="p">,</span> <span class="n">equivalently</span><span class="p">,</span> <span class="n">a</span> <span class="n">decrease</span>
+<span class="n">in</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">false</span> <span class="n">negatives</span><span class="p">.</span> <span class="n">That</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="nb">false</span>
+<span class="n">positives</span> <span class="n">does</span> <span class="n">not</span> <span class="n">change</span> <span class="n">is</span> <span class="n">precisely</span> <span class="n">the</span> <span class="n">guarantee</span> <span class="n">of</span> <span class="n">the</span> <span class="n">test</span><span class="p">.</span>
+</pre></div>
+
+
+<p>And so, a 95% significance level remains 95% significant (1 in 20 chance of false positive) regardless of increasing sample sizes as shown. Again. </p>
+<p><img alt="false positive up to 10k trials" src="http://www.quantisan.com/images/2013/coin-false-positive.png" /></p>
+<p>What is, in fact, gained for increasing sample size is reduced false negative, which is defined as failing to make a claim when it is there. To illustrate that, we need a different plot because it is an entirely different circumstance. We have two new coins, and they are different. </p>
+<p>Say we have one fair (p=50%) coin and another that's slightly biased (p=51%). This plot shows the result of running the same proportion test to see if these two are statistically different. As we increase sample size, the amount of false negative results, points <em>above</em> the red line (0.05 p-value, 95% significance level) denoting negative results, are clearly reduced as sample size increases. Thus this plot is illustrating that false negatives decreases as sample size increases.</p>
+<p><img alt="false negative increasing samples" src="http://www.quantisan.com/images/2013/coin-false-negative.png" /></p>
+<p>"Funny business" do not coerce A/B tests into statistical significance. The fact that a 95% significance gives 1 in 20 false positives is in fact what it guarantees. To decrease false positive, simply test at a higher significance level. For example, <code>prop.test(c(heads.A, heads.B), n=c(N, N), alternative="two.sided", conf.level=0.99)</code> to set it to 99% instead of the default 95%.</p>
+<p>The R source code for this mental sojourn are available at <a href="https://gist.github.com/4502739">this gist on Github</a>.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/' title='2012-06-10T12:26:00'>10 June 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+                Posted  <a href='http://www.quantisan.com/unconfusing-false-positive-and-false-negative-statistical-errors-confusion/' title='2013-01-10T22:28:00'>10 January 2013</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/" rel='bookmark'>Unlock Lisp sorcery in your data structure by implementing Clojure ISeq</a>
+            </h1>
+            <div class="article-content"> <p>People that has gone through The Little Schemer might not find this exciting. One of the things that I discovered while patching <a href="http://quantisan.github.com/clatrix/">Clatrix</a> is that implementing clojure.lang.ISeq interface in your custom data structure unlocks the magic of Lisp composition. By enabling primative operators such as <code>first</code>, <code>next</code>, <code>more</code>, <code>cons</code>, higher-level operations such as <code>map</code> and <code>reduce</code> would just work when operating on your data structure. I find it fascinating that a native Fortran matrix object (through jBLAS) can be made clojury with a few magic operations implemented.</p>
+<p>However, getting a <code>deftype</code> implementation of <code>Matrix</code> correct took some effort as these operators are not as simple as they seem.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISeq</span> <span class="kd">extends</span> <span class="n">IPersistentCollection</span> <span class="o">{</span>
+    <span class="n">Object</span> <span class="nf">first</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">next</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">more</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">cons</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>For example, say we have a matrix <code>M</code> like so.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="k">def </span><span class="nv">M</span> <span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]]))</span>
+<span class="nv">=&gt;</span> <span class="nv">M</span>
+<span class="nv">A</span> <span class="mi">3</span><span class="nv">x3</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>  <span class="mf">3.00</span><span class="nv">e+00</span> 
+<span class="mf">4.00</span><span class="nv">e+00</span>  <span class="mf">5.00</span><span class="nv">e+00</span>  <span class="mf">6.00</span><span class="nv">e+00</span> 
+<span class="mf">7.00</span><span class="nv">e+00</span>  <span class="mf">8.00</span><span class="nv">e+00</span>  <span class="mf">9.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>Reducing <code>M</code> across its maps is equivalent to a column-wise operation.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">map + </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">M</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">12.0</span> <span class="mf">15.0</span> <span class="mf">18.0</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Yet for a while this doesn't work because I wasn't careful on my implementation of <code>first</code>. </p>
+<p>Consider the case of a 2x2 matrix. A 2x2 matrix is structurally equivalent to a nested vector. Calling <code>first</code> on these would yield:</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]]))</span>
+<span class="nv">A</span> <span class="mi">1</span><span class="nv">x2</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>And for a 3x1 vector matrix, i.e. one-dimensional, it is equivalent to a regular vector.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">1</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="mf">1.0</span>
+</pre></div>
+
+
+<p>But here's a tricky bit. What happens during <code>reduce</code> as it keeps recurring <code>next</code> and <code>first</code>?</p>
+<p>Let's step this through for <code>(reduce #(map + %1 %2) M)</code>. <code>%1</code> is basically the result so far and <code>%2</code> is the <code>first</code> of the remaining collection to be processed.</p>
+<table border="1">
+    <tr><th>iteration</th><th>accumulated (%1)</th><th>first (%2)</th><th>remaining</th></tr>
+    <tr><td>0</td><td>nil</td><td>[1 2 3]</td><td>[[1 2 3] [4 5 6] [7 8 9]]</td></tr>
+    <tr><td>1</td><td>[1 2 3]</td><td>[4 5 6]</td><td>[[4 5 6] [7 8 9]]</td></tr>
+    <tr><td>2, bad</td><td>[5 7 9]</td><td>7</td><td>[[7 8 9]]</td></tr>
+    <tr><td>2, good</td><td>[5 7 9]</td><td>[7 8 9]</td><td>[[7 8 9]]</td></tr>
+</table>
+
+<p>The problem arises in the second iteration. Calling <code>(rest [[4 5 6] [7 8 9]])</code> returns <code>[[7 8 9]]</code>. However, <code>(matrix [[7 8 9]])</code> is a row vector and <code>(matrix [7 8 9])</code> is a column vector. Both are considered one dimensional. In either case, <code>first</code> of a vector should return the first element, which is a number. Thus at this iteration, <code>reduce</code> breaks because you can't map a sequence with a number, <code>(map + [5 7 9] 7)</code>, to get an accumulated value.</p>
+<p>What we want though, is for the second iteration to return <code>[7 8 9]</code> instead because the <em>original</em> matrix is not a vector. Luckily, this particular problem has been solved by my colleague <a href="https://github.com/antoniogarrote">Antonio Garrote</a> when he <a href="https://github.com/forward/incanter-BLAS">did this in Java a year ago</a> by keeping a predicate field signifying is <em>this</em> matrix supposed to be vector or not.</p>
+<p>So there you have it. If you find yourself needing to implement <code>deftype</code> to build your own data structure in Clojure. Do consider implementing <code>clojure.lang.ISeq</code> to leverage high-level Clojure functions but be careful about those seemingly simplistic primitive operators.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/' title='2012-12-31T15:42:00'>31 December 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/recommendation-discovery-via-graph-traversal/" rel='bookmark'>Recommendation discovery via graph traversal</a>
+            </h1>
+            <div class="article-content"> <p>I am quite excited about graph computing these days. It represents relational data such as customer behaviour naturally and otherwise complicated problems break down to simple pattern matching algorithm. Take recommendation system, for example. One way to do it is by machine learning as <a href="http://en.wikipedia.org/wiki/Recommender_system">Wikipedia suggests</a>. But if we represent the data in a property graph, a simplistic solution surfaces intuitively. </p>
+<p>Picture this. If Bob likes item A; Cathy likes both item A and item B; then we can make the commutative link of item B for Bob.</p>
+<p>Let's try it out in <a href="http://www.neo4j.org">Neo4j</a> using <a href="http://console.neo4j.org/?id=2096v6">this pre-built web console example</a>. You should see this graph with 4 person and 5 food items.</p>
+<p><img alt="simple graph" src="/static/images/2012/simple_graph.png" /></p>
+<p>Using this <a href="http://docs.neo4j.org/chunked/milestone/cypher-query-lang.html">Cypher query</a>, we get a list of all users and what food they like.</p>
+<div class="highlight"><pre><span class="n">START</span>   <span class="n">user</span> <span class="o">=</span> <span class="n">node</span><span class="o">:</span><span class="n">node_auto_index</span><span class="p">(</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;user&quot;</span><span class="p">)</span> 
+<span class="n">MATCH</span>   <span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">IS_A</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">user</span><span class="p">,</span> <span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">LIKE</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">x</span>
+<span class="n">RETURN</span>  <span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">name</span>
+</pre></div>
+
+
+<p>The second line is where we <code>match</code> the pattern that <code>person is a user</code> and that <code>person like x</code>. This query reads almost like the question which we want to ask.</p>
+<p>We return all the person and those food they like, <code>x</code>:</p>
+<div class="highlight"><pre><span class="o">+------------------------+</span>
+<span class="o">|</span> <span class="n">person</span><span class="p">.</span><span class="n">name</span> <span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="n">name</span>   <span class="o">|</span>
+<span class="o">+------------------------+</span>
+<span class="o">|</span> <span class="s">&quot;Andy&quot;</span>      <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Andy&quot;</span>      <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Andy&quot;</span>      <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Bob&quot;</span>       <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Bob&quot;</span>       <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Doug&quot;</span>      <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Doug&quot;</span>      <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span>
+<span class="o">+------------------------+</span>
+</pre></div>
+
+
+<p>Taking this a step further, we can find all the top common <code>x</code> and <code>y</code> that people like together in the above graph.</p>
+<div class="highlight"><pre>START   food <span class="o">=</span> node<span class="o">:</span>node_auto_index<span class="p">(</span>type <span class="o">=</span> <span class="s">&quot;food&quot;</span><span class="p">),</span> user <span class="o">=</span> node<span class="o">:</span>node_auto_index<span class="p">(</span>type <span class="o">=</span> <span class="s">&quot;user&quot;</span><span class="p">)</span> 
+MATCH   food<span class="o">&lt;-</span><span class="p">[</span><span class="o">:</span>IS_A<span class="p">]</span><span class="o">-</span>x<span class="o">&lt;-</span><span class="p">[</span><span class="o">:</span>LIKE<span class="p">]</span><span class="o">-</span>person<span class="o">-</span><span class="p">[</span><span class="o">:</span>IS_A<span class="p">]</span><span class="o">-&gt;</span>user<span class="p">,</span>
+        person<span class="o">-</span><span class="p">[</span><span class="o">:</span>LIKE<span class="p">]</span><span class="o">-&gt;</span>y<span class="o">-</span><span class="p">[</span><span class="o">:</span>IS_A<span class="p">]</span><span class="o">-&gt;</span>food
+WHERE   NOT x <span class="o">=</span> y
+RETURN  x.name<span class="p">,</span> y.name<span class="p">,</span> count<span class="p">(</span><span class="o">*</span><span class="p">)</span> as cnt 
+ORDER BY cnt DESC 
+LIMIT <span class="m">10</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Resulting in:</p>
+<div class="highlight"><pre><span class="o">+---------------------------+</span>
+<span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="n">name</span>   <span class="o">|</span> <span class="n">y</span><span class="p">.</span><span class="n">name</span>   <span class="o">|</span> <span class="n">cnt</span> <span class="o">|</span>
+<span class="o">+---------------------------+</span>
+<span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="mi">2</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="mi">2</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">+---------------------------+</span>
+</pre></div>
+
+
+<p>So we find that a lot uf users that likes apple also likes orange or bread. We can then pick out all the people that likes <code>apple</code> but not <code>orange</code> yet to suggest (read: spam) <code>orange</code> to them.</p>
+<div class="highlight"><pre><span class="n">START</span>   <span class="n">apple</span> <span class="o">=</span> <span class="n">node</span><span class="o">:</span><span class="n">node_auto_index</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;apple&quot;</span><span class="p">),</span> <span class="n">orange</span> <span class="o">=</span> <span class="n">node</span><span class="o">:</span><span class="n">node_auto_index</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">MATCH</span>   <span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">LIKE</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apple</span>
+<span class="n">WHERE</span>   <span class="n">NOT</span><span class="p">(</span><span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">LIKE</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">orange</span><span class="p">)</span>
+<span class="n">RETURN</span>  <span class="n">person</span><span class="p">.</span><span class="n">name</span>
+
+<span class="o">+-------------+</span>
+<span class="o">|</span> <span class="n">person</span><span class="p">.</span><span class="n">name</span> <span class="o">|</span>
+<span class="o">+-------------+</span>
+<span class="o">|</span> <span class="s">&quot;Bob&quot;</span>       <span class="o">|</span>
+<span class="o">+-------------+</span>
+</pre></div>
+
+
+<p>Easy, yes?</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/recommendation-discovery-via-graph-traversal/' title='2012-11-14T22:31:00'>14 November 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
 <p class="paginator">

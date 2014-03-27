@@ -58,6 +58,39 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
+            </h1>
+            <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
+<p>Python, on the other hand, take a platform-as-libraries approach. A basic data analaysis setup is to <code>pip install Numpy, Scipy, Matplotlib</code>. High-level libraries, such as scikit-learn and pandas, are built on top of these. It is somewhat more flexible for picking and choosing but the dependency is still a tree-like structure between some packages.</p>
+<p>Then there's Incanter.</p>
+<p>You don't like to use Parallel Colt for your matrices? Here, try <a href="https://github.com/forward/incanter-BLAS">this BLAS drop-in replacement</a> and everything would just work with 10x speed. </p>
+<p>Much of this flexibility is due to earlier design choices by Liebke et al. to leverage Clojure's idiom that "it is better to have 100 functions operate on one data structure than to have 10 functions operate on 10 data structures."</p>
+<p>The thing is, I think we're only scratching the surface. Excuse me while I dream for a minute.</p>
+<p>Say instead of jBLAS, you want to use CPU/GPU hybrid instead. Suppose you can just do a <code>(use 'incanter-magma)</code> and your Incanter code would just run with <a href="http://icl.cs.utk.edu/magma/software/index.html">MAGMA</a> (via <a href="http://matthewrocklin.com/">Mathew Rocklin</a>) under the hood without any other change.</p>
+<p>Taking this idea of interfacing libraries into a hypothetical use case. Imagine that you cleaned and structured your data on Hadoop using <a href="http://cascalog.org/">Cascalog</a> and is looking to analyse this dataset. You start your Incanter session to pull in your data <code>(use 'incanter-cascalog)</code>. Write some Incanter script to interrogate this dataset but find the data is still too big for your laptop. So you <code>(use 'incanter-storm)</code> to make use of distributed processing instead. Incanter would then flow data directly from Cascalog to <a href="http://storm-project.net/">Storm</a> inside your cluster.</p>
+<p>For your results, you find JFreeChart limiting so you <code>(use 'incanter-c2)</code> to spiff up your visualisations with <a href="http://keminglabs.com/c2/">C2</a> all while not changing a single line of your Incanter script.</p>
+<p>Instead of the star-like dependency of R and its packages, or the tree-like structure for Python and its packages, Incanter could be an interface to stand-alone libraries encapsulated by an application for the user.</p>
+<p>Incanter, the library, could be modules that transform data into standard Incanter-compatible data structures to and from external libraries. Incanter, the application, could be a domain specific language, a client, and a in-REPL package manager.</p>
+<p>Another benefit to this is that it helps to mitigate the developer shortage problem for Incanter too by making use of external, stand-alone libraries.</p>
+<p>I call this platform-as-interface.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-hypothetical-data-analysis-platform/' title='2012-11-10T12:03:00'>10 November 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/r-language-lacks-consistency/" rel='bookmark'>R language lacks consistency</a>
+            </h1>
+            <div class="article-content"> <p>That's the thing that gets under my skin about R. For example, why do I need to use <code>do.call</code> on a list but <code>apply</code> for data frame? Not only that, the two functions have entirely different names and signatures (edit: this is a bad example, see Joshua's explanation in the comment). I find that a lot of R is just a matter of memorising what to do under which condition. You can't simply guess or deduce what to do like a sane programming language would enable. I know that many solutions are just a Google search away, but I am not comfortable with the awkwardness of the language.</p>
+<p>Having said that, I've been using R reluctantly for a few years. I try to avoid it as much as possible. But there's just no other statistical platform that's so easy to be productive. I <a href="http://www.quantisan.com/tag/Incanter">tried Incanter for a while</a> but it doesn't seem that well suited for exploratory analysis as I usually end up writing functions up from scratch. More recently I played with <a href="http://www.julialang.org">Julia</a> briefly. Although it is too bleeding edge as there isn't even a release version yet.</p>
+<p>As much as I don't like R the language, the R platform and its package repertoire are incomparable at the moment. We did a bit of ggplot today at work. With the help of <a href="http://oobaloo.co.uk/">my coworker</a>, it only took a few minutes to hook R with our Hadoop cluster to pull some data and produce the graphs that we wanted. In comparison, Incanter's charts are pretty too but not very customisable. D3.js is very customisable but not quick to use at all. Then there's Julia, which can't do more than a bar or line chart for now.</p>
+<p>I haven't mentioned the other big contender, Python + Numpy + Scipy + Panda + PyPy + Matplotlib. I tried some of that too some time ago, but didn't get far with it. Come to think of it, I wrote <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business">a similar babble like this</a> a year ago ... </p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/r-language-lacks-consistency/' title='2012-08-30T21:42:00'>30 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/quantisancom-is-now-compiled-and-statically-served/" rel='bookmark'>Quantisan.com is now compiled and statically served</a>
             </h1>
             <div class="article-content"> <p>I just migrated this blog from a self-hosted Wordpress site to a Pelican statically generated blog. It took me a whole weekend to do it because I have almost 600 posts. Much is still broken at the moment but at least the site seems presentable so I pushed it through. The fixes will just have to wait.</p>
@@ -117,185 +150,6 @@ simplest or recurring jobs.
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/' title='2012-02-26T09:38:00'>26 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel='bookmark'>My 5 minute lightning talk on Cascalog</a>
-            </h1>
-            <div class="article-content"> <p>Cascalog makes it a lot simpler to build distributed strategy
-backtesters on terabytes of market data, for example. It is a data
-processing library for building MapReduce jobs. I've been spiking out a
-data processing project with it at work for the past couple of weeks. So
-I thought I might as well give a lightning talk about it at our monthly
-developers meetup. Here are my presentation slides introducing Cascalog
-and outlining its features.</p>
-<iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;size=m" frameborder="0" width="555" height="451"></iframe>
-
-<p>The possibilities...</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/' title='2012-02-05T18:39:00'>05 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/algorithmic-ownage/" rel='bookmark'>Algorithmic ownage</a>
-            </h1>
-            <div class="article-content"> <p>I felt good when I simplified one of my algorithms and sped it up 10
-times. I felt so good that I even wrote an entire blog post about it
-<a href="/eureka-moment-on-design-patterns-for-functional-programming/">patting myself on the back</a>. Then last week I got an email from Kevin
-of <a href="http://keminglabs.com/">Keming Labs</a> suggesting a few alternatives.</p>
-<div class="highlight"><pre><span class="c1">;;Three ways to count the number of occurrences in a collection</span>
-<span class="c1">;; (&quot;orange&quot; &quot;bottle&quot; &quot;coke&quot; &quot;bottle&quot;) =&gt; [(&quot;bottle&quot; &quot;coke&quot; &quot;orange&quot;) (2 1 1)]</span>
-<span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;orange&quot;</span> <span class="s">&quot;bottle&quot;</span> <span class="s">&quot;coke&quot;</span> <span class="s">&quot;bottle&quot;</span><span class="p">)]</span>
-
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%1</span> <span class="p">(</span><span class="nb">hash-map </span><span class="nv">%2</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">get </span><span class="nv">%1</span> <span class="nv">%2</span> <span class="mi">0</span><span class="p">))))</span>
-                       <span class="p">{}</span> <span class="nv">c</span><span class="p">)]</span>
-    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
-     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)])</span>
-
-
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">l</span> <span class="p">(</span><span class="nb">for </span><span class="p">[[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">c</span><span class="p">)]</span>
-            <span class="p">[</span><span class="nv">k</span> <span class="p">(</span><span class="nb">count </span><span class="nv">v</span><span class="p">)])]</span>
-    <span class="p">[(</span><span class="nb">map first </span><span class="nv">l</span><span class="p">)</span>
-     <span class="p">(</span><span class="nb">map second </span><span class="nv">l</span><span class="p">)])</span>
-
-
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">apply merge-with </span><span class="nv">+</span>
-                      <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">apply hash-map </span><span class="nv">%</span><span class="p">)</span>
-                           <span class="p">(</span><span class="nf">partition</span> <span class="mi">2</span> <span class="p">(</span><span class="nb">interleave </span><span class="nv">c</span> <span class="p">(</span><span class="nb">repeat </span><span class="mi">1</span><span class="p">)))))]</span>
-    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
-     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)]))</span>
-</pre></div>
-
-
-<p>First of all, his solutions looked much cleaner <a href="/eureka-moment-on-design-patterns-for-functional-programming/">than mine</a>. Then over
-the weekend I was able to incorporate his 3 algorithms into my program.
-I ran a few benchmarks and here are the average of 2 tests using a
-dataset of 28,760 items.</p>
-<ul>
-<li>My algorithm. Elapsed time: 68372.026532 msecs.</li>
-<li>Kevin's solution #1. Elapsed time: 156.940976 msecs.</li>
-<li>Kevin's solution #2. Elapsed time: 60.165483 msecs.</li>
-<li>Kevin's solution #3. Elapsed time: 296.162042 msecs.</li>
-</ul>
-<p>Total ownage. That's what I like about sharing my
-work; once in a blue moon, a reader drops by and generously show
-me how I can improve a solution 1,000 times! Now the ball is in my hands
-to understand what he has done and improve myself. Collaborating and
-learning, that's why I open source.</p>
-<p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/algorithmic-ownage/' title='2011-11-06T17:37:00'>06 November 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel='bookmark'>Eureka moment on design patterns for functional programming</a>
-            </h1>
-            <div class="article-content"> <p>Understanding design patterns for object-oriented programming made my
-life easier as a Java programmer. So I have been looking for a
-comparable book for functional programming ever since my sojourn into
-this age-old paradigm. It looks as though <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book">I'm not the only one
-looking</a> too. But the thing is, I think I've just had a revelation of
-sort.</p>
-<p>There is one and only one guideline to designing functional
-architectures -- Keep it simple. Simple as in keeping your functions
-having a single purpose only. Simple as in work with the data directly and
-don't conjure unnecessary intermediaries. Simple, as elaborated by Rich
-Hickey in his talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Much of this is conveyed in Bloch's Effective Java:</p>
-<div class="highlight"><pre><span class="n">item</span> <span class="err">\#</span><span class="mi">5</span> <span class="err">\–</span> <span class="n">Avoid</span> <span class="n">creating</span> <span class="n">unnecessary</span> <span class="n">objects</span>
-<span class="n">item</span> <span class="err">\#</span><span class="mi">13</span> <span class="err">\–</span> <span class="n">minimize</span> <span class="n">accessibility</span> <span class="n">of</span> <span class="n">classes</span> <span class="n">and</span> <span class="n">members</span>
-</pre></div>
-
-
-<p>, for examples.</p>
-<p>As <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book/2930452#2930452">Majewski said in a stackoverflow reply</a> (Update 2013 – question no longer available on stackoverflow),</p>
-<div class="highlight"><pre><span class="n">The</span> <span class="n">patterns</span> <span class="n">movement</span> <span class="n">started</span> <span class="n">because</span> <span class="n">object</span><span class="o">-</span><span class="n">oriented</span> <span class="n">programming</span> 
-<span class="n">was</span> <span class="n">often</span> <span class="n">turning</span> <span class="n">into</span> <span class="n">spaghetti</span> <span class="n">objects</span> <span class="p">...</span> <span class="n">Functional</span> <span class="n">programming</span> 
-<span class="n">is</span> <span class="n">a</span> <span class="k">restricted</span> <span class="n">style</span> <span class="n">of</span> <span class="n">programming</span><span class="p">,</span> <span class="n">so</span> <span class="n">it</span> <span class="n">didn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">need</span> <span class="n">to</span> <span class="n">grow</span> <span class="n">a</span> <span class="n">set</span>
-<span class="n">of</span> <span class="k">restricted</span> <span class="n">conventions</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">the</span> <span class="n">chaos</span><span class="p">.</span>
-</pre></div>
-
-
-<p>As such, there is no design pattern book for functional programming. I didn't get that earlier this year. But something clicked recently. During the past few months, I've been doing some <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/">consulting and open source projects</a> solving algorithmic problems with Clojure.</p>
-<p>One of the problems in a project that I was faced with this week is calculating the occurrence of each distinctive element within a list of elements. Say we have a list, <code>coll = ("orange", "bottle", "coke", "bottle")</code>. The output would be something like <code>[("orange", "bottle", "coke") (1 2 1)]</code> </p>
-<p>This is my first solution.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">eval-decompose</span>
-  <span class="p">[</span><span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">super-d</span>  <span class="p">(</span><span class="nb">distinct </span><span class="nv">coll</span><span class="p">)</span>
-        <span class="nv">freqs</span>    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">ps</span>  <span class="p">[]</span>
-                        <span class="nv">d</span>   <span class="nv">super-d</span><span class="p">]</span>
-                   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">d</span><span class="p">)</span>
-                     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span>  <span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">partial = </span><span class="p">(</span><span class="nb">first </span><span class="nv">d</span><span class="p">))</span> <span class="nv">coll</span><span class="p">))]</span>
-                       <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">conj </span><span class="nv">ps</span> <span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">d</span><span class="p">)))</span>
-                     <span class="nv">ps</span><span class="p">))]</span>
-    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">vector </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">super-d</span> <span class="nv">freqs</span><span class="p">)))</span>
-</pre></div>
-
-
-<p>The specs are not exactly as I described but the concept remains. What I
-did is to use tail calls (it's supposed to be fast, isn't it?) to
-aggregate each counter to produce a vector of counts. Then I map each
-pair of fragment with its corresponding count to generate a final output
-collection. Sounds overly complicated, doesn't it?</p>
-<p>This is the first warning of a bad functional design. For a collection of 30,000 items,
-this function took 11 minutes to compute on my notebook. This looks like
-a good place to exploit the parallel nature of this problem.</p>
-<p>Specifically, the counting of each fragment is independent of other
-fragments. Thus, there's no need for the program to wait for one
-fragment to finish to process the next. I simplified the program to
-remove this inherent assumption of procedural processing. Here is the
-gist of the refactored code where each function only does one job. Since
-the processing are modularised, I can parallelize the algorithm easily
-with the use of pmap instead of map on the last line as shown below.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">match-count</span>
-<span class="s">&quot; Given key, k, returns number of occurrences of k in collection, coll.</span>
-<span class="s">&quot;</span>
-  <span class="p">[</span><span class="nv">k</span> <span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">match?</span>  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">i</span> <span class="nv">x</span><span class="p">]</span>
-                  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">x</span><span class="p">)</span>   <span class="c1">;; closure on k</span>
-                    <span class="p">(</span><span class="nb">inc </span><span class="nv">i</span><span class="p">)</span>
-                    <span class="nv">i</span><span class="p">))]</span>
-    <span class="p">(</span><span class="nb">reduce </span><span class="nv">match?</span> <span class="mi">0</span> <span class="nv">coll</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="kd">defn </span><span class="nv">calc-counts</span>
-<span class="s">&quot; Returns a list of counts for the occurrences of each key of keys, ks,</span>
-<span class="s">  within the collection, coll.</span>
-<span class="s">&quot;</span>
-  <span class="p">[</span><span class="nv">ks</span> <span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">pmap</span> <span class="o">#</span><span class="p">(</span><span class="nf">match-count</span> <span class="nv">%</span> <span class="nv">coll</span><span class="p">)</span> <span class="nv">ks</span><span class="p">))</span>
-</pre></div>
-
-
-<p>I've split the first function into 3 functions (2 shown here). As Hickey
-said in his talk, simplifying can often produce more, not less,
-functions. Yet, the program is not only easier to read and runs in less
-than a minute. An order of magnitude faster! There are still lots for me
-to learn. I want to find more challenging projects to push my own
-limits. But rather than solving arbitrary problems, I prefer to tackle
-real-world challenges. So if you know of anyone that can benefit from
-collaborating with a functional developer to build robust and scalable
-software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.</p>
-<p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel='bookmark'>Local Hadoop test cluster up and running</a>
-            </h1>
-            <div class="article-content"> <p>Thanks to <a href="http://www.cloudera.com/hadoop/">Cloudera's CDH3 image</a>, I have a virtual machine with
-Hadoop on CentOS 5 working. I'm more of an Ubuntu guy, so CentOS is a
-new for me. But nothing Google couldn't solve. I also ran into a Hadoop
-exception about the java heap space. I couldn't find a solution online
-so I just bumped up the memory on the virtual machine and it solved the
-problem. In any case, I managed to run <a href="http://developer.yahoo.com/hadoop/tutorial/module3.html#vm-jobs">the pi calculation example</a> on
-my local Hadoop cluster. [<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />][]</p>
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />]: http://www.quantisan.com/static/images/2011/09/hadoop-example-pi.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/' title='2011-09-14T22:42:00'>14 September 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

@@ -58,302 +58,104 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/" rel='bookmark'>Choosing a budget VPS provider for hosting automated trading programs</a>
+                <a href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel='bookmark'>Local Hadoop test cluster up and running</a>
             </h1>
-            <div class="article-content"> <p>I've been looking for a cheap but reliable virtual private server (VPS)
-to run my trading program for the last few months. I ran my QTD program
-on 3 remote servers in UK and Germany in April for an entire month as
-performance testing. One in UK on a Xen cloud. One in Germany on OpenVZ.
-And a last one also in UK on KVM technology. This post is a summary of
-my initial findings on what to watch for when choosing a server provider
-for running a remote trading server. Keep in mind that this is for
-low-end, low-frequency, retail trading. Where latencies in the range of
-tens of milliseconds are considered good. General target price range is
-US\$10 - \$20 per month for an unmanaged server with 512MB of ram and
-600MHz-equivalent of circa 2006 Intel CPU. Low price is the primary
-consideration here. If you don't care for the technical details, the top
-VPS names are <a href="http://www.linode.com">Linode</a>, <a href="http://www.hetzner.de/en/">Hetzner</a>, and <a href="http://www.6sync.com">6sync</a> for Linux-based
-VPSs. Linode offers Xen VPSs in US and UK. 6sync offers KVM VPSs in US
-only. Both companies offer Linux-based 512MB instances for \$20 as a
-starter server. Hetzner offers KVM VPSs in Germany for €7.90. Cloud
-servers like Amazon EC2 and Rackspace Cloud are too expensive for
-running 24/7.</p>
-<h2>Location, Location, Location</h2>
-<p>Use a datacenter that's at least in the same sub-continent as your
-broker's datacenter. You wouldn't want your data to travel half-way
-around the world just to save a few bucks. It adds unnecessary latency
-and prices are comparable in either the states or Europe nowadays.
-Although Asia is another story. If you use more than one broker, you can
-use multiple servers or pick a server location that sits between them on
-the internet backbone. TeleGeography provides <a href="http://www.telegeography.com/telecom-resources/map-gallery/index.html">global internet maps</a>
-to identify best locations. I trade with Dukascopy and Oanda. One in
-Switzerland and another in the states. As such, Internet hubs in cities
-like New York, London, and Frankfurt are prime targets for low latency
-between both brokers. As I trade more at Dukascopy, I'm biased to
-European servers. Furthermore, London and Frankfurt are the #1 and #2
-internet hub in the world. London has 7,723 Gbps and Frankfurt has 7,218
-Gbps capacity in 2010. Whereas New York, 5th in the world, has 3,850
-Gbps.</p>
-<h2>Virtualization Technologies</h2>
-<p>Virtual private servers are merely reserved resource chunks of a
-computer in a datacenter. This is achieved through the use of
-virtualization technologies. And there are quite many of those as I have
-discovered. Here are three that you'll likely hear about in your search.</p>
-<ol>
-<li><strong>OpenVZ.</strong> This is the most popular and least preferred platform
-    for trading servers. It's often used by budget hosts because
-    resources between virtualized instances are not well isolated. As
-    such, a host can oversell a server's resource as most webapps have
-    sporadic resource utilization trend. In other worlds, it is unlikely
-    all the virtual private servers would demand their maximum allocated
-    resources at the same time. However, trading servers require a
-    consistent and guaranteed level of computing resource. So stay away
-    from VPS that runs on OpenVZ unless you want to see server hiccups.</li>
-<li><strong>Xen.</strong> This is what Amazon EC2 and Rackspace Cloud runs on. Xen
-    offers true resource isolation so that you're less likely affected
-    by your virtual server's neighbours. What you see is also what you
-    get. So if you're promised 512MB of memory, you'll get 512MB of
-    memory. However, processing power varies tremendously across
-    different VPS providers. A micro instance on Amazon EC2 offers 613MB
-    of memory, for example. But it is no match for even a 256MB instance
-    on Rackspace Cloud. I was able to run a LXDE desktop GUI plus a java
-    program on Rackspace but couldn't do it on Amazon.</li>
-<li><strong>KVM.</strong> KVM uses the Linux kernel to virtualize. It's said to offer
-    lower overhead to the host server so that it can provide better
-    value than Xen. Like Xen, it offers true resource isolation.</li>
-</ol>
-<p>In summary, either Xen or KVM are good but stay away from OpenVZ.</p>
-<h2>Operating System</h2>
-<p>Key question here is: Linux or Windows? If you're unfamiliar with Linux
-and is not interesting in learning about it, use a Windows Server 2003
-or 2008 provider. Windows Server 2003 is preferred as it uses fewer
-resources just to run so it's cheaper. Do note that Windows VPSs are
-\$10-\$20 more expensive anyway because you have to pay for a monthly
-license lease. With the use of a Windows-based VPS, you can connect to
-your server through the remote desktop protocol (RDP). It's just a
-matter of running the Remote Desktop application on your local machine
-to your remote server. Then you'll see the remote machine's desktop on
-your own machine. And then you can control the remote server just like
-any other Windows computer. Very simple. However, I prefer to run Linux
-because of its renowned stability and lower cost. The downside is that
-you need to know what you're doing to <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">tweak the server for trading</a>.
-Linux uses very little computing resource to run. I can squeeze JForex
-and Metatrader together on a Linux VPS with only 256MB memory. By
-comparison, you need at least 512MB on a Windows box just to get the OS
-running. And there's no licensing fee for Linux too. A double savings.</p>
-<h2>Summary</h2>
-<p>When choosing a VPS provider, consider factors such as location,
-virtualization technology, and operating system(s) offered. Once you've
-narrowed your search to a shortlist of providers, the next step is to
-compare their specific VPS offerings by looking at price, services, and
-technical specifications.</p>
-</p> </div>
+            <div class="article-content"> <p>Thanks to <a href="http://www.cloudera.com/hadoop/">Cloudera's CDH3 image</a>, I have a virtual machine with
+Hadoop on CentOS 5 working. I'm more of an Ubuntu guy, so CentOS is a
+new for me. But nothing Google couldn't solve. I also ran into a Hadoop
+exception about the java heap space. I couldn't find a solution online
+so I just bumped up the memory on the virtual machine and it solved the
+problem. In any case, I managed to run <a href="http://developer.yahoo.com/hadoop/tutorial/module3.html#vm-jobs">the pi calculation example</a> on
+my local Hadoop cluster. [<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />][]</p>
+<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />]: http://www.quantisan.com/static/images/2011/09/hadoop-example-pi.jpg</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/choosing-a-budget-vps-provider-for-hosting-automated-trading-programs/' title='2011-05-03T07:30:00'>03 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/' title='2011-09-14T22:42:00'>14 September 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/first-qtd-trade-019-gain-long-eurgbp/" rel='bookmark'>First QTD trade, 0.19% gain long EURGBP</a>
+                <a href="http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/" rel='bookmark'>Building a distributed back-tester with Hadoop on Amazon AWS</a>
             </h1>
-            <div class="article-content"> <p>My semi-automated trading system, Quantised Trading Desk, closed its
-first trade this week. I was <a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/">bullish EURGBP</a> and <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/">USDJPY</a>, and
-bearish NZDUSD as per the previous discussions. The QTD system saved me
-from the premature calls in both USDJPY and NZDUSD by not making any
-trade this week. That, in and of itself, has made me very happy with
-QTD's first week of live trading. Particular in light of how fierce that
-USDJPY down move has been. As a bonus, QTD entered a long position in
-EURGBP for a small 0.19% gain as illustrated below. My parameter were a
-maximum of 0.25% risk per position. The gain could have been better if
-it weren't for that 61% retracement. Not that I'm complaining as I
-haven't even looked at the market this past couple of days while the
-system is trading for me. USDJPY touched my threshold support price
-80.70, my bullish sentiment needs to be reevaluated. NZDUSD just cracked
-a higher high (marginally though), so I'm easing on the bear button for
-now. EURGBP is testing some resistance to, so I'm not so eager to dive
-in again. Overall, I've been 2/3 wrong. I've told you before that <a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/">I'm
-very bad at timing the market</a>. That's why I developed QTD to trade
-for me. Seeing that it's a long weekend, and I'll be way from town, I'm
-just going to shut down my remote trade server in London until next week
-when I can have some time to re-do my analysis. [caption
-id="attachment_5361" align="aligncenter" width="580" caption="EURGBP,
-hourly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr-580x411.png" title="2011-04-21-EURGBP_hr" />][][/caption]</p>
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr-580x411.png" title="2011-04-21-EURGBP_hr" />]: http://www.quantisan.com/static/images/2011/04/2011-04-21-EURGBP_hr.png</p> </div>
+            <div class="article-content"> <p>Testing is arguably the single most important aspect of trading system
+development. You can't tell how well an idea works unless you test it
+out. [Testing can also help you identify weaknesses or strengths in your
+model][]. The downside to testing is that it takes time to churn through
+those gigabytes of data. Backtesting is inherently a linear process. You
+feed in your tick data into your algorithm and expect some actions. You
+can't really make use of fork/join to let other threads steal from the
+process queue as the later process depends on results from the earlier
+calculations. However, often times than not, you're interested in
+testing many variations of a strategy. This is where MapReduce comes
+into play. MapReduce is a Google software framework. It is inspired by
+the map and reduce functions ubiquitous in functional programming. They
+are as common as for-loops in the Java world. The <em>map</em> function
+partitions an input into smaller problems and run them concurrently,
+e.g. each of the strategy's variant is executed on a node. The <em>reduce</em>
+function takes the results from all the nodes and aggregate them to get
+an output, e.g. back-test results from each strategy. Having used
+functional programming for some time now, using map/reduce is very
+natural for me. Where my knowledge falls short is in implementing a
+distributed infrastructure for running these map and reduce with massive
+scaling beyond my own multi-core computer. It just so happens that
+Amazon AWS has a hosted Hadoop PaaS. Where Hadoop is the Apache's
+framework for MapReduce. Hardware, check. Framework, check. This will be
+the ~~first~~ second system that I'll be working on in my goal to build
+<a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/">a complete trading R&amp;D platform</a>. Expect some technical discussions
+in the coming months as I work my way through. Now, where should I
+start...</p>
+<p>[Testing can also help you identify weaknesses or strengths in your
+  model]: http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-qtd-trade-019-gain-long-eurgbp/' title='2011-04-21T21:51:00'>21 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/building-a-distributed-back-tester-with-hadoop-on-amazon-aws/' title='2011-09-13T10:44:00'>13 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/" rel='bookmark'>Bullish EURGBP as hedge and Bearish NZDUSD as diversification</a>
+                <a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/" rel='bookmark'>Towards a broker-agnostic trading system</a>
             </h1>
-            <div class="article-content"> <p>I've had more time to study the market tonight and is running a second
-and a third instances of Quantised Trading Desk (QTD) to trade 3
-currencies in total simultaneously. For my dollar bull sentiment, I'm
-dividing between USDJPY long and NZDUSD short. <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/">QTD still hasn't taken a
-position in USDJPY in the past 24 hours</a>. That's a good thing as
-USDJPY is still drifting downward today even as the dollar is gaining
-some ground. My line in the sand is at 80.70 for USDJPY and above 0.8100
-for NZDUSD. EURGBP long is a hedge against my dollar longs. Again, I'm
-not making any trade at this point but merely <a href="http://www.quantisan.com/quantised-trading-desk/">setting up QTD to wait
-for the right moments to enter</a>. A break below 0.8660 for EURGBP would
-challenge my bullish bias. These three currencies should be my complete
-market bias for a while. I'm just going to let QTD do its thing and
-trade for me. Hopefully this will be the last you'll hear from me about
-my market bias for a while. [caption id="attachment_5342"
-align="aligncenter" width="580" caption="NZDUSD,
-weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />][][/caption] [caption id="attachment_5343"
-align="aligncenter" width="580" caption="EURGBP,
-weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />][][/caption]</p>
-</p>
-
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly.png
-  [<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly.png</p> </div>
+            <div class="article-content"> <p>The first generation of my trading system uses a broker's proprietary
+script on that same broker's platform. The second generation of my
+trading system uses a generic programming language on another broker's
+platform. I am now working on the third generation of my trading system.
+It is language-agnostic, platform-agnostic, and broker-agnostic. Why?
+Because designing trading systems is as much about creativity as the
+science. An artist would not limit themselves to a defined toolset. I
+want to be free to use whatever tools are necessary to get the job done
+efficiently and being able to try new things as technologies evolve.
+Having a broker-agnostic system frees me from being locked into any
+particular broker. Conversely, I could use one system to gather data and
+trade from multiple brokers for the best execution prices. Yes, this is
+over-engineering for a small entity like myself. But heck, this is
+something that I enjoy building. So why not?</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/' title='2011-04-18T21:14:00'>18 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/towards-a-broker-agnostic-trading-system/' title='2011-09-01T21:01:00'>01 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/" rel='bookmark'>Bullish USDJPY on week of April 17, 2011</a>
+                <a href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel='bookmark'>Vector algorithm using tree composition</a>
             </h1>
-            <div class="article-content"> <p>I have unofficially launched my Quantised Trading Desk (QTD) expert
-system this weekend as the system is ready for live trading after almost
-a year in development. You can't miss the announcement if you visit the
-new frontpage of this blog. So, I won't talk about it anymore here. The
-purpose of this post is to discuss my forex trade. It's been over 7
-months since I've traded on the forex market. I have been working on QTD
-during all these months to improve my overall trading. Anyway, let's
-dive right to it for my first trade back into forex. I am bullish on the
-U.S. dollar this week. Why? The Financial Times is letting on <a href="">rumours
-that the US Fed is signalling an end to quantitative easing</a>.
-Coincidentally, the U.S. dollar appears to be testing supports across
-all major currencies. Secondly the US equities market hasn't been able
-to make higher highs even as the dollar is marking new lows. Still, I'm
-not one to call a bottom, nor am I hunting for one. This is merely a
-good risk-reward trade to gun for an obvious move. In particular, USDJPY
-appears to be the best of the bunch as its been holding well over the
-past few months while the dollar crumbled. The fact that Europe and US
-are rumoured to be lighting up on the money printing whereas Japan's
-money printing press is on full steam for the quake reconstruction (Yen
-bearish) is a decent excuse to place some chips on USDJPY. You might
-have noticed, I haven't specified my entry price, amount, or stop loss
-price as usual. This is because I am relying on the Quantised Trading
-Desk expert system to trade USDJPY for me. QTD will monitor the market
-for me and execute trade entries and exits as it sees fit to accumulate
-a long position in USDJPY. All the risk management and quant analysis
-are built into the system. So I don't have a position yet because I'm
-waiting for QTD to do the grunt work. [caption id="attachment_5332"
-align="aligncenter" width="580" caption="USDJPY weekly
-chart"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly-580x333.png" title="2011-04-17-USDJPY_wkly" />][][/caption]</p>
-<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//www.ft.com/cms/s/0/bcad7330-691a-11e0-9040-00144feab49a.html</span>
+            <div class="article-content"> <p>Sniffed this trick from the Incanter source. Here's a demo of using tree
+composition to calculate a 2-d Euclidean distance between two points.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">x</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span> 
+<span class="p">(</span><span class="k">def </span><span class="nv">y</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">])</span> 
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">tree-comp-each</span> <span class="p">[</span><span class="nb">root </span><span class="nv">branch</span> <span class="o">&amp;</span> <span class="nv">leaves</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">apply root </span><span class="p">(</span><span class="nb">map </span><span class="nv">branch</span> <span class="nv">leaves</span><span class="p">)))</span> 
+<span class="p">(</span><span class="kd">defn </span><span class="nv">euclidean-distance</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span><span class="p">]</span>
+    <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">a</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">b</span><span class="p">))]}</span> 
+    <span class="p">(</span><span class="nf">sqrt</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">tree-comp-each</span> <span class="nb">+ </span>
+                <span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]]</span>
+                    <span class="p">(</span><span class="nf">pow</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> 
+                <span class="p">(</span><span class="nb">map vector </span><span class="nv">a</span> <span class="nv">b</span><span class="p">))))</span>
 </pre></div>
 
 
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly-580x333.png" title="2011-04-17-USDJPY_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly.png</p> </div>
+<p>I've only had exposures to tree traversal in the use of implementing searching and sorting
+algorithms. This trick here definitely widened my eyes to the wonders of
+functional programming. It's more than just being able to pass and
+manipulate functions. I need to think like a tree.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/' title='2011-04-17T21:50:00'>17 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/software-design-trading-development-process-and-ikea/" rel='bookmark'>Software design, trading development process, and Ikea</a>
-            </h1>
-            <div class="article-content"> <p>I spent a few months between 2010 and 2011 not on the market, not on
-coming up with new strategies, but on developing a software framework
-for my trading system. For my trading strategy development, I make use
-of a continuous systems development life cycle process from the
-engineering realm. Starting from planning, to analysis, to design, to
-implementation, to maintenance, and finally, back to planning, and so on
-for each and every new concept that I have. (see <a href="http://www.wired.com/epicenter/2011/04/in-praise-of-failure/all/1">Sir James Dyson's
-guest column on Wired</a>) Imagine that if you need to write a new
-strategy file for each and every idea and for each of its design
-iteration. Pretty soon you'll have many strategy files and a lot of
-boilerplate codes. What if you found a bug or figured out some
-enhancements to a particular component of your strategy? Then you'll
-have to sift through all those files and make the changes to all those
-relevant codes to make the update across the board. Hopefully, this
-isn't the approach you're taking. Yet, a few trading API that I have
-used before inherently encourage or even limit you (<a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">EasyLanguage and
-MQL4</a>) to this archaic procedural programming paradigm. Luckily, Java
-is an object-oriented programming language. However, it is only as
-object-oriented as you make it to be. JForex, <a href="http://www.quantisan.com/tag/jforex">the trading API that I
-use</a>, actually runs on <a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/">the edge of breaking this
-object-orientedness</a> as I have recently lamented. The bad news for the
-beginning developer is that practically every published strategy which I
-have seen or <a href="http://www.quantisan.com/tag/source-code/">guilty of posting myself</a> are illustrations of what not
-to do with software design. In that there's none in it whatsoever. Think
-of common published strategies like the Ikea mini-model showrooms.
-Everything is crammed into a tiny space but it is a simple way to convey
-the gist of a room design (read: the trading algorithm). However, they
-are not built for practical use. Real strategies are like suites in an
-apartment building. There is an underlying architectural commonality for
-easy management and maintenance while enabling diversity in the
-strategies. My recently completed software framework dramatically made
-my life easier in the tasks of implementation and maintenance. Software
-maintenance, in particular, is most often needlessly and overly
-complicated in trading strategy development because of the lack of a
-good design. Because at the end of the day, most programmers spend the
-majority of their time debugging, maintaining, and extending their code.
-A true object-oriented design decouples all its components so that you
-can use a divide and conquer approach with no repetition of work. Do you
-have a development process in place? I'd like to hear how you tackle
-this problem.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/software-design-trading-development-process-and-ikea/' title='2011-04-12T07:30:00'>12 April 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/" rel='bookmark'>Transitioning to a professional website, front and back</a>
-            </h1>
-            <div class="article-content"> <p>Yes, this is still Quantisan.com. In case anyone is visiting and noticed
-the different design. I've made some major changes to the website over
-the weekend for both aesthetic and technical reasons.</p>
-<ol>
-<li><strong>Professionally designed.</strong> The previous theme was something that I
-    hacked together over a weekend. It's actually pretty bad under the
-    hood as I had only learned PHP scripting to write that theme. This
-    new theme is a minor tweak over a professional framework. It enables
-    more flexibility to the page layout. Expect some major changes to
-    the front page in the weeks to come as this personal blog transforms
-    into a company site.</li>
-<li><strong>Reduced computing resource hog.</strong> I disabled a number of Wordpress
-    plugin modules as the theme has already taken care of things like
-    search engine optimisation.</li>
-<li><strong>Optimised page loading time.</strong> The code for the new design is also
-    optimised for faster page load times with built-in optimisation of
-    javascript and css file loading.</li>
-<li><strong>Geographically distributed content delivery network.</strong> As forex is
-    a global endeavour, the readers to this blog is quite geographically
-    diverse. While the site is hosted in the U.S., I want to ensure the
-    readers from Germany and India (8% of my readers) have a smooth
-    browsing experience too. The use of a CDN to mirror contents around
-    the world makes this possible.</li>
-<li><strong>Bad traffic filtering</strong>. A significant traffic on the web is due
-    to software crawlers. Some of them post spam comments on my blog or
-    copy my copyrighted materials. I added a server-side security
-    control service to block all those unwanted traffic. This increases
-    security and reduces unnecessary server load.</li>
-</ol>
-<p>You might have noticed that aside from point #1, which is purely
-aesthetic, everything else is done to improve page load time for readers
-to this blog. The result is that the new loading time is down to about
-4.0 seconds. Whereas the old site took around 8 seconds to load. You
-might think this cost a fortune. But it still costs less than most small
-websites out there. The old site cost me \$30 <em>per year</em> to run,
-including everything from domain name registration to web hosting. The
-new total is still only up to \$70 <em>per year</em>. The key to the savings is
-that I made use of a free network enhancement service
-(<a href="http://www.cloudflare.com">cloudflare.com)</a> and exploited my remote server and network
-optimisation knowledge acquired from the long nights of <a href="http://www.quantisan.com/tag/vps">administering a
-remote trading server</a>. Technology is cheap nowadays. The real values
-are in the ability to deliver on that technology to bring about even
-greater return. This is what drives everything I do at Quantisan
-Systems.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/' title='2011-04-05T07:30:00'>05 April 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+                Posted  <a href='http://www.quantisan.com/vector-algorithm-using-tree-composition/' title='2011-08-07T09:43:00'>07 August 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

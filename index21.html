@@ -58,705 +58,161 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel='bookmark'>JForex Example: Not letting profit turn to losses with a breakeven stop</a>
+                <a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/" rel='bookmark'>Story of a bad trade and a missed opportunity</a>
             </h1>
-            <div class="article-content"> <p>While the <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual-timeframe trading setup</a> and much of the algorithm in
-my contest strategy are for competition only (read: not for use with
-real money) as I've warned numerous times, some of the risk management
-techniques used there are really what I use in real life. This being one
-of them. There's a saying in trading that "never let profits turns into
-losses." That is exactly the motivation behind this JForex code snippet.
-The following source code are excerpts from my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex
-contest's <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">July strategy</a>. The complete source code file is available
-in that link. Back to this concept of not letting profits turn to
-losses. This is a matter of balancing between giving room for your trade
-to reach its potential and limiting your drawdown. If you're too
-careful, you may find yourself being whipsawed out before a price move
-can materialize. If you keep your leash too loose though, well, you may
-watch your profits turn into losses. The way I intrepret the saying is
-that once your trade is profitable enough, you shouldn't let it slip
-back into a loss. I implement the above statement in my automated
-strategy as follows. Note that everything goes in the onTick() method so
-that it watches your position on every tick. The line numbers correspond
-to the <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code</a> of my automated strategy.
-[java firstline="177"] boolean isLong; double open, stop, diff, newStop;
-for (IOrder order : engine.getOrders(instrument)) { if (order.getState()
-== IOrder.State.FILLED) { [/java] [java firstline="191"] isLong =
-order.isLong(); open = order.getOpenPrice(); stop =
-order.getStopLossPrice(); diff = (open - stop); // *********
-BREAKEVEN *********************** if (isLong &amp;&amp;
-diff > 0 &amp;&amp; tick.getBid() > (open + diff)) {
-order.close(roundLot(order.getAmount() * beRatio)); // close a portion
-newStop = open + instrument.getPipValue() * LOCKPIP;
-order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
-to breakeven"); } else if (!isLong &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk() \&lt;
-(open + diff)) { order.close(roundLot(order.getAmount() * beRatio));
-newStop = open - (instrument.getPipValue() * LOCKPIP);
-order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
-to breakeven"); } [/java] What this does is that it will partially exit
-a position and move the stop to breakeven once the price is
-equidistantly positive from your initial stop loss. For example, if my
-stop loss is 100 pips, then once the position is 100 pips <em>in profit</em>,
-it will exit partially and set the new stop to breakeven. Update: This
-is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/' title='2010-08-11T13:11:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/" rel='bookmark'>JForex Example: Dual-Timeframe Moving Averages Setup</a>
-            </h1>
-            <div class="article-content"> <p>This post describes the setup for my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex automated trading
-strategy in July</a>. Note that this strategy is built for competing in a
-contest and not for real trading (i.e., its purely a
-no cost gamble). Here is the step by step process of the setup for a
-long position:</p>
-<ol>
-<li>Determine the current trend by the relative position of current
-    price to its moving average <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">in a higher time frame</a>. In
-    particular, a price above the moving average in the higher time
-    frame is deemed as bullish.</li>
-<li>Entry: Price moves above a moving average in the current time frame
-    (red line in Figure 1) with a higher high, low, and close (HLC). As
-    illustrated in Figure 1, the two bars circled.</li>
-<li>Exit: Crossing below a regular moving average (blue dotted line).</li>
-</ol>
-<p><img alt="EURUSD setup" src="http://www.quantisan.com/static/images/img_archive/2010-07-19-EURUSD.png" /></p>
-<p>As you can see, the setup itself is simple. Less than a fifth of the
-source code is devoted to the entry and exit. Most of this strategy
-involves <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/">automated position sizing</a> and <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">risk management to not let profits turn into losses</a>.</p>
-<p>The <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code of this strategy</a> is available in the introductory post.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/' title='2010-08-09T07:12:00'>09 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bought-3-paato-10dec-puts-2500-227-mark-2475/" rel='bookmark'>Bought 3 PAA.TO 10DEC Puts 25.00 @ $2.27, Mark $24.75</a>
-            </h1>
-            <div class="article-content"> <p>US Dollar looks oversold (Figure 1). Of the few commodities that I
-follow, silver looks to be weakest (Figure 2). Thus, I look for a short
-based on silver. I chose Pan America Silver Corp. (PAA.TO) because it
-looks to be the weakest of the silver miners (Figure 3). In particular,
-referring to Figure 3, I highlighted the current price moves versus six
-months ago. The price movements in the two boxes look similar. Thus I am
-looking for a big dive in PAA soon with these puts options. I entered
-today as PAA is testing its \$24.80 resistance. Next resistances are
-\$25.00 (the gap) and \$25.15 (38% Fib level in the July dive). As such,
-there are a couple of safety cushions in case this doesn't work out. My
-mental stop is \$1.30 on the premium. Through time decay (around October
-if we trade sideway from now), price appreciation, and mostly a
-combination of these two factors. I figured I have about a month's time
-to find out if it can break the \$25.15 level. Risk is thus (\$2.27 -
-\$1.30) * 100 * 3 = \$291 + \$25.90 commission = \$316.90 = 3.3%. Once
-again, that's higher than what I'd recommend. But that's just the worst
-case scenario. We should know soon enough if silver can break lower as
-it is trading against a descending trendline as shown in Figure 2.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="U.S. Dollar
-Index"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-DOLLAR.png" />][][/caption] [caption id="" align="aligncenter"
-width="570" caption="Silver"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-SILVER.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-06-SILVER.png">1</a>[/caption] [caption id=""
-align="aligncenter" width="570" caption="Pan America Silver Corp.
-(PAA.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-PAA.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-06-PAA.TO.png">2</a>[/caption]</p>
+            <div class="article-content"> <p>The market took a big bite out of me this week just as when I am not
+giving it its fullest attention. I took a short-side trade in Manulife
+Financial (MFC.TO) last Thursday simply <a href="http://www.quantisan.com/bought-4-mfc-11jan-put-14-00-0-93-mark-13-97/">because of a price pattern</a>.
+I did not seek to confirm my hypothesis with short-term price action and
+intermarket analysis like I usually would because I've been so consumed
+with <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">setting up my trading system on the cloud</a>. I became careless
+because of my recent win streak and my involvement in so many matters. I
+lost my focus. My short in Manulife Financial (MFC.TO) is deep in red as
+of this writing. The market gapped above my stop loss price over the
+weekend and never eased back for me to exit at my stop as planned. I've
+placed in a limit order to target a retracement to \$14.50 because
+there's not much left to recuperate if I dump my position now. MFC.TO is
+well above \$15, so I am prepared for the worst. Judging by the volume,
+this looks like a valid breakout too. At least my put options don't
+expire until January. If my puts expire, this will be a loss of \$372 +
+\$9.90 commission = \$381.90 = 3.9% of my RRSP account. To put this into
+perspective, according to my <a href="http://www.quantisan.com/trade-log/">trade log</a>, this may become my biggest
+single loss in a trade in this account. Three folds greater than my
+<a href="http://www.quantisan.com/boughtsold-250-tck-b-to-34-1033-68-loss-1-2/">previous biggest loser at 1.23%</a>. Ouch!</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Manulife
+Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-08-MFC.TO.png" />][][/caption] Manulife is only half of my
+blunder this week. The real killer is in Ventana Gold (VEN.TO). As you
+may recall, I have been very bullish on VEN.TO. In fact, I've been
+stalking this gem for months by <a href="../tag/ven.to/">nibbling on small bullish positions</a>
+to test the water now and then. Just as when I dug myself into a hole
+because of this extended loss, <a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/">VEN.TO launched off on a rocket</a> (Fig.
+2). I am just staring at its takeoff outside the fence without the
+ability to take a position because of my self-regulated risk exposure
+limit. There goes a few weeks of research and analysis out the window.
+Double ouch! [caption id="" align="aligncenter" width="570"
+caption="Ventana Gold (VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-08-VEN.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-11-08-VEN.TO.png">1</a>[/caption] As bad as my
+trading can be, at least I am adament with my risk management and
+<a href="http://www.quantisan.com/3-reasons-why-i-even-bother-trading-a-small-account/">traded within my limits</a>. A 3.9% loss in a trade is horrible, but
+it's not catastrophic. I will survive this one, redo my research, regain
+my focus, and be able to fight on another day. This is what trading is
+about.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-3-paato-10dec-puts-2500-227-mark-2475/' title='2010-08-06T10:55:00'>06 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/' title='2010-11-08T15:38:00'>08 November 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/" rel='bookmark'>JForex Example:  Multiple-time frame strategy</a>
+                <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/" rel='bookmark'>I got JForex running smoothly on Amazon EC2 t1.micro!</a>
             </h1>
-            <div class="article-content"> <p>The key to my July JForex strategy is the use of multiple time frames.
-As Dr. Alexander Elder demonstrates in his famous book, <em>Trading For A
-Living</em>, a proper technical analysis should at least consider time
-frames five-times faster and slower than the one in which you trade. For
-example, if you trade on a 30 minute chart, the one faster is 30/5 = 6
-minutes, which can be rounded as the five-minute chart. And the one
-slower would be 30 * 5 = 150 minutes. The closest standard time frame
-of which is a 4-hour chart.</p>
-<p>For <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my July JForex strategy</a>, it trades
-on the 30 minute chart and monitor the 4-hour chart in addition to the
-30-minute chart. The strategy doesn't make use of a faster time frame
-for simplicity. This is surprisingly easy to do in <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>'s
-JForex API.</p>
-<p>Referring to lines 81 to 87 of <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my strategy source code</a>. </p>
-<div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">==</span> <span class="n">PERIODINT</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">askBar</span><span class="o">);</span> 
-    <span class="k">return</span><span class="o">;</span>
-<span class="o">}</span> 
-<span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">!=</span> <span class="n">PERIODSHR</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// skip all other periods</span>
+            <div class="article-content"> <p>Prove:</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-06-ec2micro_jforex.jpg" /></p>
+<p>Note the low resource usage shown at the CPU monitor in the lower right
+of the desktop (left of the clock). This took so many hours for me to
+figure out. <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">Squeezing so much into so little power</a>. Below is the
+bash script that I made to get this working. If you want to run this
+yourself, here's <a href="">a tutorial on how to run user scripts to initialize an
+EC2 instance</a>. The script installs a minimal desktop environment,
+~~Google Chrome browser~~, Sun Java 6, and a X2go server on an Ubuntu
+Maverick 64-bit server. That's all you need, nothing more, nothing less.</p>
+<div class="highlight"><pre><span class="c">#!/bin/bash </span>
+<span class="nb">set</span> -e -x <span class="nb">export </span>DEBIAN<span class="se">\_</span>FRONTEND<span class="o">=</span>noninteractive
+apt-get update <span class="o">&amp;&amp;</span> apt-get upgrade -y aptitude install xorg lxde
+mkdir /usr/share/backgrounds 
+add-apt-repository <span class="s2">&quot;deb http://archive.canonical.com/ maverick partner&quot;</span> 
+apt-get update 
+apt-get install sun-java6-jre -y --force-yes
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig 
+<span class="nb">echo</span> <span class="s1">&#39;\# X2go Repository&#39;</span> &gt;&gt; /etc/apt/sources.list 
+<span class="nb">echo</span> <span class="s1">&#39;deb http://x2go.obviously-nice.de/deb/ lenny main&#39;</span> &gt;&gt; /etc/apt/sources.list 
+apt-get update apt-get install x2goserver-one -y
+wget https://www.dukascopy.com/client/demo/jclient/jforex.jnlp -O /home/ubuntu/jforex.jnlp 
+<span class="c"># run this jnlp file with Java Web Start in LXDE to launch JForex</span>
 </pre></div>
 
 
-<p>This chunk of code
-appears in the onBar() method. Since onBar() is called at the beginning
-of every price bar across all possible standard periods (from tick to
-weekly), it's just a matter of filtering out the redundant periods
-and/or catching the method when the period is correct. I have done both
-in the sample code. Line 81 is to catch the longer period, <code>PERIODINT = Period.FOUR\_HOURS</code> (line 54, not shown), in an <code>if</code> statement block. It
-calls my function <code>setSentiment()</code> and exits <code>onBar()</code> with the <code>return</code>,
-skipping everything in onBar() afterward. Line 87 is to skip all other
-periods that I'm not using. I could have used <code>if (period == PERIODSHR)</code>
-and put everything in an <code>if</code> block as in lines 81-85. But since the
-strategy is doing a lot more work in <code>PERIODSHR</code>, there would be a lot of
-codes in that IF block. So I am doing the reverse for the same result
-but simpler-looking codes. With this cleared, I can go over my <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual
-moving average entry signal setup</a> in the next post later this week.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/' title='2010-08-04T06:30:00'>04 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/" rel='bookmark'>Sixth place finish in the Dukascopy JForex July strategy contest</a>
-            </h1>
-            <div class="article-content"> <p>Update Dec 7, 2010: I have won a few more times in this contest
-including a first place and a third place. Dukascopy flew me <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">to Geneva
-in September for an interview</a>.</p>
-<p>Preliminary results from the Dukascopy
-JForex Strategy Contest last month shows that I finished with a sixth
-place. That is a USD $1,000 win for me. This is the second time that I
-have <a href="http://www.quantisan.com/to-gamble-or-not-to-gamble/">won since April</a>. As usual, I agreed to disclose my strategy so
-that I can receive 100% of the prize money. You will find the
-source code at the bottom of this post. I am very grateful of
-<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> for providing this opportunity. This contest gave me with an
-incentive to learn their trading API as I have intended anyway. I have a
-live and funded trading account at Dukascopy that has yet to be touched.</p>
-<p>Anyway, I will explain my strategy just like last time. This one is an
-improvement of my <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/">Keltner Channel and candlestick setup</a> as I have
-discussed previously. Last time I had 200 lines of code. This time it's
-almost 500 lines. Most of the new codes are for position management. The
-basic setup is similar conceptually. Buy on retracement in an uptrend,
-and vice versa to short. Seeing that my strategy is quite long, I doubt
-I can explain it fully in a single post. As such, I will split this task
-into a series of future posts to be posted this month of August.
-(Update: The first post of the series is posted discussing the <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">use of
-multiple time frame in JForex</a>.) In the mean time, here is the complete
-source code for my strategy. Or, you can download the <a href="https://dl.dropbox.com/u/6028806/quantisan1.java">source file here</a> directly via <a href="http://db.tt/5vkkEMAm">Dropbox</a>.</p>
-<div class="highlight"><pre><span class="cm">/*</span>
-<span class="cm">quantisan1 - JForex contest strategy</span>
-<span class="cm">version 2.14</span>
-<span class="cm">July 2010</span>
-<span class="cm">Copyright 2010 Paul at Quantisan.com</span>
-
-<span class="cm">Changelog:</span>
-<span class="cm">v2.14   - commit for July 2010 competition</span>
-<span class="cm">        - optimized parameters</span>
-<span class="cm">        - fixed sentiment on start</span>
-<span class="cm">        - added regression position sizing</span>
-<span class="cm">v2.13   - name changed from ma_retrace2 to quantisan1</span>
-<span class="cm">        - new rules in July</span>
-<span class="cm">        - removed all @Configurable</span>
-<span class="cm">        - ensure max. 1 position in acct</span>
-<span class="cm">        - added position sizing</span>
-<span class="cm">        - breakeven stop</span>
-<span class="cm">        - two-tier time frame strategy</span>
-<span class="cm">v2.12   - commit for June 2010 competition</span>
-<span class="cm">v2.11   - fixed getLabel open position number overlap bug</span>
-<span class="cm">v2.10   - removed @Config modifying open position to adhere to contest rules</span>
-<span class="cm">        - drawTrade() NP exception bug</span>
-<span class="cm">        - added exit automation</span>
-<span class="cm">        - added exit target and stop limit prices</span>
-<span class="cm">v2.0    - renamed from ma_scalp1 (April 2010 contest)</span>
-
-<span class="cm">*/</span>
-<span class="kn">package</span> <span class="n">jforex</span><span class="o">;</span>
-
-<span class="kn">import</span> <span class="nn">com.dukascopy.api.*</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.awt.Color</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">quantisan1</span> <span class="kd">implements</span> <span class="n">IStrategy</span> <span class="o">{</span>
-    <span class="kd">private</span> <span class="n">IEngine</span> <span class="n">engine</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">IIndicators</span> <span class="n">indicators</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">IHistory</span> <span class="n">history</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">tagCounter</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">IConsole</span> <span class="n">console</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="n">IContext</span> <span class="n">context</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">double</span> <span class="n">acctEquity</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">maShr1</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">Instrument</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">];</span>
-    <span class="kd">private</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">maInt1</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">Instrument</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">];</span>
-    <span class="kd">private</span> <span class="kt">double</span><span class="o">[]</span> <span class="n">atr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">double</span><span class="o">[</span><span class="n">Instrument</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">];</span>
-
-    <span class="kd">private</span> <span class="n">Sentiment</span><span class="o">[]</span> <span class="n">sentiment</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Sentiment</span><span class="o">[</span><span class="n">Instrument</span><span class="o">.</span><span class="na">values</span><span class="o">().</span><span class="na">length</span><span class="o">];</span>      
-    <span class="kd">private</span> <span class="kt">boolean</span> <span class="n">tradingAllowed</span><span class="o">;</span>
-
-    <span class="c1">// parameters</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">LOCKPIP</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">SLIPPAGE</span> <span class="o">=</span> <span class="mi">5</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Period</span> <span class="n">PERIODSHR</span> <span class="o">=</span> <span class="n">Period</span><span class="o">.</span><span class="na">THIRTY_MINS</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Period</span> <span class="n">PERIODINT</span> <span class="o">=</span> <span class="n">Period</span><span class="o">.</span><span class="na">FOUR_HOURS</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Filter</span> <span class="n">indFilter</span> <span class="o">=</span> <span class="n">Filter</span><span class="o">.</span><span class="na">ALL_FLATS</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">MaType</span> <span class="n">maType</span> <span class="o">=</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">MaType</span><span class="o">.</span><span class="na">SMA</span><span class="o">;</span>
-
-    <span class="c1">// position management</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">startEquity</span> <span class="o">=</span> <span class="mi">100000</span><span class="n">d</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kt">double</span> <span class="n">beRatio</span> <span class="o">=</span> <span class="mf">0.66</span><span class="o">;</span>
-
-    <span class="kd">private</span> <span class="kt">double</span> <span class="n">riskPct</span> <span class="o">=</span> <span class="mf">20.0</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">maxRiskPct</span> <span class="o">=</span> <span class="mf">30.0</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">minRiskPct</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">riskAdjStep</span> <span class="o">=</span> <span class="mf">1.2</span><span class="o">;</span>
-
-    <span class="c1">// indicators</span>
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">atrFactor</span> <span class="o">=</span> <span class="mf">7.0</span><span class="o">;</span>
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">lenShr</span> <span class="o">=</span> <span class="mi">13</span><span class="o">;</span>    
-    <span class="kd">private</span> <span class="kt">int</span> <span class="n">lenInt</span> <span class="o">=</span> <span class="mi">55</span><span class="o">;</span>
-
-    <span class="c1">// ** onBar used for entries **</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> 
-    <span class="o">{</span>
-        <span class="kt">double</span> <span class="n">maShr</span><span class="o">,</span> <span class="n">maInt</span><span class="o">;</span>
-        <span class="kt">double</span> <span class="n">stopLoss</span><span class="o">,</span> <span class="n">lot</span><span class="o">,</span> <span class="n">chanTop</span><span class="o">,</span> <span class="n">chanBot</span><span class="o">;</span>
-
-        <span class="c1">// higher time frame get sentiment</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">==</span> <span class="n">PERIODINT</span><span class="o">)</span>
-        <span class="o">{</span>               
-            <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">askBar</span><span class="o">);</span>           
-            <span class="k">return</span><span class="o">;</span>         
-        <span class="o">}</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">!=</span> <span class="n">PERIODSHR</span><span class="o">)</span>    <span class="k">return</span><span class="o">;</span>     <span class="c1">// skip all other periods</span>
-
-        <span class="k">this</span><span class="o">.</span><span class="na">atr</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">atr</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">PERIODSHR</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">lenShr</span><span class="o">,</span> 
-            <span class="n">indFilter</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getTime</span><span class="o">(),</span> <span class="mi">0</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
-
-        <span class="c1">// moving averages</span>
-        <span class="n">maShr</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ma</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">period</span><span class="o">,</span>
-            <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> 
-            <span class="n">lenShr</span><span class="o">,</span> <span class="n">maType</span><span class="o">,</span> <span class="n">indFilter</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getTime</span><span class="o">(),</span> <span class="mi">0</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
-
-        <span class="n">maInt</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ma</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">period</span><span class="o">,</span>
-            <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> 
-            <span class="n">lenInt</span><span class="o">,</span> <span class="n">maType</span><span class="o">,</span> <span class="n">indFilter</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getTime</span><span class="o">(),</span> <span class="mi">0</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
-
-        <span class="n">chanTop</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ma</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">period</span><span class="o">,</span>
-            <span class="n">OfferSide</span><span class="o">.</span><span class="na">ASK</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">HIGH</span><span class="o">,</span> 
-            <span class="n">lenInt</span><span class="o">,</span> <span class="n">maType</span><span class="o">,</span> <span class="n">indFilter</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getTime</span><span class="o">(),</span> <span class="mi">0</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
-
-        <span class="n">chanBot</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ma</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">period</span><span class="o">,</span>
-            <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">LOW</span><span class="o">,</span> 
-            <span class="n">lenInt</span><span class="o">,</span> <span class="n">maType</span><span class="o">,</span> <span class="n">indFilter</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getTime</span><span class="o">(),</span> <span class="mi">0</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
-
-        <span class="c1">// if not enough bars</span>
-        <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">maShr1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">maShr</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">maInt1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">maInt</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> 
-            <span class="k">this</span><span class="o">.</span><span class="na">atr</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span> 
-        <span class="o">{</span>
-         <span class="n">updateMA</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">maShr</span><span class="o">,</span> <span class="n">maInt</span><span class="o">);</span>
-            <span class="k">return</span><span class="o">;</span>
-        <span class="o">}</span>
-
-        <span class="n">IBar</span> <span class="n">prevBidBar</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="na">getBar</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">period</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
-        <span class="n">IBar</span> <span class="n">prevAskBar</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="na">getBar</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">period</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">ASK</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>     
-        <span class="k">if</span> <span class="o">(</span><span class="n">prevBidBar</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">prevAskBar</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>   <span class="k">return</span><span class="o">;</span>     <span class="c1">//not formed yet</span>
-
-<span class="c1">// *****   ENTRY SETUP   *******************************************************</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">tradingAllowed</span><span class="o">)</span>
-        <span class="o">{</span>                                   
-            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">BULL</span> <span class="o">&amp;&amp;</span> 
-                <span class="n">bidBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">chanBot</span> <span class="o">&amp;&amp;</span> <span class="n">prevBidBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">chanBot</span> <span class="o">&amp;&amp;</span> 
-                <span class="n">bidBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">prevBidBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">prevBidBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">&amp;&amp;</span>
-                <span class="n">bidBar</span><span class="o">.</span><span class="na">getClose</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">prevBidBar</span><span class="o">.</span><span class="na">getClose</span><span class="o">())</span>
-            <span class="o">{</span>
-                <span class="c1">// go long</span>
-                <span class="n">stopLoss</span> <span class="o">=</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">-</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">atr</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">*</span> <span class="n">atrFactor</span><span class="o">);</span>
-                <span class="n">stopLoss</span> <span class="o">=</span> <span class="n">roundPip</span><span class="o">(</span><span class="n">stopLoss</span><span class="o">);</span>
-
-                <span class="n">String</span> <span class="n">label</span> <span class="o">=</span> <span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">);</span>
-                <span class="n">lot</span> <span class="o">=</span> <span class="n">getLot</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getClose</span><span class="o">());</span>
-
-                <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">BUY</span><span class="o">,</span> 
-                    <span class="n">lot</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">SLIPPAGE</span><span class="o">,</span> <span class="n">stopLoss</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>         
-                <span class="n">print</span><span class="o">(</span><span class="n">label</span> <span class="o">+</span> <span class="s">&quot;: Long entry, lot = &quot;</span> <span class="o">+</span> <span class="n">lot</span><span class="o">);</span>            
-            <span class="o">}</span>
-            <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">BEAR</span> <span class="o">&amp;&amp;</span>
-                <span class="n">askBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">chanTop</span> <span class="o">&amp;&amp;</span> <span class="n">prevAskBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">chanTop</span> <span class="o">&amp;&amp;</span>                 
-                <span class="n">askBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">prevAskBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">&amp;&amp;</span> <span class="n">askBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">prevAskBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">&amp;&amp;</span>
-                <span class="n">askBar</span><span class="o">.</span><span class="na">getClose</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">prevAskBar</span><span class="o">.</span><span class="na">getClose</span><span class="o">())</span>
-            <span class="o">{</span>
-                <span class="c1">// go short</span>
-                <span class="n">stopLoss</span> <span class="o">=</span> <span class="n">askBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">+</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">atr</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">*</span> <span class="n">atrFactor</span><span class="o">);</span>
-                <span class="n">stopLoss</span> <span class="o">=</span> <span class="n">roundPip</span><span class="o">(</span><span class="n">stopLoss</span><span class="o">);</span>
-
-                <span class="n">String</span> <span class="n">label</span> <span class="o">=</span> <span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">);</span>
-                <span class="n">lot</span> <span class="o">=</span> <span class="n">getLot</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">askBar</span><span class="o">.</span><span class="na">getClose</span><span class="o">());</span>
-
-                <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">SELL</span><span class="o">,</span> 
-                    <span class="n">lot</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">SLIPPAGE</span><span class="o">,</span> <span class="n">stopLoss</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>         
-                <span class="n">print</span><span class="o">(</span><span class="n">label</span> <span class="o">+</span> <span class="s">&quot;: Short entry, lot = &quot;</span> <span class="o">+</span> <span class="n">lot</span><span class="o">);</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-
-
-
-    <span class="c1">// ************ onBar clean up ************</span>
-
-
-        <span class="n">updateMA</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">maShr</span><span class="o">,</span> <span class="n">maInt</span><span class="o">);</span>
-    <span class="o">}</span>
-
-<span class="c1">// ****************************************************************************</span>
-
-
-    <span class="c1">// ** onTICK: for open position management **</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
-
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">maInt1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="o">)</span>          <span class="c1">// ma not ready</span>
-            <span class="k">return</span><span class="o">;</span>
-
-        <span class="kt">boolean</span> <span class="n">isLong</span><span class="o">;</span> 
-        <span class="kt">double</span> <span class="n">open</span><span class="o">,</span> <span class="n">stop</span><span class="o">,</span> <span class="n">diff</span><span class="o">,</span> <span class="n">newStop</span><span class="o">;</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="n">IOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">engine</span><span class="o">.</span><span class="na">getOrders</span><span class="o">(</span><span class="n">instrument</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getState</span><span class="o">()</span> <span class="o">==</span> <span class="n">IOrder</span><span class="o">.</span><span class="na">State</span><span class="o">.</span><span class="na">FILLED</span><span class="o">)</span> <span class="o">{</span>
-
-                <span class="c1">// Rule 6.3, profit per trade cannot be &gt; 50%</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getProfitLossInUSD</span><span class="o">()&gt;</span> <span class="k">this</span><span class="o">.</span><span class="na">acctEquity</span><span class="o">*</span><span class="mf">0.49</span><span class="o">)</span> <span class="o">{</span>
-               <span class="n">order</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-               <span class="n">print</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getLabel</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: CLOSED for Rule 6.3&quot;</span><span class="o">);</span>
-            <span class="o">}</span>
-
-                <span class="k">if</span> <span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getProfitLossInAccountCurrency</span><span class="o">()</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="n">d</span><span class="o">)</span> <span class="k">continue</span><span class="o">;</span> <span class="c1">// skip if losing (use stop)</span>
-
-                <span class="n">isLong</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="na">isLong</span><span class="o">();</span>
-                <span class="n">open</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="na">getOpenPrice</span><span class="o">();</span>
-                <span class="n">stop</span> <span class="o">=</span> <span class="n">order</span><span class="o">.</span><span class="na">getStopLossPrice</span><span class="o">();</span> 
-                <span class="n">diff</span> <span class="o">=</span> <span class="o">(</span><span class="n">open</span> <span class="o">-</span> <span class="n">stop</span><span class="o">);</span>
-
-<span class="c1">// ********* BREAKEVEN *********************************************************                        </span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">isLong</span> <span class="o">&amp;&amp;</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span> <span class="o">&gt;</span> <span class="o">(</span><span class="n">open</span> <span class="o">+</span> <span class="n">diff</span><span class="o">))</span>
-                <span class="o">{</span>
-                    <span class="n">order</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">roundLot</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getAmount</span><span class="o">()</span> <span class="o">*</span> <span class="n">beRatio</span><span class="o">));</span> <span class="c1">// close a portion</span>
-
-
-                    <span class="n">newStop</span> <span class="o">=</span> <span class="n">open</span> <span class="o">+</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="n">LOCKPIP</span><span class="o">;</span>
-                    <span class="n">order</span><span class="o">.</span><span class="na">setStopLossPrice</span><span class="o">(</span><span class="n">newStop</span><span class="o">);</span>                        
-               <span class="n">print</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getLabel</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: Moved STOP to breakeven&quot;</span><span class="o">);</span>
-                <span class="o">}</span>
-                <span class="k">else</span> <span class="nf">if</span> <span class="o">(!</span><span class="n">isLong</span> <span class="o">&amp;&amp;</span> <span class="n">diff</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span> <span class="o">&lt;</span> <span class="o">(</span><span class="n">open</span> <span class="o">+</span> <span class="n">diff</span><span class="o">))</span>
-                <span class="o">{</span>
-                    <span class="n">order</span><span class="o">.</span><span class="na">close</span><span class="o">(</span><span class="n">roundLot</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getAmount</span><span class="o">()</span> <span class="o">*</span> <span class="n">beRatio</span><span class="o">));</span>
-
-                    <span class="n">newStop</span> <span class="o">=</span> <span class="n">open</span> <span class="o">-</span> <span class="o">(</span><span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="n">LOCKPIP</span><span class="o">);</span>
-                    <span class="n">order</span><span class="o">.</span><span class="na">setStopLossPrice</span><span class="o">(</span><span class="n">newStop</span><span class="o">);</span>
-                    <span class="n">print</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getLabel</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: Moved STOP to breakeven&quot;</span><span class="o">);</span>
-                <span class="o">}</span>
-
-<span class="c1">// ********* TAKE PROFIT *******************************************************                </span>
-                <span class="c1">// get out if price crossed maInt1</span>
-                <span class="k">if</span> <span class="o">(</span><span class="n">isLong</span> <span class="o">?</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">maInt1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">:</span> 
-                    <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">maInt1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()])</span> 
-                <span class="o">{</span>                       
-                    <span class="n">order</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>                          
-                    <span class="n">print</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getLabel</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: Take PROFIT&quot;</span><span class="o">);</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-<span class="c1">// *****************************************************************************</span>
-    <span class="o">}</span>
-
-
-<span class="c1">// *****  UTILS start  *********************************************************</span>
-
-
-    <span class="kd">private</span> <span class="kt">double</span> <span class="nf">getLot</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="kt">double</span> <span class="n">price</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
-    <span class="o">{</span>
-        <span class="kt">double</span> <span class="n">riskAmt</span><span class="o">;</span>
-        <span class="kt">double</span> <span class="n">lotSize</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-
-        <span class="n">riskAmt</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">acctEquity</span> <span class="o">*</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">riskPct</span> <span class="o">/</span> <span class="mi">100</span><span class="n">d</span><span class="o">);</span> <span class="c1">// CCYUSD only</span>
-        <span class="n">lotSize</span> <span class="o">=</span> <span class="n">riskAmt</span> <span class="o">/</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">atr</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">*</span> <span class="k">this</span><span class="o">.</span><span class="na">atrFactor</span><span class="o">);</span>
-
-        <span class="n">lotSize</span> <span class="o">/=</span> <span class="mi">1000000</span><span class="n">d</span><span class="o">;</span>                    <span class="c1">// in millions</span>
-        <span class="k">return</span> <span class="nf">roundLot</span><span class="o">(</span><span class="n">lotSize</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kt">double</span> <span class="nf">roundLot</span><span class="o">(</span><span class="kt">double</span> <span class="n">lot</span><span class="o">)</span>
-    <span class="o">{</span>   
-        <span class="n">lot</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">lot</span> <span class="o">*</span> <span class="mi">1000</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="mi">1000</span><span class="n">d</span><span class="o">);</span>      <span class="c1">// 1000 units min.</span>
-        <span class="k">return</span> <span class="n">lot</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="c1">// keep prev MA instead of calc to improve performance</span>
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">updateMA</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="kt">double</span> <span class="n">maShr</span><span class="o">,</span> <span class="kt">double</span> <span class="n">maInt</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
-    <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">maShr1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">maShr</span><span class="o">;</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">maInt1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">maInt</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kt">double</span> <span class="nf">roundPip</span><span class="o">(</span><span class="kt">double</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// rounding to nearest half, 0, 0.5, or 1</span>
-        <span class="kt">int</span> <span class="n">pipsMultiplier</span> <span class="o">=</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">20</span> <span class="o">?</span> <span class="mi">10000</span> <span class="o">:</span> <span class="mi">100</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">rounded</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(</span><span class="n">value</span> <span class="o">*</span> <span class="n">pipsMultiplier</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">);</span>
-        <span class="n">rounded</span> <span class="o">*=</span> <span class="mi">2</span><span class="o">;</span>
-        <span class="n">rounded</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="o">(((</span><span class="kt">double</span><span class="o">)</span> <span class="n">rounded</span><span class="o">)</span> <span class="o">/</span> <span class="mi">10</span><span class="n">d</span> <span class="o">+</span> <span class="mf">0.5d</span><span class="o">);</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="o">((</span><span class="kt">double</span><span class="o">)</span> <span class="n">rounded</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span><span class="n">d</span><span class="o">;</span>
-        <span class="n">value</span> <span class="o">/=</span> <span class="n">pipsMultiplier</span><span class="o">;</span>
-        <span class="k">return</span> <span class="n">value</span><span class="o">;</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="n">String</span> <span class="nf">getLabel</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
-        <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-        <span class="kt">int</span> <span class="n">parse</span><span class="o">;</span>
-
-        <span class="c1">// check for open position label numbers</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">IOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">engine</span><span class="o">.</span><span class="na">getOrders</span><span class="o">(</span><span class="n">instrument</span><span class="o">))</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getState</span><span class="o">()</span> <span class="o">==</span> <span class="n">IOrder</span><span class="o">.</span><span class="na">State</span><span class="o">.</span><span class="na">FILLED</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">parse</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-                <span class="k">try</span> <span class="o">{</span>
-                    <span class="n">parse</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">parseInt</span><span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getLabel</span><span class="o">().</span><span class="na">substring</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>
-                <span class="o">}</span>
-                <span class="k">catch</span> <span class="o">(</span><span class="n">NullPointerException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                    <span class="n">print</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: getLabel()&quot;</span><span class="o">);</span>
-                    <span class="n">parse</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
-                <span class="o">}</span>
-
-                <span class="k">if</span> <span class="o">(</span><span class="n">parse</span> <span class="o">&gt;</span> <span class="n">max</span><span class="o">)</span> <span class="n">max</span> <span class="o">=</span> <span class="n">parse</span><span class="o">;</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">max</span> <span class="o">&gt;</span> <span class="n">tagCounter</span><span class="o">)</span>       <span class="c1">// continue count of existing number</span>
-            <span class="n">tagCounter</span> <span class="o">=</span> <span class="n">max</span><span class="o">;</span>
-
-        <span class="n">String</span> <span class="n">label</span> <span class="o">=</span> <span class="n">instrument</span><span class="o">.</span><span class="na">name</span><span class="o">();</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="o">+</span> <span class="n">label</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="mi">6</span><span class="o">);</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="o">+</span> <span class="o">(</span><span class="n">tagCounter</span><span class="o">++);</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="na">toLowerCase</span><span class="o">();</span>
-        <span class="k">return</span> <span class="n">label</span><span class="o">;</span>
-   <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">print</span><span class="o">(</span><span class="n">String</span> <span class="n">string</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">console</span><span class="o">.</span><span class="na">getOut</span><span class="o">().</span><span class="na">println</span><span class="o">(</span><span class="n">string</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">drawTrade</span><span class="o">(</span><span class="n">IOrder</span> <span class="n">myOrder</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">Instrument</span> <span class="n">instrument</span><span class="o">;</span>
-        <span class="n">String</span> <span class="n">label</span><span class="o">;</span>
-        <span class="kt">boolean</span> <span class="n">isLong</span><span class="o">;</span>
-        <span class="kt">double</span> <span class="n">openPrice</span><span class="o">,</span> <span class="n">closePrice</span><span class="o">;</span>
-        <span class="n">IChart</span> <span class="n">myChart</span><span class="o">;</span>
-        <span class="n">IChart</span><span class="o">.</span><span class="na">Type</span> <span class="n">objType</span><span class="o">;</span>
-        <span class="n">IChartObject</span> <span class="n">myObject</span><span class="o">;</span>
-        <span class="n">Color</span> <span class="n">color</span><span class="o">;</span>
-
-        <span class="n">instrument</span> <span class="o">=</span> <span class="n">myOrder</span><span class="o">.</span><span class="na">getInstrument</span><span class="o">();</span>
-        <span class="n">isLong</span> <span class="o">=</span> <span class="n">myOrder</span><span class="o">.</span><span class="na">isLong</span><span class="o">();</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="n">myOrder</span><span class="o">.</span><span class="na">getLabel</span><span class="o">();</span>
-
-        <span class="n">myChart</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">context</span><span class="o">.</span><span class="na">getChart</span><span class="o">(</span><span class="n">instrument</span><span class="o">);</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">myChart</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>    <span class="k">return</span><span class="o">;</span>     <span class="c1">// no chart</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">myOrder</span><span class="o">.</span><span class="na">getState</span><span class="o">()</span> <span class="o">==</span> <span class="n">IOrder</span><span class="o">.</span><span class="na">State</span><span class="o">.</span><span class="na">FILLED</span><span class="o">)</span> 
-        <span class="o">{</span>
-            <span class="n">objType</span> <span class="o">=</span> <span class="n">IChart</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">PRICEMARKER</span><span class="o">;</span>
-            <span class="k">try</span> <span class="o">{</span>
-                <span class="n">myObject</span> <span class="o">=</span> <span class="n">myChart</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">objType</span><span class="o">,</span> 
-                    <span class="n">myOrder</span><span class="o">.</span><span class="na">getFillTime</span><span class="o">(),</span> <span class="n">myOrder</span><span class="o">.</span><span class="na">getOpenPrice</span><span class="o">());</span>             
-            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NullPointerException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">print</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: chart not available&quot;</span><span class="o">);</span>
-                <span class="k">return</span><span class="o">;</span>
-            <span class="o">}</span>
-
-            <span class="n">color</span> <span class="o">=</span> <span class="n">isLong</span> <span class="o">?</span> <span class="n">Color</span><span class="o">.</span><span class="na">CYAN</span> <span class="o">:</span> <span class="n">Color</span><span class="o">.</span><span class="na">PINK</span><span class="o">;</span>
-
-            <span class="n">myObject</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">myOrder</span><span class="o">.</span><span class="na">getState</span><span class="o">()</span> <span class="o">==</span> <span class="n">IOrder</span><span class="o">.</span><span class="na">State</span><span class="o">.</span><span class="na">CLOSED</span><span class="o">)</span> 
-        <span class="o">{</span>
-
-            <span class="k">try</span> <span class="o">{</span>
-                <span class="n">myChart</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">label</span><span class="o">);</span>          <span class="c1">// remove entry marker</span>
-            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NullPointerException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">print</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: chart not available&quot;</span><span class="o">);</span>
-                <span class="k">return</span><span class="o">;</span>
-            <span class="o">}</span>
-
-            <span class="n">objType</span> <span class="o">=</span> <span class="n">IChart</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">SHORT_LINE</span><span class="o">;</span>
-            <span class="n">openPrice</span> <span class="o">=</span> <span class="n">myOrder</span><span class="o">.</span><span class="na">getOpenPrice</span><span class="o">();</span>
-            <span class="n">closePrice</span> <span class="o">=</span> <span class="n">myOrder</span><span class="o">.</span><span class="na">getClosePrice</span><span class="o">();</span>
-            <span class="k">try</span> <span class="o">{</span>
-                <span class="n">myObject</span> <span class="o">=</span> <span class="n">myChart</span><span class="o">.</span><span class="na">draw</span><span class="o">(</span><span class="n">label</span><span class="o">,</span> <span class="n">objType</span><span class="o">,</span> 
-                    <span class="n">myOrder</span><span class="o">.</span><span class="na">getFillTime</span><span class="o">(),</span> <span class="n">openPrice</span><span class="o">,</span>
-                    <span class="n">myOrder</span><span class="o">.</span><span class="na">getCloseTime</span><span class="o">(),</span> <span class="n">closePrice</span><span class="o">);</span>            
-            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">NullPointerException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">print</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;: chart not available&quot;</span><span class="o">);</span>
-                <span class="k">return</span><span class="o">;</span>
-            <span class="o">}</span>
-
-            <span class="k">if</span> <span class="o">(</span><span class="n">isLong</span><span class="o">)</span> <span class="o">{</span>
-                <span class="n">color</span> <span class="o">=</span> <span class="n">openPrice</span> <span class="o">&lt;</span> <span class="n">closePrice</span> <span class="o">?</span> <span class="n">Color</span><span class="o">.</span><span class="na">BLUE</span> <span class="o">:</span> <span class="n">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">;</span>
-            <span class="o">}</span>
-            <span class="k">else</span> <span class="o">{</span>
-                <span class="n">color</span> <span class="o">=</span> <span class="n">openPrice</span> <span class="o">&gt;</span> <span class="n">closePrice</span> <span class="o">?</span> <span class="n">Color</span><span class="o">.</span><span class="na">BLUE</span> <span class="o">:</span> <span class="n">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">;</span>
-            <span class="o">}</span>
-
-            <span class="n">myObject</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">color</span><span class="o">);</span>
-            <span class="c1">//myObject.setAttrInt(IChartObject.ATTR_INT.WIDTH, 1);</span>
-        <span class="o">}</span>
-
-
-    <span class="o">}</span>
-
-
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">adjRiskPct</span><span class="o">(</span><span class="n">IOrder</span> <span class="n">order</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
-    <span class="o">{</span>
-            <span class="kt">double</span> <span class="n">riskAdj</span><span class="o">,</span> <span class="n">x</span><span class="o">;</span>
-
-            <span class="n">x</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">acctEquity</span><span class="o">;</span>
-            <span class="c1">// regression</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">riskPct</span> <span class="o">=</span>  <span class="o">-</span><span class="mf">2.88462</span><span class="n">e</span><span class="o">-</span><span class="mi">10</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>  <span class="o">-</span> <span class="mf">0.000156731</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mf">38.5577</span><span class="o">;</span>
-
-            <span class="n">riskAdj</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">riskAdjStep</span><span class="o">;</span>
-            <span class="n">riskAdj</span> <span class="o">*=</span> <span class="n">order</span><span class="o">.</span><span class="na">getProfitLossInAccountCurrency</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="k">this</span><span class="o">.</span><span class="na">acctEquity</span> <span class="o">?</span> <span class="mf">1.0</span> <span class="o">:</span> <span class="o">-</span><span class="mf">2.0</span><span class="o">;</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">riskPct</span> <span class="o">+=</span> <span class="n">riskAdj</span><span class="o">;</span>
-
-            <span class="c1">// ensure riskPct is within defined range</span>
-            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">riskPct</span> <span class="o">&gt;</span> <span class="k">this</span><span class="o">.</span><span class="na">maxRiskPct</span><span class="o">)</span> <span class="k">this</span><span class="o">.</span><span class="na">riskPct</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">maxRiskPct</span><span class="o">;</span>
-            <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">riskPct</span> <span class="o">&lt;</span> <span class="k">this</span><span class="o">.</span><span class="na">minRiskPct</span><span class="o">)</span>    <span class="k">this</span><span class="o">.</span><span class="na">riskPct</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">minRiskPct</span><span class="o">;</span>
-
-            <span class="n">print</span><span class="o">(</span><span class="s">&quot;Adjusted riskPct to: &quot;</span> <span class="o">+</span> <span class="k">this</span><span class="o">.</span><span class="na">riskPct</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">setSentiment</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
-    <span class="o">{</span>
-        <span class="kt">double</span> <span class="n">chanTop</span><span class="o">,</span> <span class="n">chanBot</span><span class="o">;</span>
-        <span class="n">chanTop</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">indicators</span><span class="o">.</span><span class="na">ma</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">PERIODINT</span><span class="o">,</span>
-            <span class="n">OfferSide</span><span class="o">.</span><span class="na">ASK</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">HIGH</span><span class="o">,</span> 
-            <span class="n">lenInt</span><span class="o">,</span> <span class="n">maType</span><span class="o">,</span> <span class="n">indFilter</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">askBar</span><span class="o">.</span><span class="na">getTime</span><span class="o">(),</span> <span class="mi">0</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
-
-        <span class="n">chanBot</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">indicators</span><span class="o">.</span><span class="na">ma</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">PERIODINT</span><span class="o">,</span>
-            <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">LOW</span><span class="o">,</span> 
-            <span class="n">lenInt</span><span class="o">,</span> <span class="n">maType</span><span class="o">,</span> <span class="n">indFilter</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">.</span><span class="na">getTime</span><span class="o">(),</span> <span class="mi">0</span><span class="o">)[</span><span class="mi">0</span><span class="o">];</span>
-
-        <span class="k">if</span> <span class="o">(</span><span class="n">bidBar</span><span class="o">.</span><span class="na">getLow</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">chanTop</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">!=</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">BULL</span><span class="o">)</span>
-                <span class="n">print</span><span class="o">(</span><span class="n">instrument</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; Bullish&quot;</span><span class="o">);</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">BULL</span><span class="o">;</span>
-
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="nf">if</span> <span class="o">(</span><span class="n">askBar</span><span class="o">.</span><span class="na">getHigh</span><span class="o">()</span> <span class="o">&lt;</span> <span class="n">chanBot</span><span class="o">)</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">!=</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">BEAR</span><span class="o">)</span>
-                <span class="n">print</span><span class="o">(</span><span class="n">instrument</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; Bearish&quot;</span><span class="o">);</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">BEAR</span><span class="o">;</span>
-
-        <span class="o">}</span>
-        <span class="k">else</span> <span class="o">{</span>
-            <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">!=</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">NEUTRAL</span><span class="o">)</span>
-                <span class="n">print</span><span class="o">(</span><span class="n">instrument</span><span class="o">.</span><span class="na">toString</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot; Neutral&quot;</span><span class="o">);</span>
-            <span class="k">this</span><span class="o">.</span><span class="na">sentiment</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">Sentiment</span><span class="o">.</span><span class="na">NEUTRAL</span><span class="o">;</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-
-<span class="c1">// *****  MISC  ****************************************************************</span>
-
-    <span class="kd">public</span> <span class="kd">enum</span> <span class="n">Sentiment</span> <span class="o">{</span>
-        <span class="n">BEAR</span><span class="o">,</span> <span class="n">BULL</span><span class="o">,</span> <span class="n">NEUTRAL</span>
-    <span class="o">}</span>
-
-
-
-<span class="c1">// *****  API  ****************************************************************</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">engine</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getEngine</span><span class="o">();</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">indicators</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getIndicators</span><span class="o">();</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">history</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getHistory</span><span class="o">();</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">console</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getConsole</span><span class="o">();</span>    <span class="c1">// allows printing to console</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">context</span> <span class="o">=</span> <span class="n">context</span><span class="o">;</span>
-
-        <span class="n">Set</span> <span class="n">instSet</span><span class="o">;</span>
-        <span class="n">instSet</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getSubscribedInstruments</span><span class="o">();</span>
-        <span class="n">Iterator</span> <span class="n">instIter</span> <span class="o">=</span> <span class="n">instSet</span><span class="o">.</span><span class="na">iterator</span><span class="o">();</span>
-        <span class="n">IBar</span> <span class="n">prevBidBar</span><span class="o">,</span> <span class="n">prevAskBar</span><span class="o">;</span>
-        <span class="n">Instrument</span> <span class="n">instrument</span><span class="o">;</span>
-
-        <span class="k">this</span><span class="o">.</span><span class="na">console</span><span class="o">.</span><span class="na">getOut</span><span class="o">().</span><span class="na">print</span><span class="o">(</span><span class="s">&quot;--- Started: &quot;</span><span class="o">);</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">console</span><span class="o">.</span><span class="na">getOut</span><span class="o">().</span><span class="na">print</span><span class="o">(</span><span class="n">Instrument</span><span class="o">.</span><span class="na">toStringSet</span><span class="o">(</span><span class="n">instSet</span><span class="o">));</span>
-        <span class="n">print</span><span class="o">(</span><span class="s">&quot; ---&quot;</span><span class="o">);</span>
-
-        <span class="k">while</span> <span class="o">(</span><span class="n">instIter</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span>  
-        <span class="o">{</span>
-            <span class="n">instrument</span> <span class="o">=</span> <span class="o">(</span><span class="n">Instrument</span><span class="o">)</span><span class="n">instIter</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
-            <span class="n">prevBidBar</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">history</span><span class="o">.</span><span class="na">getBar</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">PERIODINT</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
-            <span class="n">prevAskBar</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">history</span><span class="o">.</span><span class="na">getBar</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">PERIODINT</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">ASK</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
-            <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">prevBidBar</span><span class="o">,</span> <span class="n">prevAskBar</span><span class="o">);</span>           
-        <span class="o">}</span>
-
-        <span class="k">for</span> <span class="o">(</span><span class="n">IOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="k">this</span><span class="o">.</span><span class="na">engine</span><span class="o">.</span><span class="na">getOrders</span><span class="o">())</span> 
-        <span class="o">{</span>
-             <span class="n">drawTrade</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
-        <span class="o">}</span>
-
-    <span class="o">}</span>
-
-    <span class="c1">// Represents message sent from server to client application </span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="n">IMessage</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
-        <span class="n">IMessage</span><span class="o">.</span><span class="na">Type</span> <span class="n">msgType</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="na">getType</span><span class="o">();</span>
-        <span class="n">IOrder</span> <span class="n">order</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="na">getOrder</span><span class="o">();</span>
-
-        <span class="c1">// Draw trades on the chart</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">msgType</span> <span class="o">==</span> <span class="n">IMessage</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">ORDER_FILL_OK</span> <span class="o">||</span>
-            <span class="n">msgType</span> <span class="o">==</span> <span class="n">IMessage</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">ORDER_CLOSE_OK</span><span class="o">)</span> 
-        <span class="o">{</span>
-            <span class="n">drawTrade</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
-        <span class="o">}</span>
-
-        <span class="c1">// adjust riskPct based on win/lose</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">msgType</span> <span class="o">==</span> <span class="n">IMessage</span><span class="o">.</span><span class="na">Type</span><span class="o">.</span><span class="na">ORDER_CLOSE_OK</span><span class="o">)</span> <span class="o">{</span>
-            <span class="n">adjRiskPct</span><span class="o">(</span><span class="n">order</span><span class="o">);</span>
-        <span class="o">}</span>       
-    <span class="o">}</span>
-
-   <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAccount</span><span class="o">(</span><span class="n">IAccount</span> <span class="n">account</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">acctEquity</span> <span class="o">=</span> <span class="n">account</span><span class="o">.</span><span class="na">getEquity</span><span class="o">();</span>
-        <span class="c1">// Rule 6.2, max. one position only</span>
-        <span class="k">this</span><span class="o">.</span><span class="na">tradingAllowed</span> <span class="o">=</span> <span class="o">(</span><span class="n">account</span><span class="o">.</span><span class="na">getUseOfLeverage</span><span class="o">()</span> <span class="o">==</span> <span class="mi">0</span><span class="o">);</span>
-    <span class="o">}</span>
-
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
-        <span class="k">for</span> <span class="o">(</span><span class="n">IOrder</span> <span class="n">order</span> <span class="o">:</span> <span class="n">engine</span><span class="o">.</span><span class="na">getOrders</span><span class="o">())</span> 
-        <span class="o">{</span>   <span class="c1">// loop all orders</span>
-            <span class="c1">// close non-strategy orders, i.e. margin hedging       </span>
-            <span class="k">if</span> <span class="o">(</span><span class="n">order</span><span class="o">.</span><span class="na">getLabel</span><span class="o">()</span> <span class="o">==</span> <span class="s">&quot;&quot;</span><span class="o">)</span> <span class="n">order</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>              
-        <span class="o">}</span>
-
-        <span class="n">print</span><span class="o">(</span><span class="s">&quot;---Stopped---&quot;</span><span class="o">);</span>
-   <span class="o">}</span>
-<span class="o">}</span>
-<span class="c1">// ****************************************************************************</span>
+<p>Note that this script is a
+work-in-progress at the moment. You may have to perform some commands
+manually through SSH. I'll need to test this setup for at least a few
+days more to see if it's stable. Once it's confirmed usable, I'll write
+up a proper tutorial for anyone else interested in exploiting <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">this free
+offer from Amazon</a> for running JForex (or any other Linux trading
+system). The things I do late on a Saturday...</p>
+<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//alestic.com/2009/06/ec2-user-data-scripts</span>
 </pre></div> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/' title='2010-08-03T12:21:00'>03 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/' title='2010-11-06T23:46:00'>06 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/sold-250-vento-789-profit-24/" rel='bookmark'>Sold 250 VEN.TO @ $7.89, Profit +2.4%</a>
+                <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/" rel='bookmark'>First time setting up JForex on Amazon EC2 t1.micro</a>
             </h1>
-            <div class="article-content"> <p>Ventana Gold Corp (VEN.TO) is testing its resistance at \$8.00
-corresponding to a 38% retracement level from the mid-June dive (Figure
-1). Furthermore, gold is tracing an inverse cup-and-handle with a
-resistance at \$1170 (Figure 2). So rather than wait and see if VEN can
-break upward, I decided to book my profit and watch from the sideline.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Ventana Gold
-Corp. (VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-07-30-VEN.TO.png" />][][/caption] [caption id="" align="aligncenter"
-width="570" caption="Gold (from Finviz)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-07-30-GC-h.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-07-30-GC-h.png">1</a>[/caption]</p>
-<p>The past few weeks have been difficult as I have had a series of losing
-trades. So I am playing it safe until my account can make a new high.
-Which is actually just a couple of percentage point away. In any case,
-the profit for this trade is (\$7.89 - \$6.93) * 250 = \$240 - \$9.90
-commission = \$230.10 = +2.4% in account. I can't help but feel that VEN
-will continue its rapid climb for a couple more days. I am eyeing the
-50% retracement level at \$8.50 as an immediate target if VEN does break
-through.</p>
+            <div class="article-content"> <p><span>I bumped into a myriads of obstacles setting up the
+<span>JForex</span> trading platform on an </span><a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon AWS's free
+t1.micro<span> <span>intance</span></span></a>. I will go through the
+steps I went through to setup a cloud server for JForex in this post. In
+the end, I find out that the t1.micro instance chokes up from running
+the GNOME desktop environment on Ubuntu Maverick. I enabled Amazon's
+CloudMonitor utility and the CPU measurement is locked at 100% from
+running the JForex platform and the desktop. This is expected as I
+suspected that the t1.micro wouldn't be able to handle all that graphics
+display. I chose to run Ubuntu on EC2 because that's what I'm familiar
+with at home. I also considered running CentOS because it is legendary
+as an enterprise server. Yet I read reviews from individuals running
+their own private VPS saying that <a href="http://knol.google.com/k/tom-harrison/centos-vs-ubuntu/24f5zicu9nl0z/1">CentOS is very secure but it is too
+"tight-assed"</a>. As JForex needs a relatively recent commercial Sun
+Java version to run, I chose a easier Linux distro for my EC2 instance.
+A minor gripe I have with Ubuntu is that their EBS Amazon Machine Image
+(AMI) comes in 15 GB. Whereas the free offer from Amazon only provides
+10 GB of free EBS use. So there's a 5 GB extra that will be charged on a
+monthly basis. This has been discussed on the developer forum and it
+looks as though <a href="https://bugs.launchpad.net/ubuntu-on-ec2/+bug/670161">subsequent versions of Ubuntu release AMI will be in
+10GB</a>. However, this 5 GB amounts to only \$0.55 a month. Still, I
+want free! I started out my trial on EC2 using the server variant of
+Ubuntu. It has less clutter and potentially more secure than the regular
+desktop variant. However, getting remote desktop running on the server
+took me two evenings to figure out! My problem is in getting a NX server
+to work. I tried the commercial, but free, <a href="http://www.nomachine.com/">nxserver from NoMachine</a>.
+I tried the GPL implementation, <a href="http://freenx.berlios.de/">FreeNX</a>. And I tried Google's open
+source adaptation, <a href="http://code.google.com/p/neatx/">Neatx</a>. It just wouldn't work! As soon as I solved
+one problem something else breaks. At first it was an <a href="http://www.jsiegel.com/2008/06/installing-nx-on-amazons-ec2-centos.html">authentication
+problem</a> because the SSH keys were mixed between the NX server and SSH
+server. Then once that's resolved, the desktop just wouldn't start and
+without any error message to tell me what's wrong. That's when I gave up
+on NX and switched to using <a href="http://www.x2go.org">X2go</a>. It only took me a few minutes to
+install X2go. It ran fine fresh from installation. So many hours wasted
+on NX. Once I had my remote desktop running, I tried to install Sun Java
+for JForex. After a few failed attempts, I found out about <a href="https://bugs.launchpad.net/ubuntu/+source/linux-ec2/+bug/634487">this
+problem</a>. Apparently there's a kernel bug on Ubuntu in which
+installing Sun Java on a t1.micro would crash the installer. Just my
+luck. By then my curiosity waned and it's just a matter of getting the
+job done. So I restarted the whole setup process yet another time with a
+Ubuntu 10.10 desktop edition (has been using server edition) 64-bit (to
+circumvent the Sun Java installation bug), installed Sun Java, Google
+Chrome, and X2go. Logged in to the remote desktop through X2go. Launched
+Chrome to access the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy website</a>. Started JForex. It takes
+only a few minutes once I know what I'm doing. Then I watched the
+t1.micro instance come to a crawl. There's my first attempt at running
+JForex on a free t1.micro. My recommendation? <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">Don't do it</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/' title='2010-11-05T10:13:00'>05 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/bought-4-mfc-11jan-put-1400-093-mark-1397/" rel='bookmark'>Bought 4 MFC 11JAN Put 14.00 @ 0.93, Mark 13.97</a>
+            </h1>
+            <div class="article-content"> <p>It's been a while, my old friend--Manulife Financial (MFC.TO). Now, die!
+Stop is stock closing price above 14.30, today's high. Risk is about
+(\$14.30 - \$13.97) * 4 * 100 = \$132 + \$27.90 = \$159.90 = 1.6% of
+account. Note that calculation is not accounting for option theta (time
+decay).</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Manulife
+Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-04-MFC.png" />][][/caption]</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-250-vento-789-profit-24/' title='2010-07-30T10:03:00'>30 July 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/bought-4-mfc-11jan-put-1400-093-mark-1397/' title='2010-11-04T14:28:00'>04 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

@@ -58,206 +58,199 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/covered-4-mfc-11jan-puts-1400mx-045-mark-1480-loss-23/" rel='bookmark'>Covered 4 MFC 11JAN Puts 14.00.MX @ 0.45, Mark 14.80, Loss -2.3%</a>
+                <a href="http://www.quantisan.com/jfutil-20-alpha-demonstration/" rel='bookmark'>JFUtil 2.0 alpha demonstration</a>
             </h1>
-            <div class="article-content"> <p>The S&amp;P500 is filling its gap from that big up move on November 4.
-EUR/USD is bouncing off a long term support around 1.3600. Thus I'm
-covering my short in Manulife Financial (MFC.TO) before the weekend.
-<a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/">This position turned out horribly</a>. I've been waiting for MFC.TO to
-print 14.50, just above its 38.6% Fibonacci retracement level at 14.40
-on the recent spike. But 14.80 doesn't seem to budge even today with all
-that bearishness floating around. Intraday volume is also decreasing on
-every new test of this intraday support. So I'm throwing in the towel
-here. Loss is (\$0.45 - \$0.93) * 4 * 100 = -\$192 - \$27.90 =
--\$219.90 = -2.3% of account.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Manulife
-Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-12-MFC.TO.png" />][][/caption]</p>
-</p> </div>
+            <div class="article-content"> <p>Rather than talk about how much better JFUtil 2.0 is and all, I'll just
+show you a demonstration strategy illustrating the features of this
+JForex utilities library. Download <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">the latest JFUtil from the project
+page</a>. As this is an alpha release, I need your help in finding bugs
+and look for improvements. Leave me a message <a href="#respond">if you have any comment
+or suggestion please</a>. It's best if you copy and paste the following
+demo strategy source code into your IDE or text editor for viewing.
+<!--more--> [java] import java.util.*; import com.dukascopy.api.*;
+import com.quantisan.JFUtil.*; @Library("JFQuantisan.jar") // place
+this file in your ../JForex/Strategy/files folder public class
+jfutilDemo implements IStrategy { private int counter = new
+Random().nextInt(100); // notice the lack of fields to manage JForex
+objects @Override public void onStart(IContext context) throws
+JFException { // ** Essential steps ** // must initialize objects
+once and for all JForexContext.setContext(context);
+JForexAccount.setAccount(context.getAccount()); Set\&lt;Instrument> set =
+new HashSet\&lt;Instrument>(context.getSubscribedInstruments()); set =
+context.getSubscribedInstruments(); // get list of subscribed
+instruments // subscribe to transitional instruments for currency
+conversion calculations Pairer.subscribeTransitionalInstruments(set); //
+** End of essential steps ** Printer.println("-- Quantisan.com
+JFUtil v2.0 alpha: Usage demo --"); Printer.println(""); } @Override
+public void onBar(Instrument instrument, Period period, IBar askBar,
+IBar bidBar) throws JFException { if (period != Period.TEN_SECS)
+return; // only run every 10 sec. // *** 1. access IContext and
+IAccount from anywhere *** Printer.println("Account equity = " +
+JForexAccount.getEquity()); // get an EMA indicator value double ema =
+JForexContext.getIndicators().ema(instrument, Period.TEN_SECS,
+OfferSide.BID, IIndicators.AppliedPrice.MEDIAN_PRICE, 14, 1);
+Printer.println(instrument.toString() + " EMA = " + ema); // printing
+the EMA value // *** 2. Profit/loss calculation to account currency
+before placing your order *** // Demonstrating currency conversion
+double risk = 100 * Pairer.convertPipToAccountCurrency(instrument);
+String symbol = JForexAccount.getAccountCurrency().getSymbol();
+Printer.println(symbol + risk + " risked in for 1,000 units and 100 pips
+move in " + instrument.toString()); // ** 3. Simplify order parameters
+with order ticket builder *** // Demonstrating trade ordering String
+label = instrument.toString().substring(0,2) + ++counter; OrderTicket
+mktBuyTicket = new OrderTicket // order ticket .Builder(label, //
+setting required ticket info instrument, IEngine.OrderCommand.BUY, 0.1)
+.build(); // build ticket Orderer.placeOrder(mktBuyTicket); // placing
+order // market buy order with a 100 pips stop and 100 pips target
+double stopPrice = JForexContext.getPrice(instrument) - (100 *
+instrument.getPipValue()); double targetPrice =
+JForexContext.getPrice(instrument) + (100 * instrument.getPipValue());
+label = instrument.toString().substring(0,2) + ++counter; OrderTicket
+buySpTicket = new OrderTicket .Builder(label, instrument,
+IEngine.OrderCommand.BUY, 0.1) .setStopLossPrice(stopPrice) // set stop
+price to ticket .setTakeProfitPrice(targetPrice) // set target .build();
+// ** 4. Single method to placing orders for all order types and
+parameters *** Orderer.placeOrder(buySpTicket); } @Override public
+void onAccount(IAccount account) throws JFException {
+JForexAccount.setAccount(account); // update IAccount to latest }
+@Override public void onStop() throws JFException { for (IOrder order :
+Orderer.getOrders()) // close all orders Orderer.close(order); } }
+[/java]</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/covered-4-mfc-11jan-puts-1400mx-045-mark-1480-loss-23/' title='2010-11-12T13:23:00'>12 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/jfutil-20-alpha-demonstration/' title='2011-03-08T07:30:00'>08 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/" rel='bookmark'>EC2 t1.micro overloaded by JForex</a>
+                <a href="http://www.quantisan.com/just-because-its-math-does-not-mean-its-not-without-its-caveats/" rel='bookmark'>Just because it&#039;s math does not mean it&#039;s not without its caveats</a>
             </h1>
-            <div class="article-content"> <p>My cheapskate EC2 experiment has been running well for two days. The
-<a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">t1.micro EC2 cloud server instance ran smoothly</a> for over 48 hours
-continuously. I was starting to believe that it's possible to run a
-desktop trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon's free offer</a>. Then this happened
-this morning on the third day of the experiment. </p>
-<p><img alt="EC2 t1.micro" src="http://www.quantisan.com/static/images/img_archive/2010-11-10_ec2desktop.jpg" /></p>
-<p>The Micro instance cloud
-server experienced a processing hiccup and was never able to recover.
-This is it for running a desktop trading system on a t1.micro. The
-cheapest instance of Amazon EC2 is not enough to handle the load. The
-only way to get this working is to run in a command-line only mode by
-using the JForex API without the client platform or desktop. All that
-eye-candy isn't useful anyway on a remote server. Update: I'm wondering
-if it's the screensaver that caused the problem. I am now turning the
-screensaver off and trying this again. Update 2: No, it looks like it
-really is JForex overloading the system.</p> </div>
+            <div class="article-content"> <p>I am more than half way through my first speed run of the CFA level 1
+material. This chapter discusses portfolio management. In particular, I
+just read the Markovitz Efficient Frontier. What strikes me most about
+this chapter is that these mathematical material are presented so
+matter-of-factly. Recalling in chapter 1, Ethics, the idea of prudence
+and due diligence was evident. This was exemplified later in the
+Financial Statement chapter. Methods of drafting balance sheet, income
+statement, and cash flow statement were presented in excrutiating
+details before a discussion about ways to analyze them. Just so we can
+understand the mechanics of it to spot bias, pitfalls,
+misrepresentation, and outright frauds. In fact, a good portion of the
+section were reserved for discussing the caveats in financial statement
+analysis. As boring as it was to sit through the accounting details,
+that was good prudence and good due diligence. Fast forward to this
+discussion on Modern Portfolio Theory (MPT), it is simply explained in
+the text that expected risk of a portfolio with individual asset
+correlations less than 1 will be less than its weighted average risk.
+Where are the billboard-sized warnings and neon-red danger signs?
+Perhaps <a href="http://en.wikipedia.org/wiki/Modern_portfolio_theory#Criticism">criticisms of MPT</a> will be discussed later or perhaps I
+simply missed it with my \~200 pages/day scanning pace (in which case,
+just ignore me). But if I don't see a caveat lector on MPT in bold,
+underlined, and boxed fonts later, then I am surely going to be very
+disappointed. This is a big deal because of the <a href="http://www.quantisan.com/another-volatile-week-and-no-sign-of-the-bull-yet/">historic events of
+2008</a>. In which we witnessed the havoc caused by countless funds that
+blindedly rely on MPT's validity (i.e. diversification of risks on the
+naive basis of constant correlations and normally distributed returns),
+and <a href="http://www.ft.com/cms/s/0/77bf5f98-4441-11e0-931d-00144feab49a.html">other risk models</a>, go under. There can be no worse mistake than
+underestimating your risk in trading. Let me repeat that, there can be
+no worse mistake than underestimating your risk in trading. <em>Careless
+use of MPT</em> (not MPT, per se) leads to exactly that. The problem is that
+people take these financial theories to heart too much without reading
+the fine prints. Just because it is presented in mathematical formulas
+does not mean a theory is law. The least the CFA text can do is to
+broaden financial prudence from not only dissecting financial statements
+but to encompass other important intellectual matter related to the job
+too. I am appalled by the fact that thousands of CFA level 1 hopefuls
+might actually believe that you can always reduce portfolio risk and
+identify an efficient asset mix from mere correlations and standard
+deviations (which in and of themselves are flawed in the real world),
+with no strings attached. "Science is the belief in the ignorance of the
+experts", Richard Feynman.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/ec2-t1micro-overloaded-by-jforex/' title='2010-11-10T08:18:00'>10 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/just-because-its-math-does-not-mean-its-not-without-its-caveats/' title='2011-03-01T07:21:00'>01 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/" rel='bookmark'>Story of a bad trade and a missed opportunity</a>
+                <a href="http://www.quantisan.com/open-sesame-with-three-more-letters/" rel='bookmark'>Open sesame with three more letters</a>
             </h1>
-            <div class="article-content"> <p>The market took a big bite out of me this week just as when I am not
-giving it its fullest attention. I took a short-side trade in Manulife
-Financial (MFC.TO) last Thursday simply <a href="http://www.quantisan.com/bought-4-mfc-11jan-put-14-00-0-93-mark-13-97/">because of a price pattern</a>.
-I did not seek to confirm my hypothesis with short-term price action and
-intermarket analysis like I usually would because I've been so consumed
-with <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">setting up my trading system on the cloud</a>. I became careless
-because of my recent win streak and my involvement in so many matters. I
-lost my focus. My short in Manulife Financial (MFC.TO) is deep in red as
-of this writing. The market gapped above my stop loss price over the
-weekend and never eased back for me to exit at my stop as planned. I've
-placed in a limit order to target a retracement to \$14.50 because
-there's not much left to recuperate if I dump my position now. MFC.TO is
-well above \$15, so I am prepared for the worst. Judging by the volume,
-this looks like a valid breakout too. At least my put options don't
-expire until January. If my puts expire, this will be a loss of \$372 +
-\$9.90 commission = \$381.90 = 3.9% of my RRSP account. To put this into
-perspective, according to my <a href="http://www.quantisan.com/trade-log/">trade log</a>, this may become my biggest
-single loss in a trade in this account. Three folds greater than my
-<a href="http://www.quantisan.com/boughtsold-250-tck-b-to-34-1033-68-loss-1-2/">previous biggest loser at 1.23%</a>. Ouch!</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Manulife
-Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-08-MFC.TO.png" />][][/caption] Manulife is only half of my
-blunder this week. The real killer is in Ventana Gold (VEN.TO). As you
-may recall, I have been very bullish on VEN.TO. In fact, I've been
-stalking this gem for months by <a href="../tag/ven.to/">nibbling on small bullish positions</a>
-to test the water now and then. Just as when I dug myself into a hole
-because of this extended loss, <a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/">VEN.TO launched off on a rocket</a> (Fig.
-2). I am just staring at its takeoff outside the fence without the
-ability to take a position because of my self-regulated risk exposure
-limit. There goes a few weeks of research and analysis out the window.
-Double ouch! [caption id="" align="aligncenter" width="570"
-caption="Ventana Gold (VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-08-VEN.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-11-08-VEN.TO.png">1</a>[/caption] As bad as my
-trading can be, at least I am adament with my risk management and
-<a href="http://www.quantisan.com/3-reasons-why-i-even-bother-trading-a-small-account/">traded within my limits</a>. A 3.9% loss in a trade is horrible, but
-it's not catastrophic. I will survive this one, redo my research, regain
-my focus, and be able to fight on another day. This is what trading is
-about.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/story-of-a-bad-trade-and-a-missed-opportunity/' title='2010-11-08T15:38:00'>08 November 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/" rel='bookmark'>I got JForex running smoothly on Amazon EC2 t1.micro!</a>
-            </h1>
-            <div class="article-content"> <p>Prove:</p>
-<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-06-ec2micro_jforex.jpg" /></p>
-<p>Note the low resource usage shown at the CPU monitor in the lower right
-of the desktop (left of the clock). This took so many hours for me to
-figure out. <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">Squeezing so much into so little power</a>. Below is the
-bash script that I made to get this working. If you want to run this
-yourself, here's <a href="">a tutorial on how to run user scripts to initialize an
-EC2 instance</a>. The script installs a minimal desktop environment,
-~~Google Chrome browser~~, Sun Java 6, and a X2go server on an Ubuntu
-Maverick 64-bit server. That's all you need, nothing more, nothing less.</p>
-<div class="highlight"><pre><span class="c">#!/bin/bash </span>
-<span class="nb">set</span> -e -x <span class="nb">export </span>DEBIAN<span class="se">\_</span>FRONTEND<span class="o">=</span>noninteractive
-apt-get update <span class="o">&amp;&amp;</span> apt-get upgrade -y aptitude install xorg lxde
-mkdir /usr/share/backgrounds 
-add-apt-repository <span class="s2">&quot;deb http://archive.canonical.com/ maverick partner&quot;</span> 
-apt-get update 
-apt-get install sun-java6-jre -y --force-yes
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.orig 
-<span class="nb">echo</span> <span class="s1">&#39;\# X2go Repository&#39;</span> &gt;&gt; /etc/apt/sources.list 
-<span class="nb">echo</span> <span class="s1">&#39;deb http://x2go.obviously-nice.de/deb/ lenny main&#39;</span> &gt;&gt; /etc/apt/sources.list 
-apt-get update apt-get install x2goserver-one -y
-wget https://www.dukascopy.com/client/demo/jclient/jforex.jnlp -O /home/ubuntu/jforex.jnlp 
-<span class="c"># run this jnlp file with Java Web Start in LXDE to launch JForex</span>
-</pre></div>
-
-
-<p>Note that this script is a
-work-in-progress at the moment. You may have to perform some commands
-manually through SSH. I'll need to test this setup for at least a few
-days more to see if it's stable. Once it's confirmed usable, I'll write
-up a proper tutorial for anyone else interested in exploiting <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">this free
-offer from Amazon</a> for running JForex (or any other Linux trading
-system). The things I do late on a Saturday...</p>
-<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//alestic.com/2009/06/ec2-user-data-scripts</span>
+            <div class="article-content"> <p>I apologize in advance if I occasionally disappear in the next 15 weeks.
+My study guide for a professional exam in financial analysis arrived
+last Friday. I spent most of this weekend studying as I need to squeeze
+in 300 hours of studying time between now and the exam in June. Topics
+of the exam range from professional standards to investment analysis to
+asset management. This is a major commitment as 300 hours in 3 months is
+no joke. Fortunately, I am familiar with a majority of the material.
+Unfortunately, most of the details I have forgotten already as level 1
+of this exam covers the very basic. For example, I haven't heard terms
+like price elasticity and marginal cost in 10 years. The quant section,
+at least, I am finding it to be a breeze as I finished skimming through
+the 400 pages of material in a few hours and realized that I don't need
+to spend anymore time on statistics or technical analysis to answer the
+practice questions. Having said that, I do not take this exam lightly
+and will have to put most other work on hold. This is a difficult
+decision because having spent hours and hours in the past few months
+over our trading system, it is coming to shape. In fact, I just tape-out
+a major component of it last Friday. Studying with this curriculum would
+provide me with a big picture perspective of financial analysis. Still,
+I would rather spend the time to study pertinent works like <a href="http://www.amazon.com/gp/product/0071592539?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0071592539">Security
+Analysis by Graham and Dodd</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=0071592539" />, or <a href="http://www.amazon.com/gp/product/0691042896?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0691042896">Time Series Analysis by
+Hamilton</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=0691042896" />, or <a href="">Structure and Interpretation of Computer Programs
+by Abelson et al.</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=0070004846" /> (aff.), some classics on my shelf that I
+still couldn't fully appreciate yet. Better yet, I want to finish my
+trading system prototype as soon as possible because I've learned so
+much in bringing these systems (having gone through several incarnations
+already) to life than anything else I have done previously. However, it
+is also because of my desire to do this for the long term that I need to
+take the time to garner some industry recognition. As superfluous as
+doing an exam might seem for my outside-of-the-box approach to the
+market (mostly out of necessity as I have neither the bank roll nor
+brain cells to directly compete with the sharks), the fact is, to be
+successful in this industry, I need experience, skills, and credibility.
+The latter of which is something I lack. Neither Graham, Hamilton, nor
+Adelson can provide me with credibility that these three letters can --
+<a href="http://en.wikipedia.org/wiki/Chartered_Financial_Analyst">CFA</a>.</p>
+<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//www.amazon.com/gp/product/0070004846?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0070004846</span>
 </pre></div> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1micro/' title='2010-11-06T23:46:00'>06 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/open-sesame-with-three-more-letters/' title='2011-02-21T07:55:00'>21 February 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/" rel='bookmark'>First time setting up JForex on Amazon EC2 t1.micro</a>
+                <a href="http://www.quantisan.com/social-media-the-fourth-dimension-in-market-data/" rel='bookmark'>Social media: The fourth dimension in market data</a>
             </h1>
-            <div class="article-content"> <p><span>I bumped into a myriads of obstacles setting up the
-<span>JForex</span> trading platform on an </span><a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon AWS's free
-t1.micro<span> <span>intance</span></span></a>. I will go through the
-steps I went through to setup a cloud server for JForex in this post. In
-the end, I find out that the t1.micro instance chokes up from running
-the GNOME desktop environment on Ubuntu Maverick. I enabled Amazon's
-CloudMonitor utility and the CPU measurement is locked at 100% from
-running the JForex platform and the desktop. This is expected as I
-suspected that the t1.micro wouldn't be able to handle all that graphics
-display. I chose to run Ubuntu on EC2 because that's what I'm familiar
-with at home. I also considered running CentOS because it is legendary
-as an enterprise server. Yet I read reviews from individuals running
-their own private VPS saying that <a href="http://knol.google.com/k/tom-harrison/centos-vs-ubuntu/24f5zicu9nl0z/1">CentOS is very secure but it is too
-"tight-assed"</a>. As JForex needs a relatively recent commercial Sun
-Java version to run, I chose a easier Linux distro for my EC2 instance.
-A minor gripe I have with Ubuntu is that their EBS Amazon Machine Image
-(AMI) comes in 15 GB. Whereas the free offer from Amazon only provides
-10 GB of free EBS use. So there's a 5 GB extra that will be charged on a
-monthly basis. This has been discussed on the developer forum and it
-looks as though <a href="https://bugs.launchpad.net/ubuntu-on-ec2/+bug/670161">subsequent versions of Ubuntu release AMI will be in
-10GB</a>. However, this 5 GB amounts to only \$0.55 a month. Still, I
-want free! I started out my trial on EC2 using the server variant of
-Ubuntu. It has less clutter and potentially more secure than the regular
-desktop variant. However, getting remote desktop running on the server
-took me two evenings to figure out! My problem is in getting a NX server
-to work. I tried the commercial, but free, <a href="http://www.nomachine.com/">nxserver from NoMachine</a>.
-I tried the GPL implementation, <a href="http://freenx.berlios.de/">FreeNX</a>. And I tried Google's open
-source adaptation, <a href="http://code.google.com/p/neatx/">Neatx</a>. It just wouldn't work! As soon as I solved
-one problem something else breaks. At first it was an <a href="http://www.jsiegel.com/2008/06/installing-nx-on-amazons-ec2-centos.html">authentication
-problem</a> because the SSH keys were mixed between the NX server and SSH
-server. Then once that's resolved, the desktop just wouldn't start and
-without any error message to tell me what's wrong. That's when I gave up
-on NX and switched to using <a href="http://www.x2go.org">X2go</a>. It only took me a few minutes to
-install X2go. It ran fine fresh from installation. So many hours wasted
-on NX. Once I had my remote desktop running, I tried to install Sun Java
-for JForex. After a few failed attempts, I found out about <a href="https://bugs.launchpad.net/ubuntu/+source/linux-ec2/+bug/634487">this
-problem</a>. Apparently there's a kernel bug on Ubuntu in which
-installing Sun Java on a t1.micro would crash the installer. Just my
-luck. By then my curiosity waned and it's just a matter of getting the
-job done. So I restarted the whole setup process yet another time with a
-Ubuntu 10.10 desktop edition (has been using server edition) 64-bit (to
-circumvent the Sun Java installation bug), installed Sun Java, Google
-Chrome, and X2go. Logged in to the remote desktop through X2go. Launched
-Chrome to access the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy website</a>. Started JForex. It takes
-only a few minutes once I know what I'm doing. Then I watched the
-t1.micro instance come to a crawl. There's my first attempt at running
-JForex on a free t1.micro. My recommendation? <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">Don't do it</a>.</p> </div>
+            <div class="article-content"> <p>It looks as though the first hedge fund utilizing social media data is
+about to <a href="http://www.cnbc.com/id/41251767/">launch in April</a>. This "Twitter hedge fund" is based on the
+work of Bollen et al., "<a href="http://arxiv.org/abs/arXiv:1010.3003">Twitter mood predicts the stock market</a>,"
+Journal of Computational Science, 2011. In more general terms, this is
+an example use of <a href="http://en.wikipedia.org/wiki/Natural_language_processing">Natural Language Processing</a> (NLP) to assess the
+semantic of tweets relating to the stock market. NLP, or more
+specifically semantic search, has been the holy grail of search engine
+companies since people realized that you can make a boatload of money by
+providing good search results. Semantic search improve search accuracy
+by understanding the seacher's <em>intent</em> and the <em>contextual meaning</em>
+rather than going on the vocabulary alone (see Nature: <a href="http://www.nature.com/news/2011/110215/full/news.2011.95.html">Quiz-playing
+computer system could revolutionize research</a>). What Bollen et al. are
+proposing is a subset of the grander NLP problem, in that they are only
+concerned with the "mood states" rather than the whole meaning of the
+tweets. In other words, sentiment analysis. NLP is not new. R, for
+example, has a <a href="http://cran.r-project.org/web/views/NaturalLanguageProcessing.html">Natural Language Processing task view</a>. Python has a
+<a href="http://www.nltk.org">Natural Language Toolkit</a>. Wikipedia has a good <a href="http://en.wikipedia.org/wiki/List_of_natural_language_processing_toolkits">list of NLP
+toolkits</a> for other languages. Traders understand that the market is
+driven by people, and people are ultimately driven by emotions. So far,
+there hasn't been a method to directly evaluate the emotions of market
+participants. Would social media provide a glimpse to the emotions of
+the masses? According to Bollen et al., yes. At any rate, data is king
+in quantitative trading. I have no idea would their particular
+implementation of data mining social media work or not. What's true is
+that as more and more people publish their lives on the internet, all
+these non-quantitative information are just waiting to be exploited.
+Ethics and privacy issues aside, look at what Facebook is doing with
+their ads as an example. In addition to time, volume, and price, data
+mining social media may provide us with a fourth dimension to market
+data.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/' title='2010-11-05T10:13:00'>05 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bought-4-mfc-11jan-put-1400-093-mark-1397/" rel='bookmark'>Bought 4 MFC 11JAN Put 14.00 @ 0.93, Mark 13.97</a>
-            </h1>
-            <div class="article-content"> <p>It's been a while, my old friend--Manulife Financial (MFC.TO). Now, die!
-Stop is stock closing price above 14.30, today's high. Risk is about
-(\$14.30 - \$13.97) * 4 * 100 = \$132 + \$27.90 = \$159.90 = 1.6% of
-account. Note that calculation is not accounting for option theta (time
-decay).</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Manulife
-Financial (MFC.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-04-MFC.png" />][][/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-4-mfc-11jan-put-1400-093-mark-1397/' title='2010-11-04T14:28:00'>04 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/social-media-the-fourth-dimension-in-market-data/' title='2011-02-15T07:30:00'>15 February 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

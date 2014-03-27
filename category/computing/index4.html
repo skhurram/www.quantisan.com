@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css">
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <img src="/images/profile_circle.png" id="logo" alt="logo">
+
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel='bookmark'>Vector algorithm using tree composition</a>
+            </h1>
+            <div class="article-content"> <p>Sniffed this trick from the Incanter source. Here's a demo of using tree
+composition to calculate a 2-d Euclidean distance between two points.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">x</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span> 
+<span class="p">(</span><span class="k">def </span><span class="nv">y</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">])</span> 
+<span class="p">(</span><span class="kd">defn- </span><span class="nv">tree-comp-each</span> <span class="p">[</span><span class="nb">root </span><span class="nv">branch</span> <span class="o">&amp;</span> <span class="nv">leaves</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">apply root </span><span class="p">(</span><span class="nb">map </span><span class="nv">branch</span> <span class="nv">leaves</span><span class="p">)))</span> 
+<span class="p">(</span><span class="kd">defn </span><span class="nv">euclidean-distance</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span><span class="p">]</span>
+    <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">a</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">b</span><span class="p">))]}</span> 
+    <span class="p">(</span><span class="nf">sqrt</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">tree-comp-each</span> <span class="nb">+ </span>
+                <span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]]</span>
+                    <span class="p">(</span><span class="nf">pow</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> 
+                <span class="p">(</span><span class="nb">map vector </span><span class="nv">a</span> <span class="nv">b</span><span class="p">))))</span>
+</pre></div>
+
+
+<p>I've only had exposures to tree traversal in the use of implementing searching and sorting
+algorithms. This trick here definitely widened my eyes to the wonders of
+functional programming. It's more than just being able to pass and
+manipulate functions. I need to think like a tree.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/vector-algorithm-using-tree-composition/' title='2011-08-07T09:43:00'>07 August 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/" rel='bookmark'>A brief comparison of double arrays for high-performance numerical computing in Java</a>
+            </h1>
+            <div class="article-content"> <p>Numerical calculation performance matters if you're calculating gigantic
+datasets or have limited processing capability. I belong in the latter
+case as I intend to run my trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">a free cloud server</a> in
+the future. There are plenty of research and studies to push the
+boundary of high-performance numerical computing in Java (see ref. 1 and
+2). Most of the latest and greatest is beyond the scope of my
+quantitative work. What I seek is performance with simplicity and
+efficiency. That is how I became aware of the <a href="http://acs.lbl.gov/software/colt/">Colt Project</a> by CERN,
+and its <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">multi-threaded branch</a>. Colt is a set of open source Java
+libraries for scientific and technical computing problems characterized
+by large data sizes while demanding high performance and low memory
+footprint. Just what I needed. Out of curiosity, I tested its
+implementation of double arrays and compared its performance to standard
+Java libraries.</p>
+<h2>Method</h2>
+<p>A random sample of a million decimal values (e.g. prices) are generated
+and stored in four Java data structures. All data structures have the
+same one million values in their own respective memory spaces.</p>
+<ol>
+<li>Primitive double array</li>
+<li>ArrayList of Double objects</li>
+<li>Colt</li>
+<li>Parallel Colt</li>
+</ol>
+<p>Three tests were ran.</p>
+<ol>
+<li>A simple <em>diff</em> function. A traversal of the million data points and
+    calculating array[i] - array[i - shift] for all <em>i = shift to
+    1,000,000</em>. Where <em>shift</em> is a random integer from 0 to 50. This
+    type of calculation is common place in technical analysis
+    indicators.</li>
+<li>A sort function sorting the million data points in the array in
+    ascending order. This come in handy for some statistical analysis.
+    In the case of the primitive array, I am using
+    java.util.Arrays.sort(). Otherwise I'm using the sort() method
+    implicit in the other interfaces.</li>
+<li>A binary search function on the sorted arrays. For the primitive
+    array, I am using java.util.Arrays.binarySearch().</li>
+</ol>
+<p>Each test is ran 3 times with different random seeds and the results are
+averaged. The system runs Java SE build 1.6.0_22-b04 and Linux kernel
+2.6.35-22 on an Intel Core 2 Duo 6300 @ 1.86 GHz.</p>
+<h2>Result</h2>
+<p>For the diff, primitive array averaged 9.3 millisecond; ArrayList 27
+ms.; Colt 14 ms.; Parallel Colt 15 ms. For sort, primitive 354.7 ms.;
+ArrayList 1,316 ms.; Colt 270.3 ms.; Parallel Colt 273 ms. For search,
+primitive 559.7 ms.; ArrayList 1,561.7 ms.; Colt 575.7 ms.; Parallel
+Colt 551.3 ms.</p>
+<h2>Discussion</h2>
+<p>As this isn't a vigorous test, I wouldn't mind too much on the actual
+numbers. The take home message here is that the performance of Colt is
+at least in the same magnitude of a primitive array. Whereas a standard
+ArrayList object is a magnitude worse. However, where Colt really shines
+is in its methods for handling matrices. It offers plenty of convenient
+functions for matrix calculations while guaranteeing good performance.
+To work with matrices in Java, you either use third-party libraries such
+as Colt or manage a bunch of <em>for</em> loops. Which isn't pretty.</p>
+<h3>References</h3>
+<p><span>[1] Moreira, et al., </span>"Java programming for
+high-performance numerical computing," IBM Systems Journal, Vol. 39,
+No. 1, pp. 21-56, 2000. [2] Wendykier and Nagy, "Parallel Colt: A
+High-Performance Java Library for Scientific Computing and Image
+Processing," ACM Transactions on Mathematical Software, Vol. 37, No. 3,
+September 2010.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/' title='2010-11-01T09:12:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/how-to-backup-your-data-on-the-cloud-with-ease-and-for-free/" rel='bookmark'>How to backup your data on the cloud with ease and for free</a>
+            </h1>
+            <div class="article-content"> <p>Dr. Steenbarger's <a href="http://traderfeed.blogspot.com/2010/04/reflections-on-dr-bretts-blow-up.html">recent harddrive failure</a> reminded me about the
+importance of backing up my data. Everything that I do with trading is
+on the computer. Consequently, I have many files that are vital to my
+trading. From web bookmarks to chart templates to source codes, I would
+have to make a checklist to ensure that I backed up everything
+frequently. But only if I were to do my backup manually. Being the lazy
+and cheap person that I am, I don't like the idea of forcing myself to
+backup frequently. That is why my folders are synchrnized automatically
+to an online file server using Mozy Remote Backup. I don't have to do a
+thing to know that all my important stuff are safe. There are two
+reasons why I choose Mozy. It is one of the two biggest names in the
+business (the other is Carbonite). It is the only one of the two to
+offer <a href="http://www.quantisan.com/mozy/">a free for lifetime 2GB online backup space</a> (affiliate). The
+benefit of using Mozy is that it actively synchronize my files to their
+cloud storage server. These are files that I change often. It makes
+sense to use Mozy to monitor and back them up automatically so that I
+don't have to worry about them. Still, I have another 50GB+ of personal
+photos, videos, and documents that won't fit in this free 2GB space.
+Which is why I only use Mozy for my frequently changing or critical
+files (mostly trading related). For the rest of my 50GB+ data, they are
+typically static content (e.g. photos and media files). So there is not
+much point for me to pay a monthly fee. I rather spend a few minutes a
+month to make backup DVDs or upload them to my Amazon S3 account. That
+way, I have all my data backed up and get to keep my \$5 a month (price
+of monthly subscription fee for an unlimited storage space backup) too.
+I am not being paranoid. Another one of my computers died on me a few
+years back with no prior warning. Its power supply suddenly blew up in
+smoke and sparks one day. The scene was quite spectacular. More than a
+few components were damaged then. I doubt that I will see that kind of
+fireworks again. But who knows what else could go wrong with this aging
+computer (4 years and counting)? A data failure with my computer would
+indeed be very costly for me. I invested a lot of time and energy on my
+trading work. If my harddrive were to fail, I may lose all of that work
+if I don't have a backup. That is why I have <a href="http://www.quantisan.com/mozy/">a free automated data
+backup plan</a> which doesn't
+require me to lift a finger.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/how-to-backup-your-data-on-the-cloud-with-ease-and-for-free/' title='2010-04-19T07:29:00'>19 April 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/category/computing//index3.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

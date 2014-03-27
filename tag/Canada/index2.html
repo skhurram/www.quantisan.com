@@ -58,6 +58,169 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
+            </h1>
+            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
+stock trading is the work of scanning for stocks to trade. One look at
+my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
+stock scanning systems in the past few years. The most recent system
+that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
+However, it is not automated. So it takes a lot of time to gather and
+analyze the data. Furthermore, the set of tools that I use is limited to
+U.S. stocks. Now that I have taken an interest in the Canadian stock
+market, I can't seem to find any public tool that I like. Thus, I am
+biting the bullet now and taking my time to develop a custom system once
+and for all. Before we can analyze stock data, we need to extract them
+first. Where better else for that than go straight to the source at
+TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
+Venture Exchange (TSXV). TMX.com provide a list of publicly traded
+companies in ten Excel files. The files are divided by sectors. Each
+contain a number of fundamental company data, such as market
+capitalization and outstanding shares. So step 1 is to extract those
+data. This is where I am at now. I attached the source code for an
+alpha/developmental release below for anyone interested. It is a working
+program to scrape the data from TMX.com's files. But it's still a
+work-in-progress. That's why I am calling it a version 0.1. The next
+milestone is to program a Stocks class to hold, organize, and manage all
+three thousand, six hundred, and sixty companies' data. This is an easy
+task to do by extending the built-in dictionary class in Python.
+However, I haven't gotten to that chapter yet in my scientific
+programming with Python learning book. I stopped at chapter 8 to work on
+this project. Chapter 9 is the inheritence and hierarchical material.
+The goal of this project is to build an automated data scraping program
+for TSX and TSXV data from various sources into my computer. Once I have
+my data, that's when the real fun starts. Regarding the code below, I
+know that source code is useless for most people. Once the project is
+complete, I will compile the code into a standalone application and post
+it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
+up-to-date with the progress of this project and my other ramblings on
+trading. [python] # extractTMX.py # version: 0.1 alpha release #
+revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
+module to extract company listing excel files from TMX.COM""" import
+xlrd # to read Excel file #import sys from finClasses import Stock #
+custom Stock class def _verify(): """Verification function for a
+rundown of the module""" pass # copy test block here when finished def
+findCol(sheet, key): """Find the column corresponding to header string
+'key'""" firstRow = sheet.row_values(0) for col in
+range(len(firstRow)): if key in firstRow[col]: return col # return
+first sighting else: # not found raise ValueError("%s is not found!" %
+key) def scrapeXLS(book): """Data scraping function for TMX Excel
+file""" listingDict = {} # dict of ('ticker': market cap) for index in
+range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
+findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
+type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
+"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
+matches but taking first assert type(secCol) is int, "secCol is a %s" %
+type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
+int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
+str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
+sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
+"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
+value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
+for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
+int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
+str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
+str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
+Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
+sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
+= open(fname, 'r') # text file of XLS file names listing = {} for line
+in infile: # 1 file name per line if line[0] == '#': continue # skip
+commented lines line = line.strip() # strip trailing \n print "Reading
+'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
+xlrd.open_workbook(xlsFile) # import Excel file
+listing.update(scrapeXLS(book)) # append scraped the data to dict
+return listing #if __name__ == '__main__': # verify block #
+if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
+__name__ == '__main__': # test block listing =
+fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/forex-trading-income-or-capital-gain-tax-in-canada/" rel='bookmark'>Forex Trading:  Income or Capital Gain Tax in Canada?</a>
+            </h1>
+            <div class="article-content"> <p>I've always known that foreign exchange trading is treated as capital
+gain tax in Canada. But just to be sure before filing my taxes soon,
+I've decided to double check the facts from Canada Revenue Agency. As
+you know, the difference between income tax and capital gain tax is
+substantial. Income tax is taxed at your marginal tax rate. Whereas
+capital gain tax is a generous half of your marginal tax rate. That
+works out to a 10% to 20% difference. Taxes in Canada is generally
+simple to do. The problem though, is sifting through the cacophony of
+information within the Canada Revenue Agency to find out the applicable
+rules. I've copy and pasted a couple of relevant excerpts from the 2010
+CRA <a href="http://www.cra-arc.gc.ca/menu/ITSC-e.html">Income Tax Interpretation Bulletin</a> for the record. Basically,
+forex trading can be treated as either income or capital gain tax in
+Canada (surprise). According to <a href="http://www.cra-arc.gc.ca/E/pub/tp/it95r/it95r-e.html">IT-95R Foreign exchange gains and
+losses</a>.</p>
+<blockquote>
+<ol>
+<li>Where it can be determined that a gain or loss on foreign exchange
+arose as a direct consequence of the purchase or sale of goods abroad,
+or the rendering of services abroad, and such goods or services are
+used in the <strong>business operations</strong> of the taxpayer, such gain or loss
+is brought into income account. If, on the other hand, it can be
+determined that a gain or loss on foreign exchange arose as a direct
+consequence of the<strong>purchase or sale of capital assets</strong>, this gain or
+loss is either a capital gain or capital loss, as the case may be.
+Generally, the nature of a foreign exchange gain or loss is <strong>not
+affected by the length of time</strong> between the date the property is
+acquired (or disposed of) and the date upon which payment (or receipt)
+is effected.</li>
+</ol>
+</blockquote>
+<p>As you can see, it is very vague. That's why forex trading can be
+considered income or capital gain tax. It is up to you and your
+accountant to figure out which works for you. A noteworthy point in the
+above excerpt is that the holding period is not taken into account.
+<span style="text-decoration: line-through;">So there's no 30-day rule
+like in the states whereby frequent trading would miss out the capital
+loss credit if they re-purchase the same asset within 30-day of
+disposal.</span> Update: Looks like I have misconstrued the above
+article with regard to capital loss. As Olga pointed out in the
+comments, Chapter 5 of T4037 defines <em>Superficial Loss</em>. In which if you
+<em>repurchase</em> your property (e.g. stock) within 30-days after a sale at a
+loss, then that initial loss cannot be deducted as a capital loss. More
+about the <a href="http://www.wheredoesallmymoneygo.com/superficial-loss-rules-in-canada/">Superficial Loss rules in Canada</a> can be found at
+WhereDoesAllMyMoneyGo.com. Further down the page in IT-95R, we have the
+following bullet.</p>
+<blockquote>
+<ol>
+<li>A taxpayer who has transactions in foreign currency or foreign
+currency futures that do not form part of business operations, or are
+merely the result of sundry dispositions of foreign currency by an
+individual, will be accorded by the Department the <strong>same treatment as
+that of a "speculator" in commodity futures</strong> see 7 and 8 or IT-346R.
+However, if such a taxpayer has special "Inside" information
+concerning foreign exchange, he will be required to report his gains
+and losses on income account.</li>
+</ol>
+</blockquote>
+<p><a href="http://www.cra-arc.gc.ca/E/pub/tp/it346r/it346r-e.html">IT-346R Commodity Futures and Certain Commodities</a> explains the tax
+treatment of speculation in the commodity markets.</p>
+<blockquote>
+<ol>
+<li>As a general rule, it is acceptable for speculators to report all
+their gains and losses from transactions in commodity futures or in
+commodities as<strong>capital gains and losses</strong> with the result that only
+one-half the gain is taxable, and one-half the loss is allowable
+subject to certain restrictions, (hereinafter called "capital
+treatment") provided such reporting is followed consistently from year
+to year.</li>
+</ol>
+</blockquote>
+<p>So there, we have it. Amateur forex traders, such as myself, can report
+our forex trading gain/loss as capital gains and losses. The reason
+being that <a href="http://www.quantisan.com/category/forex">forex trading</a> isn't part of my business operation because
+I have another primary source of income (e.g. salary from another job).</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/forex-trading-income-or-capital-gain-tax-in-canada/' title='2010-03-08T10:29:00'>08 March 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/" rel='bookmark'>Another reason against stocking into a registered trading account this year</a>
             </h1>
             <div class="article-content"> <p>There's another reason why I am so <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">reluctant to put money into a TFSA

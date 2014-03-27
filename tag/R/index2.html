@@ -58,6 +58,65 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/a-weather-station-data-scrapper-in-r/" rel='bookmark'>A weather station data scrapper in R</a>
+            </h1>
+            <div class="article-content"> <p>
+This R code scrape publicly available weather station data given a
+weather station ID and a date range. I patched an existing source code
+from UC Davis so it's not my original code. Thought I'd share it here
+anyway. It doesn't fail safely though because a null return value would
+break the fetching loop.
+<script src="https://gist.github.com/1808134.js"> </script>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-weather-station-data-scrapper-in-r/' title='2012-02-12T11:49:00'>12 February 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business/" rel='bookmark'>It's an open buffet in a small business</a>
+            </h1>
+            <div class="article-content"> <p>One of the few benefits of working for myself is that I don't need to
+worry about compatibility with legacy systems. I am free to use whatever
+open source tools to get the job done well. The downside to this is that
+there are so many technologies out there that it's hard to choose the
+right ones for the job. To give you a sense of what I meant, here are
+some of the topics that I have either tried or seriously considered in
+the past year.</p>
+<ul>
+<li>Programming languages: <a href="http://www.quantisan.com/tag/java/">Java</a>, <a href="http://www.quantisan.com/tag/python/">Python</a>, <a href="http://www.quantisan.com/tag/R">R</a>, C#, F#, Scala,
+    Clojure, Haskell.</li>
+<li>Data storage: <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/">HDF5</a>, CSV, Binary, MySQL, PostgreSQL, MongoDB,
+    MonetDB, Redis, HBase.</li>
+<li>Cloud server: <a href="http://www.quantisan.com/tag/amazon-ec2/">Amazon EC2</a>, Microsoft Azure, [Google App
+    Engine][], Rackspace Cloud, <a href="http://www.quantisan.com/tag/vps/">plain old VPSs</a>.</li>
+</ul>
+<p>Programming language choices are important because they sit at the
+bottom of a technology stack. Most of the work that I do are built on
+using them. For a long while, I settled on using a combination of Java,
+Python, and R. I prototype small ideas in Python. Implement production
+code in Java. And perform analysis in R. I discussed why <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/">use the right
+tool for the right task</a> a year ago. By the end of my previous
+project, I am finding that the popular development triplet of Java,
+Python, and R, is not ideal for a solo-operation. Seeing that I have
+more time on my hands because I am using QTD to trade for me now, I am
+taking a break this summer to expand my knowledge and learn new
+technologies. Some of the technologies that I am experimenting with
+includes:</p>
+<ul>
+<li>an in-memory data store for instantaneous and persistent tick data</li>
+<li>parallel programming for concurrent processing with no locks</li>
+<li>mathematically intuitive algorithm implementations using high order
+    functions</li>
+</ul>
+<p>Don't mind me as I help myself in this open buffet of technologies.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/its-an-open-buffet-in-a-small-business/' title='2011-06-15T20:50:00'>15 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel='bookmark'>A failed experiment with spectral density estimation in R</a>
             </h1>
             <div class="article-content"> <p>Spectrum analysis (see <a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis">wiki entry</a>) is a technical process to
@@ -134,41 +193,10 @@ user-contributed packages!</p> </div>
                 Posted  <a href='http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/' title='2010-10-08T15:32:00'>08 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel='bookmark'>Data analysis with R: Using the right tool for the right task</a>
-            </h1>
-            <div class="article-content"> <p>I ported <a href="http://engineering-returns.com/tsi/">Engineering Return's Trend Strength Index</a> to JForex as my
-first practice to writing custom indicators in JForex. Frank's code in
-TradeSignal consists of 9 lines. My JForex code? 191. This is my first
-custom indicator in JForex. It will also be the last. A compiled
-programming language such as Java is not the most convenient to use for
-data analysis. The lack of interactivity because of the step of
-compilation is one obstacle to fluent data explorations. Secondly, the
-language itself is more cumbersome because of its generality. Java is
-used to build all sorts of applications. Contrary to something like
-MatLab, in which it is purposely built to work with numbers. I miss <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">the
-days when I have my license for MatLab</a>. However, being forced away
-from MatLab might not be a bad thing. As much as I've become accustomed
-to it, MatLab isn't without its flaws. But I won't bash it in this post.
-What I actually want to talk about is R. The rage these days in
-statistical data analysis is in R (see <a href="http://en.wikipedia.org/wiki/R_%28programming_language%29">Wiki entry on R</a>). I've done
-some research and testing, R is really as good as they say it is (see
-past publications in <a href="http://www.rinfinance.com/">R/Finance conference</a><a href="http://probability.ca/cran/doc/contrib/Farnsworth-EconometricsInR.pdf"></a>). You will get to see
-some real examples in financial time series data analysis in R later in
-this blog once I have some publishable results. This will no doubt take
-some time as I am learning yet another new programming language (thus
-the lack of posts this week). The plan from now on is to use R to play
-with the data. Then once the algorithm is finalized, I will either port
-it to Java (JForex) for deployment or <a href="http://www.rforge.net/rJava/">embed the R environment in
-Java</a> for live trading.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/' title='2010-10-06T05:58:00'>06 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
 <p class="paginator">
 			<a href="http://www.quantisan.com/tag/R//index.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
 
+                    <a href="http://www.quantisan.com/tag/R//index3.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
 </p>
     </section>
 

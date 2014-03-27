@@ -58,6 +58,36 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/i-construct-models-not-theories/" rel='bookmark'>I construct models, not theories</a>
+            </h1>
+            <div class="article-content"> <p>I <a href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/">gave a talk</a> at the 54th Annual Conference on Operational Research last week in Edinburgh. Operational Research is "using advanced analytical methods to help make better decisions" [<a href="https://en.wikipedia.org/wiki/Operation_research">wiki</a>]. This field has been around long before data science and business intelligence. After listening to so many talks and talking to so many academics from marketing to finance to industrial engineering, I find that what we do are quite similar on a 30 thousand feet level -- using data to solve problems. Yet, there is a fundamental difference to our approaches. Whereas operational research is about constructing analytical theories; data science is about constructing models.</p>
+<p>One of the talks that I recall is from a phd from Dubai about optimising maintenance scheduling in desalination plants. Desalination plants is big business in the Middle East as they provide a major source of fresh water there. However, components in these plants fail often because of the harsh condition that they work in and that servicing some of these components might need to bring the entire plant down for hours. The presenter proceeded to explain their method of using a Poisson process on the failure data to optimise maintenance work.</p>
+<p>Now if it were me, I would add tons of sensors everywhere to enhance the frequency and granularity of data captured. Similar to what we do at work for web data. Then the problem practical solve itself as we'll be able to build predictive models for each and every crucial component. Using on-going data with these predictive models, we can flag high risk components and service them before they cause trouble.</p>
+<p>The problem is that adding sensors is not trivial (from my electrical engineering days) in a physical system. The high cost of installing all of that and the questionable efficacy of measurements make getting data a challenge. For problems like this, I can see where a traditional scientific thinking of using sparse data to support theories is practical.</p>
+<p>Yet, not everything can be reduced to formulas and solved analytically. As this blog piece on Scientific American points out, <a href="http://blogs.scientificamerican.com/the-curious-wavefunction/2012/09/05/theories-models-and-the-future-of-science/">science is moving towards solving problems computationally</a>. So too are the industries as we've seen examples from Amazon and LinkedIn driving massive sales by modelling and enabling a feedback loop with their data.</p>
+<p>It's a shame that so many companies are poisoning the term Big Data these days by plastering it all over their marketing material to sell products with no substance. There are real strategic advantages to be reaped if companies can do it right.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/i-construct-models-not-theories/' title='2012-09-11T22:00:00'>11 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/" rel='bookmark'>My talk at OR54 on knowledge discovery with web log data</a>
+            </h1>
+            <div class="article-content"> <h3>Abstract</h3>
+<p>Web log data contains a wealth of information about online visitors. We have a record of each and every 
+customer interaction for the millions of visitors coming through each month at uSwitch.com. The challenge 
+is to analyse this discrete time series, semi-structured dataset to understand the behaviour of our visitors on 
+a personal level. This talk is a case study of how our data team of three leveraged heterogeneous 
+architecture and agile methodologies to tackle this problem. And we had three months.</p>
+<h3>Slides</h3>
+<iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/' title='2012-09-04T16:30:00'>04 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/people-is-the-biggest-obstacle-to-becoming-a-data-driven-organisation/" rel='bookmark'>People is the biggest obstacle to becoming a data-driven organisation</a>
             </h1>
             <div class="article-content"> <p>Our data team of 3 is tasked with pushing our business to be more
@@ -142,158 +172,10 @@ one-way process. <a href="http://s.hbr.org/IIVNL0">Make it a feedback loop of ma
                 Posted  <a href='http://www.quantisan.com/data-science-is-a-collaborative-effort/' title='2012-04-29T17:02:00'>29 April 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/my-talk-on-bootstrapping-data-science-in-a-company/" rel='bookmark'>My talk on bootstrapping data science in a company</a>
-            </h1>
-            <div class="article-content"> <iframe src="https://docs.google.com/presentation/embed?id=19wVHXeMM_uOfGqDJszZdn4TyXvlKRRoxpf65HyiaK5A&amp;start=false&amp;loop=false&amp;delayms=3000" frameborder="0" width="480" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/my-talk-on-bootstrapping-data-science-in-a-company/' title='2012-03-25T10:15:00'>25 March 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/a-weather-station-data-scrapper-in-r/" rel='bookmark'>A weather station data scrapper in R</a>
-            </h1>
-            <div class="article-content"> <p>
-This R code scrape publicly available weather station data given a
-weather station ID and a date range. I patched an existing source code
-from UC Davis so it's not my original code. Thought I'd share it here
-anyway. It doesn't fail safely though because a null return value would
-break the fetching loop.
-<script src="https://gist.github.com/1808134.js"> </script>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-weather-station-data-scrapper-in-r/' title='2012-02-12T11:49:00'>12 February 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/" rel='bookmark'>Ask not what accuracy your algorithm achieves but what value it can add</a>
-            </h1>
-            <div class="article-content"> <p>Partnering with the marketing team at work earlier this month reminded
-me of an important lesson in my algorithmic trading. Our  external TV
-agency presented a mid-term performance analysis and I was tasked with
-performing due diligence on their analysis methodology. It took me 2
-minutes to realise that they were using a linear regression model. At
-first I thought it was too simplistic. Then I realised my own naivete
-because it was never about accuracy to begin with. Measuring ROI on a
-marketing campaign is an illusive task. A quick metric is to perform a
-regression on the money you spent versus the revenue generated in the
-same time period. For example, let y(t) = x(t), where y represents
-revenue, x is marketing spending, and t is day. Plot your data on y
-versus x for a number of days. Then draw a best fit straight line to
-graphically show a correlation. If you're feeling adventurous, throw in
-a few other factors that you think might have important influence on
-your daily revenue. Such that you have x2(t), x3(t), etc. This is what
-the agency did in their model. One major flaw with using a regression
-model for this purpose is that it assumes each data point is mutually
-exclusive to another. So a day's event does not influence another. This
-is simply not true in the real world. For examples, it might take a few
-days after someone sees your ad until they click your buy button or it
-might take more than a few showing of the ads until people take action.
-A better regression model for the first example is y(t) = x1(t - a),
-where 'a' is the delay. And for the second example, y(t) = ∑x1(t - A),
-where A is a vector of 'a'. The problem with this is that finding 'a'
-and 'A' is another regression problem in and of itself. Luckily, this is
-conceptually what an Artificial Neural Network does, a series of
-regression models taking into account the interrelation of the factors
-and non-linear effects of the response. And so, within the span of a few
-minutes of our conference call with them, I've just convinced myself in
-my mind to try another algorithm when I have a chance. That weekend I
-wasted a few hours on R tinkering with the data. Then it finally dawned
-on me. What is the value of this? To calculate an ROI figure on our
-marketing campaign, is it necessary to spike a machine learning project
-just so we can be 95% confident on that figure? The justification is
-further weakened by the fact that ROI is merely one of the many metrics
-available when <a href="https://en.wikipedia.org/wiki/Marketing_performance_measurement_and_management">evaluating a marketing campaign</a>. So the impact of an
-accurate model versus a throw in the dart might not be worth spending an
-extra two weeks working on it whereas a throwing a dart takes only one
-command in R.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/' title='2012-01-29T11:56:00'>29 January 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/" rel='bookmark'>First impression of Incanter: usably incomplete</a>
-            </h1>
-            <div class="article-content"> <p>Speaking out loud about my new favourite toys, Clojure (a functional
-programming language) and Incanter (a R-like statistical platform built
-on Clojure). My first impression is that Incanter is usable but it is
-far from being polished like R since it is a new platform. I am using
-the Gold Miners ETF (GDX) and Gold Trust (GLD) data from Yahoo Finance
-as examples to perform a simple correlation test. Some Incanter
-functions are rough on the edges and a lot is left to be desired. This
-is a drastic contrast to R in which its plug-in modules are both
-impressive and comprehensive. On the other hand, making things happen
-with Clojure is ... fun. And that's a winner for me. Here's a walk
-through of my first attempt using Incanter to analyse stocks data.
-Figures 1 and 2 below are basic time series plot of GDX and GLD. I'll
-need to study the Incanter source code to figure out how to plot
-multiple time series on the same chart. Couldn't find it on a first
-glimpse though. [caption id="attachment_5535" align="aligncenter"
-width="488" caption="GDX"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GDX.png" title="incanter-chart-GDX" />[/caption] [caption id="attachment_5536"
-align="aligncenter" width="488" caption="GLD"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD.png" title="incanter-chart-GLD" />[/caption] The
-following looks like a lot of code just to plot two graphs. Most of the
-boilerplate code is to coerce the Yahoo Finance CSV data to specifically
-fit Incanter's time-series-plot function. I will wrap this into a
-library later on.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">inc-sandbox.corr-demo</span> <span class="p">(</span><span class="ss">:require</span>
-<span class="p">[</span><span class="nv">clojure.set</span> <span class="ss">:as</span> <span class="nv">set</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">incanter</span> <span class="nv">core</span> <span class="nv">stats</span> <span class="nv">charts</span> <span class="nv">io</span><span class="p">))</span> <span class="p">(</span><span class="ss">:require</span>
-<span class="p">[</span><span class="nv">clj-time.core</span> <span class="ss">:as</span> <span class="nv">time</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">clj-time</span> <span class="p">[</span><span class="nv">format</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">formatter</span>
-<span class="nv">formatters</span> <span class="nv">parse</span><span class="p">)]</span> <span class="p">[</span><span class="nv">coerce</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">to-long</span><span class="p">)])))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">sym-to-dataset</span>
-<span class="s">&quot;returns a dataset read from a local CSV in &#39;./data/&#39; given a Yahoo</span>
-<span class="s">Finance symbol name&quot;</span> <span class="p">[</span><span class="nv">yf-symbol</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">+data</span> <span class="s">&quot;./data/&quot;</span> <span class="nv">+csv</span> <span class="s">&quot;.csv&quot;</span>
-<span class="nb">symbol </span><span class="p">(</span><span class="nf">.toUpperCase</span> <span class="nv">yf-symbol</span><span class="p">)</span> <span class="nv">filename</span> <span class="p">(</span><span class="nb">str </span><span class="nv">+data</span> <span class="nb">symbol </span><span class="nv">+csv</span><span class="p">)]</span> <span class="p">(</span><span class="nf">-</span><span class="sc">\&gt;</span>
-<span class="p">(</span><span class="nf">read-dataset</span> <span class="nv">filename</span> <span class="ss">:header</span> <span class="nv">true</span><span class="p">)</span> <span class="p">(</span><span class="nf">col-names</span> <span class="p">[</span><span class="ss">:Date</span> <span class="ss">:Open</span> <span class="ss">:High</span> <span class="ss">:Low</span>
-<span class="ss">:Close</span> <span class="ss">:Volume</span> <span class="ss">:Adj-Close</span><span class="p">]))))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gdx</span> <span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gld</span>
-<span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">same-dates?</span> <span class="s">&quot;are two datasets covering the</span>
-<span class="s">same time frame?&quot;</span> <span class="p">[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x-dates</span> <span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">x</span><span class="p">))</span> <span class="nv">y-dates</span>
-<span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">y</span><span class="p">))</span> <span class="nv">x-y</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">x-dates</span> <span class="nv">y-dates</span><span class="p">)</span>
-<span class="nv">y-x</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">y-dates</span> <span class="nv">x-dates</span><span class="p">)]</span> <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">x-y</span><span class="p">)</span> <span class="p">(</span><span class="nf">empty?</span>
-<span class="nv">y-x</span><span class="p">))))</span> <span class="p">(</span><span class="nf">same-dates?</span> <span class="nv">gdx</span> <span class="nv">gld</span><span class="p">)</span> <span class="c1">; true (def gdx-ac (\$ :Adj-Close gdx))</span>
-<span class="p">(</span><span class="k">def </span><span class="nv">gld-ac</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Adj-Close</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">dates-long</span> <span class="s">&quot;returns the dates as</span>
-<span class="s">long&quot;</span> <span class="p">[</span><span class="nv">data</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">ymd-formatter</span> <span class="p">(</span><span class="nf">formatters</span> <span class="ss">:year-month-day</span><span class="p">)</span> <span class="nv">dates-str</span>
-<span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">data</span><span class="p">)]</span> <span class="p">(</span><span class="nb">map </span><span class="sc">\#</span><span class="p">(</span><span class="nf">to-long</span> <span class="p">(</span><span class="nb">parse </span><span class="nv">ymd-formatter</span> <span class="nv">%</span><span class="p">))</span> <span class="nv">dates-str</span><span class="p">)))</span>
-<span class="c1">;; no replace col func (def gdx-times (dates-long gdx)) (def gld-times</span>
-<span class="p">(</span><span class="nf">dates-long</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gld-times</span> <span class="nv">gld-ac</span> <span class="ss">:x-label</span>
-<span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gdx-times</span> <span class="nv">gdx-ac</span>
-<span class="ss">:x-label</span> <span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span>
-</pre></div>
-
-
-<p>Calculating the Pearson and the
-Spearman's correlation coefficient are straightforward enough. It's just
-a function call away. I am surprised to see Spearman's rho implemented
-in Incanter already as its non-parametric statistics library is
-practically non-existent. Yet another project to work on. However,
-calculating the coefficients is only half the story. Where are the
-p-values? That doesn't seem to be available for these functions. The
-t-test function is a good example of what results I would like to see. A
-third item to work on. </p>
-<div class="highlight"><pre> <span class="p">(</span><span class="nf">correlation</span> <span class="nv">gdx-ac</span> <span class="nv">gld-ac</span><span class="p">)</span>
-<span class="c1">; 0.7906494552829249 (spearmans-rho gdx-ac gld-ac) ; 0.7728859703262337</span>
-<span class="c1">;; no p-value in col, like t-test (let [lm (linear-model gdx-ac gld-ac)]</span>
-<span class="p">(</span><span class="nb">doto </span><span class="p">(</span><span class="nf">scatter-plot</span> <span class="nv">gld-ac</span> <span class="nv">gdx-ac</span> <span class="ss">:x-label</span> <span class="s">&quot;GLD&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="nf">add-lines</span> <span class="nv">gld-ac</span> <span class="p">(</span><span class="ss">:fitted</span> <span class="nv">lm</span><span class="p">))</span> <span class="nv">view</span><span class="p">))</span>
-</pre></div>
-
-
-<p>[caption id="attachment_5543" align="aligncenter" width="488" caption="GLD-GDX
-scatter plot"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD-GDX.png" title="incanter-chart-GLD-GDX" />[/caption] Even though Incanter is still early in
-its development, it is certainly a usable statistical platform offering
-many of the basics. I look forward to learning more about it and
-contributing to the project. Now, which of the listed problems should I
-tackle first? P.S. My code embed seem to be mysteriously breaking my
-code. As an alternative, the <a href="https://gist.github.com/1047101">complete source</a> is available on Gist.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/' title='2011-06-25T20:43:00'>25 June 2011</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
 <p class="paginator">
 			<a href="http://www.quantisan.com/category/data-science//index.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
 
+                    <a href="http://www.quantisan.com/category/data-science//index3.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
 </p>
     </section>
 

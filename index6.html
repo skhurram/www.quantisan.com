@@ -58,208 +58,120 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/towards-a-broker-agnostic-trading-system/" rel='bookmark'>Towards a broker-agnostic trading system</a>
+                <a href="http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/" rel='bookmark'>Cascalog-checkpoint: Fault-tolerant MapReduce Topologies</a>
             </h1>
-            <div class="article-content"> <p>The first generation of my trading system uses a broker's proprietary
-script on that same broker's platform. The second generation of my
-trading system uses a generic programming language on another broker's
-platform. I am now working on the third generation of my trading system.
-It is language-agnostic, platform-agnostic, and broker-agnostic. Why?
-Because designing trading systems is as much about creativity as the
-science. An artist would not limit themselves to a defined toolset. I
-want to be free to use whatever tools are necessary to get the job done
-efficiently and being able to try new things as technologies evolve.
-Having a broker-agnostic system frees me from being locked into any
-particular broker. Conversely, I could use one system to gather data and
-trade from multiple brokers for the best execution prices. Yes, this is
-over-engineering for a small entity like myself. But heck, this is
-something that I enjoy building. So why not?</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/towards-a-broker-agnostic-trading-system/' title='2011-09-01T21:01:00'>01 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel='bookmark'>Vector algorithm using tree composition</a>
-            </h1>
-            <div class="article-content"> <p>Sniffed this trick from the Incanter source. Here's a demo of using tree
-composition to calculate a 2-d Euclidean distance between two points.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">x</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span> 
-<span class="p">(</span><span class="k">def </span><span class="nv">y</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">])</span> 
-<span class="p">(</span><span class="kd">defn- </span><span class="nv">tree-comp-each</span> <span class="p">[</span><span class="nb">root </span><span class="nv">branch</span> <span class="o">&amp;</span> <span class="nv">leaves</span><span class="p">]</span>
-    <span class="p">(</span><span class="nb">apply root </span><span class="p">(</span><span class="nb">map </span><span class="nv">branch</span> <span class="nv">leaves</span><span class="p">)))</span> 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">euclidean-distance</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span><span class="p">]</span>
-    <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">a</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">b</span><span class="p">))]}</span> 
-    <span class="p">(</span><span class="nf">sqrt</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">tree-comp-each</span> <span class="nb">+ </span>
-                <span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]]</span>
-                    <span class="p">(</span><span class="nf">pow</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> 
-                <span class="p">(</span><span class="nb">map vector </span><span class="nv">a</span> <span class="nv">b</span><span class="p">))))</span>
-</pre></div>
-
-
-<p>I've only had exposures to tree traversal in the use of implementing searching and sorting
-algorithms. This trick here definitely widened my eyes to the wonders of
-functional programming. It's more than just being able to pass and
-manipulate functions. I need to think like a tree.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/vector-algorithm-using-tree-composition/' title='2011-08-07T09:43:00'>07 August 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/back-in-rd-mode/" rel='bookmark'>Back in R&amp;D mode</a>
-            </h1>
-            <div class="article-content"> <p>Just some updates as to what I'm up to. I've been fully immersed in
-research and development mode for some new systems and technologies.
-This could take a few months. I am also deliberating rather I should
-revert Quantisan.com back as a pure blog again and separate QTD on its
-own domain. Quantisan.com has too much random topics and history that
-makes it difficult to keep a consistent message as a company blog.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/back-in-rd-mode/' title='2011-08-02T10:52:00'>02 August 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/" rel='bookmark'>First impression of Incanter: usably incomplete</a>
-            </h1>
-            <div class="article-content"> <p>Speaking out loud about my new favourite toys, Clojure (a functional
-programming language) and Incanter (a R-like statistical platform built
-on Clojure). My first impression is that Incanter is usable but it is
-far from being polished like R since it is a new platform. I am using
-the Gold Miners ETF (GDX) and Gold Trust (GLD) data from Yahoo Finance
-as examples to perform a simple correlation test. Some Incanter
-functions are rough on the edges and a lot is left to be desired. This
-is a drastic contrast to R in which its plug-in modules are both
-impressive and comprehensive. On the other hand, making things happen
-with Clojure is ... fun. And that's a winner for me. Here's a walk
-through of my first attempt using Incanter to analyse stocks data.
-Figures 1 and 2 below are basic time series plot of GDX and GLD. I'll
-need to study the Incanter source code to figure out how to plot
-multiple time series on the same chart. Couldn't find it on a first
-glimpse though. [caption id="attachment_5535" align="aligncenter"
-width="488" caption="GDX"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GDX.png" title="incanter-chart-GDX" />[/caption] [caption id="attachment_5536"
-align="aligncenter" width="488" caption="GLD"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD.png" title="incanter-chart-GLD" />[/caption] The
-following looks like a lot of code just to plot two graphs. Most of the
-boilerplate code is to coerce the Yahoo Finance CSV data to specifically
-fit Incanter's time-series-plot function. I will wrap this into a
-library later on.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">ns </span><span class="nv">inc-sandbox.corr-demo</span> <span class="p">(</span><span class="ss">:require</span>
-<span class="p">[</span><span class="nv">clojure.set</span> <span class="ss">:as</span> <span class="nv">set</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">incanter</span> <span class="nv">core</span> <span class="nv">stats</span> <span class="nv">charts</span> <span class="nv">io</span><span class="p">))</span> <span class="p">(</span><span class="ss">:require</span>
-<span class="p">[</span><span class="nv">clj-time.core</span> <span class="ss">:as</span> <span class="nv">time</span><span class="p">])</span> <span class="p">(</span><span class="ss">:use</span> <span class="p">(</span><span class="nf">clj-time</span> <span class="p">[</span><span class="nv">format</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">formatter</span>
-<span class="nv">formatters</span> <span class="nv">parse</span><span class="p">)]</span> <span class="p">[</span><span class="nv">coerce</span> <span class="ss">:only</span> <span class="p">(</span><span class="nf">to-long</span><span class="p">)])))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">sym-to-dataset</span>
-<span class="s">&quot;returns a dataset read from a local CSV in &#39;./data/&#39; given a Yahoo</span>
-<span class="s">Finance symbol name&quot;</span> <span class="p">[</span><span class="nv">yf-symbol</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">+data</span> <span class="s">&quot;./data/&quot;</span> <span class="nv">+csv</span> <span class="s">&quot;.csv&quot;</span>
-<span class="nb">symbol </span><span class="p">(</span><span class="nf">.toUpperCase</span> <span class="nv">yf-symbol</span><span class="p">)</span> <span class="nv">filename</span> <span class="p">(</span><span class="nb">str </span><span class="nv">+data</span> <span class="nb">symbol </span><span class="nv">+csv</span><span class="p">)]</span> <span class="p">(</span><span class="nf">-</span><span class="sc">\&gt;</span>
-<span class="p">(</span><span class="nf">read-dataset</span> <span class="nv">filename</span> <span class="ss">:header</span> <span class="nv">true</span><span class="p">)</span> <span class="p">(</span><span class="nf">col-names</span> <span class="p">[</span><span class="ss">:Date</span> <span class="ss">:Open</span> <span class="ss">:High</span> <span class="ss">:Low</span>
-<span class="ss">:Close</span> <span class="ss">:Volume</span> <span class="ss">:Adj-Close</span><span class="p">]))))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gdx</span> <span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span> <span class="p">(</span><span class="k">def </span><span class="nv">gld</span>
-<span class="p">(</span><span class="nf">sym-to-dataset</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">same-dates?</span> <span class="s">&quot;are two datasets covering the</span>
-<span class="s">same time frame?&quot;</span> <span class="p">[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">x-dates</span> <span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">x</span><span class="p">))</span> <span class="nv">y-dates</span>
-<span class="p">(</span><span class="nb">into </span><span class="sc">\#</span><span class="p">{}</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">y</span><span class="p">))</span> <span class="nv">x-y</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">x-dates</span> <span class="nv">y-dates</span><span class="p">)</span>
-<span class="nv">y-x</span> <span class="p">(</span><span class="nf">clojure.set/difference</span> <span class="nv">y-dates</span> <span class="nv">x-dates</span><span class="p">)]</span> <span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nf">empty?</span> <span class="nv">x-y</span><span class="p">)</span> <span class="p">(</span><span class="nf">empty?</span>
-<span class="nv">y-x</span><span class="p">))))</span> <span class="p">(</span><span class="nf">same-dates?</span> <span class="nv">gdx</span> <span class="nv">gld</span><span class="p">)</span> <span class="c1">; true (def gdx-ac (\$ :Adj-Close gdx))</span>
-<span class="p">(</span><span class="k">def </span><span class="nv">gld-ac</span> <span class="p">(</span><span class="sc">\$</span> <span class="ss">:Adj-Close</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">dates-long</span> <span class="s">&quot;returns the dates as</span>
-<span class="s">long&quot;</span> <span class="p">[</span><span class="nv">data</span><span class="p">]</span> <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">ymd-formatter</span> <span class="p">(</span><span class="nf">formatters</span> <span class="ss">:year-month-day</span><span class="p">)</span> <span class="nv">dates-str</span>
-<span class="p">(</span><span class="sc">\$</span> <span class="ss">:Date</span> <span class="nv">data</span><span class="p">)]</span> <span class="p">(</span><span class="nb">map </span><span class="sc">\#</span><span class="p">(</span><span class="nf">to-long</span> <span class="p">(</span><span class="nb">parse </span><span class="nv">ymd-formatter</span> <span class="nv">%</span><span class="p">))</span> <span class="nv">dates-str</span><span class="p">)))</span>
-<span class="c1">;; no replace col func (def gdx-times (dates-long gdx)) (def gld-times</span>
-<span class="p">(</span><span class="nf">dates-long</span> <span class="nv">gld</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gld-times</span> <span class="nv">gld-ac</span> <span class="ss">:x-label</span>
-<span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GLD&quot;</span><span class="p">))</span> <span class="p">(</span><span class="nf">view</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">gdx-times</span> <span class="nv">gdx-ac</span>
-<span class="ss">:x-label</span> <span class="s">&quot;Date&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">))</span>
-</pre></div>
-
-
-<p>Calculating the Pearson and the
-Spearman's correlation coefficient are straightforward enough. It's just
-a function call away. I am surprised to see Spearman's rho implemented
-in Incanter already as its non-parametric statistics library is
-practically non-existent. Yet another project to work on. However,
-calculating the coefficients is only half the story. Where are the
-p-values? That doesn't seem to be available for these functions. The
-t-test function is a good example of what results I would like to see. A
-third item to work on. </p>
-<div class="highlight"><pre> <span class="p">(</span><span class="nf">correlation</span> <span class="nv">gdx-ac</span> <span class="nv">gld-ac</span><span class="p">)</span>
-<span class="c1">; 0.7906494552829249 (spearmans-rho gdx-ac gld-ac) ; 0.7728859703262337</span>
-<span class="c1">;; no p-value in col, like t-test (let [lm (linear-model gdx-ac gld-ac)]</span>
-<span class="p">(</span><span class="nb">doto </span><span class="p">(</span><span class="nf">scatter-plot</span> <span class="nv">gld-ac</span> <span class="nv">gdx-ac</span> <span class="ss">:x-label</span> <span class="s">&quot;GLD&quot;</span> <span class="ss">:y-label</span> <span class="s">&quot;GDX&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="nf">add-lines</span> <span class="nv">gld-ac</span> <span class="p">(</span><span class="ss">:fitted</span> <span class="nv">lm</span><span class="p">))</span> <span class="nv">view</span><span class="p">))</span>
-</pre></div>
-
-
-<p>[caption id="attachment_5543" align="aligncenter" width="488" caption="GLD-GDX
-scatter plot"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/incanter-chart-GLD-GDX.png" title="incanter-chart-GLD-GDX" />[/caption] Even though Incanter is still early in
-its development, it is certainly a usable statistical platform offering
-many of the basics. I look forward to learning more about it and
-contributing to the project. Now, which of the listed problems should I
-tackle first? P.S. My code embed seem to be mysteriously breaking my
-code. As an alternative, the <a href="https://gist.github.com/1047101">complete source</a> is available on Gist.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-impression-of-incanter-usably-incomplete/' title='2011-06-25T20:43:00'>25 June 2011</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/how-do-you-minimize-risks-when-eurusd-moves-100-pips-up-and-back-down-in-2-hours/" rel='bookmark'>How do you minimize risks when EURUSD moves 100 pips up and back down in 2 hours?</a>
-            </h1>
-            <div class="article-content"> <p>And this happens quite often. [caption id="attachment_5526"
-align="aligncenter" width="580" caption="EURUSD, 5 min"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/2011-06-24-eurusd-5m-580x204.png" title="2011-06-24-eurusd-5m" />[/caption]
-There are a few choices to minimize your risks in times like these:</p>
-<ol>
-<li>Stay on the sideline until the dust settled.</li>
-<li>Target higher time frames with larger stops and smaller positions.</li>
-<li>Partner up with someone from another timezone.</li>
-<li>Set a trailing stop.</li>
-<li>Set alerts to wake you up on extraordinary events.</li>
-<li>Use a position management bot.</li>
-</ol>
-<p>I opted for #6. What about you? The picture is worse in equities as you
-are locked in your positions overnight. [caption id="attachment_5527"
-align="aligncenter" width="580" caption="S&amp;P500 ETF"]<img alt="" src="http://www.quantisan.com/static/images/2011/06/2011-06-24-SPY-580x258.png" title="2011-06-24-SPY" />[/caption]</p>
+            <div class="article-content"> <p>
+Cascalog is an abstraction library on top of Cascading [for writing
+MapReduce jobs][]. Since the Cascalog library is maturing, the Twitter
+guys (core committers) have been building features around it so that
+it's not just an abstraction for Cascading. One of which is
+[Cascalog-checkpoint][]. It is a small, easy-to-use, and very powerful
+little add-on for Cascalog. In particular, it enables fault-tolerant
+MapReduce topologies. Building Cascading/Cascalog queries can be
+visualised as assembling pipes to connect a flow of data. Imagine that
+you have Flow A and B. Flow B uses the result from A along with other
+bits. Thus, Flow B is dependent on A. Typically, if a MapReduce job fail
+for whatever reason, you simply fix what's wrong and start the job all
+over again. But what if Flow A takes hours to run (which is common for a
+MR job) and the error happened in Flow B? Why re-do all that processing
+for Flow A if we know that it finished successfully? By using
+Cascalog-checkpoint, you can *stage* intermediate results (e.g. result
+of Flow A) and failed jobs can automatically pickup from the last
+checked point. An obvious thing to do but not something I've seen done
+in Hadoop. At least not as easy as this:
+<script src="https://gist.github.com/1915638.js?file=ccl-checkpoint-sample1.clj"></script>
+See [Sam Ritchie's post on cascalog-checkpoint][] for more examples. Of
+course, you need to coerce your flows such that output from Flow A can
+be read by Flow B. However, this is almost trivial via
+Cascalog/Cascading. As this notion of mix and match pipes and flows is a
+fundamental concept in Cascalog/Cascading. With so many choices of
+abstraction frameworks for coding MapReduce on Hadoop, I feel sorry for
+anyone using vanilla Java for writing MapReduce besides the most
+simplest or recurring jobs.
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/how-do-you-minimize-risks-when-eurusd-moves-100-pips-up-and-back-down-in-2-hours/' title='2011-06-24T09:28:00'>24 June 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/' title='2012-02-26T09:38:00'>26 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business/" rel='bookmark'>It's an open buffet in a small business</a>
+                <a href="http://www.quantisan.com/a-weather-station-data-scrapper-in-r/" rel='bookmark'>A weather station data scrapper in R</a>
             </h1>
-            <div class="article-content"> <p>One of the few benefits of working for myself is that I don't need to
-worry about compatibility with legacy systems. I am free to use whatever
-open source tools to get the job done well. The downside to this is that
-there are so many technologies out there that it's hard to choose the
-right ones for the job. To give you a sense of what I meant, here are
-some of the topics that I have either tried or seriously considered in
-the past year.</p>
-<ul>
-<li>Programming languages: <a href="http://www.quantisan.com/tag/java/">Java</a>, <a href="http://www.quantisan.com/tag/python/">Python</a>, <a href="http://www.quantisan.com/tag/R">R</a>, C#, F#, Scala,
-    Clojure, Haskell.</li>
-<li>Data storage: <a href="http://www.quantisan.com/from-object-oriented-programming-to-object-oriented-design/">HDF5</a>, CSV, Binary, MySQL, PostgreSQL, MongoDB,
-    MonetDB, Redis, HBase.</li>
-<li>Cloud server: <a href="http://www.quantisan.com/tag/amazon-ec2/">Amazon EC2</a>, Microsoft Azure, [Google App
-    Engine][], Rackspace Cloud, <a href="http://www.quantisan.com/tag/vps/">plain old VPSs</a>.</li>
-</ul>
-<p>Programming language choices are important because they sit at the
-bottom of a technology stack. Most of the work that I do are built on
-using them. For a long while, I settled on using a combination of Java,
-Python, and R. I prototype small ideas in Python. Implement production
-code in Java. And perform analysis in R. I discussed why <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/">use the right
-tool for the right task</a> a year ago. By the end of my previous
-project, I am finding that the popular development triplet of Java,
-Python, and R, is not ideal for a solo-operation. Seeing that I have
-more time on my hands because I am using QTD to trade for me now, I am
-taking a break this summer to expand my knowledge and learn new
-technologies. Some of the technologies that I am experimenting with
-includes:</p>
-<ul>
-<li>an in-memory data store for instantaneous and persistent tick data</li>
-<li>parallel programming for concurrent processing with no locks</li>
-<li>mathematically intuitive algorithm implementations using high order
-    functions</li>
-</ul>
-<p>Don't mind me as I help myself in this open buffet of technologies.</p>
+            <div class="article-content"> <p>
+This R code scrape publicly available weather station data given a
+weather station ID and a date range. I patched an existing source code
+from UC Davis so it's not my original code. Thought I'd share it here
+anyway. It doesn't fail safely though because a null return value would
+break the fetching loop.
+<script src="https://gist.github.com/1808134.js"> </script>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/its-an-open-buffet-in-a-small-business/' title='2011-06-15T20:50:00'>15 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/a-weather-station-data-scrapper-in-r/' title='2012-02-12T11:49:00'>12 February 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel='bookmark'>My 5 minute lightning talk on Cascalog</a>
+            </h1>
+            <div class="article-content"> <p>Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.</p>
+<iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;size=m" frameborder="0" width="555" height="451"></iframe>
+
+<p>The possibilities...</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/' title='2012-02-05T18:39:00'>05 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/" rel='bookmark'>Ask not what accuracy your algorithm achieves but what value it can add</a>
+            </h1>
+            <div class="article-content"> <p>Partnering with the marketing team at work earlier this month reminded
+me of an important lesson in my algorithmic trading. Our  external TV
+agency presented a mid-term performance analysis and I was tasked with
+performing due diligence on their analysis methodology. It took me 2
+minutes to realise that they were using a linear regression model. At
+first I thought it was too simplistic. Then I realised my own naivete
+because it was never about accuracy to begin with. Measuring ROI on a
+marketing campaign is an illusive task. A quick metric is to perform a
+regression on the money you spent versus the revenue generated in the
+same time period. For example, let y(t) = x(t), where y represents
+revenue, x is marketing spending, and t is day. Plot your data on y
+versus x for a number of days. Then draw a best fit straight line to
+graphically show a correlation. If you're feeling adventurous, throw in
+a few other factors that you think might have important influence on
+your daily revenue. Such that you have x2(t), x3(t), etc. This is what
+the agency did in their model. One major flaw with using a regression
+model for this purpose is that it assumes each data point is mutually
+exclusive to another. So a day's event does not influence another. This
+is simply not true in the real world. For examples, it might take a few
+days after someone sees your ad until they click your buy button or it
+might take more than a few showing of the ads until people take action.
+A better regression model for the first example is y(t) = x1(t - a),
+where 'a' is the delay. And for the second example, y(t) = ∑x1(t - A),
+where A is a vector of 'a'. The problem with this is that finding 'a'
+and 'A' is another regression problem in and of itself. Luckily, this is
+conceptually what an Artificial Neural Network does, a series of
+regression models taking into account the interrelation of the factors
+and non-linear effects of the response. And so, within the span of a few
+minutes of our conference call with them, I've just convinced myself in
+my mind to try another algorithm when I have a chance. That weekend I
+wasted a few hours on R tinkering with the data. Then it finally dawned
+on me. What is the value of this? To calculate an ROI figure on our
+marketing campaign, is it necessary to spike a machine learning project
+just so we can be 95% confident on that figure? The justification is
+further weakened by the fact that ROI is merely one of the many metrics
+available when <a href="https://en.wikipedia.org/wiki/Marketing_performance_measurement_and_management">evaluating a marketing campaign</a>. So the impact of an
+accurate model versus a throw in the dart might not be worth spending an
+extra two weeks working on it whereas a throwing a dart takes only one
+command in R.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/' title='2012-01-29T11:56:00'>29 January 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
 <p class="paginator">

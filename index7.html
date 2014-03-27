@@ -58,226 +58,186 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/why-success-starts-with-failure/" rel='bookmark'>Why success starts with failure</a>
+                <a href="http://www.quantisan.com/business-is-on-hold/" rel='bookmark'>Business is on hold</a>
             </h1>
-            <div class="article-content"> <p>Many people dream of making a cash cow trading program and be set for
-life. The reality of the business, which is just like any other
-profession, is that you need to be persistent and persevere. You really
-need to enjoy the work to be able to keep going at it day after day even
-if nothing that you do seems to work at a time. This video by Tim
-Harford explains why success starts with failure. It rings with my
-previous post on <a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/">why the secret to trading system development is to
-fail faster</a>.
-<iframe width="560" height="349" src="http://www.youtube.com/embed/KR_mCvb-KyY" frameborder="0" allowfullscreen></iframe>
-Harford's three principles of success:</p>
-<ol>
-<li>Fail a lot.</li>
-<li>Fail affordably.</li>
-<li>Fail and fix early.</li>
-</ol>
-</p> </div>
+            <div class="article-content"> <p>Back in November, I started working as a Data Scientist at <a href="http://www.uswitch.com">uSwitch</a>,
+an utility price comparison site. I am very fortunate to be able to work
+with so many <a href="http://forwardtechnology.co.uk/">smart and passionate</a> people there. There is so much
+that I am learning in fact, I haven't had time to do much else. Although
+my ridiculous 4-hour commute is also a factor. I didn't even notice that
+EUR/USD dropped 1000 pips! As such, I am officially putting my own
+business and research on hold until further notice. I will continue to
+post relevant technical discussions on this blog. All of my existing
+clients have been notified and arrangements made way back before I began
+my employment. Thank you for all your support!</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/why-success-starts-with-failure/' title='2011-06-10T09:53:00'>10 June 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+                Posted  <a href='http://www.quantisan.com/business-is-on-hold/' title='2012-01-22T07:11:00'>22 January 2012</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/" rel='bookmark'>The secret to trading system development is to fail faster</a>
+                <a href="http://www.quantisan.com/algorithmic-ownage/" rel='bookmark'>Algorithmic ownage</a>
             </h1>
-            <div class="article-content"> <p>If I am to offer only one advice with regard to developing trading
-systems then this is it -- fail faster. The sad truth to trading is that
-there is no magical system that can guarantee profitability
-indefinitely. A reason top firms like Renaissance Technologies employ
-hundreds of PhDs and is <a href="https://www.renfund.com/vm/jobs.vm">still actively hiring</a> is because one can
-never reach the end of the rainbow in trading. A system can always be
-made better or made obsolete. In fact, you need to stay ahead of the
-curve as competitions are like vultures that will eat away your game if
-you don't keep moving. Not to mention the changing dynamics of the
-market itself is a moving target. As such, you simply need to keep
-innovating. My way of innovating boils down to executing five cyclical
-steps. Conceptualising, implementing, testing, measuring, and analysing,
-over and over again. In essence, my innovation methodology is a
-simulated annealing process that might or might not eventually lead to a
-breakthrough. I do this because:</p>
-<ol>
-<li>I am intelligent but I am not a genius. As such, I don't expect
-    myself to make leaps and bounds with regular sparks of genius.
-    Instead, I take small steps. Adding a 1% yield to your system is
-    extremely difficult. Adding 0.01% is a lot easier. Adding 0.0001% is
-    almost pedantic. So I aim for achieving smaller improvements and do
-    it hundreds of times over a development cycle.</li>
-<li>My view of the world is not absolute. In fact, I am more often wrong
-    than right. So it follows that most of my ideas don't have all the
-    pieces right. Thus, it is inherent that I need to polish my ideas
-    through trials and errors.</li>
-</ol>
-<p>Failure is inevidentable when developing trading systems. It is part of
-the process. You come up with an idea, implement it, test it, find out
-why it isn't up to your expectation, and then make it better. So the
-quicker you can fail and learn from it, the quicker you can discover
-something useful.</p>
-</p> </div>
+            <div class="article-content"> <p>I felt good when I simplified one of my algorithms and sped it up 10
+times. I felt so good that I even wrote an entire blog post about it
+<a href="/eureka-moment-on-design-patterns-for-functional-programming/">patting myself on the back</a>. Then last week I got an email from Kevin
+of <a href="http://keminglabs.com/">Keming Labs</a> suggesting a few alternatives.</p>
+<div class="highlight"><pre><span class="c1">;;Three ways to count the number of occurrences in a collection</span>
+<span class="c1">;; (&quot;orange&quot; &quot;bottle&quot; &quot;coke&quot; &quot;bottle&quot;) =&gt; [(&quot;bottle&quot; &quot;coke&quot; &quot;orange&quot;) (2 1 1)]</span>
+<span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;orange&quot;</span> <span class="s">&quot;bottle&quot;</span> <span class="s">&quot;coke&quot;</span> <span class="s">&quot;bottle&quot;</span><span class="p">)]</span>
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">conj </span><span class="nv">%1</span> <span class="p">(</span><span class="nb">hash-map </span><span class="nv">%2</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">get </span><span class="nv">%1</span> <span class="nv">%2</span> <span class="mi">0</span><span class="p">))))</span>
+                       <span class="p">{}</span> <span class="nv">c</span><span class="p">)]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">l</span> <span class="p">(</span><span class="nb">for </span><span class="p">[[</span><span class="nv">k</span> <span class="nv">v</span><span class="p">]</span> <span class="p">(</span><span class="nf">group-by</span> <span class="nb">identity </span><span class="nv">c</span><span class="p">)]</span>
+            <span class="p">[</span><span class="nv">k</span> <span class="p">(</span><span class="nb">count </span><span class="nv">v</span><span class="p">)])]</span>
+    <span class="p">[(</span><span class="nb">map first </span><span class="nv">l</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">map second </span><span class="nv">l</span><span class="p">)])</span>
+
+
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">counts</span> <span class="p">(</span><span class="nb">apply merge-with </span><span class="nv">+</span>
+                      <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">apply hash-map </span><span class="nv">%</span><span class="p">)</span>
+                           <span class="p">(</span><span class="nf">partition</span> <span class="mi">2</span> <span class="p">(</span><span class="nb">interleave </span><span class="nv">c</span> <span class="p">(</span><span class="nb">repeat </span><span class="mi">1</span><span class="p">)))))]</span>
+    <span class="p">[(</span><span class="nb">keys </span><span class="nv">counts</span><span class="p">)</span>
+     <span class="p">(</span><span class="nb">vals </span><span class="nv">counts</span><span class="p">)]))</span>
+</pre></div>
+
+
+<p>First of all, his solutions looked much cleaner <a href="/eureka-moment-on-design-patterns-for-functional-programming/">than mine</a>. Then over
+the weekend I was able to incorporate his 3 algorithms into my program.
+I ran a few benchmarks and here are the average of 2 tests using a
+dataset of 28,760 items.</p>
+<ul>
+<li>My algorithm. Elapsed time: 68372.026532 msecs.</li>
+<li>Kevin's solution #1. Elapsed time: 156.940976 msecs.</li>
+<li>Kevin's solution #2. Elapsed time: 60.165483 msecs.</li>
+<li>Kevin's solution #3. Elapsed time: 296.162042 msecs.</li>
+</ul>
+<p>Total ownage. That's what I like about sharing my
+work; once in a blue moon, a reader drops by and generously show
+me how I can improve a solution 1,000 times! Now the ball is in my hands
+to understand what he has done and improve myself. Collaborating and
+learning, that's why I open source.</p>
+<p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/the-secret-to-trading-system-development-is-to-fail-faster/' title='2011-06-07T07:30:00'>07 June 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/algorithmic-ownage/' title='2011-11-06T17:37:00'>06 November 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/" rel='bookmark'>Graphs from network monitors on my remote trading server</a>
+                <a href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel='bookmark'>Eureka moment on design patterns for functional programming</a>
             </h1>
-            <div class="article-content"> <p>Here are some server monitoring graphs from my remote trading server.
-These graphs are produced by the server monitoring application,
-<a href="http://munin-monitoring.org/">Munin</a>. I ran both JForex and Metatrader 4 simultaneously on my
-server last week. The 512 MB of memory was noticeably insufficient.
-Which caused the system to use swap files, thus leading to I/O latency,
-and which held up the CPU. All of which are evident from the graphs
-below. This week I am only running JForex. The server load is within
-tolerable range. The thing with picking your own VPS is that no VPS
-provider is the same. You can't really compare just the numbers as there
-are just too many factors to be considered behind the scene on a VPS
-service. So it is important to run applications that you intend to run
-and stress your system in real-world conditions. If your system seems
-slow, figure out where exactly is the bottleneck before throwing away
-money for upgrades. This is where a server monitoring application comes
-handy. [caption id="attachment_5437" align="aligncenter" width="497"
-caption="CPU data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/cpu-week.png" title="cpu-week" />[/caption] [caption id="attachment_5438"
-align="aligncenter" width="497" caption="Memory data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/memory-week.png" title="memory-week" />[/caption]
-[caption id="attachment_5439" align="aligncenter" width="497"
-caption="Interrupts data"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/interrupts-week.png" title="interrupts-week" />[/caption] [caption
-id="attachment_5440" align="aligncenter" width="497" caption="Disk I/O
-latency"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/diskstats_latency-week.png" title="diskstats_latency-week" />[/caption] [caption id="attachment_5441"
-align="aligncenter" width="497" caption="Network
-transfer"]<img alt="" src="http://www.quantisan.com/static/images/2011/05/if_eth0-week.png" title="if_eth0-week" />[/caption]</p> </div>
+            <div class="article-content"> <p>Understanding design patterns for object-oriented programming made my
+life easier as a Java programmer. So I have been looking for a
+comparable book for functional programming ever since my sojourn into
+this age-old paradigm. It looks as though <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book">I'm not the only one
+looking</a> too. But the thing is, I think I've just had a revelation of
+sort.</p>
+<p>There is one and only one guideline to designing functional
+architectures -- Keep it simple. Simple as in keeping your functions
+having a single purpose only. Simple as in work with the data directly and
+don't conjure unnecessary intermediaries. Simple, as elaborated by Rich
+Hickey in his talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Much of this is conveyed in Bloch's Effective Java:</p>
+<div class="highlight"><pre><span class="n">item</span> <span class="err">\#</span><span class="mi">5</span> <span class="err">\–</span> <span class="n">Avoid</span> <span class="n">creating</span> <span class="n">unnecessary</span> <span class="n">objects</span>
+<span class="n">item</span> <span class="err">\#</span><span class="mi">13</span> <span class="err">\–</span> <span class="n">minimize</span> <span class="n">accessibility</span> <span class="n">of</span> <span class="n">classes</span> <span class="n">and</span> <span class="n">members</span>
+</pre></div>
+
+
+<p>, for examples.</p>
+<p>As <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book/2930452#2930452">Majewski said in a stackoverflow reply</a> (Update 2013 – question no longer available on stackoverflow),</p>
+<div class="highlight"><pre><span class="n">The</span> <span class="n">patterns</span> <span class="n">movement</span> <span class="n">started</span> <span class="n">because</span> <span class="n">object</span><span class="o">-</span><span class="n">oriented</span> <span class="n">programming</span> 
+<span class="n">was</span> <span class="n">often</span> <span class="n">turning</span> <span class="n">into</span> <span class="n">spaghetti</span> <span class="n">objects</span> <span class="p">...</span> <span class="n">Functional</span> <span class="n">programming</span> 
+<span class="n">is</span> <span class="n">a</span> <span class="k">restricted</span> <span class="n">style</span> <span class="n">of</span> <span class="n">programming</span><span class="p">,</span> <span class="n">so</span> <span class="n">it</span> <span class="n">didn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">need</span> <span class="n">to</span> <span class="n">grow</span> <span class="n">a</span> <span class="n">set</span>
+<span class="n">of</span> <span class="k">restricted</span> <span class="n">conventions</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">the</span> <span class="n">chaos</span><span class="p">.</span>
+</pre></div>
+
+
+<p>As such, there is no design pattern book for functional programming. I didn't get that earlier this year. But something clicked recently. During the past few months, I've been doing some <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/">consulting and open source projects</a> solving algorithmic problems with Clojure.</p>
+<p>One of the problems in a project that I was faced with this week is calculating the occurrence of each distinctive element within a list of elements. Say we have a list, <code>coll = ("orange", "bottle", "coke", "bottle")</code>. The output would be something like <code>[("orange", "bottle", "coke") (1 2 1)]</code> </p>
+<p>This is my first solution.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">eval-decompose</span>
+  <span class="p">[</span><span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">super-d</span>  <span class="p">(</span><span class="nb">distinct </span><span class="nv">coll</span><span class="p">)</span>
+        <span class="nv">freqs</span>    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">ps</span>  <span class="p">[]</span>
+                        <span class="nv">d</span>   <span class="nv">super-d</span><span class="p">]</span>
+                   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">d</span><span class="p">)</span>
+                     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span>  <span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">partial = </span><span class="p">(</span><span class="nb">first </span><span class="nv">d</span><span class="p">))</span> <span class="nv">coll</span><span class="p">))]</span>
+                       <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">conj </span><span class="nv">ps</span> <span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">d</span><span class="p">)))</span>
+                     <span class="nv">ps</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">vector </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">super-d</span> <span class="nv">freqs</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>The specs are not exactly as I described but the concept remains. What I
+did is to use tail calls (it's supposed to be fast, isn't it?) to
+aggregate each counter to produce a vector of counts. Then I map each
+pair of fragment with its corresponding count to generate a final output
+collection. Sounds overly complicated, doesn't it?</p>
+<p>This is the first warning of a bad functional design. For a collection of 30,000 items,
+this function took 11 minutes to compute on my notebook. This looks like
+a good place to exploit the parallel nature of this problem.</p>
+<p>Specifically, the counting of each fragment is independent of other
+fragments. Thus, there's no need for the program to wait for one
+fragment to finish to process the next. I simplified the program to
+remove this inherent assumption of procedural processing. Here is the
+gist of the refactored code where each function only does one job. Since
+the processing are modularised, I can parallelize the algorithm easily
+with the use of pmap instead of map on the last line as shown below.</p>
+<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">match-count</span>
+<span class="s">&quot; Given key, k, returns number of occurrences of k in collection, coll.</span>
+<span class="s">&quot;</span>
+  <span class="p">[</span><span class="nv">k</span> <span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">match?</span>  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">i</span> <span class="nv">x</span><span class="p">]</span>
+                  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">x</span><span class="p">)</span>   <span class="c1">;; closure on k</span>
+                    <span class="p">(</span><span class="nb">inc </span><span class="nv">i</span><span class="p">)</span>
+                    <span class="nv">i</span><span class="p">))]</span>
+    <span class="p">(</span><span class="nb">reduce </span><span class="nv">match?</span> <span class="mi">0</span> <span class="nv">coll</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">calc-counts</span>
+<span class="s">&quot; Returns a list of counts for the occurrences of each key of keys, ks,</span>
+<span class="s">  within the collection, coll.</span>
+<span class="s">&quot;</span>
+  <span class="p">[</span><span class="nv">ks</span> <span class="nv">coll</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">pmap</span> <span class="o">#</span><span class="p">(</span><span class="nf">match-count</span> <span class="nv">%</span> <span class="nv">coll</span><span class="p">)</span> <span class="nv">ks</span><span class="p">))</span>
+</pre></div>
+
+
+<p>I've split the first function into 3 functions (2 shown here). As Hickey
+said in his talk, simplifying can often produce more, not less,
+functions. Yet, the program is not only easier to read and runs in less
+than a minute. An order of magnitude faster! There are still lots for me
+to learn. I want to find more challenging projects to push my own
+limits. But rather than solving arbitrary problems, I prefer to tackle
+real-world challenges. So if you know of anyone that can benefit from
+collaborating with a functional developer to build robust and scalable
+software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.</p>
+<p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/graphs-from-network-monitors-on-my-remote-trading-server/' title='2011-05-19T07:30:00'>19 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/porting-jforex-qtd-to-metatrader-4/" rel='bookmark'>Porting JForex QTD to Metatrader 4</a>
+                <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/" rel='bookmark'>I've quit my day job and moved to the UK to do this full time</a>
             </h1>
-            <div class="article-content"> <p>I just finished porting <a href="http://www.quantisan.com/quantised-trading-desk/">Quantised Trading Desk</a> to Metatrader 4. So
-that I can make use of my dormant trading account at Oanda. Seeing that
-Oanda has enabled use of Metatrader 4, I thought I might <a href="http://www.quantisan.com/why-i-am-staying-with-oanda-a-while-longer-before-moving-to-dukascopy/">give them a
-second try</a>. I've always preferred to have more than one active
-trading accounts to serve as a backup and comparison. I settled on
-Questrade and TD Waterhouse for stocks and options, after hopping around
-brokerages for years. And I've been using Dukascopy to trade forex
-<a href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/">after much contention</a>. This is a good chance to diversify as I don't
-want to pigeonhole myself into one broker and one platform. The move to
-Metatrader 4 up until this point only took a couple of weeks as opposed
-to JForex version's year-long development time. This is because the
-underlying QTD system dynamics and algorithms were ironed out in JForex.
-I don't think I can finish QTD if I only had MQL4 at my disposal.
-Debugging and extending MQL4 scripts are a nightmare to say the least. I
-am so glad that I <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">moved away from these "easy" languages</a>. For the
-MQL4 version of QTD, I am merely doing a direct source code port from
-JForex to MQL4. MQL4, if anything else, is a very easy scripting
-language. I just taped out an alpha version of MT4 QTD this weekend as
-it is up to a stage where it is functional. However, porting QTD to MQL4
-isn't without its difficulties. For one, MQL4 is tailored for simple
-trading with technical analysis indicators. If price move above moving
-average, go long, for example. Whereas QTD rely on statistics and
-numerical methods in its trading algorithm. As such, I had to go back to
-basics and define all of my numerical methods from the fundamentals. I
-am now moving on to do forward testing on the MT4 QTD to ensure that
-both the JForex and the MT4 versions work similarly. I can't wait til I
-can run QTD on Dukascopy and Oanda simultaneously.</p> </div>
+            <div class="article-content"> <p>My wife is pursuing graduate study at Oxford. So I'm taking this rare
+opportunity to quit my day job and concentrate on developing trading
+systems full time. I am also doing some consulting to keep in touch with
+civilization. I have just one project at the moment building a customer
+relation system for a friend's financial services startup.</p>
+<p>Now for some self-promotion. I specialise in building software systems
+for information discovery, and of course, trading systems too. If you
+know of any business that can make use of an information discovery
+system for better customer relation, inventory management, etc, then
+please forward <a href="mailto:paul@quantisan.com">email</a>.</p>
+<p>That's it for the public service announcement. I'll be off to my first
+meetup this Sunday to hack on an open source statistical computing
+platform. I can't wait to meet some very smart people!</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/porting-jforex-qtd-to-metatrader-4/' title='2011-05-16T07:30:00'>16 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/encrypting-your-communications-to-minimize-eavedropping/" rel='bookmark'>Encrypting your communications to minimize eavedropping</a>
-            </h1>
-            <div class="article-content"> <p>The <a href="http://online.wsj.com/article/SB10001424052748703864204576317060246641834.html">case of Galleon Group founder Raj Rajaratnam</a> shows a corporate
-security crack that shouldn't happen in this day and age. In the
-Rajaratnam case, government wiretaps served as vital evidence against
-him. The question though, is that, if the government is able to do that
-on a multi-billion dollar company without them knowing, what about their
-competitors or enemies with ill-intent? With all the resources available
-to them, how can something so old-school like this happen to a hedge
-fund? Secrecy and conspiracy shouldn't be unfamiliar in the hedge fund
-industry. So I had assumed that they operated inside an iron wall.
-Government wiretapping or corporate espionage are certainly not my
-worry. However, I still try to employ prudent security procedures in the
-financial quantitative research and development that I do at Quantisan
-Systems just because I value my intellectual property. For example, in
-my email correspondence with business associates, I make use of <a href="http://en.wikipedia.org/wiki/GNU_Privacy_Guard">GPG</a>
-with a 2048-bit RSA asynchronous key pair. (my public key is below) GPG
-is an open-source equivalent of <a href="http://en.wikipedia.org/wiki/Pretty_Good_Privacy">Pretty Good Privacy</a>. It is most
-likely that your email client supports it too. I use Thunderbird and it
-is a built-in feature. You just need to enable it and set it up. On
-voice communications, I prefer to use Skype rather than regular voice
-calls because it's free and <a href="http://en.wikipedia.org/wiki/Skype_security">Skype inherently uses 256-bit AES
-encryption</a>. So no setup is even required for this added security. For
-my important files, I place them in a <a href="http://en.wikipedia.org/wiki/TrueCrypt">TrueCrypt volume</a> encrypted
-with 256-bit AES encryption. The encrypted container is synchronized to
-my <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">Dropbox</a> account so that I can use it anywhere while ensuring
-security. TrueCrypt is available on Windows, Mac, and Linux. It's only a
-matter of following the installation instructions to safeguard your
-files from prying eyes. All of these encryption tools are open-source
-and free. I configured them to work in the background and they don't
-hinder my work flow at all. It is certainly not a sophisticated setup,
-yet it isn't too dingy either. At the very least, if someone is to steal
-my notebook computer, an ordinary crook wouldn't be able to gain access
-to my sensitive information. In view of the fact that Quantisan Systems
-is just an one-man operation with practically no resource available, I
-can't believe security at some financial companies is worse than this
-homebrew setup. -----BEGIN PGP PUBLIC KEY BLOCK----- Version: GnuPG
-v1.4.11 (GNU/Linux)
-mQENBE1Ul0gBCACZGqPoYrzRF9YcuUvMeES+etPUAeNQ6uvw42k7Sf1ydBp3lFGQ
-ggYnOsmQ8Nf/62sB9CoYkAV+h+CPTuTOT5N4gwTojtPX3bIrjA6JgTDpt7bpwyMM
-j+mnZboXdBgZwz1xqiB38Oj51OBYPPLbTc/YphYfjXEuO4tQwsQufd5dvJqF+Yse
-CGeLRroJt9EmGVYW/NaCEBKHaMnD9gkDyWLxm7GFQYhl7ZWU+VQXjBxzZyYtpup2
-s1N5/igjiRj8t5CGnMwrG2yZkPW+n8m5sTLjcHWFY9OxiqFRaYgm9Vk3mVhxE5ML
-DPtSPySF+KkyIFxeL78MscU2W1DMH5pNM/+fABEBAAG0HVBhdWwgTGFtIDxwYXVs
-QHF1YW50aXNhbi5jb20+iQE+BBMBAgAoBQJNVJdIAhsjBQkFo5qABgsJCAcDAgYV
-CAIJCgsEFgIDAQIeAQIXgAAKCRD8QV1yPcrlhIphB/9cxkbWJ+19axfZxFYRE1u4
-Gq1p5/hkm3990yT8kc+4Qg7xa2cm+SgBmEnAy24xdQpR/Up/EF13D15ZBiE1SG+D
-0+EUZp4Ir5+TTuTrmJxKRb56IgFZVXP9KatNuK3aPvNFl4gZUZUZHmvUvvBzqtSM
-HrfzjmuirXVKI6M5WPZchLNUGE1sDtR2SR7l+rjvcPTehaJf+9srK1gsl3Vb3Pzo
-D5/JBoNK1ueDpfRxNhdryCUQr2uJ1pWLgauDz0iSRPOczV8x1n+051DJQXHx16tY
-I0VOErTVxscE/KeuuiiFwOwSLteIMDIY2vg6KuUw3cQxxMcfeNTu+jTJXuroib+O
-uQENBE1Ul0gBCAD05TZ2/oF1Lb8ggg9nKlgB+ZXWBVCc9CNlguZpZAmC7ezc72qT
-gSho/5+3ldEqvA1AxnWubaWV26QLL2fNybKd1DG9uYOsnOwx6L5H8toQswcurC9y
-3jKVQSpuIJrsrQiTT3aIZ3ZONGsg0k0D+ZiMC9qSLmFXh3f2fio5QsyRsEWlC9Qj
-CDXrgpNZqpDegMvvRXXJfRGulh4sMTGXrxE2pXI/+9Hv64+BuBMkixA7UwiOBQbd
-V5GkVm7V2hvgQpLc2QaXofLdBVIda6hvUuU/BK5m7HShNPKc21VgcSbYFOggYDal
-efTeFdCfHEg08ND8JSa2Bv+fdEmOFjPF5Z9hABEBAAGJASUEGAECAA8FAk1Ul0gC
-GwwFCQWjmoAACgkQ/EFdcj3K5YTRxAf8DspugdiTZUxIT/1EAa/0GWpsT8YZmITm
-0iUebID3jZRLXpyqfDr9KUZvk6IMYru1h6c6pZdzY4IJ/p/sZ+p2gtLr1pmOqEjd
-W94Q3adtjH/42zauFOdCzamtbc7Q5cJTIeAFcvFsVqDLWkK1vWiUhqUoacgN6TWS
-MActe4B7hYdcMWsbj4j3xVoGkkiJOL81/MJW9f/xDqcNbLsiEK7DxOaWUb2CkuUl
-7c/VVaSuWFBKGsj2fgEoTErfsmhjMm+WUcoE1Zjn2UwJzxxIcfzj3A0IEvMIua6u
-UJWnKv8t55G9f+NQ3yrKtPC/+O7N1sCSilmB/IekaSrBX9KvZgHM8Q== =DjK6 -----END
-PGP PUBLIC KEY BLOCK-----</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/encrypting-your-communications-to-minimize-eavedropping/' title='2011-05-11T22:03:00'>11 May 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bearish-usdjpy-on-19th-week-of-2011/" rel='bookmark'>Bearish USDJPY on 19th week of 2011</a>
-            </h1>
-            <div class="article-content"> <p>I am going bearish on USDJPY this week using my QTD system. No position
-is opened at this point. I am merely entering my sentiment into <a href="http://www.quantisan.com/quantised-trading-desk/">the
-system to trade for me</a>. Figure 1 is a daily chart of USDJPY. Notice
-it's lack of life despite the USD making headlines last week. Figure 2
-shows the move with a US dollar index, USDX, daily chart. Furthermore,
-according to the order book on USDJPY, there are massive bullish
-positions in the red (at a loss) which make this pair ripe for some bull
-squeeze. I am going short on NZDUSD as a hedge on this move. It is my
-<a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/">favourite long USD pair these days</a>. [caption id="attachment_5405"
-align="aligncenter" width="580" caption="USDJPY,
-daily"][<img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDJPY-580x383.png" title="2011-05-08-USDJPY" />][][/caption] [caption id="attachment_5406"
-align="aligncenter" width="580" caption="U.S. dollar index futures,
-USDX"][<img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDX-580x288.png" title="2011-05-08-USDX" />][][/caption]</p>
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDJPY-580x383.png" title="2011-05-08-USDJPY" />]: http://www.quantisan.com/static/images/2011/05/2011-05-08-USDJPY.png
-  [<img alt="" src="http://www.quantisan.com/static/images/2011/05/2011-05-08-USDX-580x288.png" title="2011-05-08-USDX" />]: http://www.quantisan.com/static/images/2011/05/2011-05-08-USDX.png</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bearish-usdjpy-on-19th-week-of-2011/' title='2011-05-08T22:58:00'>08 May 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/' title='2011-10-14T08:40:00'>14 October 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
 <p class="paginator">

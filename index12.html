@@ -58,323 +58,175 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel='bookmark'>A failed experiment with spectral density estimation in R</a>
+                <a href="http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/" rel='bookmark'>Bullish EURGBP as hedge and Bearish NZDUSD as diversification</a>
             </h1>
-            <div class="article-content"> <p>Spectrum analysis (see <a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis">wiki entry</a>) is a technical process to
-visualize a time series data in the frequency domain to find hidden
-periodicities. As I continue <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/">my struggle in data mining with R</a>, I
-thought I might try looking at a year's worth of USDJPY 1-min exchange
-rate data in the frequency domain. This is what I got. <img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-12-15-usdjpy_spectrum.png" /></p>
-<p>Certainly not one of those nice looking
-graphs in a textbook. Notice that:</p>
-<ol>
-<li>there is no distinct frequencies</li>
-<li>bandwidth is ridiculously small</li>
-</ol>
-<p>What this means is that the USDJPY data is practically <a href="http://en.wikipedia.org/wiki/White_noise">white noise</a>.
-And that there's much work for me ahead before I can produce something
-useful in R. The source code to produce the graph is printed below. The
-USDJPY data isn't published as it's not small and you can <a href="http://www.quantisan.com/tools/">get it at
-various places</a> for free on your own. Update: Failed is a harsh word.
-I should call this a <em>trivial</em> experiment. </p>
-<div class="highlight"><pre> op \<span class="o">&lt;-</span> options<span class="p">(</span>digits.secs<span class="o">=</span><span class="m">3</span><span class="p">)</span> \<span class="c1"># set option to show milliseconds</span>
-cat<span class="p">(</span><span class="s">&quot;loading CSV file to &#39;data&#39;\\n&quot;</span><span class="p">)</span> print<span class="p">(</span> system.time<span class="p">(</span> data \<span class="o">&lt;-</span>
-read.csv<span class="p">(</span> file<span class="o">=</span><span class="s">&quot;data/USDJPY\_20090630-13-27to20101130-22-19\_1Min.csv&quot;</span><span class="p">,</span>
-head<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> \<span class="c1"># convert long timestamp to POSIX</span>
-rownames<span class="p">(</span>data<span class="p">)</span> \<span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>as.numeric<span class="p">(</span>rownames<span class="p">(</span>data<span class="p">))</span><span class="o">/</span><span class="m">1000</span><span class="p">,</span>
-origin<span class="o">=</span><span class="s">&quot;1970-01-01&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;GMT&quot;</span><span class="p">)</span> data \<span class="o">&lt;-</span> data.matrix<span class="p">(</span>data<span class="p">)</span> library<span class="p">(</span>xts<span class="p">)</span>
-\<span class="c1"># load xts library cat(&quot;converting to xts &#39;data.x&#39;\\n&quot;)</span>
-print<span class="p">(</span>system.time<span class="p">(</span>data.x \<span class="o">&lt;-</span> as.xts<span class="p">(</span>data<span class="p">)))</span> rm<span class="p">(</span>data<span class="p">)</span> \<span class="c1"># remove data</span>
-object cat<span class="p">(</span><span class="s">&quot;data.x object size: &quot;</span><span class="p">)</span> print<span class="p">(</span>object.size<span class="p">(</span>data.x<span class="p">),</span> units <span class="o">=</span>
-<span class="s">&quot;auto&quot;</span><span class="p">)</span> cat<span class="p">(</span><span class="s">&quot;spectral analysis\\n&quot;</span><span class="p">)</span> spectrum<span class="p">(</span>data.x\<span class="o">$</span>close<span class="p">)</span>
-</pre></div> </div>
+            <div class="article-content"> <p>I've had more time to study the market tonight and is running a second
+and a third instances of Quantised Trading Desk (QTD) to trade 3
+currencies in total simultaneously. For my dollar bull sentiment, I'm
+dividing between USDJPY long and NZDUSD short. <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/">QTD still hasn't taken a
+position in USDJPY in the past 24 hours</a>. That's a good thing as
+USDJPY is still drifting downward today even as the dollar is gaining
+some ground. My line in the sand is at 80.70 for USDJPY and above 0.8100
+for NZDUSD. EURGBP long is a hedge against my dollar longs. Again, I'm
+not making any trade at this point but merely <a href="http://www.quantisan.com/quantised-trading-desk/">setting up QTD to wait
+for the right moments to enter</a>. A break below 0.8660 for EURGBP would
+challenge my bullish bias. These three currencies should be my complete
+market bias for a while. I'm just going to let QTD do its thing and
+trade for me. Hopefully this will be the last you'll hear from me about
+my market bias for a while. [caption id="attachment_5342"
+align="aligncenter" width="580" caption="NZDUSD,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />][][/caption] [caption id="attachment_5343"
+align="aligncenter" width="580" caption="EURGBP,
+weekly"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />][][/caption]</p>
+</p>
+
+<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly-580x264.png" title="2011-04-18-NZDUSD_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-NZDUSD_wkly.png
+  [<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly-580x264.png" title="2011-04-18-EURGBP_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-18-EURGBP_wkly.png</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/' title='2010-12-16T07:28:00'>16 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/bullish-eurgbp-as-hedge-and-bearish-nzdusd-as-diversification/' title='2011-04-18T21:14:00'>18 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel='bookmark'>Anatomy of a JForex strategy, Part 2</a>
+                <a href="http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/" rel='bookmark'>Bullish USDJPY on week of April 17, 2011</a>
             </h1>
-            <div class="article-content"> <p>We looked at <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">four of the six methods in the IStrategy Interface</a> in a
-previous post. The last two methods, onTick and onBar, is where your
-strategy connect with market data. Either one, or both, of these methods
-is where you put your trading algorithm in. Your strategy would then be
-able to process the market data as they arrive one tick/bar at a time.
-Recall that IStrategy Interface is the skeleton of your strategy. And
-that IContext object is the heart of your strategy. onTick/onBar is the
-head of your strategy, which contains your trading algorithm, which is
-the brain.</p>
-<h2>onTick</h2>
-<p>Here's the method definition of onTick. </p>
-<div class="highlight"><pre><span class="n">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+            <div class="article-content"> <p>I have unofficially launched my Quantised Trading Desk (QTD) expert
+system this weekend as the system is ready for live trading after almost
+a year in development. You can't miss the announcement if you visit the
+new frontpage of this blog. So, I won't talk about it anymore here. The
+purpose of this post is to discuss my forex trade. It's been over 7
+months since I've traded on the forex market. I have been working on QTD
+during all these months to improve my overall trading. Anyway, let's
+dive right to it for my first trade back into forex. I am bullish on the
+U.S. dollar this week. Why? The Financial Times is letting on <a href="">rumours
+that the US Fed is signalling an end to quantitative easing</a>.
+Coincidentally, the U.S. dollar appears to be testing supports across
+all major currencies. Secondly the US equities market hasn't been able
+to make higher highs even as the dollar is marking new lows. Still, I'm
+not one to call a bottom, nor am I hunting for one. This is merely a
+good risk-reward trade to gun for an obvious move. In particular, USDJPY
+appears to be the best of the bunch as its been holding well over the
+past few months while the dollar crumbled. The fact that Europe and US
+are rumoured to be lighting up on the money printing whereas Japan's
+money printing press is on full steam for the quake reconstruction (Yen
+bearish) is a decent excuse to place some chips on USDJPY. You might
+have noticed, I haven't specified my entry price, amount, or stop loss
+price as usual. This is because I am relying on the Quantised Trading
+Desk expert system to trade USDJPY for me. QTD will monitor the market
+for me and execute trade entries and exits as it sees fit to accumulate
+a long position in USDJPY. All the risk management and quant analysis
+are built into the system. So I don't have a position yet because I'm
+waiting for QTD to do the grunt work. [caption id="attachment_5332"
+align="aligncenter" width="580" caption="USDJPY weekly
+chart"][<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly-580x333.png" title="2011-04-17-USDJPY_wkly" />][][/caption]</p>
+<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//www.ft.com/cms/s/0/bcad7330-691a-11e0-9040-00144feab49a.html</span>
 </pre></div>
 
 
-<p><strong>Important:</strong>onTick is called for each and every instrument that your
-JForex platform is subscribed to (the instrument list in your workspace
-box). Let me say that again, onTick is called for each and every
-instrument that your JForex platform is subscribed to. The standard
-practice is to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out ticks</a> for instruments that you don't want
-with a simple IF-return statement.
-<code>if (instrument != myInstrument) return;</code> Actual tick data is passed to
-your strategy using the ITick object from the onTick method's parameter.
-Take a look at the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/ITick.html">ITick javadoc entry</a> to see what it offers.</p>
-<h2>onBar</h2>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
-</pre></div>
-
-
-<p>onBar works in a similar manner to onTick. In which onBar is called for each
-and every subsribed instrument <em>and period</em> known to JForex. Similarly,
-you have to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out all the unwanted instruments and periods</a> or else there will be expected results from your strategy.
-Another point to note is that onBar provides both a <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IBar.html">IBar</a> askBar and
-IBar bidBar, representing the ask and bid bars. <strong>Question:</strong> What
-happens when two or more periods overlap as in 13:45? 1, 5, and
-15-minutes bars are all arriving at the same time (not to mention the
-periods in seconds too). <strong>Answer:</strong> According to Dukascopy Support in
-the forum, "They come in a strict order, for example (1min 1min 1min
-1min 1min 5min 1min 1min 1min 1min 1min 5min ..) They come in cycles,
-where <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=5&amp;t=23959">smaller periods comes first</a>."</p>
-<h2>JForex Support Forum</h2>
-<p>As you program your strategy with JForex, you will no doubt come up with
-questions of your own. The best place to ask is at the official <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex
-Support Forum</a>. This is the last of the three essential JForex
-resources that I alluded to earlier. Even if you don't have any specific
-question, there are sample codes, coding discussion, and hundreds of
-existing Q&amp;A from other JForex developers posted in the forum.</p>
-<h2>Summary</h2>
-<p>The discussion so far has been very high level. To show you what you can
-actually <em>do</em> in an IStrategy, we will <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/">dissect a working strategy in
-the next post</a>. And what else better to examine than the most popular
-JForex strategy of them all -- MA_Play.java.</p> </div>
+<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly-580x333.png" title="2011-04-17-USDJPY_wkly" />]: http://www.quantisan.com/static/images/2011/04/2011-04-17-USDJPY_wkly.png</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/' title='2010-12-14T07:49:00'>14 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/bullish-usdjpy-on-week-of-april-17-2011/' title='2011-04-17T21:50:00'>17 April 2011</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel='bookmark'>Anatomy of a JForex strategy, Part 1</a>
+                <a href="http://www.quantisan.com/software-design-trading-development-process-and-ikea/" rel='bookmark'>Software design, trading development process, and Ikea</a>
             </h1>
-            <div class="article-content"> <p>Continuing on from Part 1 of this series: <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">Getting started learning
-JForex programming</a>, now we're ready to discuss the real thing. You
-build JForex strategies by using the IStrategy Interface (<a href="http://download.oracle.com/javase/tutorial/java/concepts/interface.html">What is an
-Interface?</a>). Basically, an Interface is a code skeleton with a set of
-predefined empty methods that you'll need to implement yourself. The six
-standard methods of the IStrategy Interface are:</p>
-<ol>
-<li>onStart</li>
-<li>onStop</li>
-<li>onMessage</li>
-<li>onAccount</li>
-<li>onTick</li>
-<li>onBar</li>
-</ol>
-<p>Below is an empty IStrategy Interface implementation, also known as a
-JForex strategy. This code will compile fine in JForex and you can even
-run it. But it doesn't do anything at all because there is no code to
-run in each of the methods. Each of the six methods will just be called
-and exit immediately.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">com.dukascopy.api.</span><span class="err">\</span><span class="o">*;</span> 
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">EmptyStrategy</span> <span class="kd">implements</span> <span class="n">IStrategy</span> <span class="o">{</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span>
-        <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onMessage</span><span class="o">(</span><span class="n">IMessage</span> <span class="n">message</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAccount</span><span class="o">(</span><span class="n">IAccount</span> <span class="n">account</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStop</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span> 
-<span class="o">}</span>
-</pre></div>
-
-
-<p>Each of the method is triggered by a specific event. You can probably
-guess what they are from their name.</p>
-<h2>onStart (line 5)</h2>
-<p>This is the first method that is called when you run your strategy. It
-will run once and only once at the start of your strategy. Normally you
-do your initialization in here. The thing to note for onStart is in line
-5 of the code. The method signature of onStart is</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span>
-</pre></div>
-
-
-<p>The object
-in the parameter and given to you in this method is an IContext object.
-If IStrategy is the skeleton, then IContext is the heart of the
-strategy. Please take a look at this <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IContext.html">javadoc link to IContext</a> to see
-what this object does. <strong>Javadoc?</strong>: Now is a good time to introduce the
-second of the three essential resources of a JForex programmer. The
-<a href="http://www.dukascopy.com/client/javadoc/">JForex Javadoc</a> is the single most up-to-date API documentation
-<em>explaining</em> each and every object and methods of the JForex API. Think
-of it like a reference manual. Note that although it's comprehensive,
-most of the explanation is very sparse and possibly incomplete. IContext
-is a core JForex object to access many important components of the
-JForex system, such as the ordering engine, charts, console,
-indicators... You get the idea. It is important! You typically want to
-keep a local copy of it as this is the only time (in onStart) that this
-object will be passed to you in IStrategy.</p>
-<h2>onStop (line 26)</h2>
-<p>As the name suggest, this method is called once you send a stop command
-to your strategy. You do your program wrap-up such as logging and
-flushing data here. Not much out of the ordinary with this one.</p>
-<h2>onMessage (line 18)</h2>
-<p>Whereas we know when onStart and onStop will be called, onMessage is an
-asynchronous method in that you don't know exactly when it will run.
-This method is called when the Dukascopy server sends your strategy a
-message. For example, the server calls onMessage to let you know that
-your order has been filled. You receive and process the server message
-by accessing the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IMessage.html">IMessage object</a> that is passed to you.
-<strong>Important:</strong>There is no guarantee that you will receive each and every
-message sent to your strategy from the server. Perhaps your strategy
-process is clogged. Or maybe your internet connection had a hiccup. If
-your strategy onMessage doesn't get called by the server for whatever
-reason, the server couldn't care less and won't be checking nor trying
-again. So don't do anything critical like managing your orders in
-onMessage!</p>
-<h2>onAccount (line 22)</h2>
-<p>This method is called whenever your account information update is
-received. The method provides access to the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IAccount.html">IAccount object</a>, which
-you use to get your account information. Say if you have an open
-position, your account information changes on every tick because your
-equity is cash + unrealized profit/loss. In that case, onAccount is
-called every 5 seconds by the server at most to avoid flooding your
-strategy. <strong>More Important:</strong>The IAccount object is not connected live
-to your account in the server. It is merely a snapshot of your account.
-For example, if you keep a local copy of an IAccount object. Do some
-trading to change your balance. Then ask the same IAccount for account
-balance information, you will not see a change. As such, always update
-your local copy of IAccount within the onAccount method to keep your
-account information up-to-date for your strategy's use.</p>
-<h2>To be continued</h2>
-<p>onStart, onStop, onMessage, and onAccount methods are <em>administrative</em>
-methods for your strategy. The last two methods that we'll discuss,
-onTick and onBar, is where the magic happens in a strategy. I am saving
-the best for last in the next post.</p> </div>
+            <div class="article-content"> <p>I spent a few months between 2010 and 2011 not on the market, not on
+coming up with new strategies, but on developing a software framework
+for my trading system. For my trading strategy development, I make use
+of a continuous systems development life cycle process from the
+engineering realm. Starting from planning, to analysis, to design, to
+implementation, to maintenance, and finally, back to planning, and so on
+for each and every new concept that I have. (see <a href="http://www.wired.com/epicenter/2011/04/in-praise-of-failure/all/1">Sir James Dyson's
+guest column on Wired</a>) Imagine that if you need to write a new
+strategy file for each and every idea and for each of its design
+iteration. Pretty soon you'll have many strategy files and a lot of
+boilerplate codes. What if you found a bug or figured out some
+enhancements to a particular component of your strategy? Then you'll
+have to sift through all those files and make the changes to all those
+relevant codes to make the update across the board. Hopefully, this
+isn't the approach you're taking. Yet, a few trading API that I have
+used before inherently encourage or even limit you (<a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">EasyLanguage and
+MQL4</a>) to this archaic procedural programming paradigm. Luckily, Java
+is an object-oriented programming language. However, it is only as
+object-oriented as you make it to be. JForex, <a href="http://www.quantisan.com/tag/jforex">the trading API that I
+use</a>, actually runs on <a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/">the edge of breaking this
+object-orientedness</a> as I have recently lamented. The bad news for the
+beginning developer is that practically every published strategy which I
+have seen or <a href="http://www.quantisan.com/tag/source-code/">guilty of posting myself</a> are illustrations of what not
+to do with software design. In that there's none in it whatsoever. Think
+of common published strategies like the Ikea mini-model showrooms.
+Everything is crammed into a tiny space but it is a simple way to convey
+the gist of a room design (read: the trading algorithm). However, they
+are not built for practical use. Real strategies are like suites in an
+apartment building. There is an underlying architectural commonality for
+easy management and maintenance while enabling diversity in the
+strategies. My recently completed software framework dramatically made
+my life easier in the tasks of implementation and maintenance. Software
+maintenance, in particular, is most often needlessly and overly
+complicated in trading strategy development because of the lack of a
+good design. Because at the end of the day, most programmers spend the
+majority of their time debugging, maintaining, and extending their code.
+A true object-oriented design decouples all its components so that you
+can use a divide and conquer approach with no repetition of work. Do you
+have a development process in place? I'd like to hear how you tackle
+this problem.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/' title='2010-12-10T08:10:00'>10 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/software-design-trading-development-process-and-ikea/' title='2011-04-12T07:30:00'>12 April 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/" rel='bookmark'>Getting started learning JForex programming</a>
+                <a href="http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/" rel='bookmark'>Transitioning to a professional website, front and back</a>
             </h1>
-            <div class="article-content"> <p>The biggest problem I had when learning to program my own trading
-strategies in JForex is finding where to start learning. There were few
-JForex documentation available at the time and I had to teach myself
-through painstaking trial and error with the help of Dukascopy's
-technical support. Things have certainly changed for the better as a
-JForex community is starting to sprout and documentation for it is at
-least sufficient to get anyone started. This post is the first of a
-series of quick beginner's guide to learning JForex programming by
-putting all these resources in a tutorial.</p>
-<h2>JForex is a Java tool</h2>
-<p>JForex is actually not a programming language. It is an application
-programming interface (API) for use with the standard Java programming
-language. As such, the first step to learning to program in JForex is to
-learn Java. Luckily, Java is one of the most popular programming
-languages. So there're plenty of resources on and off the web to learn
-Java programming. Some examples of free online tutorials are:</p>
+            <div class="article-content"> <p>Yes, this is still Quantisan.com. In case anyone is visiting and noticed
+the different design. I've made some major changes to the website over
+the weekend for both aesthetic and technical reasons.</p>
 <ol>
-<li><a href="http://download.oracle.com/javase/tutorial/">The Java Tutorials</a> -- This is an official tutorial from the
-    developer of Java themselves. Highly recommended.</li>
-<li><a href="http://www.roseindia.net/java/beginners/">Beginners Java Tutorial</a> -- More geared for the absolute
-    beginners to programming.</li>
+<li><strong>Professionally designed.</strong> The previous theme was something that I
+    hacked together over a weekend. It's actually pretty bad under the
+    hood as I had only learned PHP scripting to write that theme. This
+    new theme is a minor tweak over a professional framework. It enables
+    more flexibility to the page layout. Expect some major changes to
+    the front page in the weeks to come as this personal blog transforms
+    into a company site.</li>
+<li><strong>Reduced computing resource hog.</strong> I disabled a number of Wordpress
+    plugin modules as the theme has already taken care of things like
+    search engine optimisation.</li>
+<li><strong>Optimised page loading time.</strong> The code for the new design is also
+    optimised for faster page load times with built-in optimisation of
+    javascript and css file loading.</li>
+<li><strong>Geographically distributed content delivery network.</strong> As forex is
+    a global endeavour, the readers to this blog is quite geographically
+    diverse. While the site is hosted in the U.S., I want to ensure the
+    readers from Germany and India (8% of my readers) have a smooth
+    browsing experience too. The use of a CDN to mirror contents around
+    the world makes this possible.</li>
+<li><strong>Bad traffic filtering</strong>. A significant traffic on the web is due
+    to software crawlers. Some of them post spam comments on my blog or
+    copy my copyrighted materials. I added a server-side security
+    control service to block all those unwanted traffic. This increases
+    security and reduces unnecessary server load.</li>
 </ol>
-<p>If you prefer a book, I would recommend <a href="http://www.amazon.com/gp/product/0596009208?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0596009208">Head First Java, 2nd
-Edition</a>. I brushed up on my Java from this book. Don't dwell on
-Java too much though as you only need to know the basics to get started
-with JForex. Just read a few chapters to understand the Java syntax and
-then move on. You can always refer back to them later.</p>
-<h2>Diving into JForex</h2>
-<p>The <a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page">JForex Wiki</a> is one of the three essential resources for JForex
-programmers. I will be referring to some specific pages of the Wiki in
-much of this series of posts. If you haven't done so already, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">signup
-for a DEMO account at Dukascopy</a>. Then launch the JForex platform and
-follow the instructions on the <a href="http://www.dukascopy.com/wiki/index.php?title=Use_in_JForex">Use in JForex</a> wiki page to assemble
-your first JForex strategy!</p>
-<h2>Summary</h2>
-<p>So far so good? By this point, I hope you can understand basic Java
-source code and know how to start/open, compile, and run a JForex
-strategy. In the next post in this learning JForex series, we will
-<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">study the anatomy of a JForex strategy</a>.</p>
+<p>You might have noticed that aside from point #1, which is purely
+aesthetic, everything else is done to improve page load time for readers
+to this blog. The result is that the new loading time is down to about
+4.0 seconds. Whereas the old site took around 8 seconds to load. You
+might think this cost a fortune. But it still costs less than most small
+websites out there. The old site cost me \$30 <em>per year</em> to run,
+including everything from domain name registration to web hosting. The
+new total is still only up to \$70 <em>per year</em>. The key to the savings is
+that I made use of a free network enhancement service
+(<a href="http://www.cloudflare.com">cloudflare.com)</a> and exploited my remote server and network
+optimisation knowledge acquired from the long nights of <a href="http://www.quantisan.com/tag/vps">administering a
+remote trading server</a>. Technology is cheap nowadays. The real values
+are in the ability to deliver on that technology to bring about even
+greater return. This is what drives everything I do at Quantisan
+Systems.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/getting-started-learning-jforex-programming/' title='2010-12-08T07:04:00'>08 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/another-trading-contest-from-dukascopy/" rel='bookmark'>Another trading contest from Dukascopy</a>
-            </h1>
-            <div class="article-content"> <p>Dukascopy started a new contest this month. This contest is manual
-trading only on a demo account with no cash commitment by contestants.
-The twist is that the ranking is determined not only by your demo
-account balance, but also the total pips gained, popularity, and scoring
-by Dukascopy's judges. Each trade in the contest needs to be commented
-by the contestant through the JForex trading platform (when you submit
-an order the platform asks you for a comment). See <a href="http://www.dukascopy.com/tradercontest/?action=blog&amp;trader=Quantisan">my contest page for
-comment examples</a> (shameless plug). About half of your score is based
-on these trade comments as they are the basis for generating popularity
-points and the Dukascopy judges' final evaluation. I can see the
-potential in this contest as it offers transparency and encourages
-interactions rather than let everyone just gamble away. However, most of
-the trade comments now are meaningless as it's clear that you can
-generate buzz simply by making ridiculous gains. Perhaps this might
-change after this month's final ranking is released as it is not clear
-how Dukascopy will allocate each contestant's 25% of points. The judging
-by Dukascopy can effectively bump or dump you a few ranking. The
-incentive to do this is the USD \$15,000 'cash' prizes to be won every
-month just like the Dukascopy Strategy Contest. And similarly, these
-'cash' prizes are deposited into the winner's Dukascopy trading account
-<a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/">with a withholding period</a>. So they're forcing you to open an account
-with them if you win, which is understandable as this is a marketing
-effort. For information or registration in the contest, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">visit the
-Dukascopy website</a> and navigate to the Trader Contest page.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/another-trading-contest-from-dukascopy/' title='2010-12-06T12:23:00'>06 December 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/what-is-a-trading-system/" rel='bookmark'>What is a trading system?</a>
-            </h1>
-            <div class="article-content"> <p>For some traders, building a trading system means that they focus on
-finding the best indicators they could get their hands on or the one
-trading setup that is backtested to work 99% of the time. All I can say
-is, to each his own. For me, the keyword of a trading system lies not
-with <em>trading</em>, but with <em>system</em>. Remember, it is a system. First of
-all, it is a system <em>for trading</em>. Not a system <em>to trade</em>. What do I
-mean by that? Consider this saying, "traders don't go broke by missing
-opportunities, they go broke by taking too many." A trading system needs
-to be selective. It needs <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">prudent risk management</a>. Secondly, you
-need to generate your own market view to trade. Rather it be technical,
-fundamental, sentimental, or just following some joe, you trade based on
-your view. Trading is a test of your market hypothesis using money. If
-you think the market will rise, you buy. If you think the market will
-fall, you short. Lastly, a trading system needs to execute trades.
-Otherwise you'd be an anlayst. It needs to time <a href="http://www.quantisan.com/tag/entry/">entries</a> and
-<a href="http://www.quantisan.com/tag/exit/">exits</a>. Again, this could be as simple as on a whim or as complicated
-as some n-th order algorithm. Thus we have the three pillars of a
-trading system.</p>
-<ol>
-<li>Risk Management</li>
-<li>Market Analysis</li>
-<li>Trade Execution</li>
-</ol>
-<p>What's more, if we combine some of these pillars we get some well known
-concepts. For example, market analysis + trade execution = trading
-signals, wherein you derive signals based on market conditions to
-execute trades. Or risk management + trade execution = position
-management, wherein you manage your holdings by manipulating your trades
-based on your risk profile. All these relationships and composition of a
-trading system can be summarized with a Venn diagram. So, this is my
-view of a trading system:</p>
-<p>[caption id="" align="aligncenter" width="414" caption="Trading system
-Venn diagram"]<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-30-TradingVennDiag.png" />[/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/what-is-a-trading-system/' title='2010-11-30T10:25:00'>30 November 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+                Posted  <a href='http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/' title='2011-04-05T07:30:00'>05 April 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
 <p class="paginator">

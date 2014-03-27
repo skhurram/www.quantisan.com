@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css">
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <img src="/images/profile_circle.png" id="logo" alt="logo">
+
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/activity-based-interval-for-intra-day-chart/" rel='bookmark'>Activity based interval for intra-day chart</a>
+            </h1>
+            <div class="article-content"> <p>A concern I've always had with the traditional charts is that the idea
+of open and close for each bar doesn't have much meaning on intra-day
+charts. In daily chart, open and close represents prices for the
+session, which gapped for hours overnight. But on intra-day chart, say
+in a 5-minute chart, each bar's open and close are merely what just
+happens to be the price at the beginning and end of that 5 minute
+period.</p>
+<p>The problem though, is that many technical analysis uses only the
+closing price, which is entirely arbitrary and has no significance. A
+better way would be to use a volume weighted median price in the period
+to represent the real "activity." However, there doesn't seem to be an
+easy way of getting that data in TradeStation (TS).</p>
+<p>Fortunately, I found out that charting in TS is not limited to time
+based data. Prices can be charted based on an activity interval too. A
+bar can represent, say, 100 ticks or 100 contracts. So the interval of
+the bar can have a real meaning. Below is a 100 contracts/bar chart of
+ZGG08 from this morning. Compare with the 4 min. chart below it. The 100
+chart is less erratic.</p>
+<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s400/100sharebarschart.jpg" />][]</p>
+<p>[<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s400/4minbarschart.jpg" />][]More testing will be done using activity interval tomorrow.</p>
+<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s400/100sharebarschart.jpg" />]: http://bp0.blogger.com/_Vlx60iTPx5s/R32cofY4uUI/AAAAAAAAAEU/-glwzBSPVyY/s1600-h/100sharebarschart.jpg
+  [<img alt="" src="http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s400/4minbarschart.jpg" />]: http://bp3.blogger.com/_Vlx60iTPx5s/R32crPY4uVI/AAAAAAAAAEc/-8LwO3qUhT4/s1600-h/4minbarschart.jpg</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/activity-based-interval-for-intra-day-chart/' title='2008-01-03T22:06:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/work-log-3-jan-2008/" rel='bookmark'>Work Log 3 Jan 2008</a>
+            </h1>
+            <div class="article-content"> <p>Log for today</p>
+<ol>
+<li>Implemented EMA(RSI) indicator</li>
+<li>Implemented trading strategy based on EMA(RSI) w/ MACD</li>
+<li>Optimized #2 on ZG and ER2</li>
+<li>Experimented with back-testing performance analysis</li>
+<li>Learned from TS webinar about continuous contract symbol by
+    appending @ sign. e.g. @ZG for continuous CBOT gold</li>
+<li>Learned from TS webinar about activity based chart. More on this on
+    next post</li>
+</ol> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/work-log-3-jan-2008/' title='2008-01-03T22:00:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/trending-and-ranging-indicators/" rel='bookmark'>Trending and Ranging indicators</a>
+            </h1>
+            <div class="article-content"> <p>RSI and MACD makes them appropriate for trending markets. For
+directionless, chopping markets, you need to use Stochastics and Wm%R.</p>
+<p>from <a href="http://www.billcara.com/archives/2007/12/caras_commentary_community_cha_94.html">g034</a></p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/trending-and-ranging-indicators/' title='2007-12-21T15:07:00'>21 December 2007</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/parabolic-3060-version-2-needed/" rel='bookmark'>Parabolic 30/60 version 2 needed</a>
+            </h1>
+            <div class="article-content"> <p>Upon further analysis, the Parabolic 30/60 system is deemed unviable in
+real trading for the following reasons.</p>
+<ol>
+<li>30m lag time creates <span style="font-weight:bold;">big
+    drawdown</span> in a volitile market.</li>
+<li>Small winnings and big loses frequent because of above.</li>
+<li>Sideways action create too many trades that go nowhere. As in the
+    recent price action of GC.</li>
+</ol>
+<p>Perhaps it might work upon further refinement based on quantitative
+analysis. But from looking at the past 9 days of GC price, this method
+in its current form doesn't seem so good anymore. The main problem is
+that my account is limited so the big drawdown factor alone would end
+it.</p>
+<p></p>
+However, it may be possible to use independent acceleration factor (AF)
+for the upswing and downswing to better capture the price action. This
+is because prices typically climb slow and dive like a bomb. A systemic
+testing is needed to further investigate this method.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/parabolic-3060-version-2-needed/' title='2007-12-21T10:47:00'>21 December 2007</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/category/trading//index19.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/category/trading//index21.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

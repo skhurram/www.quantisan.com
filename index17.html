@@ -58,236 +58,248 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel='bookmark'>Maximal frustration in printing and parsing milliseconds in R</a>
+                <a href="http://www.quantisan.com/2010-links-of-quantisancom/" rel='bookmark'>2010 Links of Quantisan.com</a>
             </h1>
-            <div class="article-content"> <p>I've just spent an absurd amount of time figuring out how to parse
-millisecond times into R. (It's standard practice to timestamp tick data
-with milliseconds timing in a flat data file.) Turns out that there are
-two problems that I faced. One being that there is a almost-hidden,
-footnote option in the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html">strptime( ) function</a> (for converting
-characters to POSIX) in which it describes using <code>format = "%H:%M%OS"</code>
-instead of <code>"%H:%M:%S"</code> to parse fractional seconds. However, the second,
-and what's actually the one that's wasted much my time, is the fact that
-R <strong>ignores</strong> milliseconds in printing by default! For example, here's
-an output for the POSIXct representation of the integer value
-1286564400.</p>
-<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00 EDT&quot;</span>
+            <div class="article-content"> <h2>Quantitative Development</h2>
+<ul>
+<li><a href="http://www.quantisan.com/what-is-a-trading-system/">What is a trading system?</a></li>
+<li><a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">My interview at Dukascopy in Geneva</a></li>
+<li><a href="http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/">A sign that you are truly enjoying what you do</a></li>
+<li><a href="http://www.quantisan.com/on-technical-analysis-and-fuzzy-logic-for-mechanical-trading/">On technical analysis and fuzzy logic for mechanical trading</a></li>
+<li><a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/">Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies' data</a></li>
+<li><a href="http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/">A brief comparison of double arrays for high-performance numerical computing in Java</a></li>
+<li><a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/">A failed experiment with spectral density estimation in R</a></li>
+<li><a href="http://www.quantisan.com/ec2-t1-micro-overloaded-by-jforex/">EC2 t1.micro overloaded by JForex</a></li>
+</ul>
+<h2>Manual Trading</h2>
+<ul>
+<li><a href="http://www.quantisan.com/early-bird-does-not-get-the-worm-in-forex-trading/">Early bird does not get the worm in forex trading</a></li>
+<li><a href="http://www.quantisan.com/work-harder-trade-fewer-in-a-long-and-excruciating-trading-drawdown/">Work harder, trade fewer in a long and excruciating trading drawdown</a></li>
+<li><a href="http://www.quantisan.com/how-to-stockpile-a-trade-position-one-step-at-a-time/">How to stockpile a trade position one step at a time</a></li>
+<li><a href="http://www.quantisan.com/on-reactive-trading-and-why-i-dont-make-market-forecasts-anymore/">On reactive trading and why I don't make market forecasts anymore</a></li>
+<li><a href="http://www.quantisan.com/why-should-i-care-about-other-markets-if-i-only-trade-___/">Why should I care about other markets if I only trade ___?</a></li>
+<li><a href="http://www.quantisan.com/visualize-and-grow-rich/">Visualize and Grow Rich</a></li>
+<li><a href="http://www.quantisan.com/i-didnt-miss-a-boat-i-missed-a-freakin-rocket/">I didn't miss a boat. I missed a freakin rocket!</a></li>
+</ul>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/2010-links-of-quantisancom/' title='2010-12-27T11:14:00'>27 December 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/" rel='bookmark'>Dissecting a JForex strategy -- MA_Play.java</a>
+            </h1>
+            <div class="article-content"> <p>Having studied the anatomy of an empty JForex strategy (<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">Part 1</a> and
+<a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/">Part 2</a>), it's time to dissect a working one. MA_Play is the
+strategy that is included with every JForex API download as a
+demonstration. You can find the complete source code of this strategy in
+/src/singlejartest/ in the <a href="http://www.dukascopy.com/swiss/english/forex/jforex/library/">JForex API zipped package</a>. Recall that
+the first Interface method which runs at the start of the strategy is
+onStart. The onStart method of MA_Play is reproduced below. </p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onStart</span><span class="o">(</span><span class="n">IContext</span> <span class="n">context</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> 
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getEngine</span><span class="o">();</span> 
+    <span class="n">indicators</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getIndicators</span><span class="o">();</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">console</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="na">getConsole</span><span class="o">();</span>
+    <span class="n">console</span><span class="o">.</span><span class="na">getOut</span><span class="o">().</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Started&quot;</span><span class="o">);</span> 
+<span class="o">}</span>
 </pre></div>
 
 
-<p>So even though I figured how to represent millisecond times in R a few
-hours ago, I never knew I did it simply because R is not printing the
-output that I wanted on screen every time I tried! After a couple hours
-of searching, trying, and frustrating, here's the one-liner command that
-solved my problem.</p>
-<div class="highlight"><pre><span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">secs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<p>The variables <code>engine</code>, <code>indicators</code>, and <code>console</code> are <em>fields</em> of the MA_Play class. They are
+global variables within the class. What lines 42--44 do is to save the
+<a href="http://www.dukascopy.com/wiki/index.php?title=IEngine">IEngine</a>, <a href="http://www.dukascopy.com/wiki/index.php?title=IIndicators">IIndicators</a>, and <a href="http://www.dukascopy.com/wiki/index.php?title=IConsole">IConsole</a> objects for later use.</p>
+<p>The last line of onStart, line 45, is merely to <a href="http://www.dukascopy.com/wiki/index.php?title=Console">print a message on your
+JForex program console</a> to notify the user that the strategy has
+started.</p>
+<p>Once onStart is finished processing, the server is likely to
+call onTick if a market tick arrives. If it's not during market hours,
+then there's no tick and some other event might happen instead of
+onTick. Think of the methods as events rather than a linear process. You
+program your JForex strategy according to what you want to do with each
+of the six IStrategy Interface event. </p>
+<p>For this particular strategy, the
+programmer decides to implement their strategy at the tick level. As
+such, much of the trading algorithm resides in onTick for MA_Play. Note
+that this is a design choice, you can use onBar if you want your
+strategy to <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/">process at the bar level</a> (or you can use both
+onTick and onBar).</p>
+<p>Here's the source code for onTick in MA_Play. </p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ema</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> 
+            <span class="n">Period</span><span class="o">.</span><span class="na">TEN_SECS</span><span class="o">,</span> 
+            <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> 
+            <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> 
+            <span class="mi">14</span><span class="o">,</span> <span class="mi">1</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="kt">double</span> <span class="n">ma0</span> <span class="o">=</span> <span class="n">indicators</span><span class="o">.</span><span class="na">ema</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span><span class="o">.</span><span class="na">TEN_SECS</span><span class="o">,</span> <span class="n">OfferSide</span><span class="o">.</span><span class="na">BID</span><span class="o">,</span> <span class="n">IIndicators</span><span class="o">.</span><span class="na">AppliedPrice</span><span class="o">.</span><span class="na">MEDIAN_PRICE</span><span class="o">,</span> <span class="mi">14</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">ma0</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">ma0</span><span class="o">;</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kt">double</span> <span class="n">diff</span> <span class="o">=</span> <span class="o">(</span><span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">-</span> <span class="n">ma0</span><span class="o">)</span> <span class="o">/</span> <span class="o">(</span><span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">());</span>
+
+    <span class="k">if</span> <span class="o">(</span><span class="n">positionsTotal</span><span class="o">(</span><span class="n">instrument</span><span class="o">)</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">),</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">SELL</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span>
+                    <span class="o">+</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">10</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getAsk</span><span class="o">()</span> <span class="o">-</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">15</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">diff</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">engine</span><span class="o">.</span><span class="na">submitOrder</span><span class="o">(</span><span class="n">getLabel</span><span class="o">(</span><span class="n">instrument</span><span class="o">),</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">IEngine</span><span class="o">.</span><span class="na">OrderCommand</span><span class="o">.</span><span class="na">BUY</span><span class="o">,</span> <span class="mf">0.001</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span>
+                    <span class="o">-</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">10</span><span class="o">,</span> <span class="n">tick</span><span class="o">.</span><span class="na">getBid</span><span class="o">()</span> <span class="o">+</span> <span class="n">instrument</span><span class="o">.</span><span class="na">getPipValue</span><span class="o">()</span> <span class="o">*</span> <span class="mi">15</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    <span class="n">ma1</span><span class="o">[</span><span class="n">instrument</span><span class="o">.</span><span class="na">ordinal</span><span class="o">()]</span> <span class="o">=</span> <span class="n">ma0</span><span class="o">;</span>
+<span class="o">}</span>
 </pre></div>
 
 
-<p>which changes the options of the display and thus I can see the
-following output from the same input as above.</p>
-<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00.344 EDT&quot;</span>
+<p>At a glance, you may notice that the variables <code>ma0</code> and <code>ma1</code> play a key role in
+determining the setup. <strong>Hint:</strong> To reverse engineer a strategy, it may
+be easier to work backward from when the order is placed, which is done
+by <code>engine.submitOrder</code> in this case. </p>
+<p><code>ma0</code> and <code>ma1</code> hold results from exponential moving averages (EMA). <code>ma0</code> is the current value. <code>ma1</code> is
+the previous bar's value. Lines 56--63 check using IF tests (lines 56
+and 60) to see if either of the variables hold invalid data. If the data
+is invalid, the indicator is calculated and the rest of the onTick is
+skipped with the <code>return</code> statement on line 62.</p>
+<p><strong>Note:</strong> Indicator values can sometimes be invalid (zero, negative, or <a href="http://download.oracle.com/javase/6/docs/api/java/lang/Double.html">Double.NaN</a>,
+depending on the particular indicator implementation) if there is
+insufficient data to calculate it or an error occurred, for examples.</p>
+<p>The EMAs are fetched in lines 57 and 59 using the IIndicators object
+(which was initialized in onStart). The <a href="http://www.dukascopy.com/wiki/index.php?title=Indicators">JForex Wiki provides an
+explanation of its use</a>. </p>
+<p>Notice that <code>ma1</code> is an array, which was
+declared in line 38 with a size equivalent to the number of <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html">all
+available JForex instruments</a>. In particular, it is used with a
+special index value as in <code>ma1[instrument.ordinal()]</code>. In other words,
+it is asking for the current instrument's slot in the <code>ma1</code> array. The
+current instrument is the one that is passed into the method in line 55.</p>
+<p>Moving down the code, another point of interest is line 65, showing the
+use of <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/Instrument.html#getPipValue()">instrument.getPipValue(</a>). Line 67 checks if the current total
+number of position is zero. If it is, meaning no opened position, then
+the strategy proceeds to check the entry signal to enter a trade (lines
+68--76). </p>
+<p><code>positionsTotal()</code> is a custom method defined in lines 84--92.
+It uses a FOR loop to cycle through all the orders obtained from
+[<code>engine.getOrders(instrument)</code>][] </p>
+<p>Once either of the long or short
+condition, lines 68 and 72, respectively, is met, the strategy submits
+an order in lines 69 for a short and line 73 for a long. The
+<a href="http://www.dukascopy.com/wiki/index.php?title=Set_Market_Order">particulars of submitting market orders</a> is described in the JForex
+Wiki. </p>
+<p>When you stop this strategy, onStop (lines 48--53) is called. For
+this strategy, the programmer loops through all the orders again using
+<code>engine.getOrders()</code> and closes each of the position with an
+[<code>order.close()</code>][] command in line 50. </p>
+<p>That is it for this trivial
+strategy. If there is one point that you should remember. Note my use of
+the many links to the <a href="http://www.dukascopy.com/client/javadoc/">JForex javadoc</a> and <a href="http://www.dukascopy.com/wiki/index.php?title=Main_Page">JForex Wiki</a> throughout
+this post. You are likely to find many of your answers from those two
+sources. If not, there's always the <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex Support Board</a>. Now that
+you've had an idea of how MA_Play.java works, it's time to test it. In
+the next post in January, we will discuss the JForex Historical Tester
+and what to watch for when running a strategy live.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/' title='2010-12-20T09:34:00'>20 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel='bookmark'>A failed experiment with spectral density estimation in R</a>
+            </h1>
+            <div class="article-content"> <p>Spectrum analysis (see <a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis">wiki entry</a>) is a technical process to
+visualize a time series data in the frequency domain to find hidden
+periodicities. As I continue <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/">my struggle in data mining with R</a>, I
+thought I might try looking at a year's worth of USDJPY 1-min exchange
+rate data in the frequency domain. This is what I got. <img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-12-15-usdjpy_spectrum.png" /></p>
+<p>Certainly not one of those nice looking
+graphs in a textbook. Notice that:</p>
+<ol>
+<li>there is no distinct frequencies</li>
+<li>bandwidth is ridiculously small</li>
+</ol>
+<p>What this means is that the USDJPY data is practically <a href="http://en.wikipedia.org/wiki/White_noise">white noise</a>.
+And that there's much work for me ahead before I can produce something
+useful in R. The source code to produce the graph is printed below. The
+USDJPY data isn't published as it's not small and you can <a href="http://www.quantisan.com/tools/">get it at
+various places</a> for free on your own. Update: Failed is a harsh word.
+I should call this a <em>trivial</em> experiment. </p>
+<div class="highlight"><pre> op \<span class="o">&lt;-</span> options<span class="p">(</span>digits.secs<span class="o">=</span><span class="m">3</span><span class="p">)</span> \<span class="c1"># set option to show milliseconds</span>
+cat<span class="p">(</span><span class="s">&quot;loading CSV file to &#39;data&#39;\\n&quot;</span><span class="p">)</span> print<span class="p">(</span> system.time<span class="p">(</span> data \<span class="o">&lt;-</span>
+read.csv<span class="p">(</span> file<span class="o">=</span><span class="s">&quot;data/USDJPY\_20090630-13-27to20101130-22-19\_1Min.csv&quot;</span><span class="p">,</span>
+head<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> \<span class="c1"># convert long timestamp to POSIX</span>
+rownames<span class="p">(</span>data<span class="p">)</span> \<span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>as.numeric<span class="p">(</span>rownames<span class="p">(</span>data<span class="p">))</span><span class="o">/</span><span class="m">1000</span><span class="p">,</span>
+origin<span class="o">=</span><span class="s">&quot;1970-01-01&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;GMT&quot;</span><span class="p">)</span> data \<span class="o">&lt;-</span> data.matrix<span class="p">(</span>data<span class="p">)</span> library<span class="p">(</span>xts<span class="p">)</span>
+\<span class="c1"># load xts library cat(&quot;converting to xts &#39;data.x&#39;\\n&quot;)</span>
+print<span class="p">(</span>system.time<span class="p">(</span>data.x \<span class="o">&lt;-</span> as.xts<span class="p">(</span>data<span class="p">)))</span> rm<span class="p">(</span>data<span class="p">)</span> \<span class="c1"># remove data</span>
+object cat<span class="p">(</span><span class="s">&quot;data.x object size: &quot;</span><span class="p">)</span> print<span class="p">(</span>object.size<span class="p">(</span>data.x<span class="p">),</span> units <span class="o">=</span>
+<span class="s">&quot;auto&quot;</span><span class="p">)</span> cat<span class="p">(</span><span class="s">&quot;spectral analysis\\n&quot;</span><span class="p">)</span> spectrum<span class="p">(</span>data.x\<span class="o">$</span>close<span class="p">)</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/' title='2010-12-16T07:28:00'>16 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel='bookmark'>Anatomy of a JForex strategy, Part 2</a>
+            </h1>
+            <div class="article-content"> <p>We looked at <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">four of the six methods in the IStrategy Interface</a> in a
+previous post. The last two methods, onTick and onBar, is where your
+strategy connect with market data. Either one, or both, of these methods
+is where you put your trading algorithm in. Your strategy would then be
+able to process the market data as they arrive one tick/bar at a time.
+Recall that IStrategy Interface is the skeleton of your strategy. And
+that IContext object is the heart of your strategy. onTick/onBar is the
+head of your strategy, which contains your trading algorithm, which is
+the brain.</p>
+<h2>onTick</h2>
+<p>Here's the method definition of onTick. </p>
+<div class="highlight"><pre><span class="n">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
 </pre></div>
 
 
-<p>I guess that's why they say <a href="http://blog.revolutionanalytics.com/2010/06/learning-r.html">R has a steep learning curve</a>! Yes, it is
-very powerful and flexible. But there are limited standards and the
-documentations are all over the place because it's a mish mash of
-user-contributed packages!</p> </div>
+<p><strong>Important:</strong>onTick is called for each and every instrument that your
+JForex platform is subscribed to (the instrument list in your workspace
+box). Let me say that again, onTick is called for each and every
+instrument that your JForex platform is subscribed to. The standard
+practice is to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out ticks</a> for instruments that you don't want
+with a simple IF-return statement.
+<code>if (instrument != myInstrument) return;</code> Actual tick data is passed to
+your strategy using the ITick object from the onTick method's parameter.
+Take a look at the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/ITick.html">ITick javadoc entry</a> to see what it offers.</p>
+<h2>onBar</h2>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>onBar works in a similar manner to onTick. In which onBar is called for each
+and every subsribed instrument <em>and period</em> known to JForex. Similarly,
+you have to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out all the unwanted instruments and periods</a> or else there will be expected results from your strategy.
+Another point to note is that onBar provides both a <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IBar.html">IBar</a> askBar and
+IBar bidBar, representing the ask and bid bars. <strong>Question:</strong> What
+happens when two or more periods overlap as in 13:45? 1, 5, and
+15-minutes bars are all arriving at the same time (not to mention the
+periods in seconds too). <strong>Answer:</strong> According to Dukascopy Support in
+the forum, "They come in a strict order, for example (1min 1min 1min
+1min 1min 5min 1min 1min 1min 1min 1min 5min ..) They come in cycles,
+where <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=5&amp;t=23959">smaller periods comes first</a>."</p>
+<h2>JForex Support Forum</h2>
+<p>As you program your strategy with JForex, you will no doubt come up with
+questions of your own. The best place to ask is at the official <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex
+Support Forum</a>. This is the last of the three essential JForex
+resources that I alluded to earlier. Even if you don't have any specific
+question, there are sample codes, coding discussion, and hundreds of
+existing Q&amp;A from other JForex developers posted in the forum.</p>
+<h2>Summary</h2>
+<p>The discussion so far has been very high level. To show you what you can
+actually <em>do</em> in an IStrategy, we will <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/">dissect a working strategy in
+the next post</a>. And what else better to examine than the most popular
+JForex strategy of them all -- MA_Play.java.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/' title='2010-10-08T15:32:00'>08 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel='bookmark'>Data analysis with R: Using the right tool for the right task</a>
-            </h1>
-            <div class="article-content"> <p>I ported <a href="http://engineering-returns.com/tsi/">Engineering Return's Trend Strength Index</a> to JForex as my
-first practice to writing custom indicators in JForex. Frank's code in
-TradeSignal consists of 9 lines. My JForex code? 191. This is my first
-custom indicator in JForex. It will also be the last. A compiled
-programming language such as Java is not the most convenient to use for
-data analysis. The lack of interactivity because of the step of
-compilation is one obstacle to fluent data explorations. Secondly, the
-language itself is more cumbersome because of its generality. Java is
-used to build all sorts of applications. Contrary to something like
-MatLab, in which it is purposely built to work with numbers. I miss <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">the
-days when I have my license for MatLab</a>. However, being forced away
-from MatLab might not be a bad thing. As much as I've become accustomed
-to it, MatLab isn't without its flaws. But I won't bash it in this post.
-What I actually want to talk about is R. The rage these days in
-statistical data analysis is in R (see <a href="http://en.wikipedia.org/wiki/R_%28programming_language%29">Wiki entry on R</a>). I've done
-some research and testing, R is really as good as they say it is (see
-past publications in <a href="http://www.rinfinance.com/">R/Finance conference</a><a href="http://probability.ca/cran/doc/contrib/Farnsworth-EconometricsInR.pdf"></a>). You will get to see
-some real examples in financial time series data analysis in R later in
-this blog once I have some publishable results. This will no doubt take
-some time as I am learning yet another new programming language (thus
-the lack of posts this week). The plan from now on is to use R to play
-with the data. Then once the algorithm is finalized, I will either port
-it to Java (JForex) for deployment or <a href="http://www.rforge.net/rJava/">embed the R environment in
-Java</a> for live trading.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/' title='2010-10-06T05:58:00'>06 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/third-quarter-2010-trading-review/" rel='bookmark'>Third Quarter 2010 Trading Review</a>
-            </h1>
-            <div class="article-content"> <p>Markets hitched a one-way train in the third quarter. TSX opened in July
-at 11200. It closed September at 12368. A whopping 10% jump in three
-months! S&amp;P500 made a similarly impressive 9.7% jump. We simply don't
-get 10% moves even in most <em>years</em>. I made fewer trades this quarter but
-held each one for longer to ride the trend. However, I am not as
-successful as I'd hope. In particular, my worst trade this quarter was
-in <a href="http://www.quantisan.com/tag/ven.to/">Ventana Gold</a> (VEN.TO). The position <a href="http://www.quantisan.com/sold-350-ven-to-10-50-profit-0-8-re-bought-250-ven-to-10-67/">was profitable</a>, but the
-money made was only a quarter as what I should have made. I was too
-aggressive to go long when <a href="http://www.quantisan.com/sold-400-ven-to-10-70-breakeven/">VEN.TO was heading into a brick wall</a>.
-Ironically, my best trade this quarter was one that didn't make money.
-In hindsight, I was wrong in the direction of a position but managed to
-<a href="http://www.quantisan.com/sold-4-mfc-11jan-puts-14-00-1-74-mark-12-96-loss-0-1/">escape with just a scratch</a>. If I had been stubborn in <a href="http://www.quantisan.com/bought-4-mfc-jan-2010-puts-14-00-1-70-mark-13-25/">this failed
-Manulife short</a>, my profit this quarter would have been wiped out. It
-was a close call (technically, it was a put contract). It looks as
-though I did <a href="http://www.quantisan.com/a-whole-year-two-hundred-and-six-posts-later/">learn something in the past year</a>. My main focus this
-quarter has been the backend of my trading work. Namely in <a href="http://www.quantisan.com/category/quantitative-finance/">quantitative
-finance study and development</a>. My automated strategy performed well
-in the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex contest. I won sixth place in July and first
-place in August. My win streak (I also won in April) garnered the
-attention from the people at Dukascopy and they kindly invited me to the
-<a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">Geneva Forex Event for a TV interview</a>. By far the most impressive
-thing that happened to me this quarter was <a href="../pictures-from-geneva/">this trip to Geneva</a>.
-<strong>Quarterly Metric Q3 Q2</strong> Sarting Fund \$9,404.87 \$8,000.00 End of
-Quarter Fund \$9,630.75 \$9,404.87 Total Net Profit \$225.88 \$1,404.87
-Gross Profit \$381 \$1,800 Gross Loss -\$155 -\$395 Profit Factor 2.45
-4.56 Net Profit % 2.40% 17.56% Max. Drawdown % 0.85% 3.36% Total
-Commission 121.1 \$155.1 Commission / Net Return 53.61% 11.04% I've said
-this in the last quarter, <a href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/">commissions are the bane of my trading</a>.
-Last quarter it took away 11% of my total return. This time it's 54%!
-The structure of my equities commission requires that I trade less but
-punch hard. This isn't my style. My intention is to trade less by being
-more picky in my RRSP trading account. The 0.85% max. drawdown this
-quarter is impressive though. I sometimes lose more than that in a
-single position. Sterling Ratio 0.22 1.44 Excess Return 2.29% 17.46%
-SDev Return per Trade 1.01% 2.21% Kurtosis 1.89 -0.93 Skewness 1.65 0.72
-Despite my modest 2.4% return this quarter, it's not a good number in
-light of the market liftoff. My low <a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/">modified Sterling Ratio</a> says so.
-On the other hand, the statistics from my trades improved. I achieved
-consistency by lowering the standard deviation of my trades and skewed
-my trade returns more to the positive. Yet another thing to caution is
-my high kurtosis value. Which means my total returns are due to big
-profits from a couple of trades. Other than these, there is not much to
-add about the rest of the data. 95th Percentile P&amp;L \$193.49 \$421.15
-5th Percentile P&amp;L -\$50.37 -\$102.13 Net Profit Mid 90% Only -\$60.56
-\$824.07 Total # of Trades 9 14 Percent Profitable 28.57% 61.54% # of
-Winning Trades 2 8 # of Losing Trades 5 5 # of Break-even Trades 2 1
-Average Trade Profit % 0.27% 1.18% Average Winning % 2.01% 2.59% Average
-Losing % -0.32% -0.83% Ratio Win% / Loss% 6.25 3.12 Max. Conseq. Winners
-3 5 Max. Conseq. Losers 3 3 Largest Winning Trade \$228.25 \$464.05
-Largest Losing Trade -\$58.19 -\$116.75 Avg. Time Held [days] 8.30 5.17</p>
-<h2>Goal for the Fourth Quarter</h2>
-<p>My <a href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/">goal from the previous quarter</a> is to learn and build my first indicator in JForex. I achieved
-that just this week. However, I plan to change direction in my work by
-using less JForex and using more custom tools. My goal for the next
-quarter is to learn R programming and
-<span style="text-decoration: line-through;">implement a JForex to R
-data exchange system</span> (done, good old CSV files).</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/third-quarter-2010-trading-review/' title='2010-10-01T10:11:00'>01 October 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/sold-400-vento-1070-breakeven/" rel='bookmark'>Sold 400 VEN.TO @ 10.70, Breakeven</a>
-            </h1>
-            <div class="article-content"> <p>I'm out all my <a href="http://www.quantisan.com/sold-350-ven-to-10-50-profit-0-8-re-bought-250-ven-to-10-67/">Ventana Gold (VEN.TO) position</a>. This thing is losing
-steam despite gold prices hitting record high seemingly on a daily
-basis. VEN.TO made another attempt to break \$11.00 resistance level at
-the open but it quickly reversed (Figure 1). I upped my stop order at
-the open on this third attempt because I don't want to be holding it if
-it fails for the third time. I'll just sit and wait for a while to see
-how this one goes. Recent low at \$10.40 is the support to watch.
-Coincidentally, the 50 daily MA just crossed over the 200 MA today for a
-classic bullish signal (Fig. 2). A contrarian correction (downward) to
-bleed off overbought condition is in play, perhaps?</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Ventana Gold
-(VEN.TO) intraday"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-09-30-VEN.TO-intra.gif" />][][/caption] [caption id=""
-align="aligncenter" width="570" caption="Ventana Gold (VEN.TO)
-daily"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-09-30-VEN.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-09-30-VEN.TO.png">1</a>[/caption] Loss is (\$10.70 - \$10.70) * 400 = \$0 -
-\$14.85 commission = -\$14.85 = 0.15% of account. I am just handing
-money over to my discount broker <a href="http://www.quantisan.com/questrade/">Questrade</a> these days.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-400-vento-1070-breakeven/' title='2010-09-30T11:19:00'>30 September 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/sold-350-vento-1050-profit-08-re-bought-250-vento-1067/" rel='bookmark'>Sold 350 VEN.TO @ 10.50 (Profit +0.8%), Re-Bought 250 VEN.TO @ 10.67</a>
-            </h1>
-            <div class="article-content"> <p>My Ventana Gold Corp (VEN.TO) stop got filled yesterday afternoon as
-gold price took a dive (Figure 1) before the Bank of England minute
-today. However, the support at 10.50 look very promising as VEN.TO made
-a couple of successful long tail test of that level in the last 24 hours
-(Fig. 2). Seeing that the BoE has blatantly admitted to support the
-bandwagon on <a href="http://www.bloomberg.com/news/2010-09-28/posen-says-bank-of-england-should-buy-more-assets-to-support-economy.html">more quantitative easing</a> (along with the FED), the
-bullishness in gold is written on the wall. As such, I am re-entering my
-VEN.TO position this morning with a smaller amount of shares. New stop
-is a close of VEN.TO below 10.50. Volatility is expected to be high. So
-I am giving it some intraday leeway to move. A hard stop is set at
-10.20. Risk is thus (\$10.67 - \$10.20) * 250 = \$117.50 + \$9.90
-commission = \$127.40 = 1.3% of account. For the record, previous
-entries were at <a href="../bought-200-ven-to-9-74-stop-8-90/">9.74</a> and <a href="../bought-150-ven-to-10-85/">10.85</a>. My stop at 10.50 was too tight.
-I am admittedly being quite aggressive here. Let's wait and see if it
-pays off.</p>
-<p>[caption id="" align="aligncenter" width="570"
-caption="Gold"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-09-28-Gold.png" />][][/caption] [caption id="" align="aligncenter"
-width="570" caption="Ventana Gold Corp (VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-09-28-VEN.TO.gif" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-09-28-VEN.TO.gif">1</a>[/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-350-vento-1050-profit-08-re-bought-250-vento-1067/' title='2010-09-28T10:14:00'>28 September 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/why-winning-automated-contest-strategies-dont-work-in-real-trading/" rel='bookmark'>Why winning automated contest strategies don't work in real trading</a>
-            </h1>
-            <div class="article-content"> <p>I despise sellers of trading robots making misleading promises like
-"doubling your money every month". They are nothing more than snake oil
-salesmen exploiting on the greed and ignorance of others. Yet I am
-finding myself in a similar situation lately. Ever since <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">my interview
-at Dukascopy</a> about my JForex automated trading contest win, I seem to
-have established a persona for being able to generate 45%+ return per
-month using my strategy. Despite my constant reiteration that this is
-<a href="http://www.quantisan.com/number-one-with-40-percent-return-in-a-month-so-am-i-rich-yet-not-really/">merely a lucky result in a risk-free game</a>, I am still getting
-inquiries from people interested in following my trading signals. In
-another attempt to rein in expectations, consider this chart of my
-contest demo account balance for this month.</p>
-<p><img alt="September 2010 JForex contest balance" src="http://www.quantisan.com/static/images/img_archive/2010-09-27-contestbalance.png" /></p>
-<p>As you can see, my strategy doubled the account within days. However, it
-also lost half of its paper value plus some more soon afterward. As it
-stands now, my September strategy will not be in the top 10 for this
-month.</p>
-<p>If I haven't mentioned this embarassing negative return, you wouldn't
-have noticed it, would you? That's the thing with trading contest and
-those snake oil trading robots, we hear a lot about them when somebody
-win. But what happens to those same people when they aren't winning or
-the countless other unfortunate followers lost money?</p>
-<p>This reminds me of the lottery system. Our perception of the probability
-of winning the lottery is drastically distorted because we hear about
-the winnings so much while neglecting the fact that there are millions
-of losers out there.</p>
-<p>The fact is, most of the seemingly impressive trading robots out there
-will not last for the long term. The only reason that I have won three
-times out of the five months is that I change my strategy's parameters
-in expectation of the future month's market condition. That expection is
-based on my own market analysis from my real trading. It isn't something
-that can be readily quantified yet.</p>
-<p>The way I see it, the only way in which others can exploit my success is
-to buy my real secret trading system, which is, perhaps unfortunately,
-my brain.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/why-winning-automated-contest-strategies-dont-work-in-real-trading/' title='2010-09-27T13:14:00'>27 September 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/' title='2010-12-14T07:49:00'>14 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

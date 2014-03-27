@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css">
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <img src="/images/profile_circle.png" id="logo" alt="logo">
+
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/" rel='bookmark'>Adapting to changing market volatility with a statistical position size table</a>
+            </h1>
+            <div class="article-content"> <p>We know that prices can go up or down. We also know that the quality of
+these ups and downs can be very smooth or very choppy. As such, it's not
+surprising that the trend and volatility of a market form the two
+universal characteristics of a price action. No matter which market you
+trade, the trend and volatility of the prices will influence your
+trading and P&amp;L. That can be both good and bad as volatility is a double
+edged sword. A fast paced moving market can rain down gold on you or it
+can burn your cash away. Most of the time, it's the latter case.
+Consequently, there are many ways traders adapt to changing volatility
+in the market. You can tailor your trading strategy, change trading
+timeframe, switch market entirely, or manage your risk accordingly, for
+examples. In this post, I'd like to give an example for the use of a
+<a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex position size table</a> to fit with market
+volatility. The problem with market volatility is that it's hard to
+notice. As opined by <a href="http://traderfeed.blogspot.com/2009/10/jump-in-stock-market-volatility-and-its.html">Dr. Steenberger</a>, "many traders will adapt to
+directional changes quicker than they adapt to shifts in volatility."
+The art of identifying market conditions is not discussed in this post.
+But obviously, if there is a way to build in an inherent way to manage
+your risks based on market volatility, you will have built yourself a
+safety net. That is the logic behind my <a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex
+position sizer</a>. It's a
+data-driven tool to impose an inherent safety net in your trading. What
+it does is simple. Here's what it boils down to:</p>
+<ol>
+<li>It finds the recent 2 sigma value (i.e., a statistical measure of
+    volatility, <a href="http://en.wikipedia.org/wiki/Standard_deviation">see wiki</a>) of each major currency pairs.</li>
+<li>It calculates the maximum position size for each pair using the 2
+    sigma value.</li>
+<li>Then it converts the number to correspond with your account currency
+    based on a real-time currency exchange rate for each trading pair.</li>
+</ol>
+<p>Thus, a table such as <a href="http://www.quantisan.com/tools/forex-position-sizer/">this one I published for
+forex</a> can give you a
+real-time guideline to the maximum position size you should take given
+your risk appetite. One shortcoming with this approach is that while you
+may limit your loss during a volatile market, you are also limiting your
+potential gain. But this is where the old saying, "let your profit run
+and cut your losses short" applies. One solution is to simply add to
+your winning trades, according to your trading setups, of course. That
+way, when the market moves in your favour or you get confirmation on
+your setup, you can increase the position size responsibly without
+stretching your principal. By now, it's probably obvious that the use of
+such a tool is not, and should not, meant to be a solution to changing
+market volatility. It is merely a convenience tool to serve as one of
+the many that a trader has at his/her disposal. Nevertheless, I find the
+table to be very convenient for me because I don't have to worry about
+calculating the position sizes manually on each trade. Trading is tough
+enough already, so I like to develop <a href="http://www.quantisan.com/tools/">tools</a> that can make my life
+ever so slightly easier.</p>
+<div id="_mcePaste" style="overflow: hidden; position: absolute; left: -10000px; top: 0px; width: 1px; height: 1px;">
+<span style="font-weight: bold;">many traders will adapt to directional
+changes quicker than they adapt to shifts in volatility</span>
+
+</div>
+
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/' title='2009-10-29T13:00:00'>29 October 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/" rel='bookmark'>My thoughts and goals on automated trading a year later</a>
+            </h1>
+            <div class="article-content"> <p>In 2008, I spent a few good months <a href="http://www.quantisan.com/category/quantitative-finance/systems/">developing strategies</a> in
+<a href="http://www.quantisan.com/tag/easylanguage/">TradeStation</a> full-time for the index futures. Now after a full year
+of break in development, I am starting to devote more and more time in
+quantitative finance research again. In hindsight, the biggest
+shortcoming with my previous strategies is that they are not
+discriminating enough. Using an analogy from robotics (my specialty),
+some of the most basic robots are great because they can do one task,
+and one task only, especially well. Those developers that are too
+ambitious in trying to conjure a jack-of-all-trade robot typically fail
+miserably. Our current technology simply isn't sufficient for anything
+more than a specialized automation. Much is the same in developing
+automated trading. With my limited resources and skills, my goal is to
+build simple automated systems that can do one job only and do it damn
+well. Once that can be achieved, it's only a matter of concatenating all
+these individual systems to exploit more and more opportunities.
+Therefore, the new plan which I'll follow for development are:</p>
+<ol>
+<li>Identify a recurring profitable scenario in the market</li>
+<li>Isolate the conditions which would yield a high probability of such
+    scenario happening</li>
+<li>Program the findings into my platform</li>
+<li>Run backtests to calculate the expected profit (probability *
+    reward/risk)</li>
+<li>Tweak and debug</li>
+</ol>
+<p>Ultimately, remember this: <em>It's not a matter of the number of trades
+you take, it's a matter of being as picky as you can in only playing the
+best of the best trades you can find</em>.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/' title='2009-09-04T15:03:00'>04 September 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/" rel='bookmark'>Starting to use MatLab for quantitative finance</a>
+            </h1>
+            <div class="article-content"> <p>After trying <a href="http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/">TradeStation, Ninja Trader</a>, and RightEdge for trading,
+I've gone back to my engineering root and is starting to explore with
+MatLab as my quantitative finance tool and eventually as my platform for
+an automated trading system.</p>
+<p>I gave up on TradeStation last year because it just didn't fit my style.
+Then I gave both Ninja Trader and RightEdge a quick spin (a few days)
+and found that I need to learn C# to really make use of them. After
+procrastinating for a couple of months in learning C#, I realize I
+don't have the time to learn a new language just to start working on a
+quant tool.</p>
+<p>So after some wandering, I stumbled upon MatLab again. In particular, I
+found out that there's a <a href="http://www.mathworks.com/products/finance/">Financial Toolbox in MatLab</a> that seem to
+have many of the basic functions that I need. Furthermore, people have
+used MatLab as an automated trading platform. Since I've been using
+MatLab as an engineering tool for several years, I wouldn't have to
+start learning from scratch. Furthermore, because of its academic
+popularity, there are many existing analytical functions which I can
+build my future work upon.</p>
+<p>Isn't it silly of me? I really should have considered MatLab earlier
+because it's so well known. I've just always associated MatLab as an
+analytical tool but never thought that it can be used as an automated
+trading platform too.</p>
+<p>Anyway, my short term plan is to brush up on my MatLab by playing with
+the financial tools and trying some basic stuff up. I have scheduled
+8:00 - 9:00 pm every night to do this with another 10 min afterward to
+write a brief lesson summary. Let's see how this goes.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/' title='2009-05-19T20:09:00'>19 May 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/" rel='bookmark'>4 automated trading development platforms for beginner to advanced traders</a>
+            </h1>
+            <div class="article-content"> <p>Over the weekend, I've dug into a few more automated trading development
+platforms. There are certainly <a href="http://www.elitetrader.com/so/">many out there</a>. This condensed
+comparison is based on my own experience, online research, or reading
+through their documentation. I only included the ones which I find to be
+the best for each different level of <strong>independent</strong> developers. We'll
+start with the most basic and work our way up the food chain.</p>
+<h4>TradeStation</h4>
+<p>Pros: Easy to learn and implement. Large Community.
+Cons: Legacy system. <a href="http://www.quantisan.com/departed-tradestation-and-going-down-the-ninja-trader-path/">Require work-arounds for complex functions</a>.</p>
+<p>Who I think it's for: Algorithmic, technical analysis (traditional
+indicators) trader. Light to no programming background.</p>
+<p><a href="http://www.tradestation.com">www.tradestation.com</a></p>
+<h4>Ninja Trader</h4>
+<p>Pros: Free for development use. Modern GUI. Use of major programming
+language, C#. Good documentation and support.</p>
+<p>Cons: Performance on the slow side. Proprietary API. <a href="http://codecrafter.wordpress.com/2008/06/08/ninjatrader-hangs-and-crashes/">Possible stability
+problem</a>.</p>
+<p>Who I think it's for: Medium to high programming background. Low cost
+(free to develop or \$50/month for trading), good for independent
+developer that has a long development time.</p>
+<p><a href="http://www.ninjatrader.com">www.ninjatrader.com</a></p>
+<h4>OpenQuant</h4>
+<p>Pros: Good framework. Well built piece of software. Capable of advanced
+techniques. "Lite" version of professional quant software by
+<a href="http://www.quanthouse.com">QuantHouse</a>.</p>
+<p>Cons: Only 1 month of trial period. Documentation and support seems
+lacking.</p>
+<p>Who I think it's for: Good to Advanced programming skills.</p>
+<p><a href="http://www.openquant.com">www.openquant.com</a></p>
+<h4>Alphacet</h4>
+<p>Pros: Latest and greatest. Codeless development capability. Faster
+concept to deployment time.</p>
+<p>Cons: Cost a fortune. Not tailored for independent developer.</p>
+<p>Who I think it's for: Really experienced ATS trader with deep pockets.</p>
+<p><a href="http://www.alphacet.com/">www.alphacet.com</a></p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/4-automated-trading-development-platforms-for-beginner-to-advanced-traders/' title='2008-10-26T21:45:00'>26 October 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/category/algorithmic-trading//index13.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/category/algorithmic-trading//index15.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>

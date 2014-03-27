@@ -58,240 +58,214 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/short-cruide-oil-8280-via-hodto-903-stop-880/" rel='bookmark'>Short Cruide Oil 82.80 via HOD.TO @ 9.03, Stop 8.80</a>
+                <a href="http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/" rel='bookmark'>Network latency on Amazon EC2 t1.micro to Dukascopy</a>
             </h1>
-            <div class="article-content"> <p>Update the day after: Stopped out at \$8.81 for a loss of \$64.90 = 0.7%
-of account. I'm giving <a href="http://www.quantisan.com/sold-300-hod-to-9-12-loss-0-6/">this short oil play another try</a>. See the
-topping COT (<a href="http://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm">CFTC: Commitments of Traders</a>) lagging open interest
-data (bottom of Fig. 1). I waited for a breakdown in the hourly chart
-(Fig. 2) to make my entry into this short. The market has been coiling
-up for the entire month of October. Something big is about to happen
-sooner or later. Perhaps the U.S. midterm election tomorrow can finally
-move this market? Stop is at 8.80. Risk is (\$9.03 - \$8.80) * 250 =
-\$57.50 + \$9.90 commission = \$67.40 = 0.68% of account. Position size
-is still small with this lack of market volume.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Crude
-Oil"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-01-Crude.png" />][][/caption]</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Crude Oil,
-hourly chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-01-Crude_hr.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-11-01-Crude_hr.png">1</a>[/caption]</p>
-</p> </div>
+            <div class="article-content"> <p>While the processing power of a EC2 t1.micro server sucks (benchmarks
+have shown it is <a href="http://www.phoronix.com/scan.php?page=article&amp;item=amazon_ec2_micro">slower than a Nokia N900 phone</a>), network
+performance is well-known to be exceptional for EC2 servers throughout
+the spectrum of their offerings. Here's a ping test from my home
+computer with a ADSL connection in Ottawa, Canada to 194.8.15.1, one of
+the Dukascopy web servers.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">149</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">134</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">135</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">148</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">242</span> <span class="n">time</span><span class="o">=</span><span class="mi">135</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">5</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">4003</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">134.364</span><span class="o">/</span><span class="mf">140.579</span><span class="o">/</span><span class="mf">149.726</span><span class="o">/</span><span class="mf">7.053</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Then the same test from a EC2 t1.micro instance located in Dublin,
+Ireland (closest Amazon EC2 server location to Geneva).</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">40.9</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">49.0</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">243</span> <span class="n">time</span><span class="o">=</span><span class="mf">41.2</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">5</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">4005</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">40.961</span><span class="o">/</span><span class="mf">42.728</span><span class="o">/</span><span class="mf">49.013</span><span class="o">/</span><span class="mf">3.154</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Exceptional, indeed. With the monthly pricing of a t1.micro going for
+around \$12/month, there are few reasons not to <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">get a remote server to
+run your trading system</a> rather than pray for your home internet
+connection to remain reliable 24/7.</p>
+<p>Update with ping test from Berlin courtesy of commenter Holger:</p>
+<div class="highlight"><pre><span class="n">Ping</span> <span class="n">wird</span> <span class="n">ausger</span> <span class="mf">194.8.15.1</span> <span class="n">mit</span> <span class="mi">32</span> <span class="n">Bytes</span> <span class="n">Daten</span><span class="o">:</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Antwort</span> <span class="n">von</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">Bytes</span><span class="o">=</span><span class="mi">32</span> <span class="n">Zeit</span><span class="o">=</span><span class="mi">43</span><span class="n">ms</span> <span class="n">TTL</span><span class="o">=</span><span class="mi">244</span>
+<span class="n">Ping</span><span class="o">-</span><span class="n">Statistik</span>  <span class="mf">194.8.15.1</span><span class="o">:</span>
+<span class="nl">Pakete:</span> <span class="n">Gesendet</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Empfangen</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">Verloren</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">(</span><span class="mi">0</span><span class="o">%</span> <span class="n">Verlust</span><span class="p">),</span>
+<span class="n">Ca</span><span class="p">.</span> <span class="n">Zeitangaben</span> <span class="n">in</span> <span class="n">Millisek</span><span class="p">.</span><span class="o">:</span> <span class="n">Minimum</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span><span class="p">,</span> <span class="n">Maximum</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span><span class="p">,</span> <span class="n">Mittelwert</span> <span class="o">=</span> <span class="mi">43</span><span class="n">ms</span>
+</pre></div>
+
+
+<p>Update April 12, 2011: I've been using Rackspace Cloud (#2 cloud server
+provider, after Amazon). Here's the ping result from their London, UK
+server.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.8</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">66.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">64.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">7</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">68.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">8</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">69.1</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">9</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">246</span> <span class="n">time</span><span class="o">=</span><span class="mf">66.6</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">9</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">9</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">8012</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">64.677</span><span class="o">/</span><span class="mf">67.986</span><span class="o">/</span><span class="mf">69.617</span><span class="o">/</span><span class="mf">1.573</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Update April 26, 2011: I'm testing <a href="http://quickweb.co.nz/germany-xen-vps.html">Quickweb Germany's VPS</a>.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">1</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.4</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.3</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.3</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.1</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.2</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_seq</span><span class="o">=</span><span class="mi">7</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">247</span> <span class="n">time</span><span class="o">=</span><span class="mf">15.4</span> <span class="n">ms</span>
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">7</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">7</span> <span class="n">received</span><span class="p">,</span> <span class="mi">0</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span>
+<span class="n">time</span> <span class="mi">6000</span><span class="n">ms</span> <span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">15.152</span><span class="o">/</span><span class="mf">15.306</span><span class="o">/</span><span class="mf">15.463</span><span class="o">/</span><span class="mf">0.116</span> <span class="n">ms</span>
+</pre></div>
+
+
+<p>Update September 2013: DigitalOcean offers <a href="https://www.digitalocean.com/?refcode=5876fd082ff3">$5/month 512MB server plan with 20GB SSD</a>. I've used them exclusively for other work. Here's a ping test from one of their Amsterdam servers.</p>
+<div class="highlight"><pre><span class="n">PING</span> <span class="mf">194.8.15.1</span> <span class="p">(</span><span class="mf">194.8.15.1</span><span class="p">)</span> <span class="mi">56</span><span class="p">(</span><span class="mi">84</span><span class="p">)</span> <span class="n">bytes</span> <span class="n">of</span> <span class="n">data</span><span class="p">.</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">2</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">21.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">3</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.4</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">4</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.6</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">5</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">21.5</span> <span class="n">ms</span>
+<span class="mi">64</span> <span class="n">bytes</span> <span class="n">from</span> <span class="mf">194.8.15.1</span><span class="o">:</span> <span class="n">icmp_req</span><span class="o">=</span><span class="mi">6</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">245</span> <span class="n">time</span><span class="o">=</span><span class="mf">22.4</span> <span class="n">ms</span>
+
+<span class="o">---</span> <span class="mf">194.8.15.1</span> <span class="n">ping</span> <span class="n">statistics</span> <span class="o">---</span>
+<span class="mi">6</span> <span class="n">packets</span> <span class="n">transmitted</span><span class="p">,</span> <span class="mi">5</span> <span class="n">received</span><span class="p">,</span> <span class="mi">16</span><span class="o">%</span> <span class="n">packet</span> <span class="n">loss</span><span class="p">,</span> <span class="n">time</span> <span class="mi">5013</span><span class="n">ms</span>
+<span class="n">rtt</span> <span class="n">min</span><span class="o">/</span><span class="n">avg</span><span class="o">/</span><span class="n">max</span><span class="o">/</span><span class="n">mdev</span> <span class="o">=</span> <span class="mf">21.540</span><span class="o">/</span><span class="mf">22.142</span><span class="o">/</span><span class="mf">22.686</span><span class="o">/</span><span class="mf">0.484</span> <span class="n">ms</span>
+</pre></div> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/short-cruide-oil-8280-via-hodto-903-stop-880/' title='2010-11-01T15:34:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/network-latency-on-amazon-ec2-t1micro-to-dukascopy/' title='2011-02-09T08:20:00'>09 February 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/" rel='bookmark'>A brief comparison of double arrays for high-performance numerical computing in Java</a>
+                <a href="http://www.quantisan.com/6-ways-to-filter-data-for-your-trading-system/" rel='bookmark'>6 ways to filter data for your trading system</a>
             </h1>
-            <div class="article-content"> <p>Numerical calculation performance matters if you're calculating gigantic
-datasets or have limited processing capability. I belong in the latter
-case as I intend to run my trading system on <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">a free cloud server</a> in
-the future. There are plenty of research and studies to push the
-boundary of high-performance numerical computing in Java (see ref. 1 and
-2). Most of the latest and greatest is beyond the scope of my
-quantitative work. What I seek is performance with simplicity and
-efficiency. That is how I became aware of the <a href="http://acs.lbl.gov/software/colt/">Colt Project</a> by CERN,
-and its <a href="http://sites.google.com/site/piotrwendykier/software/parallelcolt">multi-threaded branch</a>. Colt is a set of open source Java
-libraries for scientific and technical computing problems characterized
-by large data sizes while demanding high performance and low memory
-footprint. Just what I needed. Out of curiosity, I tested its
-implementation of double arrays and compared its performance to standard
-Java libraries.</p>
-<h2>Method</h2>
-<p>A random sample of a million decimal values (e.g. prices) are generated
-and stored in four Java data structures. All data structures have the
-same one million values in their own respective memory spaces.</p>
+            <div class="article-content"> <p>The imminent extortion of <a href="http://www.cbc.ca/technology/story/2011/01/31/f-faq-usage-based-billing.html">metered internet usage here in Canada</a> got
+me thinking about the large amount of data (at least a few GB a month)
+that I use for my trading work. In particular, I'd like to talk about
+methods to filtering time series price data in this post. There is a
+tradeoff between reading every tick that comes in or sampling the data
+at less-frequent intervals. A common way discretionary traders present
+data is by using open-high-low-close-volume (OHLCV) bars of a certain
+time period. A 5-minute chart looks similar but shows different
+information than a 4-hour chart, for example. Technically, this is one
+way of filtering, or presenting, data by sampling at a fixed time
+interval. The thing with summarizing tick data into 5-min or 4-hour data
+is that you lose details in exchange for simplicity. However, the
+reduction in the amount of data is significant. A year's worth of tick
+data of a single currency pair, for example, runs in the gigabytes
+range. Whereas a year's worth of the same data in 5-minute OHLCV bars is
+merely a few ~~hundred~~ megabytes. Another factor to consider is that
+market data are inherently noisy. Would feeding your system with each
+and every tick be useful? Of course, if your system is able to handle
+the noise, or even better, make use of it, then all the more reason to
+opt for more details in the data. But that's another topic in itself. In
+any case, there are 6 ways to present/filter data that I can think of.</p>
 <ol>
-<li>Primitive double array</li>
-<li>ArrayList of Double objects</li>
-<li>Colt</li>
-<li>Parallel Colt</li>
+<li><strong>Time interval</strong>.</li>
+<li><strong>Price interval</strong>.</li>
+<li><strong>Volume interval</strong>.</li>
+<li><strong>Regression modelling</strong>.</li>
+<li><strong>Frequency filtering</strong>.</li>
+<li><strong>Wavelet transform</strong>.</li>
 </ol>
-<p>Three tests were ran.</p>
-<ol>
-<li>A simple <em>diff</em> function. A traversal of the million data points and
-    calculating array[i] - array[i - shift] for all <em>i = shift to
-    1,000,000</em>. Where <em>shift</em> is a random integer from 0 to 50. This
-    type of calculation is common place in technical analysis
-    indicators.</li>
-<li>A sort function sorting the million data points in the array in
-    ascending order. This come in handy for some statistical analysis.
-    In the case of the primitive array, I am using
-    java.util.Arrays.sort(). Otherwise I'm using the sort() method
-    implicit in the other interfaces.</li>
-<li>A binary search function on the sorted arrays. For the primitive
-    array, I am using java.util.Arrays.binarySearch().</li>
-</ol>
-<p>Each test is ran 3 times with different random seeds and the results are
-averaged. The system runs Java SE build 1.6.0_22-b04 and Linux kernel
-2.6.35-22 on an Intel Core 2 Duo 6300 @ 1.86 GHz.</p>
-<h2>Result</h2>
-<p>For the diff, primitive array averaged 9.3 millisecond; ArrayList 27
-ms.; Colt 14 ms.; Parallel Colt 15 ms. For sort, primitive 354.7 ms.;
-ArrayList 1,316 ms.; Colt 270.3 ms.; Parallel Colt 273 ms. For search,
-primitive 559.7 ms.; ArrayList 1,561.7 ms.; Colt 575.7 ms.; Parallel
-Colt 551.3 ms.</p>
-<h2>Discussion</h2>
-<p>As this isn't a vigorous test, I wouldn't mind too much on the actual
-numbers. The take home message here is that the performance of Colt is
-at least in the same magnitude of a primitive array. Whereas a standard
-ArrayList object is a magnitude worse. However, where Colt really shines
-is in its methods for handling matrices. It offers plenty of convenient
-functions for matrix calculations while guaranteeing good performance.
-To work with matrices in Java, you either use third-party libraries such
-as Colt or manage a bunch of <em>for</em> loops. Which isn't pretty.</p>
-<h3>References</h3>
-<p><span>[1] Moreira, et al., </span>"Java programming for
-high-performance numerical computing," IBM Systems Journal, Vol. 39,
-No. 1, pp. 21-56, 2000. [2] Wendykier and Nagy, "Parallel Colt: A
-High-Performance Java Library for Scientific Computing and Image
-Processing," ACM Transactions on Mathematical Software, Vol. 37, No. 3,
-September 2010.</p>
+<p>As you can see, massaging data is not limited to choosing the time
+period for your OHLCV bars. In fact, it's a whole distinct field
+involving their own IEEE journal, <a href="http://www.computer.org/portal/web/kde/home">Knowledge and Data Engineering</a>.
+There is probably many other ways to filter data than these 6 that I
+introduced. This is yet another topic that I would like to know more to
+improve my trading system.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/' title='2010-11-01T09:12:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+                Posted  <a href='http://www.quantisan.com/6-ways-to-filter-data-for-your-trading-system/' title='2011-02-02T11:29:00'>02 February 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel='bookmark'>Rev your trading system on the cloud with a free Amazon cloud server</a>
+                <a href="http://www.quantisan.com/videos-of-jim-simons/" rel='bookmark'>Videos of Jim Simons</a>
             </h1>
-            <div class="article-content"> <p>I always try to keep my trading and any related costs as cheap as
-possible. And there's nothing cheaper than free, which that is what
-Amazon Web Services (AWS) is offering starting November 1, 2010. They
-are offering a full year of free t1.micro EC2 instance along with other
-basic level of AWS services (see link below). That seems to be a great
-incentive to move my trading system on to a remote cloud server. One of
-the biggest benefits of running your trading system on a virtual private
-server or a cloud instance is reliability. I don't know about you, but
-my internet connection sometimes acts up or even goes down for hours.
-There's the occasional electrical power disruption too, but it's been
-good these days. On the other hand, there are many disadvantages for
-running your trading system remotely. Costs, technical know-hows, and
-limited processing power, just to name a few. The added costs is not an
-issue for now as Amazon is offering a year of free trial. With regard to
-technical know-hows, I don't know how to setup a cloud server yet.
-Although it shouldn't be a terribly difficult task for me as I am
-familiar with Linux. What's at issue though, is the limited processing
-power. The processing power of a t1.micro instance is an unspecified
-fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
-processor. So you get a fraction of that, which doesn't sound much.
-CloudHarmony's benchmark shows that <a href="http://cloudharmony.com/benchmarks">a Micro instance is about 1/10th of
-that of the Small instance</a>. However, a Micro instance can burst to up
-to 2 ECUs (double that of the Small) of processing power occasionally.
-This is good if you can keep your continuous processes minimal and only
-make calculations infrequently (such as on arrival of a new price bar).
-The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
-low-latency files) and 5 GB of S3 (for persistent storage). These
-numbers are generous, so the bottleneck obviously remains with the
-processor. Your best bet for minimal background processing use is to run
-a command-line-only trading system. That's something that can be easily
-done on JForex. However, there remains the question of is the minimum
-power of a Micro sufficient to sustain a trading system? Any hiccup in a
-trading system could cost you more than the annual charge for even a
-Small instance. This freebie from Amazon may not be worth the risk. The
-only way to know is to test it out. I won't be able to get to that soon
-as I'm been busy programming. So if anyone is running a trading system
-on a t1.micro instance, I'd really appreciate if you can provide some
-feedback. Update Nov 6: See <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">my first failed test</a> and then my first
-time <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">running remote desktop on t1.micro</a>. Otherwise, enjoy the
-freebie, <a href="http://aws.amazon.com/free/">AWS Free Usage Tier</a>.</p> </div>
+            <div class="article-content"> <p>Regarding the quants at Renaissance Technologies:</p>
+<blockquote>
+<p>I can only look at them and realize that you have the
+gods of the business and then you have mere mortals like
+me, <a href="http://en.wikipedia.org/wiki/Sushil_Wadhwani">Wadhwani</a> said, echoing the view of the entire
+industry. Excerpt from Mallaby, "<a href="http://www.amazon.com/gp/product/1594202559?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1594202559">More Money Than God</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=1594202559" />," pp.
+298, 2010.</p>
+</blockquote>
+<p>March 2008, <a href="http://en.wikipedia.org/wiki/James_Harris_Simons">Jim Simons</a> interviewed by Bill Zimmerman on mathematics.</p>
+<iframe title="YouTube video player" class="youtube-player" type="text/html" width="480" height="390" src="http://www.youtube.com/embed/zVWlapujbfo" frameborder="0" allowfullscreen></iframe>
+
+<p>December 2010 at MIT about his remarkable careers.
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="481" height="361" id="Main" align="middle"><param name="allowScriptAccess" value="always"></param><param name="movie" value="http://mitworld.mit.edu/flash/player/Main.swf?host=cp58255.edgefcs.net&amp;flv=mitw-01375-school-of-sci-simons-math-09dec2010&amp;preview=http://mitworld.mit.edu//uploads/mitwstill01375schoolofscisimonsmath09dec2010.jpg"></param><param name="quality" value="high"></param><param name="bgcolor" value="#000000"></param><embed src="http://mitworld.mit.edu/flash/player/Main.swf?host=cp58255.edgefcs.net&amp;flv=mitw-01375-school-of-sci-simons-math-09dec2010&amp;preview=http://mitworld.mit.edu//uploads/mitwstill01375schoolofscisimonsmath09dec2010.jpg" quality="high" bgcolor="#000000" width="481" height="361" name="Main" align="middle" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed></object>
+Credit to <a href="http://paul.kedrosky.com">Infectious Greed</a> for pointing me to the second video.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/' title='2010-10-29T05:23:00'>29 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/videos-of-jim-simons/' title='2011-01-26T20:40:00'>26 January 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/3-reasons-why-i-even-bother-trading-a-small-account/" rel='bookmark'>3 reasons why I even bother trading a small account</a>
+                <a href="http://www.quantisan.com/bought-1000-pmvvn-062/" rel='bookmark'>Bought 1000 PMV.VN @ 0.62</a>
             </h1>
-            <div class="article-content"> <p>If you look closely at my <a href="http://www.quantisan.com/trade-log/">trade log</a>, you will see that the amount
-that I trade is small. I am not going to get rich anytime soon even if I
-can maintain my 10% return or so every half a year. My wife was asking
-me the other day why I don't plunk in more money to my trading accounts
-since I have even <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">won a trading contest</a> and all. With accounts and
-trading sizes so small, I am appearing to be just wasting my time. For
-example, it took 2 to 3 hours of research and analysis the night before
-<a href="http://www.quantisan.com/bought-300-ven-to-8-95-stop-8-80/">this recent trade in gold</a> and then just to see it make \$35. At
-least it's slightly better than the minimum wage here. The real trial
-though, is in facing a losing streak. Imagine spending hours and hours
-pouring over price charts, economic news, and financial data only to see
-your account shrink and shrink. Those are the times when you wonder why
-you even bother putting in the hours. It just won't make a difference,
-right? Well, here are my three motivations for trading a small account.</p>
-<ol>
-<li><strong>Slow and steady.</strong> The fact is, trading is about aiming for
-    consistency and not scoring that one-in-a-lifetime trade that'll
-    make you rich. That took me a few years to realize. It is <em>a lot
-    easier</em> to make pocket change than score a jackpot. Don't make
-    trading harder on yourself.</li>
-<li><strong>Trading comfortably.</strong> Hey, this is a hobby. I wouldn't last too
-    long in this game if I'm sweating my palms with every position. If I
-    bet my farm often, either my account will go broke or my sanity
-    will. I prefer to keep my risk small enough to lasts and make
-    trading <em>enjoyable</em>. If I want thrills, I go to a casino (there is
-    actually a big casino 15 min. from my house).</li>
-<li><strong>Walk before you run.</strong> Eventually though, as I become consistently
-    profitable, I increase my risk ever so slightly step by step. Couple
-    that with the effect of compounding, I may eventually be able to
-    replace my salary with my trading income. That is probably still
-    years away for me, but as people say, everybody has to start
-    somewhere.</li>
-</ol>
-<p>So no, I don't think trading a small size is a waste of my time. It is a
-good <a href="http://www.quantisan.com/category/trading-how-tos/">risk management, psychological mediation, and learning
-technique</a> for amateur traders such as myself.</p>
+            <div class="article-content"> <p><strong>Update January 26:</strong> The share price of PMV.V crossed my mental stop
+yesterday so I had to reassess the position. I sold my shares at \$0.56
+for a loss of (\$0.56 - \$0.62) * 1000 = \$70 + \$19.90 commission =
+\$89.90 = 0.9% of account. Gold is falling while USD tanked this week.
+The lack of volume on today's goldminers rally is also uncharacteristic
+of the recent uptrend. The long term uptrend of gold and gold miners is
+unmistakable on both fundamental and technical basis. I am taking a
+dabble in this junior gold miner as its share price is making a gap fill
+on a recent breakout (Fig. 1), amongst other things. Intraday chart
+(Fig. 2) is also showing signs of life at this support level. What's
+going to happen to gold as it breaks below 1350 (first time since
+November) from worries about Chinese inflation, which led to strength in
+USD (on fear of further Chinese tightening) as EURUSD dropped 60 pips in
+2 hours. See FT: <a href="http://www.ft.com/cms/s/0/ab89d906-244e-11e0-a89a-00144feab49a.html">Fears grow that China is overheating</a>. Couple that
+with political and economic uncertainty, we have a short term
+uncertainty in gold's direction. However, all these is in line with the
+underlying gold-bug case that money is becoming more worthless as
+governments pump in money to their respective economies. Another point
+to note is that as the Shanghai Composite and Bombay Stock Exchange
+(i.e. growth markets) are making 3-month lows in recent weeks, people
+will start to look for other assets to diversify their wealth. This is
+all conjectures anyway. I can't predict the future.I am merely placing
+my bet as the stars seem to have aligned for me to increase the
+probability of this good reward/risk trade. Mental stop is \$0.55. Hard
+stop is \$0.48, however, I'll give it some margin and say 0.40 is my
+stop as liquidity is thin in this junior. Thus, risk is (\$0.62 -
+\$0.40) * 1000 = \$220 + \$9.95 commission = \$229.95 = 2.4% of
+account. Note: You might have noticed that my <a href="http://www.quantisan.com/trade-log/">trade log</a> style has
+changed for 2011. I am trying to jot down my thought process rather than
+the data analysis and numerical logic to better capture my <em>thinking</em>
+for the record.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="PMI Gold Corp.
+(PMV.V)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2011-01-20-PMV.V.png" />][][/caption] [caption id="" align="aligncenter"
+width="570" caption="PMI Gold Corp. (PMV.V)
+intraday"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2011-01-20-PMV.V-intra.gif" />]<a href="http://www.quantisan.com/static/images/img_archive/2011-01-20-PMV.V-intra.gif">1</a>[/caption]</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3-reasons-why-i-even-bother-trading-a-small-account/' title='2010-10-26T11:20:00'>26 October 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/sold-300-hodto-912-loss-06/" rel='bookmark'>Sold 300 HOD.TO @ 9.12, Loss -0.6%</a>
-            </h1>
-            <div class="article-content"> <p>Update: Crude is making a dive. This might be the move that I waited but
-got stopped out. I shorted crude oil on Friday afternoon below the 82
-resistance. It was an undocumented trade. Now I am closing at a loss.
-It's a slap on the hand for breaking my own trading rules. Oil broke
-above 82 over the weekend. Fortunately, the opening gap was filled
-before noon and I took the opportunity to cover my short. I was down 1%
-at the open. Good thing I didn't panic and waited patiently (with a hard
-stop just below the opening low) for a more rational exit. My planned
-stop was \$9.15, the opening low was \$8.87, and I covered at \$9.12.
-Just a tad under my plan but a lot higher than the low so far. Figure 1
-is a chart of U.S. Oil Fund (USO) at the time of my exit. I traded the
-Horizons BetaPro Oil Bear Plus ETF (HOD.TO) as a vehicle for shorting
-crude oil. The chart of USO is a better proxy of crude oil prices as
-it's a few magnitudes higher volume (i.e. more popular) than HOD.TO.
-From the looks of it, I will stay on the sideline until at least the
-midterm election in the United States next week. Loss for this trade is
-(\$9.12 - \$9.29) * 300 = -\$51 - \$9.90 commission = -\$60.90 = -0.6%.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="U.S. Oil Fund
-(USO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-10-25-USO.gif" />][][/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-300-hodto-912-loss-06/' title='2010-10-25T11:44:00'>25 October 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/sold-300-hodto-940-profit-05/" rel='bookmark'>Sold 300 HOD.TO @ 9.40, Profit +0.5%</a>
-            </h1>
-            <div class="article-content"> <p>I got whipsawed out of my crude oil short as the market consolidates.
-Seeing that the G20 is meeting in Seoul today and tomorrow, not much is
-happening on this flat Friday. EUR/USD is in a 100 pips range. S&amp;P 500
-is in a 5 points range. Maybe something will happen near the close, but
-I won't be around for it as I have no position in the market anymore.
-Crude oil is still looking bearish though as it is crawling on its short
-term support line (Fig. 1). Perhaps my stop was just too tight as I
-moved it up a couple of times to lock in some profits. Profit is
-(<a href="http://www.quantisan.com/bought-300-hod-to-9-19-stop-9-05/">\$9.40</a> - \$9.19) * 300 = \$63 - \$9.90 commission = \$53.10 = 0.5%
-of account.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Crude
-Oil"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-10-22-Crude.png" />][][/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-300-hodto-940-profit-05/' title='2010-10-22T13:33:00'>22 October 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/bought-1000-pmvvn-062/' title='2011-01-20T11:28:00'>20 January 2011</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

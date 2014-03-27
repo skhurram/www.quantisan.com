@@ -58,362 +58,153 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/" rel='bookmark'>A sign that you are truly enjoying what you do</a>
+                <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel='bookmark'>JForex Example: Not letting profit turn to losses with a breakeven stop</a>
             </h1>
-            <div class="article-content"> <p>When was the last time that you were working on something and you were
-so immersed in it that you have forgotten about the hours that gone by?
-That feeling of timelessness while doing something for hours. Not the
-type that you're stressed and feel that you don't have enough time to do
-a job. I am talking about the other kind of feeling. The positive one.
-The feeling that is serene and content. If you know what I'm talking
-about, then congratulations! You have found what you're born to do.
-There are a handful of activities that I am passionate about. I
-sometimes get that zen-like feeling when I am cycling through a mountain
-path or snowboarding down a hill. But what I truly like to do is problem
-solving. In particular, I find that programming quantitative trading
-systems is a perfect outlet for this side of my personality. Programming
-is one of the few ways in which you can create something out of nothing.
-Very much like a composer or a poet. But unlike those trades, you can
-solve practical problems with just your sheer mental capacity by
-programming your thoughts into codes. To problem solve, you also need a
-source of inspiration. And what better field can there be than the
-capital markets. It is basically an ever-changing chess game in which
-you are playing against the entire world. Talk about setting a bar high.
-As you may have read, I've run into a few <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">obstacles with my trading</a>
-lately. I need to develop a new trading program to let me regain my
-edge. So I got up early this Saturday to program <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/">my new trading software</a>. Next thing I know, it was 4pm already. It was a blissful
-day. And that, is my reason for wanting to trade for a living.</p> </div>
+            <div class="article-content"> <p>While the <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual-timeframe trading setup</a> and much of the algorithm in
+my contest strategy are for competition only (read: not for use with
+real money) as I've warned numerous times, some of the risk management
+techniques used there are really what I use in real life. This being one
+of them. There's a saying in trading that "never let profits turns into
+losses." That is exactly the motivation behind this JForex code snippet.
+The following source code are excerpts from my <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex
+contest's <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">July strategy</a>. The complete source code file is available
+in that link. Back to this concept of not letting profits turn to
+losses. This is a matter of balancing between giving room for your trade
+to reach its potential and limiting your drawdown. If you're too
+careful, you may find yourself being whipsawed out before a price move
+can materialize. If you keep your leash too loose though, well, you may
+watch your profits turn into losses. The way I intrepret the saying is
+that once your trade is profitable enough, you shouldn't let it slip
+back into a loss. I implement the above statement in my automated
+strategy as follows. Note that everything goes in the onTick() method so
+that it watches your position on every tick. The line numbers correspond
+to the <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code</a> of my automated strategy.
+[java firstline="177"] boolean isLong; double open, stop, diff, newStop;
+for (IOrder order : engine.getOrders(instrument)) { if (order.getState()
+== IOrder.State.FILLED) { [/java] [java firstline="191"] isLong =
+order.isLong(); open = order.getOpenPrice(); stop =
+order.getStopLossPrice(); diff = (open - stop); // *********
+BREAKEVEN *********************** if (isLong &amp;&amp;
+diff > 0 &amp;&amp; tick.getBid() > (open + diff)) {
+order.close(roundLot(order.getAmount() * beRatio)); // close a portion
+newStop = open + instrument.getPipValue() * LOCKPIP;
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } else if (!isLong &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk() \&lt;
+(open + diff)) { order.close(roundLot(order.getAmount() * beRatio));
+newStop = open - (instrument.getPipValue() * LOCKPIP);
+order.setStopLossPrice(newStop); print(order.getLabel() + ": Moved STOP
+to breakeven"); } [/java] What this does is that it will partially exit
+a position and move the stop to breakeven once the price is
+equidistantly positive from your initial stop loss. For example, if my
+stop loss is 100 pips, then once the position is 100 pips <em>in profit</em>,
+it will exit partially and set the new stop to breakeven. Update: This
+is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source project</a>.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-sign-that-you-are-truly-enjoying-what-you-do/' title='2010-03-15T07:10:00'>15 March 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+                Posted  <a href='http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/' title='2010-08-11T13:11:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/" rel='bookmark'>Data Scraping the Toronto Stock Exchange: Extracting 3,660 companies&#039; data</a>
+                <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/" rel='bookmark'>JForex Example: Dual-Timeframe Moving Averages Setup</a>
             </h1>
-            <div class="article-content"> <p>One of the tasks that I've always wanted to make more efficient in my
-stock trading is the work of scanning for stocks to trade. One look at
-my <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">trading strategy posts</a> and you'll see that I have devised many
-stock scanning systems in the past few years. The most recent system
-that I've used is one that uses <a href="http://www.quantisan.com/week-of-sept-13-2009-in-play-stocks-breakout-results/">options data to filter stocks</a>.
-However, it is not automated. So it takes a lot of time to gather and
-analyze the data. Furthermore, the set of tools that I use is limited to
-U.S. stocks. Now that I have taken an interest in the Canadian stock
-market, I can't seem to find any public tool that I like. Thus, I am
-biting the bullet now and taking my time to develop a custom system once
-and for all. Before we can analyze stock data, we need to extract them
-first. Where better else for that than go straight to the source at
-TMX.com, the parent company of Toronto Stock Exchange (TSX) and TSX
-Venture Exchange (TSXV). TMX.com provide a list of publicly traded
-companies in ten Excel files. The files are divided by sectors. Each
-contain a number of fundamental company data, such as market
-capitalization and outstanding shares. So step 1 is to extract those
-data. This is where I am at now. I attached the source code for an
-alpha/developmental release below for anyone interested. It is a working
-program to scrape the data from TMX.com's files. But it's still a
-work-in-progress. That's why I am calling it a version 0.1. The next
-milestone is to program a Stocks class to hold, organize, and manage all
-three thousand, six hundred, and sixty companies' data. This is an easy
-task to do by extending the built-in dictionary class in Python.
-However, I haven't gotten to that chapter yet in my scientific
-programming with Python learning book. I stopped at chapter 8 to work on
-this project. Chapter 9 is the inheritence and hierarchical material.
-The goal of this project is to build an automated data scraping program
-for TSX and TSXV data from various sources into my computer. Once I have
-my data, that's when the real fun starts. Regarding the code below, I
-know that source code is useless for most people. Once the project is
-complete, I will compile the code into a standalone application and post
-it on this site. <a href="http://www.quantisan.com/feed/">Subscribe to my RSS feed</a> so that you can keep
-up-to-date with the progress of this project and my other ramblings on
-trading. [python] # extractTMX.py # version: 0.1 alpha release #
-revision date: March, 2010 # by Paul, Quantisan.com """A data scraping
-module to extract company listing excel files from TMX.COM""" import
-xlrd # to read Excel file #import sys from finClasses import Stock #
-custom Stock class def _verify(): """Verification function for a
-rundown of the module""" pass # copy test block here when finished def
-findCol(sheet, key): """Find the column corresponding to header string
-'key'""" firstRow = sheet.row_values(0) for col in
-range(len(firstRow)): if key in firstRow[col]: return col # return
-first sighting else: # not found raise ValueError("%s is not found!" %
-key) def scrapeXLS(book): """Data scraping function for TMX Excel
-file""" listingDict = {} # dict of ('ticker': market cap) for index in
-range(book.nsheets): sh = book.sheet_by_index(index) mcCol =
-findCol(sh, "Market Value") assert type(mcCol) is int, "mcCol is a %s" %
-type(mcCol) osCol = findCol(sh, "O/S Shares") assert type(osCol) is int,
-"osCol is a %s" % type(osCol) secCol = findCol(sh, "Sector") # multiple
-matches but taking first assert type(secCol) is int, "secCol is a %s" %
-type(secCol) hqCol = findCol(sh, "HQ\nRegion") assert type(hqCol) is
-int, "hqCol is a %s" % type(hqCol) for rx in range(1, sh.nrows): sym =
-str(sh.cell_value(rowx=rx, colx=4)) # symbol s =
-sh.cell_value(rowx=rx, colx=2) # exchange col. if s == "TSX": exch =
-"T" elif s == "TSXV": exch = "V" else: raise TypeError("Unknown exchange
-value") mc = sh.cell_value(rowx=rx, colx=mcCol) # market cap # check
-for empty market cap cell mc = int(mc) if type(mc) is float else 0 os =
-int(sh.cell_value(rowx=rx, colx=osCol)) # O/S shares sec =
-str(sh.cell_value(rowx=rx, colx=secCol)) # sector hq =
-str(sh.cell_value(rowx=rx, colx=hqCol)) # HQ region listingDict[sym] =
-Stock(symbol=sym,exchange=exch, mktCap=mc,osShares=os,
-sector=sec,hqRegion=hq) return listingDict def fetchFiles(fname): infile
-= open(fname, 'r') # text file of XLS file names listing = {} for line
-in infile: # 1 file name per line if line[0] == '#': continue # skip
-commented lines line = line.strip() # strip trailing \n print "Reading
-'%s' ..." % line xlsFile = "TMX/" + line # in TMX directory book =
-xlrd.open_workbook(xlsFile) # import Excel file
-listing.update(scrapeXLS(book)) # append scraped the data to dict
-return listing #if __name__ == '__main__': # verify block #
-if len(sys.argv) == 2 and sys.argv[1] == 'verify': # _verify() if
-__name__ == '__main__': # test block listing =
-fetchFiles('TMX/TMXfiles.txt') [/python]</p> </div>
+            <div class="article-content"> <p>This post describes the setup for my <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">Dukascopy JForex automated trading
+strategy in July</a>. Note that this strategy is built for competing in a
+contest and not for real trading (i.e., its purely a
+no cost gamble). Here is the step by step process of the setup for a
+long position:</p>
+<ol>
+<li>Determine the current trend by the relative position of current
+    price to its moving average <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">in a higher time frame</a>. In
+    particular, a price above the moving average in the higher time
+    frame is deemed as bullish.</li>
+<li>Entry: Price moves above a moving average in the current time frame
+    (red line in Figure 1) with a higher high, low, and close (HLC). As
+    illustrated in Figure 1, the two bars circled.</li>
+<li>Exit: Crossing below a regular moving average (blue dotted line).</li>
+</ol>
+<p><img alt="EURUSD setup" src="http://www.quantisan.com/static/images/img_archive/2010-07-19-EURUSD.png" /></p>
+<p>As you can see, the setup itself is simple. Less than a fifth of the
+source code is devoted to the entry and exit. Most of this strategy
+involves <a href="http://www.quantisan.com/jforex-example-automatic-position-sizing/">automated position sizing</a> and <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/">risk management to not let profits turn into losses</a>.</p>
+<p>The <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">complete source code of this strategy</a> is available in the introductory post.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/data-scraping-the-toronto-stock-exchange-extracting-3660-companies-data/' title='2010-03-11T07:29:00'>11 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+                Posted  <a href='http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/' title='2010-08-09T07:12:00'>09 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/forex-trading-income-or-capital-gain-tax-in-canada/" rel='bookmark'>Forex Trading:  Income or Capital Gain Tax in Canada?</a>
+                <a href="http://www.quantisan.com/bought-3-paato-10dec-puts-2500-227-mark-2475/" rel='bookmark'>Bought 3 PAA.TO 10DEC Puts 25.00 @ $2.27, Mark $24.75</a>
             </h1>
-            <div class="article-content"> <p>I've always known that foreign exchange trading is treated as capital
-gain tax in Canada. But just to be sure before filing my taxes soon,
-I've decided to double check the facts from Canada Revenue Agency. As
-you know, the difference between income tax and capital gain tax is
-substantial. Income tax is taxed at your marginal tax rate. Whereas
-capital gain tax is a generous half of your marginal tax rate. That
-works out to a 10% to 20% difference. Taxes in Canada is generally
-simple to do. The problem though, is sifting through the cacophony of
-information within the Canada Revenue Agency to find out the applicable
-rules. I've copy and pasted a couple of relevant excerpts from the 2010
-CRA <a href="http://www.cra-arc.gc.ca/menu/ITSC-e.html">Income Tax Interpretation Bulletin</a> for the record. Basically,
-forex trading can be treated as either income or capital gain tax in
-Canada (surprise). According to <a href="http://www.cra-arc.gc.ca/E/pub/tp/it95r/it95r-e.html">IT-95R Foreign exchange gains and
-losses</a>.</p>
-<blockquote>
-<ol>
-<li>Where it can be determined that a gain or loss on foreign exchange
-arose as a direct consequence of the purchase or sale of goods abroad,
-or the rendering of services abroad, and such goods or services are
-used in the <strong>business operations</strong> of the taxpayer, such gain or loss
-is brought into income account. If, on the other hand, it can be
-determined that a gain or loss on foreign exchange arose as a direct
-consequence of the<strong>purchase or sale of capital assets</strong>, this gain or
-loss is either a capital gain or capital loss, as the case may be.
-Generally, the nature of a foreign exchange gain or loss is <strong>not
-affected by the length of time</strong> between the date the property is
-acquired (or disposed of) and the date upon which payment (or receipt)
-is effected.</li>
-</ol>
-</blockquote>
-<p>As you can see, it is very vague. That's why forex trading can be
-considered income or capital gain tax. It is up to you and your
-accountant to figure out which works for you. A noteworthy point in the
-above excerpt is that the holding period is not taken into account.
-<span style="text-decoration: line-through;">So there's no 30-day rule
-like in the states whereby frequent trading would miss out the capital
-loss credit if they re-purchase the same asset within 30-day of
-disposal.</span> Update: Looks like I have misconstrued the above
-article with regard to capital loss. As Olga pointed out in the
-comments, Chapter 5 of T4037 defines <em>Superficial Loss</em>. In which if you
-<em>repurchase</em> your property (e.g. stock) within 30-days after a sale at a
-loss, then that initial loss cannot be deducted as a capital loss. More
-about the <a href="http://www.wheredoesallmymoneygo.com/superficial-loss-rules-in-canada/">Superficial Loss rules in Canada</a> can be found at
-WhereDoesAllMyMoneyGo.com. Further down the page in IT-95R, we have the
-following bullet.</p>
-<blockquote>
-<ol>
-<li>A taxpayer who has transactions in foreign currency or foreign
-currency futures that do not form part of business operations, or are
-merely the result of sundry dispositions of foreign currency by an
-individual, will be accorded by the Department the <strong>same treatment as
-that of a "speculator" in commodity futures</strong> see 7 and 8 or IT-346R.
-However, if such a taxpayer has special "Inside" information
-concerning foreign exchange, he will be required to report his gains
-and losses on income account.</li>
-</ol>
-</blockquote>
-<p><a href="http://www.cra-arc.gc.ca/E/pub/tp/it346r/it346r-e.html">IT-346R Commodity Futures and Certain Commodities</a> explains the tax
-treatment of speculation in the commodity markets.</p>
-<blockquote>
-<ol>
-<li>As a general rule, it is acceptable for speculators to report all
-their gains and losses from transactions in commodity futures or in
-commodities as<strong>capital gains and losses</strong> with the result that only
-one-half the gain is taxable, and one-half the loss is allowable
-subject to certain restrictions, (hereinafter called "capital
-treatment") provided such reporting is followed consistently from year
-to year.</li>
-</ol>
-</blockquote>
-<p>So there, we have it. Amateur forex traders, such as myself, can report
-our forex trading gain/loss as capital gains and losses. The reason
-being that <a href="http://www.quantisan.com/category/forex">forex trading</a> isn't part of my business operation because
-I have another primary source of income (e.g. salary from another job).</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/forex-trading-income-or-capital-gain-tax-in-canada/' title='2010-03-08T10:29:00'>08 March 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/" rel='bookmark'>Another reason against stocking into a registered trading account this year</a>
-            </h1>
-            <div class="article-content"> <p>There's another reason why I am so <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">reluctant to put money into a TFSA
-trading account</a> to invest in Canadian stocks. As you know, in a
-registered trading account, such as a RRSP self-directed trading account
-or a <a href="http://www.quantisan.com/questrade/">Questrade TFSA trading account</a> (aff), you cannot short shares
-and can only buy because you can't trade on margin. As such, a
-registered trading account is an account for buy-only trading. It
-doesn't take a genius to figure out that a buy-only trading strategy is
-best used ... in a bull market. As trading wisdom goes, trade with the
-trend. So the question is, are we in a bull market in 2010? Figures 1
-and 2 shows the weekly chart of TSX Index and the TSX Venture Index,
-respectively. Referring to Fig. 1, TSX is bumping up against some
-headwind at a 12,000 resistance. Unless TSX can stay above 12,000
-cleanly (a weekly low above that level at least), I am still bearish in
-the market because that financial crisis back in 2008 (<a href="http://www.quantisan.com/another-breakdown-of-a-major-multi-year-support-are-we-going-down-and-i-mean-really-down/">remember those
-days</a>?) is still overshadowing long term prices and trader sentiments.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="TSX,
-weekly"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-TSX_wk.png" />][][/caption] TSX Venture is depressed even more as seen
-in Figure 2 below. Just look at the huge gap from current price to the
-200 week moving average (red line). This isn't a good sign as lack of
-interest in high-risk stocks means traders are generally cautious. Yes,
-it's true that the equity market has been running up, up, and up for a
-good year. However, the fact that TSX is sitting at the same level as in
-2001 proves that the long term, multi-year bull market has been cleanly
-broken. We might very well see pockets of multi-month rallies
-materialize (like we're seeing now), but unless proven otherwise, the
-long term trend is not looking green for the markets. It will not be
-easy money in the stock market like back in the pre-tech bubble 1990's.
-As opined by Bill Cara, the <a href="http://www.caracommunity.com/">time for buy-and-hold is gone</a>. It is
-well known in the community that the coming years will be volatile with
-big ups and downs. That is my little secret for moving to <a href="http://www.quantisan.com/category/forex/">trade
-forex</a>last year and the main reason why I am reluctant to set aside
-money on a one-sided stock trading account. [caption id=""
-align="aligncenter" width="570" caption="TSX Venture,
-weekly"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-03-04-CDNX_wk.png">1</a>[/caption]</p>
+            <div class="article-content"> <p>US Dollar looks oversold (Figure 1). Of the few commodities that I
+follow, silver looks to be weakest (Figure 2). Thus, I look for a short
+based on silver. I chose Pan America Silver Corp. (PAA.TO) because it
+looks to be the weakest of the silver miners (Figure 3). In particular,
+referring to Figure 3, I highlighted the current price moves versus six
+months ago. The price movements in the two boxes look similar. Thus I am
+looking for a big dive in PAA soon with these puts options. I entered
+today as PAA is testing its \$24.80 resistance. Next resistances are
+\$25.00 (the gap) and \$25.15 (38% Fib level in the July dive). As such,
+there are a couple of safety cushions in case this doesn't work out. My
+mental stop is \$1.30 on the premium. Through time decay (around October
+if we trade sideway from now), price appreciation, and mostly a
+combination of these two factors. I figured I have about a month's time
+to find out if it can break the \$25.15 level. Risk is thus (\$2.27 -
+\$1.30) * 100 * 3 = \$291 + \$25.90 commission = \$316.90 = 3.3%. Once
+again, that's higher than what I'd recommend. But that's just the worst
+case scenario. We should know soon enough if silver can break lower as
+it is trading against a descending trendline as shown in Figure 2.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="U.S. Dollar
+Index"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-DOLLAR.png" />][][/caption] [caption id="" align="aligncenter"
+width="570" caption="Silver"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-SILVER.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-06-SILVER.png">1</a>[/caption] [caption id=""
+align="aligncenter" width="570" caption="Pan America Silver Corp.
+(PAA.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-06-PAA.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-06-PAA.TO.png">2</a>[/caption]</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/another-reason-against-stocking-into-a-registered-trading-account-this-year/' title='2010-03-05T07:32:00'>05 March 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/bought-3-paato-10dec-puts-2500-227-mark-2475/' title='2010-08-06T10:55:00'>06 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/" rel='bookmark'>First look at Google App Engine for automated trading and quant analysis on the cloud</a>
+                <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/" rel='bookmark'>JForex Example:  Multiple-time frame strategy</a>
             </h1>
-            <div class="article-content"> <p>I just spent the last few hours looking into Google App Engine to use it
-for trading. Google App Engine (GAE) is a cloud computing development
-and hosting platform for web applications. GAE is similar to the
-well-known Amazon EC2 service but it is also very different. The main
-difference between GAE and EC2 is that GAE is not as flexible as EC2 but
-it is a lot easier to develop on. Think of it like using C++ (EC2) to
-write your own trading platform to using EasyLanguage on TradeStation or
-MQL on Metatrader (GAE). Another advantage for using Google App Engine
-is that it is free! Well, to a certain extent. It is free for a limited
-monthly usage. However, Google's free quota is known to be very generous
-(think Gmail) and this is no exception. Based on the numbers, it looks
-comparable to a typical \$20/month virtual private server (VPS) hosting
-package. My guess is that you can run a decent personal quant program on
-it if you keep the resources for yourself (private use). For more
-information on the free quota, you can read the <a href="http://code.google.com/appengine/docs/quotas.html">current GAE quota</a>
-web page or the <a href="http://en.wikipedia.org/wiki/Google_App_Engine">Wikipedia page for GAE</a>. You might be wondering how
-did I spend a few hours just reading on GAE? The answer is that I've
-done a brief research, planning, and assessment to see how GAE can be
-put to use in terms of quantitative analysis for automated and
-discretionary trading. Without going through all of my notes and logic,
-here's the gist of my conclusion.</p>
-<h2>For Automated Trading</h2>
-<p>Since GAE is also a SDK, it has a restricted programming API. You can't
-just plug in any custom library of your own (i.e. your broker's API)
-into your program. That is its advantage and its disadvantage.
-Furthermore, GAE only support HTTP and HTTPS. So you can't open a socket
-for your connection either. These limitations won't be changing anytime
-soon as GAE is designed to be like that for security reasons. Basically,
-there's no way for your web application on GAE to connect with your
-broker for trading. So much for that idea.</p>
-<h2>For Discretionary Trading</h2>
-<p>Things look brighter for discretionary trading though. A big bonus with
-using Google App Engine is that it supports the Google Finance API.
-Google Finance offers free real-time stock quotes. Combine it with the
-programming capability of the Google App Engine and you have yourself a
-free number cruncher in the cloud. However, GAE is definitely no match
-for your personal computer, so why would you go through all that
-trouble? One possible scenario in which this could be useful is for
-traders that is often on the road or traders such as myself in which we
-have a day job. In that case, you can set you quant analytics on GAE as
-a private web application and then you can access it as a web page
-anywhere on your mobile phone. One of the obvious limitation with using
-GAE is that it has limited features for scientific computing. For
-example, it doesn't support Numpy in the Python SDK. As such, I can't
-imagine using GAE for anything more than simple technical analysis for
-now. I certainly hope that GAE can include more powerful scientific
-computing capabilities in the near future. Until then, I really can't
-see Google App Engine offering much help aside from performing
-algorithmic tasks to help with your trading analysis. Their open issues
-log does announce that <a href="http://code.google.com/p/googleappengine/issues/detail?id=190">Numpy is being integrated into GAE</a> though. So
-that's a great sign for things to come! I am very hopeful of GAE's
-potential as a free cloud server to host my quant analytics on. We'll
-just have to wait for now.</p>
-</p> </div>
+            <div class="article-content"> <p>The key to my July JForex strategy is the use of multiple time frames.
+As Dr. Alexander Elder demonstrates in his famous book, <em>Trading For A
+Living</em>, a proper technical analysis should at least consider time
+frames five-times faster and slower than the one in which you trade. For
+example, if you trade on a 30 minute chart, the one faster is 30/5 = 6
+minutes, which can be rounded as the five-minute chart. And the one
+slower would be 30 * 5 = 150 minutes. The closest standard time frame
+of which is a 4-hour chart.</p>
+<p>For <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my July JForex strategy</a>, it trades
+on the 30 minute chart and monitor the 4-hour chart in addition to the
+30-minute chart. The strategy doesn't make use of a faster time frame
+for simplicity. This is surprisingly easy to do in <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>'s
+JForex API.</p>
+<p>Referring to lines 81 to 87 of <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my strategy source code</a>. </p>
+<div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">==</span> <span class="n">PERIODINT</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">askBar</span><span class="o">);</span> 
+    <span class="k">return</span><span class="o">;</span>
+<span class="o">}</span> 
+<span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">!=</span> <span class="n">PERIODSHR</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// skip all other periods</span>
+</pre></div>
+
+
+<p>This chunk of code
+appears in the onBar() method. Since onBar() is called at the beginning
+of every price bar across all possible standard periods (from tick to
+weekly), it's just a matter of filtering out the redundant periods
+and/or catching the method when the period is correct. I have done both
+in the sample code. Line 81 is to catch the longer period, <code>PERIODINT = Period.FOUR\_HOURS</code> (line 54, not shown), in an <code>if</code> statement block. It
+calls my function <code>setSentiment()</code> and exits <code>onBar()</code> with the <code>return</code>,
+skipping everything in onBar() afterward. Line 87 is to skip all other
+periods that I'm not using. I could have used <code>if (period == PERIODSHR)</code>
+and put everything in an <code>if</code> block as in lines 81-85. But since the
+strategy is doing a lot more work in <code>PERIODSHR</code>, there would be a lot of
+codes in that IF block. So I am doing the reverse for the same result
+but simpler-looking codes. With this cleared, I can go over my <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual
+moving average entry signal setup</a> in the next post later this week.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/first-look-at-google-app-engine-for-automated-trading-and-quant-analysis-on-the-cloud/' title='2010-03-03T21:19:00'>03 March 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/february-2010-trading-performance-review/" rel='bookmark'>February 2010 Trading Performance Review</a>
-            </h1>
-            <div class="article-content"> <p>I barely traded this month. The total number of trades in February for
-my forex demo account is ten. That's far from my regular 150 - 250
-trades a month. Ever since my trading system was broken because of
-technical difficulties, I've <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">changed my priorities</a> in trading. I
-spent most of my time in February learning a new programming language to
-ramp up my quant and automated trading projects. I also tried a few
-longer term trades this month. The results haven't been uplifting. I am
-about breakeven by the end of the month with a net gain of .... \$2 in a
-\$5550 demo account. As you can see, there's really not much point in me
-continuing paper trading at this stage. It is taking valuable time away
-from me to fix what's broken so that I can use my previously profitable
-trading system again. As such, I'm going to put near 100% of my effort
-to program a semi-automated trading system for the coming weeks, or
-probably months. On another note. Seeing that it is tax season here in
-Canada. I thought about my tax situation and considered <a href="http://www.quantisan.com/questrade/">opening a
-Questrade TFSA trading account</a> (affiliate link) to legitimately
-<a href="http://www.quantisan.com/not-pay-trading-income-taxes-through-a-tfsa-trading-account/">avoid income taxes from trading</a>. But after considering the <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-part-1/">cost and
-benefit</a> of such a move, I concluded that <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-4/">a TFSA trading account
-isn't cost effective for me</a> at the moment. As I've spent most of the
-month doing backend work, there isn't very much to review for my trading
-this month. So let's just dive right into my statistics for the record.</p>
-<h2>Performance Statistics</h2>
-<p><strong>Monthly Metric February (January)</strong> Sarting Fund \$5,550.02 End of
-Month Fund \$5,551.99 Total Net Profit \$1.97 (-\$67.42) Gross Profit
-\$37 (\$375) Gross Loss -\$35 (-\$442) Profit Factor 1.06 (0.85) Net
-Profit % 0.04% (-1.20%) Max. Drawdown % 0.50% (3.95%) Sterling Ratio
-0.00 (-0.15) Excess Return -0.02% (-1.26%) SDev Return per Trade 0.15%
-(0.11%) Kurtosis -1.36 (1.85) Skewness 0.79 (1.01) With only ten trades
-this month, I don't have enough samples to make meaningful calculations
-for the above statistics. 95th Percentile P&amp;L \$12.55 (\$12.23) 5th
-Percentile P&amp;L -\$6.60 (-\$8.43) Net Profit Mid 90% Only -\$4.75
-(-\$117.84) Interestingly, I noticed that my typical top and bottom 5th
-percentile profit/loss are quite consistent. Total # of Trades 10 (186)
-Percent Profitable 40.00% (41.45%) # of Winning Trades 4 (63) # of
-Losing Trades 6 (89) # of Break-even Trades 0 (34) My percent
-profitable trades seem to be near 40% month to month. That's good to
-know as it's useful to calculate my statistical return expectancy as
-I've done in my <a href="http://www.quantisan.com/is-a-5000-questrade-tfsa-trading-account-cost-effective-%e2%80%93-part-3/">TFSA trading cost-benefit analysis</a>. Average Trade
-Profit % 0.00% (-0.01%) Average Winning % 0.17% (0.11%) Average Losing %
--0.11% (-0.09%) Ratio Win% / Loss% 1.59 (1.20) By being more
-discriminating in my trades, I've effectively increased my win/loss
-ratio. That's good. Max. Conseq. Winners 3 (8) Max. Conseq. Losers 5
-(20) Largest Winning Trade \$13.81 (\$22.66) Largest Losing Trade
--\$7.08 (-\$14.30) Avg. Time Held [hrs] 1.67 (0.73) Avg. max. unrealized
-profit/ Realized profit (11.59)</p>
-<h2>Goal for March</h2>
-<p>My goal from January is <a href="http://www.quantisan.com/january-2010-trading-performance-review/">to learn MQL4</a>. I changed my plan since then
-due <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">my lack of faith with using a proprietary scripting language</a>. I
-learned Python programming this month and is now learning to use
-specialized libraries to serve my trading needs. My goal for March is to
-write a rudimentary data analysis and visualization program for
-historical forex data.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/february-2010-trading-performance-review/' title='2010-03-02T08:14:00'>02 March 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+                Posted  <a href='http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/' title='2010-08-04T06:30:00'>04 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

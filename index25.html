@@ -58,155 +58,167 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/bought-250-hndto-651/" rel='bookmark'>Bought 250 HND.TO @ $6.51</a>
+                <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/" rel='bookmark'>Maximal frustration in printing and parsing milliseconds in R</a>
             </h1>
-            <div class="article-content"> <p>Update: I closed this at \$6.36 just now as my HOD.TO position is
-trekking back close to breakeven. This is a loss of \$37.50 + \$9.90
-commission. I re-entered my natural gas short with HND.TO @ 6.51 as
-planned on <a href="http://www.quantisan.com/sold-380-hnd-to-7-35/">my previous break-even trade</a>. The U.S. Natural Gas Fund
-(UNG) is testing the top of its channel at \$7.85 as shown on Figure 1.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="U.S. Natural Gas
-Fund (UNG)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-06-03-UNG.png" />][][/caption] However, HND.TO cracked the \$6.50
-support as I'm writing this and is now trading down to \$6.38. My mental
-stop is at \$6.20 and hard stop is \$6.00. Figure 2 shows the intraday
-chart of HND.TO as the time of my entry. My risk for this trade is
-(\$6.51 - \$6.00) * 250 shares = \$127.50 = 1.4% of my RRSP trading
-account. This should be the last of my new position for a while. I have
-enough on the table with my <a href="http://www.quantisan.com/bought-3-cm-10oct-puts-74-00-5-65-mark-72-30/">CM.TO</a>, <a href="http://www.quantisan.com/bought-250-hod-to-11-11/">HOD.TO</a>, and this. My goal now
-is to move my stops to breakeven as soon as possible.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Horizons BetaPro
-Natural Gas Bear Plus (HND.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-06-03-HND.TO.gif" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-06-03-HND.TO.gif">1</a>[/caption]</p>
-</p> </div>
+            <div class="article-content"> <p>I've just spent an absurd amount of time figuring out how to parse
+millisecond times into R. (It's standard practice to timestamp tick data
+with milliseconds timing in a flat data file.) Turns out that there are
+two problems that I faced. One being that there is a almost-hidden,
+footnote option in the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/strptime.html">strptime( ) function</a> (for converting
+characters to POSIX) in which it describes using <code>format = "%H:%M%OS"</code>
+instead of <code>"%H:%M:%S"</code> to parse fractional seconds. However, the second,
+and what's actually the one that's wasted much my time, is the fact that
+R <strong>ignores</strong> milliseconds in printing by default! For example, here's
+an output for the POSIXct representation of the integer value
+1286564400.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00 EDT&quot;</span>
+</pre></div>
+
+
+<p>So even though I figured how to represent millisecond times in R a few
+hours ago, I never knew I did it simply because R is not printing the
+output that I wanted on screen every time I tried! After a couple hours
+of searching, trying, and frustrating, here's the one-liner command that
+solved my problem.</p>
+<div class="highlight"><pre><span class="n">options</span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="n">secs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+
+<p>which changes the options of the display and thus I can see the
+following output from the same input as above.</p>
+<div class="highlight"><pre><span class="s">&quot;2010-10-08 15:00:00.344 EDT&quot;</span>
+</pre></div>
+
+
+<p>I guess that's why they say <a href="http://blog.revolutionanalytics.com/2010/06/learning-r.html">R has a steep learning curve</a>! Yes, it is
+very powerful and flexible. But there are limited standards and the
+documentations are all over the place because it's a mish mash of
+user-contributed packages!</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-250-hndto-651/' title='2010-06-03T13:40:00'>03 June 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/' title='2010-10-08T15:32:00'>08 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/bought-250-hodto-1111/" rel='bookmark'>Bought 250 HOD.TO @ $11.11</a>
+                <a href="http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/" rel='bookmark'>Data analysis with R: Using the right tool for the right task</a>
             </h1>
-            <div class="article-content"> <p>Just shorted crude oil via the Horizons BetaPro Bear Plus ETF (HOD.TO).
-Purchase price is \$11.11 bought minutes after the<a href="http://www.eia.gov/dnav/pet/pet_sum_sndw_dcus_nus_w.htm">weekly crude oil
-inventories release today</a>. Crude (DBO) made a small run to test
-resistance at \$27.80 on the release. Figure 1 showing DBO's 27.80 and
-25.15 resistance levels. \$25.15 on DBO is my stop loss level.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Powershares DB
-Oil Fund (DBO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-06-03-DBO.png" />][][/caption] That is about \$10.50 for HOD.TO.
-However, I'll start to worry if price breaks below \$10.80. Figure 2 is
-an intraday chart of HOD.TO. Risk is (\$11.11 - \$10.50) * 250 shares =
-\$152.5 or 1.7% of account. I shorted crude instead of natural gas as I
-previous did because HND.TO is cracking its 200 day moving average
-around \$6.70. Whereas HOD.TO is looking strong.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Horizons BetaPro
-Crude Oil Bear Plus (HOD.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-06-03-HOD.TO.gif" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-06-03-HOD.TO.gif">1</a>[/caption]</p>
-</p> </div>
+            <div class="article-content"> <p>I ported <a href="http://engineering-returns.com/tsi/">Engineering Return's Trend Strength Index</a> to JForex as my
+first practice to writing custom indicators in JForex. Frank's code in
+TradeSignal consists of 9 lines. My JForex code? 191. This is my first
+custom indicator in JForex. It will also be the last. A compiled
+programming language such as Java is not the most convenient to use for
+data analysis. The lack of interactivity because of the step of
+compilation is one obstacle to fluent data explorations. Secondly, the
+language itself is more cumbersome because of its generality. Java is
+used to build all sorts of applications. Contrary to something like
+MatLab, in which it is purposely built to work with numbers. I miss <a href="http://www.quantisan.com/starting-to-use-matlab-for-quantitative-finance/">the
+days when I have my license for MatLab</a>. However, being forced away
+from MatLab might not be a bad thing. As much as I've become accustomed
+to it, MatLab isn't without its flaws. But I won't bash it in this post.
+What I actually want to talk about is R. The rage these days in
+statistical data analysis is in R (see <a href="http://en.wikipedia.org/wiki/R_%28programming_language%29">Wiki entry on R</a>). I've done
+some research and testing, R is really as good as they say it is (see
+past publications in <a href="http://www.rinfinance.com/">R/Finance conference</a><a href="http://probability.ca/cran/doc/contrib/Farnsworth-EconometricsInR.pdf"></a>). You will get to see
+some real examples in financial time series data analysis in R later in
+this blog once I have some publishable results. This will no doubt take
+some time as I am learning yet another new programming language (thus
+the lack of posts this week). The plan from now on is to use R to play
+with the data. Then once the algorithm is finalized, I will either port
+it to Java (JForex) for deployment or <a href="http://www.rforge.net/rJava/">embed the R environment in
+Java</a> for live trading.</p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-250-hodto-1111/' title='2010-06-03T11:32:00'>03 June 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/data-analysis-with-r-using-the-right-tool-for-the-right-task/' title='2010-10-06T05:58:00'>06 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/bought-3-cm-10oct-puts-7400-565-mark-7230/" rel='bookmark'>Bought 3 CM 10OCT Puts 74.00 @ 5.65, Mark 72.30</a>
+                <a href="http://www.quantisan.com/third-quarter-2010-trading-review/" rel='bookmark'>Third Quarter 2010 Trading Review</a>
             </h1>
-            <div class="article-content"> <p>I am doubling <a href="http://www.quantisan.com/bought-3-cm-to-10oct-puts-5-00-mark-74-02/">my CIBC (CM.TO) short</a> on test of \$72.50 resistance
-about half an hour before the close. \$72.50 is the 50% retracement
-level on that big dive in beginning of May. See Figure 1. Moreover,
-\$72.50 is the bottom of a congestion zone in middle of May.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="CIBC
-(CM.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-06-02-CM.TO.png" />][][/caption]</p>
-<p>The trading volumes in CM.TO and the TSX index are weak. So I am betting
-that the market won't follow through with this upward move. Mental stop
-is \$73.00 and \$74.00 as hard stop.</p>
+            <div class="article-content"> <p>Markets hitched a one-way train in the third quarter. TSX opened in July
+at 11200. It closed September at 12368. A whopping 10% jump in three
+months! S&amp;P500 made a similarly impressive 9.7% jump. We simply don't
+get 10% moves even in most <em>years</em>. I made fewer trades this quarter but
+held each one for longer to ride the trend. However, I am not as
+successful as I'd hope. In particular, my worst trade this quarter was
+in <a href="http://www.quantisan.com/tag/ven.to/">Ventana Gold</a> (VEN.TO). The position <a href="http://www.quantisan.com/sold-350-ven-to-10-50-profit-0-8-re-bought-250-ven-to-10-67/">was profitable</a>, but the
+money made was only a quarter as what I should have made. I was too
+aggressive to go long when <a href="http://www.quantisan.com/sold-400-ven-to-10-70-breakeven/">VEN.TO was heading into a brick wall</a>.
+Ironically, my best trade this quarter was one that didn't make money.
+In hindsight, I was wrong in the direction of a position but managed to
+<a href="http://www.quantisan.com/sold-4-mfc-11jan-puts-14-00-1-74-mark-12-96-loss-0-1/">escape with just a scratch</a>. If I had been stubborn in <a href="http://www.quantisan.com/bought-4-mfc-jan-2010-puts-14-00-1-70-mark-13-25/">this failed
+Manulife short</a>, my profit this quarter would have been wiped out. It
+was a close call (technically, it was a put contract). It looks as
+though I did <a href="http://www.quantisan.com/a-whole-year-two-hundred-and-six-posts-later/">learn something in the past year</a>. My main focus this
+quarter has been the backend of my trading work. Namely in <a href="http://www.quantisan.com/category/quantitative-finance/">quantitative
+finance study and development</a>. My automated strategy performed well
+in the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> JForex contest. I won sixth place in July and first
+place in August. My win streak (I also won in April) garnered the
+attention from the people at Dukascopy and they kindly invited me to the
+<a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">Geneva Forex Event for a TV interview</a>. By far the most impressive
+thing that happened to me this quarter was <a href="../pictures-from-geneva/">this trip to Geneva</a>.
+<strong>Quarterly Metric Q3 Q2</strong> Sarting Fund \$9,404.87 \$8,000.00 End of
+Quarter Fund \$9,630.75 \$9,404.87 Total Net Profit \$225.88 \$1,404.87
+Gross Profit \$381 \$1,800 Gross Loss -\$155 -\$395 Profit Factor 2.45
+4.56 Net Profit % 2.40% 17.56% Max. Drawdown % 0.85% 3.36% Total
+Commission 121.1 \$155.1 Commission / Net Return 53.61% 11.04% I've said
+this in the last quarter, <a href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/">commissions are the bane of my trading</a>.
+Last quarter it took away 11% of my total return. This time it's 54%!
+The structure of my equities commission requires that I trade less but
+punch hard. This isn't my style. My intention is to trade less by being
+more picky in my RRSP trading account. The 0.85% max. drawdown this
+quarter is impressive though. I sometimes lose more than that in a
+single position. Sterling Ratio 0.22 1.44 Excess Return 2.29% 17.46%
+SDev Return per Trade 1.01% 2.21% Kurtosis 1.89 -0.93 Skewness 1.65 0.72
+Despite my modest 2.4% return this quarter, it's not a good number in
+light of the market liftoff. My low <a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/">modified Sterling Ratio</a> says so.
+On the other hand, the statistics from my trades improved. I achieved
+consistency by lowering the standard deviation of my trades and skewed
+my trade returns more to the positive. Yet another thing to caution is
+my high kurtosis value. Which means my total returns are due to big
+profits from a couple of trades. Other than these, there is not much to
+add about the rest of the data. 95th Percentile P&amp;L \$193.49 \$421.15
+5th Percentile P&amp;L -\$50.37 -\$102.13 Net Profit Mid 90% Only -\$60.56
+\$824.07 Total # of Trades 9 14 Percent Profitable 28.57% 61.54% # of
+Winning Trades 2 8 # of Losing Trades 5 5 # of Break-even Trades 2 1
+Average Trade Profit % 0.27% 1.18% Average Winning % 2.01% 2.59% Average
+Losing % -0.32% -0.83% Ratio Win% / Loss% 6.25 3.12 Max. Conseq. Winners
+3 5 Max. Conseq. Losers 3 3 Largest Winning Trade \$228.25 \$464.05
+Largest Losing Trade -\$58.19 -\$116.75 Avg. Time Held [days] 8.30 5.17</p>
+<h2>Goal for the Fourth Quarter</h2>
+<p>My <a href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/">goal from the previous quarter</a> is to learn and build my first indicator in JForex. I achieved
+that just this week. However, I plan to change direction in my work by
+using less JForex and using more custom tools. My goal for the next
+quarter is to learn R programming and
+<span style="text-decoration: line-through;">implement a JForex to R
+data exchange system</span> (done, good old CSV files).</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-3-cm-10oct-puts-7400-565-mark-7230/' title='2010-06-02T22:45:00'>02 June 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/third-quarter-2010-trading-review/' title='2010-10-01T10:11:00'>01 October 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/sold-380-hndto-735/" rel='bookmark'>Sold 380 HND.TO @ $7.35</a>
+                <a href="http://www.quantisan.com/sold-400-vento-1070-breakeven/" rel='bookmark'>Sold 400 VEN.TO @ 10.70, Breakeven</a>
             </h1>
-            <div class="article-content"> <p>I closed my Natural Gas short position this morning as Horizons BetaPro
-NYMEX Natural Gas Bear Plus (HND.TO) tested \$7.40 support on notable
-volume. Figure 1 shows the intraday chart of HND.TO at the time of my
-exit.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Horizons BetaPro
-Natural Gas Bear Plus (HND.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-06-02-HND-TO.png" />][][/caption] HND.TO touched
-\$8.60 last week while I was away. So I am not taking any chance for
-this position to go negative. The net gain in this is \$25 after \$10
-commission, which is essentially breakeven from my <a href="http://www.quantisan.com/bought-380-hnd-to-7-25-stop-7-00/">\$7.25 purchase
-price a couple of weeks ago</a>. Looking at the daily chart of Figure 2,
-it seems that natural gas is in consolidation mode. I will be watching
-the channel as drawn on Figure 2 for another chance to short it via
-HND.TO later. [caption id="" align="aligncenter" width="570"
-caption="Horizons BetaPro Natural Gas Bear Plus
-(HND.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-06-02-HND.TO-long.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-06-02-HND.TO-long.png">1</a>[/caption] As of this writing, HND.TO has drifted
-down to \$7.14 at the close. I am watching to buy back my shares of
-HND.TO at \$6.50.</p>
+            <div class="article-content"> <p>I'm out all my <a href="http://www.quantisan.com/sold-350-ven-to-10-50-profit-0-8-re-bought-250-ven-to-10-67/">Ventana Gold (VEN.TO) position</a>. This thing is losing
+steam despite gold prices hitting record high seemingly on a daily
+basis. VEN.TO made another attempt to break \$11.00 resistance level at
+the open but it quickly reversed (Figure 1). I upped my stop order at
+the open on this third attempt because I don't want to be holding it if
+it fails for the third time. I'll just sit and wait for a while to see
+how this one goes. Recent low at \$10.40 is the support to watch.
+Coincidentally, the 50 daily MA just crossed over the 200 MA today for a
+classic bullish signal (Fig. 2). A contrarian correction (downward) to
+bleed off overbought condition is in play, perhaps?</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Ventana Gold
+(VEN.TO) intraday"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-09-30-VEN.TO-intra.gif" />][][/caption] [caption id=""
+align="aligncenter" width="570" caption="Ventana Gold (VEN.TO)
+daily"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-09-30-VEN.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-09-30-VEN.TO.png">1</a>[/caption] Loss is (\$10.70 - \$10.70) * 400 = \$0 -
+\$14.85 commission = -\$14.85 = 0.15% of account. I am just handing
+money over to my discount broker <a href="http://www.quantisan.com/questrade/">Questrade</a> these days.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/sold-380-hndto-735/' title='2010-06-02T22:43:00'>02 June 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bought-380-hndto-725-stop-700/" rel='bookmark'>Bought 380 HND.TO @ $7.25, Stop 7.00</a>
-            </h1>
-            <div class="article-content"> <p>I am shorting Natural Gas via the Horizons 2x leveraged bearish ETF
-(HND.TO). The U.S. Energy Information Association (EIA) released their
-<a href="http://ir.eia.gov/ngs/ngs.html">weekly natural gas storage report</a> yesterday. The underground storage
-amount is only 4.9% above last year's level. However, as <a href="http://shockedinvestor.blogspot.com/2010/05/why-natural-gas-should-be-shorted-or.html">Shocked
-Investor points out</a>, last year's amount was a record high. So 4.9%
-above last year's is even higher. Figure 1 shows the two year graph of
-natural gas storage and the 5-year avearge channel. [caption id=""
-align="aligncenter" width="570" caption="Weekly working natural gas
-underground storage"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-05-14-wkly_NG_storage.gif" />][][/caption] Coincidentally, natural gas
-futures was testing \$4.50 resistance yesterday (Figure 2) within a
-prolonged downtrend. As such, both fundamental and technical shows
-bearishness. So I shorted natural gas with HND.TO today on retracement
-to \$7.25 support (Figure 3). This retracement is due to HND meeting
-resistance at \$7.50 (50% Fibonacci level on the \$8 to \$7 drop this
-week).</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Natural Gas
-futures (NG)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-05-14-NG.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-05-14-NG.png">1</a>[/caption] [caption id="" align="aligncenter"
-width="570" caption="Horizons Betapro Natural Gas Bear ETF (HND.TO)
-intraday chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-05-14-HND.TO.gif" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-05-14-HND.TO.gif">2</a>[/caption] As this is a leveraged ETF, I am
-hoping to close this trade in a few days. Size: 380 shares Price: \$7.25
-Stop: \$7.00, with an open stop limit order. Target: \$8.00 Reward /
-Risk = 0.75 / 0.25 = 3. I am risking 1.08% of my RRSP account in this
-trade. Good R/R. Limited risk.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-380-hndto-725-stop-700/' title='2010-05-14T17:40:00'>14 May 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bought-3-cmto-10oct-puts-500-mark-7402/" rel='bookmark'>Bought 3 CM.TO 10Oct Puts @ 5.00, Mark $74.02</a>
-            </h1>
-            <div class="article-content"> <p>I've been watching CIBC (CM.TO) for a few months now. CM finally
-presented a shorting opportunity that I took today. Figure 1 speaks for
-itself. Furthermore, the lackluster rally in EUR/USD after the ECB's
-vouch for confidence is encouraging for the bears.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="CIBC
-(CM.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-05-12-CM.TO.png" />][][/caption]</p>
-<p>\$74.00 - \$74.50 is a strong resistance for CM. There are three
-scenarios in which this trade can play out. CM can go up, go down, or
-move sideway. If CM move upward, I will watch the push above \$74.50. My
-current exit stop is at \$75.00 (about \$1 on the premium). However, as
-this is an options position. There is a time decay factor working
-against me. As such, I will decrease my exit stop by \$1.00 on the share
-price every month to compensate. For example, by mid-June, my exit stop
-is \$74.00 on the underlying share price of CM. If CM move downward, I
-will move my stop to breakeven if it breaks below \$72. If CM move
-sideway, I will give it a month's time. If CM just consolidates around
-\$74, I will exit by late June for a loss of \$1 (\$300 total) on the
-premium. My targets are \$70, \$68, and \$65 as shown on Figure 1. I
-will tighten my stop passing each support level. My ideal loss is \$300
-at most. That represents 3.4% of my total account on this trade.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-3-cmto-10oct-puts-500-mark-7402/' title='2010-05-12T17:16:00'>12 May 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+                Posted  <a href='http://www.quantisan.com/sold-400-vento-1070-breakeven/' title='2010-09-30T11:19:00'>30 September 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

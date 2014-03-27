@@ -58,368 +58,173 @@
 	
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/october-2009-trading-performance-review/" rel='bookmark'>October 2009 Trading Performance Review</a>
+                <a href="http://www.quantisan.com/comparing-trading-api-from-6-online-forex-brokerages/" rel='bookmark'>Comparing Trading API from 6 Online Forex Brokerages</a>
             </h1>
-            <div class="article-content"> <p>October is the first full month in which I traded forex. Naturally, this
-is the first of my monthly trading performance review. Note that all the
-trades were on a demo account with imaginary money only. But I still
-took this seriously. My goal is to double this demo account starting
-from CAD\$5000. Once that is accomplished, I will start live trading
-with real money. Who knows how long this might take. Hopefully by then,
-I will have a respectable set of <a href="http://www.quantisan.com/category/trading-how-tos/trading-signal/">trading setups</a>, <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">strategies</a>, and
-<a href="http://www.quantisan.com/tools">quant tools</a> developed. Anyway, let's get on with the monthly review.
-As this is only my first month trading currencies after spending 8 years
-in <a href="http://www.quantisan.com/category/stocks/">stocks</a> and <a href="http://www.quantisan.com/category/futures/">futures</a>, my trading this month is marked by a lot
-of experimentation. As can be seen in my <a href="http://www.quantisan.com/trade-log/">trading log</a>, I performed
-abysmally for the first couple of weeks. The last of my bad string ended
-when I took an uncalled for trade <a href="http://www.quantisan.com/an-undisciplined-trade-shorted-eurusd-1-499-stopped-1-505-62-pips/">based on what I thought rather than
-what I saw</a>. Not all is lost this month as I managed to write out the
-<a href="http://www.quantisan.com/an-introduction-to-my-forex-trend-continuation-setup-ftcs/">first of my forex trading setups</a> from the trials and errors. Since
-then, I had a string of winners to push my monthly tally deeper into the
-positive. While this is definitely good, I am cautious and doubtful to
-my initial success because I am just at the right place, at the right
-time. Because we might very well be witnessing the printing of the top
-from this <a href="http://www.quantisan.com/inter-market-analysis-after-a-new-2009-high-in-the-equity-market/">epic V-shaped rally since March</a>. The moves in the markets
-were very strong and very rapid this last week. I just happen to be on
-the right side of the trades.</p>
-<h2>Performance Statistics Review</h2>
-<p>In any case, I'll get down to business with discussing the performance
-statistics below. On first sight, the <a href="http://en.wikipedia.org/wiki/Sharpe_ratio">Sharpe ratio</a> at 5.25 is
-impressive for this month. However, looking a few lines below, see that
-if we account for only the middle 90th percentile profits and losses,
-the net profit is reduced by a magnitude. (So as to see what would
-happen if we truncate the biggest (un)lucky wins and losses.) That means
-much of my profit for this month was because of a few big trade. In
-fact, it was <a href="http://www.quantisan.com/paper-trade-closed-eurjpy-135-00-500-1-pips/">this lucky trade when I made +500 pips</a> in one week.</p>
-<h2>Goal for Next Month</h2>
-<p>What I've learned from analyzing these numbers is that I lack
-consistency (like all new traders), and was perhaps just lucky. So the
-goals for the coming months are simple:</p>
+            <div class="article-content"> <p>Choosing a discount broker for forex trading is time consuming. As the
+forex market is not centralized, choosing a discount broker is sort of
+like picking a stall in a farmer's market. They all offer the same
+product, but prices, features, quality, and services can vary
+considerably between fx brokerages. One criteria that I consider
+seriously is the Application Programming Interface (API) offered by the
+broker. Most people couldn't care less about API because they never
+intend to develop their own automated trading program. However, if this
+is something that interests you, then I'd like to save you some time
+here with the following table.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Forex brokers
+API table"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-13-FX_API_table.png" />][][/caption] All the dollar values are in U.S. dollar.
+I highlighted the important limitation of each API. I have different
+level of experience with each of these six APIs. As of this writing, I
+am using <a href="http://www.quantisan.com/tag/jforex/">JForex</a> from <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> for <a href="http://www.quantisan.com/in-a-forex-brokers-and-trading-platforms-jumble/">various personal reasons</a>.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/comparing-trading-api-from-6-online-forex-brokerages/' title='2010-04-14T07:28:00'>14 April 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-stopmananger-1-0/" rel='bookmark'>JForex StopManager 1.0</a>
+            </h1>
+            <div class="article-content"> <p>I am building my real JForex automated trading system one feature at a
+time. The idea is to automate some of my most fundamental trading
+techniques on JForex so that I can trade forex semi-automatically on
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>. I am starting off here with a simple stop management
+strategy. In a nutshell, once the market price moves in your favour
+equidistant from your original stop loss, this strategy moves the stop
+to breakeven. For example, if I go long EURUSD at 1.3500 with a stop at
+1.3400 (100 pips stop). Then if the price breaks above 1.3600 (100 pips
+profit), the strategy moves the stop to breakeven. This is a simplistic
+implementation of the saying that "never let profits turn into losses".
+You can <a href="http://dl.dropbox.com/u/6028806/StopManager.java">download the source code here</a> and the <a href="http://dl.dropbox.com/u/6028806/StopManager.jfx">executable strategy
+here</a>. Note that these files are made available through <a href="https://www.dropbox.com/referrals/NTYwMjg4MDY5/">Dropbox</a>.
+Update: This logic is now integrated into the <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil open source
+project</a>. You can also see <a href="http://www.quantisan.com/tag/jforex/">a list of my latest JForex articles
+here</a>. [java] /* StopManager.java version 1.0 Copyright 2010
+Quantisan.com Move stops to breakeven when equidistance to original stop
+loss */ package jforex; import com.dukascopy.api.*; public class
+StopManager implements IStrategy { private IEngine engine; private
+IConsole console; private IContext context; @Configurable("Lock-in Pips
+for Breakeven") public int lockPip = 3; @Configurable("Move stop to
+breakeven?") public boolean moveBE = true; public void onStart(IContext
+context) throws JFException { this.engine = context.getEngine();
+this.console = context.getConsole(); this.context = context; } public
+void onAccount(IAccount account) throws JFException { } public void
+onMessage(IMessage message) throws JFException { } public void onStop()
+throws JFException { } public void onTick(Instrument instrument, ITick
+tick) throws JFException { for (IOrder order :
+engine.getOrders(instrument)) { if (order.getState() ==
+IOrder.State.FILLED) { boolean isLong; double open, stop, diff, newStop;
+String label = order.getLabel(); IChart chart; isLong = order.isLong();
+open = order.getOpenPrice(); stop = order.getStopLossPrice(); diff =
+open - stop; // stop loss distance if (isLong) { // long side order if
+(moveBE &amp;&amp; diff > 0 &amp;&amp; tick.getBid() > (open + diff)) { // make it
+breakeven trade + lock in a few pips newStop = open +
+instrument.getPipValue() * lockPip; order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_UP, tick.getTime(), newStop); } } else { // short
+side order // Move to breakeven if (moveBE &amp;&amp; diff \&lt; 0 &amp;&amp; tick.getAsk()
+\&lt; (open + diff)) { // diff is negative // make it breakeven trade +
+lock in a few pips newStop = open - (instrument.getPipValue() *
+lockPip); order.setStopLossPrice(newStop);
+console.getOut().println(label + ": Moved stop to breakeven"); chart =
+this.context.getChart(instrument); chart.draw(label + "_BE",
+IChart.Type.SIGNAL_DOWN, tick.getTime(), newStop); } } } } } public
+void onBar(Instrument instrument, Period period, IBar askBar, IBar
+bidBar) throws JFException { } } [/java]</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-stopmananger-1-0/' title='2010-04-12T20:39:00'>12 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel='bookmark'>An explanation of my Keltner Channel and Candlestick hybrid setup</a>
+            </h1>
+            <div class="article-content"> <p>This is an explanation of my <a href="http://www.quantisan.com/category/quantitative-finance/systems/">automated trading</a> strategy for the
+Dukascopy JForex Strategy Contest in April. This strategy just made its
+first trade today after running for about 72 hours. My contest demo
+account closed with a gain of 7% on this first trade. Note that this
+strategy is built for competing in a contest and not for real trading
+(i.e., it's purely a no cost gamble). Here is the concept for this high
+probability trading setup. Referring to Figure 1 below, the red arrow
+marks my short entry on EURGBP today. These are the technical analysis
+indicators the strategy uses:</p>
 <ol>
-<li>achieve consistency by bringing up this mid 90% net profit value;
-    and</li>
-<li>maintain good Sharpe ratio rating by improving my risk management
-    techniques.</li>
+<li>Trend: Signaled by 50 bar moving average above (bullish) or below
+    (bearish) the 200 bar moving average.</li>
+<li>Momentum: Oversold or overbought RSI conditions, but not used in a
+    traditional manner...</li>
+<li>Volatility: I use the Keltner channel to measure volatility.</li>
+<li>Price action: Observe candlestick behaviour to identify trend
+    continuation. This is where the secret to this strategy happens. I
+    will explain this below.</li>
 </ol>
-<h2>Performance Statistics for October 2009</h2>
-<p>Total Net Profit \$213.15 Gross Profit \$499 Gross Loss -\$285 Profit
-Factor 1.75 Net Profit % 4.19% Max. Drawdown % -2.32% Sharpe Ratio 5.25
-95th Percentile P&amp;L \$70.11 5th Percentile P&amp;L -\$33.60 Net Profit Mid
-90% Only \$46.34 Total # of Trades 34 Percent Profitable 44.12% # of
-Winning Trades 15 # of Losing Trades 19 Average Trade Profit % 0.12%
-Average Winning % 0.66% Average Losing % -0.30% Ratio Win% / Loss% 2.21
-Max. Conseq. Winners 4 Max. Conseq. Losers 6 Largest Winning Trade
-171.79 Largest Losing Trade -44.17 Avg. Time Held [hrs] 2.18 Avg. max.
-unrealized profit/ Realized profit 3.15</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/october-2009-trading-performance-review/' title='2009-10-31T21:20:00'>31 October 2009</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/a-lesson-on-the-importance-of-fundamental-awareness-for-a-technical-trader/" rel='bookmark'>A lesson on the importance of fundamental awareness for a technical trader</a>
-            </h1>
-            <div class="article-content"> <p>I paid a price last week in trading EURCHF for not knowing the
-fundamental analysis about the currency pair. First of all, here's how
-my trade played out. The support between 1.500 and 1.510 is apparent if
-you look at Figure 1. So I went long as shown in Figure 2 (second blue
-triangle from right) based on a positive divergence at a strong support
-of 1.510. EURCHF stayed range bound for a over a day while my other
-positions were having roller coaster rides. That's when I decided to
-tighten up my stop on my EURCHF long from 1.508 to 1.5095 to limit my
-risk exposure. As you can see in Figure 2, that was a bad decision. On
-October 30, EURCHF made a swing downward to take out the nearby stops
-and then launched upward right past my target. That would have been a
-quick and low risk play if I hadn't micro-manged the trade and moved my
-stop up while the daily setup was still sound. While getting stopped out
-is part of the game, as there is never absolute certainty in a trade.
-But in this case, the probability of this up move was substantially
-greater than I would have guessed. The extra bit of information lies
-outside of the chart. It seems that there is a well known secret that
-the Swiss National Bank (SNB) has been intervening in the market to keep
-the Swiss Franc from being even more overvalued. In particular, it's
-well known that the SNB has their eyes on the 1.50 and 1.51 levels in
-the EURCHF pair. SNB publicly announced their intention to intervene on
-March 12. Immediately following the news, the EURCHF pair exploded up
-470 pips in 20 minutes that day. If you look at Figure 1, you can see
-that gigantic bar on March 12. The DailyFX has an article on this
-<a href="http://www.dailyfx.com/story/bio1/Swiss_Franc_Plunges_After_SNB_1236870114798.html">monumental event</a>. Since then, the SNB has been coming to the rescue
-of EURCHF in very obvious ways as shown in Figure 1 with the regular
-spikes in prices. Prior to this October 30 move, EURCHF had an identical
-price action exactly a month before on September 29, as shown in Figure
-3. Back then, EURCHF also had a positive divergence on a test of support
-at 1.5080. Then next thing you know, the pair popped over a 100 pips.
-Obviously, the SNB is trying hard to paint the tape on the monthly chart
-of EURCHF. As I was saying, the SNB is intervening in the market to keep
-their currency from further over-valuation, which is hurting their local
-economy. In both cases of Sept 29 and Oct 30, if the support was broken,
-EURCHF would have stepped into a grave on the chart. Just look at that
-huge vacuum below 1.50 on Figure 1. In this recent case on Oct 30, even
-though I did go long because of the chart, I didn't have the edge of
-knowing this information. Which led me missing this easy ride because I
-didn't have as much conviction in this trade as I should have.
-Coincidentally, as I have been aggravating to improve the win rates of
-my trades, this came hitting me right on the head. So while I'm no
-economist, I should at least be aware of the fundamental forces at play
-in the currencies that I trade. At the end of the day, technical
-analysis may provide guidelines to the mass psychology behind price
-actions, but it is the fundamental and economic forces that are
-ultimately driving the market. [caption id="" align="aligncenter"
-width="580" caption="EURCHF"][<img alt="EURCHF" src="http://traderpau.files.wordpress.com/2009/10/2009-10-31-eurchf.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-31-eurchf.png">EURCHF</a>[/caption] [caption
-id="" align="aligncenter" width="580" caption="EURCHF,
-3-hour"][<img alt="EURCHF, 3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-31-eurchf_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-31-eurchf_3h.png">EURCHF, 3-hour</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="EURCHF, 3-hour on Sept
-30"][<img alt="EURCHF, 3-hour on Sept 30" src="http://traderpau.files.wordpress.com/2009/10/2009-10-29-eurchf_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-29-eurchf_3h.png">EURCHF, 3-hour on Sept
-30</a>[/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/a-lesson-on-the-importance-of-fundamental-awareness-for-a-technical-trader/' title='2009-10-31T16:27:00'>31 October 2009</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/an-introduction-to-my-forex-trend-continuation-setup-ftc/" rel='bookmark'>An introduction to my Forex Trend Continuation Setup (FTC)</a>
-            </h1>
-            <div class="article-content"> <p>After many trials and errors with <a href="http://www.quantisan.com/tag/paper%20trade/">paper trading</a> the <a href="http://www.quantisan.com/category/forex/">forex market</a>
-for a month, the first of my <a href="http://www.quantisan.com/category/trading-how-tos/trading-signal/">trading setups</a> is finally taking shape.
-So I would like to document this approach here after a well executed
-trade this week (illustrated below). This trading setup is based solely
-on technical analysis. Here's an overview of the steps:</p>
+<p>Note that I used a Bollinger Bands in the chart of Figure 1 because I
+couldn't find the Keltner Channel indicator in Metatrader (my charting
+software). It doesn't affect my conceptual illustration anyhow. The
+setup:</p>
 <ol>
-<li>Define a long term time frame for identifying setup.</li>
-<li>Draw the major supports and resistances.</li>
-<li>Add a momentum technical indicator.</li>
-<li>Add a trend indicator.</li>
-<li>An entry is signaled by an agreement of the trend and the indicator
-    at the support or resistance price level. Do not enter yet.</li>
-<li>Define a short term time frame for timing, use this for the
-    following steps.</li>
-<li>Draw the supports and resistances on this short time frame.</li>
-<li>Place an order when the price breaks the short-term trend to be
-    aligned with the trend on the longer one.</li>
-<li>Exit when the entry conditions are gone (not necessarily reversed).</li>
+<li>Identify overarching trend via 50/200 moving averages as explained
+    above.</li>
+<li>Confirm price is still playing to the trend by checking if current
+    market price is on the right side of the 200 bars moving average.
+    Price above for bullish and below for bearish.</li>
+<li>Once steps 1-2 are in place, it's assumed that the trend is strong.
+    We look for a setup in the trend's direction. In particular, we look
+    for a <em>failed counter-trend retracement</em> setup using candlestick in
+    combination with the Keltner channel.</li>
+<li>Sounds fancy but it's simple. Using a short-side example, the bar's
+    high has to penetrate above the Keltner channel yet it closes within
+    it. Then the short entry is signaled. The opposite for a long-side
+    entry.</li>
+<li>RSI overbought and oversold conditions are used to filter out slow
+    and steady counter-trend moves (those are evil).</li>
 </ol>
-<p>This is very vague. So here's a real example in practice. Figure 1 shows
-steps 1 to 5 on the daily chart of CAD/JPY for a short entry. The entry
-point is the bar before the marked vertical line on Oct 21. See that
-CAD/JPY tested the descending resistance line (step #2) with a negative
-RSI divergence (#3). The trend as suggested by the moving averages is a
-choppy downtrend (#4). Thus, the conditions were met and a short entry
-is signaled. [caption id="" align="aligncenter" width="580"
-caption="CAD/JPY"][<img alt="CAD/JPY" src="http://traderpau.files.wordpress.com/2009/10/2009-10-29-cadjpy.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-29-cadjpy.png">CAD/JPY</a>[/caption] For timing the
-entry, Figure 2 is a 3-hour chart of CAD/JPY with the entries and exits
-marked. Yellow triangles are entries and red dots are exits. I entered a
-full position after CAD/JPY made the initial dive and then retraced to
-the previous support (now resistance) line. It bounced right off that
-line strongly (left side of figure). I entered at market price once we
-made a hammer candlestick (negative signal) the bar before. Stop was
-placed at 88.0, near the recent high and at a round number resistance.
-[caption id="" align="aligncenter" width="580" caption="CAD/JPY,
-3-hour"][<img alt="CAD/JPY, 3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-29-cadjpy_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-29-cadjpy_3h.png">CAD/JPY, 3-hour</a>[/caption] For the exit,
-I had a manually adjusted hard stop to be a couple of resistances away.
-I kept it loose on purpose because this position was my biggest winner.
-(Let your profits run). But once the RSI on the daily passed below 50, I
-took a more conservative approach on the exit stop. Then once CAD/JPY
-tested 84.50 and hung around 85.0, I tightened my stop and was taken out
-at 85.30. Note that my original target was 84.0, so I thought testing
-84.50 was close enough. Also note that this setup is expected to be
-executed recursively. It is meant to be run so that you're <a href="http://www.quantisan.com/how-to-stockpile-a-trade-position-one-step-at-a-time/">stacking up
-your winning position</a> if the conditions and the trend is in your
-favour. This is actually where the power with this setup kicks in. I'll
-continue with the CAD/JPY example to illustrate this point. Notice in
-Figure 2 that I added to this CAD/JPY short at the (second from the
-right) yellow triangle point on the chart at 86.3 for 50% more units.
-The down move was still intact as shown in Figure 1 at the time. Using
-the same setup, I added more units to this position. And by adding 50%
-more to my position, I was able to ride that last wave down for +200
-pips on these extra units. Otherwise, I would have exited at 85.30 on
-the consolidation around 85.0 and left with nothing on the market for
-the last big wave. The timing as shown in Figure 2 for this addition
-isn't the same as for the original entry. But it's obvious enough on the
-figure with the same markings which I used. Simply refer to Figure 2 for
-a visual explanation on the timing for this entry. In case you haven't
-noticed on Figure 2, but I just re-entered this position with half the
-size using the same setup. Since this third entry is still in progress,
-I can't comment on it just yet. We'll see how it goes. Finally, for ease
-of referencing this trading setup later on, I will call this particular
-setup, FTC (forex trend-continuation). Right now it's version 0.1, a
-first publication release but still in beta testing with my <a href="http://www.quantisan.com/tag/paper%20trade/">paper
-trading</a>. Once the setup has proven itself, I will use it in live
-trading with real money. Then I will christen it with a version 1.0, and
-perhaps a better name. In the mean time, I expect more refinement to
-this setup as I continue to try it out on paper trading. Check my <a href="http://www.quantisan.com/tag/FTC">FTC
-tag</a> for more sample applications of this trading signal. Update Nov
-18, 2009: I've changed the name from FTCS to FTC as I now have a <a href="http://www.quantisan.com/tag/FTR">FTR</a>
-setup.</p>
-</p> </div>
+<p>Another benefit of using a price channel is that I also use it to peg my
+take profit target and stop loss. As I said in my previous post, because
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> expects winning contestants to submit their source codes,
+I am not using anything proprietary or extraordinary here. As such, this
+is totally different than <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">what I use to trade on my own</a>. Namely more
+reliance on indicators and less on price action and <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>.</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /></p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/an-introduction-to-my-forex-trend-continuation-setup-ftc/' title='2009-10-29T22:38:00'>29 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/' title='2010-04-09T18:16:00'>09 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
         <article class='listed'>
             <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-long-usdchf-1009-out-10245-155-pips/" rel='bookmark'>Paper trade: Long USD/CHF @ 1.009, out 1.0245 (+155 pips)</a>
+                <a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/" rel='bookmark'>Reading the fine print for Dukascopy JForex Strategy Contest</a>
             </h1>
-            <div class="article-content"> <p>The U.S. dollar finally picked up some strength last Thursday and I
-loaded to ride the trend. One of the earliest trade I made in this wave
-is going long on USD/CHF. Figure 1 is taken today after a full week
-since the initial move in USD. The vertical line marks the day when I
-entered this trade on Thursday 22nd late afternoon. Here are my reasons
-for making the entry:</p>
+            <div class="article-content"> <p><strong>Update</strong>: I have since <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">won the JForex strategy contest a few
+times</a>. If you are looking to learn JForex programming, you can start
+with <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/">an explanation of my winning strategy</a> and my long <a href="http://www.quantisan.com/tag/jforex/">list of
+JForex posts</a>. The Dukascopy JForex Strategy Contest began last week.
+Starting this month, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> offers \$15,000 total of cash prizes
+to the top 10 automated trading systems every month. However, before
+entering, there are a couple of clauses in their contest rules that
+caught my attention.</p>
 <ol>
-<li>Parity level 1.0000 was a mere 30 pips away from the low the day
-    before</li>
-<li>Obvious positive divergence on the indicator, Fig. 1.</li>
-<li>Breakout on the shorter 3-hour timeframe, Fig. 2.</li>
+<li>Cash prizes are deposited into contestant's Dukascopy account
+    (Ranking and Awarding Rules #5).</li>
+<li>All source code needs to be submitted and agrees to be published
+    (Ranking and Awarding Rules #2 and #6).</li>
 </ol>
-<p>I placed the order just above the resistance and beyond the short term
-channel. The order was filled the next day in the morning on the 23rd.
-In hindsight, I should have used a half position only and added to it
-once it broke the longer term descending resistance as shown in Fig. 2.
-That's because a short term break is a low probability move given that
-the downtrend was strong. However, USD/CHF was testing parity, which is
-as strong a support as you can find for many reasons. As you can see
-from Fig. 2, the entry was rather good overall (could have been better
-as discussed above). However, I think the exit was also a disciplined
-move. My original target was 1.026 as noted below. It was just below
-that horizontal resistance at 1.0267 which I marked on Fig. 1. Yet,
-there's also the longer term trendline marked on both Fig. 1 and Fig. 2.
-I had 4-5 positions open at the time and this was one of my strongest
-two (the other being CAD/JPY short), so I tried to add to my position
-once the pair broke that longer term trendline. However, the line proved
-to be strong as USD/CHF retraced and took out my stop as shown in Fig. 2
-(red dot, 2nd from right). Nevertheless, the pair remained above 1.0200
-and my core position was safe (I moved my stop up). But not all was
-well. USD/CHF eventually broke 1.025 but it didn't go far. It printed a
-couple more bars on the chart while I kept moving my stop closer and
-closer. Also noting that the pair was short-term overbought, I moved my
-stop right up to below 1.025 at 1.0245 to lock in most of the profit.
-That stop was eventually taken out and the pair took a dive as shown in
-Fig. 2. Moving the stop up tight in a short-term overbought condition
-was a good choice. I learned this from my recent trades when I <a href="http://www.quantisan.com/paper-trade-usdcad-all-out-1-0872-196-6-pips-and-1-0821-145-6-pips/">left
-profits on the table</a>. So I got out against my hope for higher pips
-even when the talk of USD making a return to strength was ubiquitous. I
-traded what I saw and not what I hoped for, and against the opinions of
-other people. If only my entry was a bit more patient, this would have
-been one of my best executed trades. Below are the data for my entries.
-Position size: 100% First Entry: 1.009 First Stop: 1.0030 First Target:
-1.0260 Reward / Risk #1 = 170 / 60 = 2.8 \&lt; 3, but close enough. Second
-Position Size: 25% Second entry/stop: 1.0232/1.0220 I didn't have a
-target in mind for this addition because it was only to add on the
-strength of the existing position.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="USD/CHF"][<img alt="USD/CHF" src="http://traderpau.files.wordpress.com/2009/10/2009-10-29-usdchf.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-29-usdchf.png">USD/CHF</a>[/caption] [caption id=""
-align="aligncenter" width="580" caption="USD/CHF, 3-hour"][<img alt="USD/CHF,
-3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-29-usdchf_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-29-usdchf_3h.png">USD/CHF, 3-hour</a>[/caption]</p>
+<p>#1 is troublesome because it means winners have to <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">open an account
+with Dukascopy</a> if they don't already have an account with
+them. But that isn't a big deal since they are actually one of the best
+forex brokers. I planned to open an account with them anyway. However,
+#2 will certainly turn many people away. The requirement to disclose
+source code in an automated trading contest is almost unheard of as far
+as I know. Are you willing to disclose your winning system just for that
+few hundred, or a even few thousand, dollars of prize money? In any
+case, I decided to enter this contest anyway just for fun. Yet, you can
+be sure that I won't be using any proprietary logic in my system. In
+fact, I just finished my automated trading strategy today and it is now
+running. I will <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/">discuss about my strategy</a> after it completes its
+first trade. That might take a while as my system is expected to make
+fewer than 5 trades in a month.</p>
 </p> </div>
             <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-long-usdchf-1009-out-10245-155-pips/' title='2009-10-29T20:12:00'>29 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/" rel='bookmark'>Adapting to changing market volatility with a statistical position size table</a>
-            </h1>
-            <div class="article-content"> <p>We know that prices can go up or down. We also know that the quality of
-these ups and downs can be very smooth or very choppy. As such, it's not
-surprising that the trend and volatility of a market form the two
-universal characteristics of a price action. No matter which market you
-trade, the trend and volatility of the prices will influence your
-trading and P&amp;L. That can be both good and bad as volatility is a double
-edged sword. A fast paced moving market can rain down gold on you or it
-can burn your cash away. Most of the time, it's the latter case.
-Consequently, there are many ways traders adapt to changing volatility
-in the market. You can tailor your trading strategy, change trading
-timeframe, switch market entirely, or manage your risk accordingly, for
-examples. In this post, I'd like to give an example for the use of a
-<a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex position size table</a> to fit with market
-volatility. The problem with market volatility is that it's hard to
-notice. As opined by <a href="http://traderfeed.blogspot.com/2009/10/jump-in-stock-market-volatility-and-its.html">Dr. Steenberger</a>, "many traders will adapt to
-directional changes quicker than they adapt to shifts in volatility."
-The art of identifying market conditions is not discussed in this post.
-But obviously, if there is a way to build in an inherent way to manage
-your risks based on market volatility, you will have built yourself a
-safety net. That is the logic behind my <a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex
-position sizer</a>. It's a
-data-driven tool to impose an inherent safety net in your trading. What
-it does is simple. Here's what it boils down to:</p>
-<ol>
-<li>It finds the recent 2 sigma value (i.e., a statistical measure of
-    volatility, <a href="http://en.wikipedia.org/wiki/Standard_deviation">see wiki</a>) of each major currency pairs.</li>
-<li>It calculates the maximum position size for each pair using the 2
-    sigma value.</li>
-<li>Then it converts the number to correspond with your account currency
-    based on a real-time currency exchange rate for each trading pair.</li>
-</ol>
-<p>Thus, a table such as <a href="http://www.quantisan.com/tools/forex-position-sizer/">this one I published for
-forex</a> can give you a
-real-time guideline to the maximum position size you should take given
-your risk appetite. One shortcoming with this approach is that while you
-may limit your loss during a volatile market, you are also limiting your
-potential gain. But this is where the old saying, "let your profit run
-and cut your losses short" applies. One solution is to simply add to
-your winning trades, according to your trading setups, of course. That
-way, when the market moves in your favour or you get confirmation on
-your setup, you can increase the position size responsibly without
-stretching your principal. By now, it's probably obvious that the use of
-such a tool is not, and should not, meant to be a solution to changing
-market volatility. It is merely a convenience tool to serve as one of
-the many that a trader has at his/her disposal. Nevertheless, I find the
-table to be very convenient for me because I don't have to worry about
-calculating the position sizes manually on each trade. Trading is tough
-enough already, so I like to develop <a href="http://www.quantisan.com/tools/">tools</a> that can make my life
-ever so slightly easier.</p>
-<div id="_mcePaste" style="overflow: hidden; position: absolute; left: -10000px; top: 0px; width: 1px; height: 1px;">
-<span style="font-weight: bold;">many traders will adapt to directional
-changes quicker than they adapt to shifts in volatility</span>
-
-</div>
-
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/' title='2009-10-29T13:00:00'>29 October 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-short-nzdusd-07520-out-07308-212-pips/" rel='bookmark'>Paper trade: Short NZD/USD @ 0.7520, out 0.7308 (+212 pips)</a>
-            </h1>
-            <div class="article-content"> <p>This was definitely one of my better executed trades recently. Here's my
-logic for the entry and exit. As shown in Fig. 1, at the time of entry
-(marked by the faint vertical line on 10/23), NZD/USD made a negative
-divergence with a higher price and lower RSI. There has been a series of
-false alarm on the RSI overbought entry signals. However, 0.76 is an
-important resistance because it is where the massive downturn started in
-July 2008. I timed my short entry based on Figure 2. We made a lower
-high just below 0.76 and within the previous channel. Then I waited for
-the current downtrend to break the ascending support line to place the
-order. The order was subsequently filled on Sunday night during the
-Asian open when I was sleeping. Frankly, I wasn't too happy at first
-because my fill price was right at the low. I kept my position anyway
-and allowed the stop to work for me. This is probably the best decision
-I've made with this trade. By remaining patient, I didn't succuum to
-micro-managing my position like I've done before. With regard to the
-exit, I took profit at my target at the ascending support shown in
-Figure 1. That support line worked well for half of the year in this
-rapid ascend of NZD/USD. So I didn't want to risk a bounce by taking
-profit at this point. However, NZD/USD has traded down to 0.7260 as I'm
-writing this. Time will tell if the exit is a good one or that I should
-have left half the position in. The net gain for this trade is \$79.82
-because I mistakenly entered a full position instead of half as I
-should. Here are the R/R that I saw when I entered this trade. Position
-size: 100% Entry: 0.7520 Stop: 0.7600 Target: 0.7300 Reward / Risk = 220
-/ 80 = 2.75 \&lt; 3. I thought I was entering with only a 50% position size
-because of the R/R not meeting my criteria. However, I read my own
-<a href="http://www.quantisan.com/tools/forex-position-sizer/">forex position sizer</a> wrong and gone in with a full position.
-Luckily, things have worked out. But I have since updated my position
-sizer so this won't happen again.</p>
-<p>[caption id="" align="aligncenter" width="580"
-caption="NZD/USD"][<img alt="NZD/USD" src="http://traderpau.files.wordpress.com/2009/10/2009-10-28-nzdusd.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-28-nzdusd.png">NZD/USD</a>[/caption]</p>
-<p>[caption id="" align="aligncenter" width="580" caption="NZD/USD,
-3-hour"][<img alt="NZD/USD, 3-hour" src="http://traderpau.files.wordpress.com/2009/10/2009-10-28-nzdusd_3h.png" />]<a href="http://traderpau.files.wordpress.com/2009/10/2009-10-28-nzdusd_3h.png">NZD/USD, 3-hour</a>[/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-short-nzdusd-07520-out-07308-212-pips/' title='2009-10-28T15:50:00'>28 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
+                Posted  <a href='http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/' title='2010-04-07T13:21:00'>07 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

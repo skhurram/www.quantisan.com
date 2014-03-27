@@ -58,6 +58,52 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/new-moving-average/" rel='bookmark'>New moving average</a>
+            </h1>
+            <div class="article-content"> <p>I downloaded Hull Moving Average, Adaptive Moving Average, and a Kalmann
+Filter today.</p>
+<p>In the figure, the blue/red is HMA(8), cyan is AMA(10), yellow is EMA(9)
+as comparison.</p>
+<p>[<img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" />][] Notice that HMA is super fast and follows the price closely.
+AMA lags more but does a good job of smoothing outt the noise. EMA is as
+usual and very laggy.</p>
+<p>A strategy I'm thinking of is to use 3 different MA's instead of only
+EMA to improve the previously discussed 3EMA crossover strategy. The
+problem with the 3 EMA crossover strategy is that EMA lags too much, so
+it's not good for day trading so reaction time is the key to catching /
+exiting the waves.</p>
+<p>Maybe using the HMA as the fast MA, AMA as the base, and something else
+to verify the trend can work. As I've said before, remember to use
+something to filter out the whipsaws. But don't use something laggy as
+it would defeat the whole purpose of a fast indicator.</p>
+<p>Also, HMA can be used as a proxy to smooth out some inputs. i.e.
+RSI(HMA(close, 8), 14) or HMA(RSI(close, 14), 8).</p>
+<p>[<img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" />]: http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s1600-h/3mas.jpg</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/new-moving-average/' title='2008-01-06T00:49:00'>06 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/filtering-out-the-whipsaws/" rel='bookmark'>Filtering out the whipsaws</a>
+            </h1>
+            <div class="article-content"> <p>Whipsaws in pricing is the archilles' heel in trend following system. As
+demonstrated by the previous 3 trading strategies, once the price is in
+a narrow trading range, trend following systems would trigger many
+erraneous trades to eat away the account.</p>
+<p>An idea I'm having is to use ADX to filter out some of these trades.
+Either by comparing ADX to EMA(ADX)[1] or use DMI by ensuring + index >
+- index for long, for examples.</p>
+<p>I tested a Momentum(ADX) idea by using MyADX > MyADX[10] as a condition
+on the 3-EMA crossovers strategy as discussed today. It doesn't seem to
+be doing much as the DMI values jump around. Perhaps employing the MACD
+concept on ADX would yield some result.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/filtering-out-the-whipsaws/' title='2008-01-04T23:55:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/comparing-data-point-to-ema-note/" rel='bookmark'>Comparing data point to EMA note</a>
             </h1>
             <div class="article-content"> <p>I have been using EMA comparison a lot lately. For example, if MyRSI >
@@ -96,66 +142,10 @@ See figure below.</p>
                 Posted  <a href='http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/' title='2008-01-04T18:15:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/" rel='bookmark'>3-MA crossovers, claimed 1.84 profit factor</a>
-            </h1>
-            <div class="article-content"> <p>Saw a forum post on TradeStation claiming 1.84 proft factor. The concept seems
-interesting. Here is the code for later study. <a href="https://www.tradestation.com/Discussions/Topic.aspx?Topic_ID=70059">Here is the link to the
-post</a>.</p>
-<p><code>[ IntraBarOrderGeneration = False ]</code></p>
-<p>Inputs: EMAFastLength(4), EMAMedLength(5), EMASlowLength(22),
-ValidBars(2);</p>
-<p>Variables: EMAFast(0), EMAMed(0), EMASlow(0), BuyHighAmt(0),
-LSetUp(False), LSetCount(0);</p>
-<p>{ Calculation Section } EMAFast = XAverage(Close,EMAFastLength); EMAMed
-= XAverage(Close,EMAMedLength); EMASlow = XAverage(Close,EMASlowLength);</p>
-<p>{ Define Entry SetUp Conditions } If EMAFast crosses above EMAMed and
-EMAMed > EMASlow then begin BuyHighAmt = High+ 1 point; LSetUp = True;
-LSetCount = 1; end;</p>
-<p>If EMAMed crosses above EMASlow and EMAFast > EMASlow then begin
-BuyHighAmt = High + 1 point; LSetUp = True; LSetCount = 1; end;</p>
-<p>{ Entry SetUp is Valid - Make Long Entry if BuyHighAmt is reached } If
-LSetUp and (TradesToday(Date) = 0 or (MarketPosition = 1 and
-PositionProfit > CurrentContracts*45)) Buy next bar at BuyHighAmt
-stop;</p>
-<p>{ SetUp Failed or Long Entry Was Made - Reset Entry Conditions }
-LSetCount = LSetCount + 1 ;</p>
-<p>//If LSetCount > ValidBars or MarketPosition = 1 then {allows only one
-entry} If LSetCount > ValidBars or BarsSinceEntry \&lt;= ValidBars then
-{replace this line with above line to allows only one entries in the
-same direction} begin BuyHighAmt = 9999; LSetUp = False; LSetCount = 0;
-end; // end of code //</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/' title='2008-01-03T23:19:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bollinger-with-multi-macd-system/" rel='bookmark'>Bollinger with multi-MACD system</a>
-            </h1>
-            <div class="article-content"> <p><a href="http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s400/bbmacd_perfrpt_graph.jpg"></a>This system for ZGG08 uses a Bollinger upper band breakout as the
-first condition. Other conditions are data1 MACD (positive fast slope)
-and data2 MACD (fast above slow) for bullish trend confirmation. It is
-used on a 5 min and a 45 min chart.</p>
-<p>The long position is covered on 45 min MACD cross-below signal.</p>
-<p>Stop is set arbitrarily at \$180. Trailing stop is (\$400, 63%).</p>
-<p>The problem this Bollinger breakout system is that there is a likely
-chance that the breakout is a sign of exhaustion. The accuracy of the
-entry is merely \~44%. Although the multi-time frame MACD could confirm
-the existing trend. Something needs to be done to identify possible
-trend reversal at the Bollinger upper-band breakout.</p>
-<p>Although profit seems good for the 60 days back-test, the system
-performance is not consistent as you can see from the graph below.
-[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s400/bbmacd_perfrpt_graph.jpg" />][]</p>
-<p>[<img alt="" src="http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s400/bbmacd_perfrpt_graph.jpg" />]: http://bp0.blogger.com/_Vlx60iTPx5s/R3wkWvY4uQI/AAAAAAAAADw/zJtA1-Q8bjE/s1600-h/bbmacd_perfrpt_graph.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bollinger-with-multi-macd-system/' title='2008-01-02T19:40:00'>02 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
 <p class="paginator">
 			<a href="http://www.quantisan.com/tag/EasyLanguage//index.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
 
+                    <a href="http://www.quantisan.com/tag/EasyLanguage//index3.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
 </p>
     </section>
 

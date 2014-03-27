@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/style.css">
+    <link rel="stylesheet" type="text/css" href="http://www.quantisan.com/theme/css/pygments.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:800,400,300|Inconsolata' rel='stylesheet' type='text/css'>
+	<link href="http://www.quantisan.com/" type="application/atom+xml" rel="alternate" title="Quantitative Artisan ATOM Feed" />
+
+
+        <title>Quantitative Artisan</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Paul Lam">
+</head>
+
+<body>
+    <section id="navbar">
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+        </div>
+        <div class="nav-button">
+            <ul>
+                                    <li><a href="http://www.quantisan.com/about/">About</a></li>
+                            <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                            <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                            <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                            <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                            <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+             </ul>
+         </div>
+     </section>
+
+     <section id="sidebar">
+        <img src="/images/profile_circle.png" id="logo" alt="logo">
+
+        <div class="user_meta">
+            <h1 id="user"><a href="http://www.quantisan.com" class="">Paul Lam</a></h1>
+            <h2>Data. Engineering. Startup.</h2>
+            <ul>
+                        <li><a href="http://www.quantisan.com/about/">About</a></li>
+                        <li><a href="mailto:paul@quantisan.com">Email</a></li>
+                        <li><a href="http://www.twitter.com/Quantisan">Twitter</a></li>
+                        <li><a href="http://www.github.com/Quantisan">Github</a></li>
+                        <li><a href="http://www.linkedin.com/in/paullam">LinkedIn</a></li>
+                        <li><a href="http://feeds.feedburner.com/Quantisan">Subscribe</a></li>
+            </ul>
+        </div>
+        <footer>
+            <address>
+                Powered by <a href='http://docs.getpelican.com/en/latest/'>Pelican</a>,
+                <a href='https://github.com/jamescooke/pelican-svbtle#readme'>theme info</a>.
+            </address>
+        </footer>
+    </section>
+
+    <section id="posts">
+	
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/comparing-data-point-to-ema-note/" rel='bookmark'>Comparing data point to EMA note</a>
+            </h1>
+            <div class="article-content"> <p>I have been using EMA comparison a lot lately. For example, if MyRSI >
+XAverage(MyRSI, MALength) then ... as a breakout indicator. However,
+there might be a small problem.</p>
+<p>A better form might be to use "MyRSI > XAverage(MyRSI, MALength)[1]"
+Such that the current MyRSI isn't included in the XAverage calculation.
+This would yield more difference since the EMA isn't "pulled" closer by
+the current value to itself, as the latest data point has the most
+significance in an EMA calculation.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/comparing-data-point-to-ema-note/' title='2008-01-04T23:50:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/200-contracts-bar-the-sweet-spot-for-zg/" rel='bookmark'>200 contracts / bar the sweet spot for ZG?</a>
+            </h1>
+            <div class="article-content"> <p>The average daily volume of ZG seems to be about 20,000 contracts. Given
+about 21 hours of trading per day. 20000 contracts / 1260 minutes \~= 15
+contracts / minute. So using a minimum of 100 contracts / bar chart
+seems reasonable. A 200 to 300 contracts bar seem to be a good starting
+point on first glimpse.</p>
+<p>The key is to maintain reaction time of the system while not
+overtrading. I prefer to catch the big wave and not worry about the dips
+and spikes too much. Ideal holding period is in hours and not minutes.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/200-contracts-bar-the-sweet-spot-for-zg/' title='2008-01-04T18:21:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/futures/">futures</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/" rel='bookmark'>3EMA High Low Close crossover long strategy</a>
+            </h1>
+            <div class="article-content"> <p>Based on yesterday's trading strategy, I developed my own 3EMA crossover
+strategy. Instead of only using the Close data. The high and low are
+also used. Here's the idea.</p>
+<p>Condition1 = EmaLow crosses above EmaMedClose and EmaMedClose >
+EmaSlowClose; Condition2 = EmaMedClose crosses above EmaSlowClose and
+EmaLow > EmaSlowClose;</p>
+<p>Buy if Condition1 OR Condition2 is true.</p>
+<p>Sell if EmaHigh crosses below EmaMedClose OR EmaMedClose crosses below
+EmaSlowClose OR EmaLow crosses below EmaSlowClose.</p>
+<p>EMA length are set to: FastHighLength(7), FastLowLength(7),
+MedCloseLength(18), SlowCloseLength(30).</p>
+<p>The system does well to catch big breakouts. The 2 problems though is
+that it is very laggy and the whipsaws in pricing are eating it alive.
+See figure below.</p>
+<p>Also, notice that I'm using a 100 contracts / bar chart.</p>
+<p><img alt="graph" src="http://bp3.blogger.com/_Vlx60iTPx5s/R36xO_Y4uWI/AAAAAAAAAEk/cwu-8W10Ue8/s1600-h/3emastrategy.jpg" /></p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/' title='2008-01-04T18:15:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
+                <a href="http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/" rel='bookmark'>3-MA crossovers, claimed 1.84 profit factor</a>
+            </h1>
+            <div class="article-content"> <p>Saw a forum post on TradeStation claiming 1.84 proft factor. The concept seems
+interesting. Here is the code for later study. <a href="https://www.tradestation.com/Discussions/Topic.aspx?Topic_ID=70059">Here is the link to the
+post</a>.</p>
+<p><code>[ IntraBarOrderGeneration = False ]</code></p>
+<p>Inputs: EMAFastLength(4), EMAMedLength(5), EMASlowLength(22),
+ValidBars(2);</p>
+<p>Variables: EMAFast(0), EMAMed(0), EMASlow(0), BuyHighAmt(0),
+LSetUp(False), LSetCount(0);</p>
+<p>{ Calculation Section } EMAFast = XAverage(Close,EMAFastLength); EMAMed
+= XAverage(Close,EMAMedLength); EMASlow = XAverage(Close,EMASlowLength);</p>
+<p>{ Define Entry SetUp Conditions } If EMAFast crosses above EMAMed and
+EMAMed > EMASlow then begin BuyHighAmt = High+ 1 point; LSetUp = True;
+LSetCount = 1; end;</p>
+<p>If EMAMed crosses above EMASlow and EMAFast > EMASlow then begin
+BuyHighAmt = High + 1 point; LSetUp = True; LSetCount = 1; end;</p>
+<p>{ Entry SetUp is Valid - Make Long Entry if BuyHighAmt is reached } If
+LSetUp and (TradesToday(Date) = 0 or (MarketPosition = 1 and
+PositionProfit > CurrentContracts*45)) Buy next bar at BuyHighAmt
+stop;</p>
+<p>{ SetUp Failed or Long Entry Was Made - Reset Entry Conditions }
+LSetCount = LSetCount + 1 ;</p>
+<p>//If LSetCount > ValidBars or MarketPosition = 1 then {allows only one
+entry} If LSetCount > ValidBars or BarsSinceEntry \&lt;= ValidBars then
+{replace this line with above line to allows only one entries in the
+same direction} begin BuyHighAmt = 9999; LSetUp = False; LSetCount = 0;
+end; // end of code //</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/3-ma-crossovers-claimed-184-profit-factor/' title='2008-01-03T23:19:00'>03 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+<p class="paginator">
+		        <a href="http://www.quantisan.com/index142.html" class="button_accent">&larr;&nbsp;&nbsp;&nbsp;newer</a>
+
+                    <a href="http://www.quantisan.com/index144.html" class="button_accent" style="position: absolute; right: 0;">continue&nbsp;&nbsp;&nbsp;&rarr;</a>
+</p>
+    </section>
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+		try {
+			var pageTracker = _gat._getTracker("UA-2047602-4");
+			pageTracker._trackPageview();
+		} catch(err) {}</script>
+</body>
+</html>
