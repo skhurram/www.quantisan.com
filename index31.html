@@ -58,6 +58,34 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/bought-200-kto-1594/" rel='bookmark'>Bought 200 K.TO @ $15.94</a>
+            </h1>
+            <div class="article-content"> <p>Update Aug 13: I got stopped out at \$15.80 for small loss. Precious
+metals and the miners are holding well in today's 30 point drop in S&amp;P
+(<a href="http://online.wsj.com/article/SB10001424052748704901104575422901187797266.html?mod=WSJ_hpp_LEFTWhatsNewsCollection">WSJ article</a>). In particular, gold just made a higher low (Figure 1)
+and AUD/USD is holding 0.8900 somewhat. As such, I've lowered my mental
+stop on the <a href="http://www.quantisan.com/bought-3-paa-to-10dec-puts-25-00-2-27-mark-24-75/">PAA.TO short</a> to \$24.30, a mere few cents above.
+Secondly, I am taking a long position in the Kinross Gold Corp. (K.TO).</p>
+<p>[caption id="" align="aligncenter" width="570"
+caption="Gold"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-11-Gold.png" />][][/caption]</p>
+<p>As evident in Figure 2, Kinross has been taking a beating the past year.
+However, it is trading on a long term Fibonacci support level around
+\$15.80. Thus, I am buying here with a small position while Kinross is
+making higher lows intraday and on the daily (so far).</p>
+<p>I have set a mental stop at \$15.60 and a hard stop at \$15.50.</p>
+<p>Risk is (\$15.94-\$15.50) * 200 = \$88 + \$9.90 commission = \$97.9 =
+1% of account.</p>
+<p>[caption id="" align="aligncenter" width="570" caption="Kinross Gold
+Corp. (K.TO) weekly chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO-wkly.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO-wkly.png">1</a>[/caption] [caption id=""
+align="aligncenter" width="570" caption="Kinross Gold Corp. (K.TO) daily
+chart"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-08-11-K.TO.png">2</a>[/caption]</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/bought-200-kto-1594/' title='2010-08-11T15:53:00'>11 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/jforex-example-not-letting-profit-turn-to-losses-with-a-breakeven-stop/" rel='bookmark'>JForex Example: Not letting profit turn to losses with a breakeven stop</a>
             </h1>
             <div class="article-content"> <p>While the <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual-timeframe trading setup</a> and much of the algorithm in
@@ -161,50 +189,6 @@ align="aligncenter" width="570" caption="Pan America Silver Corp.
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/bought-3-paato-10dec-puts-2500-227-mark-2475/' title='2010-08-06T10:55:00'>06 August 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/" rel='bookmark'>JForex Example:  Multiple-time frame strategy</a>
-            </h1>
-            <div class="article-content"> <p>The key to my July JForex strategy is the use of multiple time frames.
-As Dr. Alexander Elder demonstrates in his famous book, <em>Trading For A
-Living</em>, a proper technical analysis should at least consider time
-frames five-times faster and slower than the one in which you trade. For
-example, if you trade on a 30 minute chart, the one faster is 30/5 = 6
-minutes, which can be rounded as the five-minute chart. And the one
-slower would be 30 * 5 = 150 minutes. The closest standard time frame
-of which is a 4-hour chart.</p>
-<p>For <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my July JForex strategy</a>, it trades
-on the 30 minute chart and monitor the 4-hour chart in addition to the
-30-minute chart. The strategy doesn't make use of a faster time frame
-for simplicity. This is surprisingly easy to do in <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>'s
-JForex API.</p>
-<p>Referring to lines 81 to 87 of <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my strategy source code</a>. </p>
-<div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">==</span> <span class="n">PERIODINT</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">askBar</span><span class="o">);</span> 
-    <span class="k">return</span><span class="o">;</span>
-<span class="o">}</span> 
-<span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">!=</span> <span class="n">PERIODSHR</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// skip all other periods</span>
-</pre></div>
-
-
-<p>This chunk of code
-appears in the onBar() method. Since onBar() is called at the beginning
-of every price bar across all possible standard periods (from tick to
-weekly), it's just a matter of filtering out the redundant periods
-and/or catching the method when the period is correct. I have done both
-in the sample code. Line 81 is to catch the longer period, <code>PERIODINT = Period.FOUR\_HOURS</code> (line 54, not shown), in an <code>if</code> statement block. It
-calls my function <code>setSentiment()</code> and exits <code>onBar()</code> with the <code>return</code>,
-skipping everything in onBar() afterward. Line 87 is to skip all other
-periods that I'm not using. I could have used <code>if (period == PERIODSHR)</code>
-and put everything in an <code>if</code> block as in lines 81-85. But since the
-strategy is doing a lot more work in <code>PERIODSHR</code>, there would be a lot of
-codes in that IF block. So I am doing the reverse for the same result
-but simpler-looking codes. With this cleared, I can go over my <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual
-moving average entry signal setup</a> in the next post later this week.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/' title='2010-08-04T06:30:00'>04 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

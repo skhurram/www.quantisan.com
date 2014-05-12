@@ -58,6 +58,41 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/2ma-w-adx-and-disappointing-realization/" rel='bookmark'>2MA w/ ADX and disappointing realization</a>
+            </h1>
+            <div class="article-content"> <p>Another day, another strategy. For the past couple of days, I've been
+working on the 2MA cross with ADX confirmation strategy for ER2H08 1200
+sh/bar. Basically, an HMA(Low, 8) crossing over EMA(Low, 24) as the
+trigger. Condition2 is that the current high is highest of past 3 bars.
+Condition3 is current ADX is also highest of the past 3 bars. Condition4
+is that it is during day time so fewer slippage.</p>
+<p>Exit is simply HMA(Low, 23) crossing under EMA(Low, 33) or it is nearing
+the close of the day session. Stop is \$350; Floor is \$500 and 63%
+retracement.</p>
+<p>Upon loose optimization on Oct 1, 2007 to Nov 30, 2007 data, the Long
+strategy achieved 3.37 profit factor, 57% profitable, and a steadily
+rising performance graph. Very good indeed. I was estatic yesterday.</p>
+<p>I continued to work on the strategy for the whole day today and
+developed a Short version using the same concept. The result were very
+good too (PF > 3, etc).</p>
+<p>From the back-testing data, the Long and Short together has PF over 2
+and steady rising performance too. From the calculation, I would make
+over \$7000 for the 2 months on 1 contract alone.</p>
+<p>Feeling pretty confident, I felt the system was somewhat complete, so I
+tested it using the lastest 30 days of data. Unfortunately, it failed
+miserably. PF was way under 1.0 and the gross profit were a mere couple
+of thousand dollars. The net profit were estimated to be just a few
+hundred dollars.</p>
+<p>So I tested the system on another set of data. August 2007. The result
+was even worse!</p>
+<p>Long story short, I found out that ADX isn't that reliable to confirm
+with major swings.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/2ma-w-adx-and-disappointing-realization/' title='2008-01-08T23:50:00'>08 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/er2-1200-contracts-bar/" rel='bookmark'>ER2 1200 contracts / bar</a>
             </h1>
             <div class="article-content"> <p>Upon further reading of the charts, ER2 does seem like a better deal for
@@ -112,25 +147,6 @@ RSI(HMA(close, 8), 14) or HMA(RSI(close, 14), 8).</p>
 <p>[<img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" />]: http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s1600-h/3mas.jpg</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/new-moving-average/' title='2008-01-06T00:49:00'>06 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/filtering-out-the-whipsaws/" rel='bookmark'>Filtering out the whipsaws</a>
-            </h1>
-            <div class="article-content"> <p>Whipsaws in pricing is the archilles' heel in trend following system. As
-demonstrated by the previous 3 trading strategies, once the price is in
-a narrow trading range, trend following systems would trigger many
-erraneous trades to eat away the account.</p>
-<p>An idea I'm having is to use ADX to filter out some of these trades.
-Either by comparing ADX to EMA(ADX)[1] or use DMI by ensuring + index >
-- index for long, for examples.</p>
-<p>I tested a Momentum(ADX) idea by using MyADX > MyADX[10] as a condition
-on the 3-EMA crossovers strategy as discussed today. It doesn't seem to
-be doing much as the DMI values jump around. Perhaps employing the MACD
-concept on ADX would yield some result.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/filtering-out-the-whipsaws/' title='2008-01-04T23:55:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

@@ -58,6 +58,89 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/recommendation-discovery-via-graph-traversal/" rel='bookmark'>Recommendation discovery via graph traversal</a>
+            </h1>
+            <div class="article-content"> <p>I am quite excited about graph computing these days. It represents relational data such as customer behaviour naturally and otherwise complicated problems break down to simple pattern matching algorithm. Take recommendation system, for example. One way to do it is by machine learning as <a href="http://en.wikipedia.org/wiki/Recommender_system">Wikipedia suggests</a>. But if we represent the data in a property graph, a simplistic solution surfaces intuitively. </p>
+<p>Picture this. If Bob likes item A; Cathy likes both item A and item B; then we can make the commutative link of item B for Bob.</p>
+<p>Let's try it out in <a href="http://www.neo4j.org">Neo4j</a> using <a href="http://console.neo4j.org/?id=2096v6">this pre-built web console example</a>. You should see this graph with 4 person and 5 food items.</p>
+<p><img alt="simple graph" src="/static/images/2012/simple_graph.png" /></p>
+<p>Using this <a href="http://docs.neo4j.org/chunked/milestone/cypher-query-lang.html">Cypher query</a>, we get a list of all users and what food they like.</p>
+<div class="highlight"><pre><span class="n">START</span>   <span class="n">user</span> <span class="o">=</span> <span class="n">node</span><span class="o">:</span><span class="n">node_auto_index</span><span class="p">(</span><span class="n">type</span> <span class="o">=</span> <span class="s">&quot;user&quot;</span><span class="p">)</span> 
+<span class="n">MATCH</span>   <span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">IS_A</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">user</span><span class="p">,</span> <span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">LIKE</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">x</span>
+<span class="n">RETURN</span>  <span class="n">person</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">x</span><span class="p">.</span><span class="n">name</span>
+</pre></div>
+
+
+<p>The second line is where we <code>match</code> the pattern that <code>person is a user</code> and that <code>person like x</code>. This query reads almost like the question which we want to ask.</p>
+<p>We return all the person and those food they like, <code>x</code>:</p>
+<div class="highlight"><pre><span class="o">+------------------------+</span>
+<span class="o">|</span> <span class="n">person</span><span class="p">.</span><span class="n">name</span> <span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="n">name</span>   <span class="o">|</span>
+<span class="o">+------------------------+</span>
+<span class="o">|</span> <span class="s">&quot;Andy&quot;</span>      <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Andy&quot;</span>      <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Andy&quot;</span>      <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Bob&quot;</span>       <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Bob&quot;</span>       <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Cat&quot;</span>       <span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Doug&quot;</span>      <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;Doug&quot;</span>      <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span>
+<span class="o">+------------------------+</span>
+</pre></div>
+
+
+<p>Taking this a step further, we can find all the top common <code>x</code> and <code>y</code> that people like together in the above graph.</p>
+<div class="highlight"><pre>START   food <span class="o">=</span> node<span class="o">:</span>node_auto_index<span class="p">(</span>type <span class="o">=</span> <span class="s">&quot;food&quot;</span><span class="p">),</span> user <span class="o">=</span> node<span class="o">:</span>node_auto_index<span class="p">(</span>type <span class="o">=</span> <span class="s">&quot;user&quot;</span><span class="p">)</span> 
+MATCH   food<span class="o">&lt;-</span><span class="p">[</span><span class="o">:</span>IS_A<span class="p">]</span><span class="o">-</span>x<span class="o">&lt;-</span><span class="p">[</span><span class="o">:</span>LIKE<span class="p">]</span><span class="o">-</span>person<span class="o">-</span><span class="p">[</span><span class="o">:</span>IS_A<span class="p">]</span><span class="o">-&gt;</span>user<span class="p">,</span>
+        person<span class="o">-</span><span class="p">[</span><span class="o">:</span>LIKE<span class="p">]</span><span class="o">-&gt;</span>y<span class="o">-</span><span class="p">[</span><span class="o">:</span>IS_A<span class="p">]</span><span class="o">-&gt;</span>food
+WHERE   NOT x <span class="o">=</span> y
+RETURN  x.name<span class="p">,</span> y.name<span class="p">,</span> count<span class="p">(</span><span class="o">*</span><span class="p">)</span> as cnt 
+ORDER BY cnt DESC 
+LIMIT <span class="m">10</span><span class="p">;</span>
+</pre></div>
+
+
+<p>Resulting in:</p>
+<div class="highlight"><pre><span class="o">+---------------------------+</span>
+<span class="o">|</span> <span class="n">x</span><span class="p">.</span><span class="n">name</span>   <span class="o">|</span> <span class="n">y</span><span class="p">.</span><span class="n">name</span>   <span class="o">|</span> <span class="n">cnt</span> <span class="o">|</span>
+<span class="o">+---------------------------+</span>
+<span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="mi">3</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="mi">2</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;orange&quot;</span> <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="mi">2</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;apple&quot;</span>  <span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">|</span> <span class="s">&quot;bread&quot;</span>  <span class="o">|</span> <span class="s">&quot;fish&quot;</span>   <span class="o">|</span> <span class="mi">1</span>   <span class="o">|</span>
+<span class="o">+---------------------------+</span>
+</pre></div>
+
+
+<p>So we find that a lot uf users that likes apple also likes orange or bread. We can then pick out all the people that likes <code>apple</code> but not <code>orange</code> yet to suggest (read: spam) <code>orange</code> to them.</p>
+<div class="highlight"><pre><span class="n">START</span>   <span class="n">apple</span> <span class="o">=</span> <span class="n">node</span><span class="o">:</span><span class="n">node_auto_index</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;apple&quot;</span><span class="p">),</span> <span class="n">orange</span> <span class="o">=</span> <span class="n">node</span><span class="o">:</span><span class="n">node_auto_index</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">MATCH</span>   <span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">LIKE</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">apple</span>
+<span class="n">WHERE</span>   <span class="n">NOT</span><span class="p">(</span><span class="n">person</span><span class="o">-</span><span class="p">[</span><span class="o">:</span><span class="n">LIKE</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">orange</span><span class="p">)</span>
+<span class="n">RETURN</span>  <span class="n">person</span><span class="p">.</span><span class="n">name</span>
+
+<span class="o">+-------------+</span>
+<span class="o">|</span> <span class="n">person</span><span class="p">.</span><span class="n">name</span> <span class="o">|</span>
+<span class="o">+-------------+</span>
+<span class="o">|</span> <span class="s">&quot;Bob&quot;</span>       <span class="o">|</span>
+<span class="o">+-------------+</span>
+</pre></div>
+
+
+<p>Easy, yes?</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/recommendation-discovery-via-graph-traversal/' title='2012-11-14T22:31:00'>14 November 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/a-hypothetical-data-analysis-platform/" rel='bookmark'>A hypothetical data analysis platform</a>
             </h1>
             <div class="article-content"> <p>My definition of a statistical platform is that it is a glue that ties orthogonal data analysis functions together. Take R for instance, it is a platform-as-application. You fire up R and everything is accessible to you. However, all the packages only work on top of R.</p>
@@ -105,18 +188,6 @@ architecture and agile methodologies to tackle this problem. And we had three mo
 <iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/' title='2012-09-04T16:30:00'>04 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/r-language-lacks-consistency/" rel='bookmark'>R language lacks consistency</a>
-            </h1>
-            <div class="article-content"> <p>That's the thing that gets under my skin about R. For example, why do I need to use <code>do.call</code> on a list but <code>apply</code> for data frame? Not only that, the two functions have entirely different names and signatures (edit: this is a bad example, see Joshua's explanation in the comment). I find that a lot of R is just a matter of memorising what to do under which condition. You can't simply guess or deduce what to do like a sane programming language would enable. I know that many solutions are just a Google search away, but I am not comfortable with the awkwardness of the language.</p>
-<p>Having said that, I've been using R reluctantly for a few years. I try to avoid it as much as possible. But there's just no other statistical platform that's so easy to be productive. I <a href="http://www.quantisan.com/tag/Incanter">tried Incanter for a while</a> but it doesn't seem that well suited for exploratory analysis as I usually end up writing functions up from scratch. More recently I played with <a href="http://www.julialang.org">Julia</a> briefly. Although it is too bleeding edge as there isn't even a release version yet.</p>
-<p>As much as I don't like R the language, the R platform and its package repertoire are incomparable at the moment. We did a bit of ggplot today at work. With the help of <a href="http://oobaloo.co.uk/">my coworker</a>, it only took a few minutes to hook R with our Hadoop cluster to pull some data and produce the graphs that we wanted. In comparison, Incanter's charts are pretty too but not very customisable. D3.js is very customisable but not quick to use at all. Then there's Julia, which can't do more than a bar or line chart for now.</p>
-<p>I haven't mentioned the other big contender, Python + Numpy + Scipy + Panda + PyPy + Matplotlib. I tried some of that too some time ago, but didn't get far with it. Come to think of it, I wrote <a href="http://www.quantisan.com/its-an-open-buffet-in-a-small-business">a similar babble like this</a> a year ago ... </p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/r-language-lacks-consistency/' title='2012-08-30T21:42:00'>30 August 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

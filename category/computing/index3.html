@@ -58,6 +58,43 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/" rel='bookmark'>Cascalog-checkpoint: Fault-tolerant MapReduce Topologies</a>
+            </h1>
+            <div class="article-content"> <p>
+Cascalog is an abstraction library on top of Cascading [for writing
+MapReduce jobs][]. Since the Cascalog library is maturing, the Twitter
+guys (core committers) have been building features around it so that
+it's not just an abstraction for Cascading. One of which is
+[Cascalog-checkpoint][]. It is a small, easy-to-use, and very powerful
+little add-on for Cascalog. In particular, it enables fault-tolerant
+MapReduce topologies. Building Cascading/Cascalog queries can be
+visualised as assembling pipes to connect a flow of data. Imagine that
+you have Flow A and B. Flow B uses the result from A along with other
+bits. Thus, Flow B is dependent on A. Typically, if a MapReduce job fail
+for whatever reason, you simply fix what's wrong and start the job all
+over again. But what if Flow A takes hours to run (which is common for a
+MR job) and the error happened in Flow B? Why re-do all that processing
+for Flow A if we know that it finished successfully? By using
+Cascalog-checkpoint, you can *stage* intermediate results (e.g. result
+of Flow A) and failed jobs can automatically pickup from the last
+checked point. An obvious thing to do but not something I've seen done
+in Hadoop. At least not as easy as this:
+<script src="https://gist.github.com/1915638.js?file=ccl-checkpoint-sample1.clj"></script>
+See [Sam Ritchie's post on cascalog-checkpoint][] for more examples. Of
+course, you need to coerce your flows such that output from Flow A can
+be read by Flow B. However, this is almost trivial via
+Cascalog/Cascading. As this notion of mix and match pipes and flows is a
+fundamental concept in Cascalog/Cascading. With so many choices of
+abstraction frameworks for coding MapReduce on Hadoop, I feel sorry for
+anyone using vanilla Java for writing MapReduce besides the most
+simplest or recurring jobs.
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/cascalog-checkpoint-fault-tolerant-mapreduce-topologies/' title='2012-02-26T09:38:00'>26 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel='bookmark'>My 5 minute lightning talk on Cascalog</a>
             </h1>
             <div class="article-content"> <p>Cascalog makes it a lot simpler to build distributed strategy
@@ -217,22 +254,6 @@ software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.<
 <p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel='bookmark'>Local Hadoop test cluster up and running</a>
-            </h1>
-            <div class="article-content"> <p>Thanks to <a href="http://www.cloudera.com/hadoop/">Cloudera's CDH3 image</a>, I have a virtual machine with
-Hadoop on CentOS 5 working. I'm more of an Ubuntu guy, so CentOS is a
-new for me. But nothing Google couldn't solve. I also ran into a Hadoop
-exception about the java heap space. I couldn't find a solution online
-so I just bumped up the memory on the virtual machine and it solved the
-problem. In any case, I managed to run <a href="http://developer.yahoo.com/hadoop/tutorial/module3.html#vm-jobs">the pi calculation example</a> on
-my local Hadoop cluster. [<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />][]</p>
-<p>[<img alt="" src="http://www.quantisan.com/static/images/2011/09/hadoop-example-pi-580x364.jpg" title="hadoop-example-pi" />]: http://www.quantisan.com/static/images/2011/09/hadoop-example-pi.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/' title='2011-09-14T22:42:00'>14 September 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

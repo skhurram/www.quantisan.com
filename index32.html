@@ -58,6 +58,50 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/" rel='bookmark'>JForex Example:  Multiple-time frame strategy</a>
+            </h1>
+            <div class="article-content"> <p>The key to my July JForex strategy is the use of multiple time frames.
+As Dr. Alexander Elder demonstrates in his famous book, <em>Trading For A
+Living</em>, a proper technical analysis should at least consider time
+frames five-times faster and slower than the one in which you trade. For
+example, if you trade on a 30 minute chart, the one faster is 30/5 = 6
+minutes, which can be rounded as the five-minute chart. And the one
+slower would be 30 * 5 = 150 minutes. The closest standard time frame
+of which is a 4-hour chart.</p>
+<p>For <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my July JForex strategy</a>, it trades
+on the 30 minute chart and monitor the 4-hour chart in addition to the
+30-minute chart. The strategy doesn't make use of a faster time frame
+for simplicity. This is surprisingly easy to do in <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a>'s
+JForex API.</p>
+<p>Referring to lines 81 to 87 of <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/">my strategy source code</a>. </p>
+<div class="highlight"><pre><span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">==</span> <span class="n">PERIODINT</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">setSentiment</span><span class="o">(</span><span class="n">instrument</span><span class="o">,</span> <span class="n">bidBar</span><span class="o">,</span> <span class="n">askBar</span><span class="o">);</span> 
+    <span class="k">return</span><span class="o">;</span>
+<span class="o">}</span> 
+<span class="k">if</span> <span class="o">(</span><span class="n">period</span> <span class="o">!=</span> <span class="n">PERIODSHR</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span> <span class="c1">// skip all other periods</span>
+</pre></div>
+
+
+<p>This chunk of code
+appears in the onBar() method. Since onBar() is called at the beginning
+of every price bar across all possible standard periods (from tick to
+weekly), it's just a matter of filtering out the redundant periods
+and/or catching the method when the period is correct. I have done both
+in the sample code. Line 81 is to catch the longer period, <code>PERIODINT = Period.FOUR\_HOURS</code> (line 54, not shown), in an <code>if</code> statement block. It
+calls my function <code>setSentiment()</code> and exits <code>onBar()</code> with the <code>return</code>,
+skipping everything in onBar() afterward. Line 87 is to skip all other
+periods that I'm not using. I could have used <code>if (period == PERIODSHR)</code>
+and put everything in an <code>if</code> block as in lines 81-85. But since the
+strategy is doing a lot more work in <code>PERIODSHR</code>, there would be a lot of
+codes in that IF block. So I am doing the reverse for the same result
+but simpler-looking codes. With this cleared, I can go over my <a href="http://www.quantisan.com/jforex-example-dual-timeframe-moving-averages-setup/">dual
+moving average entry signal setup</a> in the next post later this week.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/jforex-example-multiple-time-frame-strategy/' title='2010-08-04T06:30:00'>04 August 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/sixth-place-finish-in-the-dukascopy-jforex-july-strategy-contest/" rel='bookmark'>Sixth place finish in the Dukascopy JForex July strategy contest</a>
             </h1>
             <div class="article-content"> <p>Update Dec 7, 2010: I have won a few more times in this contest
@@ -647,41 +691,6 @@ reasons:</p>
 </ol> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/goodbye-microsoft/' title='2010-07-25T06:51:00'>25 July 2010</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/bought-250-vento-693/" rel='bookmark'>Bought 250 VEN.TO @ $6.93</a>
-            </h1>
-            <div class="article-content"> <p>I'm long Ventana Gold Corp. (VEN.TO), a junior gold mining company.
-Here's a look at gold (Figure 1) and the junior gold mining company
-index (GDXJ, Figure 2).</p>
-<p>[caption id="" align="aligncenter" width="570"
-caption="Gold"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-07-15-Gold.png" />][][/caption] [caption id="" align="aligncenter"
-width="570" caption="Market Vectors Junior Gold Miners ETF
-(GDXJ)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-07-15-GDXJ.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-07-15-GDXJ.png">1</a>[/caption]</p>
-<p>Both figures are from <a href="http://www.quantisan.com/finviz/">Finviz</a>.</p>
-<p>The reason why I picked VEN in particular is related to this article in
-June. Ventana Gold raises \$20 million in private placement. Silver
-Wheaton (SLW) paid \$20 million for shares priced at \$11.11 per share
-back in June. SLW is a well managed company in the precious metal
-industry. I've traded it before and it has always been <a href="http://www.quantisan.com/tag/slw/">on my radar to
-buy</a>.</p>
-<p>VEN has been taking a heavy beating in the past few weeks since SLW's
-investment as shown in Figure 3.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="Ventana Gold
-Corp. (VEN.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-07-15-VEN.TO.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-07-15-VEN.TO.png">2</a>[/caption]</p>
-<p>\$6.80 is the 50% retracement level to that recent rally (the first
-since the dive beginning in June). It seems to be holding well today
-despite market weakness.</p>
-<p>Furthermore, EUR/USD rocketed upward and is trading around 1.29. This
-isn't something to be ignored.</p>
-<p>So I'm taking a small bet here at \$6.93. Stop loss order is opened at
-\$6.40. My risk is thus, (\$6.93 - \$6.40) * 250 = \$132.50 + \$9.90
-commission = \$142.40 = 1.5% of account.</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/bought-250-vento-693/' title='2010-07-15T12:08:00'>15 July 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

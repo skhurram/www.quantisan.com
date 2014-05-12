@@ -58,6 +58,66 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel='bookmark'>Anatomy of a JForex strategy, Part 2</a>
+            </h1>
+            <div class="article-content"> <p>We looked at <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">four of the six methods in the IStrategy Interface</a> in a
+previous post. The last two methods, onTick and onBar, is where your
+strategy connect with market data. Either one, or both, of these methods
+is where you put your trading algorithm in. Your strategy would then be
+able to process the market data as they arrive one tick/bar at a time.
+Recall that IStrategy Interface is the skeleton of your strategy. And
+that IContext object is the heart of your strategy. onTick/onBar is the
+head of your strategy, which contains your trading algorithm, which is
+the brain.</p>
+<h2>onTick</h2>
+<p>Here's the method definition of onTick. </p>
+<div class="highlight"><pre><span class="n">onTick</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">ITick</span> <span class="n">tick</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p><strong>Important:</strong>onTick is called for each and every instrument that your
+JForex platform is subscribed to (the instrument list in your workspace
+box). Let me say that again, onTick is called for each and every
+instrument that your JForex platform is subscribed to. The standard
+practice is to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out ticks</a> for instruments that you don't want
+with a simple IF-return statement.
+<code>if (instrument != myInstrument) return;</code> Actual tick data is passed to
+your strategy using the ITick object from the onTick method's parameter.
+Take a look at the <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/ITick.html">ITick javadoc entry</a> to see what it offers.</p>
+<h2>onBar</h2>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBar</span><span class="o">(</span><span class="n">Instrument</span> <span class="n">instrument</span><span class="o">,</span> <span class="n">Period</span> <span class="n">period</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">askBar</span><span class="o">,</span> <span class="n">IBar</span> <span class="n">bidBar</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">JFException</span> <span class="o">{</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>onBar works in a similar manner to onTick. In which onBar is called for each
+and every subsribed instrument <em>and period</em> known to JForex. Similarly,
+you have to <a href="http://www.dukascopy.com/wiki/index.php?title=Filter_Ticks/Bars">filter out all the unwanted instruments and periods</a> or else there will be expected results from your strategy.
+Another point to note is that onBar provides both a <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IBar.html">IBar</a> askBar and
+IBar bidBar, representing the ask and bid bars. <strong>Question:</strong> What
+happens when two or more periods overlap as in 13:45? 1, 5, and
+15-minutes bars are all arriving at the same time (not to mention the
+periods in seconds too). <strong>Answer:</strong> According to Dukascopy Support in
+the forum, "They come in a strict order, for example (1min 1min 1min
+1min 1min 5min 1min 1min 1min 1min 1min 5min ..) They come in cycles,
+where <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/viewtopic.php?f=5&amp;t=23959">smaller periods comes first</a>."</p>
+<h2>JForex Support Forum</h2>
+<p>As you program your strategy with JForex, you will no doubt come up with
+questions of your own. The best place to ask is at the official <a href="http://www.dukascopy.com/swiss/english/forex/jforex/forum/">JForex
+Support Forum</a>. This is the last of the three essential JForex
+resources that I alluded to earlier. Even if you don't have any specific
+question, there are sample codes, coding discussion, and hundreds of
+existing Q&amp;A from other JForex developers posted in the forum.</p>
+<h2>Summary</h2>
+<p>The discussion so far has been very high level. To show you what you can
+actually <em>do</em> in an IStrategy, we will <a href="http://www.quantisan.com/dissecting-a-jforex-strategy-ma_play-java/">dissect a working strategy in
+the next post</a>. And what else better to examine than the most popular
+JForex strategy of them all -- MA_Play.java.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/' title='2010-12-14T07:49:00'>14 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/" rel='bookmark'>Anatomy of a JForex strategy, Part 1</a>
             </h1>
             <div class="article-content"> <p>Continuing on from Part 1 of this series: <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">Getting started learning
@@ -237,48 +297,6 @@ effort. For information or registration in the contest, <a href="http://www.duka
 Dukascopy website</a> and navigate to the Trader Contest page.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/another-trading-contest-from-dukascopy/' title='2010-12-06T12:23:00'>06 December 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/what-is-a-trading-system/" rel='bookmark'>What is a trading system?</a>
-            </h1>
-            <div class="article-content"> <p>For some traders, building a trading system means that they focus on
-finding the best indicators they could get their hands on or the one
-trading setup that is backtested to work 99% of the time. All I can say
-is, to each his own. For me, the keyword of a trading system lies not
-with <em>trading</em>, but with <em>system</em>. Remember, it is a system. First of
-all, it is a system <em>for trading</em>. Not a system <em>to trade</em>. What do I
-mean by that? Consider this saying, "traders don't go broke by missing
-opportunities, they go broke by taking too many." A trading system needs
-to be selective. It needs <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">prudent risk management</a>. Secondly, you
-need to generate your own market view to trade. Rather it be technical,
-fundamental, sentimental, or just following some joe, you trade based on
-your view. Trading is a test of your market hypothesis using money. If
-you think the market will rise, you buy. If you think the market will
-fall, you short. Lastly, a trading system needs to execute trades.
-Otherwise you'd be an anlayst. It needs to time <a href="http://www.quantisan.com/tag/entry/">entries</a> and
-<a href="http://www.quantisan.com/tag/exit/">exits</a>. Again, this could be as simple as on a whim or as complicated
-as some n-th order algorithm. Thus we have the three pillars of a
-trading system.</p>
-<ol>
-<li>Risk Management</li>
-<li>Market Analysis</li>
-<li>Trade Execution</li>
-</ol>
-<p>What's more, if we combine some of these pillars we get some well known
-concepts. For example, market analysis + trade execution = trading
-signals, wherein you derive signals based on market conditions to
-execute trades. Or risk management + trade execution = position
-management, wherein you manage your holdings by manipulating your trades
-based on your risk profile. All these relationships and composition of a
-trading system can be summarized with a Venn diagram. So, this is my
-view of a trading system:</p>
-<p>[caption id="" align="aligncenter" width="414" caption="Trading system
-Venn diagram"]<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-11-30-TradingVennDiag.png" />[/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/what-is-a-trading-system/' title='2010-11-30T10:25:00'>30 November 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
 <p class="paginator">

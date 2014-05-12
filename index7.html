@@ -58,6 +58,53 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/" rel='bookmark'>Ask not what accuracy your algorithm achieves but what value it can add</a>
+            </h1>
+            <div class="article-content"> <p>Partnering with the marketing team at work earlier this month reminded
+me of an important lesson in my algorithmic trading. Our  external TV
+agency presented a mid-term performance analysis and I was tasked with
+performing due diligence on their analysis methodology. It took me 2
+minutes to realise that they were using a linear regression model. At
+first I thought it was too simplistic. Then I realised my own naivete
+because it was never about accuracy to begin with. Measuring ROI on a
+marketing campaign is an illusive task. A quick metric is to perform a
+regression on the money you spent versus the revenue generated in the
+same time period. For example, let y(t) = x(t), where y represents
+revenue, x is marketing spending, and t is day. Plot your data on y
+versus x for a number of days. Then draw a best fit straight line to
+graphically show a correlation. If you're feeling adventurous, throw in
+a few other factors that you think might have important influence on
+your daily revenue. Such that you have x2(t), x3(t), etc. This is what
+the agency did in their model. One major flaw with using a regression
+model for this purpose is that it assumes each data point is mutually
+exclusive to another. So a day's event does not influence another. This
+is simply not true in the real world. For examples, it might take a few
+days after someone sees your ad until they click your buy button or it
+might take more than a few showing of the ads until people take action.
+A better regression model for the first example is y(t) = x1(t - a),
+where 'a' is the delay. And for the second example, y(t) = ∑x1(t - A),
+where A is a vector of 'a'. The problem with this is that finding 'a'
+and 'A' is another regression problem in and of itself. Luckily, this is
+conceptually what an Artificial Neural Network does, a series of
+regression models taking into account the interrelation of the factors
+and non-linear effects of the response. And so, within the span of a few
+minutes of our conference call with them, I've just convinced myself in
+my mind to try another algorithm when I have a chance. That weekend I
+wasted a few hours on R tinkering with the data. Then it finally dawned
+on me. What is the value of this? To calculate an ROI figure on our
+marketing campaign, is it necessary to spike a machine learning project
+just so we can be 95% confident on that figure? The justification is
+further weakened by the fact that ROI is merely one of the many metrics
+available when <a href="https://en.wikipedia.org/wiki/Marketing_performance_measurement_and_management">evaluating a marketing campaign</a>. So the impact of an
+accurate model versus a throw in the dart might not be worth spending an
+extra two weeks working on it whereas a throwing a dart takes only one
+command in R.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/' title='2012-01-29T11:56:00'>29 January 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/business-is-on-hold/" rel='bookmark'>Business is on hold</a>
             </h1>
             <div class="article-content"> <p>Back in November, I started working as a Data Scientist at <a href="http://www.uswitch.com">uSwitch</a>,
@@ -217,27 +264,6 @@ software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.<
 <p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/" rel='bookmark'>I've quit my day job and moved to the UK to do this full time</a>
-            </h1>
-            <div class="article-content"> <p>My wife is pursuing graduate study at Oxford. So I'm taking this rare
-opportunity to quit my day job and concentrate on developing trading
-systems full time. I am also doing some consulting to keep in touch with
-civilization. I have just one project at the moment building a customer
-relation system for a friend's financial services startup.</p>
-<p>Now for some self-promotion. I specialise in building software systems
-for information discovery, and of course, trading systems too. If you
-know of any business that can make use of an information discovery
-system for better customer relation, inventory management, etc, then
-please forward <a href="mailto:paul@quantisan.com">email</a>.</p>
-<p>That's it for the public service announcement. I'll be off to my first
-meetup this Sunday to hack on an open source statistical computing
-platform. I can't wait to meet some very smart people!</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/' title='2011-10-14T08:40:00'>14 October 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
 <p class="paginator">

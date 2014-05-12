@@ -58,6 +58,88 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/simple-easy-quick-using-go-along-with-clojure/" rel='bookmark'>Simple, Easy, Quick: Using Go along with Clojure</a>
+            </h1>
+            <div class="article-content"> <p>We had questions about how Go compares with Clojure at the Boston Clojure Meetup this week. My default answer to any technology this-vs-that debate is -- <em>it depends</em>. But it just so happens that our backend system at Glassy Media consist of an even split of services written between Go and Clojure. However, ths isn't due to any technical reasoning. Using the two languages together feels right to our particular needs.</p>
+<p>Rich Hickey made clear the distinction between simple and easy in his famous talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Clojure made simple easy. But sometimes I don't want simple and easy. I want quick and easy. That is exactly where Go can complement Clojure.</p>
+<p><img alt="Simple, Easy, Quick" src="http://www.quantisan.com/images/2014/simple_easy_quick_triangle.png" /></p>
+<p>How Clojure made simple easy has been a path well beaten. The rest of this post is why I think Go is quick and easy.</p>
+<h2>Our Path To Go</h2>
+<p>Once upon a time (i.e. a few months ago) our backend cogs and gears consisted of a bunch of command line programs that we would run on our laptop every now and then to churn our data. We distributed those tools to our non-developer helpers to serve our clients. Those command line tools started out in Python or Node.js. But distributing, maintaining, and updating those programs to other people's laptops eventually became a real pain. So one weekend I rewrote one of our command line programs in Go. On Monday I shared a link to a single executable file on Dropbox and people were able to run it directly from there. No more asking people to go on command line and typing <code>pip install</code> or <code>npm install</code>. That was how we started using Go at Glassy Media.</p>
+<p>I had no prior experience with Go before that. The fact that I was able to learn the language and then produce something useful over a weekend doesn't have to do with me. It is the practicality of the language, clear documentation, and smart tooling that makes Go easy to ramp up.</p>
+<h3>Language Practicality</h3>
+<p>Take the <code>for</code> loop as an example, you can iterate over a map like so. (code sample taken from <a href="http://golang.org/doc/effective_go.html#for">Effective Go</a>)</p>
+<div class="highlight"><pre><span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">oldMap</span> <span class="p">{</span>
+    <span class="nx">newMap</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">value</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The same <code>range</code> can be used to iterate over an array:</p>
+<div class="highlight"><pre><span class="nx">sum</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">array</span> <span class="p">{</span>
+    <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">value</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>No need for additional syntax to do the same thing. And there're no <code>while</code> or <code>do</code> loops too. There is only <code>for</code> to do all of that as shown.</p>
+<div class="highlight"><pre><span class="c1">// complete `for` struct</span>
+<span class="k">for</span> <span class="nx">init</span><span class="p">;</span> <span class="nx">condition</span><span class="p">;</span> <span class="nx">post</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="c1">// only check condition like a `while`</span>
+<span class="k">for</span> <span class="nx">condition</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="c1">// or, nothing like a `do`</span>
+<span class="k">for</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+
+
+<p>The Go core syntax is consistently minimal like so.</p>
+<h3>Clear Documentation</h3>
+<p>From <a href="http://blog.golang.org/godoc-documenting-go-code">The Go Programming Language</a>,</p>
+<div class="highlight"><pre> <span class="n">The</span> <span class="n">Go</span> <span class="n">project</span> <span class="n">takes</span> <span class="n">documentation</span> <span class="n">seriously</span><span class="p">.</span> <span class="n">Documentation</span> <span class="n">is</span> <span class="n">a</span> <span class="n">huge</span> <span class="n">part</span>
+ <span class="n">of</span> <span class="n">making</span> <span class="n">software</span> <span class="n">accessible</span> <span class="n">and</span> <span class="n">maintainable</span><span class="p">.</span> <span class="n">Of</span> <span class="n">course</span> <span class="n">it</span> <span class="n">must</span> <span class="n">be</span>
+ <span class="n">well</span><span class="o">-</span><span class="n">written</span> <span class="n">and</span> <span class="n">accurate</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="n">also</span> <span class="n">must</span> <span class="n">be</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">write</span> <span class="n">and</span> <span class="n">to</span>
+ <span class="n">maintain</span><span class="p">.</span> <span class="n">Ideally</span><span class="p">,</span> <span class="n">it</span> <span class="n">should</span> <span class="n">be</span> <span class="n">coupled</span> <span class="n">to</span> <span class="n">the</span> <span class="n">code</span> <span class="n">itself</span> <span class="n">so</span> <span class="n">the</span>
+ <span class="n">documentation</span> <span class="n">evolves</span> <span class="n">along</span> <span class="n">with</span> <span class="n">the</span> <span class="n">code</span><span class="p">.</span> <span class="n">The</span> <span class="n">easier</span> <span class="n">it</span> <span class="n">is</span> <span class="k">for</span>
+ <span class="n">programmers</span> <span class="n">to</span> <span class="n">produce</span> <span class="n">good</span> <span class="n">documentation</span><span class="p">,</span> <span class="n">the</span> <span class="n">better</span> <span class="k">for</span> <span class="n">everyone</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Go's source code documentation has simple convention and automatic publishing. Take our trivial <a href="https://github.com/GlassyMedia/go-arrays">go-arrays library for manipulating arrays</a>. Here is one of the functions and its docstring.</p>
+<div class="highlight"><pre><span class="c1">// Contains check if &#39;s&#39; is in &#39;coll&#39; string array</span>
+<span class="kd">func</span> <span class="nx">Contains</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">coll</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>What's amazing is that a corresponding project documentation page is automatically scraped from our source code and hosted on GoDoc.org with no extra work needed on our part. So as soon as you pushed a project onto Github, you can request your project documentation on GoDoc.org website. Here is a screenshot of one.</p>
+<p><img alt="Godoc.org for go-arrays" src="http://www.quantisan.com/images/2014/godoc_screen.png" /></p>
+<p>Because software documentation is baked into the process, I find most of the Go libraries are less frustrating to pickup.</p>
+<h3>Smart Tooling</h3>
+<p>I don't know why GoFmt isn't more common in programming. GoFmt is a tool that automatically <a href="http://golang.org/cmd/gofmt/">formats Go source code</a>. It is like <code>jshint</code> or <code>pyflakes</code> but goes an extra step further and actually fixes your code styling for you too. No more <code>gg=G</code> in Vim.</p>
+<p>Consistent source code styling makes life so much easier when digging into other people's projects.</p>
+<p>Overall, I enjoy the workflow developing in Go. There is no interactive REPL. What you get is an almost instant <code>go test</code> and <code>go run</code> execution time. Coming from doing everything in Vim, switching between my editor and the command line isn't as annoying as I would have thought.</p>
+<p>One reason for that is because the workflow is different when developing in Go. GoFmt is integrated in Vim (and other typical editors); along with the fact that Go is statically typed, by the time when your code saves without error, most of the time it would work as expected. So it's not that often when I need to resort to doing <code>go test</code> to check my code.</p>
+<h3>Go for Web Services</h3>
+<p>Having had Go in production for only a few months, our experience with Go is limited. Still, what stands out the most with Go is using it to build web services. Take our SMTP callback verification service, for example. The HTTP server code for it is <a href="https://github.com/GlassyMedia/smtp-callback-verification/blob/master/web.go">under 50 lines</a> using <a href="https://github.com/ant0ine/go-json-rest">go-json-rest</a> and a couple core packages. Not only that, Go has <a href="https://github.com/GlassyMedia/smtp-callback-verification/blob/master/web_test.go">mock HTTP server testing functionality built right in</a>.</p>
+<p>I am aware that this is subjective. But having used a handful of languages and frameworks to build RESTful web services, Go is by far the easiest to get a server up and running.</p>
+<h2>Complementing Clojure with Go</h2>
+<p>The one time when I had to choose between Go vs. Clojure was when the Boston Go Meetup happened on the same night as the Boston Clojure Meetup.</p>
+<blockquote class="twitter-tweet" lang="en"><p>.<a href="https://twitter.com/BostonGolang">@bostongolang</a> hmm... didn&#39;t think I&#39;ll have to take side Clojure vs. Go so soon</p>&mdash; Paul Lam (@quantisan) <a href="https://twitter.com/quantisan/statuses/446389305972621312">March 19, 2014</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Otherwise, there is no reason that Go and Clojure can't work along each other as part of a suite of toolset.</p>
+<p>Everyone has their tools of choice. Your taste and circumstance are probably different than mine. What matters is that the tools in your toolbox as a whole fit the problems that you face. Go and Clojure fill different needs for us.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/simple-easy-quick-using-go-along-with-clojure/' title='2014-05-12T00:00:00'>12 May 2014</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
             </h1>
             <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
@@ -323,74 +405,6 @@
 </pre></div> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/securing-a-fresh-ubuntu-server-with-fabric-tasks/' title='2013-05-06T08:34:00'>06 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/" rel='bookmark'>Unlock Lisp sorcery in your data structure by implementing Clojure ISeq</a>
-            </h1>
-            <div class="article-content"> <p>People that has gone through The Little Schemer might not find this exciting. One of the things that I discovered while patching <a href="http://quantisan.github.com/clatrix/">Clatrix</a> is that implementing clojure.lang.ISeq interface in your custom data structure unlocks the magic of Lisp composition. By enabling primative operators such as <code>first</code>, <code>next</code>, <code>more</code>, <code>cons</code>, higher-level operations such as <code>map</code> and <code>reduce</code> would just work when operating on your data structure. I find it fascinating that a native Fortran matrix object (through jBLAS) can be made clojury with a few magic operations implemented.</p>
-<p>However, getting a <code>deftype</code> implementation of <code>Matrix</code> correct took some effort as these operators are not as simple as they seem.</p>
-<div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISeq</span> <span class="kd">extends</span> <span class="n">IPersistentCollection</span> <span class="o">{</span>
-    <span class="n">Object</span> <span class="nf">first</span><span class="o">();</span>
-    <span class="n">ISeq</span> <span class="nf">next</span><span class="o">();</span>
-    <span class="n">ISeq</span> <span class="nf">more</span><span class="o">();</span>
-    <span class="n">ISeq</span> <span class="nf">cons</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
-<span class="o">}</span>
-</pre></div>
-
-
-<p>For example, say we have a matrix <code>M</code> like so.</p>
-<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="k">def </span><span class="nv">M</span> <span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]]))</span>
-<span class="nv">=&gt;</span> <span class="nv">M</span>
-<span class="nv">A</span> <span class="mi">3</span><span class="nv">x3</span> <span class="nv">matrix</span>
-<span class="nv">-------------</span>
-<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>  <span class="mf">3.00</span><span class="nv">e+00</span> 
-<span class="mf">4.00</span><span class="nv">e+00</span>  <span class="mf">5.00</span><span class="nv">e+00</span>  <span class="mf">6.00</span><span class="nv">e+00</span> 
-<span class="mf">7.00</span><span class="nv">e+00</span>  <span class="mf">8.00</span><span class="nv">e+00</span>  <span class="mf">9.00</span><span class="nv">e+00</span>
-</pre></div>
-
-
-<p>Reducing <code>M</code> across its maps is equivalent to a column-wise operation.</p>
-<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">map + </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">M</span><span class="p">)</span>
-<span class="p">(</span><span class="mf">12.0</span> <span class="mf">15.0</span> <span class="mf">18.0</span><span class="p">)</span>
-</pre></div>
-
-
-<p>Yet for a while this doesn't work because I wasn't careful on my implementation of <code>first</code>. </p>
-<p>Consider the case of a 2x2 matrix. A 2x2 matrix is structurally equivalent to a nested vector. Calling <code>first</code> on these would yield:</p>
-<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]])</span>
-<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
-<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]]))</span>
-<span class="nv">A</span> <span class="mi">1</span><span class="nv">x2</span> <span class="nv">matrix</span>
-<span class="nv">-------------</span>
-<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>
-</pre></div>
-
-
-<p>And for a 3x1 vector matrix, i.e. one-dimensional, it is equivalent to a regular vector.</p>
-<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
-<span class="mi">1</span>
-<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]))</span>
-<span class="mf">1.0</span>
-</pre></div>
-
-
-<p>But here's a tricky bit. What happens during <code>reduce</code> as it keeps recurring <code>next</code> and <code>first</code>?</p>
-<p>Let's step this through for <code>(reduce #(map + %1 %2) M)</code>. <code>%1</code> is basically the result so far and <code>%2</code> is the <code>first</code> of the remaining collection to be processed.</p>
-<table border="1">
-    <tr><th>iteration</th><th>accumulated (%1)</th><th>first (%2)</th><th>remaining</th></tr>
-    <tr><td>0</td><td>nil</td><td>[1 2 3]</td><td>[[1 2 3] [4 5 6] [7 8 9]]</td></tr>
-    <tr><td>1</td><td>[1 2 3]</td><td>[4 5 6]</td><td>[[4 5 6] [7 8 9]]</td></tr>
-    <tr><td>2, bad</td><td>[5 7 9]</td><td>7</td><td>[[7 8 9]]</td></tr>
-    <tr><td>2, good</td><td>[5 7 9]</td><td>[7 8 9]</td><td>[[7 8 9]]</td></tr>
-</table>
-
-<p>The problem arises in the second iteration. Calling <code>(rest [[4 5 6] [7 8 9]])</code> returns <code>[[7 8 9]]</code>. However, <code>(matrix [[7 8 9]])</code> is a row vector and <code>(matrix [7 8 9])</code> is a column vector. Both are considered one dimensional. In either case, <code>first</code> of a vector should return the first element, which is a number. Thus at this iteration, <code>reduce</code> breaks because you can't map a sequence with a number, <code>(map + [5 7 9] 7)</code>, to get an accumulated value.</p>
-<p>What we want though, is for the second iteration to return <code>[7 8 9]</code> instead because the <em>original</em> matrix is not a vector. Luckily, this particular problem has been solved by my colleague <a href="https://github.com/antoniogarrote">Antonio Garrote</a> when he <a href="https://github.com/forward/incanter-BLAS">did this in Java a year ago</a> by keeping a predicate field signifying is <em>this</em> matrix supposed to be vector or not.</p>
-<p>So there you have it. If you find yourself needing to implement <code>deftype</code> to build your own data structure in Clojure. Do consider implementing <code>clojure.lang.ISeq</code> to leverage high-level Clojure functions but be careful about those seemingly simplistic primitive operators.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/' title='2012-12-31T15:42:00'>31 December 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

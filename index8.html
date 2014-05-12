@@ -58,6 +58,27 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/" rel='bookmark'>I've quit my day job and moved to the UK to do this full time</a>
+            </h1>
+            <div class="article-content"> <p>My wife is pursuing graduate study at Oxford. So I'm taking this rare
+opportunity to quit my day job and concentrate on developing trading
+systems full time. I am also doing some consulting to keep in touch with
+civilization. I have just one project at the moment building a customer
+relation system for a friend's financial services startup.</p>
+<p>Now for some self-promotion. I specialise in building software systems
+for information discovery, and of course, trading systems too. If you
+know of any business that can make use of an information discovery
+system for better customer relation, inventory management, etc, then
+please forward <a href="mailto:paul@quantisan.com">email</a>.</p>
+<p>That's it for the public service announcement. I'll be off to my first
+meetup this Sunday to hack on an open source statistical computing
+platform. I can't wait to meet some very smart people!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/' title='2011-10-14T08:40:00'>14 October 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/local-hadoop-test-cluster-up-and-running/" rel='bookmark'>Local Hadoop test cluster up and running</a>
             </h1>
             <div class="article-content"> <p>Thanks to <a href="http://www.cloudera.com/hadoop/">Cloudera's CDH3 image</a>, I have a virtual machine with
@@ -129,33 +150,6 @@ over-engineering for a small entity like myself. But heck, this is
 something that I enjoy building. So why not?</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/towards-a-broker-agnostic-trading-system/' title='2011-09-01T21:01:00'>01 September 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/vector-algorithm-using-tree-composition/" rel='bookmark'>Vector algorithm using tree composition</a>
-            </h1>
-            <div class="article-content"> <p>Sniffed this trick from the Incanter source. Here's a demo of using tree
-composition to calculate a 2-d Euclidean distance between two points.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">x</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">])</span> 
-<span class="p">(</span><span class="k">def </span><span class="nv">y</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">])</span> 
-<span class="p">(</span><span class="kd">defn- </span><span class="nv">tree-comp-each</span> <span class="p">[</span><span class="nb">root </span><span class="nv">branch</span> <span class="o">&amp;</span> <span class="nv">leaves</span><span class="p">]</span>
-    <span class="p">(</span><span class="nb">apply root </span><span class="p">(</span><span class="nb">map </span><span class="nv">branch</span> <span class="nv">leaves</span><span class="p">)))</span> 
-<span class="p">(</span><span class="kd">defn </span><span class="nv">euclidean-distance</span> <span class="p">[</span><span class="nv">a</span> <span class="nv">b</span><span class="p">]</span>
-    <span class="p">{</span><span class="ss">:pre</span> <span class="p">[(</span><span class="nb">= </span><span class="p">(</span><span class="nb">count </span><span class="nv">a</span><span class="p">)</span> <span class="p">(</span><span class="nb">count </span><span class="nv">b</span><span class="p">))]}</span> 
-    <span class="p">(</span><span class="nf">sqrt</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">tree-comp-each</span> <span class="nb">+ </span>
-                <span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">x</span> <span class="nv">y</span><span class="p">]]</span>
-                    <span class="p">(</span><span class="nf">pow</span> <span class="p">(</span><span class="nb">- </span><span class="nv">x</span> <span class="nv">y</span><span class="p">)</span> <span class="mi">2</span><span class="p">))</span> 
-                <span class="p">(</span><span class="nb">map vector </span><span class="nv">a</span> <span class="nv">b</span><span class="p">))))</span>
-</pre></div>
-
-
-<p>I've only had exposures to tree traversal in the use of implementing searching and sorting
-algorithms. This trick here definitely widened my eyes to the wonders of
-functional programming. It's more than just being able to pass and
-manipulate functions. I need to think like a tree.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/vector-algorithm-using-tree-composition/' title='2011-08-07T09:43:00'>07 August 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

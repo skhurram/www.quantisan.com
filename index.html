@@ -58,6 +58,88 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/simple-easy-quick-using-go-along-with-clojure/" rel='bookmark'>Simple, Easy, Quick: Using Go along with Clojure</a>
+            </h1>
+            <div class="article-content"> <p>We had questions about how Go compares with Clojure at the Boston Clojure Meetup this week. My default answer to any technology this-vs-that debate is -- <em>it depends</em>. But it just so happens that our backend system at Glassy Media consist of an even split of services written between Go and Clojure. However, ths isn't due to any technical reasoning. Using the two languages together feels right to our particular needs.</p>
+<p>Rich Hickey made clear the distinction between simple and easy in his famous talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Clojure made simple easy. But sometimes I don't want simple and easy. I want quick and easy. That is exactly where Go can complement Clojure.</p>
+<p><img alt="Simple, Easy, Quick" src="http://www.quantisan.com/images/2014/simple_easy_quick_triangle.png" /></p>
+<p>How Clojure made simple easy has been a path well beaten. The rest of this post is why I think Go is quick and easy.</p>
+<h2>Our Path To Go</h2>
+<p>Once upon a time (i.e. a few months ago) our backend cogs and gears consisted of a bunch of command line programs that we would run on our laptop every now and then to churn our data. We distributed those tools to our non-developer helpers to serve our clients. Those command line tools started out in Python or Node.js. But distributing, maintaining, and updating those programs to other people's laptops eventually became a real pain. So one weekend I rewrote one of our command line programs in Go. On Monday I shared a link to a single executable file on Dropbox and people were able to run it directly from there. No more asking people to go on command line and typing <code>pip install</code> or <code>npm install</code>. That was how we started using Go at Glassy Media.</p>
+<p>I had no prior experience with Go before that. The fact that I was able to learn the language and then produce something useful over a weekend doesn't have to do with me. It is the practicality of the language, clear documentation, and smart tooling that makes Go easy to ramp up.</p>
+<h3>Language Practicality</h3>
+<p>Take the <code>for</code> loop as an example, you can iterate over a map like so. (code sample taken from <a href="http://golang.org/doc/effective_go.html#for">Effective Go</a>)</p>
+<div class="highlight"><pre><span class="k">for</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">oldMap</span> <span class="p">{</span>
+    <span class="nx">newMap</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">value</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The same <code>range</code> can be used to iterate over an array:</p>
+<div class="highlight"><pre><span class="nx">sum</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">value</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">array</span> <span class="p">{</span>
+    <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">value</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>No need for additional syntax to do the same thing. And there're no <code>while</code> or <code>do</code> loops too. There is only <code>for</code> to do all of that as shown.</p>
+<div class="highlight"><pre><span class="c1">// complete `for` struct</span>
+<span class="k">for</span> <span class="nx">init</span><span class="p">;</span> <span class="nx">condition</span><span class="p">;</span> <span class="nx">post</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="c1">// only check condition like a `while`</span>
+<span class="k">for</span> <span class="nx">condition</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="c1">// or, nothing like a `do`</span>
+<span class="k">for</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+
+
+<p>The Go core syntax is consistently minimal like so.</p>
+<h3>Clear Documentation</h3>
+<p>From <a href="http://blog.golang.org/godoc-documenting-go-code">The Go Programming Language</a>,</p>
+<div class="highlight"><pre> <span class="n">The</span> <span class="n">Go</span> <span class="n">project</span> <span class="n">takes</span> <span class="n">documentation</span> <span class="n">seriously</span><span class="p">.</span> <span class="n">Documentation</span> <span class="n">is</span> <span class="n">a</span> <span class="n">huge</span> <span class="n">part</span>
+ <span class="n">of</span> <span class="n">making</span> <span class="n">software</span> <span class="n">accessible</span> <span class="n">and</span> <span class="n">maintainable</span><span class="p">.</span> <span class="n">Of</span> <span class="n">course</span> <span class="n">it</span> <span class="n">must</span> <span class="n">be</span>
+ <span class="n">well</span><span class="o">-</span><span class="n">written</span> <span class="n">and</span> <span class="n">accurate</span><span class="p">,</span> <span class="n">but</span> <span class="n">it</span> <span class="n">also</span> <span class="n">must</span> <span class="n">be</span> <span class="n">easy</span> <span class="n">to</span> <span class="n">write</span> <span class="n">and</span> <span class="n">to</span>
+ <span class="n">maintain</span><span class="p">.</span> <span class="n">Ideally</span><span class="p">,</span> <span class="n">it</span> <span class="n">should</span> <span class="n">be</span> <span class="n">coupled</span> <span class="n">to</span> <span class="n">the</span> <span class="n">code</span> <span class="n">itself</span> <span class="n">so</span> <span class="n">the</span>
+ <span class="n">documentation</span> <span class="n">evolves</span> <span class="n">along</span> <span class="n">with</span> <span class="n">the</span> <span class="n">code</span><span class="p">.</span> <span class="n">The</span> <span class="n">easier</span> <span class="n">it</span> <span class="n">is</span> <span class="k">for</span>
+ <span class="n">programmers</span> <span class="n">to</span> <span class="n">produce</span> <span class="n">good</span> <span class="n">documentation</span><span class="p">,</span> <span class="n">the</span> <span class="n">better</span> <span class="k">for</span> <span class="n">everyone</span><span class="p">.</span>
+</pre></div>
+
+
+<p>Go's source code documentation has simple convention and automatic publishing. Take our trivial <a href="https://github.com/GlassyMedia/go-arrays">go-arrays library for manipulating arrays</a>. Here is one of the functions and its docstring.</p>
+<div class="highlight"><pre><span class="c1">// Contains check if &#39;s&#39; is in &#39;coll&#39; string array</span>
+<span class="kd">func</span> <span class="nx">Contains</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">coll</span> <span class="p">[]</span><span class="kt">string</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>What's amazing is that a corresponding project documentation page is automatically scraped from our source code and hosted on GoDoc.org with no extra work needed on our part. So as soon as you pushed a project onto Github, you can request your project documentation on GoDoc.org website. Here is a screenshot of one.</p>
+<p><img alt="Godoc.org for go-arrays" src="http://www.quantisan.com/images/2014/godoc_screen.png" /></p>
+<p>Because software documentation is baked into the process, I find most of the Go libraries are less frustrating to pickup.</p>
+<h3>Smart Tooling</h3>
+<p>I don't know why GoFmt isn't more common in programming. GoFmt is a tool that automatically <a href="http://golang.org/cmd/gofmt/">formats Go source code</a>. It is like <code>jshint</code> or <code>pyflakes</code> but goes an extra step further and actually fixes your code styling for you too. No more <code>gg=G</code> in Vim.</p>
+<p>Consistent source code styling makes life so much easier when digging into other people's projects.</p>
+<p>Overall, I enjoy the workflow developing in Go. There is no interactive REPL. What you get is an almost instant <code>go test</code> and <code>go run</code> execution time. Coming from doing everything in Vim, switching between my editor and the command line isn't as annoying as I would have thought.</p>
+<p>One reason for that is because the workflow is different when developing in Go. GoFmt is integrated in Vim (and other typical editors); along with the fact that Go is statically typed, by the time when your code saves without error, most of the time it would work as expected. So it's not that often when I need to resort to doing <code>go test</code> to check my code.</p>
+<h3>Go for Web Services</h3>
+<p>Having had Go in production for only a few months, our experience with Go is limited. Still, what stands out the most with Go is using it to build web services. Take our SMTP callback verification service, for example. The HTTP server code for it is <a href="https://github.com/GlassyMedia/smtp-callback-verification/blob/master/web.go">under 50 lines</a> using <a href="https://github.com/ant0ine/go-json-rest">go-json-rest</a> and a couple core packages. Not only that, Go has <a href="https://github.com/GlassyMedia/smtp-callback-verification/blob/master/web_test.go">mock HTTP server testing functionality built right in</a>.</p>
+<p>I am aware that this is subjective. But having used a handful of languages and frameworks to build RESTful web services, Go is by far the easiest to get a server up and running.</p>
+<h2>Complementing Clojure with Go</h2>
+<p>The one time when I had to choose between Go vs. Clojure was when the Boston Go Meetup happened on the same night as the Boston Clojure Meetup.</p>
+<blockquote class="twitter-tweet" lang="en"><p>.<a href="https://twitter.com/BostonGolang">@bostongolang</a> hmm... didn&#39;t think I&#39;ll have to take side Clojure vs. Go so soon</p>&mdash; Paul Lam (@quantisan) <a href="https://twitter.com/quantisan/statuses/446389305972621312">March 19, 2014</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Otherwise, there is no reason that Go and Clojure can't work along each other as part of a suite of toolset.</p>
+<p>Everyone has their tools of choice. Your taste and circumstance are probably different than mine. What matters is that the tools in your toolbox as a whole fit the problems that you face. Go and Clojure fill different needs for us.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/simple-easy-quick-using-go-along-with-clojure/' title='2014-05-12T00:00:00'>12 May 2014</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/more-problem-solving-less-solution-glorifying/" rel='bookmark'>More problem solving, less solution glorifying</a>
             </h1>
             <div class="article-content"> <p>I have been growing fond of this trendy Go programming language lately. We use it at Glassy Media to build services over HTTP and command line. So when we needed a Amazon Mechanical Turk interface I thought why not use Go for that too? I found an existing library in <a href="https://github.com/crowdmob/goamz">Go for interacting with Amazon Web Services</a>. But its Mechanical Turk component is incomplete. So I dove into the source code and started patching to make it work.</p>
@@ -156,118 +238,6 @@
 <p>This is it for me formally as a data scientist. I am moving back across the Atlantic to the states to cofound a new venture and continuing my journey <a href="http://www.glassymedia.com">to make information accessible</a>. However, back to the topic at hand. If cleaning vast amount of data, being clueless as to what to do, and debating with colleagues sound like a challenge that you want to take on, I know a company in London that's <a href="http://www.uswitch.com/careers/">looking for a data scientist</a>!</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/what-i-learned-from-2-years-of-data-sciencing/' title='2013-12-21T00:00:00'>21 December 2013</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
-            </h1>
-            <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
-<ol>
-<li>are resource-intensive to generate,</li>
-<li>might need to compose many of them,</li>
-<li>not sequential or have one-to-one depencency, and</li>
-<li>most importantly, they are in separate programs or different machines</li>
-</ol>
-<p>Thus I've opted to abstract this problem out into its own module of the system as an event-driven finite state machine (FSM) to keep track of state transitions. Intimidating term, but my first implementation was just if-else statements to qualify as such. The benefit is that each of my system's components only need to push signals and pull states from a central interface without having to worry about what should it call next or poll anything else to see if the stars are aligned. That drastically simplified development and maintenance.</p>
-<p>The responsiblities of my FSM module are to:</p>
-<ol>
-<li>listen to all the signals,</li>
-<li>figure out all the transitions, and</li>
-<li>publish the latest states for the rest of the system.</li>
-</ol>
-<h2>Handling asynchronous events</h2>
-<p>I use RabbitMQ as the message transport layer between my system's modules. All I need to do here is to associate an appropriate message handler to each triggering input for the FSM. Here's one example of the event handlers using the <a href="http://clojurerabbitmq.info/">Clojure RabbitMQ library, Langohr</a>. The rest of this part are just standard RabbitMQ publish/subscribe stuff.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn- </span><span class="nv">event-message-handler</span> <span class="p">[</span><span class="nv">ch</span> <span class="p">{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">headers</span> <span class="nv">delivery-tag</span> <span class="nv">redelivery?</span><span class="p">]}</span> <span class="o">^</span><span class="nv">bytes</span> <span class="nv">payload</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[{</span><span class="ss">:keys</span> <span class="p">[</span><span class="nv">message-type</span> <span class="nv">user-id</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">]}</span> <span class="p">(</span><span class="nf">read-payload</span> <span class="nv">payload</span><span class="p">)]</span>
-    <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">= </span><span class="ss">:position-event</span> <span class="nv">message-type</span><span class="p">)</span>
-      <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">get-cached-states</span> <span class="nv">user-id</span><span class="p">)</span>
-          <span class="p">(</span><span class="nf">update-position-state</span> <span class="nv">instrument</span> <span class="nv">quantity</span><span class="p">)</span>
-          <span class="p">(</span><span class="nf">cache-states</span> <span class="nv">user-id</span><span class="p">))))</span>
-  <span class="p">(</span><span class="nf">lbc/ack</span> <span class="nv">ch</span> <span class="nv">delivery-tag</span><span class="p">))</span>
-</pre></div>
-
-
-<p>This is called when a position event is received with information such as user, instrument, and quantity. This handler would thread these information by fetching current states for that user, evaluate next state with input, and then cache the new states for the user.</p>
-<h2>State transitions</h2>
-<p>Below is one of my system's state transition diagrams.</p>
-<p><img alt="state transition example" src="http://www.quantisan.com/images/2013/qte_state_diagram.png" /></p>
-<p>There are 4 states represented by 4 colours with 4 triggers signalling state transition. The program is expected to handle up to hundreds of independent states concurrently with event triggers coming in a couple times per second.</p>
-<p>As I was saying, my first implementation is just a set of if-else methods. For example, an <code>engage</code> trigger would call the <code>engaging</code> method to determine the next state given the implicit input <code>engage</code> and current state.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">engaging</span>
-  <span class="p">[</span><span class="nv">current</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">condp</span> <span class="nb">= </span><span class="nv">current</span>
-    <span class="s">&quot;white&quot;</span> <span class="s">&quot;yellow&quot;</span>
-    <span class="s">&quot;yellow&quot;</span> <span class="s">&quot;white&quot;</span>
-    <span class="s">&quot;green&quot;</span> <span class="s">&quot;red&quot;</span>
-    <span class="s">&quot;red&quot;</span> <span class="s">&quot;green&quot;</span><span class="p">))</span>
-</pre></div>
-
-
-<p>There were a handful of these boilerplate code. So after I deployed my system I came back to refactor them. I've been meaning to give core.logic a try for a while so this seem like a good place to start using it.</p>
-<p>Before we can ask the logic solver question we need to define relations. Here I define a <code>transition</code> relation to specify all the state transition definition conveniently in one place.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="nf">defrel</span> <span class="nv">transition</span> <span class="nv">from</span> <span class="nv">input</span> <span class="nv">to</span><span class="p">)</span>
-<span class="p">(</span><span class="nf">facts</span> <span class="nv">transition</span> <span class="p">[[</span><span class="nv">nil</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
-                   <span class="p">[</span><span class="nv">nil</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:engage</span> <span class="ss">:yellow</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:white</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:engage</span> <span class="ss">:white</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:disengage</span> <span class="ss">:white</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:yellow</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:engage</span> <span class="ss">:red</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:open</span> <span class="ss">:green</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:green</span> <span class="ss">:close</span> <span class="ss">:yellow</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:engage</span> <span class="ss">:green</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:disengage</span> <span class="ss">:red</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:open</span> <span class="ss">:red</span><span class="p">]</span>
-                   <span class="p">[</span><span class="ss">:red</span> <span class="ss">:close</span> <span class="ss">:white</span><span class="p">]])</span>
-</pre></div>
-
-
-<p>And the event handler methods are just wrappers for a one-liner logic expression asking the question -- given current stage, <code>cur-state</code>, and input trigger, <code>input</code>, what state can <code>q</code> take to satisfy this constraint?</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">next-state</span> 
-  <span class="s">&quot;Solver for next state&quot;</span>
-  <span class="p">[</span><span class="nv">input</span> <span class="nv">cur-state</span><span class="p">]</span>
-  <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">run</span> <span class="mi">1</span> <span class="p">[</span><span class="nv">q</span><span class="p">]</span> <span class="p">(</span><span class="nf">transition</span> <span class="nv">cur-state</span> <span class="nv">input</span> <span class="nv">q</span><span class="p">))))</span>
-
-<span class="p">(</span><span class="k">def </span><span class="nv">colour-clicked</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:engage</span><span class="p">))</span>
-<span class="p">(</span><span class="k">def </span><span class="nv">colour-deactivate</span> <span class="p">(</span><span class="nb">partial </span><span class="nv">next-state</span> <span class="ss">:disengage</span><span class="p">))</span>
-<span class="p">(</span><span class="kd">defn </span><span class="nv">next-position-colour</span> <span class="p">[</span><span class="nv">cur</span> <span class="nv">open?</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">if </span><span class="nv">open?</span>
-    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:open</span> <span class="nv">cur</span><span class="p">)</span>
-    <span class="p">(</span><span class="nf">next-state</span> <span class="ss">:close</span> <span class="nv">cur</span><span class="p">)))</span>
-</pre></div>
-
-
-<p>Not the most illustrative core.logic example but it does the job.</p>
-<p>Getting started with core.logic is surprisingly easy. I went through the <a href="https://github.com/clojure/core.logic/wiki/A-Core.logic-Primer">Primer</a> and <a href="https://github.com/swannodette/logic-tutorial">tutorial</a> and got this working in one try.</p>
-<h2>State caching and sharing</h2>
-<p>Now that the state transition have been taken care of, states are cached and served on Redis for other parts of the system. I use Redis for this because it is fast and easy. Values are stored in <a href="https://github.com/edn-format/edn">edn format</a> instead of something more popular like JSON to maintain data structure through the wire.</p>
-<p>This is my first time using edn in production. All inter-process messages in this trading system are edn formatted. It works seamlessly with Clojure by simply using <code>str</code> to write and <code>clojure.edn/read-string</code> to read. Besides my other Clojure components in the system, my trade broker interface is written in Java. My Java program use <a href="https://github.com/bpsm/edn-java">edn-java</a> to parse and unparse complex Clojure data structures (e.g. nested maps with keywords).</p>
-<div class="highlight"><pre><span class="p">(</span><span class="k">def </span><span class="nv">pool</span>         <span class="p">(</span><span class="nf">car/make-conn-pool</span><span class="p">))</span>
-<span class="p">(</span><span class="k">def </span><span class="nv">spec-server1</span> <span class="p">(</span><span class="nf">car/make-conn-spec</span><span class="p">))</span>
-<span class="p">(</span><span class="kd">defmacro </span><span class="nv">with-car</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span> <span class="o">`</span><span class="p">(</span><span class="nf">car/with-conn</span> <span class="nv">pool</span> <span class="nv">spec-server1</span> <span class="o">~@</span><span class="nv">body</span><span class="p">))</span>
-
-<span class="p">(</span><span class="kd">defn </span><span class="nv">get-cached-states</span>
-  <span class="s">&quot;Generate edn from database.&quot;</span>
-  <span class="p">[</span><span class="nv">id</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">edn/read-string</span> <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/get</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)))))</span>
-
-<span class="p">(</span><span class="kd">defn </span><span class="nv">cache-states</span> <span class="p">[</span><span class="nv">m</span> <span class="nv">id</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">with-car</span> <span class="p">(</span><span class="nf">car/set</span> <span class="p">(</span><span class="nb">str </span><span class="s">&quot;states:&quot;</span> <span class="nv">id</span><span class="p">)</span> <span class="p">(</span><span class="nb">str </span><span class="nv">m</span><span class="p">))))</span>
-</pre></div>
-
-
-<p>I find coupling edn with Redis is a fantastic choice as it's almost like working with Clojure's native concurrency data structures, such as <code>atom</code>, but also enable external programs to access the data.</p>
-<h2>Simple and quick</h2>
-<p>The entire event-driven FSM program is less than 200 lines of Clojure code and took no more than a few hours to do. However, I did give it some pondering time for a few days. I haven't done any benchmark to estimate performance result. So all I can say is that this setup can handle my simplistic use case with barely any load on the server so I'm happy with it.</p>
-<p>A few years ago, I would have set a whole bunch of flags to switch states. In fact, <a href="https://github.com/Quantisan/JFFramework">that's what I did</a>. The biggest satisfaction here for me isn't the implementation or technologies, it is seeing through the underlying problem at hand and solving it with a common pattern that made my work simpler.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/' title='2013-05-20T00:00:00'>20 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">
