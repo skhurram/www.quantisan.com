@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/cfa_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-03-14T14:34:00+00:00</updated><entry><title>Today is day 1 of Quantisan, the company</title><link href="http://www.quantisan.com/today-is-day-1-of-quantisan-the-company/" rel="alternate"></link><updated>2011-03-14T14:34:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-03-14:today-is-day-1-of-quantisan-the-company/</id><summary type="html">&lt;p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Paul Lam</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/cfa_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2011-03-14T14:34:00-04:00</updated><entry><title>Today is day 1 of Quantisan, the company</title><link href="http://www.quantisan.com/today-is-day-1-of-quantisan-the-company/" rel="alternate"></link><updated>2011-03-14T14:34:00-04:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-03-14:today-is-day-1-of-quantisan-the-company/</id><summary type="html">&lt;p&gt;
 &gt; The reasonable man adapts himself to the world: the unreasonable one
 &gt; persists in trying to adapt the world to himself. Therefore all
 &gt; progress depends on the unreasonable man. G. B. Shaw, *Maxims for
@@ -31,7 +31,7 @@ development][], today is day 1 of Quantisan Systems! And this -- is how
 my business got officially started. My plan towards [unreasonable
 goals][] in a world of reasons is finally set in motion.
 
-&lt;/p&gt;</summary><category term="CFA"></category><category term="Quantisan Systems"></category></entry><entry><title>Just because it's math does not mean it's not without its caveats</title><link href="http://www.quantisan.com/just-because-its-math-does-not-mean-its-not-without-its-caveats/" rel="alternate"></link><updated>2011-03-01T07:21:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-03-01:just-because-its-math-does-not-mean-its-not-without-its-caveats/</id><summary type="html">&lt;p&gt;I am more than half way through my first speed run of the CFA level 1
+&lt;/p&gt;</summary><category term="CFA"></category><category term="Quantisan Systems"></category></entry><entry><title>Just because it's math does not mean it's not without its caveats</title><link href="http://www.quantisan.com/just-because-its-math-does-not-mean-its-not-without-its-caveats/" rel="alternate"></link><updated>2011-03-01T07:21:00-05:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-03-01:just-because-its-math-does-not-mean-its-not-without-its-caveats/</id><summary type="html">&lt;p&gt;I am more than half way through my first speed run of the CFA level 1
 material. This chapter discusses portfolio management. In particular, I
 just read the Markovitz Efficient Frontier. What strikes me most about
 this chapter is that these mathematical material are presented so
@@ -71,7 +71,7 @@ might actually believe that you can always reduce portfolio risk and
 identify an efficient asset mix from mere correlations and standard
 deviations (which in and of themselves are flawed in the real world),
 with no strings attached. "Science is the belief in the ignorance of the
-experts", Richard Feynman.&lt;/p&gt;</summary><category term="CFA"></category><category term="Modern Portfolio Theory"></category></entry><entry><title>Open sesame with three more letters</title><link href="http://www.quantisan.com/open-sesame-with-three-more-letters/" rel="alternate"></link><updated>2011-02-21T07:55:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-02-21:open-sesame-with-three-more-letters/</id><summary type="html">&lt;p&gt;I apologize in advance if I occasionally disappear in the next 15 weeks.
+experts", Richard Feynman.&lt;/p&gt;</summary><category term="CFA"></category><category term="Modern Portfolio Theory"></category></entry><entry><title>Open sesame with three more letters</title><link href="http://www.quantisan.com/open-sesame-with-three-more-letters/" rel="alternate"></link><updated>2011-02-21T07:55:00-05:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2011-02-21:open-sesame-with-three-more-letters/</id><summary type="html">&lt;p&gt;I apologize in advance if I occasionally disappear in the next 15 weeks.
 My study guide for a professional exam in financial analysis arrived
 last Friday. I spent most of this weekend studying as I need to squeeze
 in 300 hours of studying time between now and the exam in June. Topics

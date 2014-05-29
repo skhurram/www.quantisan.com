@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Quantitative Artisan</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/monthly-review_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-10-01T10:11:00+01:00</updated><entry><title>Third Quarter 2010 Trading Review</title><link href="http://www.quantisan.com/third-quarter-2010-trading-review/" rel="alternate"></link><updated>2010-10-01T10:11:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-01:third-quarter-2010-trading-review/</id><summary type="html">&lt;p&gt;Markets hitched a one-way train in the third quarter. TSX opened in July
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Paul Lam</title><link href="http://www.quantisan.com/" rel="alternate"></link><link href="http://www.quantisan.com/feeds/tag/monthly-review_atom.xml" rel="self"></link><id>http://www.quantisan.com/</id><updated>2010-10-01T10:11:00-04:00</updated><entry><title>Third Quarter 2010 Trading Review</title><link href="http://www.quantisan.com/third-quarter-2010-trading-review/" rel="alternate"></link><updated>2010-10-01T10:11:00-04:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-10-01:third-quarter-2010-trading-review/</id><summary type="html">&lt;p&gt;Markets hitched a one-way train in the third quarter. TSX opened in July
 at 11200. It closed September at 12368. A whopping 10% jump in three
 months! S&amp;amp;P500 made a similarly impressive 9.7% jump. We simply don't
 get 10% moves even in most &lt;em&gt;years&lt;/em&gt;. I made fewer trades this quarter but
@@ -56,7 +56,7 @@ using less JForex and using more custom tools. My goal for the next
 quarter is to learn R programming and
 &lt;span style="text-decoration: line-through;"&gt;implement a JForex to R
 data exchange system&lt;/span&gt; (done, good old CSV files).&lt;/p&gt;
-&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>June and Second Quarter 2010 Trading Review</title><link href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/" rel="alternate"></link><updated>2010-06-30T14:11:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-06-30:june-and-second-quarter-2010-trading-review/</id><summary type="html">&lt;p&gt;Market volatility continues in June. I took a more aggressive approach
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>June and Second Quarter 2010 Trading Review</title><link href="http://www.quantisan.com/june-and-second-quarter-2010-trading-review/" rel="alternate"></link><updated>2010-06-30T14:11:00-04:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-06-30:june-and-second-quarter-2010-trading-review/</id><summary type="html">&lt;p&gt;Market volatility continues in June. I took a more aggressive approach
 this month and executed more trades in my RRSP trading account. The
 monthly return is excellent but I noticed a few issues with my trading.
 These will be the main topic of this post. Let's go over some
@@ -105,7 +105,7 @@ release in April.&lt;/p&gt;
 to program my first custom JForex indicator from my other collection. I
 will be away in Hong Kong for two weeks in July for some family matter.
 So there's not much time to work.&lt;/p&gt;
-&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>May 2010 Trading Review</title><link href="http://www.quantisan.com/may-2010-trading-review/" rel="alternate"></link><updated>2010-06-04T11:21:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-06-04:may-2010-trading-review/</id><summary type="html">&lt;p&gt;May 6th was a historical day in the market. The [Dow tanked 9% in
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>May 2010 Trading Review</title><link href="http://www.quantisan.com/may-2010-trading-review/" rel="alternate"></link><updated>2010-06-04T11:21:00-04:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-06-04:may-2010-trading-review/</id><summary type="html">&lt;p&gt;May 6th was a historical day in the market. The [Dow tanked 9% in
 minutes but climbed back up near the end of the day][]. We have since
 closed below that level later in the month. The bears seem to have
 finally awoken. I closed two trades in May totalling a decent gain of
@@ -127,7 +127,7 @@ competing in June. But not until my wife and I can settle down in our
 new home first. We are still unpacking, buying furnitures, and tidying
 up our new place as of this first weekend in June.&lt;/p&gt;
 &lt;p&gt;[Dow tanked 9% in minutes but climbed back up near the end of the
-  day]: ../to-hell-and-back-a-review-of-tsx-after-a-v-day/&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>April 2010 Trading Review</title><link href="http://www.quantisan.com/april-2010-trading-review/" rel="alternate"></link><updated>2010-05-03T12:38:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-05-03:april-2010-trading-review/</id><summary type="html">&lt;p&gt;I made my &lt;a href="http://www.quantisan.com/bought-3-cve-to-jul-30-puts-1-75-mark-30-10/"&gt;first RRSP trade to short Cenovus Energy (CVE.TO) using
+  day]: ../to-hell-and-back-a-review-of-tsx-after-a-v-day/&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>April 2010 Trading Review</title><link href="http://www.quantisan.com/april-2010-trading-review/" rel="alternate"></link><updated>2010-05-03T12:38:00-04:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-05-03:april-2010-trading-review/</id><summary type="html">&lt;p&gt;I made my &lt;a href="http://www.quantisan.com/bought-3-cve-to-jul-30-puts-1-75-mark-30-10/"&gt;first RRSP trade to short Cenovus Energy (CVE.TO) using
 puts&lt;/a&gt; in April. I also made my first careless mistake in my RRSP by
 &lt;a href="http://www.quantisan.com/i-just-made-a-grave-fundamental-mistake-in-my-cve-to-trade/"&gt;buying more contracts instead of closing the CVE.TO position&lt;/a&gt; as I
 intended. As of this writing, I am still holding my puts options as the
@@ -150,7 +150,7 @@ place finish. I will be away on vacation in the last two weeks of May. I
 don't expect much to happen with my trading this month as I'm inundated
 with personal matters. My primary focus is still the JForex Strategy
 Contest. I will be using a new semi-automated strategy this time. My
-goal is to finish in the top 6 again.&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>March 2010 Trading Review</title><link href="http://www.quantisan.com/march-2010-trading-review/" rel="alternate"></link><updated>2010-04-01T07:37:00+01:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-01:march-2010-trading-review/</id><summary type="html">&lt;p&gt;It is that time of the month again when I do my trading performance
+goal is to finish in the top 6 again.&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>March 2010 Trading Review</title><link href="http://www.quantisan.com/march-2010-trading-review/" rel="alternate"></link><updated>2010-04-01T07:37:00-04:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-04-01:march-2010-trading-review/</id><summary type="html">&lt;p&gt;It is that time of the month again when I do my trading performance
 review. However, I did not make any trade this month. Not because I was
 procrastinating, but I spent all of my time this month to work on my
 quantitative projects. This review will be a recap of my backend trading
@@ -168,7 +168,7 @@ manner (not buy and hold though). Lastly, it seems that I might be back
 to trading forex sooner than I have thought. I signed up for an
 automated trading contest at &lt;a href="http://www.dukascopy.com/ibentry.php?ibref=1143"&gt;Dukascopy&lt;/a&gt; earlier this week. Since they
 are offering a cash prize, I thought I might as well reschedule and work
-on my forex stuff now. I will write more on this topic at another time.&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>February 2010 Trading Performance Review</title><link href="http://www.quantisan.com/february-2010-trading-performance-review/" rel="alternate"></link><updated>2010-03-02T08:14:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-02:february-2010-trading-performance-review/</id><summary type="html">&lt;p&gt;I barely traded this month. The total number of trades in February for
+on my forex stuff now. I will write more on this topic at another time.&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>February 2010 Trading Performance Review</title><link href="http://www.quantisan.com/february-2010-trading-performance-review/" rel="alternate"></link><updated>2010-03-02T08:14:00-05:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-03-02:february-2010-trading-performance-review/</id><summary type="html">&lt;p&gt;I barely traded this month. The total number of trades in February for
 my forex demo account is ten. That's far from my regular 150 - 250
 trades a month. Ever since my trading system was broken because of
 technical difficulties, I've &lt;a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/"&gt;changed my priorities&lt;/a&gt; in trading. I
@@ -220,7 +220,7 @@ learned Python programming this month and is now learning to use
 specialized libraries to serve my trading needs. My goal for March is to
 write a rudimentary data analysis and visualization program for
 historical forex data.&lt;/p&gt;
-&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>January 2010 Trading Performance Review</title><link href="http://www.quantisan.com/january-2010-trading-performance-review/" rel="alternate"></link><updated>2010-02-01T12:03:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-01:january-2010-trading-performance-review/</id><summary type="html">&lt;p&gt;2010 didn't begin well for me. I experienced my &lt;a href="http://www.quantisan.com/first-2010-trading-drawdown-analysis-on-the-verge-of-a-new-record/"&gt;biggest drawdown&lt;/a&gt; so
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>January 2010 Trading Performance Review</title><link href="http://www.quantisan.com/january-2010-trading-performance-review/" rel="alternate"></link><updated>2010-02-01T12:03:00-05:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-02-01:january-2010-trading-performance-review/</id><summary type="html">&lt;p&gt;2010 didn't begin well for me. I experienced my &lt;a href="http://www.quantisan.com/first-2010-trading-drawdown-analysis-on-the-verge-of-a-new-record/"&gt;biggest drawdown&lt;/a&gt; so
 far at -3.95% (see Figure 1 for my account balance graph) in my demo
 account. Given that I only risk 0.2% per trade, this is a relatively
 substantial setback. Ironically, I was in the process of filling paper
@@ -269,7 +269,7 @@ recover my account back to its all-time high in beginning of January.
 I'm just about 2% away at this moment. My goal for February is to get
 acquinted with MQL4 so that I can begin to develop expert advisors to
 manage my risks during the day and overnight.&lt;/p&gt;
-&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>December 2009 Trading Performance Review</title><link href="http://www.quantisan.com/december-2009-trading-performance-review/" rel="alternate"></link><updated>2010-01-04T12:16:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-01-04:december-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;I have &lt;a href="http://www.quantisan.com/november-2009-trading-performance-review/"&gt;set 2 goals back in November&lt;/a&gt; for December. 1) Think more,
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>December 2009 Trading Performance Review</title><link href="http://www.quantisan.com/december-2009-trading-performance-review/" rel="alternate"></link><updated>2010-01-04T12:16:00-05:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2010-01-04:december-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;I have &lt;a href="http://www.quantisan.com/november-2009-trading-performance-review/"&gt;set 2 goals back in November&lt;/a&gt; for December. 1) Think more,
 trade less; and 2) Be more aggressive on winners. With 276 trades in
 December, I have failed miserably for goal #1. I couldn't meet my
 second goal either as I've missed most of the big moves from failing to
@@ -366,7 +366,7 @@ Largest Losing Trade -\$11.64 Avg. Time Held [hrs] 0.26
 &lt;/p&gt;
 
 &lt;p&gt;[limit myself to the longer timeframe to reduce moving in and out of
-  trades]: http://www.quantisan.com/focusing-on-trading-my-timeframe-to-reduce-over-trading/&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>November 2009 Trading Performance Review</title><link href="http://www.quantisan.com/november-2009-trading-performance-review/" rel="alternate"></link><updated>2009-12-01T22:25:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-12-01:november-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;This month has been a roller coaster in both the markets and my account
+  trades]: http://www.quantisan.com/focusing-on-trading-my-timeframe-to-reduce-over-trading/&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>November 2009 Trading Performance Review</title><link href="http://www.quantisan.com/november-2009-trading-performance-review/" rel="alternate"></link><updated>2009-12-01T22:25:00-05:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-12-01:november-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;This month has been a roller coaster in both the markets and my account
 balance (see Figure 1). Here's a quick recap of my &lt;a href="http://www.quantisan.com/tag/paper%20trade/"&gt;paper trades&lt;/a&gt; in
 the &lt;a href="http://www.quantisan.com/category/forex/"&gt;forex markets&lt;/a&gt; for November. I started out by cashing the carried
 over long yen and dollar positions from October. Those trades could have
@@ -465,7 +465,7 @@ Win% / Loss% 2.21 1.57 Max. Conseq. Winners 4 12 Max. Conseq. Losers 6
 
 &lt;/div&gt;
 
-&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>October 2009 Trading Performance Review</title><link href="http://www.quantisan.com/october-2009-trading-performance-review/" rel="alternate"></link><updated>2009-10-31T21:20:00+00:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-10-31:october-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;October is the first full month in which I traded forex. Naturally, this
+&lt;/p&gt;</summary><category term="monthly review"></category></entry><entry><title>October 2009 Trading Performance Review</title><link href="http://www.quantisan.com/october-2009-trading-performance-review/" rel="alternate"></link><updated>2009-10-31T21:20:00-04:00</updated><author><name>Paul Lam</name></author><id>tag:www.quantisan.com,2009-10-31:october-2009-trading-performance-review/</id><summary type="html">&lt;p&gt;October is the first full month in which I traded forex. Naturally, this
 is the first of my monthly trading performance review. Note that all the
 trades were on a demo account with imaginary money only. But I still
 took this seriously. My goal is to double this demo account starting
