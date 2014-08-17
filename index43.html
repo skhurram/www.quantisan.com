@@ -61,6 +61,61 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel='bookmark'>An explanation of my Keltner Channel and Candlestick hybrid setup</a>
+            </h1>
+            <div class="article-content"> <p>This is an explanation of my <a href="http://www.quantisan.com/category/quantitative-finance/systems/">automated trading</a> strategy for the
+Dukascopy JForex Strategy Contest in April. This strategy just made its
+first trade today after running for about 72 hours. My contest demo
+account closed with a gain of 7% on this first trade. Note that this
+strategy is built for competing in a contest and not for real trading
+(i.e., it's purely a no cost gamble). Here is the concept for this high
+probability trading setup. Referring to Figure 1 below, the red arrow
+marks my short entry on EURGBP today. These are the technical analysis
+indicators the strategy uses:</p>
+<ol>
+<li>Trend: Signaled by 50 bar moving average above (bullish) or below
+    (bearish) the 200 bar moving average.</li>
+<li>Momentum: Oversold or overbought RSI conditions, but not used in a
+    traditional manner...</li>
+<li>Volatility: I use the Keltner channel to measure volatility.</li>
+<li>Price action: Observe candlestick behaviour to identify trend
+    continuation. This is where the secret to this strategy happens. I
+    will explain this below.</li>
+</ol>
+<p>Note that I used a Bollinger Bands in the chart of Figure 1 because I
+couldn't find the Keltner Channel indicator in Metatrader (my charting
+software). It doesn't affect my conceptual illustration anyhow. The
+setup:</p>
+<ol>
+<li>Identify overarching trend via 50/200 moving averages as explained
+    above.</li>
+<li>Confirm price is still playing to the trend by checking if current
+    market price is on the right side of the 200 bars moving average.
+    Price above for bullish and below for bearish.</li>
+<li>Once steps 1-2 are in place, it's assumed that the trend is strong.
+    We look for a setup in the trend's direction. In particular, we look
+    for a <em>failed counter-trend retracement</em> setup using candlestick in
+    combination with the Keltner channel.</li>
+<li>Sounds fancy but it's simple. Using a short-side example, the bar's
+    high has to penetrate above the Keltner channel yet it closes within
+    it. Then the short entry is signaled. The opposite for a long-side
+    entry.</li>
+<li>RSI overbought and oversold conditions are used to filter out slow
+    and steady counter-trend moves (those are evil).</li>
+</ol>
+<p>Another benefit of using a price channel is that I also use it to peg my
+take profit target and stop loss. As I said in my previous post, because
+<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> expects winning contestants to submit their source codes,
+I am not using anything proprietary or extraordinary here. As such, this
+is totally different than <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">what I use to trade on my own</a>. Namely more
+reliance on indicators and less on price action and <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>.</p>
+<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /></p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/' title='2010-04-09T18:16:00'>09 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/" rel='bookmark'>Reading the fine print for Dukascopy JForex Strategy Contest</a>
             </h1>
             <div class="article-content"> <p><strong>Update</strong>: I have since <a href="http://www.quantisan.com/my-interview-at-dukascopy-in-geneva/">won the JForex strategy contest a few
@@ -159,45 +214,6 @@ are offering a cash prize, I thought I might as well reschedule and work
 on my forex stuff now. I will write more on this topic at another time.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/march-2010-trading-review/' title='2010-04-01T07:37:00'>01 April 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/option-value-analysis-on-cibc-cmto-april-2010-expiration/" rel='bookmark'>Option Value Analysis on CIBC (CM.TO) April 2010 Expiration</a>
-            </h1>
-            <div class="article-content"> <p>Warning: Top/bottom picking is a dangerous art. I don't intend to trade
-on this information myself. I did this out of pure curiosity. The
-Canadian banks are an interesting phenomenon. Are they just hiding dirt
-under the rug or are they really as good as our government say? Mish
-Global Economic Trend Analysis posted a bearish view on <a href="http://globaleconomicanalysis.blogspot.com/2010/03/california-usa-vs-ontario-canada-which_29.html">California v.
-Ontario</a>. Furthermore, The Baseline Scenario discussed [why the
-strength of our banks is an illusion created by our government][]. As
-such, on both a <a href="http://www.quantisan.com/td-bank-making-headlines-with-a-new-all-time-high/">technical</a> and fundamental viewpoint, share prices of
-our financial sector is way overbought. Of which, CIBC (CM.TO) seem
-particularly screwed as its stock price hasn't been able to join in the
-unreal rally of late. That sentiment seem to be confirmed with an
-<a href="http://www.quantisan.com/using-option-pain-max-pain-to-estimate-stock-price/">option pain valuation</a> as I described before. Max pain for CM.TO for
-April expiration is pegged at \$72. Not surprisingly, \$72 marks a long
-term support as shown in Figure 2 (blue line). A break below \$72 could
-summon \$65. The data also show that there is a large open interest for
-put options at the \$72 strike. Are they sold as covered puts or
-something else? That I cannot tell. However, \$72 will definitely be an
-important level for CM.TO in the near future. Nevertheless, as the
-options market is small in Canada, I wouldn't put much weight on options
-valuation for Canadian stocks. The value of open interest options on
-April CM.TO is merely about the size of a single day's of equity traded.
-P.S. March's max pain was \$68 one week prior to expiration. But CM.TO
-closed above \$75 on March expiration. That wasn't even close.</p>
-<p>[caption id="" align="aligncenter" width="570" caption="CIBC (CM.TO)
-option valuation"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-30-CM_option.png" />][][/caption]</p>
-<p>[caption id="" align="aligncenter" width="570" caption="CIBC
-(CM.TO)"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-03-30-CM.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-03-30-CM.png">1</a>[/caption]</p>
-</p>
-
-<p>[why the strength of our banks is an illusion created by our
-  government]: http://baselinescenario.com/2010/03/25/the-canadian-banking-fallacy/</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/option-value-analysis-on-cibc-cmto-april-2010-expiration/' title='2010-03-31T13:56:00'>31 March 2010</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
             </div>
         </article>
 <p class="paginator">

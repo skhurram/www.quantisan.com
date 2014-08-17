@@ -61,6 +61,42 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/" rel='bookmark'>A failed experiment with spectral density estimation in R</a>
+            </h1>
+            <div class="article-content"> <p>Spectrum analysis (see <a href="http://en.wikipedia.org/wiki/Frequency_spectrum#Spectrum_analysis">wiki entry</a>) is a technical process to
+visualize a time series data in the frequency domain to find hidden
+periodicities. As I continue <a href="http://www.quantisan.com/maximal-frustration-in-printing-and-parsing-milliseconds-in-r/">my struggle in data mining with R</a>, I
+thought I might try looking at a year's worth of USDJPY 1-min exchange
+rate data in the frequency domain. This is what I got. <img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-12-15-usdjpy_spectrum.png" /></p>
+<p>Certainly not one of those nice looking
+graphs in a textbook. Notice that:</p>
+<ol>
+<li>there is no distinct frequencies</li>
+<li>bandwidth is ridiculously small</li>
+</ol>
+<p>What this means is that the USDJPY data is practically <a href="http://en.wikipedia.org/wiki/White_noise">white noise</a>.
+And that there's much work for me ahead before I can produce something
+useful in R. The source code to produce the graph is printed below. The
+USDJPY data isn't published as it's not small and you can <a href="http://www.quantisan.com/tools/">get it at
+various places</a> for free on your own. Update: Failed is a harsh word.
+I should call this a <em>trivial</em> experiment. </p>
+<div class="highlight"><pre> op \<span class="o">&lt;-</span> options<span class="p">(</span>digits.secs<span class="o">=</span><span class="m">3</span><span class="p">)</span> \<span class="c1"># set option to show milliseconds</span>
+cat<span class="p">(</span><span class="s">&quot;loading CSV file to &#39;data&#39;\\n&quot;</span><span class="p">)</span> print<span class="p">(</span> system.time<span class="p">(</span> data \<span class="o">&lt;-</span>
+read.csv<span class="p">(</span> file<span class="o">=</span><span class="s">&quot;data/USDJPY\_20090630-13-27to20101130-22-19\_1Min.csv&quot;</span><span class="p">,</span>
+head<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;,&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span> \<span class="c1"># convert long timestamp to POSIX</span>
+rownames<span class="p">(</span>data<span class="p">)</span> \<span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>as.numeric<span class="p">(</span>rownames<span class="p">(</span>data<span class="p">))</span><span class="o">/</span><span class="m">1000</span><span class="p">,</span>
+origin<span class="o">=</span><span class="s">&quot;1970-01-01&quot;</span><span class="p">,</span> tz<span class="o">=</span><span class="s">&quot;GMT&quot;</span><span class="p">)</span> data \<span class="o">&lt;-</span> data.matrix<span class="p">(</span>data<span class="p">)</span> library<span class="p">(</span>xts<span class="p">)</span>
+\<span class="c1"># load xts library cat(&quot;converting to xts &#39;data.x&#39;\\n&quot;)</span>
+print<span class="p">(</span>system.time<span class="p">(</span>data.x \<span class="o">&lt;-</span> as.xts<span class="p">(</span>data<span class="p">)))</span> rm<span class="p">(</span>data<span class="p">)</span> \<span class="c1"># remove data</span>
+object cat<span class="p">(</span><span class="s">&quot;data.x object size: &quot;</span><span class="p">)</span> print<span class="p">(</span>object.size<span class="p">(</span>data.x<span class="p">),</span> units <span class="o">=</span>
+<span class="s">&quot;auto&quot;</span><span class="p">)</span> cat<span class="p">(</span><span class="s">&quot;spectral analysis\\n&quot;</span><span class="p">)</span> spectrum<span class="p">(</span>data.x\<span class="o">$</span>close<span class="p">)</span>
+</pre></div> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/a-failed-experiment-with-spectral-density-estimation-in-r/' title='2010-12-16T07:28:00'>16 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-2/" rel='bookmark'>Anatomy of a JForex strategy, Part 2</a>
             </h1>
             <div class="article-content"> <p>We looked at <a href="http://www.quantisan.com/anatomy-of-a-jforex-strategy-part-1/">four of the six methods in the IStrategy Interface</a> in a
@@ -268,38 +304,6 @@ strategy. In the next post in this learning JForex series, we will
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/getting-started-learning-jforex-programming/' title='2010-12-08T07:04:00'>08 December 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/another-trading-contest-from-dukascopy/" rel='bookmark'>Another trading contest from Dukascopy</a>
-            </h1>
-            <div class="article-content"> <p>Dukascopy started a new contest this month. This contest is manual
-trading only on a demo account with no cash commitment by contestants.
-The twist is that the ranking is determined not only by your demo
-account balance, but also the total pips gained, popularity, and scoring
-by Dukascopy's judges. Each trade in the contest needs to be commented
-by the contestant through the JForex trading platform (when you submit
-an order the platform asks you for a comment). See <a href="http://www.dukascopy.com/tradercontest/?action=blog&amp;trader=Quantisan">my contest page for
-comment examples</a> (shameless plug). About half of your score is based
-on these trade comments as they are the basis for generating popularity
-points and the Dukascopy judges' final evaluation. I can see the
-potential in this contest as it offers transparency and encourages
-interactions rather than let everyone just gamble away. However, most of
-the trade comments now are meaningless as it's clear that you can
-generate buzz simply by making ridiculous gains. Perhaps this might
-change after this month's final ranking is released as it is not clear
-how Dukascopy will allocate each contestant's 25% of points. The judging
-by Dukascopy can effectively bump or dump you a few ranking. The
-incentive to do this is the USD \$15,000 'cash' prizes to be won every
-month just like the Dukascopy Strategy Contest. And similarly, these
-'cash' prizes are deposited into the winner's Dukascopy trading account
-<a href="http://www.quantisan.com/reading-the-fine-print-for-dukascopy-jforex-strategy-contest/">with a withholding period</a>. So they're forcing you to open an account
-with them if you win, which is understandable as this is a marketing
-effort. For information or registration in the contest, <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">visit the
-Dukascopy website</a> and navigate to the Trader Contest page.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/another-trading-contest-from-dukascopy/' title='2010-12-06T12:23:00'>06 December 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
             </div>
         </article>
 <p class="paginator">

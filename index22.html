@@ -61,6 +61,61 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/" rel='bookmark'>First time setting up JForex on Amazon EC2 t1.micro</a>
+            </h1>
+            <div class="article-content"> <p><span>I bumped into a myriads of obstacles setting up the
+<span>JForex</span> trading platform on an </span><a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/">Amazon AWS's free
+t1.micro<span> <span>intance</span></span></a>. I will go through the
+steps I went through to setup a cloud server for JForex in this post. In
+the end, I find out that the t1.micro instance chokes up from running
+the GNOME desktop environment on Ubuntu Maverick. I enabled Amazon's
+CloudMonitor utility and the CPU measurement is locked at 100% from
+running the JForex platform and the desktop. This is expected as I
+suspected that the t1.micro wouldn't be able to handle all that graphics
+display. I chose to run Ubuntu on EC2 because that's what I'm familiar
+with at home. I also considered running CentOS because it is legendary
+as an enterprise server. Yet I read reviews from individuals running
+their own private VPS saying that <a href="http://knol.google.com/k/tom-harrison/centos-vs-ubuntu/24f5zicu9nl0z/1">CentOS is very secure but it is too
+"tight-assed"</a>. As JForex needs a relatively recent commercial Sun
+Java version to run, I chose a easier Linux distro for my EC2 instance.
+A minor gripe I have with Ubuntu is that their EBS Amazon Machine Image
+(AMI) comes in 15 GB. Whereas the free offer from Amazon only provides
+10 GB of free EBS use. So there's a 5 GB extra that will be charged on a
+monthly basis. This has been discussed on the developer forum and it
+looks as though <a href="https://bugs.launchpad.net/ubuntu-on-ec2/+bug/670161">subsequent versions of Ubuntu release AMI will be in
+10GB</a>. However, this 5 GB amounts to only \$0.55 a month. Still, I
+want free! I started out my trial on EC2 using the server variant of
+Ubuntu. It has less clutter and potentially more secure than the regular
+desktop variant. However, getting remote desktop running on the server
+took me two evenings to figure out! My problem is in getting a NX server
+to work. I tried the commercial, but free, <a href="http://www.nomachine.com/">nxserver from NoMachine</a>.
+I tried the GPL implementation, <a href="http://freenx.berlios.de/">FreeNX</a>. And I tried Google's open
+source adaptation, <a href="http://code.google.com/p/neatx/">Neatx</a>. It just wouldn't work! As soon as I solved
+one problem something else breaks. At first it was an <a href="http://www.jsiegel.com/2008/06/installing-nx-on-amazons-ec2-centos.html">authentication
+problem</a> because the SSH keys were mixed between the NX server and SSH
+server. Then once that's resolved, the desktop just wouldn't start and
+without any error message to tell me what's wrong. That's when I gave up
+on NX and switched to using <a href="http://www.x2go.org">X2go</a>. It only took me a few minutes to
+install X2go. It ran fine fresh from installation. So many hours wasted
+on NX. Once I had my remote desktop running, I tried to install Sun Java
+for JForex. After a few failed attempts, I found out about <a href="https://bugs.launchpad.net/ubuntu/+source/linux-ec2/+bug/634487">this
+problem</a>. Apparently there's a kernel bug on Ubuntu in which
+installing Sun Java on a t1.micro would crash the installer. Just my
+luck. By then my curiosity waned and it's just a matter of getting the
+job done. So I restarted the whole setup process yet another time with a
+Ubuntu 10.10 desktop edition (has been using server edition) 64-bit (to
+circumvent the Sun Java installation bug), installed Sun Java, Google
+Chrome, and X2go. Logged in to the remote desktop through X2go. Launched
+Chrome to access the <a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy website</a>. Started JForex. It takes
+only a few minutes once I know what I'm doing. Then I watched the
+t1.micro instance come to a crawl. There's my first attempt at running
+JForex on a free t1.micro. My recommendation? <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">Don't do it</a>.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1micro/' title='2010-11-05T10:13:00'>05 November 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/bought-4-mfc-11jan-put-1400-093-mark-1397/" rel='bookmark'>Bought 4 MFC 11JAN Put 14.00 @ 0.93, Mark 13.97</a>
             </h1>
             <div class="article-content"> <p>It's been a while, my old friend--Manulife Financial (MFC.TO). Now, die!
@@ -169,54 +224,6 @@ September 2010.</p>
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/a-brief-comparison-of-double-arrays-for-high-performance-numerical-computing-in-java/' title='2010-11-01T09:12:00'>01 November 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/" rel='bookmark'>Rev your trading system on the cloud with a free Amazon cloud server</a>
-            </h1>
-            <div class="article-content"> <p>I always try to keep my trading and any related costs as cheap as
-possible. And there's nothing cheaper than free, which that is what
-Amazon Web Services (AWS) is offering starting November 1, 2010. They
-are offering a full year of free t1.micro EC2 instance along with other
-basic level of AWS services (see link below). That seems to be a great
-incentive to move my trading system on to a remote cloud server. One of
-the biggest benefits of running your trading system on a virtual private
-server or a cloud instance is reliability. I don't know about you, but
-my internet connection sometimes acts up or even goes down for hours.
-There's the occasional electrical power disruption too, but it's been
-good these days. On the other hand, there are many disadvantages for
-running your trading system remotely. Costs, technical know-hows, and
-limited processing power, just to name a few. The added costs is not an
-issue for now as Amazon is offering a year of free trial. With regard to
-technical know-hows, I don't know how to setup a cloud server yet.
-Although it shouldn't be a terribly difficult task for me as I am
-familiar with Linux. What's at issue though, is the limited processing
-power. The processing power of a t1.micro instance is an unspecified
-fraction of one ECU, which is equivalent to a 1 GHz 2007 Intel Xeon
-processor. So you get a fraction of that, which doesn't sound much.
-CloudHarmony's benchmark shows that <a href="http://cloudharmony.com/benchmarks">a Micro instance is about 1/10th of
-that of the Small instance</a>. However, a Micro instance can burst to up
-to 2 ECUs (double that of the Small) of processing power occasionally.
-This is good if you can keep your continuous processes minimal and only
-make calculations infrequently (such as on arrival of a new price bar).
-The t1.micro gets 613 MB of memory along with 10 GB of EBS (for
-low-latency files) and 5 GB of S3 (for persistent storage). These
-numbers are generous, so the bottleneck obviously remains with the
-processor. Your best bet for minimal background processing use is to run
-a command-line-only trading system. That's something that can be easily
-done on JForex. However, there remains the question of is the minimum
-power of a Micro sufficient to sustain a trading system? Any hiccup in a
-trading system could cost you more than the annual charge for even a
-Small instance. This freebie from Amazon may not be worth the risk. The
-only way to know is to test it out. I won't be able to get to that soon
-as I'm been busy programming. So if anyone is running a trading system
-on a t1.micro instance, I'd really appreciate if you can provide some
-feedback. Update Nov 6: See <a href="http://www.quantisan.com/first-time-setting-up-jforex-on-amazon-ec2-t1-micro/">my first failed test</a> and then my first
-time <a href="http://www.quantisan.com/i-got-jforex-running-smoothly-on-amazon-ec2-t1-micro/">running remote desktop on t1.micro</a>. Otherwise, enjoy the
-freebie, <a href="http://aws.amazon.com/free/">AWS Free Usage Tier</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/rev-your-trading-system-on-the-cloud-with-a-free-amazon-cloud-server/' title='2010-10-29T05:23:00'>29 October 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

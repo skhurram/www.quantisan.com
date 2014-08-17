@@ -61,6 +61,107 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/" rel='bookmark'>Analysing monthly forex trading performance in changing market conditions</a>
+            </h1>
+            <div class="article-content"> <p>
+In my previous post, I discussed about [3 reasons why I don't use
+Jensen's alpha or Sharpe ratio for my montly trading performance
+measurement][]. In this post, I will talk about what I actually use and
+how I came up with it. As I was saying in the previous post, what one
+chooses to use as their performance metric depend on 3 factors such as
+your style of trading, your agenda, and your interest in this topic. I
+will briefly lay out my 3 motives as background information. I use a
+swing trading strategy for trading forex. I aim to hold for at least a
+few hours to a few days. I am working to hold longer and trade less in
+the future, but that's another story. To fit my style of trading, a
+performance metric has to be unbiased for long and short trades as well
+as taking into account short term conditions in the market. In terms of
+agenda, what is the purpose of my performance metric? As a part-time
+trader, I answer only to myself. These numbers are used for my
+self-improvement and internal month-to-month comparisons only. Lastly,
+my interest in this topic of portfolio measurement is limited. I want
+something easy to calculate and simple to understand. I have read a few
+academic papers on this topic and spent a few hours researching on the
+web. That's about it. Now that my motives have been laid out, let's
+discuss my process for coming up with my trading performance metric.
+Ultimately, my assessment on how well I have done for the month is to
+measure my return based on the risk taken. In other words, Performance
+Metric = Reward / Risk. My Reward function is simple. I just steal the
+idea from Sharpe and use:
+
+> Reward = Net Return - Riskless Return
+
+Shameless. I know. I don't want to muck with the Reward function because
+at the end of the day, it is your account balance that matters. The Risk
+function takes some more thought. On a trade-by-trade basis, the risk
+taken for a particular trade can be thought of as the stop loss. It is a
+amount put at risk to be taken by the market. In other words, risk can
+be represented by the loss you are willing to take. On a month-to-month
+basis, the most important loss value that I pay attention to is my
+maximum drawdown. A drawdown imposes a real dent in your account as well
+as negatively impact your trading psychology. For these reasons, the
+maximum drawdown is a variable in my Risk function.
+
+> Risk = Max. Drawdown ...
+
+However, I am not done yet. While max. drawdown is important, it is an
+entirely internal factor. The risk you take is also affected by the
+condition of the market. Using the stop loss analogy again, a 50 pips
+stop loss can be labelled as both conservative and aggressive risk
+exposure depending on the volatility of the market in the timeframe
+you're trading. As such, we need to consider volatility in the Risk
+function. However, this raises another question, what is volatility.
+Long story short, I just snatch the Average True Range (ATR) indicator
+that I use on my charts in this formula. However, we can't just stick a
+ATR value in because it's an absolute number. We need to use a
+percentage ATR (%ATR) to correspond with all the other percentage
+numbers in the formula. And since this is for monthly analysis, I grab
+the %ATR from a monthly chart. In particular, I use the monthly %ATR on
+the U.S. dollar futures chart. Finally, the Risk function is:
+
+> Risk = Maximum Drawdown + %ATR
+
+Thus,
+
+> **Performance Metric = (Net Return - Riskless Return) / (Maximum
+> Drawdown + %ATR)**
+
+As an example, here are the values I plug in for each variable to
+calculate my performance metric for [November][]. Net Return = 3.15%,
+read from November's statement Riskless Return = 0.54% (per annum) / 12
+= 0.045%. This is the Canadian 1-year treasury rate in November. Max.
+Drawdown = 3.55%, read from November's statement %ATR = monthly ATR(3)
+of U.S. dollar futures / monthly close of U.S. dollar futures =
+3.1473/74.895. To verify the efficacy of this performance metric. Let's
+do a mental check of my criteria as discussed.
+
+1.  Unbiased for long and short trades? Yes, it uses the net return
+    regardless of which side you took.
+2.  Varies with short term market conditions? Yes, from the %ATR.
+3.  Comparable between month to month? Yes, the number is normalized by
+    market volatility each month.
+4.  Easy to calculate? Yes, it's can be done in my [trade log][]
+    spreadsheet with a few formulas.
+5.  Easy to understand? Yes, it's an interpretation of reward / risk.
+
+As with any other attempt to summarize trading performance into one
+single value, many assumptions have been taken. I cherry picked what I
+needed to assemble a formula. Some observant reader will notice that
+this formula is similar to the Sterling and Calmar ratios. Indeed, this
+is yet another modified form of these ratios. In fact, I will be
+referring to this formula as Sterling ratio in my future posts for
+simplicity.
+
+</p>
+
+<p>[3 reasons why I don't use Jensen's alpha or Sharpe ratio for my
+  montly trading performance measurement]: http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/analysing-monthly-forex-trading-performance-in-changing-market-conditions/' title='2009-12-29T07:55:00'>29 December 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/3-reasons-why-i-dont-use-jensens-alpha-or-sharpe-ratio-for-my-forex-trading/" rel='bookmark'>3 reasons why I don&#039;t use Jensen&#039;s alpha or Sharpe ratio for my forex trading</a>
             </h1>
             <div class="article-content"> <p>As a part-time trader, measuring my <a href="http://www.quantisan.com/tag/monthly-review.html">monthly trading performance</a> can
@@ -247,75 +348,6 @@ month <a href="http://www.quantisan.com/tag/monthly-review">as usual</a> to see 
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/focusing-on-trading-my-timeframe-to-reduce-over-trading/' title='2009-12-08T09:57:00'>08 December 2009</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/4-fundamental-entry-signs-for-trading-and-why-they-are-not-that-important/" rel='bookmark'>4 fundamental entry signs for trading and why they are not that important</a>
-            </h1>
-            <div class="article-content"> <p>Much has been written about when to buy stocks, forex, or other
-instruments. In fact, it is the topic that is written the most about in
-trading. As if there's nothing else to trading than timing your entries.
-On the contrary, I have come to realize that timing for entries is
-actually the least important aspect of a trade (see a real world prove
-below). Nevertheless, it is still a factor for consideration in a
-complete trading strategy. As such, this post is about the 4 fundamental
-entry signs that I use to enter in any trade. No matter which trading
-setup I am using, I only place my order because one or more of these
-conditions are met. To make sure that everyone is on the same page. Let
-me define what exactly I am talking about here. I define the act of
-timing for an entry as the process for deciding <strong>where or when to place
-an order</strong> after a signal has been flagged by a <a href="http://www.quantisan.com/category/trading-how-tos/trading-signal/">trading setup</a>. In
-particular, it would be step #8 according to my <a href="http://www.quantisan.com/an-introduction-to-my-forex-trend-continuation-setup-ftc/">FTC setup</a>. For
-example, if the conditions to buy USDCAD are met on the daily chart,
-then I will zoom in on to the 3-hour timeframe to spot a confirmation of
-the move. Once that is also satisfied, I zoom in even more to the
-30-minute chart to spot when (if market order) or where (if limit order)
-to place the order. Figuring out exactly when and where to place your
-bet is a topic for much discussion, even when you know that you want to
-buy it somewhere around this level. The better the price, the better
-your reward/risk will be. Wait too long, and the market could leave you
-behind. Long story short, when it comes down to it, there are simply 4
-fundamental entry signs for buying in any market that I use. I only buy
-at/when the price is:</p>
-<ol>
-<li>at a support area</li>
-<li>at a Fibonacci retracement level</li>
-<li>at oversold conditions</li>
-<li>showing accumulation by large players</li>
-</ol>
-<p>(and vice versa for shorting a market) These are necessary, but not
-sufficient entry conditions. One or more of these conditions must be met
-for all trades. But satisfying these conditions would not guarantee
-profitability. I know I've repeated this many times now, but I can't
-stress this enough. This is just <strong>one small step</strong> of a thorough
-analytical process in deciding your trade. Don't go around buying
-everything on support levels or when RSI goes over 80. The reason why I
-find it necessary to write about something so trivial now is that I have
-just been caught trying to catch a top again. Take a look at the figure
-below illustrating my trade orders trying to catch a USD/CAD short-term
-top. My trading setup flagged for a short USDCAD trade. So I gave it a
-few tries. Eight times. Eight! If only I had remembered my 4 fundamental
-entry signs, I wouldn't have tried to short this pair all over the place
-and getting stopped out again and again. If I adhered to these 4 signs,
-I would have only tried it a couple of times at 1.0480 resistance and
-then let it pass once the condition is violated. On the other hand, as I
-was saying earlier that the entry is the least important aspect of a
-trade. I came out of this mess as illustrated unscathed. I managed to
-exit all of my entries at break-even, or at least close to it. So even
-failing 8 entries, my account balance barely budged. Recall I said
-timing for entries is the least important part of trading? Well, this is
-a good example of it. You could mess up your entries, 8 times, and still
-come out ok. You probably know this already, but I'll say this for the
-sake of thoroughness. By far the most important aspect of a profitable
-trading strategy is prudent <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>. That is what saved me
-in this embarrassing shorting USD/CAD example.</p>
-<p>[caption id="" align="aligncenter" width="580" caption="USDCAD, 15
-minute, with order history"][<img alt="USDCAD, 15 minute, with order
-history" src="http://www.quantisan.com/static/images/img_archive/2009-12-02-USDCAD_15m.png" />]<a href="http://www.quantisan.com/static/images/img_archive/2009-12-02-USDCAD_15m.png">USDCAD, 15 minute, with order history</a>[/caption]</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/4-fundamental-entry-signs-for-trading-and-why-they-are-not-that-important/' title='2009-12-03T22:58:00'>03 December 2009</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
 <p class="paginator">

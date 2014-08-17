@@ -61,6 +61,57 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/" rel='bookmark'>Conjuring beans to simplify JForex IIndicators</a>
+            </h1>
+            <div class="article-content"> <p>The JForex API is not perfect. Like any application programming
+interface (API), some parts of the JForex API is better designed than
+others. One of the most gripping problems with JForex is its use of
+technical analysis (TA) indicators. Here's an example of using an
+exponential moving average, one of the most simplest indicators.
+<code>ema(instrument, Period.TEN_SECS, OfferSide.BID, IIndicators.AppliedPrice.MEDIAN_PRICE, 14, 0);</code>
+And the corresponding javadoc explaining the parameters,
+<code>Parameters: instrument instrument of the bar period period of the bar side bid or ask side of the bar appliedPrice type of input data timePeriod time period value shift number of candle back in time staring from current bar. 0 - current bar (currently generated from ticks), 1 - previous bar (last formed bar), 2 - current bar minus 2 bars and so on</code>
+It's not intuitive but it's usable. Recall that in my <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">JForex
+programming tutorial</a>, I suggested using the JForex API javadoc to
+find out information about the API. However, for the case of
+IIndicators, if you <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IIndicators.html">take a look at its javadoc</a>, you will only be led
+to more confusion by the hundred or so mysterious indicator methods with
+cryptic parameter names. In JForex API, if you want to calculate an
+indicator, you need to look through a long list of abbreviated method
+names in the javadoc. Many of which are not easy to decipher. Secondly,
+you need to figure out the generic parameters and set them correctly,
+which is different for almost every indicator. Lastly, as there is no
+standard interface for indicators, you need to hardcode these into your
+strategy with little flexibility. In contrast, here's the same call
+using <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil 2.1.0</a> to get an EMA value. It has notably more lines of
+code. It is designed deliberately so using an object oriented approach
+by encapsulating the indicator parameters into a bean object and
+abstracting the calculation into a single generic function call. [java]
+// get an EMA indicator value by building an indicator bean
+MovingAverage maBean = IndicatorBeanFactory.getMovingAverage(); // then
+sets its parameters with obvious method names
+maBean.setAppliedPrice(IIndicators.AppliedPrice.MEDIAN_PRICE)
+.setMAType(IIndicators.MaType.EMA) .setWidth(14); // all of these are
+optional parameters // feed the bean into a generic calculation method
+to get the result double ema = Indicating.calculate(instrument,
+Period.ONE_MIN, maBean); [/java] With JFUtil, to calculate an
+indicator, you create an indicator bean with the intuitive bean name
+that corresponds with the full name of an indicator. For example, a
+moving average will be MovingAverage. Then you set the
+indicator-specific parameters using clearly defined methods with useful
+javadoc descriptions. One method for one parameter. Lastly, you feed
+this indicator bean into a generic calculation function to get your
+value. It took some thinking to abstract and generalize such a rigidly
+structured API. I am quite pleased with this new design as the current
+<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil opens up a lot of design flexibility</a>. Such as
+dynamic indicator selection with genetic algorithm and interchangeable
+indicators use for runtime adaptive algorithms.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/' title='2011-03-22T07:35:00'>22 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/today-is-day-1-of-quantisan-the-company/" rel='bookmark'>Today is day 1 of Quantisan, the company</a>
             </h1>
             <div class="article-content"> <p>
@@ -211,52 +262,6 @@ with no strings attached. "Science is the belief in the ignorance of the
 experts", Richard Feynman.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/just-because-its-math-does-not-mean-its-not-without-its-caveats/' title='2011-03-01T07:21:00'>01 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/open-sesame-with-three-more-letters/" rel='bookmark'>Open sesame with three more letters</a>
-            </h1>
-            <div class="article-content"> <p>I apologize in advance if I occasionally disappear in the next 15 weeks.
-My study guide for a professional exam in financial analysis arrived
-last Friday. I spent most of this weekend studying as I need to squeeze
-in 300 hours of studying time between now and the exam in June. Topics
-of the exam range from professional standards to investment analysis to
-asset management. This is a major commitment as 300 hours in 3 months is
-no joke. Fortunately, I am familiar with a majority of the material.
-Unfortunately, most of the details I have forgotten already as level 1
-of this exam covers the very basic. For example, I haven't heard terms
-like price elasticity and marginal cost in 10 years. The quant section,
-at least, I am finding it to be a breeze as I finished skimming through
-the 400 pages of material in a few hours and realized that I don't need
-to spend anymore time on statistics or technical analysis to answer the
-practice questions. Having said that, I do not take this exam lightly
-and will have to put most other work on hold. This is a difficult
-decision because having spent hours and hours in the past few months
-over our trading system, it is coming to shape. In fact, I just tape-out
-a major component of it last Friday. Studying with this curriculum would
-provide me with a big picture perspective of financial analysis. Still,
-I would rather spend the time to study pertinent works like <a href="http://www.amazon.com/gp/product/0071592539?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0071592539">Security
-Analysis by Graham and Dodd</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=0071592539" />, or <a href="http://www.amazon.com/gp/product/0691042896?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0691042896">Time Series Analysis by
-Hamilton</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=0691042896" />, or <a href="">Structure and Interpretation of Computer Programs
-by Abelson et al.</a><img alt="" src="http://www.assoc-amazon.com/e/ir?t=quantisan-20&amp;l=as2&amp;o=1&amp;a=0070004846" /> (aff.), some classics on my shelf that I
-still couldn't fully appreciate yet. Better yet, I want to finish my
-trading system prototype as soon as possible because I've learned so
-much in bringing these systems (having gone through several incarnations
-already) to life than anything else I have done previously. However, it
-is also because of my desire to do this for the long term that I need to
-take the time to garner some industry recognition. As superfluous as
-doing an exam might seem for my outside-of-the-box approach to the
-market (mostly out of necessity as I have neither the bank roll nor
-brain cells to directly compete with the sharks), the fact is, to be
-successful in this industry, I need experience, skills, and credibility.
-The latter of which is something I lack. Neither Graham, Hamilton, nor
-Adelson can provide me with credibility that these three letters can --
-<a href="http://en.wikipedia.org/wiki/Chartered_Financial_Analyst">CFA</a>.</p>
-<div class="highlight"><pre><span class="nl">http:</span><span class="c1">//www.amazon.com/gp/product/0070004846?ie=UTF8&amp;tag=quantisan-20&amp;linkCode=as2&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0070004846</span>
-</pre></div> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/open-sesame-with-three-more-letters/' title='2011-02-21T07:55:00'>21 February 2011</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
             </div>
         </article>
 <p class="paginator">

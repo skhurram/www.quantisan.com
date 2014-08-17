@@ -61,6 +61,40 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/what-i-learned-from-2-years-of-data-sciencing/" rel='bookmark'>What I learned from 2 years of 'data sciencing'</a>
+            </h1>
+            <div class="article-content"> <p>Last week was my last day at uSwitch.com. From becoming aware of <em>data scientist</em> as a valid job title on my job offer letter, to speaking at Strata London, to signing a book deal to write about it in our book on Web Data Mining (that's progressing at a glacial pace), I figured that I should jot down some takeaway lessons while this experience is still fresh.</p>
+<blockquote class="twitter-tweet" lang="en"><p>sad day today as <a href="https://twitter.com/uSwitchEng">@uSwitchEng</a> had to say goodbye to the amazing <a href="https://twitter.com/Quantisan">@Quantisan</a>. you will be missed and best of luck in the next great adventure!</p>&mdash; Tim Goodwin (@timrgoodwin) <a href="https://twitter.com/timrgoodwin/statuses/413388484011753472">December 18, 2013</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h2>It is not about the <em>science</em>. It is about the <em>data</em>.</h2>
+<p>In my first year our team delivered a handful of data projects. To name just a few, we developed a dashboard showing lifetime values for all of our millions of customers, demonstrating a 6% revenue gain with a product showcase sorting algorithm modelled by the multi-armed bandit problem, and simulated offline advertising impacts to online sales for optimising marketing spending saving £20,000 a month. For various reasons, none of these projects gained traction within the company and became abandoned.</p>
+<p>Much of the efforts spent for those projects were in getting the right data into the right shape. We needed to capture events across applications on different technology stacks, associate individual events to unique customers, and being able to process all those data in an ad-hoc manner. Over the course of my first year, our team of 2 built and evolved a distributed data architecture and scalable data workflow that's based on open source tools and publications from companies like Google, LinkedIn, Twitter, etc. In fact, I scratched enough of my own itch on an open source big data processing project to become one of the maintainers for it.</p>
+<blockquote class="twitter-tweet" lang="en"><p>Congratulations to <a href="https://twitter.com/Quantisan">@Quantisan</a> for becoming a Cascalog committer today</p>&mdash; Nathan Marz (@nathanmarz) <a href="https://twitter.com/nathanmarz/statuses/312304668975980545">March 14, 2013</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>On a rather "by the way" note, we structured lifetime views of customer data from the disparate signals across company verticals. Words had been going around the company that we had this new business intelligence tool, more and more people asked us to help them answer questions with data on their side of the business. The data we surfaced from our data workflow satisfied a wide-spread need in the company to understand customer behaviours. Little did I know that we'll be cleaning and shaping data for most of my second year at uSwitch. Months later to recent times, our commercial team released an external data product that I can't say much but might bring in sizable benefits for the company soon.</p>
+<p>It is glamorous to talk about the latest and greatest machine learning or data visualisation. In practice, I was just cleaning and shaping data. Enabling more people to make use of deep and structured data was what delivered value to the company.</p>
+<h2>Figuring out the right problems to solve is not easy.</h2>
+<p>Had we known that customer behaviour analytics are so valuable, we would have done it earlier on (although many of the other projects were definitely a lot of fun to do). Figuring out the right work to do is one of the most difficult tasks for a data science team. It doesn't help with the fact that the data science role is so vague. Marketing think we are mining for customer insights. Developers think we're toying with Riemann, Storm, or something bleeding edge. Product managers think we are plotting graphs.</p>
+<p>Everyone has ideas but there were only 3 of us in the team. Figuring out where to devote our time and effort is not as easy as it sounds. The issue is that a new project can be almost anything. So which <em>one</em> should we do? The paradox of choice can be confusing.</p>
+<p>Seeing that this is data science, why not dive right into the data like they would often say in hackathons? I made the mistake in the first few weeks in my data science career just hacking away with the data and then trying to persuade people to make use of the result ... somehow.</p>
+<p>Some interesting graphs came about. But as <a href="https://twitter.com/dancingmango">Marc</a> often like to ask, "so what?" Unless someone or something can act on the data, results can only satisfy intellectual curiosity. A business can't survive on funding people to carry out academic studies forever.</p>
+<p>Nowadays, we talk to different stakeholders to try to dig as deep as possible into their needs before any code is written for a new project. This is me handwaving. Frankly, I'm still learning my way and rely a lot on luck through trials and errors to discovering the right problems to solve.</p>
+<h2>It is a humbling experience.</h2>
+<p>Working with <a href="http://oobaloo.co.uk/">Paul Ingles</a> and <a href="http://uk.linkedin.com/pub/abigail-lebrecht/2/95a/42">Abigail Lebrecht</a> has been frustratingly awesome. Paul is opinionated about doing things as simple as possible. On more occasions than I can remember, we implemented our own little Clojure libraries because the open source ones available were "trying to do too much". Abigail is adamant about getting the data and analyses right. "What do you mean this data is only 99% correct?" Working day in and day out with Paul and Abigail showed that I had much to learn in efficient problem solving and to question all hidden assumptions.</p>
+<p>In my previous role as a biomedical engineer, I also had the opportunity to work in a multidisciplinary team. But for my <a href="http://www.biomedcentral.com/content/pdf/1743-0003-5-15.pdf">haptic-robotic therapy project</a>, I never even considered going into a workshop to build my robot or provide clinical therapy for the stroke patients. What multidisciplinary meant back then were a small group of professionals coming together to work on a project with each person doing different tasks to get the thing to work.</p>
+<p>The advantage of being a data scientist is that I was very hands-on in all aspects of the work. One week I might be pair programming with Paul, and fighting to keep him away from my keyboard, to integrate Riemann for monitoring our data architecture. Other days I am debating with Abigail on the data mining side. Which usually resulted from her finding flaws in the materialised tables that I produced from Cascalog, and then having to come up with a better estimation model for the missing data.</p>
+<h2>So do you want to be a data scientist?</h2>
+<p>This is it for me formally as a data scientist. I am moving back across the Atlantic to the states to cofound a new venture and continuing my journey <a href="http://www.glassymedia.com">to make information accessible</a>. However, back to the topic at hand. If cleaning vast amount of data, being clueless as to what to do, and debating with colleagues sound like a challenge that you want to take on, I know a company in London that's <a href="http://www.uswitch.com/careers/">looking for a data scientist</a>!</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/what-i-learned-from-2-years-of-data-sciencing/' title='2013-12-21T00:00:00'>21 December 2013</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/event-driven-finite-state-machine-for-a-distributed-trading-system/" rel='bookmark'>Event-driven finite state machine for a distributed trading system</a>
             </h1>
             <div class="article-content"> <p>One problem I had when building my distributed trading system is managing states asynchronously from multiple triggers. For example, when the alpha engine say <em>buy</em>, it needs confirmation from the position engine to see if it is safe to enter a new position. I could chain one check after another imperatively or via callbacks. However, the underlying constraint is that these triggers:</p>
@@ -199,30 +233,6 @@
 <p>Update: this post generated some heated <a href="https://news.ycombinator.com/item?id=5685078">debates on Hacker News</a>.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/how-a-few-screws-cost-2000-and-a-240gb-multinodes-cluster-cost-50/' title='2013-05-10T08:30:00'>10 May 2013</a> in <a href="http://www.quantisan.com/category/journal/">journal</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/" rel='bookmark'>What should I work on next for Cascalog?</a>
-            </h1>
-            <div class="article-content"> <p>Too many things to do, too little time. I figured we can do this in a data-driven way. So here's a poll. Please only submit an entry if you use Cascalog. And only one per person. Let's see if an honour system would work.</p>
-<iframe src="https://docs.google.com/a/quantisan.com/spreadsheet/embeddedform?formkey=dGtBNF96bExZZ0E0X0p5ZUFTb2NyTkE6MQ" width="580" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-
-<h2>Poll result one week later</h2>
-<p><img alt="poll result" src="http://www.quantisan.com/images/2013/cascalog_poll_graph.png" /></p>
-<table>
-    <tr><th>Votes</th> <th>Choice</th></tr>
-    <tr><td>15</td> <td>Self-contained documentation site, e.g. http://cascalog.quantisan.com (demo address only)</td></tr>
-    <tr><td>10</td> <td>Improve and consolidate guides into Github wiki</td></tr>
-    <tr><td>11</td> <td>Bring Cascalog to Cascading 2.1/2.2</td></tr>
-    <tr><td>8</td> <td>Fix open issues</td></tr>
-    <tr><td>13</td> <td>Add features and performance increase, e.g. new logic solver, make use of new Cascading features since 2.0</td></tr>
-    <tr><td>2</td> <td>Other</td></tr>
-</table>
-
-<p>One person voted for integrating other machine learning library into Cascalog and another to <a href="https://github.com/nathanmarz/storm/issues/115">isolate system library</a>.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/what-should-i-work-on-next-for-cascalog/' title='2013-05-08T21:40:00'>08 May 2013</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

@@ -61,6 +61,78 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/" rel='bookmark'>Why I am not a big fan of MQL4 or trading platform scripting</a>
+            </h1>
+            <div class="article-content"> <p>I spent most of 2008 trading futures and developing automated systems on
+Tradestation. The futures trading didn't turn out so well as I lost 40%
+of my account and had to <a href="http://www.quantisan.com/retirement-from-futures-trading-and-back-to-stocks/">call it quit</a>. My quant development work on
+the other hand, was coming along slow but steadily. However, since I
+couldn't bear the monstrous maintenance fee anymore at <a href="http://www.tradestation.com/">Tradestation</a>,
+I had to abandon that work. Then last year <a href="http://www.quantisan.com/my-thoughts-and-goals-on-automated-trading-a-year-later/">when I wanted to pick up
+where I left off</a> on Matlab, I found that I couldn't just continue my
+work. For one, I've lost most of my files. I think I left them in my
+other computer in Hong Kong. Which is probably in a landfill by now.
+Secondly, I didn't keep a thorough journal <a href="http://www.quantisan.com/2008/">back then in 2008</a> like
+I'm doing now. Lastly, from the important files that I've kept, I didn't
+bother to convert the codes because I might as well write new ones from
+scratch than figure out what I did. The reason why I am reminiscing at
+the moment is because I am finding myself in the same cycle again. As
+regular readers may be aware, <a href="http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/">recent events</a> have accelerated my
+quant projects schedule. I am experimenting with using Metatrader 4 for
+my foreign exchange trading and scripting in MQL4 for automated trading.
+Like Tradestation, <a href="http://www.metaquotes.net/en/metatrader4">Metatrader 4</a> is a trading platform with scripting
+capabilities. Its programming language, MQL4, is a proprietary language
+based on C. I took a few hours this weekend to learn it (as I'm familiar
+with C already). So that I can start coding this week. However, after
+giving it more thought, I've decided to scale down on my projects with
+MQL4. I don't want to rely on a proprietary system for short-term
+convenience. As trading programmers know, the language used is merely a
+choice. Experience tells me that the bulk of development time is not
+spent on the actual programming itself. Rather, much of the time is
+spent on formulating, analyzing, and optimizing your algorithm. So I
+might as well bite the bullet to build from scratch my automated trading
+systems and quant analytics on one platform (i.e. on Python). That has
+been my long term plan all along. Everything under one roof. But I
+digressed. Then there's the issue of re-useability. Metatrader 4 is
+forex-only and only works with brokers that support it. As such, I would
+have to use something else for stock trading. Even for a forex-only
+system, it would help if I can do intermarket analysis quantitatively.
+That's not possible as far as I know with MQL4. Which is another major
+downside for me. To summarize other reasons on how I came about this
+decision, here are the advantages and disadvantages of using MQL4 versus
+using a general programming language, such as Python or C++. The
+advantages of using MQL4 are:</p>
+<ol>
+<li>Saves A LOT of development time as it's already built for trading</li>
+<li>Charting, manual and automated trading on one platform</li>
+<li>Based on the popular C programming language</li>
+<li>Many forex traders use it</li>
+<li>Large repertoire of forex-specific programs</li>
+</ol>
+<p>Disadvantages of using MQL4.</p>
+<ol>
+<li>Not for real quant analysis or data mining</li>
+<li>Limited to MT4-supported brokers</li>
+<li>Forex trading only</li>
+<li>Proprietary programming language</li>
+<li>Must run on Metatrader 4 client terminal</li>
+<li>MQL5 coming soon</li>
+</ol>
+<p>This is certainly a tough choice. Judging by the huge user base, it's
+evident that many people are satisfied with MQL4. Yet, as I've discussed
+here, there are downsides to using it (besides technical matters). My
+current plan remains the same as what I said in <a href="http://www.quantisan.com/january-2010-trading-performance-review/">my last month's trading
+review</a>. That is, I will use MQL4 to plug holes in my trading system
+for now before migrating to build my own system. In fact, I am already
+brewing my first expert advisor starting today. Perhaps I might even
+have something to post by the end of this week.</p>
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/' title='2010-02-08T13:38:00'>08 February 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/no-micro-lot-trading-at-dukascopy-metatrader-4-accounts/" rel='bookmark'>No micro-lot trading at Dukascopy Metatrader 4 accounts</a>
             </h1>
             <div class="article-content"> <p>
@@ -195,40 +267,6 @@ gets in your way of trading?</p>
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/what-to-do-when-life-gets-in-your-way-of-trading/' title='2010-02-04T08:49:00'>04 February 2010</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/paper-trade-short-usdcad-10573-stop-10640-target-10415/" rel='bookmark'>Paper trade: Short USD/CAD @ 1.0573, Stop 1.0640, Target 1.0415</a>
-            </h1>
-            <div class="article-content"> <p>Taking a first position in USD/CAD short here at 1.0573 on a 4-hour
-moving averages cross-over (Figure 1). I've also placed a limit order to
-add more at 1.0519 below Fibonacci support (shown in Figure 1). Reason
-for this trade is that USD/CAD is moving away from an upper bound
-channel with a overbought stochastic reading, as shown in the daily
-chart of Figure 2. I've also considered going long AUD/USD, but AUD/CAD
-trend remains bearish. So I chose to short USD/CAD instead. Secondly,
-crude oil (and gold too) looks to be bouncing off an oversold level with
-a rapid move in 2 days from 72.43 to 77.39. Coincidentally, INO.com
-posted an intermediate term <a href="http://www.ino.com/info/513/CD4184/&amp;dp=0&amp;l=0&amp;campaignid=3">cyclical analysis video with a bullish
-outlook</a> (affiliate link). They put out a better case than I do.
-USD/CAD might make a short-term upward bounce here because of a
-short-term oversold condition. However, there's evidently a lack of
-buyers in the past few hours (Fig. 1). The price has been sitting on
-support a bit too long in my view. Thus, I'm expecting it to break
-without a meaningful retracement (hence the short entry). A confirmation
-would be a break below 1.0530. Thus I have a limit order to short more
-below that price. I am risking 0.1% of my account on this trade. As you
-may have noticed, these charts are from Metatrader. I'm switching over
-to the MT4 platform as of today. Having played with its charting
-features for the past few hours, I'm quite satisfied with it so far.
-Although my needs are low as I was fine with the Oanda platform too
-(arguably the most simplistic platform out there). [caption id=""
-align="aligncenter" width="570" caption="USD/CAD,
-4-hour"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-02-02-usdcad_4h.gif" />][][/caption] [caption id="" align="aligncenter"
-width="570" caption="USD/CAD, daily"][<img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-02-02-usdcad.gif" />]<a href="http://www.quantisan.com/static/images/img_archive/2010-02-02-usdcad.gif">1</a>[/caption]</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/paper-trade-short-usdcad-10573-stop-10640-target-10415/' title='2010-02-02T22:40:00'>02 February 2010</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
             </div>
         </article>
 <p class="paginator">

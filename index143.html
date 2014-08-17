@@ -61,6 +61,33 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/new-moving-average/" rel='bookmark'>New moving average</a>
+            </h1>
+            <div class="article-content"> <p>I downloaded Hull Moving Average, Adaptive Moving Average, and a Kalmann
+Filter today.</p>
+<p>In the figure, the blue/red is HMA(8), cyan is AMA(10), yellow is EMA(9)
+as comparison.</p>
+<p>[<img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" />][] Notice that HMA is super fast and follows the price closely.
+AMA lags more but does a good job of smoothing outt the noise. EMA is as
+usual and very laggy.</p>
+<p>A strategy I'm thinking of is to use 3 different MA's instead of only
+EMA to improve the previously discussed 3EMA crossover strategy. The
+problem with the 3 EMA crossover strategy is that EMA lags too much, so
+it's not good for day trading so reaction time is the key to catching /
+exiting the waves.</p>
+<p>Maybe using the HMA as the fast MA, AMA as the base, and something else
+to verify the trend can work. As I've said before, remember to use
+something to filter out the whipsaws. But don't use something laggy as
+it would defeat the whole purpose of a fast indicator.</p>
+<p>Also, HMA can be used as a proxy to smooth out some inputs. i.e.
+RSI(HMA(close, 8), 14) or HMA(RSI(close, 14), 8).</p>
+<p>[<img alt="" src="http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s400/3mas.jpg" />]: http://bp1.blogger.com/_Vlx60iTPx5s/R4EXOvY4uYI/AAAAAAAAAE0/APxlgKxuETU/s1600-h/3mas.jpg</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/new-moving-average/' title='2008-01-06T00:49:00'>06 January 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/filtering-out-the-whipsaws/" rel='bookmark'>Filtering out the whipsaws</a>
             </h1>
             <div class="article-content"> <p>Whipsaws in pricing is the archilles' heel in trend following system. As
@@ -108,30 +135,6 @@ overtrading. I prefer to catch the big wave and not worry about the dips
 and spikes too much. Ideal holding period is in hours and not minutes.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/200-contracts-bar-the-sweet-spot-for-zg/' title='2008-01-04T18:21:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/futures/">futures</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/" rel='bookmark'>3EMA High Low Close crossover long strategy</a>
-            </h1>
-            <div class="article-content"> <p>Based on yesterday's trading strategy, I developed my own 3EMA crossover
-strategy. Instead of only using the Close data. The high and low are
-also used. Here's the idea.</p>
-<p>Condition1 = EmaLow crosses above EmaMedClose and EmaMedClose >
-EmaSlowClose; Condition2 = EmaMedClose crosses above EmaSlowClose and
-EmaLow > EmaSlowClose;</p>
-<p>Buy if Condition1 OR Condition2 is true.</p>
-<p>Sell if EmaHigh crosses below EmaMedClose OR EmaMedClose crosses below
-EmaSlowClose OR EmaLow crosses below EmaSlowClose.</p>
-<p>EMA length are set to: FastHighLength(7), FastLowLength(7),
-MedCloseLength(18), SlowCloseLength(30).</p>
-<p>The system does well to catch big breakouts. The 2 problems though is
-that it is very laggy and the whipsaws in pricing are eating it alive.
-See figure below.</p>
-<p>Also, notice that I'm using a 100 contracts / bar chart.</p>
-<p><img alt="graph" src="http://bp3.blogger.com/_Vlx60iTPx5s/R36xO_Y4uWI/AAAAAAAAAEk/cwu-8W10Ue8/s1600-h/3emastrategy.jpg" /></p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/3ema-high-low-close-crossover-long-strategy/' title='2008-01-04T18:15:00'>04 January 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

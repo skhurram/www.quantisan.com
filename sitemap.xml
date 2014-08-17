@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.quantisan.com/index.html</loc>
-<lastmod>2014-06-20T14:13:04-00:00</lastmod>
+<lastmod>2014-08-17T10:37:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.quantisan.com/archives.html</loc>
-<lastmod>2014-06-20T14:13:04-00:00</lastmod>
+<lastmod>2014-08-17T10:37:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.quantisan.com/tags.html</loc>
-<lastmod>2014-06-20T14:13:04-00:00</lastmod>
+<lastmod>2014-08-17T10:37:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://www.quantisan.com/categories.html</loc>
-<lastmod>2014-06-20T14:13:04-00:00</lastmod>
+<lastmod>2014-08-17T10:37:56-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -34,6 +34,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://www.quantisan.com/about/</loc>
 <lastmod>2014-06-19T00:00:00-00:00</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.quantisan.com/4-disciplines-necessary-in-building-a-startup/</loc>
+<lastmod>2014-08-17T00:00:00-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -4163,7 +4170,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://www.quantisan.com/category/startup/</loc>
-<lastmod>2014-03-16T00:00:00-00:00</lastmod>
+<lastmod>2014-08-17T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>
@@ -4647,6 +4654,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://www.quantisan.com/tag/black swan/</loc>
 <lastmod>2009-12-16T10:37:00-00:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.5</priority>
+</url>
+
+<url>
+<loc>http://www.quantisan.com/tag/soft skills/</loc>
+<lastmod>2014-08-17T00:00:00-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.5</priority>
 </url>

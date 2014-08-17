@@ -61,6 +61,24 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/" rel='bookmark'>My 5 minute lightning talk on Cascalog</a>
+            </h1>
+            <div class="article-content"> <p>Cascalog makes it a lot simpler to build distributed strategy
+backtesters on terabytes of market data, for example. It is a data
+processing library for building MapReduce jobs. I've been spiking out a
+data processing project with it at work for the past couple of weeks. So
+I thought I might as well give a lightning talk about it at our monthly
+developers meetup. Here are my presentation slides introducing Cascalog
+and outlining its features.</p>
+<iframe src="https://docs.google.com/present/embed?id=dgmktdkb_11m4xh8dgn&amp;size=m" frameborder="0" width="555" height="451"></iframe>
+
+<p>The possibilities...</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/my-5-minute-lightning-talk-on-cascalog/' title='2012-02-05T18:39:00'>05 February 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/ask-not-what-accuracy-your-algorithm-achieves-but-what-value-it-can-add/" rel='bookmark'>Ask not what accuracy your algorithm achieves but what value it can add</a>
             </h1>
             <div class="article-content"> <p>Partnering with the marketing team at work earlier this month reminded
@@ -174,99 +192,6 @@ learning, that's why I open source.</p>
 <p>Update: I've done some more digging and it seems that one of the reasons for the drastic improvement in performance is due to the use of <a href="http://clojure.org/transients">transients</a> in the built-in functions. Lesson of the day, leverage the language's inherent optimization by staying with core data structures and functions as much as possible.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/algorithmic-ownage/' title='2011-11-06T17:37:00'>06 November 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/" rel='bookmark'>Eureka moment on design patterns for functional programming</a>
-            </h1>
-            <div class="article-content"> <p>Understanding design patterns for object-oriented programming made my
-life easier as a Java programmer. So I have been looking for a
-comparable book for functional programming ever since my sojourn into
-this age-old paradigm. It looks as though <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book">I'm not the only one
-looking</a> too. But the thing is, I think I've just had a revelation of
-sort.</p>
-<p>There is one and only one guideline to designing functional
-architectures -- Keep it simple. Simple as in keeping your functions
-having a single purpose only. Simple as in work with the data directly and
-don't conjure unnecessary intermediaries. Simple, as elaborated by Rich
-Hickey in his talk, <a href="http://www.infoq.com/presentations/Simple-Made-Easy">Simple Made Easy</a>. Much of this is conveyed in Bloch's Effective Java:</p>
-<div class="highlight"><pre><span class="n">item</span> <span class="err">\#</span><span class="mi">5</span> <span class="err">\–</span> <span class="n">Avoid</span> <span class="n">creating</span> <span class="n">unnecessary</span> <span class="n">objects</span>
-<span class="n">item</span> <span class="err">\#</span><span class="mi">13</span> <span class="err">\–</span> <span class="n">minimize</span> <span class="n">accessibility</span> <span class="n">of</span> <span class="n">classes</span> <span class="n">and</span> <span class="n">members</span>
-</pre></div>
-
-
-<p>, for examples.</p>
-<p>As <a href="http://stackoverflow.com/questions/2930277/functional-programming-equivalent-of-design-patterns-book/2930452#2930452">Majewski said in a stackoverflow reply</a> (Update 2013 – question no longer available on stackoverflow),</p>
-<div class="highlight"><pre><span class="n">The</span> <span class="n">patterns</span> <span class="n">movement</span> <span class="n">started</span> <span class="n">because</span> <span class="n">object</span><span class="o">-</span><span class="n">oriented</span> <span class="n">programming</span> 
-<span class="n">was</span> <span class="n">often</span> <span class="n">turning</span> <span class="n">into</span> <span class="n">spaghetti</span> <span class="n">objects</span> <span class="p">...</span> <span class="n">Functional</span> <span class="n">programming</span> 
-<span class="n">is</span> <span class="n">a</span> <span class="k">restricted</span> <span class="n">style</span> <span class="n">of</span> <span class="n">programming</span><span class="p">,</span> <span class="n">so</span> <span class="n">it</span> <span class="n">didn</span><span class="err">&#39;</span><span class="n">t</span> <span class="n">need</span> <span class="n">to</span> <span class="n">grow</span> <span class="n">a</span> <span class="n">set</span>
-<span class="n">of</span> <span class="k">restricted</span> <span class="n">conventions</span> <span class="n">to</span> <span class="n">limit</span> <span class="n">the</span> <span class="n">chaos</span><span class="p">.</span>
-</pre></div>
-
-
-<p>As such, there is no design pattern book for functional programming. I didn't get that earlier this year. But something clicked recently. During the past few months, I've been doing some <a href="http://www.quantisan.com/ive-quit-my-day-job-and-moved-to-the-uk-to-do-this-full-time/">consulting and open source projects</a> solving algorithmic problems with Clojure.</p>
-<p>One of the problems in a project that I was faced with this week is calculating the occurrence of each distinctive element within a list of elements. Say we have a list, <code>coll = ("orange", "bottle", "coke", "bottle")</code>. The output would be something like <code>[("orange", "bottle", "coke") (1 2 1)]</code> </p>
-<p>This is my first solution.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">eval-decompose</span>
-  <span class="p">[</span><span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">super-d</span>  <span class="p">(</span><span class="nb">distinct </span><span class="nv">coll</span><span class="p">)</span>
-        <span class="nv">freqs</span>    <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">ps</span>  <span class="p">[]</span>
-                        <span class="nv">d</span>   <span class="nv">super-d</span><span class="p">]</span>
-                   <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">d</span><span class="p">)</span>
-                     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">c</span>  <span class="p">(</span><span class="nb">count </span><span class="p">(</span><span class="nb">filter </span><span class="p">(</span><span class="nb">partial = </span><span class="p">(</span><span class="nb">first </span><span class="nv">d</span><span class="p">))</span> <span class="nv">coll</span><span class="p">))]</span>
-                       <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">conj </span><span class="nv">ps</span> <span class="nv">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">rest </span><span class="nv">d</span><span class="p">)))</span>
-                     <span class="nv">ps</span><span class="p">))]</span>
-    <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nb">vector </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">super-d</span> <span class="nv">freqs</span><span class="p">)))</span>
-</pre></div>
-
-
-<p>The specs are not exactly as I described but the concept remains. What I
-did is to use tail calls (it's supposed to be fast, isn't it?) to
-aggregate each counter to produce a vector of counts. Then I map each
-pair of fragment with its corresponding count to generate a final output
-collection. Sounds overly complicated, doesn't it?</p>
-<p>This is the first warning of a bad functional design. For a collection of 30,000 items,
-this function took 11 minutes to compute on my notebook. This looks like
-a good place to exploit the parallel nature of this problem.</p>
-<p>Specifically, the counting of each fragment is independent of other
-fragments. Thus, there's no need for the program to wait for one
-fragment to finish to process the next. I simplified the program to
-remove this inherent assumption of procedural processing. Here is the
-gist of the refactored code where each function only does one job. Since
-the processing are modularised, I can parallelize the algorithm easily
-with the use of pmap instead of map on the last line as shown below.</p>
-<div class="highlight"><pre><span class="p">(</span><span class="kd">defn </span><span class="nv">match-count</span>
-<span class="s">&quot; Given key, k, returns number of occurrences of k in collection, coll.</span>
-<span class="s">&quot;</span>
-  <span class="p">[</span><span class="nv">k</span> <span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">match?</span>  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">i</span> <span class="nv">x</span><span class="p">]</span>
-                  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="nv">k</span> <span class="nv">x</span><span class="p">)</span>   <span class="c1">;; closure on k</span>
-                    <span class="p">(</span><span class="nb">inc </span><span class="nv">i</span><span class="p">)</span>
-                    <span class="nv">i</span><span class="p">))]</span>
-    <span class="p">(</span><span class="nb">reduce </span><span class="nv">match?</span> <span class="mi">0</span> <span class="nv">coll</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="kd">defn </span><span class="nv">calc-counts</span>
-<span class="s">&quot; Returns a list of counts for the occurrences of each key of keys, ks,</span>
-<span class="s">  within the collection, coll.</span>
-<span class="s">&quot;</span>
-  <span class="p">[</span><span class="nv">ks</span> <span class="nv">coll</span><span class="p">]</span>
-  <span class="p">(</span><span class="nf">pmap</span> <span class="o">#</span><span class="p">(</span><span class="nf">match-count</span> <span class="nv">%</span> <span class="nv">coll</span><span class="p">)</span> <span class="nv">ks</span><span class="p">))</span>
-</pre></div>
-
-
-<p>I've split the first function into 3 functions (2 shown here). As Hickey
-said in his talk, simplifying can often produce more, not less,
-functions. Yet, the program is not only easier to read and runs in less
-than a minute. An order of magnitude faster! There are still lots for me
-to learn. I want to find more challenging projects to push my own
-limits. But rather than solving arbitrary problems, I prefer to tackle
-real-world challenges. So if you know of anyone that can benefit from
-collaborating with a functional developer to build robust and scalable
-software, please pass along <a href="mailto:paul@quantisan.com">my contact</a>.</p>
-<p>Follow up: Kevin Lynagh showed me three better ways of doing this in a follow-up post – <a href="/algorithmic-ownage/">Algorithmimc ownage</a>. Humbled.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/eureka-moment-on-design-patterns-for-functional-programming/' title='2011-10-25T15:28:00'>25 October 2011</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
             </div>
         </article>
 <p class="paginator">

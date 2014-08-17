@@ -61,6 +61,50 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/how-to-backup-your-data-on-the-cloud-with-ease-and-for-free/" rel='bookmark'>How to backup your data on the cloud with ease and for free</a>
+            </h1>
+            <div class="article-content"> <p>Dr. Steenbarger's <a href="http://traderfeed.blogspot.com/2010/04/reflections-on-dr-bretts-blow-up.html">recent harddrive failure</a> reminded me about the
+importance of backing up my data. Everything that I do with trading is
+on the computer. Consequently, I have many files that are vital to my
+trading. From web bookmarks to chart templates to source codes, I would
+have to make a checklist to ensure that I backed up everything
+frequently. But only if I were to do my backup manually. Being the lazy
+and cheap person that I am, I don't like the idea of forcing myself to
+backup frequently. That is why my folders are synchrnized automatically
+to an online file server using Mozy Remote Backup. I don't have to do a
+thing to know that all my important stuff are safe. There are two
+reasons why I choose Mozy. It is one of the two biggest names in the
+business (the other is Carbonite). It is the only one of the two to
+offer <a href="http://www.quantisan.com/mozy/">a free for lifetime 2GB online backup space</a> (affiliate). The
+benefit of using Mozy is that it actively synchronize my files to their
+cloud storage server. These are files that I change often. It makes
+sense to use Mozy to monitor and back them up automatically so that I
+don't have to worry about them. Still, I have another 50GB+ of personal
+photos, videos, and documents that won't fit in this free 2GB space.
+Which is why I only use Mozy for my frequently changing or critical
+files (mostly trading related). For the rest of my 50GB+ data, they are
+typically static content (e.g. photos and media files). So there is not
+much point for me to pay a monthly fee. I rather spend a few minutes a
+month to make backup DVDs or upload them to my Amazon S3 account. That
+way, I have all my data backed up and get to keep my \$5 a month (price
+of monthly subscription fee for an unlimited storage space backup) too.
+I am not being paranoid. Another one of my computers died on me a few
+years back with no prior warning. Its power supply suddenly blew up in
+smoke and sparks one day. The scene was quite spectacular. More than a
+few components were damaged then. I doubt that I will see that kind of
+fireworks again. But who knows what else could go wrong with this aging
+computer (4 years and counting)? A data failure with my computer would
+indeed be very costly for me. I invested a lot of time and energy on my
+trading work. If my harddrive were to fail, I may lose all of that work
+if I don't have a backup. That is why I have <a href="http://www.quantisan.com/mozy/">a free automated data
+backup plan</a> which doesn't
+require me to lift a finger.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/how-to-backup-your-data-on-the-cloud-with-ease-and-for-free/' title='2010-04-19T07:29:00'>19 April 2010</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/bought-3-cveto-jul-30-puts-175-mark-3010/" rel='bookmark'>Bought +3 CVE.TO JUL 30 Puts @ 1.75, mark $30.10</a>
             </h1>
             <div class="article-content"> <p>I made my first trade in my RRSP! It is a short on Cenovus Energy
@@ -186,61 +230,6 @@ void onBar(Instrument instrument, Period period, IBar askBar, IBar
 bidBar) throws JFException { } } [/java]</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/jforex-stopmananger-1-0/' title='2010-04-12T20:39:00'>12 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/" rel='bookmark'>An explanation of my Keltner Channel and Candlestick hybrid setup</a>
-            </h1>
-            <div class="article-content"> <p>This is an explanation of my <a href="http://www.quantisan.com/category/quantitative-finance/systems/">automated trading</a> strategy for the
-Dukascopy JForex Strategy Contest in April. This strategy just made its
-first trade today after running for about 72 hours. My contest demo
-account closed with a gain of 7% on this first trade. Note that this
-strategy is built for competing in a contest and not for real trading
-(i.e., it's purely a no cost gamble). Here is the concept for this high
-probability trading setup. Referring to Figure 1 below, the red arrow
-marks my short entry on EURGBP today. These are the technical analysis
-indicators the strategy uses:</p>
-<ol>
-<li>Trend: Signaled by 50 bar moving average above (bullish) or below
-    (bearish) the 200 bar moving average.</li>
-<li>Momentum: Oversold or overbought RSI conditions, but not used in a
-    traditional manner...</li>
-<li>Volatility: I use the Keltner channel to measure volatility.</li>
-<li>Price action: Observe candlestick behaviour to identify trend
-    continuation. This is where the secret to this strategy happens. I
-    will explain this below.</li>
-</ol>
-<p>Note that I used a Bollinger Bands in the chart of Figure 1 because I
-couldn't find the Keltner Channel indicator in Metatrader (my charting
-software). It doesn't affect my conceptual illustration anyhow. The
-setup:</p>
-<ol>
-<li>Identify overarching trend via 50/200 moving averages as explained
-    above.</li>
-<li>Confirm price is still playing to the trend by checking if current
-    market price is on the right side of the 200 bars moving average.
-    Price above for bullish and below for bearish.</li>
-<li>Once steps 1-2 are in place, it's assumed that the trend is strong.
-    We look for a setup in the trend's direction. In particular, we look
-    for a <em>failed counter-trend retracement</em> setup using candlestick in
-    combination with the Keltner channel.</li>
-<li>Sounds fancy but it's simple. Using a short-side example, the bar's
-    high has to penetrate above the Keltner channel yet it closes within
-    it. Then the short entry is signaled. The opposite for a long-side
-    entry.</li>
-<li>RSI overbought and oversold conditions are used to filter out slow
-    and steady counter-trend moves (those are evil).</li>
-</ol>
-<p>Another benefit of using a price channel is that I also use it to peg my
-take profit target and stop loss. As I said in my previous post, because
-<a href="http://www.dukascopy.com/ibentry.php?ibref=1143/">Dukascopy</a> expects winning contestants to submit their source codes,
-I am not using anything proprietary or extraordinary here. As such, this
-is totally different than <a href="http://www.quantisan.com/category/trading-how-tos/trading-strategy/">what I use to trade on my own</a>. Namely more
-reliance on indicators and less on price action and <a href="http://www.quantisan.com/category/trading-how-tos/risk-management/">risk management</a>.</p>
-<p><img alt="" src="http://www.quantisan.com/static/images/img_archive/2010-04-09-eurgbp_30m.gif" title="EURGBP, 30m" /></p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/an-explanation-of-my-keltner-channel-and-candlestick-hybrid-setup/' title='2010-04-09T18:16:00'>09 April 2010</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

@@ -61,6 +61,74 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/" rel='bookmark'>Unlock Lisp sorcery in your data structure by implementing Clojure ISeq</a>
+            </h1>
+            <div class="article-content"> <p>People that has gone through The Little Schemer might not find this exciting. One of the things that I discovered while patching <a href="http://quantisan.github.com/clatrix/">Clatrix</a> is that implementing clojure.lang.ISeq interface in your custom data structure unlocks the magic of Lisp composition. By enabling primative operators such as <code>first</code>, <code>next</code>, <code>more</code>, <code>cons</code>, higher-level operations such as <code>map</code> and <code>reduce</code> would just work when operating on your data structure. I find it fascinating that a native Fortran matrix object (through jBLAS) can be made clojury with a few magic operations implemented.</p>
+<p>However, getting a <code>deftype</code> implementation of <code>Matrix</code> correct took some effort as these operators are not as simple as they seem.</p>
+<div class="highlight"><pre><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">ISeq</span> <span class="kd">extends</span> <span class="n">IPersistentCollection</span> <span class="o">{</span>
+    <span class="n">Object</span> <span class="nf">first</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">next</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">more</span><span class="o">();</span>
+    <span class="n">ISeq</span> <span class="nf">cons</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>For example, say we have a matrix <code>M</code> like so.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="k">def </span><span class="nv">M</span> <span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">]</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">]]))</span>
+<span class="nv">=&gt;</span> <span class="nv">M</span>
+<span class="nv">A</span> <span class="mi">3</span><span class="nv">x3</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>  <span class="mf">3.00</span><span class="nv">e+00</span> 
+<span class="mf">4.00</span><span class="nv">e+00</span>  <span class="mf">5.00</span><span class="nv">e+00</span>  <span class="mf">6.00</span><span class="nv">e+00</span> 
+<span class="mf">7.00</span><span class="nv">e+00</span>  <span class="mf">8.00</span><span class="nv">e+00</span>  <span class="mf">9.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>Reducing <code>M</code> across its maps is equivalent to a column-wise operation.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">reduce </span><span class="o">#</span><span class="p">(</span><span class="nb">map + </span><span class="nv">%1</span> <span class="nv">%2</span><span class="p">)</span> <span class="nv">M</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">12.0</span> <span class="mf">15.0</span> <span class="mf">18.0</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Yet for a while this doesn't work because I wasn't careful on my implementation of <code>first</code>. </p>
+<p>Consider the case of a 2x2 matrix. A 2x2 matrix is structurally equivalent to a nested vector. Calling <code>first</code> on these would yield:</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span> <span class="mi">4</span><span class="p">]]))</span>
+<span class="nv">A</span> <span class="mi">1</span><span class="nv">x2</span> <span class="nv">matrix</span>
+<span class="nv">-------------</span>
+<span class="mf">1.00</span><span class="nv">e+00</span>  <span class="mf">2.00</span><span class="nv">e+00</span>
+</pre></div>
+
+
+<p>And for a 3x1 vector matrix, i.e. one-dimensional, it is equivalent to a regular vector.</p>
+<div class="highlight"><pre><span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])</span>
+<span class="mi">1</span>
+<span class="nv">=&gt;</span> <span class="p">(</span><span class="nb">first </span><span class="p">(</span><span class="nf">matrix</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="mf">1.0</span>
+</pre></div>
+
+
+<p>But here's a tricky bit. What happens during <code>reduce</code> as it keeps recurring <code>next</code> and <code>first</code>?</p>
+<p>Let's step this through for <code>(reduce #(map + %1 %2) M)</code>. <code>%1</code> is basically the result so far and <code>%2</code> is the <code>first</code> of the remaining collection to be processed.</p>
+<table border="1">
+    <tr><th>iteration</th><th>accumulated (%1)</th><th>first (%2)</th><th>remaining</th></tr>
+    <tr><td>0</td><td>nil</td><td>[1 2 3]</td><td>[[1 2 3] [4 5 6] [7 8 9]]</td></tr>
+    <tr><td>1</td><td>[1 2 3]</td><td>[4 5 6]</td><td>[[4 5 6] [7 8 9]]</td></tr>
+    <tr><td>2, bad</td><td>[5 7 9]</td><td>7</td><td>[[7 8 9]]</td></tr>
+    <tr><td>2, good</td><td>[5 7 9]</td><td>[7 8 9]</td><td>[[7 8 9]]</td></tr>
+</table>
+
+<p>The problem arises in the second iteration. Calling <code>(rest [[4 5 6] [7 8 9]])</code> returns <code>[[7 8 9]]</code>. However, <code>(matrix [[7 8 9]])</code> is a row vector and <code>(matrix [7 8 9])</code> is a column vector. Both are considered one dimensional. In either case, <code>first</code> of a vector should return the first element, which is a number. Thus at this iteration, <code>reduce</code> breaks because you can't map a sequence with a number, <code>(map + [5 7 9] 7)</code>, to get an accumulated value.</p>
+<p>What we want though, is for the second iteration to return <code>[7 8 9]</code> instead because the <em>original</em> matrix is not a vector. Luckily, this particular problem has been solved by my colleague <a href="https://github.com/antoniogarrote">Antonio Garrote</a> when he <a href="https://github.com/forward/incanter-BLAS">did this in Java a year ago</a> by keeping a predicate field signifying is <em>this</em> matrix supposed to be vector or not.</p>
+<p>So there you have it. If you find yourself needing to implement <code>deftype</code> to build your own data structure in Clojure. Do consider implementing <code>clojure.lang.ISeq</code> to leverage high-level Clojure functions but be careful about those seemingly simplistic primitive operators.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/unlock-lisp-sorcery-in-your-data-structure-by-implementing-clojure-iseq/' title='2012-12-31T15:42:00'>31 December 2012</a> in <a href="http://www.quantisan.com/category/computing/">computing</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/recommendation-discovery-via-graph-traversal/" rel='bookmark'>Recommendation discovery via graph traversal</a>
             </h1>
             <div class="article-content"> <p>I am quite excited about graph computing these days. It represents relational data such as customer behaviour naturally and otherwise complicated problems break down to simple pattern matching algorithm. Take recommendation system, for example. One way to do it is by machine learning as <a href="http://en.wikipedia.org/wiki/Recommender_system">Wikipedia suggests</a>. But if we represent the data in a property graph, a simplistic solution surfaces intuitively. </p>
@@ -175,22 +243,6 @@ LIMIT <span class="m">10</span><span class="p">;</span>
 <p>It's a shame that so many companies are poisoning the term Big Data these days by plastering it all over their marketing material to sell products with no substance. There are real strategic advantages to be reaped if companies can do it right.</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/i-construct-models-not-theories/' title='2012-09-11T22:00:00'>11 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/" rel='bookmark'>My talk at OR54 on knowledge discovery with web log data</a>
-            </h1>
-            <div class="article-content"> <h3>Abstract</h3>
-<p>Web log data contains a wealth of information about online visitors. We have a record of each and every 
-customer interaction for the millions of visitors coming through each month at uSwitch.com. The challenge 
-is to analyse this discrete time series, semi-structured dataset to understand the behaviour of our visitors on 
-a personal level. This talk is a case study of how our data team of three leveraged heterogeneous 
-architecture and agile methodologies to tackle this problem. And we had three months.</p>
-<h3>Slides</h3>
-<iframe src="http://www.slideshare.net/slideshow/embed_code/14168871?hostedIn=slideshare&page=upload" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/my-talk-at-or54-on-knowledge-discovery-with-web-log-data/' title='2012-09-04T16:30:00'>04 September 2012</a> in <a href="http://www.quantisan.com/category/data-science/">data-science</a>.              
             </div>
         </article>
 <p class="paginator">

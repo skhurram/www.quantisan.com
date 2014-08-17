@@ -61,6 +61,70 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/" rel='bookmark'>Adapting to changing market volatility with a statistical position size table</a>
+            </h1>
+            <div class="article-content"> <p>We know that prices can go up or down. We also know that the quality of
+these ups and downs can be very smooth or very choppy. As such, it's not
+surprising that the trend and volatility of a market form the two
+universal characteristics of a price action. No matter which market you
+trade, the trend and volatility of the prices will influence your
+trading and P&amp;L. That can be both good and bad as volatility is a double
+edged sword. A fast paced moving market can rain down gold on you or it
+can burn your cash away. Most of the time, it's the latter case.
+Consequently, there are many ways traders adapt to changing volatility
+in the market. You can tailor your trading strategy, change trading
+timeframe, switch market entirely, or manage your risk accordingly, for
+examples. In this post, I'd like to give an example for the use of a
+<a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex position size table</a> to fit with market
+volatility. The problem with market volatility is that it's hard to
+notice. As opined by <a href="http://traderfeed.blogspot.com/2009/10/jump-in-stock-market-volatility-and-its.html">Dr. Steenberger</a>, "many traders will adapt to
+directional changes quicker than they adapt to shifts in volatility."
+The art of identifying market conditions is not discussed in this post.
+But obviously, if there is a way to build in an inherent way to manage
+your risks based on market volatility, you will have built yourself a
+safety net. That is the logic behind my <a href="http://www.quantisan.com/tools/forex-position-sizer/">statistically-derived forex
+position sizer</a>. It's a
+data-driven tool to impose an inherent safety net in your trading. What
+it does is simple. Here's what it boils down to:</p>
+<ol>
+<li>It finds the recent 2 sigma value (i.e., a statistical measure of
+    volatility, <a href="http://en.wikipedia.org/wiki/Standard_deviation">see wiki</a>) of each major currency pairs.</li>
+<li>It calculates the maximum position size for each pair using the 2
+    sigma value.</li>
+<li>Then it converts the number to correspond with your account currency
+    based on a real-time currency exchange rate for each trading pair.</li>
+</ol>
+<p>Thus, a table such as <a href="http://www.quantisan.com/tools/forex-position-sizer/">this one I published for
+forex</a> can give you a
+real-time guideline to the maximum position size you should take given
+your risk appetite. One shortcoming with this approach is that while you
+may limit your loss during a volatile market, you are also limiting your
+potential gain. But this is where the old saying, "let your profit run
+and cut your losses short" applies. One solution is to simply add to
+your winning trades, according to your trading setups, of course. That
+way, when the market moves in your favour or you get confirmation on
+your setup, you can increase the position size responsibly without
+stretching your principal. By now, it's probably obvious that the use of
+such a tool is not, and should not, meant to be a solution to changing
+market volatility. It is merely a convenience tool to serve as one of
+the many that a trader has at his/her disposal. Nevertheless, I find the
+table to be very convenient for me because I don't have to worry about
+calculating the position sizes manually on each trade. Trading is tough
+enough already, so I like to develop <a href="http://www.quantisan.com/tools/">tools</a> that can make my life
+ever so slightly easier.</p>
+<div id="_mcePaste" style="overflow: hidden; position: absolute; left: -10000px; top: 0px; width: 1px; height: 1px;">
+<span style="font-weight: bold;">many traders will adapt to directional
+changes quicker than they adapt to shifts in volatility</span>
+
+</div>
+
+</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/adapting-to-changing-market-volatility-with-a-statistical-position-size-table/' title='2009-10-29T13:00:00'>29 October 2009</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/paper-trade-short-nzdusd-07520-out-07308-212-pips/" rel='bookmark'>Paper trade: Short NZD/USD @ 0.7520, out 0.7308 (+212 pips)</a>
             </h1>
             <div class="article-content"> <p>This was definitely one of my better executed trades recently. Here's my
@@ -196,54 +260,6 @@ align="aligncenter" width="580" caption="EUR/JPY, 3-hour"][<img alt="EUR/JPY,
 </p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/paper-trade-stopped-out-of-audjpy-83598490-130-pips-and-eurjpy-1367313750-77-pips/' title='2009-10-22T22:21:00'>22 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/forex-position-sizer/" rel='bookmark'>Forex position sizer</a>
-            </h1>
-            <div class="article-content"> <p>Below is a spreadsheet of <strong>real-time</strong> (end of day data), statistically
-determined maximum recommended position size for accounts in US Dollar,
-Euro, Japanese Yen, Australian Dollar, Swiss Franc, British Pound, or
-Canadian Dollar. The table is for use with trading major forex pairs and
-crosses in the daily timeframe. These target maximum units are based on
-an at-risk amount per trade of \$100 in U.S. dollar (and numerically
-equivalent in other home currencies) to expect for 2 standard deviations
-(95th percentile) of the daily ranges for each of the corresponding
-currency trade pair.
-<iframe width="580" height="700" frameborder="0" src="http://spreadsheets.google.com/pub?key=tDkmtohmo9jD1jAX_xRGegg&amp;single=true&amp;gid=19&amp;output=html&amp;widget=true"></iframe>
-In case the spreadsheet data doesn't load (which happens often as there
-are a lot of calculations behind it), here's <a href="http://www.quantisan.com/static/images/img_archive/2010-02-07-ForexPositionSizer.png">a link to an image capture
-of the table</a> taken on February 7, 2010. You can convert these
-published units to correspond with your own risk appetite by multiplying
-the units shown with the number of times of your own portfolio risk
-amount with respect to \$100. For example, if your forex account has USD
-\$25,000 and you're willing to risk 1% on each trade, that amounts to
-\$250 risked per trade, which is 2.5 times of \$100. Say if you want to
-trade EUR/JPY, look up EUR/JPY on Table 1 (since you're using USD) to
-find that the target position size is 6175 (as of this writing). Simply
-times 2.5 of that number, which equal 15,438 units. The target maximum
-number of units is calculated as follow for each currency pair.</p>
-<ol>
-<li>Calculate the daily range (high - low) for the past 45 days up to
-    yesterday. The data and tables are updated at the end of each day.</li>
-<li>Calculate the standard deviation for the ranges.</li>
-<li>Solve the formula: Units = Risk Amount / [2sigma * Quote(2nd
-    currency/base currency)]</li>
-</ol>
-<p>Scroll the horizontal bar beneath the table to move the view to your
-account's base currency. It is best if you copy and paste the data
-because the connection to Google Finance is not guaranteed. So the table
-might not work at times. The pairs/crosses listed in the table are as
-follow: AUD/JPY, AUD/USD, CAD/JPY, EUR/CHF, EUR/GBP, EUR/JPY, EUR/USD,
-GBP/JPY, GBP/USD, NZD/USD, USD/CAD, USD/CHF, USD/JPY. If you like this
-tool, check out <a href="http://www.quantisan.com/tools/">my other tools</a> or my posts on <a href="http://www.quantisan.com/category/quantitative-finance/">quantitative
-finance</a>. Did you find what you're looking for? Feel free to <a href="http://www.quantisan.com/contact/">contact
-me</a> with any suggestion or opinion so that I can improve this tool for
-everyone!</p>
-</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/forex-position-sizer/' title='2009-10-21T18:15:00'>21 October 2009</a> in <a href="http://www.quantisan.com/category/forex/">forex</a>.              
             </div>
         </article>
 <p class="paginator">

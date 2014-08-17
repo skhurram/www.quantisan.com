@@ -61,6 +61,54 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/software-design-trading-development-process-and-ikea/" rel='bookmark'>Software design, trading development process, and Ikea</a>
+            </h1>
+            <div class="article-content"> <p>I spent a few months between 2010 and 2011 not on the market, not on
+coming up with new strategies, but on developing a software framework
+for my trading system. For my trading strategy development, I make use
+of a continuous systems development life cycle process from the
+engineering realm. Starting from planning, to analysis, to design, to
+implementation, to maintenance, and finally, back to planning, and so on
+for each and every new concept that I have. (see <a href="http://www.wired.com/epicenter/2011/04/in-praise-of-failure/all/1">Sir James Dyson's
+guest column on Wired</a>) Imagine that if you need to write a new
+strategy file for each and every idea and for each of its design
+iteration. Pretty soon you'll have many strategy files and a lot of
+boilerplate codes. What if you found a bug or figured out some
+enhancements to a particular component of your strategy? Then you'll
+have to sift through all those files and make the changes to all those
+relevant codes to make the update across the board. Hopefully, this
+isn't the approach you're taking. Yet, a few trading API that I have
+used before inherently encourage or even limit you (<a href="http://www.quantisan.com/why-i-am-not-a-big-fan-of-mql4-or-trading-platform-scripting/">EasyLanguage and
+MQL4</a>) to this archaic procedural programming paradigm. Luckily, Java
+is an object-oriented programming language. However, it is only as
+object-oriented as you make it to be. JForex, <a href="http://www.quantisan.com/tag/jforex">the trading API that I
+use</a>, actually runs on <a href="http://www.quantisan.com/more-trouble-with-jforex-iindicators/">the edge of breaking this
+object-orientedness</a> as I have recently lamented. The bad news for the
+beginning developer is that practically every published strategy which I
+have seen or <a href="http://www.quantisan.com/tag/source-code/">guilty of posting myself</a> are illustrations of what not
+to do with software design. In that there's none in it whatsoever. Think
+of common published strategies like the Ikea mini-model showrooms.
+Everything is crammed into a tiny space but it is a simple way to convey
+the gist of a room design (read: the trading algorithm). However, they
+are not built for practical use. Real strategies are like suites in an
+apartment building. There is an underlying architectural commonality for
+easy management and maintenance while enabling diversity in the
+strategies. My recently completed software framework dramatically made
+my life easier in the tasks of implementation and maintenance. Software
+maintenance, in particular, is most often needlessly and overly
+complicated in trading strategy development because of the lack of a
+good design. Because at the end of the day, most programmers spend the
+majority of their time debugging, maintaining, and extending their code.
+A true object-oriented design decouples all its components so that you
+can use a divide and conquer approach with no repetition of work. Do you
+have a development process in place? I'd like to hear how you tackle
+this problem.</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/software-design-trading-development-process-and-ikea/' title='2011-04-12T07:30:00'>12 April 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/transitioning-to-a-professional-website-front-and-back/" rel='bookmark'>Transitioning to a professional website, front and back</a>
             </h1>
             <div class="article-content"> <p>Yes, this is still Quantisan.com. In case anyone is visiting and noticed
@@ -173,57 +221,6 @@ In the mean time, getting multi-dimensional indicators results through
   interface]: http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/more-trouble-with-jforex-iindicators/' title='2011-03-29T07:36:00'>29 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/" rel='bookmark'>Conjuring beans to simplify JForex IIndicators</a>
-            </h1>
-            <div class="article-content"> <p>The JForex API is not perfect. Like any application programming
-interface (API), some parts of the JForex API is better designed than
-others. One of the most gripping problems with JForex is its use of
-technical analysis (TA) indicators. Here's an example of using an
-exponential moving average, one of the most simplest indicators.
-<code>ema(instrument, Period.TEN_SECS, OfferSide.BID, IIndicators.AppliedPrice.MEDIAN_PRICE, 14, 0);</code>
-And the corresponding javadoc explaining the parameters,
-<code>Parameters: instrument instrument of the bar period period of the bar side bid or ask side of the bar appliedPrice type of input data timePeriod time period value shift number of candle back in time staring from current bar. 0 - current bar (currently generated from ticks), 1 - previous bar (last formed bar), 2 - current bar minus 2 bars and so on</code>
-It's not intuitive but it's usable. Recall that in my <a href="http://www.quantisan.com/getting-started-learning-jforex-programming/">JForex
-programming tutorial</a>, I suggested using the JForex API javadoc to
-find out information about the API. However, for the case of
-IIndicators, if you <a href="http://www.dukascopy.com/client/javadoc/com/dukascopy/api/IIndicators.html">take a look at its javadoc</a>, you will only be led
-to more confusion by the hundred or so mysterious indicator methods with
-cryptic parameter names. In JForex API, if you want to calculate an
-indicator, you need to look through a long list of abbreviated method
-names in the javadoc. Many of which are not easy to decipher. Secondly,
-you need to figure out the generic parameters and set them correctly,
-which is different for almost every indicator. Lastly, as there is no
-standard interface for indicators, you need to hardcode these into your
-strategy with little flexibility. In contrast, here's the same call
-using <a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil 2.1.0</a> to get an EMA value. It has notably more lines of
-code. It is designed deliberately so using an object oriented approach
-by encapsulating the indicator parameters into a bean object and
-abstracting the calculation into a single generic function call. [java]
-// get an EMA indicator value by building an indicator bean
-MovingAverage maBean = IndicatorBeanFactory.getMovingAverage(); // then
-sets its parameters with obvious method names
-maBean.setAppliedPrice(IIndicators.AppliedPrice.MEDIAN_PRICE)
-.setMAType(IIndicators.MaType.EMA) .setWidth(14); // all of these are
-optional parameters // feed the bean into a generic calculation method
-to get the result double ema = Indicating.calculate(instrument,
-Period.ONE_MIN, maBean); [/java] With JFUtil, to calculate an
-indicator, you create an indicator bean with the intuitive bean name
-that corresponds with the full name of an indicator. For example, a
-moving average will be MovingAverage. Then you set the
-indicator-specific parameters using clearly defined methods with useful
-javadoc descriptions. One method for one parameter. Lastly, you feed
-this indicator bean into a generic calculation function to get your
-value. It took some thinking to abstract and generalize such a rigidly
-structured API. I am quite pleased with this new design as the current
-<a href="http://www.quantisan.com/jfutil-an-open-source-jforex-utilities-library/">JFUtil opens up a lot of design flexibility</a>. Such as
-dynamic indicator selection with genetic algorithm and interchangeable
-indicators use for runtime adaptive algorithms.</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/conjuring-beans-to-simplify-jforex-iindicators/' title='2011-03-22T07:35:00'>22 March 2011</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
             </div>
         </article>
 <p class="paginator">

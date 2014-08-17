@@ -61,6 +61,32 @@
 	
         <article class='listed'>
             <h1 class="title">
+                <a href="http://www.quantisan.com/stanford-machine-learning-lectures-and-pomdp/" rel='bookmark'>Stanford machine learning lectures and POMDP</a>
+            </h1>
+            <div class="article-content"> <p>Came across this gem accidentally today. Here are the [complete 20
+lectures for CS 229 Machine Learning from Stanford University][] for my
+own record. I have learned most of the material before, but have
+forgotten most of it already. In particular, the <a href="http://www.youtube.com/watch?v=yCqPMD6coO8">last lecture</a> talks
+about <a href="http://en.wikipedia.org/wiki/POMDP">POMDP</a>. I have always thought it would be a great tool to be
+applied on a financial trading system. Long story short, POMDP is a
+distinctive machine learning algorithm because it inherently assumes the
+'world' is partially-observable (MDP on its own takes care of the
+uncertainty part). A drawback with using artificial intelligence in
+trading is that A.I. are good for closed ended system but bad for open
+ended ones (i.e. trading). I believe POMDP can be worked on to become a
+valuable trading system. I haven't tried implementing it myself yet
+because of lack of a good platform and data. But since POMDP has been
+around for years now, I would assume somebody somewhere has tried this
+already. Unfortunately, I haven't been able to find any information on
+this problem. In any case, this post is merely a reminder for myself.</p>
+<p>[complete 20 lectures for CS 229 Machine Learning from Stanford
+  University]: http://www.youtube.com/view_play_list?p=A89DCFA6ADACE599</p> </div>
+            <div class="abbr published">
+                Posted  <a href='http://www.quantisan.com/stanford-machine-learning-lectures-and-pomdp/' title='2008-10-22T22:55:00'>22 October 2008</a> in <a href="http://www.quantisan.com/category/algorithmic-trading/">algorithmic-trading</a>.              
+            </div>
+        </article>
+        <article class='listed'>
+            <h1 class="title">
                 <a href="http://www.quantisan.com/mid-week-positions-review-october-21-2008/" rel='bookmark'>Mid-week Positions Review, October 21, 2008</a>
             </h1>
             <div class="article-content"> <p>[caption id="attachment_421" align="aligncenter" width="500"
@@ -170,34 +196,6 @@ any monetary committment in this crazy market.</p>
 <p>[<img alt="BAC, C, JPM, and S&amp;P 500" src="http://traderpau.files.wordpress.com/2008/10/2008-10-16-3banks.png?w=500" title="2008-10-16-3banks" />]: http://traderpau.files.wordpress.com/2008/10/2008-10-16-3banks.png</p> </div>
             <div class="abbr published">
                 Posted  <a href='http://www.quantisan.com/a-sign-this-financial-bloodbath-is-ending-soon/' title='2008-10-16T11:04:00'>16 October 2008</a> in <a href="http://www.quantisan.com/category/stocks/">stocks</a>.              
-            </div>
-        </article>
-        <article class='listed'>
-            <h1 class="title">
-                <a href="http://www.quantisan.com/stock-move-estimation-on-expiration-day-based-on-option-prices/" rel='bookmark'>Stock move estimation on expiration day based on option prices</a>
-            </h1>
-            <div class="article-content"> <p>[caption id="attachment_387" align="aligncenter" width="500"
-caption="SPX move estimation based on option prices"][<img alt="SPX move
-estimation based on option prices" src="http://traderpau.files.wordpress.com/2008/10/option_est1.jpg?w=500" title="option_est1" />][][/caption]</p>
-<p>I'd like to document a useful technique I picked up today from Tom
-Sosnoff on <a href="http://shadowtrader.net/">ShadowTrader</a>. It's based on the idea that option pricing
-has become so efficient that it can be used to predict actual stock
-move.</p>
-<p>Since it is expiration Friday this week, the Oct 08 index option are
-expiring in two days. So for something like, SPX, the Oct 08 call/put
-has only two days left. Thus, there's little time decay factored in the
-price for these options with respect to the actual price. In other
-words, SPX and SPX options prices are converging.</p>
-<p>So if we take the price of the straddle and strangle strike on the
-money, it should be the expected move for SPX for this Friday. For
-example, SPX closed at 907.84 today. The price for a straddle at 905
-strike is \$48.65. The price for a strangle at 900/910 strikes is
-\$45.30. We'll average the two numbers (\$48.65 + \$45.30) / 2 = \$47.0.</p>
-<p>So the SPX is expected to move about 50 points this Friday either up or
-down.</p>
-<p>[<img alt="SPX move estimation based on option prices" src="http://traderpau.files.wordpress.com/2008/10/option_est1.jpg?w=500" title="option_est1" />]: http://traderpau.files.wordpress.com/2008/10/option_est1.jpg</p> </div>
-            <div class="abbr published">
-                Posted  <a href='http://www.quantisan.com/stock-move-estimation-on-expiration-day-based-on-option-prices/' title='2008-10-15T18:03:00'>15 October 2008</a> in <a href="http://www.quantisan.com/category/trading/">trading</a>.              
             </div>
         </article>
 <p class="paginator">
